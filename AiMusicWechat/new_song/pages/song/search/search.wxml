@@ -1,0 +1,23 @@
+<import src="/components/nav/navtab.wxml"/>
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<view class='search-hd'>
+<form bindsubmit="searchB">
+<view class='search'>
+  <view class="search_img" style="background-image: url('http://s.immusician.com/static/wechat/images/icon-search@2x.png');"></view>
+   <input bindconfirm="searchA" class='search_input' name="keyword" placeholder='搜索' focus></input> 
+  <!-- <view class='search_input'>搜索</view> -->
+</view>
+ <button class="search-btn" formType="submit">搜索</button>
+</form>
+</view>
+<view class="search-keyword" wx:if="{{hotKeyword}}">
+  <view class="search-keyword-title">热门搜索</view>
+  <view wx:for="{{hotKeyword}}" wx:for-item="hotKeywordItem" wx:key="idx" class="search-keyword-item" data-item="{{hotKeywordItem}}" bindtap="searchByKeyword">
+    <view wx:if="{{hotKeywordItem.type===0}}">{{hotKeywordItem.title}}</view>
+    <view wx:elif="{{hotKeywordItem.type===1}}"><image src='http://s.immusician.com/static/wechat/images/icon-huo@1x.png'></image>{{hotKeywordItem.title}}</view>
+    <view wx:elif="{{hotKeywordItem.type===2}}"><image src='http://s.immusician.com/static/wechat/images/icon-jian@1x.png'></image>{{hotKeywordItem.title}}</view>
+  </view>
+  </view>
+
+
+

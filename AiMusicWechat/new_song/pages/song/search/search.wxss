@@ -1,0 +1,81 @@
+/* pages/song/search/search.wxss */
+@import "/components/nav/navtab.wxss";
+.search-hd{
+  margin: 20rpx 0 10rpx 30rpx;
+  width: 100%rpx;
+  height: 62rpx;
+} 
+.search{ 
+  float: left; 
+  width:600rpx;
+  height:60rpx;
+  background:  #F5F5F5;
+  border-radius: 40rpx;
+ }
+
+.search_img{
+  margin: 10rpx 0 0 20rpx;
+  left: 0;
+  z-index: 5;
+  background-repeat: no-repeat;
+  background-position: 0rpx 0rpx; 
+  width: 43.9rpx;
+  height: 44.2rpx;
+  background-size: 100% 100%;
+  float: left;
+}  
+
+.search_input{
+  float: left;
+  width: 490rpx;
+  height:58rpx;
+  padding-left: 20rpx;
+  color: #999999;
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+.search-btn{padding: 0;
+  font-size: 34rpx;
+  color: #999999;
+  float: right;
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 90rpx;
+  margin-right: 10rpx;
+  background: white;
+  border: none;
+  margin-bottom:20rpx;
+} 
+
+.search-btn::after {
+  border: none;
+} 
+
+
+.search-keyword {
+  margin-left: 20rpx;
+}
+
+.search-keyword-title{
+  display: block;
+  margin: 70rpx 0 20rpx 10rpx;
+  font-size: 26rpx;
+  color: #343434;
+}
+
+.search-keyword-item{
+  font-size: 26rpx;
+  color: #343434;
+  line-height: 56rpx;
+  margin: 10rpx 10rpx 10rpx 10rpx;
+  float: left;
+  padding: 0 30rpx 0 30rpx;
+  background: #F5F5F5; 
+  border-radius:40rpx;
+}
+
+.search-keyword-item image{
+  width: 24rpx;
+  height:24rpx;
+  padding-right: 5rpx;
+} 

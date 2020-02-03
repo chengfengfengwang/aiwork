@@ -1,0 +1,26 @@
+{
+  "name": "aimusic_OMS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "PORT=9000 umi dev",
+    "build": "umi build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.letan.me:30000/liuxin/aimusic_OMS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "umi": "^2.2.5",
+    "umi-plugin-react": "^1.2.2"
+  },
+  "dependencies": {
+    "echarts": "^4.2.0-rc.2",
+    "react": "^16.6.3"
+  }
+}

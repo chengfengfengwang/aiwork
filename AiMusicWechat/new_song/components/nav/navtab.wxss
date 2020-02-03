@@ -1,0 +1,19 @@
+.navTab{
+  height: 130rpx;
+}
+.navTab image{
+  width: 20rpx;
+  height: 40rpx;
+  padding-top: 85rpx;
+  padding-left: 30rpx;
+  padding-bottom: 60rpx; 
+  padding-right: 30rpx;
+} 
+.navTitle{
+  width: 580rpx;
+  font-size: 40rpx;
+  text-align: center;
+  float: right;
+  padding-right: 80rpx;
+  margin-top: 75rpx;
+}

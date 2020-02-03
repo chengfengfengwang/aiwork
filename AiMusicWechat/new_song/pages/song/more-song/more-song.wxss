@@ -1,0 +1,3 @@
+/* pages/song/more-song/more-song.wxss */
+@import "/components/item/item-template.wxss";
+@import "/components/nav/navtab.wxss";

@@ -1,0 +1,85 @@
+<!--pages/indent/indent.wxml-->
+<wxs module='filter' src='../../utils/filter.wxs'></wxs>
+
+<view class='indent' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>确认订单</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <view class='courseInfo'>
+      <view class='courseTitlePrice'>
+        <text class='courseTitle'>{{courseTitle}}</text>
+        <text class='coursePrice'>￥{{coursePrice}}</text>
+      </view>
+      <view class='courseAttribute'>
+        <text class='courseInsType'>{{courseInsType}}</text>
+        <text class='courseLevel'>{{courseLevelType}}</text>
+      </view>
+    </view>
+
+    <view class='couponsLabel'>
+      <view class='couponsLabelLeft'>优惠券</view>
+      <view class='couponsLabelRight' bindtap='couponsShow'>
+        <text class='couponsLabelText' style='color:{{color}}'>{{couponsLabelText}}</text>
+        <view class='LabelImgContain'>
+          <image src="http://s.immusician.com/static/you/imgs/list.png" class='couponsLabelImg' style='transform:{{transform}}' mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+
+    <block wx:if='{{isShow}}'>
+      <view class='coupons' wx:for="{{couponsValid}}" wx:key="index">
+        <view class='coupon'>
+         <view class='price' wx:if='{{item.coupon_type == 0}}'>￥{{item.coupon_value}}</view>
+            <view class='price' wx:if='{{item.coupon_type == 1}}'>{{item.coupon_value/10}}折</view>
+          <view class='couponAttribute'>
+            <text class='couponReminder'>{{item.name}}</text>
+            <view class='couponValidity'>{{filter.dateCount(item.end_time)}}</view>
+          </view>
+          <view  class='choose' bindtap='choicedCoupon' data-coupon-id="{{item._id}}" data-coupon-type="{{item.coupon_type}}" data-coupon-value="{{item.coupon_value}}">
+            <icon class='chooseIcon' type="success" size="26" color='{{choicedCouponId == item._id ? "#7048D1" : "#999"}}' />
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='priceStatistics'>
+      <view class='priceContain'>
+        <text class='priceText'>原价</text>
+        <text class='priceNum'>￥{{courseOldPrice}}</text>
+      </view>
+      <view class='priceContain'>
+        <text class='priceText'>优惠</text>
+        <text class='priceNum'>-￥{{priceDifferences + choicedCouponValue}}</text>
+      </view>
+      <view class='priceContain'>
+        <text class='priceText'>合计</text>
+        <text class='priceNum'>￥{{coursePrice - choicedCouponValue}}</text>
+      </view>
+    </view>
+
+    <!-- <view class='countdown'>
+      <text class='countdownText'>订单倒计时：</text>
+      <text class='countdownNum'>{{minutes}}:{{seconds}}</text>
+    </view> -->
+
+  </view>
+
+  <view class='bottomBuy'>
+
+    <view class='bottomPrice'>
+      <text class='bottomNewPrice'>实付：</text>
+      <text class='bottomOldPrice'>￥{{coursePrice - choicedCouponValue}}</text>
+    </view>
+
+    <view class='bottomBtn'>
+      <button class='buy' bindtap='pay' style='background-color: {{disabled ?   "#ccc" : "#7048d1"}}' disabled='{{disabled}}'>{{disabled ? "重新下单" : "立即购买"}}</button>
+
+    </view>
+
+  </view>
+
+</view>

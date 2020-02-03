@@ -1,0 +1,9 @@
+<!--components/navNew.wxml-->
+<view catchtap="backPage" class='nav'   style='height: {{height*4 + 40}}rpx;line-height: {{lineHeight}}rpx;'>
+  <!-- <view class='navLeft' wx:if="{{isShow}}" catchtap="backPage">
+    <image class='img' src='http://s.immusician.com/static/wechat/images/fanhui@2x.png' mode="widthFix"></image>
+  </view> -->
+  <image style='margin-top:{{plat=="IOS"?9:18}}rpx' class='backIcon' wx:if="{{isShow}}"  src='http://s.immusician.com/static/wechat/images/fanhui@2x.png' mode="widthFix"></image>
+  <slot></slot>
+</view>
+

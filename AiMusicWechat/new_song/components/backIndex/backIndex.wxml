@@ -1,0 +1,4 @@
+<template name="backIndex">
+<view class='{{showShare?"backIndex":""}}' style="background-image: url('http://s.immusician.com/static/wechat/images/btn@2x.png');" bindtap='backIndex' >
+</view>
+</template>

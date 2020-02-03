@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'PingFang SC',  'Microsoft YaHei'
+}
+ul,li{
+    list-style: none;
+}
+a{
+    color: #333;
+    text-decoration: none;
+}
+.wrapper{
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.mask {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.6;
+    z-index: 1000;
+  }
+
+
+//swiper样式
+@media screen and (min-width:1025px){
+    .swiper-pagination-bullet{
+        width: 12px !important;
+        height: 12px !important;
+        opacity: 0.3;
+        background: #FFFFFF;
+    }
+}
+
+.swiper-pagination-bullet-active{
+    opacity: 1 !important;
+    background-color: #FFFFFF !important; 
+}

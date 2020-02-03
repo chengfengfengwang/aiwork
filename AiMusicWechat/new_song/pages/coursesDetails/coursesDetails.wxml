@@ -1,0 +1,126 @@
+<!--pages/coursesDetails/coursesDetails.wxml-->
+<view class='course' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>课程详情</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <image src="{{course.wechat_desc_cover}}" class='banner' mode="widthFix"></image>
+
+    <view class='courseDetails'>
+
+      <view class='courseAttribute'>
+        <view class='courseLeft'>
+          <view class='courseTitleLevel'>
+            <text class='courseTitle'>{{course.name}}</text>
+            <text class='courseLevel'>{{course.level_type}}</text>
+          </view> 
+          <view class='coursePrice' wx:if="{{course.purchased == 0 && !isIOS}}">
+            <text class='newPrice'>￥{{course.description.price}}</text>
+            <text class='oldPrice'>{{course.description.old_price}}</text>
+          </view>
+        </view>
+        <view class='courseRight' bindtap='isShow'>
+          <image src="https://s.immusician.com/static/wechat/images/%E7%B4%AB%E8%89%B2-%E5%9B%BE%E7%89%87@3x.png" class='consultImg' mode="widthFix"></image>
+          <text class='consult'>咨询</text>
+        </view>
+      </view>
+
+      <view class='courseBottom' wx:if="{{course.purchased == 0 && !isIOS}}">
+        <!-- 倒计时 -->
+        <view class='countDown'>
+          <view class="countDownTime">特价倒计时：</view>
+          <view class="countDownTime">
+            <text class="countDownTimeText">{{countDownDay}}</text>天
+          </view>
+          <view class="countDownTime">
+            <text class="countDownTimeText">{{countDownHour}}</text>时
+          </view>
+          <view class="countDownTime">
+            <text class="countDownTimeText">{{countDownMinute}}</text>分
+          </view>
+          <view class="countDownTime">
+            <text class="countDownTimeText">{{countDownSecond}}</text>秒
+          </view>
+        </view>
+        <text class='courseStudentsCount'>{{course.studied_count}}人已购买</text>
+      </view>
+
+    </view>
+
+    <view class='teacher'>
+      <text>老师简介</text>
+      <view class='teacherIntro'>
+        <image src="{{course.wechat_course_desc.teacher_info[0].url}}" class='teacherIntroPhoto' mode="widthFix"></image>
+        <view class='teacherIntroRight'>
+          <text class='teacherIntroName'>{{course.wechat_course_desc.teacher_info[0].name}}</text>
+          <text class='teacherIntroDesc'>\n{{course.wechat_course_desc.teacher_info[0].desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='courseOutline' wx:if="{{showOutline}}">
+      <text>课程大纲</text>
+      <view class='outlineContain'>
+        <block wx:for="{{course.wechat_course_desc.course_content[0]}}" wx:for-index='key' wx:key="*this">
+          <text class='parentItem'>{{key}}\n</text>
+          <text wx:for="{{item}}" wx:key="*this" class='subitem'>{{item}}\n</text>
+        </block>
+      </view>
+    </view>
+    <view class='courseOutline' wx:if="{{course.wechat_course_desc.deadline}}">
+      <text>有效期限</text>
+      <view class='outlineContain'>
+        <block>
+          <text class='parentItem'>{{course.wechat_course_desc.deadline}}</text>
+        </block>
+      </view>
+    </view>
+    <view class='courseOutline last' wx:if="{{course.wechat_course_desc.deadline}}">
+      <text>上课方式</text>
+      <view class='outlineContain'>
+        <block>
+          <text class='parentItem app_name'>请到App Store下载“AI音乐学院”</text>
+        </block>
+      </view>
+    </view>
+    <view class='bottomBuy' wx:if="{{course.purchased == 0 && !isIOS}}">
+
+      <view class='bottomPrice'>
+        <text class='bottomNewPrice'>￥{{course.description.price}}</text>
+        <text class='bottomOldPrice'>{{course.description.old_price}}</text>
+      </view>
+
+      <view class='bottomBtn'>
+        <view class='btnConsult' bindtap='isShow'>
+          <image src="https://s.immusician.com/static/wechat/images/%E7%81%B0%E8%89%B2%E5%92%A8%E8%AF%A2@3x.png" class='bottomConsultImg' mode="widthFix"></image>
+          <text class='bottomConsult'>咨询</text>
+        </view>
+
+        <button class='buy' style='background-color: {{course.purchased == 0 ? "#7048d1" : "#ccc"}}' bindtap='goIndent' data-course-title="{{course.name}}" data-course-old-price="{{course.description.old_price}}" data-course-price="{{course.description.price}}"
+          data-course-type="{{course.type}}" data-course-instrument-type="{{course.instrument_type}}" data-course-level="{{course.level}}" data-course-level-type="{{course.level_type}}" data-goods-id="{{course.goods_id}}" disabled='{{course.purchased == 0 ? false : true}}'>{{course.purchased == 0 ? "立即购买" : "已购买"}}</button>
+      </view>
+    </view>
+    <view class='bottomBuy ios_disable' wx:if="{{course.purchased == 0 && isIOS}}">
+      由于相关规范，iOS功能暂不可用
+    </view>
+    <button wx:if="{{course.purchased == 1}}" class='buy' style='background-color: #ccc;width:100%;text-align:center'>已购买</button>
+    <view class='modal' wx:if='{{isShow}}'>
+      <view class='teacherInfo'>
+        <text class='close' bindtap='close'>+</text>
+        <image src="https://s.immusician.com/static/wechat/images/qianqian.jpeg" class='teacherPhoto' mode="widthFix"></image>
+        <view class='teacherNameContain'>
+          <text class='teacherName'>倩倩老师</text>
+        </view>
+        <text class='hint'>长按保存，扫码添加客服微信\n</text>
+        <image src="https://s.immusician.com/static/wechat/images/rainpleliu.jpeg" class='teacherImg' mode="widthFix" bindlongpress='saveTeacherQrImg'></image>
+        <text class='teacherAccount'>\n或客服微信号：{{teacherAccount}}</text>
+        <button class='copy clear-button scale-1px' bindtap='copyWxNumber'>复制微信号</button>
+      </view>
+    </view>
+
+  </view>
+
+</view>

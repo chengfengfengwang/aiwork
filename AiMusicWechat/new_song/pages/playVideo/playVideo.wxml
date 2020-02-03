@@ -1,0 +1,7 @@
+<!--pages/playVideo/playVideo.wxml-->
+<component-nav is-show="{{true}}" back-page="1">
+    <view>在线学琴方式</view>
+</component-nav>
+<view class='wrapper' style='padding-top:{{navHeight}}rpx'>
+      <video class='myVideo' poster="{{videoPoster}}" autoplay="{{true}}" objectFit="cover"  show-center-play-btn="{{true}}"  src="{{videoSrc}}"  page-gesture></video>
+</view>

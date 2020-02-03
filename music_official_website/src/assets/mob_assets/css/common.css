@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 0 !important;
+}
+.swiper-pagination-bullet {
+  width: 5px;
+  height: 5px;
+  opacity: 0.4;
+  background: #FFF;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  background-color: #FFF !important;
+}
+.van-image-preview__overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.van-popup {
+  background-color: transparent !important;
+}

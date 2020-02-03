@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "component-nav":"../../components/navNew/navNew"
+  }
+}

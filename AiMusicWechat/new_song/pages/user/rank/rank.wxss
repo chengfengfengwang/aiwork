@@ -1,0 +1,320 @@
+/* pages/user/rank/rank.wxss */
+@import "/components/nav/navtab.wxss";
+@import "/components/backIndex/backIndex.wxss";
+.navTab{
+  background: white;
+}
+page{
+  background-color: #f5f5fa;
+}
+.class_name{
+  width:100%;
+  font-size: 24rpx;
+  color: #666666;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.class_dank{
+  width:100%;
+  font-size: 32rpx;
+  color: #000000;
+  text-align: center;
+  margin: 30rpx 0 20rpx 0 ;
+}
+.dank{
+  width: 540rpx;
+  height: 66rpx;
+  border-radius: 30rpx;
+  background: #e9e8eb;
+  margin: auto;
+  color: #999999;
+  font-size: 26rpx;
+  line-height: 50rpx;
+  margin-bottom: 30rpx;
+}
+.dank view{
+  float: left;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  margin-top: 7rpx;
+}
+.dankSuperStudy{
+  border-bottom: solid #655ba0 0.5rpx;
+  border-radius: 30rpx;
+  color: #655ba0;
+  background: white;
+  box-shadow:  0 3rpx 3rpx 0rpx
+}
+.dankDiligent{
+  border-bottom: solid #655ba0 0.5rpx;
+  border-radius: 30rpx;
+  color: #655ba0;
+  background: white;
+  box-shadow:  0 3rpx 3rpx 0rpx
+}
+.dankSchedule{
+  border-bottom: solid #655ba0 0.5rpx;
+  border-radius: 30rpx;
+  color: #655ba0;
+  background: white;
+  box-shadow:  0 3rpx 3rpx 0rpx
+}
+.dankGraduate{
+  border-bottom: solid #655ba0 0.5rpx;
+  border-radius: 30rpx;
+  color: #655ba0;
+  background: white;
+  box-shadow:  0 3rpx 3rpx 0rpx
+}
+.dankList{
+  margin-top: 25rpx;
+  height: 109rpx;
+  border-bottom: solid #e6e6e6 1rpx
+}
+.index{
+  float: left;
+  width:42rpx;
+  height:44rpx;
+  background-size: 100% 100%;
+  margin: 20rpx 20rpx 0 30rpx;
+  font-size:24rpx;
+  color: #333333;
+  text-align: center;
+  line-height: 60rpx;
+}
+.index_dark{
+  float: left;
+  width:42rpx;
+  height:44rpx;
+  background-size: 100% 100%;
+  margin: 20rpx 20rpx 0 30rpx;
+  font-size:24rpx;
+  color: #333333;
+  text-align: center;
+  line-height: 60rpx;
+  opacity: 0.5;
+}
+.avatar{
+  width: 70rpx;
+  height:70rpx;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  float: left;
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+}
+.avatarDark{
+  width: 70rpx;
+  height:70rpx;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  float: left;
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+  opacity: 0.1;
+}
+.userName{
+  float: left;
+}
+.userName{
+  font-size: 28rpx;
+  color: #333333;
+}
+.userName view{
+  font-size: 18rpx;
+  color:#ffffff;
+  line-height: 34rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.userName_bright{
+  float: left;
+}
+.userName_bright{
+  font-size: 28rpx;
+  color: #999999;
+}
+.userName_bright view{
+  font-size: 18rpx;
+  color:#ffffff;
+  line-height: 36rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+
+
+.level1{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+        background-image: url('http://s.immusician.com/static/wechat/images/lv1-3@2x.png');
+
+}
+.level2{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+  background-image: url('http://s.immusician.com/static/wechat/images/lv4-6@2x.png');
+
+}
+.level4{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+  background-image: url('http://s.immusician.com/static/wechat/images/lv7-8@2x.png');
+
+}
+.level3{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+  background-image: url('http://s.immusician.com/static/wechat/images/lv9-10@2x.png');
+
+}
+.level3_bright{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+      background-image: url('http://s.immusician.com/static/wechat/images/hui.png');
+
+}
+
+.level1_bright{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+    opacity: 0.5;
+      background-image: url('http://s.immusician.com/static/wechat/images/hui.png');
+}
+.level2_bright{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+    opacity: 0.5;
+      background-image: url('http://s.immusician.com/static/wechat/images/hui.png');
+}
+.level3_bright{
+  width:76rpx;
+  height: 36rpx;
+  background-size: 100% 100%;
+  opacity: 0.5;
+  background-image: url('http://s.immusician.com/static/wechat/images/hui.png');
+}
+
+
+.dank_right{
+  float: right;
+  color: #655ba0;
+  font-size: 26rpx;
+  margin-right: 30rpx;
+}
+.dank_right .courseName{
+  margin-top: 15rpx;
+  font-size: 26rpx;
+}
+.dank_right .study{
+  margin-top: 15rpx;
+}
+.dank_right .study .ke{
+  color: #fea45c;
+}
+.mydankList{
+  height: 110rpx;
+  width: 100%;
+  border-bottom: solid #e6e6e6 1rpx;
+  position: fixed;
+  bottom: 0;  
+  left: 0;
+  z-index: 10;
+  color: #eb6767;
+  background: white;
+  padding-top: 25rpx;
+}
+.mydankList .index{
+  color:#eb6767;  
+}
+.mydankList .userName{
+  color:#eb6767;
+} 
+.mydankList .dank_right{
+  color:#eb6767;
+}
+.mydankList .dank_right .courseName{
+  color:#eb6767;
+}
+.study{
+  float: right;
+}
+.below2{
+  font-size: 20rpx;
+  color: #666666;
+}
+.placeholder{
+  height: 150rpx;
+}
+
+
+.dank_right_bright{
+  float: right;
+  color: #999999;
+  font-size: 26rpx;
+  margin-right: 30rpx;
+}
+
+.dank_right_bright .courseName_bright{
+  margin-top: 15rpx;
+  font-size: 26rpx;
+}
+.dank_right_bright .study_bright{
+  margin-top: 15rpx;
+}
+.dank_right_bright .study .ke_bright{
+  color: #7e7b7b;
+}
+
+
+.mydankList .index{
+  color:#eb6767;  
+}
+.mydankList .userName{
+  color:#eb6767;
+} 
+.mydankList .dank_right{
+  color:#eb6767;
+}
+.mydankList .dank_right .courseName{
+  color:#eb6767;
+}
+.study{
+  float: right;
+}
+.below2{
+  font-size: 20rpx;
+  color: #666666;
+}
+.placeholder{
+  height: 150rpx;
+}
+
+
+.mydankList .index_bright{
+  color:#999999;  
+}
+.mydankList .userName_bright{
+  color:#999999;
+} 
+.mydankList .dank_right_bright{
+  color:#999999;
+}
+.mydankList .dank_right_bright .courseName_bright{
+  color:#999999;
+}
+.study_bright{
+  float: right;
+}
+.below2_bright{
+  font-size: 20rpx;
+  color: #999999;
+}

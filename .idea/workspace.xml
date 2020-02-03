@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="79e0acda-a49c-4ffc-92d0-4eaf64b69ec6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/app.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/activity/activity.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coupons/coupons.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/course/course.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/course/course.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/course/course.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/course/course.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/courses/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/courses/courses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/courses/courses.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/courses/courses.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/coursesDetails/coursesDetails.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/home/home.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/indent/indent.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/invite/invite.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/login/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/loginNew/loginNew.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/me/me.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/payComplete/payComplete.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/payComplete/payComplete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/payComplete/payComplete.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/payComplete/payComplete.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/receivePrize/receivePrize.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/receivePrize/receivePrize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/receivePrize/receivePrize.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/receivePrize/receivePrize.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/more-song/more-song.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/more-song/more-song.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/search/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/search/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/song-detail/song-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/song-detail/song-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/song.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/song/song.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/study/study.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/bright/bright.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/bright/bright.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/bright/bright.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/bright/bright.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/class/class.wxss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/rank/rank.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/rank/rank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/wechatQr/wechatQr.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/pages/user/wechatQr/wechatQr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/templates/authdialog/authdialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/templates/authdialog/authdialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/utils/filter.wxs" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/utils/filter.wxs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AiMusicWechat/new_song/utils/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/AiMusicWechat/new_song/utils/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloworld/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/helloworld/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloworld/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/helloworld/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloworld/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/helloworld/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/src/components/Configs.js" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin/src/components/Configs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/config/dev.env.js" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/config/dev.env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/mixins/allUserList.js" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/mixins/allUserList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/ClassInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/views/ClassInfo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/ClassList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/Group.vue" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/views/Group.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/Layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/views/Layout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/manageSystem/open-class/src/views/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageSystem/open-class/src/views/Permissions.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicBaseH5/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/musicBaseH5/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music_official_website/src/modules/course/course.vue" beforeDir="false" afterPath="$PROJECT_DIR$/music_official_website/src/modules/course/course.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my/fakervue/packages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/my/fakervue/packages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my/iview-components/src/views/LiveRoomManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my/iview-components/src/views/LiveRoomManage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/other/reset_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/other/reset_password_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/config/dev.env.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/config/dev.env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/config/prod.env.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/config/prod.env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/assets/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/assets/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/assets/css/common.less" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/assets/css/common.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/utils/axios_config.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/utils/axios_config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/utils/rem.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/utils/rem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/utils/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/src/utils/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/views/CourseDetail.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/views/EvaluationList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/src/views/Pay.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qualification/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/qualification/upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yinyueke-h5/qrcode.js" beforeDir="false" afterPath="$PROJECT_DIR$/yinyueke-h5/qrcode.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/AiMusicWechat" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="260" />
+    <option name="y" value="43" />
+    <option name="width" value="1400" />
+    <option name="height" value="963" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="79e0acda-a49c-4ffc-92d0-4eaf64b69ec6" name="Default Changelist" comment="" />
+      <created>1562922416706</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562922416706</updated>
+      <workItem from="1562922494822" duration="187000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="187000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="260" y="43" width="1400" height="963" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496318" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+</project>

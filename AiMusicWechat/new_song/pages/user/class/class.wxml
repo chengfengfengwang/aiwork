@@ -1,0 +1,17 @@
+<!--pages/user/class/class.wxml-->
+<import src="/components/nav/navtab.wxml"/>
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<view class='wrapper'>
+<view class='no_data_show' wx:if='{{classList && classList.length===0}}'>
+  您尚未加入班级
+</view>
+<block wx:for="{{classList}}" wx:for-item="item">
+  <view class='my-class' catchtap="openClass" data-list="{{item}}">
+  <!-- <view class= 'class'> -->
+  <!-- <text catchtap='openClass' data-list="{{item}}">{{item.name}}</text> -->
+  <text>{{item.name}}</text>
+  <!-- <text catchtap='clickBright' class='{{itme.is_bright? "is_bright":"no_bright"}}'>{{item.bright}}</text> -->
+  <image class='class_jiantou' src='http://s.immusician.com/static/wechat/images/wode-jiantou@1x.png' mode='widthFix'></image>
+  </view>
+</block>
+</view>

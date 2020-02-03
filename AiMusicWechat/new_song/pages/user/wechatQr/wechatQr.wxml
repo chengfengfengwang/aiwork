@@ -1,0 +1,39 @@
+<!--pages/login/login.wxml-->
+<import src='../../../templates/authdialog/authdialog.wxml' />
+<template is='auth-info-dialog' data='{{authInfoDlg: authInfoDlg}}' />
+<view class="wode_bg">
+  <view>
+    <view class='up_bg' style="background-image:url('http://s.immusician.com/static/wechat/BG2%20UP.png')">
+      <view class='welcome'>
+        <!-- <text class='huanhang zhong'>恭喜 <text class='zhong'>{{userName}}</text> 同学</text>
+        <text class='huanhang da'>你被分到了 <text class='da colorHong'>{{className}}</text></text>
+        <text class='huanhang xiao'>快入群去和你的专属辅导老师认识一下吧！</text> -->
+        <view class='qr'>
+          <image bindtap='previewImage' src='{{wechatQr}}' mode='widthFix'></image>
+        </view>
+      </view> 
+    </view>
+
+
+  <view class='down_bg' style="background-image:url('http://s.immusician.com/static/wechat/BG2%20DN.png')">
+    
+      <view class='welcome-text'>
+    <!-- <text>上面是你的班级群二维码，扫码即刻进入班级</text> -->
+    <!-- <text>别忘记找老师解锁福利课程！(长安可保存图片)</text> -->
+    <text class='hong_title'>-操作流程-</text>
+    <text class='one' space='ensp'><text class='one_1'>1. </text>长按保存图片到相册</text>
+    <text class='two' space='ensp'><text class='two_1'>2. </text>在微信扫一扫中识别</text>
+    <text class='' space="emsp">保存的二维码  </text>  
+    <!-- <text>需长按保存图片后识别二维码入班 。</text> -->
+  </view>
+    <view class='welcome-buttom'>
+        <image class='one' src='http://s.immusician.com/static/wechat/images/loginpicwaiting4u@2x.png' mode='widthFix'></image>
+        <image class='two' src='http://s.immusician.com/static/wechat/images/ailogo@2x.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+  <button class='{{showShare?"":"backIndex"}}' bindtap='backIndex'>
+    <image src='http://s.immusician.com/static/wechat/images/btn@2x.png' mode='widthFix'></image>
+  </button>
+
+</view>

@@ -1,0 +1,68 @@
+<!--pages/me/me.wxml-->
+<view class='meContainer' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{false}}" back-page="0">
+    <view>我的</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <view class='logOutState' wx:if='{{!loginIn}}'>
+      <open-data class="userinfo-avatar" type="userAvatarUrl"></open-data>
+      <text class='hint'>您尚未登录</text>
+      <button class='loginIn' bindtap="loginIn">注册/登录</button>
+    </view>
+
+    <view class='logInState' wx:else>
+      <image src="{{avatar}}" class='usePhoto'></image>
+      <view class='useInfo'>
+        <text class='name'>{{nickname}}</text>
+        <text class='telephone'>\n{{telephone}}</text>
+      </view>
+      <!-- <text class='grade'>LV.{{grade}}</text> -->
+    </view>
+
+    <view class='personalStudy' bindtap='goStudy'>
+      <image src="https://s.immusician.com/static/wechat/images/%E5%AD%A6%E4%B9%A0%E8%BF%9B%E5%BA%A6@3x.png" class='studyIcon' mode="widthFix"></image>
+      <text class='studyText'>学习进度</text>
+      <image src="https://s.immusician.com/static/wechat/images/icon_common_more_g@3x.png" class='studyExtend' mode="widthFix"></image>
+    </view>
+
+    <view class='studyProgress' wx:if='{{loginIn && firstCourseState}}'>
+      <image src="{{firstCourse.cover_url}}" class='studyCover' mode="widthFix"></image>
+      <view class='studyProgressVisual'>
+        <view class='studyCourse'>
+          <text class='courseName'>{{firstCourse.name}}</text>
+          <text class='courseProgress'>{{firstCourse.lesson_study_count}}/{{firstCourse.lesson_count}}</text>
+        </view>
+        <progress percent="{{firstCourse.lesson_study_count/firstCourse.lesson_count*100}}" activeColor="#7048d1" border-radius="3" />
+      </view>
+    </view>
+
+    <view class='personalClass' bindtap='myClass'>
+      <image src="https://s.immusician.com/static/wechat/images/%E6%88%91%E7%9A%84%E7%8F%AD%E7%BA%A7@3x.png" class='classIcon' mode="widthFix"></image>
+      <text class='classText'>我的班级</text>
+      <image src="https://s.immusician.com/static/wechat/images/icon_common_more_g@3x.png" class='classExtend' mode="widthFix"></image>
+    </view>
+    <form bindsubmit="formSubmit" report-submit="{{true}}">
+      <button form-type="submit" class='clear-button my-invite personalInvite' bindtap='goInvite'>
+        <image src="https://s.immusician.com/static/wechat/images/%E6%88%91%E7%9A%84%E9%82%80%E8%AF%B7@3x.png" class='inviteIcon' mode="widthFix"></image>
+        <text class='inviteText'>我的邀请</text>
+        <image src="https://s.immusician.com/static/wechat/images/icon_common_more_g@3x.png" class='inviteExtend' mode="widthFix"></image>
+        <text class='inviteRatio' wx:if='{{loginIn}}'>{{sum}}/{{sumTotal}}</text>
+        <view class='inviteProgress' wx:if='{{loginIn}}'>
+          <progress percent="{{sum/sumTotal*100}}" activeColor="#7048d1" border-radius='3' />
+        </view>
+      </button>
+    </form>
+    
+
+    <view class='personalCoupons' bindtap='goCoupons'>
+      <image src="https://s.immusician.com/static/wechat/images/%E4%BC%98%E6%83%A0%E5%88%B8@3x.png" class='couponsIcon' mode="widthFix"></image>
+      <text class='couponsText'>优惠券</text>
+      <image src="https://s.immusician.com/static/wechat/images/icon_common_more_g@3x.png" class='couponsExtend' mode="widthFix"></image>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,60 @@
+.section_pay {
+  background-color: #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 32px;
+  background: #ffffff;
+  box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.05);
+}
+.section_pay .left {
+  flex-grow: 1;
+}
+.section_pay .left .left_top .pay_label {
+  font-size: 28px;
+  font-family: PingFang-SC-Regular, PingFang-SC;
+  font-weight: 400;
+  color: #333333;
+}
+.section_pay .left .left_top .money_icon {
+  font-size: 24px;
+  font-family: PingFang-SC-Medium;
+  font-weight: 400;
+  color: #ff2626;
+}
+.section_pay .left .left_top .price_num {
+  font-size: 40px;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #ff2626;
+}
+.section_pay .left .left_top .old_price_num {
+  font-size: 28px;
+  font-family: PingFang-SC-Regular, PingFang-SC;
+  font-weight: 400;
+  color: #cccccc;
+  text-decoration: line-through;
+}
+.section_pay .left .left_bottom {
+  font-size: 24px;
+  font-family: PingFang-SC-Regular, PingFang-SC;
+  font-weight: 400;
+  color: #999999;
+}
+.section_pay .right {
+  flex-grow: 0;
+  width: 240px;
+  height: 80px;
+  background-color: #ff742b;
+  line-height: 80px;
+  text-align: center;
+  font-size: 36px;
+  font-family: PingFang-SC-Medium, PingFang-SC;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 40px;
+}

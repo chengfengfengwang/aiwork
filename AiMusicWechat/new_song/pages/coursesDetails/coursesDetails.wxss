@@ -1,0 +1,346 @@
+/* pages/coursesDetails/coursesDetails.wxss */
+
+.course {
+  padding-top: 130rpx;
+  background-color: #f5f5fa;
+}
+
+.contain {
+  padding: 10rpx 0 0 0;
+  background-color: #f5f5fa;
+  position: relative;
+}
+
+.banner {
+  width: 100%;
+  height: 280rpx;
+  vertical-align: bottom;
+}
+
+.courseDetails {
+  margin: 10rpx 0;
+  padding: 20rpx 30rpx;
+  background-color: white;
+}
+
+.courseAttribute::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.courseLeft {
+  float: left;
+}
+
+.courseTitle {
+  font-size: 32rpx;
+  color: #000;
+}
+
+.courseLevel {
+  border: 1rpx solid #7048d1;
+  border-radius: 5rpx;
+  color: #7048d1;
+  font-size: 24rpx;
+  padding: 0 5rpx;
+  margin-left: 15rpx;
+}
+
+.newPrice {
+  color: #7048d1;
+  font-size: 36rpx;
+  vertical-align: middle;
+}
+
+.oldPrice {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 15rpx;
+  text-decoration: line-through;
+  vertical-align: middle;
+}
+
+.courseRight {
+  float: right;
+  width: 40rpx;
+  text-align: center;
+  font-size: 20rpx;
+}
+
+.consultImg {
+  width: 39rpx;
+  vertical-align: bottom;
+}
+
+.consult {
+  color: #7048d1;
+}
+
+.courseBottom {
+  margin-top: 20rpx;
+}
+
+.courseBottom::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.countDown {
+  font-size: 22rpx;
+  color: #666;
+  float: left;
+}
+
+.countDownTime {
+  float: left;
+}
+
+.countDownTimeText {
+  font-size: 24rpx;
+  color: #7048d1;
+}
+
+.courseStudentsCount {
+  float: right;
+  color: #999;
+  font-size: 22rpx;
+}
+
+.teacher {
+  padding: 30rpx;
+  background-color: white;
+}
+
+.teacherIntro {
+  margin: 30rpx 0 0 0;
+}
+
+.teacherIntroPhoto {
+  width: 120rpx;
+  height: 120rpx;
+  display: inline-block;
+  vertical-align: bottom;
+  border-radius: 50%;
+}
+
+.teacherIntroRight {
+  display: inline-block;
+  margin-left: 40rpx;
+  width: 530rpx;
+  height: 120rpx;
+  vertical-align: bottom;
+  font-size: 24rpx;
+}
+
+.teacherIntroName {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.teacherIntroDesc {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.courseOutline {
+  padding: 30rpx 30rpx 10rpx 30rpx;
+  background-color: white;
+}
+.courseOutline.last{
+  padding: 15rpx 130rpx 130rpx 30rpx;
+}
+.outlineContain {
+  color: #666;
+  font-size: 24rpx;
+}
+
+.parentItem{
+  padding-left: 16rpx;
+}
+
+.subitem {
+  padding-left: 48rpx;
+}
+.bottomBuy.ios_disable{
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  color: #fff;
+  background-color: #999 !important;
+}
+.bottomBuy {
+  width: 100%;
+  height: 100rpx;
+  border-top: 2rpx solid #d9d9d9;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
+
+.bottomBuy::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bottomPrice {
+  float: left;
+  font-size: 36rpx;
+  line-height: 100rpx;
+}
+
+.bottomNewPrice {
+  color: #7048d1;
+  vertical-align: middle;
+  margin-left: 30rpx;
+}
+
+.bottomOldPrice {
+  color: #999;
+  font-size: 24rpx;
+  vertical-align: middle;
+  margin-left: 15rpx;
+  text-decoration: line-through
+}
+
+.bottomBtn {
+  float: right;
+  width: 330rpx;
+  font-size: 20rpx;
+}
+
+.btnConsult {
+  width: 40rpx;
+  text-align: center;
+  vertical-align: middle;
+  color: #666;
+  display: inline-block;
+  margin-right: 30rpx;
+}
+
+.bottomConsultImg {
+  width: 39rpx;
+  vertical-align: bottom;
+}
+
+.buy {
+  width: 260rpx;
+  text-align: center;
+  line-height: 100rpx;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 34rpx;
+  color: #fff;
+  padding: 0;
+  border-radius: 0;
+}
+
+.buy::after {
+  border: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 130rpx;
+  height: calc(100vh - 130rpx);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.teacherInfo {
+  width: 600rpx;
+  height: 700rpx;
+  border-radius: 20rpx;
+  margin: 190rpx auto;
+  background-color: white;
+  padding: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 21rpx;
+  color: #666;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 29rpx;
+  height: 29rpx;
+  color: #979797;
+  font-size: 81rpx;
+  line-height: 29rpx;
+  text-align: center;
+  vertical-align: bottom;
+  transform: rotate(45deg);
+}
+
+.teacherPhoto {
+  width: 120rpx;
+  height: 120rpx;
+  border: 2rpx solid #7849ec;
+  border-radius: 50%;
+  vertical-align: bottom;
+}
+
+.teacherNameContain {
+  margin: 14rpx 0 34rpx 0;
+}
+
+.teacherName {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.hint {
+  margin-top: 34rpx;
+}
+
+.teacherImg {
+  width: 256rpx;
+  height: 256rpx;
+  vertical-align: bottom;
+  margin-top: 16rpx;
+  border: 1rpx solid black;
+  padding: 2rpx;
+  /* box-sizing: border-box; */
+  /* padding: 10rpx; */
+  margin-bottom: 24rpx;
+}
+
+/* .copy {
+  width: 260rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  line-height: 50rpx;
+  font-size: 18rpx;
+  margin-top: 12.5rpx;
+  border: 1rpx solid #979797;
+  background-color: white;
+  color: #666;
+  padding: 2rpx;
+} */
+.copy{
+  width: 260rpx;
+  height: 50rpx;
+  /* border-radius: 25rpx; */
+  line-height: 50rpx;
+  font-size: 18rpx;
+  margin: 12.5rpx auto 0 auto;
+  /* border: 1rpx solid #979797 !important; */
+  background-color: white;
+  color: #666;
+}
+.scale-1px:after{
+  border-radius: 50rpx;
+}
+.app_name{
+  font-weight: bold;
+  color: red
+}

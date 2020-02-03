@@ -1,0 +1,9 @@
+.video_pice{
+    position: relative;
+}
+.video_pice .add{
+    position: absolute;
+    left: 200px;
+    top:50%;
+    transform: translateY(-50%)
+}

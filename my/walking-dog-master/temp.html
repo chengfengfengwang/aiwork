@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="walking-dog"></canvas>
+    <script>
+        class WalkingDog {
+            constructor() {
+                this.canvas = document.querySelector('#walking-dog');
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = 500;
+                this.ctx = this.canvas.getContext('2d');
+                this.imgCount = 9;
+                this.imgSrcArr = [];
+                this.imgLoadedArr = [];
+                this.imgIndex = -1;
+                this.lastTime = 0;
+                this.MouseX = 100;
+                this.dog = {
+                    stepDistance: 10
+                };
+                this.dogX = 0;
+            }
+            loadImgs() {
+                var promiseArr = [];
+                for (var i = 0; i < this.imgCount; i++) {
+                    this.imgSrcArr.push(`./images/${i}.png`)
+                };
+                for (var j = 0; j < this.imgSrcArr.length; j++) {
+                    let img = new Image();
+                    img.src = this.imgSrcArr[j];
+                    var myPromise = new Promise((resolve) => {
+                        img.onload = () => {
+                            this.imgLoadedArr.push(img)
+                            resolve()
+                        }
+                    })
+                    promiseArr.push(myPromise);
+                };
+                return Promise.all(promiseArr)
+            }
+            walk(){
+                this.imgIndex = ++this.imgIndex % this.imgCount;
+                //console.log(this.imgIndex)
+                var img = this.imgLoadedArr[this.imgIndex]
+                this.ctx.drawImage(img,0,0)
+                window.requestAnimationFrame(this.walk.bind(this));
+            }
+            async init() {
+                await this.loadImgs();
+                this.imgWidth = this.imgLoadedArr[0].width / 2;
+                window.requestAnimationFrame(this.walk.bind(this))
+            }
+        }
+
+        new WalkingDog().init()
+    </script>
+</body>
+
+</html>

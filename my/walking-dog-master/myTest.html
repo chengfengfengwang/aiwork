@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="walking-dog"></canvas>
+    <script>
+        class WalkingDog {
+            constructor() {
+                this.canvas = document.querySelector('#walking-dog');
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = 500;
+                this.ctx = this.canvas.getContext('2d');
+                this.imgCount = 9;
+                this.imgSrcArr = [];
+                this.imgLoadedArr = [];
+                this.imgIndex = -1;
+                this.lastTime = 0;
+                this.MouseX = 100;
+                this.dog = {
+                    stepDistance: 10
+                };
+                this.dogX = 0;
+            }
+            loadImgs() {
+                var promiseArr = [];
+                for (var i = 0; i < this.imgCount; i++) {
+                    this.imgSrcArr.push(`./images/${i}.png`)
+                };
+                for (var j = 0; j < this.imgSrcArr.length; j++) {
+                    let img = new Image();
+                    img.src = this.imgSrcArr[j];
+                    var myPromise = new Promise((resolve) => {
+                        img.onload = () => {
+                            this.imgLoadedArr.push(img)
+                            resolve()
+                        }
+                    })
+                    promiseArr.push(myPromise);
+                };
+                return Promise.all(promiseArr)
+            }
+            walk() {
+                let now = Date.now();
+                let interval = now - this.lastTime;
+                if (interval > 100) {
+                    this.imgIndex = ++this.imgIndex % (this.imgCount - 1);
+
+
+                    let direct = 1;
+                    let stopWalking;
+                    if (this.MouseX > (this.dogX + this.imgWidth)) {
+                        direct = 1
+                    } else if (this.MouseX < this.dogX) {
+                        direct = -1
+                    } else {
+                        stopWalking = true;
+                        direct = (this.MouseX - this.dogX) > this.imgWidth / 2 ? 1 : -1;
+                        this.imgIndex = -1;
+                    }
+                    if (!stopWalking) {
+                        this.dogX += this.dog.stepDistance * direct;
+                    }
+
+                    let drawX = this.dogX * direct - (direct == -1 ? this.imgWidth : 0);
+                    let img = this.imgLoadedArr[this.imgIndex + 1];
+
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.ctx.save();
+                    if (direct === -1) {
+                        this.ctx.scale(-1, 1)
+                    }
+                    console.log(direct)
+                    this.ctx.drawImage(img, drawX, 16, img.width / 2, img.height / 2);
+                    this.ctx.restore();
+
+                    this.lastTime = Date.now();
+                }
+
+                window.requestAnimationFrame(this.walk.bind(this))
+            }
+            recordMousePosition() {
+                window.addEventListener('mousemove', (e) => {
+                    this.MouseX = e.clientX;
+                })
+            }
+            async init() {
+                await this.loadImgs();
+                this.imgWidth = this.imgLoadedArr[0].width / 2;
+                //this.recordMousePosition();
+                window.requestAnimationFrame(this.walk.bind(this))
+            }
+        }
+
+        new WalkingDog().init()
+    </script>
+</body>
+
+</html>

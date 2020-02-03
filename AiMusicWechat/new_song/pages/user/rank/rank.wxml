@@ -1,0 +1,54 @@
+<!--pages/user/rank/rank.wxml-->
+<import src="/components/nav/navtab.wxml"/>
+<import src="/components/backIndex/backIndex.wxml"/>
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<!-- <view class='class_name'><text>{{className}}</text></view> -->
+<!-- <canvas canvas-id="myCanvas"/> -->
+<view class='class_dank'>班级排行榜 <text bindtap='share' class='share'></text></view>
+<view class='dank'>
+  <view class='{{type==1? "dankDiligent":"diligent"}}' data-type="1" bindtap='onClick'>勤奋榜</view>
+  <view class='{{type==2? "dankSchedule":"schedule"}}' data-type="2" bindtap='onClick'>进度榜</view>
+  <view class='{{type==0? "dankSuperStudy":"superStudy"}}' data-type="0" bindtap='onClick'>学霸榜</view> 
+  <view class='{{type==3? "dankGraduate":"graduate"}}' data-type="3" bindtap='onClick'>毕业榜</view>
+</view>
+
+<block wx:for="{{dankList}}" wx:for-item="item" wx:for-index="idx">
+  <view class='dankList' >
+    <view class="index" style="background-image: url('http://s.immusician.com/static/wechat/images/icon-y@3x.png');" wx:if="{{idx==0}}"><text>{{idx+1}}</text></view>
+    <view class="index" style="background-image: url('http://s.immusician.com/static/wechat/images/icon-g@2x.png');" wx:elif="{{idx==1}}"><text>{{idx+1}}</text></view>
+    <view class="index" style="background-image: url('http://s.immusician.com/static/wechat/images/icon-o@2x.png');" wx:elif="{{idx==2}}"><text>{{idx+1}}</text></view>
+    <view class="index" wx:else><text>{{idx+1}}</text></view>
+    <view class='{{item.is_bright==1? "avatar":"avatarDark"}}'style="background-image:url('{{item.avatar_url}}')"></view>
+    <view class='{{item.is_bright==1? "userName":"userName_bright"}}'><text>{{item.user_name}}</text>
+      <view class='{{item.is_bright==1? "level3":"level3_bright"}}' style="background-image: url('http://s.immusician.com/static/wechat/images/lv9-10@2x.png');" wx:if="{{item.user_level>8}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level2":"level2_bright"}}'  wx:elif="{{item.user_level>6}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level2":"level2_bright"}}' wx:elif="{{item.user_level>3}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level1":"level1_bright"}}'  wx:else>LV.{{item.user_level}}</view>
+    </view>
+    <view class='{{item.is_bright==1? "dank_right":"dank_right_bright"}}'>
+      <view class='{{item.is_bright==1? "courseName":"courseName_bright"}}'><text>{{item.course_name}}</text></view>
+      <view class='{{item.is_bright==1? "study":"study_bright"}}'><text>{{text1}}</text><text class='{{item.is_bright==1?"ke":"ke_bright"}}'>{{item.below}}</text><text>{{text2}}</text><text class='{{itme.is_bright==1?"below2":"below2_bright"}}'>{{item.below2}}</text></view>
+    </view>
+  </view>
+
+<view class='mydankList' wx:if="{{item.is_my==1}}">
+    <view class='{{item.is_bright==1? "index":"index_dark"}}' style="background-image: url('http://s.immusician.com/static/wechat/images/icon-y@3x.png');" wx:if="{{idx==0}}"><text>{{idx+1}}</text></view>
+    <view class='{{item.is_bright==1? "index":"index_dark"}}' style="background-image: url('http://s.immusician.com/static/wechat/images/icon-g@2x.png');" wx:elif="{{idx==1}}"><text>{{idx+1}}</text></view>
+    <view class='{{item.is_bright==1? "index":"index_dark"}}' style="background-image: url('http://s.immusician.com/static/wechat/images/icon-o@2x.png');" wx:elif="{{idx==2}}"><text>{{idx+1}}</text></view>
+    <view class='{{item.is_bright==1? "index":"index_dark"}}' wx:else><text>{{idx+1}}</text></view>
+    <view class='{{item.is_bright==1? "avatar":"avatarDark"}}'style="background-image:url('{{item.avatar_url}}')">
+    <text>{{itme.is_bright}}</text></view>
+    <view class='{{item.is_bright==1? "userName":"userName_bright"}}'><text>{{item.user_name}}</text>
+      <view class='{{item.is_bright==1? "level3":"level3_bright"}}' style="background-image: url('http://s.immusician.com/static/wechat/images/lv9-10@2x.png');" wx:if="{{item.user_level>8}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level4":"level4_bright"}}'  wx:elif="{{item.user_level>6}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level2":"level2_bright"}}'  wx:elif="{{item.user_level>3}}">LV.{{item.user_level}}</view>
+      <view class='{{item.is_bright==1? "level1":"level1_bright"}}'  wx:else>LV.{{item.user_level}}</view>
+    </view>
+    <view class='{{item.is_bright==1? "dank_right":"dank_right_bright"}}'>
+      <view class='{{item.is_bright==1? "courseName":"courseName_bright"}}'><text>{{item.course_name}}</text></view>
+      <view class='{{item.is_bright==1? "study":"study_bright"}}'><text>{{text1}}</text><text class='{{item.is_bright==1?"ke":"ke_bright"}}'>{{item.below}}</text><text>{{text2}}</text><text class='{{itme.is_bright==1?"below2":"below2_bright"}}'>{{item.below2}}</text></view>
+    </view>
+  </view>
+</block>
+<view class='placeholder'></view>
+<template is="backIndex" data="{{showShare:showShare}}" />

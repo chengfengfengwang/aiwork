@@ -1,0 +1,1 @@
+exports.authUserInfo = require('./authdialog/authdialog');

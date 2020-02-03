@@ -1,0 +1,167 @@
+/* pages/coupons/coupons.wxss */
+.couponspPage {
+  padding-top: 130rpx;
+  box-sizing: border-box;
+  height: 100vh;
+  background-color: #f5f5fa;
+}
+
+.contain {
+  background-color: #f5f5fa;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.availability{
+  background-color: white;
+  height: 75rpx;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.usable{
+  float: left;
+  width: 50%;
+  height: 75rpx;
+  line-height: 74rpx;
+  border-bottom: 1rpx solid white;
+  box-sizing: border-box;
+  color: #666;
+}
+
+.usableSelect{
+  float: left;
+  width: 50%;
+  height: 75rpx;
+  line-height: 74rpx;
+  border-bottom: 1rpx solid #7048D1;
+  box-sizing: border-box;
+  color: #7048D1;
+}
+
+.disabled{
+  float: right;
+  width: 50%;
+  height: 75rpx;
+  line-height: 74rpx;
+  box-sizing: border-box;
+  color: #666;
+  border-bottom: 1rpx solid white;
+}
+
+.disabledSelect{
+  float: right;
+  width: 50%;
+  height: 75rpx;
+  line-height: 74rpx;
+  box-sizing: border-box;
+  color: #7048D1;
+  border-bottom: 1rpx solid #7048D1;
+}
+
+.couponsContain{
+  background-color: #f5f5fa;
+}
+
+.navTitle{
+  height: 100%;
+}
+
+.coupons {
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+}
+
+.coupon {
+  width: 100%;
+  height: 143rpx;
+  background-image: url('https://s.immusician.com/static/wechat/images/%E4%BC%98%E6%83%A0%E5%88%B8%E8%83%8C%E6%99%AF@3x.png');
+  background-size: 100% 100%;
+}
+
+.coupon::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.price {
+  width: 187rpx;
+  height: 100%;
+  display: inline-block;
+  /* background-color: lightsalmon; */
+  text-align: center;
+  line-height: 143rpx;
+  color: #7048d1;
+  font-size: 42rpx;
+  vertical-align: bottom;
+}
+
+.couponAttribute {
+  width: 362rpx;
+  height: 100%;
+  display: inline-block;
+  /* background-color: limegreen; */
+  vertical-align: bottom;
+  color: #666;
+  font-size: 20rpx;
+  padding: 17rpx 20rpx 17rpx 41rpx;
+  box-sizing: border-box;
+}
+
+.couponReminder {
+  font-size: 30rpx;
+  color: #333;
+  display: inline-block;
+  width: 380rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.couponDate {
+  margin-top: 9rpx;
+}
+
+.couponValidity {
+  display: inline-block;
+  width: 141rpx;
+  height: 100%;
+  color: #FD3838;
+  font-size: 20rpx;
+  line-height: 143rpx;
+}
+
+.couponAttributeDisabled{
+  width: 422rpx;
+  height: 100%;
+  display: inline-block;
+  vertical-align: bottom;
+  color: #666;
+  font-size: 20rpx;
+  padding: 27rpx 20rpx 27rpx 41rpx;
+  box-sizing: border-box;
+}
+
+.couponValidityUsed{
+  display: inline-block;
+  width: 80rpx;
+  height: 100%;
+  color: #FD3838;
+  font-size: 20rpx;
+  line-height: 143rpx;
+}
+
+.couponValidityOverdue{
+  display: inline-block;
+  width: 80rpx;
+  height: 100%;
+  font-size: 20rpx;
+  line-height: 143rpx;
+}
+.describe{
+   width: 300rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,2 @@
+<!--pages/song/relevance_course/relevance_course.wxml-->
+<web-view src="{{relevanceUrl}}"></web-view>

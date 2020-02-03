@@ -1,0 +1,17 @@
+.auth-title {
+margin: auto;
+margin-top: 30rpx;
+}
+.auth-dlg-content {
+  margin-top: 40rpx;
+  font-size: 32rpx;
+  color:  #666666;
+}
+.auth-dlg-btn {
+  margin-top: 50rpx;
+  width: 530rpx;
+  height: 82rpx;
+  line-height: 82rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}

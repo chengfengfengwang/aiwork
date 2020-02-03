@@ -1,0 +1,71 @@
+<!--pages/coupons/coupons.wxml-->
+
+<wxs module='filter' src='../../utils/filter.wxs'></wxs>
+
+<view class='couponspPage' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view class='navTitle'>优惠券</view>
+  </component-nav>
+
+  <view class='contain'>
+    <view class='availability'>
+      <view class='{{(availability=="usable")? "usableSelect":"usable"}}' bindtap='usableClick'>
+        <text>可用</text>
+      </view>
+      <view class='{{(availability=="disabled")? "disabledSelect":"disabled"}}' bindtap='disabledClick'>
+        <text>已过期</text>
+      </view>
+    </view>
+
+    <view class='couponsContain'>
+
+      <block wx:if='{{availability == "usable"}}'>
+        <view class='no_data_show' wx:if='{{couponsValid && couponsValid.length===0}}'>
+         暂无可用优惠券
+        </view>
+        <view class='coupons' wx:for="{{couponsValid}}" wx:key="index">
+          <view class='coupon'>
+            <view class='price' wx:if='{{item.coupon_type == 0}}'>￥{{item.coupon_value}}</view>
+            <view class='price' wx:if='{{item.coupon_type == 1}}'>{{item.coupon_value/10}}折</view>
+            <view class='couponAttribute'>
+              <text class='couponReminder'>{{item.name}}</text>
+              <view class='describe'>{{item.describe}}</view>
+              <view class='couponDate'>{{filter.dateFormat(item.start_time)}}-{{filter.dateFormat(item.end_time)}}</view>
+            </view>
+            <view class='couponValidity'>{{filter.dateCount(item.end_time)}}</view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:elif='{{availability == "disabled"}}'>
+        <view class='coupons' wx:for="{{couponsUsed}}" wx:key="index">
+          <view class='coupon'>
+             <view class='price' wx:if='{{item.coupon_type == 0}}'>￥{{item.coupon_value}}</view>
+            <view class='price' wx:if='{{item.coupon_type == 1}}'>{{item.coupon_value/10}}折</view>
+            <view class='couponAttributeDisabled'>
+              <text class='couponReminder'>{{item.name}}</text>
+              <view class='describe'>{{item.describe}}</view>
+              <view class='couponDate'>{{filter.dateFormat(item.start_time)}}-{{filter.dateFormat(item.end_time)}}</view>
+            </view>
+            <view class='couponValidityUsed'>已使用</view>
+          </view>
+        </view>
+        <view class='coupons' wx:for="{{couponsOverdue}}" wx:key="index">
+          <view class='coupon'>
+             <view class='price' wx:if='{{item.coupon_type == 0}}'>￥{{item.coupon_value}}</view>
+            <view class='price' wx:if='{{item.coupon_type == 1}}'>{{item.coupon_value/10}}折</view>
+            <view class='couponAttributeDisabled'>
+              <text class='couponReminder'>{{item.name}}</text>
+              <view class='couponDate'>{{filter.dateFormat(item.start_time)}}-{{filter.dateFormat(item.end_time)}}</view>
+            </view>
+            <view class='couponValidityOverdue'>已过期</view>
+          </view>
+        </view>
+      </block>
+
+    </view>
+
+  </view>
+
+</view>

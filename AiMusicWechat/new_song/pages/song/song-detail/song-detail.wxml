@@ -1,0 +1,14 @@
+<!--pages/song/song-detail/song-detail.wxml-->
+<import src="/components/nav/navtab.wxml"/>
+<import src="/components/backIndex/backIndex.wxml" />
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<view class='song'>
+  <view>
+    <view wx:for="{{songDetail.song_url}}" for-item="item" for-index="index">
+      <image bindtap='previewImage' src='{{songDetail.song_url[index]}}' mode='widthFix'></image>
+    </view>
+  </view>
+</view>
+<!-- <view class='student_float' bindtap='clickFloata' style="background-image: url('http://s.immusician.com/static/wechat/images/btn-learn@1x.png');">
+</view> -->
+<template is="backIndex" data="{{showShare:showShare}}" />

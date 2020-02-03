@@ -1,0 +1,48 @@
+<!--pages/loginNew/loginNew.wxml-->
+<view class='loginNew' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view></view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <view class='imgContain'>
+      <image src="https://s.immusician.com/static/wechat/images/%E7%99%BB%E5%BD%95LOGO@3x.png" class='img' mode="widthFix"></image>
+    </view>
+
+    <view class='formContainer'>
+      <form bindsubmit='formSubmit'>
+        <view class='labelStyle'>
+          <label for='telephone' class='login_label'>
+            <image bindtap='showZone' src="https://s.immusician.com/static/wechat/images/Shape3%E5%80%8D%E5%9B%BE.png" class='formImg' mode="widthFix"></image>
+            <view class='pre_zone' bindtap='showZone'>+{{preZone}}</view>
+            <input id='telephone' class='inputStyle' name="telephone" maxlength="11" bindinput="bindTelephone" />
+          </label>
+        </view>
+        <view class='labelStyle labelTwo'>
+          <label for='authCode'>
+            <image src="https://s.immusician.com/static/wechat/images/%E5%AF%86%E7%A0%813%E5%80%8D%E5%9B%BE.png" class='formImg' mode="widthFix"></image>
+            <input id='authCode' class='inputStyle' name="authCode" bindinput="bindAuthCode" />
+          </label>
+          <button class='sendAuthCode' bindtap="sendAuthCode" style='border:{{border}};color:{{sendAuthCodeColor}};background-color: white' disabled='{{sendAuthCodeDisabled}}' plain='{{true}}'>{{sendAuthCodeText}}{{countdown}}</button>
+        </view>
+        <button class='submit' form-type="submit" style='background-color:{{submitBackgroundColor}};color:{{color}}' disabled='{{submitDisabled}}'>注册/登录</button>
+      </form>
+    </view>
+
+  </view>
+  <!-- 弹窗 -->
+  <view class='modal preview_none' wx:if="{{zoneMask}}">
+    <view class='content'>
+      <view class='modal_header'>选择国家/地区</view>
+      <scroll-view scroll-y style="height: 600rpx;">
+        <view class='item' data-zone="{{item.value}}" bindtap='choseZone' wx:for="{{zoneData}}" wx:key="name">
+          <text class='label'>{{item.name}}</text>
+          <text class='value'>+{{item.value}}</text>
+        </view>
+      </scroll-view>
+      <image bindtap='closeZoneMask' class='close_img' src='./../../images/close.png' mode="widthFix"></image>
+    </view>
+  </view>
+</view>

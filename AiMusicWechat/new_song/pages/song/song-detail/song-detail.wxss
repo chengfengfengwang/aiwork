@@ -1,0 +1,27 @@
+/* pages/song/song-detail/song-detail.wxss */
+@import "/components/nav/navtab.wxss";
+@import "/components/backIndex/backIndex.wxss";
+.detail_title{
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+.song image{
+  /* width: 650rpx;  */
+  /* height: 100%;  */
+  width: 90%;  
+  margin-left: 5%;
+  margin-bottom: 10rpx; 
+}
+
+.student_float {
+  background: no-repeat ;
+  width: 150rpx;
+  height: 150rpx;
+  opacity: 0.9;
+  position: fixed;
+  bottom: 0; 
+  right: 0;
+  z-index: 10;
+}
+
+

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "component-nav": "../../components/navNew/navNew"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle":"dark"
+}

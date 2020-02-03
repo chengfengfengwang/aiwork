@@ -1,0 +1,24 @@
+/* pages/user/class/class.wxss */
+@import "/components/nav/navtab.wxss";
+page{
+  background-color: #f5f5fa;
+}
+.wrapper{
+  margin-top: 10rpx;
+}
+.my-class{
+  background: white;
+  padding: 0 0 0 30rpx;
+  height: 100rpx;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  align-content: center;
+  border-bottom: solid 1rpx  #f5f5fa;
+}
+.class_jiantou{
+  display: block;
+  width: 18rpx;
+  float: right;
+  margin-top: 35rpx;
+  margin-right: 30rpx;
+}

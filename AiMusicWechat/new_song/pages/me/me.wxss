@@ -1,0 +1,172 @@
+/* pages/me/me.wxss */
+
+.meContainer {
+  padding-top: 130rpx;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f5f5fa;
+}
+
+.contain {
+  padding: 10rpx 0;
+  background-color: #f5f5fa;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.logOutState, .logInState {
+  height: 180rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background-color: white;
+  margin-bottom: 10rpx;
+}
+
+.defaultPhoto {
+  width: 120rpx;
+  vertical-align: middle;
+  margin-right: 18rpx;
+}
+
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 18rpx;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.usePhoto {
+  width: 120rpx;
+  height: 120rpx;
+  vertical-align: middle;
+  margin-right: 18rpx;
+  border-radius: 60rpx;
+  border:4rpx solid #7048D1;
+  box-sizing:border-box;
+}
+
+.useInfo {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.name {
+  color: black;
+  font-size: 34rpx;
+}
+
+.grade {
+  color: #7048d1;
+  float: right;
+  height: 120rpx;
+  line-height: 120rpx;
+  font-size: 34rpx;
+}
+
+.hint {
+  font-size: 34rpx;
+  color: #666;
+  vertical-align: middle;
+}
+
+.loginIn {
+  width: 180rpx;
+  height: 60rpx;
+  color: white;
+  background-color: #7048d1;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 200rpx;
+}
+
+.personalStudy, .personalClass, .personalInvite, .personalCoupons {
+  height: 100rpx;
+  border-bottom: 1rpx solid #f5f5fa;
+  font-size: 28rpx;
+  color: #333;
+  background-color: white;
+  padding: 33rpx 30rpx 33rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.studyProgress {
+  height: 120rpx;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  background-color: white;
+  margin-bottom: 10rpx;
+}
+
+.studyCover {
+  width: 80rpx;
+  height: 80rpx;
+  display: inline-block;
+}
+
+.studyProgressVisual {
+  width: 580rpx;
+  display: inline-block;
+  margin-left: 30rpx;
+}
+
+.studyCourse {
+  font-size: 22rpx;
+  margin-bottom: 22rpx;
+}
+
+.courseName {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.courseProgress {
+  color: #666;
+  float: right;
+}
+
+.studyIcon, .classIcon, .inviteIcon, .couponsIcon {
+  width: 40rpx;
+  height: 32.7rpx;
+  vertical-align: middle;
+  margin-right: 13rpx;
+}
+
+.studyText, .classText, .inviteText, .couponsText {
+  vertical-align: middle;
+}
+
+.studyExtend, .classExtend, .inviteExtend, .couponsExtend {
+  width: 20rpx;
+  height: 19rpx;
+  vertical-align: middle;
+  float: right;
+}
+
+.inviteRatio {
+  float: right;
+  vertical-align: middle;
+  font-size: 22rpx;
+  color: #666;
+  margin: 5rpx 15rpx 0 10rpx;
+}
+
+.inviteProgress {
+  float: right;
+  width: 240rpx;
+  margin-top: 13rpx;
+  vertical-align: middle;
+}
+.my-invite{
+  text-align: left;
+  line-height: normal;
+}

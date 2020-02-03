@@ -1,0 +1,44 @@
+{
+  "name": "yinyueke-h5",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "deploy": "vue-cli-service build && node newupload.js && node refresh.js",
+    "odeploy": "vue-cli-service build && node upload.js && node refresh.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "clipboard": "^2.0.4",
+    "core-js": "^2.6.5",
+    "html2canvas": "^1.0.0-rc.5",
+    "jquery": "^3.4.1",
+    "qrcode": "^1.3.3",
+    "swiper": "^4.5.0",
+    "vant": "^2.0.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.2",
+    "vuedraggable": "^2.23.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "babel-plugin-import": "^1.12.0",
+    "image-webpack-loader": "^5.0.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "postcss-pxtorem": "^4.0.1",
+    "qiniu": "^7.2.2",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

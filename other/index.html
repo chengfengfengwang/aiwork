@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="baidu-site-verification" content="jClQPQ9Ymo" />
+    <meta charset="UTF-8">
+    <meta name="apple-itunes-app" content="app-id=1246637618">
+    <link href="http://s.immusician.com/static/images/bitbug_favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="迄今为止最好的在线学琴方式，智能互动教学模式+国内顶级名师团队+乐音识别技术，让学生边学边练，完美还原线下一对一手把手教学效果和体验。七天学会吉他、尤克里里弹唱，就是这么简单！">
+    <meta name="keywords" content="吉他,尤克里里,尤克里里教学,吉他教学,吉他弹唱,尤克里里弹唱,吉他速成,尤克里里速成,吉他谱,尤克里里谱,学音乐,学乐器,节拍器,调音器,乐理,曲谱大全,歌曲伴奏">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="http://s.immusician.com/static/website/swiper.min.css" />
+    <link rel="stylesheet" href="http://s.immusician.com/static/website/main.css" />
+    <script src="http://s.immusician.com/static/website/font.js"></script>
+    <script src="http://s.immusician.com/static/website/jquery-1.9.1.min.js"></script>
+    <script src="http://s.immusician.com/static/website/swiper.min.js"></script>
+    <title>AI音乐学院【官网】</title>
+    <script type="text/javascript">
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                    weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                    qq: u.match(/\sQQ/i) == " qq" //是否QQ
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var openInApp = u.indexOf('immusician') != -1 || u.indexOf('buluobang') != -1 || u.indexOf('bangtabs') != -1;
+        //判断是否IE内核或webKit内核
+        if (browser.versions.trident || browser.versions.presto || browser.versions.gecko || browser.versions.webKit) {
+            if (browser.versions.mobile) {
+                location.href = 'http://s.immusician.com/static/web/index_mob.html'
+            } else if (openInApp) {
+                location.href = 'http://s.immusician.com/static/web/index_mob.html'
+            }
+        }
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d7900abe595736cd5e3c5d2a6db7ef3f";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        .qr_hint{color: white;font-size: 15px; height: 30px; width: 130px;
+            margin-top: 10px;
+            margin-left:10px;}
+        .qrcode{margin-left: 70px; width:150px; height: 150px}
+        .qr{width:150px;
+            height: 150px; }
+        #qr{width:150px;
+            height: 150px; }
+        .pos{height: 650px}
+        #b-l-bottom{margin-top: 40px}
+
+    </style>
+</head>
+
+<body>
+    <div class="top-nav">
+        <div class="inner">
+            <div class="nav">
+                <div class="left">
+                    <a href="javascript:void(0);" class="logo">
+                        <img src="http://s.immusician.com/static/website/imgs/nav-logo.png" />
+                    </a>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li class="nav-onactive">
+                            <a href="http://s.immusician.com/static/web/index.html">首页</a>
+                        </li>
+                        <li class="nav-par">
+                            <a href="javascript:void(0);">课程<i class="icon-add"></i></a>
+                            <div class="nav-more">
+                                <a href="http://s.immusician.com/static/website/system.html?instrument_type=ukulele">尤克里里课程</a>
+                                <a href="http://s.immusician.com/static/website/system.html?instrument_type=guitar">吉他课程</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="https://immusician.taobao.com/?spm=2013.1.0.0.1cda7289S5hJJD" target="_blank">智能琴</a>
+                        </li>
+                        <li>
+                            <a href="http://s.immusician.com/static/website/about.html">关于我们</a>
+                        </li>
+                    </ul>
+                    <div class="btn-content">
+                        <a href="javascript:void(0);" class="btn-qrcode">
+                            <i></i>
+                            <div class="qrcode">
+                                <img src="http://s.immusician.com/static/website/imgs/banner-code.png" />
+                            </div>
+                        </a>
+                        <a href="https://weibo.com/u/6285406943?refer_flag=1001030101_" class="btn-blog">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(".nav-par").hover(function () {
+            $(".nav-more").show();
+        }, function () {
+            $(".nav-more").hide();
+        })
+    </script>
+    <div class="wrap" id="top">
+        <div class="block b0">
+            <div class="swiper-container swiper-banner">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image:url(http://s.immusician.com/static/website/imgs/banner01-bg.png)">
+                        <div class="inner pos">
+                            <div class="left">
+                                <div class="b-l-top">
+                                    <img src="http://s.immusician.com/static/website/img/01.png" />
+                                </div>
+                                <div class="b-l-bottom" id="b-l-bottom">
+                                    <a href="javascript:void(0);" class="qrcode">
+                                        <img class="qr" id="qr" src="http://s.immusician.com/static/website/imgs/index_qr.png" />
+                                        <p class="qr_hint">扫一扫下载客户端</p>
+                                    </a>
+                                    <div class="btn-banner-box">
+                                        <!--<a class="btn-android" id="btn-android1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'iOS-PC'])"></a>-->
+                                        <!--<a class="btn-ios" id="btn-ios1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'Android-PC'])"></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="b-r-top">
+                                    <img src="http://s.immusician.com/static/website/imgs/banner01-phone.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image:url(http://s.immusician.com/static/website/imgs/banner02-bg.png)">
+                        <div class="inner pos">
+                            <div class="left">
+                                <div class="b-l-top b-l-s">
+                                    <img src="http://s.immusician.com/static/website/img/02.png" />
+                                </div>
+                                <div class="b-l-bottom" id="b-l-bottom">
+                                    <a href="javascript:void(0);" class="qrcode">
+                                        <img class="qr" id="qr" src="http://s.immusician.com/static/website/imgs/index_qr.png" />
+                                        <p class="qr_hint">扫一扫下载客户端</p>
+                                    </a>
+                                    <div class="btn-banner-box">
+                                        <!--<a class="btn-android" id="btn-android1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'iOS-PC'])"></a>-->
+                                        <!--<a class="btn-ios" id="btn-ios1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'Android-PC'])"></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image:url(http://s.immusician.com/static/website/imgs/banner03-bg.png)">
+                        <div class="inner pos">
+                            <div class="left">
+                                <div class="b-l-top">
+                                    <img src="http://s.immusician.com/static/website/imgs/banner03-words.png" />
+                                </div>
+                                <div class="b-l-bottom" id="b-l-bottom">>
+                                    <a href="javascript:void(0);" class="qrcode">
+                                        <img class="qr" id="qr" src="http://s.immusician.com/static/website/imgs/index_qr.png" />
+                                        <p class="qr_hint">扫一扫下载客户端</p>
+                                    </a>
+                                    <div class="btn-banner-box">
+                                        <!--<a class="btn-android" id="btn-android1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'iOS-PC'])"></a>-->
+                                        <!--<a class="btn-ios" id="btn-ios1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'Android-PC'])"></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image:url(http://s.immusician.com/static/website/imgs/banner04-bg.png)">
+                        <div class="inner pos">
+                            <div class="left">
+                                <div class="b-l-top" style="width: 300px; margin-top: 0px">
+                                    <img src="http://s.immusician.com/static/website/imgs/banner04-words.png" />
+                                </div>
+                                <div class="b-l-bottom" id="b-l-bottom">
+                                    <a href="javascript:void(0);" class="qrcode">
+                                        <img class="qr" id="qr" src="" />
+                                        <p class="qr_hint">扫一扫下载客户端</p>
+                                    </a>
+                                    <div class="btn-banner-box">
+                                        <!--<a class="btn-android" id="btn-android1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'iOS-PC'])"></a>-->
+                                        <!--<a class="btn-ios" id="btn-ios1" href="" onclick="_hmt.push(['_trackEvent', 'download', 'click', 'Android-PC'])"></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination-banner"></div>
+            </div>
+        </div>
+        <div class="block b1">
+            <div class="inner">
+                <div class="left">
+                    <a href="http://s.immusician.com/static/website/system.html?instrument_type=guitar">
+                        <img src="http://s.immusician.com/static/website/imgs/jita.png" />
+                        <p class="title">吉他课程</p>
+                        <p class="content"><span>43997</span>人正在学习</p>
+                    </a>
+                    <a href="http://s.immusician.com/static/website/system.html?instrument_type=ukulele">
+                        <img src="http://s.immusician.com/static/website/imgs/youkelili.png" />
+                        <p class="title">尤克里里课程</p>
+                        <p class="content"><span>71203</span>人正在学习</p>
+                    </a>
+                </div>
+                <div class="right">
+                    <h5 class="title">零基础七天学会<br><span>尤克</span>里里或吉他</h5>
+                    <ul>
+                        <li>
+                            <p class="text-impor"><span>81593</span></p>
+                            <p class="text-nur">毕业人数</p>
+                        </li>
+                        <li>
+                            <p class="text-impor"><span>15</span>小时</p>
+                            <p class="text-nur">尤克里里毕业时间</p>
+                        </li>
+                        <li>
+                            <p class="text-impor"><span>21</span>小时</p>
+                            <p class="text-nur">吉他毕业时间</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block b2">
+            <div class="inner">
+                <div class="left">
+                    <h5 class="title">在AI音乐学院<br><span>你将</span>这样学音乐</h5>
+                    <dl>
+                        <dt>
+                            <p>智能互动教学模式</p>
+                        </dt>
+                        <dd>
+                            <a href="javascript:void(0);">全球首创的“智能互动式音乐教学”，乐音识别反馈；让学员及时发现问题，纠正错音，高效学习。</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <p>国内顶级的名师团队</p>
+                        </dt>
+                        <dd>
+                            <a href="javascript:void(0);">AI音乐学院聚集了国内顶尖的吉他、尤克里里老师；线上一对一细致教学，随时解答疑问；顶尖名师成为你的音乐私教，让你享受最专业的教学体验！</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            <p>完善的课程体系</p>
+                        </dt>
+                        <dd>
+                            <a href="javascript:void(0);">AI音乐学院联合名师团队共同打造了一套完善的课程体系，覆盖技巧、乐理等多维度知识点，从新手入门到乐器达人，为用户定制智能化学习路径。</a>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="right">
+                    <div class="video-box">
+                        <video controls="controls" class="vd" id="vd">
+                            <source src="http://s.immusician.com/static/videos/immusician-zhu.mp4" type="video/mp4">
+                        </video>
+                        <div class="vd-cover" id="vd-cover">
+                            <a href="javascript:void(0);" class="icon-play" id="btn-play-video"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block b3">
+            <div class="inner">
+                <h5 class="title">此刻<span>他们</span>正在学</h5>
+                <div class="user-list-box">
+                    <div class="user-list-wrap">
+                        <ul class="user-list" id="user-list1">
+                            <li>
+                                <!--<a href="javascript:void(0);">-->
+                                <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                                <!--<div class="user-info">-->
+                                <!--<div class="user-name">羊羊羊1</div>-->
+                                <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                                <!--</div>-->
+                                <!--</a>-->
+                            </li>
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊2</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊3</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊4</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <div class="user-list-wrap">
+                        <ul class="user-list" id="user-list2">
+                            <li>
+                                <!--<a href="javascript:void(0);">-->
+                                <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                                <!--<div class="user-info">-->
+                                <!--<div class="user-name">羊羊羊4</div>-->
+                                <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                                <!--</div>-->
+                                <!--</a>-->
+                            </li>
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊5</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊6</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                    <div class="user-list-wrap">
+                        <ul class="user-list" id="user-list3">
+                            <li>
+                                <!--<a href="javascript:void(0);">-->
+                                <!--<img class="user-photo" src="" alt=""/>-->
+                                <!--<div class="user-info">-->
+                                <!--<div class="user-name"></div>-->
+                                <!--<div class="user-work"></div>-->
+                                <!--</div>-->
+                                <!--</a>-->
+                            </li>
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊8</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="img/teacher.jpg" alt=""/>-->
+                            <!--<div class="user-info">-->
+                            <!--<div class="user-name">羊羊羊9ßßß</div>-->
+                            <!--<div class="user-work">刚刚完成了 第一章第一节刚刚完成了 第一章第一节</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="javascript:void(0);">-->
+                            <!--<img class="user-photo" src="" alt=""/>-->
+                            <!--<div class="ser-info">-->
+                            <!--<div class="user-name">Ak47</div>-->
+                            <!--<div class="user-work">刚刚完成了 都老师答疑</div>-->
+                            <!--</div>-->
+                            <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block b4">
+            <div class="work-box-inner">
+                <div class="rank rank0">
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-1">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p"></i>《风吹麦浪》</p>
+                                <span>解宇-指弹</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>尤克里里 学琴五个月</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="vd-b">
+                        <a href="javascript:void(0);" class="vd-link" id="vd-link-2">
+                            <div class="mask">
+                                <div class="work">
+                                    <p><i class="icon-p">《父亲》</i></p>
+                                    <span>文艺老僧</span>
+                                </div>
+                                <div class="work-mess">
+                                    <p>尤克里里 学琴一个月</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="javascript:void(0);" class="vd-link" id="vd-link-3">
+                            <div class="mask">
+                                <div class="work">
+                                    <p><i class="icon-p">《旅行的意义》</i></p>
+                                    <span>郑东芳</span>
+                                </div>
+                                <div class="work-mess">
+                                    <p>尤克里里 学琴三个月</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="rank rank1">
+                    <img src="http://s.immusician.com/static/website/imgs/student.png" />
+                </div>
+                <div class="rank rank2">
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-5">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p"></i>《宝贝》</p>
+                                <span>蒋明月</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>尤克里里 学琴一个月</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-6">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p"></i>《往事只能回味》</p>
+                                <span>好彩妹</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>尤克里里 学琴七天</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="rank rank3">
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-7">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p">《童话镇》</i></p>
+                                <span>小茜</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>尤克里里 学琴六个月</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-8">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p"></i>《兰花草》</p>
+                                <span>蔡昌峻10岁</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>吉他 学琴三个月</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="rank rank4">
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-9">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p">《女儿情》</i></p>
+                                <span>张演</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>吉他 学琴四个月</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="javascript:void(0);" class="vd-link" id="vd-link-10">
+                        <div class="mask">
+                            <div class="work">
+                                <p><i class="icon-p"></i>《父亲》</p>
+                                <span>michael和妈妈</span>
+                            </div>
+                            <div class="work-mess">
+                                <p>尤克里里 学琴三个月</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="block b5">
+            <div class="inner">
+                <div class="swiper-box">
+                    <div class="swiper-container swiper-student">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="user-text">
+                                        <p class="user-name">152******23：</p>
+                                        <div class="user-speak">
+                                            这么说吧，这个绝对是目前国内水平最高的吉他应用，我跟着学了三个多月，从小白开始练习到现在，也能晒作品啦，每天能从大神那学到更多的东西，大家一起加油吧！
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="user-text">
+                                        <p class="user-name">卡农爷爷：</p>
+                                        <div class="user-speak">
+                                            一直以来对吉他有着特殊的偏爱，很久以前练过一段时间，后来就放下了。最近又购置了吉他，并使用了AI音乐学院app，非常喜欢这个软件。课程的设置合理，大向老师专业幽默的讲课，使得我非常有兴趣。加之专业老师和微信群，使得我们能够互相交流，共同勉励。群里面，专业的学院老师也会为我们讲解和鼓励。非常不错的体验。-学员
+                                            卡农。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="user-text">
+                                        <p class="user-name">长劲super鹿：</p>
+                                        <div class="user-speak">
+                                            与AI的缘分来的很突然，本来只是买个尤克里里。结果附赠了ai学院的入学通知书，还有奖学金，让我感觉很欢喜，立刻加入了，里面可以选择从你喜欢的老师，就像一对一的教学，每个细节都说的很到位，还有智能调音器，我觉得最好的是闯关模式，只有达到标准才能继续往下学，我觉得这个给了我很大的动力，学起来特别来劲，每过一关都非常开心。目前才学习5天，但是我已经能独立弹奏一个歌曲了。并且还能弹唱，ai学院真的非常棒，发了朋友圈后还有好多朋友跟着我一起学起来了！一件衣服的价格就能多一项技能，我感觉特别棒！
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="user-text">
+                                        <p class="user-name">燕欢颜：</p>
+                                        <div class="user-speak">
+                                            家里有一把朋友送孩子的尤克里里，开始在网上找视频学习，断断续续的跟过几个视频学过，都因为讲的太笼统，太快，学的很糊涂渐渐失去信心，真忘了在哪里了解了这个软件，一学上就非常开心，以前的迷惑一扫而空，非常简单易懂，老师教的很细，每节课都像玩游戏过关一样，让我不断进步着，非常喜欢老师们，每天都会抽出时间来练习，已经改变了生活的常态，改变了看电脑看小说的习惯
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-student"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+        <div class="block b6">
+            <div class="inner">
+                <h5 class="title">我们<span>向您</span>承诺</h5>
+                <div class="promise-box">
+                    <div class="promise">
+                        <div class="p-bx">
+                            <img src="http://s.immusician.com/static/website/imgs/refund.png" />
+                        </div>
+                        <h5>退款承诺</h5>
+                        <p>若您对课程或服务不满意，只要满足退款条件，即可申请“全额退款”。</p>
+                    </div>
+                    <div class="promise">
+                        <div class="p-bx">
+                            <img src="http://s.immusician.com/static/website/imgs/service.png" />
+                        </div>
+                        <h5>服务承诺</h5>
+                        <p>购买课程即成为AI音乐学院的VIP学员。我们将向每一位学员提供在线辅导服务。</p>
+                    </div>
+                    <div class="promise">
+                        <div class="p-bx">
+                            <img src="http://s.immusician.com/static/website/imgs/teachers.png" />
+                        </div>
+                        <h5>师资承诺</h5>
+                        <p>我们承诺AI音乐学院的师资团队来自国内顶尖名师，保证教师的优质教学水平。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block b7">
+            <div class="inner">
+                <h5 class="title">战略<span>合作</span>伙伴</h5>
+                <img src="http://s.immusician.com/static/website/imgs/partner-logo.jpg">
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频播放弹窗 -->
+    <div class="vd-modal-box">
+        <div class="btn-close"></div>
+        <div class="modal-body">
+            <video controls="controls" id="modal-video">
+                <source src="" type="video/mp4">
+            </video>
+            <div class="vd-cover">
+                <img src="http://s.immusician.com/static/imgs/teachers_cover.png" alt="" />
+                <div class="vd-modal"><a href="javascript:void(0);" class="icon-modal-play"></a></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <div class="inner">
+            <div class="left">
+                <div class="logo"></div>
+                <ul>
+                    <li>
+                        <a href="https://immusician.taobao.com/?spm=2013.1.0.0.1cda7289S5hJJD" target="_blank">淘宝旗舰店</a>
+                    </li>
+                    <li>
+                        <a href="http://s.immusician.com/static/website/about.html">关于我们</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="btn-qrcode">
+                            <i></i>
+                            <div class="qrcode">
+                                <img src="http://s.immusician.com/static/website/imgs/banner-code.png" />
+                            </div>
+                        </a>
+                        <a href="https://weibo.com/u/6285406943?refer_flag=1001030101_" class="btn-blog">
+                            <i></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="copyright">
+                    <p>Copyright©2016 Immusician.All rights reserved.版权所有音悦荚 京ICP备16047852号-1</p>
+                </div>
+            </div>
+            <div class="right">
+                <a href="#top" class="back-top">返回顶部</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var initUtil = {
+            init: function () {
+                var that = this;
+                //页面内视频播放
+                that.videoPlay();
+                //swiper
+                that.swiperBanner();
+                that.swiperStudent();
+                //学生墙
+                that.userListScroll();
+                //视频播放弹窗
+                that.videoModal();
+            },
+            videoPlay: function () {
+                var w = $(".vd").width();
+                var h = w * 0.73;
+                $(".vd").css({ "width": w + "px", "height": h + "px" })
+
+                $(".icon-play").on("click", function () {
+                    var that = $(this);
+                    that.parents(".vd-cover").hide();
+                    var vd = $(this).parents(".video-inner").index();
+                    document.querySelector("#vd").play();
+                    document.querySelector("#vd").addEventListener("ended", function () {
+                        that.parents(".vd-cover").show();
+                    })
+                })
+            },
+            swiperStudent: function () {
+                var swiper1 = new Swiper('.swiper-student', {
+                    pagination: '.swiper-pagination-student',
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    paginationType: 'fraction',
+                    paginationClickable: true,
+                    autoplay: 10000,
+                    loop: true
+                })
+            },
+            swiperBanner: function () {
+                var swiper2 = new Swiper('.swiper-banner', {
+                    pagination: '.swiper-pagination-banner',
+                    paginationType: 'bullets',
+                    loop: true,
+                    autoplay: 3000
+                })
+            },
+            userListScroll: function () {
+                var e = $(".user-list");
+                var h = $(".user-list li").innerHeight();
+                e.each(function (e, t) {
+                    var t = $(t),
+                        n = function o() {
+                            var e = t.find("li").eq(0);
+                            e.animate({
+                                opacity: 0
+                            },
+                                800,
+                                function () {
+                                    t.animate({
+                                        top: "-" + h + "px"
+                                    },
+                                        500,
+                                        function () {
+                                            e.appendTo(t).css("opacity", 1),
+                                                t.css("top", 0),
+                                                setTimeout(o, 2000)
+                                        })
+                                })
+                        };
+                    n()
+                })
+            },
+            videoModal: function () {
+                $(".work-box-inner").find("#vd-link-1").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/1.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-2").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/2.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-3").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/3.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-5").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/5.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-6").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/6.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-7").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/7.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-8").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/8.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-9").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/9.mp4");
+                    $("#modal-video").load();
+                });
+                $(".work-box-inner").find("#vd-link-10").on("click", function () {
+                    $("body").addClass("modal-open");
+                    $(".vd-modal-box").show();
+                    $("#modal-video source").attr("src", "http://s.immusician.com/static/website/videos/10.mp4");
+                    $("#modal-video").load();
+                });
+                $(".icon-modal-play").on("click", function () {
+                    $(this).parents(".vd-cover").hide();
+                    document.querySelector("#modal-video").play();
+                    document.querySelector("#modal-video").addEventListener("ended", function () {
+                        $(this).next(".vd-cover").show();
+                    })
+                })
+                $(".btn-close").on("click", function () {
+
+
+                    document.querySelector("#modal-video").pause();
+                    $("body").removeClass("modal-open");
+                    $(".vd-modal-box").hide();
+                    $("#modal-video source").attr("src", "");
+                    $(".vd-modal-box .vd-cover").show();
+                })
+            }
+        }
+        $(function () {
+            initUtil.init();
+        })
+        $.ajax({
+            url: 'http://iguitar.immusician.com:2525/v3/web/study/',
+            type: 'get',
+            success: function (data) {
+                $('#user-list1').html(data['left']);
+                $('#user-list2').html(data['right']);
+                $('#user-list3').html(data['three']);
+            }
+        })
+        jQuery(document).ready(function ($) {
+            function getParam(strParamName) {
+                var strReturn = "";
+                var strHref = document.location.href;
+                var bFound = false;
+                var cmpstring = strParamName + "=";
+                var cmplen = cmpstring.length;
+
+                if (strHref.indexOf("?") > -1) {
+                    var strQueryString = strHref.substr(strHref.indexOf("?") + 1);
+                    var aQueryString = strQueryString.split("&");
+                    for (var iParam = 0; iParam < aQueryString.length; iParam++) {
+                        if (aQueryString[iParam].substr(0, cmplen) == cmpstring) {
+                            var aParam = aQueryString[iParam].split("=");
+                            strReturn = aParam[1];
+                            bFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (bFound == false) return null;
+                return strReturn;
+            }
+            var source = getParam("channel")
+            var channel = getParam("channels")
+            if (source) {
+                $(".btn-ios").attr('href', 'http://iguitar.immusician.com:2525/d?device=android&channel=' + source + '&button=index_android1');
+                $(".qr").attr('src', 'http://s.immusician.com/static/web/imgs/index_' + source + '.png');
+                $(".btn-android").attr('href', 'http://iguitar.immusician.com:2525/d?device=ios&channel=' + source + '&skip_ios=skip_ios&button=index_ios1')
+            } else {
+                $(".btn-ios").attr('href', 'http://iguitar.immusician.com:2525/d?device=android&button=index_android1');
+                $(".btn-android").attr('href', 'http://iguitar.immusician.com:2525/d?device=ios&skip_ios=skip_ios&button=index_ios1');
+                $(".qr").attr('src', 'http://s.immusician.com/static/web/imgs/index.png');
+            }
+
+            if (channel) {
+                $(".btn-ios").attr('href', 'http://iguitar.immusician.com:2525/d?device=android&channel=' + channel + '&button=index_android1');
+                $(".qr").attr('src', 'http://s.immusician.com/static/web/imgs/index_' + channel + '.png');
+                $(".btn-android").attr('href', 'http://iguitar.immusician.com:2525/d?device=ios&channel=' + channel + '&skip_ios=skip_ios&button=index_ios1')
+            }
+        })
+    </script>
+</body>
+<script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1263336784'%3E%3C/span%3E%3Cscript src='" +
+        cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263336784' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    document.getElementById("cnzz_stat_icon_1263336784").style.display = "none";
+</script>
+
+</html>

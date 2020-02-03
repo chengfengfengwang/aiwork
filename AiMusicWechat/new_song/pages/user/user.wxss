@@ -1,0 +1,63 @@
+/* pages/user/user.wxss */
+@import "/components/nav/navtab.wxss";
+page{
+  background-color: #f5f5fa;
+}
+.wode_bg{
+width: 760rpx;
+height: 400rpx;
+background-size: 100% 100%;
+background-repeat: no-repeat;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+  margin-top: 80rpx;
+  border-radius: 80rpx;
+  overflow: hidden;
+}
+
+.userinfo-nickname {
+  color: #000000;
+  font-size: 36rpx;
+}
+
+.wode_txt {
+  background-color: white;
+  margin-top: 20rpx;
+}
+
+.myclass {
+  width: 750rpx;
+  height: 100rpx;
+  border-bottom: solid 1rpx #e6e6e6;
+}
+.myclass image{
+  width: 40rpx;
+  margin: 35rpx 35rpx 0rpx 30rpx;
+  float: left;
+}
+.myclass text{
+  display: block;
+  line-height: 100rpx; 
+  font-size: 30rpx;
+  color: #333333;
+  float: left;
+}
+.myclass .class_jiantou{
+  display: block;
+  width: 18rpx;
+  float: right;
+  margin-top: 35rpx;
+}
+.public{
+  border-bottom: 0rpx;
+}

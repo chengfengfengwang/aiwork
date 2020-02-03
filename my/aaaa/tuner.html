@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>威伯AI调音器</title>
+    <meta name="apple-mobile-web-app-capable" />
+    <meta name="referrer" content="no-referrer" />
+    <link href="http://s.immusician.com/static/iTunesArtwork.png" rel="shortcut icon" type="image/x-icon">
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <script type="text/javascript">
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 750) {
+                    width = 750 * dpr;
+                }
+                docEl.dataset.width = width
+                docEl.dataset.percent = 100 * (width / 750);
+                docEl.style.fontSize = 100 * (width / 750) + 'px';
+            };
+            recalc()
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+    </script>
+    <meta name="format-detection" content="telephone=no" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            -webkit-user-select: text
+        }
+
+        a,
+        img {
+            -webkit-touch-callout: none
+        }
+
+        ol,
+        ul {
+            list-style: none
+        }
+
+        *,
+        :after,
+        :before {
+            -webkit-box-sizing: border-box;
+            -webkit-text-size-adjust: none;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body,
+        html {
+            font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+            font-size: .35rem;
+            font-weight: 300;
+            line-height: .5rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-align: center;
+            height: 100%;
+        }
+
+        body {
+            width: 7.5rem;
+            background: white;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        header {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: .24rem;
+            font-weight: 400;
+            color: #333;
+            text-align: center;
+            height: .3rem;
+            line-height: .3rem;
+            margin-top: .12rem;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: .5rem;
+            margin-top: .4rem;
+        }
+
+        .desc {
+            padding: .3rem .2rem;
+        }
+
+        .video {
+            display: none
+        }
+
+        .video,
+        .video video {
+            width: 100%;
+            height: auto;
+        }
+
+        .video video {
+            padding: 0 !important;
+            object-fit: fill;
+        }
+
+        video::-webkit-media-controls-volume-slider,
+        video::-webkit-media-controls-mute-button {
+            display: none;
+        }
+
+        .download {
+            margin-top: 1rem;
+        }
+
+        .download a {
+            padding: .1rem .2rem;
+            text-decoration: none;
+            border: 1px solid #3e81bb;
+            background: white;
+            border-radius: .1rem;
+            color: #3e81bb;
+            margin-left: .3rem;
+        }
+
+        .download a:hover {
+            background: #3e81bb;
+            color: white;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            font-size: .25rem;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+    <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script> -->
+</head>
+
+<body ontouchstart="">
+    <div id="kalimba" class="video">
+        <video controls="controls" webkit-playsinline="true" poster="https://s.immusician.com/tuner/kalimba_poster.png"
+            controlsList="nodownload">
+            <source src="//s.immusician.com/tuner/kalimba.mp4" type="video/mp4" -webkit-playsinline="true">
+        </video>
+    </div>
+    <div id="ukulele" class="video">
+        <video id="aiukulele" controls="controls" webkit-playsinline="true" poster="http://s.immusician.com/static/web/imgs/aituner_cover.png"
+            id="videCtl" controlsList="nodownload">
+            <source src="http://s.immusician.com/aituner_demostration.mp4" type="video/mp4" -webkit-playsinline="true">
+        </video>
+        <video id="noaiukulele" controls="controls" webkit-playsinline="true" poster="http://s.immusician.com/tuner/tuner-noai-poster.png"
+            id="videCtl" controlsList="nodownload">
+            <source src="http://s.immusician.com/tuner/tuner-noai-uku.mp4" type="video/mp4" -webkit-playsinline="true">
+        </video>
+    </div>
+
+</body>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d7900abe595736cd5e3c5d2a6db7ef3f";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script type="text/javascript">
+    var u = navigator.userAgent.toLowerCase();
+    var openInAi = u.indexOf('com.immusician.music/') != -1;
+    console.log(u)
+    console.log(openInAi)
+    function isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        return (ua.match(/MicroMessenger/i) == 'micromessenger');
+    }
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
+        }
+        return '';
+    }
+    var instrumentType = getQueryVariable('instrument_type');
+    if (instrumentType === 'kalimba') {
+        document.querySelector('#kalimba').style.display = 'block'
+    } else {
+        document.querySelector('#ukulele').style.display = 'block'
+        if(openInAi){
+            document.querySelector('#aiukulele').style.display = 'block'
+            document.querySelector('#noaiukulele').style.display = 'none'
+        }else{
+            document.querySelector('#noaiukulele').style.display = 'block'
+            document.querySelector('#aiukulele').style.display = 'none'
+        }
+    }
+    document.getElementById("androidBtn").onclick = function () {
+        if (isWeiXin) {
+            alert("请点击右上角在浏览器中打开后下载调音器。");
+        }
+    }
+
+</script>
+
+</html>

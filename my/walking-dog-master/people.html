@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .people {
+            width: 100px;
+            height: 114px;
+            background: url(https://upload-images.jianshu.io/upload_images/1287935-9fb1095de0d2d321.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp);
+            animation: run 1s steps(9) linear 0s infinite;
+            -webkit-animation: run 1s steps(9) 0s infinite;
+        }
+
+        @keyframes run {
+            to {
+                background-position: -900% 0
+            }
+        }
+
+
+
+
+        .demo {
+            border-top: 100px solid #ccc;
+            height: 300px;
+        }
+
+        @keyframes grow {
+            0% {
+                font-size: 0;
+            }
+
+            100% {
+                font-size: 40px;
+            }
+        }
+
+        .demo:hover .grows {
+            animation-name: grow;
+            animation-duration: 3s;
+        }
+
+        .demo:hover .growsandstays {
+            animation-name: grow;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="people"></div> -->
+    <p>Move your mouse over the gray box!</p>
+    <div class="demo">
+        <div class="growsandstays">This grows and stays big.</div>
+        <div class="grows">This just grows.</div>
+    </div>
+</body>
+
+</html>

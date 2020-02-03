@@ -1,0 +1,10 @@
+<!--pages/user/bright/bright.wxml-->
+<!-- <template is="navTab" data="{{navTitle:navTitle}}" /> -->
+
+<view wx:if="{{!showWebview}}">
+  
+</view>
+<view wx:if="{{showWebview}}">
+  <web-view src='{{url}}'></web-view>
+</view>
+<!-- <video src='http://s.immusician.com/static/videos/befor_05.mp4' show-fullscreen-btn='true'></video> -->

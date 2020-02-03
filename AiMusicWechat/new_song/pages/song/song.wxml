@@ -1,0 +1,26 @@
+<!--pages/song/song.wxml-->
+<import src="/components/item/item-template.wxml" />
+<!-- <import src="components/tabbar/tabbar.wxml" /> -->
+<view class='navTab'></view>
+<view class='instrument'>
+  <view class='{{(instrumentType=="ukulele")? "uku":"uku2"}}' bindtap='click_uku'>
+    <text>尤克里里</text>
+  </view>
+  <view class='{{(instrumentType=="guitar")? "guitar":"guitar2"}}' bindtap='click_guitar'>
+    <text>吉他</text>
+  </view>
+</view>
+<view class='search' catchtap="openSearch">
+  <view class="search_img" style="background-image: url('http://s.immusician.com/static/wechat/images/icon-search@2x.png');"></view>
+  <view class='search_input'>搜索</view>
+</view>
+<view class='bar_img' style="background-image: url('http://s.immusician.com/static/wechat/images/1532000754884.png');">
+</view>
+<text class='hot_txt'>热门曲谱</text>
+<view class=''>
+  <view class='song_module'>
+    <view class='song-list-box'>
+      <template is="itemTemplate" data="{{list:songList, hasMore:hasMore}}" />
+    </view>
+  </view>
+</view>

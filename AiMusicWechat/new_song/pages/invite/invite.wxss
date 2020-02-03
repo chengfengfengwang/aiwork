@@ -1,0 +1,472 @@
+/* pages/invite/invite.wxss */
+
+.invite {
+  padding-top: 130rpx;
+  background-color: #f5f5fa;
+}
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(51, 51, 51, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 300rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.coupon {
+  width: 100%;
+  height: 143rpx;
+  background-image: url('https://s.immusician.com/static/wechat/images/%E4%BC%98%E6%83%A0%E5%88%B8%E8%83%8C%E6%99%AF@3x.png');
+  background-size: 100% 100%;
+  margin-top: 20rpx;
+}
+
+.coupon::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.price {
+  width: 187rpx;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  line-height: 143rpx;
+  color: #4ac1bf;
+  font-size: 42rpx;
+  vertical-align: bottom;
+}
+
+.couponAttribute {
+  width: 503rpx;
+  height: 100%;
+  display: inline-block;
+  vertical-align: bottom;
+  color: #666;
+  font-size: 20rpx;
+  padding: 30rpx 20rpx 30rpx 41rpx;
+  box-sizing: border-box;
+}
+
+.couponReminder {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.modalBtn{
+  margin-top: 20rpx;
+}
+
+.modalBtnLeft{
+  color: white;
+  font-size: 32rpx;
+  background-color: #7048d1;
+}
+
+.modalBtnRight{
+  color: white;
+  font-size: 32rpx;
+  background-color: #7048d1;
+  margin-top: 20rpx;
+}
+
+.maskLayer {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(51, 51, 51, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.inviteAllContain {
+  position: absolute;
+  left: 0;
+  /* bottom: 0; */
+  top:10.5%;
+  height: 1190rpx;
+  width: 100%;
+  padding: 0rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.inviteAll {
+  padding-top:20rpx;
+  /* height: 100%; */
+  border-radius: 15rpx 15rpx 15rpx 15rpx;
+  background-color: white;
+}
+
+.inviteFirstStage {
+  padding: 30rpx 30rpx 14rpx 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.inviteSecondStage, .inviteThirdStage {
+  padding: 0rpx 30rpx 14rpx 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.inviteAllStageVisual {
+  width: 460rpx;
+  display: inline-block;
+}
+
+.inviteAllFirstLine {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.inviteAllFirstLineText {
+  font-size: 32rpx;
+  color: #333;
+  display: inline-block;
+}
+
+.inviteAllFirstLineHint {
+  display: inline-block;
+  margin-left: 40rpx;
+}
+
+.inviteAllFirstLineNum {
+  color: #7048d1;
+}
+
+.inviteAllSecondLine {
+  margin: 35rpx 0 15rpx 0;
+}
+
+.inviteAllThirdLine {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.inviteAllRatio {
+  float: right;
+}
+
+.inviteAllThirdLineNum {
+  color: #7048d1;
+}
+
+.inviteAllGitf {
+  width: 120rpx;
+  margin-left: 50rpx;
+}
+
+.inviteAllMembers {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  align-content: space-between;
+  vertical-align: bottom;
+}
+
+.inviteMemberContain {
+  width: 20%;
+  height: 80rpx;
+  text-align: center;
+  vertical-align: bottom;
+  margin-bottom: 16rpx;
+  /* background-color: red; */
+}
+
+.hideStageImg {
+  width: 12rpx;
+  transform: rotate(90deg);
+  margin-left: 13rpx;
+}
+
+.contain {
+  padding: 10rpx 0 0 0;
+  background-color: #f5f5fa;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.banner {
+  width: 100%;
+  height: 400rpx;
+  vertical-align: bottom;
+}
+
+.inviteContain {
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.inviteBtn {
+  height: 72rpx;
+  padding: 18rpx 0;
+  font-size: 24rpx;
+  color: #666;
+  box-sizing: border-box;
+}
+
+.inviteBtn::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.btnLeft {
+  float: left;
+}
+
+.btnRight {
+  float: right;
+}
+
+.imgLeft {
+  width: 12rpx;
+  margin-right: 12rpx;
+  transform: rotate(180deg);
+  vertical-align: middle;
+}
+
+.imgRight {
+  width: 12rpx;
+  margin-left: 12rpx;
+  vertical-align: middle;
+}
+
+.textLeft, .textRight {
+  vertical-align: middle;
+}
+
+.inviteInfo {
+  height: 722rpx;
+  background-color: white;
+  border-radius: 15rpx 15rpx 0 0;
+}
+
+.inviteStage {
+  padding: 30rpx;
+  height: 212rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+}
+
+.inviteStageVisual {
+  width: 460rpx;
+  display: inline-block;
+}
+
+.firstLine {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.firstLineText {
+  font-size: 32rpx;
+  color: #333;
+  display: inline-block;
+}
+
+.firstLineHint {
+  display: inline-block;
+  margin-left: 40rpx;
+}
+
+.firstLineNum {
+  color: #7048d1;
+}
+
+.secondLine {
+  margin: 35rpx 0 15rpx 0;
+}
+
+.thirdLine {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.inviteRatio {
+  float: right;
+}
+
+.thirdLineNum {
+  color: #7048d1;
+}
+
+.inviteGitf {
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: 50rpx;
+}
+
+.inviteMembers {
+  padding: 30rpx 30rpx 24rpx 30rpx;
+  height: 260rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ddd;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: space-between;
+  vertical-align: bottom;
+}
+
+.inviteMemberContain {
+  width: 20%;
+  height: 80rpx;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.inviteMember {
+  width: 80rpx;
+  height: 80rpx;
+  vertical-align: bottom;
+  border-radius: 50%;
+}
+
+.inviteExtend {
+  text-align: center;
+  padding: 0 95rpx;
+  box-sizing: border-box;
+}
+
+.moreStage {
+  font-size: 28rpx;
+  color: #333;
+  margin: 50rpx 0 30rpx 0;
+}
+
+.moreStageImg {
+  width: 12rpx;
+  transform: rotate(-90deg);
+  margin-left: 13rpx;
+}
+
+.share {
+  color: white;
+  font-size: 32rpx;
+  background-color: #7048d1;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.closeBtn{
+  position: absolute;
+  bottom: -80rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.preview_none .top{
+  position: relative;
+  font-size: 0;
+}
+.preview_none .top image{
+  width: 690rpx;
+  height: 260rpx;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.preview_none .top .top_cupon{
+  width: 450rpx;
+  height: 120rpx;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-top: -60rpx;
+  margin-left: -225rpx;
+}
+.preview_none .bottom{
+  position: relative;
+  text-align: center;
+  background-color: #fff;
+  padding-bottom: 40rpx;
+  border-radius: 0 0 10rpx 10rpx;
+}
+.preview_none .bottom .bottom_title{
+  padding: 30rpx 0;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  color: #333333;
+  letter-spacing: 2rpx;
+  line-height: 36rpx;
+}
+.preview_none .bottom_content{
+  padding-bottom: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 1.44rpx;
+  text-align: center;
+  line-height: 38rpx;
+}
+.preview_btn{
+  display: inline-block;
+  width: 280rpx;
+  height: 72rpx;
+  background: #7048D1;
+  border-radius: 40rpx;
+  font-family: PingFangSC-Semibold;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.78rpx;
+  line-height: 72rpx;
+}
+.preview_pice,.preview_name,.preview_describe{
+  position: absolute;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 1.44px;
+}
+.preview_pice{
+  top:38%;
+  left:27%;
+  font-family: PingFangSC-Semibold;
+  font-size: 48rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.78rpx;
+}
+.preview_name{
+  top:35%;
+  left:42%;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 1.44rpx;
+}
+.preview_describe{
+  top:50%;
+  left:42%;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  color: #333333;
+  letter-spacing: 1.44rpx;
+}
+.invite_share{
+  width: 90%;
+  margin: 0 auto
+}
+.modal_moreStage{
+  margin: 0rpx 0 30rpx 0;
+}
+.close_icon{
+  position: absolute;
+  right:36rpx;
+  top:6rpx;
+  padding: 10rpx;
+  box-sizing: content-box;
+}
+.close_icon image{
+  width: 40rpx;
+  height: 40rpx;
+  opacity: .8
+}
+.testbox{
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #fff;
+}

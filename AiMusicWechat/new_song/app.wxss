@@ -1,0 +1,73 @@
+@import "templates/index.wxss";
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+/* flex布局 */
+.flex-row {
+  display: flex;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-1 {
+  flex: 1;
+}
+
+/* 白底橘字按钮 */
+.btn-org {
+  background: #fff;
+  color: #FF6D1F;
+  border: 1px solid #FF6D1F;
+  border-radius: 8rpx;
+  text-align: center;
+}
+/* 橘底白字按钮 */
+.btn-solid-org {
+  background: #655ba0;
+  color: #FFF;
+  border-radius: 8rpx;
+  text-align: center;
+}
+/* 清除小程序原生btn样式 */
+.clear-button{
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none
+}
+.clear-button::after{ border: none; }
+.scale-1px{
+position: relative;
+border:none;
+}
+.scale-1px:after{
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+border: 2rpx solid #000;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+width: 200%;
+height: 200%;
+-webkit-transform: scale(0.5);
+transform: scale(0.5);
+-webkit-transform-origin: left top;
+transform-origin: left top;
+}
+.no_data_show{
+  text-align: center;
+  font-size: 28rpx;
+  margin-top:30%;
+  color: #333;
+  letter-spacing: 1rpx
+}

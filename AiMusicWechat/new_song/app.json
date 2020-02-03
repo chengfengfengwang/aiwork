@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/courses/courses",
+    "pages/coursesDetails/coursesDetails",
+    "pages/indent/indent",
+    "pages/activity/activity",
+    "pages/receivePrize/receivePrize",
+    "pages/loginNew/loginNew",
+    "pages/payComplete/payComplete",
+    "pages/me/me",
+    "pages/study/study",
+    "pages/invite/invite",
+    "pages/coupons/coupons",
+    "pages/song/song",
+    "pages/user/user",
+    "pages/user/rank/rank",
+    "pages/user/class/class",
+    "pages/song/song-detail/song-detail",
+    "pages/song/search/search",
+    "pages/song/relevance_course/relevance_course",
+    "pages/course/course",
+    "pages/song/more-song/more-song",
+    "pages/user/guide/guide",
+    "pages/login/login",
+    "pages/user/bright/bright",
+    "pages/user/wechatQr/wechatQr",
+    "pages/playVideo/playVideo"
+  ],
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#8C8C8C",
+    "selectedColor": "#7048D1",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/new_edition/fanfei/icon_tabbar_home_nm@3x.png",
+        "selectedIconPath": "images/new_edition/fanfei/icon_tabbar_home_act@3x.png"
+      },
+      {
+        "pagePath": "pages/song/song",
+        "text": "曲谱库",
+        "iconPath": "images/new_edition/fanfei/icon_tabbar_playlist_nm@3x.png",
+        "selectedIconPath": "images/new_edition/fanfei/icon_tabbar_playlist_act@3x.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/new_edition/fanfei/icon_tabbar_user_nm@3x.png",
+        "selectedIconPath": "images/new_edition/fanfei/icon_tabbar_user_act@3x.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "AI音乐学院",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "backgroundTextStyle": "light",
+    "backgroundColorTop": "#f5f5fa",
+    "backgroundColorBottom": "#f5f5fa"
+  }
+}

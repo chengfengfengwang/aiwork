@@ -1,0 +1,2 @@
+<!--pages/course/course.wxml-->
+<web-view src="{{webviewUrl}}"></web-view>

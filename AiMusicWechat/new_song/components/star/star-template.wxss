@@ -1,0 +1,12 @@
+.star {
+  width: 34rpx;
+  height:34rpx;
+  background: bisque
+}
+.star image{
+  display: block;
+  width:34rpx;
+  height:34rpx;
+  float: left;
+  margin-left: 15rpx;
+}

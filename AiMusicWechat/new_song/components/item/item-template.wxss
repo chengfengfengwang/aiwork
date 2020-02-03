@@ -1,0 +1,49 @@
+/* @import "/components/star/star-template.wxss"; */
+.song_list{
+margin-top:50rpx;
+height: 200rpx;
+border-bottom: solid 1rpx;
+border-bottom-color: #E6E6E6;
+}
+.cover{
+  float: left;
+  margin-left: 30rpx;
+}
+.cover_img{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius:50% ;
+  background-size: 100% 100%;
+}
+.text{
+  margin-left: 30rpx;
+  float: left
+}
+.txt_title{
+  font-size: 34rpx;
+}
+.diff{
+  margin-top:60rpx;
+}
+.txt_diff{
+  font-size: 24rpx;
+  display: block;
+  float: left
+}
+ .diff_imgs{
+  width:34rpx;
+  height:34rpx;
+  background-size: 100% 100%;
+  float: left;
+  margin-left: 15rpx;
+} 
+.arrows{
+  float: right
+}
+.arrows_img{
+  width: 13rpx;
+  height: 34rpx;
+  margin-right: 30rpx;
+  margin-top: 50rpx;
+  background-size: 100% 100%;
+}

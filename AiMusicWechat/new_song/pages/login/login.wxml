@@ -1,0 +1,42 @@
+<!--pages/login/login.wxml-->
+<import src='../../templates/authdialog/authdialog.wxml' />
+<template is='auth-info-dialog' data='{{authInfoDlg: authInfoDlg}}' />
+<!-- <view class='wode_bg' style="background-image: url('http://s.immusician.com/static/wechat/images/loginbg@2x.png');"> -->
+<view class="wode_bg">
+  <view>
+    <view class='up_bg' style="background-image:url('http://s.immusician.com/static/wechat/images/loginbgup@2x.png')">
+      <view class='welcome'>
+        <image src='http://s.immusician.com/static/wechat/images/loginpicwelcom@2x.png' mode='widthFix'></image>     
+      </view>
+      
+      <view class='btn'>
+      <text></text>
+      <form bindsubmit="telLogin">
+        <input bindblur="telLogin" name="tel"  placeholder='请输入注册APP时使用的手机号'></input>
+        <!-- <button formType="submit">
+          <image src='http://s.immusician.com/static/wechat/images/loginbutton@2x.png' mode='widthFix'></image>
+        </button> -->
+      </form>
+      </view>
+    </view>
+
+  <view class='welcome-text'>
+    <text class='huanhang'>亲爱的同学，请输入手机号，加入班级学习群</text>
+    <!-- <text class='huanhang'>- 入群后可获得价值<text class='colorHong'>89元</text>的特别课程-</text> -->
+    <text class='huanhang'>入群后可免费解锁一套神秘课程</text>
+  </view>
+
+  <view class='down_bg' style="background-image:url('http://s.immusician.com/static/wechat/images/loginbgdown@2x.png')">
+    <view class='welcome-buttom'>
+        <image class='one' src='http://s.immusician.com/static/wechat/images/loginpicwaiting4u@2x.png' mode='widthFix'></image>
+        <image class='two' src='http://s.immusician.com/static/wechat/images/ailogo@2x.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+  <button class='{{showShare?"":"backIndex"}}' bindtap='backIndex'>
+    <image src='http://s.immusician.com/static/wechat/images/btn@2x.png' mode='widthFix'></image>
+  </button>
+
+</view>
+
+

@@ -1,0 +1,33 @@
+.stars {
+  display: flex;
+  text-align: left;
+}
+.stars .star_wrapper {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+.stars .star_wrapper > span {
+  position: absolute;
+}
+.stars .star_wrapper .left {
+  width: 60%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.stars .star_wrapper .right {
+  width: 40%;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+.stars .star_wrapper.half .right {
+  background-color: #fff;
+}
+.stars .star {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}

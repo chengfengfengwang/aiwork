@@ -1,0 +1,105 @@
+/* pages/login/login.wxss */
+@import "../../templates/authdialog/authdialog.wxss";
+.wode_bg{
+/* width: 100%; */
+/* background-size: 100% 100%;
+background-repeat: no-repeat; */
+background: #f4f1ff;
+}
+.up_bg{
+width: 750rpx;
+height: 620rpx;
+background-size: 100% 100%;
+background-repeat: no-repeat;
+}
+.down_bg{
+width: 750rpx;
+height: 580rpx;
+background-size: 100% 100%;
+background-repeat: no-repeat;
+}
+.welcome{
+  padding-top: 156rpx;
+  padding-left: 90rpx;
+  padding-bottom:0rpx;
+  height: 276rpx;  
+}
+.welcome image{
+  width: 544rpx;  
+  margin: auto
+}
+
+.btn text{
+  margin: 0 0 10rpx 200rpx; 
+}
+.btn input{
+  background: white;
+  margin: auto; 
+  width:570rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+  margin-bottom: 25rpx;
+  margin-top: 25rpx;
+  /* text-indent: 30rpx; */
+  font-size: 32rpx;
+  letter-spacing: 3rpx;
+  padding-left: 30rpx;
+}
+
+.btn button{
+  border: none;
+  background:none;
+}
+.btn button::after{
+  border: none;
+}
+/* .btn image{
+  width: 542rpx;
+  height: 100rpx;
+} */
+
+.welcome-buttom{
+  /* margin:300rpx 0 0 174rpx; */
+  margin-top: 70rpx;
+  padding: 450rpx 0 0 174rpx;
+}
+.welcome-buttom .one{
+  display: block;
+  width:396rpx;
+}
+.welcome-buttom .two{
+  margin:20rpx 0 0 110rpx;
+  width:160rpx;
+  display: block;
+}
+
+.welcome-text{
+  text-align: center;
+  font-size: 24rpx;
+  color: #363630;
+  letter-spacing: 1rpx;
+}
+.welcome-text .huanhang{
+  display: block
+}
+
+.welcome-text text .colorHong{
+  color:#ff6767;
+}
+
+.backIndex image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.backIndex {
+  border: none;
+  background:none;
+  opacity: 0.9;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+.backIndex::after{
+  border: none
+}

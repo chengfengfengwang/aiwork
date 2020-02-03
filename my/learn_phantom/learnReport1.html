@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no , viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .px1-bottom-ffe6e6 {
+            position: relative;
+            border: none;
+        }
+
+        .px1-bottom-ffe6e6:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #FFE6E6;
+            width: 100%;
+            height: 2px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .px1-bottom-f3f3f3 {
+            position: relative;
+            border: none;
+        }
+
+        .px1-bottom-f3f3f3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #f3f3f3;
+            width: 100%;
+            height: 2px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .px1-around {
+            border: none;
+        }
+
+        .px1-around:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px #FED083 solid;
+            border-radius: 50px;
+            width: 200%;
+            height: 200%;
+            transform: scale(0.5);
+            transform-origin: left top;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+
+        html {
+            font-size: 4.266666666666667vw;
+        }
+
+        @media screen and (max-width: 320px) {
+            html {
+                font-size: 4.266666666666667vw;
+            }
+        }
+
+        @media screen and (min-width: 480px) {
+            html {
+                font-size: 3.466666666666667vw;
+            }
+        }
+
+        .canvas_img_wrapper {
+            position: relative;
+            background: linear-gradient(180deg, #ffb517 0%, #ffd03f 100%);
+            padding: 20px 10px;
+        }
+
+        .canvas_img_wrapper .header {
+            position: relative;
+            width: 345px;
+            margin: 0 auto 20px auto;
+        }
+
+        .canvas_img_wrapper .header .header_title {
+            text-align: center;
+            font-size: 17px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .canvas_img_wrapper .header .draw_btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 75px;
+            height: 30px;
+            background: #ff7b1f;
+            border-radius: 20px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .canvas_img_wrapper .main_wrapper {
+            width: 345px;
+            margin: 0 auto 50px auto;
+            padding: 20px 12px;
+            background: url("../../assets/img/learnReport/marin_wrapper.png") no-repeat 0 0%;
+            background-position: 0 0;
+            background-size: 100% 100%;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top {
+            display: flex;
+            position: relative;
+            border: none;
+            padding-bottom: 10px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #f3f3f3;
+            width: 100%;
+            height: 2px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .left_s {
+            width: 40%;
+            text-align: center;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .left_s .all_status_icon {
+            width: 100px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .left_s .all_status_icon img {
+            width: 100%;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .left_s .all_status {
+            font-size: 17px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #c2621b;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s {
+            display: flex;
+            align-items: center;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s .left {
+            margin-right: 5px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s .left .avatar {
+            border-radius: 50%;
+            border: 3px solid #fdb841;
+            width: 56px;
+            vertical-align: middle;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s .right {
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #666666;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s .right .user_name {
+            margin-right: 10px;
+            font-size: 17px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .canvas_img_wrapper .main_wrapper .top .right_s .right .right_ranking {
+            background: #ffb830;
+            border-radius: 11px;
+            font-size: 11px;
+            text-align: center;
+            padding: 0 5px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #ffffff;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item {
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            border: none;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #f3f3f3;
+            width: 100%;
+            height: 2px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left {
+            display: flex;
+            align-items: center;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left .item_left_l {
+            width: 27px;
+            margin-right: 10px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left .item_left_l img {
+            width: 27px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left .item_left_r .t {
+            font-size: 11px;
+            text-align: center;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #999999;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left .item_left_r .t .n {
+            margin-right: 10px;
+            font-size: 19px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_left .item_left_r .b {
+            font-size: 13px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #333333;
+        }
+
+        .canvas_img_wrapper .main_wrapper .item_wrapper .item .item_right {
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #666666;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            border: none;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #f3f3f3;
+            width: 100%;
+            height: 2px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper .item {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper .item .item_left {
+            width: 27px;
+            margin-right: 10px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper .item .item_left img {
+            width: 100%;
+        }
+
+        .canvas_img_wrapper .main_wrapper .love_wrapper .item .item_right {
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #666666;
+        }
+
+        .canvas_img_wrapper .main_wrapper .star_wrapper {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .canvas_img_wrapper .main_wrapper .star_wrapper .star_item {
+            display: flex;
+            width: 50%;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .star_wrapper .star_item .star_title {
+            margin-right: 5px;
+            font-size: 14px;
+            font-family: PingFangSC-Semibold, PingFangSC;
+            font-weight: 600;
+            color: #874413;
+        }
+
+        .canvas_img_wrapper .main_wrapper .star_wrapper .star_item img.star {
+            width: 22px;
+            height: 22px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .star_wrapper .star_item img.star1 {
+            width: 18px;
+            height: 18px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .remark_wrapper {
+            margin-top: 0px;
+            margin-bottom: 22px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .remark_wrapper .remark_title {
+            margin-bottom: 12px;
+            width: 75px;
+            height: 21px;
+            background: #ffd335;
+            border-radius: 20px;
+            line-height: 21px;
+            text-align: center;
+            font-size: 14px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: #874413;
+        }
+
+        .canvas_img_wrapper .main_wrapper .remark_wrapper .remark_content {
+            font-size: 12px;
+            font-family: PingFangSC-Regular, PingFangSC;
+            font-weight: 400;
+            color: #9c531d;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_left {
+            width: 60px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_left img {
+            width: 100%;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_right {
+            display: flex;
+            align-items: center;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_right .right_l {
+            text-align: right;
+            margin-right: 5px;
+            font-size: 14px;
+            font-family: PingFangSC-Medium, PingFangSC;
+            font-weight: 500;
+            color: #753a3a;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_right .right_l .t {
+            margin-bottom: 5px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_right .right_r {
+            width: 85px;
+        }
+
+        .canvas_img_wrapper .main_wrapper .main_bottom_wrapper .main_bottom_right .right_r img {
+            width: 100%;
+        }
+
+        .canvas_img_wrapper .leaf {
+            position: absolute;
+            bottom: 0;
+            width: 110px;
+            font-size: 0;
+        }
+
+        .canvas_img_wrapper .leaf img {
+            width: 100%;
+        }
+
+        .canvas_img_wrapper .leaf.l {
+            left: 0;
+        }
+
+        .canvas_img_wrapper .leaf.r {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="canvasImgWrapper" class="canvas_img_wrapper">
+            <div class="header">
+                <div class="header_title">学习报告{{testdata}}</div>
+                <div class="draw_btn">晒一晒</div>
+            </div>
+            <div class="main_wrapper">
+                <div class="top">
+                    <div class="left_s">
+                        <div class="all_status_icon">
+                            <img v-show="learnInfo.one_word==='一般'" src="../../assets/img/learnReport/score1.png" alt>
+                            <img v-show="learnInfo.one_word==='良好'" src="../../assets/img/learnReport/score2.png" alt>
+                            <img v-show="learnInfo.one_word==='优秀'" src="../../assets/img/learnReport/score3.png" alt>
+                        </div>
+                        <!-- <div class="all_status">{{learnInfo.one_word}}</div> -->
+                    </div>
+                    <div class="right_s">
+                        <div class="left">
+                            <img :src="learnInfo.avatar_url" alt class="avatar">
+                        </div>
+                        <div class="right">
+                            <div>
+                                <span class="user_name">{{learnInfo.username}}</span>
+                                <span>{{learnInfo.total_study_days}}</span>
+                            </div>
+                            <div class="right_ranking">{{learnInfo.ranking}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item_wrapper">
+                    <div class="item">
+                        <div class="item_left">
+                            <div class="item_left_l">
+                                <img src="../../assets/img/learnReport/time.png" alt>
+                            </div>
+                            <div class="item_left_r">
+                                <div class="t">
+                                    <span class="n">{{learnInfo.study_time}}</span>分钟
+                                </div>
+                                <div class="b">学习时长</div>
+                            </div>
+                        </div>
+                        <div class="item_right">{{learnInfo.study_time_word}}</div>
+                    </div>
+                    <div class="item">
+                        <div class="item_left">
+                            <div class="item_left_l">
+                                <img src="../../assets/img/learnReport/game.png" alt>
+                            </div>
+                            <div class="item_left_r">
+                                <div class="t">
+                                    <span class="n">{{learnInfo.played_count}}</span>次
+                                </div>
+                                <div class="b">练习次数</div>
+                            </div>
+                        </div>
+                        <div class="item_right">{{learnInfo.played_count_word}}</div>
+                    </div>
+                </div>
+                <div class="love_wrapper">
+                    <div class="item">
+                        <div class="item_left">
+                            <img src="../../assets/img/learnReport/lover.png" alt>
+                        </div>
+                        <div class="item_right">{{learnInfo.favorite_score}}</div>
+                    </div>
+
+                    <!-- <div class="right">{{learnInfo.complete_lesson}}{{learnInfo.complete_lesson_word}}</div> -->
+                </div>
+                <div class="star_wrapper">
+                    <div v-for="(item,index) in starArr" :key="index" class="star_item">
+                        <span class="star_title">{{item.type}}</span>
+                        <img v-for="n in item.value" :key="n" src="./../../assets/img/learnReport/star1.png" alt class="star">
+                        <img v-for="(m,idx) in (5-item.value)" :key="idx" src="./../../assets/img/learnReport/star2.png"
+                            alt class="star1">
+                    </div>
+                </div>
+                <div class="remark_wrapper">
+                    <div class="remark_title">老师点评</div>
+                    <div class="remark_content">{{learnInfo.teacher_comments}}</div>
+                </div>
+                <div class="main_bottom_wrapper">
+                    <div class="main_bottom_left">
+                        <img src="../../assets/img/learnReport/logo.png" alt class="logo">
+                    </div>
+                    <div class="main_bottom_right">
+                        <div class="right_l">
+                            <div class="t">加入音乐壳</div>
+                            <div class="b">和我一起跟大师学音乐</div>
+                        </div>
+                        <div class="right_r">
+                            <img src="../../assets/img/learnReport/qr.png" alt class="qr">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leaf l">
+                <img src="../../assets/img/learnReport/leafl.png" alt>
+            </div>
+            <div class="leaf r">
+                <img src="../../assets/img/learnReport/leafr.png" alt>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script>
+        var el =document.createElement('div');
+        el.innerHTML = 'zzz';
+        document.querySelector('.header').appendChild(el)
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return '';
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                testdata: 'asdasd',
+                learnInfo: {},
+                starArr: []
+            },
+            mounted() {
+                this.getData();
+            },
+            methods: {
+                getData() {
+                    var url = `http://api.yinji.immusician.com:55555/v1/liveroom/my_report?lesson_id=${getQueryVariable('lessonId')}`;
+                    axios
+                        .get(url, {
+                            headers: {
+                                god: getQueryVariable('uid')
+                            }
+                        })
+                        .then(res => {
+                            var res = res.data;
+                            if (res.error === 0) {
+                                this.learnInfo = res.data;
+                                this.starArr = res.data.rate_list;
+                                var div = document.createElement("div");
+                                div.setAttribute("id", "finalEle");
+                                setTimeout(() => {
+                                    //this.drawImg()
+                                    document.body.appendChild(div);
+                                }, 200);
+                            } else {
+                                alert(res.msg);
+                            }
+                        });
+                },
+                drawImg() {
+                    var that = this;
+                    var imgWrapper = document.querySelector("#canvasImgWrapper");
+                    var width = imgWrapper.offsetWidth;
+                    var height = imgWrapper.offsetHeight;
+                    this.imgToBase64(this.learnInfo.avatar_url).then(res => {
+                        this.avatarBase64 = res;
+                        this.$set(this.learnInfo, "avatar_url", res);
+                        this.$nextTick(pa => {
+                            html2canvas(imgWrapper, {
+                                backgroundColor: "transparent",
+                                width: width,
+                                height: height,
+                                x: 0,
+                                y: 0
+                                //allowTaint: true
+                            }).then(canvas => {
+                                canvas.toBlob(function (e) {
+                                    console.log("---blob");
+                                    console.log(e);
+                                    that.upload(e);
+                                });
+                                var img = new Image();
+                                img.classList.add("resultImg");
+                                img.src = canvas.toDataURL("image/png");
+                                img.onload = function () {
+                                    document.body.appendChild(img);
+                                };
+                            });
+                        });
+                        setTimeout(() => { }, 300);
+                    });
+                },
+                toShare() {
+                    if (platForm == "IOS") {
+                        console.log("--------------");
+                        console.log(webkit.messageHandlers.Share.postMessage);
+                        webkit.messageHandlers.Share.postMessage({
+                            title: "0元享VIP会员",
+                            content: myShareUrl,
+                            mode: 0,
+                            type: num
+                        });
+                    } else {
+                        console.log("--------------");
+                        PayFeedBack.shareUrl(myShareUrl);
+                        //PayFeedBack.shareUrl(myShareUrl, 0, num, "0元享VIP会员");
+                    }
+                },
+                imgToBase64(url) {
+                    var url = url + "?" + new Date().valueOf();
+                    return new Promise((resolve, reject) => {
+                        var img = new Image();
+                        img.setAttribute("crossOrigin", "Anonymous");
+                        img.src = url;
+                        img.onload = function () {
+                            var canvas = document.createElement("canvas");
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            var ctx = canvas.getContext("2d");
+                            ctx.drawImage(img, 0, 0);
+                            var base64 = canvas.toDataURL("image/png");
+                            console.log("------");
+                            console.log(base64);
+                            resolve(base64);
+                        };
+                    });
+                },
+                upload(file) {
+                    var formdata = new FormData();
+                    formdata.append("cover", file);
+                    formdata.append("uid", getQueryVariable('uid'));
+                    formdata.append("lesson_id", getQueryVariable('lessonId'));
+                    this.axios
+                        .post(`http://api.yinji.immusician.com:55555/v1/liveroom/upload_images`, formdata, {
+                            headers: {
+                                "Content-Type": "multipart/form-data"
+                            }
+                        })
+                        .then(res => {
+                            console.log(res);
+                        });
+                }
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+module.exports = { 'ukulele': 1, "djembe": 3, "music_basis": 5, "enlightenment": 7 }

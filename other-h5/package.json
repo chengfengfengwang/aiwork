@@ -1,0 +1,48 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "deploy": "vue-cli-service build && node upload.js && node refresh.js",
+    "fontmin": "node fontScripts/SH-Medium.js && node fontScripts/SH-Regular.js",
+    "pushg": "git push origin master && git push home master"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "echarts": "^4.2.1",
+    "fakervue": "^0.5.3",
+    "html2canvas": "^1.0.0-rc.5",
+    "iview": "^3.4.2",
+    "qiniu-js": "^2.5.4",
+    "swiper": "^4.5.0",
+    "vant": "^1.6.13",
+    "vue": "^2.6.6",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1",
+    "weixin-js-sdk": "^1.4.0-test"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-service": "^3.5.0",
+    "babel-plugin-import": "^1.11.0",
+    "fontmin": "^0.9.7-beta",
+    "image-webpack-loader": "^4.6.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "postcss-pxtorem": "^4.0.1",
+    "qiniu": "^7.2.1",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

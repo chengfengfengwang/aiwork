@@ -1,0 +1,63 @@
+<!--pages/payComplete/payComplete.wxml-->
+<wxs module='filter' src='../../utils/filter.wxs'></wxs>
+
+<view class='payComplete' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="2">
+    <view>{{topNavStatus}}</view>
+  </component-nav>
+
+  <view class='contain' wx:if='{{state == "success"}}'>
+
+    <view class='payStateContain'>
+      <view class='payState'>
+        <icon class='successIcon' type="success" size="70" />
+        <text class='successText'>\n支付成功</text>
+      </view>
+    </view>
+
+    <view class='teacherInfo'>
+      <view class='notice'>
+        <image src="https://s.immusician.com/static/wechat/images/%E5%8A%A0%E7%BE%A4icon@3x.png" class='noticeImg' mode="widthFix"></image>
+        <text class='noticeText'>请添加客服微信进入班级群开始学习</text>
+      </view>
+      <text class='hint'>长按或截图保存，扫码添加客服微信\n</text>
+      <image src="{{teacherInfo.teacherQr}}" class='teacherImg' mode="widthFix" bindlongpress='saveTeacherQrImg'></image>
+      <text class='teacherAccount'>\n或添加客服微信号：{{teacherInfo.teacherAccount}}</text>
+      <button class='copy' style='' bindtap='setClipboard'>复制微信号</button>
+    </view>
+
+  </view>
+
+  <view class='containTwo' wx:if='{{state == "fail"}}'>
+
+    <view class='payStateContain'>
+      <view class='payState'>
+        <icon class='failIcon' type="warn" size="70" />
+        <text class='failText'>\n支付失败</text>
+      </view>
+    </view>
+
+    <view class='orderInfo'>
+      <text>商品名称：{{courseTitle}}</text>
+      <view class='orderPrice'>
+        <text>订单金额：￥{{coursePrice}}</text>
+      </view>
+      <text>订单时间：{{time}}</text>
+    </view>
+
+  </view>
+
+  <view class='bottomBuy' wx:if='{{state == "fail"}}'>
+
+    <view class='bottomPrice'>
+      <text class='bottomNewPrice'>实付：</text>
+      <text class='bottomOldPrice'>￥{{coursePrice - choicedCouponValue}}</text>
+    </view>
+    <view class='bottomBtn'>
+      <view class='buy' bindtap='payAgain'>重新支付</view>
+    </view>
+
+  </view>
+
+</view>

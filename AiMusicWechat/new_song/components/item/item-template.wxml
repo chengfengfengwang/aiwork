@@ -1,0 +1,28 @@
+<template name="itemTemplate">
+<!-- <import src="/components/stars/star-template.wxml" /> -->
+  <block wx:for="{{list}}" wx:key='index' wx:for-item="item" wx:for-index="idx">
+    <view class='song_list' catchtap="openDetail" data-list="{{item}}">
+      <view class='cover'>
+      <view class='cover_img' style="background-image:url('{{item.cover_url}}')"></view>
+      </view>
+      <view class='text'>
+      <text class='txt_title'>{{item.title}}</text>
+      <view class='diff'>
+      <text class='txt_diff'>难度:</text>
+      <block wx:for="{{item.stars}}" wx:key='index' wx:for-star="star">
+       <view class='diff_imgs' style="background-image:url('http://s.immusician.com/static/wechat/images/icon-star@2x.png');">
+       </view> 
+       </block>
+      <!-- <template is="starTemplate" data="{{stars:item.stars}}" /> -->
+      </view>
+      </view>
+      <view class='arrows'>
+        <view class='arrows_img' style="background-image:url('http://s.immusician.com/static/wechat/images/jinqu@2x.png');"></view>
+      </view>
+    </view>
+  </block>
+  <block> 
+      <wxc-loadmore wx:if="{{hasMore}}" icon="{{true}}"></wxc-loadmore>
+    <wxc-loadmore wx:else is-end="{{true}}" text="汪~木有啦" icon="/images/icon/dog.png"></wxc-loadmore>
+  </block>
+</template>

@@ -1,0 +1,22 @@
+<!--pages/user/user.wxml-->
+<import src="/components/nav/navtab.wxml"/>
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<view class='wode_bg' style="background-image: url('http://s.immusician.com/static/wechat/images/wode-bg@3x.png');">
+  <view class='userinfo'>
+    <open-data class="userinfo-avatar"  type="userAvatarUrl"></open-data>
+    <open-data class='userinfo-nickname' type="userNickName" lang="zh_CN">
+    </open-data>
+  </view>
+</view>
+<view class='wode_txt'>
+  <view class='myclass' bindtap='myClass'>
+    <image src='http://s.immusician.com/static/wechat/images/wode-icon--class@2x.png' mode='widthFix'></image>
+    <text>我的班级</text>
+    <image class='class_jiantou' src='http://s.immusician.com/static/wechat/images/wode-jiantou@1x.png' mode='widthFix'></image>
+  </view>
+  <!-- <view class='myclass public'>
+    <image src='../../images/dank/wode-icon-logo@1x.png' mode='widthFix'></image>
+    <text>进入公众号</text>
+    <image class='class_jiantou' src='../../images/dank/wode-jiantou@1x.png' mode='widthFix'></image>
+  </view> -->
+</view>

@@ -1,0 +1,264 @@
+/* pages/indent/indent.wxss */
+
+.indent {
+  padding-top: 130rpx;
+  box-sizing: border-box;
+  height: 100vh;
+  background-color: #f5f5fa;
+}
+
+.contain {
+  padding: 10rpx 0;
+  background-color: #f5f5fa;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.courseInfo {
+  height: 140rpx;
+  background-color: white;
+  margin-bottom: 10rpx;
+  padding: 26rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.courseTitlePrice {
+  font-size: 30rpx;
+  color: #333;
+  /* background-color: blue; */
+}
+
+.courseTitlePrice::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.courseTitle {
+  float: left;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width: 600rpx;
+}
+
+.coursePrice {
+  float: right;
+}
+
+.courseAttribute {
+  font-size: 24rpx;
+  color: #999;
+  /* background-color: red; */
+  margin-top: 14rpx;
+}
+
+.courseLevel {
+  border-left: 1rpx solid #d9d9d9;
+  margin-left: 13rpx;
+  padding-left: 13rpx;
+  line-height: 5rpx;
+}
+
+.couponsLabel {
+  height: 100rpx;
+  background-color: white;
+  margin-bottom: 10rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+}
+
+.couponsLabelLeft {
+  float: left;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 100rpx;
+}
+
+.couponsLabelRight {
+  float: right;
+  line-height: 100rpx;
+  padding-right: 30rpx;
+}
+
+.couponsLabelText {
+  font-size: 26rpx;
+  vertical-align: middle;
+}
+
+.LabelImgContain {
+  display: inline-block;
+  width: 40rpx;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.couponsLabelImg {
+  width: 20rpx;
+  margin-left: 10rpx;
+}
+
+.couponsLabelImgSel {
+  width: 20rpx;
+  margin-left: 10rpx;
+  transform: rotate(90deg);
+}
+
+.coupons {
+  padding: 0 30rpx;
+}
+
+.coupon {
+  width: 100%;
+  height: 143rpx;
+  margin-bottom: 10rpx;
+  background-image: url('https://s.immusician.com/static/wechat/images/%E4%BC%98%E6%83%A0%E5%88%B8%E8%83%8C%E6%99%AF@3x.png');
+  background-size: 100% 100%;
+}
+
+.coupon::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.price {
+  width: 187rpx;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  line-height: 143rpx;
+  color: #7048d1;
+  font-size: 42rpx;
+  vertical-align: bottom;
+}
+
+.couponAttribute {
+  width: 421rpx;
+  height: 100%;
+  display: inline-block;
+  vertical-align: bottom;
+  color: #666;
+  font-size: 20rpx;
+  padding: 27rpx 20rpx 27rpx 41rpx;
+  box-sizing: border-box;
+}
+
+.couponReminder {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.couponValidity {
+  margin-top: 9rpx;
+  color: #fd3838;
+}
+
+.choose {
+  display: inline-block;
+  width: 82rpx;
+  height: 100%;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.chooseIcon {
+  vertical-align: bottom;
+  /* margin: auto; */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.priceStatistics {
+  padding: 13rpx 30rpx 0 30rpx;
+  /* border-bottom: 2rpx solid #d9d9d9; */
+  height: 210rpx;
+  font-size: 28rpx;
+  color: #999;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.priceContain {
+  margin: 17rpx 0;
+}
+
+.priceNum {
+  float: right;
+}
+
+.countdown {
+  height: 85rpx;
+  background-color: white;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  color: #999;
+  box-sizing: border-box;
+  line-height: 85rpx;
+}
+
+.countdownNum {
+  float: right;
+}
+
+.bottom {
+  height: 100rpx;
+}
+
+.bottomBuy {
+  width: 100%;
+  height: 100rpx;
+  border-top: 2rpx solid #d9d9d9;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+}
+
+.bottomBuy::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.bottomPrice {
+  float: left;
+  font-size: 42rpx;
+  line-height: 100rpx;
+}
+
+.bottomNewPrice {
+  color: #999;
+  font-size: 30rpx;
+  vertical-align: middle;
+  margin-left: 30rpx;
+}
+
+.bottomOldPrice {
+  color: #7048d1;
+  vertical-align: middle;
+  margin-left: 5rpx;
+}
+
+.bottomBtn {
+  float: right;
+  width: 260rpx;
+  font-size: 20rpx;
+}
+
+.buy {
+  width: 260rpx;
+  text-align: center;
+  line-height: 100rpx;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 34rpx;
+  color: #fff;
+  padding: 0;
+  border-radius: 0;
+}
+
+.buy::after {
+  border: none;
+}

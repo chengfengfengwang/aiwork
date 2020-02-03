@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    hello world
+    <div>
+        <form method="post" action="http://upload.qiniup.com/" enctype="multipart/form-data">
+            <input name="key" type="hidden" value="<resource_key>">
+            <input name="x:<custom_name>" type="hidden" value="<custom_value>">
+            <input name="token" type="hidden" value="<upload_token>">
+            <input name="crc32" type="hidden" />
+            <input name="accept" type="hidden" />
+            <input name="file" type="file" />
+            <input type="submit" value="上传文件" />
+        </form>
+    </div>
+    <script>
+        console.log(axios)
+        var accessKey = '493-3wqSvs35AYgjhYQaoY4qRHOb4i3bsxdFwwxQ';
+    var secretKey = 'DKXVZp563b434wmycV36njsqWrYr_ejYuZxSWE1S';
+        // axios
+        //     .post(`http://upload.qiniup.com/`, {
+        //         key:'wang'
+        //     }, {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data"
+        //         }
+        //     })
+        //     .then(res => {
+                
+        //     });
+
+    </script>
+</body>
+
+</html>

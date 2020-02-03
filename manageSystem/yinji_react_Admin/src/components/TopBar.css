@@ -1,0 +1,36 @@
+/**
+ * Author: BaiJiFeiLong@gmail.com
+ * Datetime: 2017/5/15 下午3:34
+ */
+.navbar {
+    margin: 0 !important;
+    background: #0e90d2 !important;
+    border-color: #0b6fa2 !important;
+    border-radius: 0 !important;
+}
+
+.navbar-inverse .navbar-brand {
+    border: 0 none !important;
+}
+
+.navbar a {
+    color: #eeeeee !important;
+}
+
+.navbar-default {
+    max-width: 160px !important;
+    border: 0 none !important;
+    float: right;
+}
+
+.navbar-default .navbar-default {
+    width: 60px;
+    padding-top: 20px;
+    float: left;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        min-width: 100%;
+    }
+}

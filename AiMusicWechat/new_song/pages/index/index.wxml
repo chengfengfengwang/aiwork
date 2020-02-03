@@ -1,0 +1,7 @@
+<!--pages/index/index.wxml-->
+<view class='navTab' catchtap="backLast">
+  <image  src='http://s.immusician.com/static/wechat/images/fanhui@2x.png' mode="widthFix"></image>
+  <view class='navTitle'>
+    <text>{{navTitle}}</text>
+  </view>
+</view>

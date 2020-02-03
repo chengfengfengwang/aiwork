@@ -1,0 +1,24 @@
+<!--pages/courses/courses.wxml-->
+<view class='courses' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>{{coursesTitle}}</view>
+  </component-nav>
+
+  <view class='contain'>
+    <view class='course' wx:for="{{courses}}" wx:key="index" bindtap="goCoursesDetails" data-course-id="{{item.id}}">
+      <image src="{{item.cover_url}}" class='courseImg' mode="widthFix"></image>
+      <view class='courseInfo'>
+        <view class='courseTitleLevel'>
+          <text class='courseTitle'>{{item.name}}</text>
+          <text class='courseLevel'>{{item.level_type}}</text>
+        </view>
+        <view class='courseAttribute'>
+          <text class='coursePrice' wx:if="{{!isIOS}}">￥{{item.price / 100}}</text>
+          <text class='courseStudentsCount' wx:if="{{!isIOS}}">{{item.studied_count}}人已购买</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

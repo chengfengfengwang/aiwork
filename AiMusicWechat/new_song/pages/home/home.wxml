@@ -1,0 +1,122 @@
+<view class='homeContainer' style='padding-top:{{navHeight}}rpx'>
+
+  <view class='maskLayer' wx:if="{{showModal}}">
+    <view class='dialogs'>
+
+      <view class='guideTop'>
+        <image src="https://s.immusician.com/static/wechat/images/pic_toast_home2@3x.png" class='guideImg' mode="widthFix"></image>
+        <view class='guideText'>
+          <text class='guideTitle'>同学，欢迎来到AI音乐学院！</text>
+          <text class='guideTxt'>\n我们为你准备了一份新手大礼包，快来和我们一起感受音乐的美妙吧！</text>
+        </view>
+      </view>
+
+      <view class='guideBottom'>
+        <button class='know' bindtap="know"> 我知道了 </button>
+        <button class='benefit' bindtap="benefit"> 立即领取 </button>
+      </view>
+    </view>
+  </view>
+
+  <component-nav is-show="{{false}}" back-page="0">
+    <view class='navTitle'>AI音乐学院</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="rgba(0, 0, 0, .3)" indicator-active-color="rgba(255, 255, 255, .3)" autoplay="{{false}}" interval="5000" duration="1000">
+      <!-- <block wx:for="{{slides}}" wx:key="*this"> -->
+      <swiper-item class="video" data-slide-video="{{slides[0].slide_video}}">
+        <image bindtap='goPlay' data-poster="{{slides[0].slide_cover}}" data-video="{{slides[0].slide_video}}" style='width:100%' src='{{slides[0].slide_cover}}'></image>
+      </swiper-item>
+      <swiper-item class="banner">
+        <image bindtap='goInvite' style='width:100%' src='{{slides[1].slide_cover}}'></image>
+      </swiper-item>
+      <!-- </block> -->
+    </swiper>
+    <view class='menus' wx:if="{{contentShow}}">
+      <form class='guitar menu' bindsubmit="formSubmit" report-submit="{{true}}">
+        <button form-type="submit" class='clear-button formid-menu' bindtap="goCourses" data-instrument-type="0">
+          <image src="https://s.immusician.com/static/wechat/images/icon_home_guitar@3x.png" class='menuImg' mode="widthFix"></image>
+          <text class='menuTitle'>吉他课程</text>
+        </button>
+      </form>
+      <form class='ukulele menu' bindsubmit="formSubmit" report-submit="{{true}}">
+        <button form-type="submit" class='clear-button formid-menu' bindtap="goCourses" data-instrument-type="1">
+          <image src="https://s.immusician.com/static/wechat/images/icon_home_ukulele@3x.png" class='menuImg' mode="widthFix"></image>
+          <text class='menuTitle'>尤克里里课程</text>
+        </button>
+      </form>
+      <form class='kalimba menu' bindsubmit="formSubmit" report-submit="{{true}}">
+        <button form-type="submit" class='clear-button formid-menu' bindtap="goCourses" data-instrument-type="2">
+          <image src="https://s.immusician.com/static/wechat/images/icon_home_kalimba@3x.png" class='menuImg' mode="widthFix"></image>
+          <text class='menuTitle'>拇指琴课程</text>
+        </button>
+      </form>
+      <form class='feizhougu menu' bindsubmit="formSubmit" report-submit="{{true}}">
+        <button form-type="submit" class='clear-button formid-menu' bindtap="goCourses" data-instrument-type="3">
+          <image src="https://s.immusician.com/static/wechat/images/icon_home_djembe@3x.png" class='menuImg' mode="widthFix"></image>
+          <text class='menuTitle'>非洲鼓课程</text>
+        </button>
+      </form>
+
+    </view>
+
+    <view class='recommend' wx:if="{{contentShow}}">
+      <view class='recLabel'>
+        <view class='recLabelLeft'>
+          <text>推荐课程</text>
+        </view>
+      </view>
+      <view class='recCourses'>
+        <view wx:for="{{recCourses}}" wx:key="index" class='course' bindtap="goCoursesDetails" data-course-id="{{item.course_id}}">
+          <image src="{{item.course_cover}}" class='courseImg' mode="widthFix"></image>
+          <image src="https://s.immusician.com/static/wechat/images/icon_common_vip_200@3x.png" class='courseImgSecond' mode="widthFix" wx:if="{{item.is_new == 1 }}"></image>
+          <text class='courseTitle'>{{item.course_title}}</text>
+          <view class='courseAttribute'>
+            <text class='courseType'>{{item.course_type}}</text>
+            <text class='coursePrice' wx:if="{{!isIOS}}">￥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='teachers'>
+      <view class='teaLabel'>
+        教师风采
+      </view>
+      <view class='teacher'>
+        <image src="{{teacherMien[0]}}" class='teachersImg' mode="widthFix"></image>
+      </view>
+    </view>
+
+    <!-- <view class='students'>
+      <view class='stuLabel'>
+        优秀学员
+      </view>
+      <view class='student'>
+        <image src="{{goodStudents[0]}}" class='studentsImg' mode="widthFix"></image>
+      </view>
+    </view> -->
+
+    <image src="https://s.immusician.com/static/wechat/images/icon_common_contact_l@3x.png" class='serviceImg' mode="widthFix" bindtap='showTeacherContact' wx:if='{{!teacherContactBox}}'></image>
+
+    <cover-view class='modal cover-view' wx:if='{{teacherContactBox}}'>
+      <cover-view class='teacherInfo'>
+        <!-- <cover-view class='close' bindtap='close'>+</cover-view> -->
+        <cover-image src="./../../images/close.png" bindtap='close' class='close_icon' mode="widthFix"></cover-image>
+        <cover-image src="https://s.immusician.com/static/wechat/images/qianqian.jpeg" class='teacherPhoto' mode="widthFix"></cover-image>
+        <cover-view class='teacherNameContain'>
+          <cover-view class='teacherName'>倩倩老师</cover-view>
+        </cover-view>
+        <cover-view class='hint'>点击下方保存按钮，扫码添加客服微信\n</cover-view>
+        <cover-image src="https://s.immusician.com/static/wechat/images/rainpleliu.jpeg" class='teacherImg' bindlongpress="saveTeacherQrImg" mode="widthFix"></cover-image>
+        <cover-view class='teacherAccount'>\n或客服微信号：{{teacherAccount}}</cover-view>
+        <button class='copy' bindtap='saveTeacherQrImg'>保存二维码图片</button>
+        <button class='copy' bindtap='copyWxNumber'>复制微信号</button>
+      </cover-view>
+    </cover-view>
+
+  </view>
+
+</view>

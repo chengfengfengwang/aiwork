@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <button>发送</button> 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        const button = document.querySelector('button');
+
+        function sendCommon(url) {
+            var xhr = new XMLHttpRequest();
+            var url = url;
+
+            xhr.ontimeout = function () {
+                console.error('The request for ' + url + ' timed out.');
+            };
+
+            xhr.onload = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('success');
+                        console.log(xhr);
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onprogress = function (event) {
+                console.log('---onprogress----');
+                console.log(event);
+            console.log(event.loaded);
+            console.log(event.total);
+            };
+            xhr.open('GET', url, true);
+            xhr.timeout = 10 * 1000;
+            xhr.send(null);
+        }
+        button.addEventListener('click', ()=>{
+            sendCommon('https://javascript.ruanyifeng.com/bom/ajax.html')
+        })
+    </script>
+</body>
+
+</html>

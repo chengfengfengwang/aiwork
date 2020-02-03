@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-itunes-app" content="app-id=1246637618">
+    <link href="http://s.immusician.com/static/images/bitbug_favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="http://s.immusician.com/static/website/swiper.min.css" />
+    <link rel="stylesheet" href="http://s.immusician.com/static/website/main.css" />
+    <script src="http://s.immusician.com/static/website/font.js"></script>
+    <script src="http://s.immusician.com/static/website/jquery-1.9.1.min.js"></script>
+    <script src="http://s.immusician.com/static/website/swiper.min.js"></script>
+    <title>米小声科技</title>
+    <style type="text/css">
+        .block.first {
+            width: 100%;
+            height: 220px;
+            background: url('./img/bg.jpg') no-repeat center;
+
+            /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDnpipSgejdYyd27wvze8XBfkyNcxG17cciGOctuqFPo0rn605') no-repeat center;  */
+            background-size: cover;
+        }
+
+        .banner_title {
+            color: #fff;
+            font-size: 55px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            padding-top: 60px;
+            border-top: 1px solid transparent
+        }
+
+        .banner_title.second {
+            padding-top: 0px;
+            color: #fff;
+            font-size: 35px;
+            text-indent: 8em
+        }
+    </style>
+    <script type="text/javascript">
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                    weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                    qq: u.match(/\sQQ/i) == " qq" //是否QQ
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        //判断是否IE内核或webKit内核
+        if (browser.versions.trident || browser.versions.presto || browser.versions.gecko || browser.versions.webKit) {
+            if (browser.versions.mobile) {
+                var href = window.location.href;
+                document.location.href = href.replace("system.html", "system_mob.html");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrap" id="top" style="padding:0">
+        <div class="block sy0 first">
+            <h1 class="banner_title">米小声科技</h1>
+            <h2 class="banner_title second">——为音乐发声</h2>
+        </div>
+        <div class="block sy1">
+            <div class="inner">
+                <h5 class="title"><span>教学</span>团队</h5>
+                <div class="teacher-show">
+                    <div class="swiper-container swiper-no-swiping">
+                        <div class="swiper-wrapper" id="swiper-wrapper">
+
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/xiaotao.png">
+                                        <h5><span>小涛</span>：米小声金牌讲师，怀特海岸乐队吉他手</h5>
+                                        <p>
+                                            • 米小声金牌讲师
+                                            • 培训学员人数5000+
+                                            • 五年以上教学经验，深受学员们的喜爱
+                                            • 北京鼓楼“小涛音乐工作室”创始人
+                                            • 国内新晋英伦摇滚乐队“怀特海岸”吉他手
+                                            • 独立音乐人
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/caomao.png">
+                                        <h5><span>草帽</span>尤克里里网络名师，白熊音乐工作室创始人</h5>
+                                        <p>
+                                            • 尤克里里弹唱达人
+                                            • 网易音乐人
+                                            • 广州尤克里里嘉年华演出嘉宾
+                                            • 视频点击播放量达百万
+                                            • 现为白熊音乐工作室创始人之一
+                                            • 致力于推广尤克里里
+                                            • 旨在传递尤克里里带来的快乐与美好
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/taozixiangjiao.png">
+                                        <h5><span>桃子香蕉</span>桃子鱼仔尤克里里教室创始人，网络音乐红人</h5>
+                                        <p>
+                                            • 尤克里里指弹/弹唱达人
+                                            • 擅长把当下流行歌改编为尤克里里的版本
+                                            • 推广尤克里里，让更多人喜欢尤克里里
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/guxiaoe.png">
+                                        <h5><span>顾小鹅</span>职业音乐人，好妹妹乐队乐手</h5>
+                                        <p>
+                                            • 职业音乐人，好妹妹乐队乐手
+                                            • 恩雅教学总监
+                                            • 江苏省尤克里里考级荣誉评委
+                                            • 江苏省尤克里里考级大纲编者
+                                            • 江苏省尤克里里名师
+                                            • 江苏省流行音乐学会会员
+                                            • 《看见音乐》封面人物
+                                            • 《你好，尤克里里》作者
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/songtao.png">
+                                        <h5><span>松涛叔叔</span>国内尤克里里推广先驱，独立音乐人</h5>
+                                        <p>
+                                            • 国内尤克里里推广先驱
+                                            • 欢闹童声合唱团团长
+                                            • ukulele独立音乐人
+                                            • 《松涛叔叔新童谣》节目主播
+                                            • 优可音乐英语“玩”学法创始人
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/lishanshan.png">
+                                        <h5><span>李姗姗</span>伊斯曼音乐学院音乐教育专业硕士，资深音乐教师</h5>
+                                        <p>
+                                            • 硕士毕业于伊斯曼音乐学院音乐教育专业
+                                            • 本科毕业于中央音乐学院音乐教育专业
+                                            • 持美国奥尔夫教师Level Ⅱ资格
+                                            • 及美国柯达伊教师Level Ⅱ资格
+                                            • AOSA美国奥尔夫教育协会会员
+                                            • 美国大学理事会课程AP认证教师
+                                            • 持ABRSM英皇教师培训课程认证
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-wrapper" id="swiper-wrapper1">
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/liushuqi.png">
+                                        <h5><span>柳舒淇</span>吉他弹唱红人，央视主播</h5>
+                                        <p>
+                                            • 北京大学研究生
+                                            • 中国传媒大学11级播音主持专业
+                                            • 央视四套《中国新闻》实习主播
+                                            • 山东卫视《青春星主播》主持人大赛三强
+                                            • 自幼学习钢琴、古典吉他
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/daxiang.png">
+                                        <h5><span>大向</span>李健、李宇春御用吉他手</h5>
+                                        <p>
+                                            • 李健御用吉他手
+                                            • 李宇春合作乐手
+                                            • 毕业于北京现代音乐学院
+                                            • 曾担任周华健、赵传、王杰、童安格、齐秦、张信哲等巡演乐手
+                                            • 曾担任江苏卫视《名师高徒》乐手
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/sanshu.png">
+                                        <h5><span>毛三叔</span>陈粒前制作人及吉他手</h5>
+                                        <p>
+                                            • 陈粒前制作人及吉他手
+                                            • 米小声教研组负责人
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="slide">
+                                    <div class="teacher-info">
+                                        <img src="http://s.immusician.com/static/website/imgs/dupeng.png">
+                                        <h5><span>都鹏</span>音乐唱作、制作人，七年以上教学经验</h5>
+                                        <p>
+                                            • 黑石吉他教室创始人
+                                            • 七年以上教学经验
+                                            • “在行”高分吉他行家
+                                            • 音乐唱作、制作人
+                                            • 组建SmogCity乐队
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="teacher-page">
+                    <div class="btn-left"></div>
+                    <div class="slide-contain">
+                        <div class="slide-wrap">
+                            <div class="slide-box" id="slide-box">
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/xiaotaos.png" />
+                                        <p>小涛</p>
+                                        <span>米小声金牌讲师，怀特海岸乐队吉他手</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/caomaos.png" />
+                                        <p>草帽</p>
+                                        <span>尤克里里网络名师，白熊音乐工作室创始人</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/taozixiangjiaos.png" />
+                                        <p>桃子香蕉</p>
+                                        <span>桃子鱼仔尤克里里教室创始人，网络音乐红人</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/guxiaoes.png" />
+                                        <p>顾小鹅</p>
+                                        <span>职业音乐人，好妹妹乐队乐手</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/songtaos.png" />
+                                        <p>松涛叔叔</p>
+                                        <span>国内尤克里里推广先驱，独立音乐人</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide-box" id="slide-box1">
+                                <div class="slide slide-on">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/liushuqis.png" />
+                                        <p>柳舒淇</p>
+                                        <span>吉他弹唱红人，央视主播</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/daxiangs.png" />
+                                        <p>大向</p>
+                                        <span>李健、李宇春御用吉他手</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/sanshus.png" />
+                                        <p>毛三叔</p>
+                                        <span>陈粒前制作人及吉他手</span>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="slide-inner">
+                                        <img src="http://s.immusician.com/static/website/imgs/dupengs.png" />
+                                        <p>都鹏</p>
+                                        <span>音乐唱作、制作人，七年以上教学经验</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="btn-right"></div>
+                </div>
+            </div>
+        </div>
+        <div class="block sy2">
+            <div class="inner">
+                <h5 class="title"><span>教学</span>特色</h5>
+                <div class="line">
+                    <div class="left">
+                        <img src="http://s.immusician.com/static/website/imgs/teaching-01.png" />
+                    </div>
+                    <div class="right">
+                        <h5>你的音乐私教，随时随地教你学琴</h5>
+                        <p>名师+智能软件+智能硬件，远程亮灯指引，智能识别反馈完美还原线下一对一、手把手教学体验</p>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="left">
+                        <h5>游戏化练琴，比你想象的更简单好玩</h5>
+                        <p>练琴太枯燥乏味，试试切换到游戏模式，让练琴变成一件好玩的事</p>
+                    </div>
+                    <div class="right">
+                        <img src="http://s.immusician.com/static/website/imgs/teaching-02.png" />
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="left">
+                        <img src="http://s.immusician.com/static/website/imgs/teaching-03.png" />
+                    </div>
+                    <div class="right">
+                        <h5>为你制定学习目标，陪你一起刻苦练习</h5>
+                        <p>国内名师共同打造最适合互动教学的课程体系，为你定制智能化的学习路径</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block sy3">
+            <div class="inner">
+                <h5 class="title"><span>课程</span>体系</h5>
+                <img src="http://s.immusician.com/static/html/imgs/chart.png" />
+            </div>
+        </div>
+        <div class="block sy3">
+            <div class="inner">
+                <h5 class="title"><span>关于</span>我们</h5>
+                <h4 style="font-size:19px;margin-top:20px">合肥米小声科技有限责任公司</h4>
+                <!-- <p class="mess">因一群热爱音乐，怀揣音乐梦想的人而生！致力于智能互动、数字化在线音乐教学的创新应用。</p> -->
+                <ul>
+                    <li>
+                        <p style="font-size:16px">联系电话：010-81708781</p>
+                    </li>
+                    <!-- <li>
+                        <p>联系地址：北京市昌平区回龙观西大街龙冠商务中心</p>
+                    </li> -->
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="inner" style="padding:0;text-align:center;justify-content: center">
+            <div class="left">
+                <div class="copyright">
+                    <p style="margin-bottom:10px">合肥米小声科技有限责任公司<span style="margin:0 5px"></span> 电话：0551-65301775</p>
+                    <p>Hefei Mixiaosheng Science and Technology Co., Ltd.</p>
+                </div>
+            </div>
+            <!-- <div class="right">
+                <a href="#top" class="back-top">返回顶部</a>
+            </div> -->
+        </div>
+    </div>
+    <script>
+
+        var initUtil = {
+            mySwiper: null,
+            init: function () {
+                var that = this;
+                //swiper
+                that.swiperFun();
+                //名师
+                that.teachshow();
+                //名师swiper
+                that.teachSwiper();
+            },
+            swiperFun: function () {
+                this.mySwiper = new Swiper('.swiper-container', {
+                    noSwiping: true,
+                    //effect : 'fade',
+                })
+            },
+            teachshow: function () {
+                var that = this;
+                $(".teacher-page").find(".slide").on("click", function () {
+                    if (!$(this).hasClass('slide-on')) {
+                        $(this).addClass('slide-on').siblings().removeClass('slide-on');
+                        var pos = $(this).index();
+                        that.mySwiper.slideTo(pos, 500, false);
+                    }
+                })
+            },
+            teachSwiper: function () {
+                var slideLength = $(".slide-box").find(".slide").length;
+                var slideW = $(".slide-box").find(".slide").width();
+                var onNum = 0;
+                if (slideLength < 5) {
+                    $(".btn-left").addClass("btn-none");
+                    $(".btn-right").addClass("btn-none");
+                } else {
+                    $(".btn-left").addClass("btn-none");
+                    $(".btn-right").on("click", function () {
+                        $(".btn-left").removeClass("btn-none");
+                        onNum++;
+                        if ((slideLength - onNum) >= 4) {
+                            $(".slide-wrap").css({ "transform": "translateX(-" + slideW * onNum + "px)" })
+                            if ((slideLength - onNum) == 4) {
+                                $(".btn-right").addClass("btn-none");
+                            }
+                        } else {
+                            onNum = slideLength - onNum;
+                        }
+                    })
+                    $(".btn-left").on("click", function () {
+                        onNum--;
+                        $(".btn-right").removeClass("btn-none");
+                        if (onNum >= 0) {
+                            $(".slide-wrap").css({ "transform": "translateX(-" + slideW * onNum + "px)" })
+                            if (onNum == 0) {
+                                $(".btn-left").addClass("btn-none")
+                            }
+                        } else {
+                            onNum = 0;
+                        }
+                    })
+                }
+            }
+        }
+        $(function () {
+            initUtil.init();
+        })
+
+        jQuery(document).ready(function ($) {
+            function getParam(strParamName) {
+                var strReturn = "";
+                var strHref = document.location.href;
+                var bFound = false;
+                var cmpstring = strParamName + "=";
+                var cmplen = cmpstring.length;
+
+                if (strHref.indexOf("?") > -1) {
+                    var strQueryString = strHref.substr(strHref.indexOf("?") + 1);
+                    var aQueryString = strQueryString.split("&");
+                    for (var iParam = 0; iParam < aQueryString.length; iParam++) {
+                        if (aQueryString[iParam].substr(0, cmplen) == cmpstring) {
+                            var aParam = aQueryString[iParam].split("=");
+                            strReturn = aParam[1];
+                            bFound = true;
+                            break;
+                        }
+                    }
+                }
+                if (bFound == false) return null;
+                return strReturn;
+            }
+            var source = getParam("instrument_type");
+            if (source == 'guitar') {
+                $('#swiper-wrapper1').show();
+                $('#slide-box1').show();
+                $('#swiper-wrapper').hide();
+                $('#slide-box').hide();
+                $('.block.sy0').css("background", "url(http://s.immusician.com/static/website/imgs/banner-system-guitar.png)no-repeat top center ")
+            } else {
+                console.log('aaaaa')
+                // $('#swiper-wrapper1').removeClass('show');
+                // $('#slide-box1').removeClass('show');
+                // $('#swiper-wrapper').addClass('show');
+                // $('#slide-box').addClass('show');
+                console.log($("#siper-box"));
+                $('#swiper-wrapper1').hide();
+                $('#slide-box1').hide('');
+                $('#swiper-wrapper').show();
+                $('#slide-box').show();
+                console.log($('.block.sy0'));
+                //$('.block.sy0').css("background", "url(http://s.immusician.com/static/website/imgs/banner-system-bg.png)no-repeat top center ")
+            }
+        })
+    </script>
+</body>
+<script type="text/javascript">
+    document.getElementById("cnzz_stat_icon_1263336784").style.display = "none";
+</script>
+
+</html>

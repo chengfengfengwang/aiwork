@@ -1,0 +1,234 @@
+<!--pages/invite/invite.wxml-->
+<view class='invite' style='padding-top:{{navHeight}}rpx'>
+  <!-- 预览礼物弹窗 -->
+  <view class='modal preview_none' wx:if="{{previewGiftMask}}">
+    <view class=''>
+      <view class='top'>
+        <image class='top_cupon' src='/images/pic_cupon.png'></image>
+        <image class='top_b' src='/images/pic_toast_invite.png'></image>
+        <view class='price' wx:if='{{currentClickedGift.coupon_type == 0}}'>￥{{currentClickedGift.coupon_value}}</view>
+        <view class='price' wx:if='{{currentClickedGift.coupon_type == 1}}'>{{currentClickedGift.coupon_value/10}}折</view>
+        <view class='preview_name'>{{currentClickedGift.name}}</view>
+        <view class='preview_describe'>{{currentClickedGift.describe}}</view>
+      </view>
+      <view class='bottom'>
+        <view class='bottom_title'>{{currentClickedGiftStatus.title}}</view>
+        <view class='bottom_content'>
+          <view>{{currentClickedGiftStatus.content1}}</view>
+          <view>
+            {{currentClickedGiftStatus.content2}}
+          </view>
+        </view>
+        <form wx:if="{{currentClickedGiftStatus.status==1}}" class='inviteExtend' bindsubmit="formSubmit" report-submit="{{true}}">
+          <button  class='preview_btn' form-type="submit" open-type="share">{{currentClickedGiftStatus.btnText}}</button>
+        </form>
+        <view wx:elif="{{currentClickedGiftStatus.status==2}}" bindtap='toHome' data-couponid="{{currentClickedGift._id}}" class='preview_btn'>{{currentClickedGiftStatus.btnText}}</view>
+        <view wx:else bindtap='toUse' class='preview_btn'>{{currentClickedGiftStatus.btnText}}</view>
+
+        <icon bindtap='closeGiftPreview' class='closeBtn' size='27' type='clear'></icon>
+      </view>
+    </view>
+  </view>
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>我的邀请</view>
+  </component-nav>
+  <view class='contain'>
+    <image src="https://s.immusician.com/static/wechat/images/invite.jpeg" class='banner' mode="scaleToFill "></image>
+    <view class='inviteContain'>
+
+      <view class='inviteBtn'>
+        <view class='btnLeft' bindtap='upperStage'>
+          <image src="https://s.immusician.com/static/wechat/images/icon_common_more@3x.png" class='imgLeft' mode="widthFix"></image>
+          <text class='textLeft'>上一阶段</text>
+        </view>
+        <view class='btnRight' bindtap='nextStage'>
+          <text class='textRight'>下一阶段</text>
+          <image src="https://s.immusician.com/static/wechat/images/icon_common_more@3x.png" class='imgRight' mode="widthFix"></image>
+        </view>
+      </view>
+      <view class='inviteInfo'>
+        <view class='inviteStage'>
+          <view class='inviteStageVisual'>
+            <view class='firstLine'>
+              <view class='firstLineText'>我的邀请</view>
+              <view class='firstLineHint'>离下一奖励还差
+                <text class='firstLineNum'>{{currentStageData.upGradeNeedNum - currentStageData.curentStageInvitedNum}}</text> 位
+              </view>
+            </view>
+            <progress class='secondLine' stroke-width="12" percent="{{currentStageData.curentStageInvitedNum/currentStageData.upGradeNeedNum*100}}" activeColor="#7048d1" border-radius='6' />
+
+            <view class='thirdLine'>
+              <text class='thirdLineText'>{{currentStageData.stageText}}</text>
+              <view class='inviteRatio'>
+                <text class='thirdLineNum'>{{currentStageData.curentStageInvitedNum}}</text>/{{currentStageData.upGradeNeedNum}}</view>
+            </view>
+          </view>
+          <!-- 可以领取 -->
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus2" wx:if="{{!currentStageData.haveGetGift  && currentStageData.curentStageInvitedNum == currentStageData.upGradeNeedNum}}" src="https://s.immusician.com/static/wechat/images/icon_invite_gift_act@3x.png"
+            class='inviteGitf' mode="widthFix" data-stage="{{'stage'+currentStage}}"></image>
+          <!-- 已经领取 -->
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus3" wx:elif="{{currentStageData.haveGetGift && currentStageData.curentStageInvitedNum == currentStageData.upGradeNeedNum}}" src="/images/icon_already.png" class='inviteGitf' mode="widthFix"></image>
+          <!-- 还不可领取 -->
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus1" wx:else src="https://s.immusician.com/static/wechat/images/icon_invite_gift_g@3x.png" class='inviteGitf' mode="widthFix"></image>
+
+        </view>
+
+        <view class='inviteMembers' style="justify-content:{{currentStage==3?'left':'center'}};">
+          <view wx:for="{{currentStageData.avatar_list}}" wx:key='*this' class='inviteMemberContain'>
+            <image src="{{item}}" class='inviteMember' mode="widthFix"></image>
+          </view>
+          <view wx:for="{{currentStageData.upGradeNeedNum-currentStageData.curentStageInvitedNum}}" wx:key='*this' class='inviteMemberContain'>
+            <image src="https://s.immusician.com/static/wechat/images/icon_invite_null@3x.png" class='inviteMember' mode="widthFix"></image>
+          </view>
+        </view>
+
+        <form class='inviteExtend' bindsubmit="formSubmit" report-submit="{{true}}">
+          <view class='moreStage' bindtap="showMoreStageModal">
+            <text>查看更多</text>
+            <image src="https://s.immusician.com/static/wechat/images/icon_common_more@3x.png" class='moreStageImg' mode="widthFix"></image>
+          </view>
+          <button form-type="submit" class='share' open-type="share" title="好好学习，天天向上">分享招募成员</button>
+        </form>
+      </view>
+
+    </view>
+
+  </view>
+  <!-- 领取礼物弹窗 -->
+  <view class='modal' wx:if="{{showGiftMask}}">
+    <view class='coupon'>
+      <view class='price' wx:if='{{gift.coupon_type == 0}}'>￥{{gift.coupon_value}}</view>
+      <view class='price' wx:if='{{gift.coupon_type == 1}}'>{{gift.coupon_value/10}}折</view>
+      <view class='couponAttribute'>
+        <text class='couponReminder'>{{gift.name}}</text>
+        <view class='couponDescribe'>{{gift.describe}}</view>
+      </view>
+    </view>
+    <view class='modalBtn'>
+      <button class='modalBtnLeft' bindtap='cancel'>取消</button>
+      <button class='modalBtnRight' bindtap='goReceivePrize' data-coupon-id='{{gift._id}}'>立即领取</button>
+    </view>
+  </view>
+  <!-- 三个阶段 -->
+  <view class='maskLayer' wx:if="{{moreStageModalShow}}">
+    <view class='inviteAllContain'>
+      <view class='close_icon' bindtap="hideModal">
+        <image src="./../../images/close.png"></image>
+      </view>
+      <view class='inviteAll'>
+
+        <view class='inviteFirstStage'>
+          <view class='inviteAllStageVisual'>
+            <view class='inviteAllFirstLine'>
+              <view class='inviteAllFirstLineText'>我的邀请</view>
+              <!-- <view class='inviteAllFirstLineHint'>离下一奖励还差
+                <text class='inviteAllFirstLineNum'>{{currentStageData.upGradeNeedNum - currentStageData.curentStageInvitedNum}}</text> 位
+              </view> -->
+            </view>
+
+            <progress class='inviteAllSecondLine' stroke-width="12" percent="{{stage1.curentStageInvitedNum/stage1.upGradeNeedNum*100}}" activeColor="#7048d1" border-radius='6' />
+
+            <view class='inviteAllThirdLine'>
+              <text class='inviteAllThirdLineText'>第一阶段</text>
+              <view class='inviteAllRatio'>
+                <text class='inviteAllThirdLineNum'>{{stage1.curentStageInvitedNum}}</text>/{{stage1.upGradeNeedNum}}</view>
+            </view>
+          </view>
+
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus2" data-stage='stage1' wx:if='{{!stage1.haveGetGift && stage1.curentStageInvitedNum == stage1.upGradeNeedNum}}' src="https://s.immusician.com/static/wechat/images/icon_invite_gift_act@3x.png"
+            class='inviteAllGitf' mode="widthFix"></image>
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus3" data-stage='stage1' wx:elif="{{stage1.haveGetGift && stage1.curentStageInvitedNum == stage1.upGradeNeedNum}}" src="/images/icon_already.png" class='inviteGitf' mode="widthFix"></image>
+
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus1" data-stage='stage1' wx:else src="https://s.immusician.com/static/wechat/images/icon_invite_gift_g@3x.png" class='inviteGitf' mode="widthFix"></image>
+
+          <view class='inviteAllMembers'>
+            <view wx:for="{{stage1.avatar_list}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="{{item}}" class='inviteMember' mode="widthFix"></image>
+            </view>
+            <view wx:for="{{stage1.upGradeNeedNum-stage1.curentStageInvitedNum}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="https://s.immusician.com/static/wechat/images/icon_invite_null@3x.png" class='inviteMember' mode="widthFix"></image>
+            </view>
+          </view>
+
+        </view>
+
+        <view class='inviteSecondStage'>
+          <view class='inviteAllStageVisual'>
+            <view class='inviteAllFirstLine'>
+              <view class='inviteAllFirstLineText'></view>
+              <view class='inviteAllFirstLineHint'>
+                <text class='inviteAllFirstLineNum'></text>
+              </view>
+            </view>
+
+            <progress class='inviteAllSecondLine' stroke-width="12" percent="{{stage2.curentStageInvitedNum/stage2.upGradeNeedNum*100}}" activeColor="#7048d1" border-radius='6' />
+
+            <view class='inviteAllThirdLine'>
+              <text class='inviteAllThirdLineText'>第二阶段</text>
+              <view class='inviteAllRatio'>
+                <text class='inviteAllThirdLineNum'>{{stage2.curentStageInvitedNum}}</text>/{{stage2.upGradeNeedNum}}</view>
+            </view>
+          </view>
+
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus2" data-stage='stage2' wx:if='{{!stage2.haveGetGift  && stage2.curentStageInvitedNum == stage2.upGradeNeedNum}}' src="https://s.immusician.com/static/wechat/images/icon_invite_gift_act@3x.png"
+            class='inviteAllGitf' mode="widthFix" data-stage='stage2'></image>
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus3" data-stage='stage2' wx:elif="{{stage2.haveGetGift && stage2.curentStageInvitedNum == stage2.upGradeNeedNum}}" src="/images/icon_already.png" class='inviteGitf' mode="widthFix"></image>
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus1" data-stage='stage2' wx:else src="https://s.immusician.com/static/wechat/images/icon_invite_gift_g@3x.png" class='inviteGitf' mode="widthFix"></image>
+
+          <view class='inviteAllMembers'>
+            <view wx:for="{{stage2.avatar_list}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="{{item}}" class='inviteMember' mode="widthFix"></image>
+            </view>
+            <view wx:for="{{stage2.upGradeNeedNum-stage2.curentStageInvitedNum}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="https://s.immusician.com/static/wechat/images/icon_invite_null@3x.png" class='inviteMember' mode="widthFix"></image>
+            </view>
+          </view>
+
+        </view>
+
+        <view class='inviteThirdStage'>
+          <view class='inviteAllStageVisual'>
+            <view class='inviteAllFirstLine'>
+              <view class='inviteAllFirstLineText'></view>
+              <view class='inviteAllFirstLineHint'>
+                <text class='inviteAllFirstLineNum'></text>
+              </view>
+            </view>
+
+            <progress class='inviteAllSecondLine' stroke-width="12" percent="{{stage3.curentStageInvitedNum/stage3.upGradeNeedNum*100}}" activeColor="#7048d1" border-radius='6' />
+
+            <view class='inviteAllThirdLine'>
+              <text class='inviteAllThirdLineText'>第三阶段</text>
+              <view class='inviteAllRatio'>
+                <text class='inviteAllThirdLineNum'>{{stage3.curentStageInvitedNum}}</text>/{{stage3.upGradeNeedNum}}</view>
+            </view>
+          </view>
+
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus2" data-stage='stage3' wx:if='{{!stage3.haveGetGift && stage3.upGradeNeedNum == stage3.curentStageInvitedNum}}' src="https://s.immusician.com/static/wechat/images/icon_invite_gift_act@3x.png"
+            class='inviteAllGitf' mode="widthFix" data-stage='stage3'></image>
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus3" data-stage='stage3' wx:elif="{{stage3.haveGetGift && stage3.curentStageInvitedNum == stage3.upGradeNeedNum}}" src="/images/icon_already.png" class='inviteGitf' mode="widthFix"></image>
+          <image bindtap='handleClickGift' data-giftStatus="giftstatus1" data-stage='stage3' wx:else src="https://s.immusician.com/static/wechat/images/icon_invite_gift_g@3x.png" class='inviteGitf' mode="widthFix"></image>
+
+          <view class='inviteAllMembers'>
+            <view wx:for="{{stage3.avatar_list}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="{{item}}" class='inviteMember' mode="widthFix"></image>
+            </view>
+            <view wx:for="{{stage3.upGradeNeedNum - stage3.curentStageInvitedNum}}" wx:key='*this' class='inviteMemberContain'>
+              <image src="https://s.immusician.com/static/wechat/images/icon_invite_null@3x.png" class='inviteMember' mode="widthFix"></image>
+            </view>
+          </view>
+
+        </view>
+
+        <form class='inviteExtend' bindsubmit="formSubmit" report-submit="{{true}}">
+          <view class='moreStage modal_moreStage' bindtap="hideModal">
+            <text>收起详情</text>
+            <image src="https://s.immusician.com/static/wechat/images/icon_common_more@3x.png" class='hideStageImg' mode="widthFix"></image>
+          </view>
+          <button form-type="submit" class='share invite_share' open-type="share">分享招募成员</button>
+        </form>
+
+      </view>
+    </view>
+  </view>
+</view>

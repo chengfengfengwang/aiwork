@@ -1,0 +1,53 @@
+<!--pages/receivePrize/receivePrize.wxml-->
+<wxs module='filter' src='../../utils/filter.wxs'></wxs>
+
+<view class='receivePrize'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>{{title}}</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <view style='background-image:url({{backgroundImg}});' class='backgroundImg'>
+      <view class='success' wx:if="{{isShow}}">
+        <view class='title'>
+          <text class='titleText'>恭喜你获得了</text>
+        </view>
+        <view wx:for="{{coupons}}" wx:key="index" class='coupon'>
+          <view class='price'>￥{{item.coupon_value}}</view>
+          <view class='couponAttribute'>
+            <text class='couponReminder'>{{item.name}}</text>
+            <view class='couponDescribe'>{{item.describe}}</view>
+            <view class='couponValidity'>{{filter.dateFormat(item.start_time)}}-{{filter.dateFormat(item.end_time)}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class='btn'>
+    <button class='use' bindtap="goHome">立即使用</button>
+    <button class='invite' bindtap='popup'>邀请好友</button>
+  </view>
+
+  <view class='modal' wx:if='{{isModal}}'>
+    <view class='close'>
+      <icon class='closeBtn' type="clear" size="27" bindtap="closeModal"/>
+    </view>
+    <image src="https://s.immusician.com/miniwechat/aimusicWechatIMG40.jpeg" bindtap='previewImage' class='saveImg' mode="widthFix"></image>
+    <!-- <view class='saveBtn' bindtap='saveImage'>保存图片分享至朋友圈</view> -->
+    <view class='modal_bottom'>
+      <button class='left clear-button' open-type='share'>
+        <image src='/images/icon_share_WeChat.png'></image>
+        <view>微信好友</view>
+      </button>
+      <view class='right' bindtap='saveImg'>
+        <image src='/images/icon_share_download.png'></image>
+        <view>保存图片</view>
+      </view>
+    </view>
+  </view>
+
+</view>

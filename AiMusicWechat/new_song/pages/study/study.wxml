@@ -1,0 +1,27 @@
+<!--pages/study/study.wxml-->
+<view class='studyPage' style='padding-top:{{navHeight}}rpx'>
+
+  <component-nav is-show="{{true}}" back-page="1">
+    <view>学习进度</view>
+  </component-nav>
+
+  <view class='contain'>
+
+    <view class='studyContain'>
+
+      <view class='studyProgress' wx:for="{{courses}}" wx:key="index">
+        <image src="{{item.cover_url}}" class='studyCover' mode="widthFix"></image>
+        <view class='studyProgressVisual'>
+          <view class='studyCourse'>
+            <text class='courseName'>{{item.name}}</text>
+            <text class='courseProgress'>{{item.lesson_study_count}}/{{item.lesson_count}}</text>
+          </view>
+          <progress percent="{{item.lesson_study_count/item.lesson_count*100}}" stroke-width="9" border-radius="5" activeColor="#7048d1" border-radius="6" />
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,8 @@
+<view class='dialog-layer' wx:if='{{visible}}'>
+  <view class='dialog-mask' bindtap='maskEvt'/>
+  <view class='dialog-box' style='{{innerStyle}}'>
+    <icon wx:if='{{closeType === "in"}}' class='dialog-close__in' type='cancel' size='24' color='#666' bindtap='closeEvt'/>
+    <icon wx:if='{{closeType === "out"}}' class='dialog-close__out' type='clear' size='24' color='#e0e0e0' bindtap='closeEvt'/>
+    <slot/>
+  </view>
+</view>

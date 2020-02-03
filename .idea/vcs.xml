@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/AiMusicWechat" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/AiMusicWechat/new_song" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ai-h5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/helloworld" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/Live_AiMusic_Admin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/aimusic_OMS" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/kpi-class" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/live_room_admin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/open-class" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/manageSystem/user_data" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/musicBaseH5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/music_official_website" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/my/fakervue" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/my/iview-components" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/my/learn-react" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/other" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/other-h5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/qualification" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/yearReport" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/yinyueke-h5" vcs="Git" />
+  </component>
+</project>

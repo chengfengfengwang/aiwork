@@ -1,0 +1,11 @@
+.backIndex {
+  background: no-repeat;
+  background-size: 100% 100%;
+  width: 120rpx;
+  height: 120rpx;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 150rpx; 
+  right: 10rpx;
+  z-index: 10;
+  }

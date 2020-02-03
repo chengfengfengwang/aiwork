@@ -1,0 +1,9 @@
+<template name='auth-info-dialog'>
+  <dialog visible='{{authInfoDlg}}' isMask='{{false}}' innerStyle='height:332rpx;'>
+    <view class='flex-col' style='align-items:center'>
+      <view class='auth-title'>登录提示</view>
+      <view class='auth-dlg-content'>小程序需要您的授权才能提供更好的服务</view>
+      <button class='auth-dlg-btn btn-solid-org' open-type="getUserInfo" lang='zh_CN' bindgetuserinfo="_getUserInfo">点击授权</button>
+    </view>
+  </dialog>
+</template>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="walking-dog" style="position:fixed;left:0;bottom:0"></canvas>
+    <script>
+        class walkingDog {
+            constructor(canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = 200;
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.imgSrc = [];
+                this.imgArr = [];
+                this.promiseArr = [];
+                this.index = -1;
+                this.lastWalkingtime = 0;
+                this.img_count = 8;
+                this.dog = {
+                    stepDistance: 10,
+                    speed: 0.1,
+                    mouseX: -1
+                };
+
+            }
+            loadPic() {
+                for (var i = 0; i <= this.img_count; i++) {
+                    this.imgSrc.push(`./images/${i}.png`)
+                }
+                for (var j = 0; j < this.imgSrc.length; j++) {
+                    var myPromise = new Promise((resolve) => {
+                        let img = new Image();
+                        var that = this;
+                        img.onload = function () {
+                            that.imgArr.push(img)
+                            resolve()
+                        }
+                        img.src = this.imgSrc[j]
+                    })
+                    this.promiseArr.push(myPromise);
+                }
+                return new Promise(resolve => {
+                    Promise.all(this.promiseArr).then(res => {
+                        resolve()
+                    })
+                })
+            }
+            draw() {
+                let now = Date.now();
+
+                let interval = now - this.lastWalkingtime;
+                if (interval > 100) {
+                    this.index = ++this.index % this.img_count;
+
+                    // let distance = (now - this.lastWalkingtime) * this.dog.speed;
+                    // if (distance < this.dog.stepDistance) {
+                    //     window.requestAnimationFrame(this.draw.bind(this));
+                    //     return;
+                    // }
+
+                    let direct = -1,
+                        stopWalking = false;
+
+                    //鼠标在图片前
+                    if(this.mouseX < this.dog.mouseX){
+                        direct = -1;
+                    //鼠标在图片后
+                    }else if( this.mouseX > (this.dog.mouseX + this.pictureWidth) ){
+                        direct = 1;
+                    //鼠标在图片上
+                    }else{
+                        direct = this.mouseX - this.dog.mouseX > this.pictureWidth / 2 ? 1 : -1;
+                        stopWalking = true;
+                        this.index = -1;
+                    }
+
+                    if (!stopWalking) {
+                        this.dog.mouseX += this.dog.stepDistance * direct;
+                    }
+
+                    var img = this.imgArr[this.index + 1];
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+
+                    //let drawX = this.dog.mouseX * direct - (direct === 1 ? 0 : img.naturalWidth / 2);
+
+                    let drawX = this.dog.mouseX * direct - (direct === 1 ? 0 : this.pictureWidth)
+                    this.ctx.save();
+                    if (direct == -1) {
+                        this.ctx.scale(direct, 1);
+                    }
+                    this.ctx.drawImage(img,
+                        drawX,
+                        16,
+                        img.naturalWidth / 2,
+                        img.naturalHeight / 2)
+                    this.ctx.restore();
+
+                    this.lastWalkingtime = Date.now()
+                }
+                window.requestAnimationFrame(this.draw.bind(this))
+            }
+            recordMousePosition() {
+                window.addEventListener('mousemove', event => {
+                    this.mouseX = event.clientX;
+                })
+            }
+            async init() {
+                await this.loadPic();
+                this.pictureWidth = this.imgArr[0].naturalWidth / 2;
+
+                this.recordMousePosition()
+                window.requestAnimationFrame(this.draw.bind(this));
+
+            }
+        }
+
+
+        var canvas = document.querySelector('#walking-dog');
+        var dog = new walkingDog(canvas);
+        dog.init()
+
+
+    </script>
+</body>
+
+</html>

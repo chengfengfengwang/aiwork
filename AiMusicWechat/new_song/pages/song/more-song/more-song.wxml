@@ -1,0 +1,10 @@
+<import src="/components/item/item-template.wxml" />
+<import src="/components/nav/navtab.wxml"/>
+<template is="navTab" data="{{navTitle:navTitle}}" />
+<view class=''>
+  <view class='song_module'>
+    <view class='song-list-box'>
+      <template is="itemTemplate" data="{{list:songList, hasMore:hasMore}}" />
+    </view>
+  </view>
+</view>

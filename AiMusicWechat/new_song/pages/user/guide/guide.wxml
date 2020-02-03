@@ -1,0 +1,7 @@
+<import src="/components/nav/navtab.wxml"/>
+<import src="/components/backIndex/backIndex.wxml" />
+<view class='guide_bg' style="background-image: url('http://s.immusician.com/static/wechat/images/guide.png');">
+<template is="navTab" data="{{navTitle:navTitle}}" />
+</view>
+<template is="backIndex" data="{{showShare:showShare}}" />
+

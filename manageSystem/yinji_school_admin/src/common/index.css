@@ -1,0 +1,79 @@
+.table_top_tool {
+  margin-bottom: 10px;
+}
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.yg_item_wrapper .ivu-upload-list-remove {
+  display: none;
+}
+.note_area {
+  background: #f00;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  opacity: 0.5;
+  cursor: move;
+}
+.mywrapper {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  border: 1px solid #333;
+  margin: 30px 0px;
+  user-select: none;
+}
+.tool_row {
+  margin: 10px 0 10px 0px;
+}
+.edit_area {
+  padding: 10px 0;
+  background-color: #f2f2f2;
+  margin-left: 0px;
+}
+.edit_area .edit_row {
+  margin: 5px 0;
+}
+.edit_area .submit_btn {
+  width: 200px;
+  margin-left: 37px;
+}
+.spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}
+@keyframes ani-demo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-col {
+  height: 100px;
+  position: relative;
+  border: 1px solid #eee;
+}
+.ivu-layout-header {
+  z-index: 9;
+}
+.question_item {
+  display: flex;
+  align-items: top;
+  margin: 0 0 10px 0;
+}
+.table_title {
+  text-align: center;
+  margin: 20px 0 10px 0;
+}
+.ivu-breadcrumb a {
+  font-weight: 400 !important;
+}

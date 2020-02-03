@@ -1,0 +1,393 @@
+/* pages/home.wxss */
+
+.homeContainer {
+  padding-top: 130rpx;
+  background-color: #f5f5fa;
+}
+
+.maskLayer {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(51, 51, 51, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.dialogs {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 433rpx;
+  width: 100%;
+  background-color: white;
+  padding: 60rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.guideTop {
+  height: 200rpx;
+  width: 100%;
+  /* background-color: red; */
+}
+
+.guideTop::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.guideImg {
+  float: left;
+  width: 200rpx;
+}
+
+.guideText {
+  float: right;
+  width: 490rpx;
+  height: 100%;
+  padding: 25rpx 30rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.guideTitle {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.guideTxt {
+  font-size: 26rpx;
+}
+
+.guideBottom {
+  margin-top: 40rpx;
+  height: 72rpx;
+}
+
+.guideBottom::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.know {
+  float: left;
+  height: 100%;
+  width: 320rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  background-color: #d8d8d8;
+  color: #999;
+}
+
+.know::after {
+  border: none;
+}
+
+.benefit {
+  float: right;
+  height: 100%;
+  width: 320rpx;
+  line-height: 72rpx;
+  border-radius: 36rpx;
+  background-color: #7048d1;
+  color: white;
+}
+
+.contain {
+  padding: 10rpx 0;
+  background-color: #f5f5fa;
+}
+
+.swiper {
+  height: 420rpx;
+}
+
+.myVideo {
+  width: 100%;
+}
+
+.slide-image {
+  width: 100%;
+}
+
+.menus {
+  background-color: white;
+  margin: 10rpx 0;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  font-size: 24rpx;
+  width: 25%;
+  text-align: center;
+}
+
+.menuImg {
+  width: 138rpx;
+  height: 138rpx;
+  vertical-align: bottom;
+}
+
+.menuTitle {
+  color: #333;
+  display: inline-block;
+}
+
+.recommend {
+  background-color: white;
+  padding: 30rpx;
+}
+
+.recLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recLabelLeft {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.recLabelRight {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.recLabelRight text {
+  width: 50rpx;
+  vertical-align: middle;
+}
+
+.recLabelRight image {
+  width: 12rpx;
+  margin-left: 10rpx;
+  vertical-align: middle;
+}
+
+.recCourses {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.course {
+  width: 48%;
+  padding: 20rpx 0;
+  position: relative;
+}
+
+.courseImg {
+  width: 330rpx;
+  height: 330rpx;
+  background: linear-gradient(#eee, #ddd, #aaa);
+  border-radius: 10rpx;
+}
+
+.courseImgSecond {
+  width: 50%;
+  position: absolute;
+  top: 20rpx;
+  right: 0;
+}
+
+.courseTitle {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.courseAttribute::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.courseType {
+  float: left;
+  border: 1rpx solid #7048d1;
+  border-radius: 5rpx;
+  color: #7048d1;
+  font-size: 24rpx;
+  padding: 0 5rpx;
+}
+
+.coursePrice {
+  float: right;
+  color: #ff3535;
+  font-size: 34rpx;
+}
+
+.teachers {
+  margin: 10rpx 0;
+  padding: 30rpx;
+  background-color: white;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.teacher {
+  padding: 20rpx 0;
+}
+
+.teachersImg, .studentsImg {
+  width: 100%;
+}
+
+.students {
+  padding: 30rpx;
+  background-color: white;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.student {
+  padding: 20rpx 0;
+}
+
+.serviceImg {
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 30rpx;
+  /* top: 1100rpx; */
+  bottom: 80rpx;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 130rpx;
+  height: calc(100vh - 130rpx);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.teacherInfo {
+  width: 600rpx;
+  /* height: 700rpx; */
+  border-radius: 20rpx;
+  margin: 190rpx auto;
+  background-color: white;
+  padding: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 21rpx;
+  color: #666;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  width: 29rpx;
+  height: 29rpx;
+  color: #979797;
+  font-size: 81rpx;
+  line-height: 29rpx;
+  text-align: center;
+  vertical-align: bottom;
+  transform: rotate(45deg);
+}
+
+.teacherPhoto {
+  width: 120rpx;
+  height: 120rpx;
+  border: 2rpx solid #7849ec;
+  border-radius: 50%;
+  vertical-align: bottom;
+}
+
+.teacherNameContain {
+  margin: 14rpx 0 34rpx 0;
+}
+
+.teacherName {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.hint {
+  margin-top: 34rpx;
+}
+
+.teacherImg {
+  width: 256rpx;
+  height: 256rpx;
+  vertical-align: bottom;
+  margin-top: 16rpx;
+  border: 1rpx solid black;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
+}
+
+.copy {
+  width: 260rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  line-height: 50rpx;
+  font-size: 18rpx;
+  margin-top: 12.5rpx;
+  border: 1rpx solid #979797;
+  background-color: white;
+  color: #666;
+}
+.cover-view{
+  /* position: relative; */
+  text-align: center;
+}
+.cover-view .teacherPhoto{
+  margin:0 auto
+}
+.cover-view .teacherImg{
+  margin:0 auto
+}
+.cover-view .hint{
+  margin-bottom: 17rpx;
+}
+.cover-view .teacherAccount{
+  margin: 17rpx 0;
+}
+.cover-view  .close {
+position:absolute;
+top:11px;
+right:24rpx;
+width:70rpx;
+height:70rpx;
+color:#979797;
+font-size:50rpx;
+/* text-align:center;
+vertical-align:bottom; */
+transform:rotate(45deg);
+padding: 10rpx;
+display: flex;
+align-content: center;
+align-items: center;
+justify-content: center;
+}
+.close_icon{
+  position: absolute;
+  right: 20rpx;
+  top:20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+.swiper .video video{
+  height: 420rpx
+}
+.swiper .banner image{
+  height: 420rpx;
+}
+.formid-menu{
+  font-size: 24rpx;
+  line-height: normal;
+}
