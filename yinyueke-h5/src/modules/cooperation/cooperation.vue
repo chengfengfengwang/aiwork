@@ -38,8 +38,8 @@
       </div>
       <div class="tel_box">
         <div class="item">
-          <img class="teacher_avatar" src="../../assets/img/cooperation/photo1.png" alt>
-          <div class="item_title">琴行、音乐老师请联系</div>
+          <img class="teacher_avatar" src="../../assets/img/cooperation/area1.png" alt>
+          <div style="color:#2599FF" class="item_title">华南、华东大区</div>
           <div class="name">钟老师</div>
           <div class="tel">
             17779677797
@@ -68,8 +68,8 @@
           <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'13511089101'">复制号码</button>
         </div> -->
         <div class="item">
-          <img class="teacher_avatar" src="../../assets/img/cooperation/photo4.png" alt>
-          <div class="item_title">考级点请联系</div>
+          <img class="teacher_avatar" src="../../assets/img/cooperation/area2.png" alt>
+          <div style="color:#1EBE8C" class="item_title">华中、华北大区</div>
           <div class="name">李老师</div>
           <div class="tel">
             18801020414
@@ -78,14 +78,24 @@
           <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'18801020414'">复制号码</button>
         </div>
         <div class="item">
-          <img class="teacher_avatar" src="../../assets/img/cooperation/photo1.png" alt>
-          <div class="item_title">乡（镇）老师领课请联系</div>
+          <img class="teacher_avatar" src="../../assets/img/cooperation/area3.png" alt>
+          <div style="color:#FF6A64" class="item_title">东北、西南大区</div>
           <div class="name">赵老师</div>
           <div class="tel">
             18510088511
             <span class="wx">(微信同号)</span>
           </div>
           <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'18510088511'">复制号码</button>
+        </div>
+        <div class="item">
+          <img class="teacher_avatar" src="../../assets/img/cooperation/area4.png" alt>
+          <div style="color:#7B38FF" class="item_title">西北大区</div>
+          <div class="name">党老师</div>
+          <div class="tel">
+            13810352513
+            <span class="wx">(微信同号)</span>
+          </div>
+          <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'13810352513'">复制号码</button>
         </div>
       </div>
     </div>
@@ -275,8 +285,8 @@ html {
 }
 .tel_box {
   width: 345px;
-  //height: 419px;
-  height: 320px;
+  height: 419px;
+  //height: 320px;
   margin: auto;
   background: url("../../assets/img/cooperation/box3.png") no-repeat center/100%
     100%;
@@ -286,19 +296,19 @@ html {
     padding: 15px 0 12px 0;
     padding-left: 25px;
     .teacher_avatar {
-      width: 20px;
+      width: 11px;
       position: absolute;
-      left: -2px;
-      top: 15px;
+      left: 5px;
+      top: 19px;
     }
     &:not(:last-child){
         .px1-bottom-ffe6e6;
     }
     .item_title {
       margin-bottom: 10px;
-      font-size: 15px;
-      font-family: PingFangSC-Medium;
-      font-weight: 500;
+      font-size:15px;
+      font-family:PingFangSC-Medium,PingFang SC;
+      font-weight:500;
       color: rgba(51, 51, 51, 1);
     }
     .name,

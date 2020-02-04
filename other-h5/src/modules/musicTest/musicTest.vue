@@ -896,7 +896,10 @@ export default {
           var loadingPage = document.querySelector(".page.loading");
           setTimeout(() => {
             loadingPage.classList.add("hide");
-            this.shareReady(this.wxParam);
+            if(!this.isApp){
+              this.shareReady(this.wxParam);
+            }
+            
             setTimeout(() => {
               loadingPage.style.display = "none";
             }, 700);
@@ -1547,9 +1550,13 @@ export default {
       this.page1Audio.pause();
     },
     beginClick() {
+      console.log('1')
       this.swiper.slideNext();
+      console.log('2')
       this.page1Audio.pause();
+      console.log('3')
       this.callBack();
+      console.log('4')
     },
     testWeixin() {
       //判断是否是微信
