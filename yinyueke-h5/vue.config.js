@@ -84,5 +84,7 @@ module.exports = {
         guoyuan2SongList:'src/modules/guoyuan2SongList/app.js', 
         //奥尔夫打击乐歌单
         hitMusicSongList:'src/modules/hitMusicSongList/hitMusicSongList.js',
+        //小哈皮课程详情
+        hapiCourse:'src/modules/hapiCourse/hapiCourse.js',
     }   
 }
