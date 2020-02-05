@@ -6,9 +6,12 @@
     </div>
     <div @click="getShare64" class="share_btn">分享</div>
     <div class="tips">长按保存图片</div>
+    
   </div>
 </template>
 <script>
+var eruda = require('eruda');
+eruda.init();
 import { getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 const QRCode = require("qrcode");
@@ -28,8 +31,18 @@ export default {
     }).then(res => {
       this.qrSrc = res;
     });
+
+    this.openTest()
   },
   methods: {
+    openTest() {
+      var src = "//cdn.jsdelivr.net/npm/eruda";
+      console.log('111')
+    
+      document.write("<scr" + 'ipt src="' + src + '"></scr' + "ipt>");
+      document.write("<scr" + "ipt>eruda.init();</scr" + "ipt>");
+       console.log('222')
+    },
     imgToBase64(url) {
       var url = url + "?" + new Date().valueOf();
       return new Promise((resolve, reject) => {

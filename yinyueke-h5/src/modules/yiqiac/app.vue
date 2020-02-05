@@ -34,14 +34,14 @@ export default {
 html {
   .font-size(16);
 }
-html {
-  @media screen and (max-width: 320px) {
-    .font-size(16);
-  }
-  @media screen and (min-width: 480px) {
-    .font-size(13);
-  }
-}
+// html {
+//   @media screen and (max-width: 320px) {
+//     .font-size(16);
+//   }
+//   @media screen and (min-width: 480px) {
+//     .font-size(13);
+//   }
+// }
 
 * {
   box-sizing: border-box;

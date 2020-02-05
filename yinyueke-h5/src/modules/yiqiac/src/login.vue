@@ -230,6 +230,8 @@ body {
   .reg_btn {
     width: 314px;
     height: 50px;
+    margin-left: auto;
+    margin-right: auto;
     background: rgba(255, 116, 43, 0.7);
     border-radius: 25px;
     font-size: 17px;
