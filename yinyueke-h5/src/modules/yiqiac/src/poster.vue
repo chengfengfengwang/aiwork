@@ -36,10 +36,10 @@ export default {
     // console.log(this.imgToBase64('http://kids.immusician.com/web/h5/img/poster.6df40fde.png').then(res=>{
     //   console.log(res)
     // }))
-     console.log(this.imgToBase64(require('../../../assets/img/yiqiac/poster.png')).then(res=>{
+    this.imgToBase64(require('../../../assets/img/yiqiac/poster.png')).then(res=>{
       console.log(res)
       this.bgSrc = res
-    }))
+    })
   },
   methods: {
     
