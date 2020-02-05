@@ -93,7 +93,8 @@ const router = new Router({
         {
           name: 'WriteOrders',
           path: '/',
-          component: WriteOrders
+          component: WriteOrders,
+          redirect: '/channels'
         },
         {
           name: 'OrderProcess',
@@ -177,16 +178,17 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login') {
-    next()
-  } else {
-    if (store.state.userInfo.token) {
-      next()
-    } else {
-      next({
-        path: '/Login'
-      })
-    }
-  }
+  // if (to.name == 'Login') {
+  //   next()
+  // } else {
+  //   if (store.state.userInfo.token) {
+  //     next()
+  //   } else {
+  //     next({
+  //       path: '/Login'
+  //     })
+  //   }
+  // }
+  next()
 })
 export default router

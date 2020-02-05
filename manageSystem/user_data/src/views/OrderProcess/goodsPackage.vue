@@ -12,6 +12,17 @@
       <Option v-for="option in channelList" :key="option.id" :value="option.id">{{option.name}}</Option>
     </Select>-->
     <Table :loading="tableLoading" border :columns="columns" :data="dataList"></Table>
+     <div style="margin-top:10px">
+      <Page
+        @on-page-size-change="pageSizeChange"
+        @on-change="pageChange"
+        :total="total"
+        :page-size="pageSize"
+        show-sizer
+        :page-size-opts="[5,10,15,20,30,40]"
+        show-elevator
+      />
+    </div>
     <Modal v-model="modalShow" width="760" :mask-closable="false">
       <p slot="header" style>
         <span>sku</span>
@@ -183,7 +194,10 @@ export default {
       channelName: localStorage.getItem("channelName")
         ? localStorage.getItem("channelName")
         : "",
-      courseSlectList:[]
+      courseSlectList:[],
+      page: 0,
+      pageSize: 10,
+      total:0
     };
   },
   components: {
@@ -194,6 +208,15 @@ export default {
     //this.getChannelList();
   },
   methods: {
+    pageChange(page) {
+      this.page = page - 1;
+      this.getTableList();
+    },
+    pageSizeChange(pageSize) {
+      this.pageSize = pageSize;
+      this.page = 0;
+      this.getTableList();
+    },
     yinjiCourseSubmit() {
       this.formValidate.goods_map = this.$refs.allChildGoods.selected.map(e=>{
         return {
@@ -274,11 +297,12 @@ export default {
         .get(
           `${
             process.env.WULIU
-          }/fgoods/index?page=0&size=999&status=1&channel_id=${channel_id}`
+          }/fgoods/index?page=${this.page}&size=${this.pageSize}&status=1&channel_id=${channel_id}`
         )
         .then(res => {
           this.tableLoading = false;
           this.dataList = res.data.list;
+           this.total = res.data.total;
         });
     }
   },
