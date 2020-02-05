@@ -86,4 +86,4 @@ function testWeixin() { //判断是否是微信
     var ua = navigator.userAgent.toLowerCase();
     return ua.match(/MicroMessenger/i) == "micromessenger";
 };
-export { dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
+export { platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }

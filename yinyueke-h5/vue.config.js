@@ -2,6 +2,7 @@ const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 module.exports = {
     devServer: {
+        host: '0.0.0.0',
         port: 5555,     // 端口
     },
     css: {
@@ -86,5 +87,7 @@ module.exports = {
         hitMusicSongList:'src/modules/hitMusicSongList/hitMusicSongList.js',
         //小哈皮课程详情
         hapiCourse:'src/modules/hapiCourse/hapiCourse.js',
+        //疫期领课
+        yiqiac:'src/modules/yiqiac/app.js', 
     }   
 }
