@@ -40,7 +40,7 @@ function testPlat() {
         return -1
     }
 }
-const platForm = testPlat===0 ? 'IOS' : 'Android'
+const platForm = testPlat()===0 ? 'IOS' : 'Android'
 function formatNumber(n) {
     n = n.toString();
     return n[1] ? n : '0' + n;

@@ -107,7 +107,9 @@ export default {
           console.log("onload");
           document.body.appendChild(img);
         };
+        console.log("----------");
         console.log(resultBase64)
+        console.log("----------");
         this.share()
         //document.querySelector(".page.p6 .result").appendChild(canvas);
         //canvas.toDataURL("image/png");
