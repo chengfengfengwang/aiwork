@@ -19,7 +19,7 @@
         :total="total"
         :page-size="pageSize"
         show-sizer
-        :page-size-opts="[5,10,15,20,30,40]"
+        :page-size-opts="[10,20,30,40,60,80]"
         show-elevator
       />
     </div>
