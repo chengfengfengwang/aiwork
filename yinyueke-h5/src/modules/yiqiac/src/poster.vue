@@ -32,17 +32,9 @@ export default {
       this.qrSrc = res;
     });
 
-    this.openTest()
   },
   methods: {
-    openTest() {
-      var src = "//cdn.jsdelivr.net/npm/eruda";
-      console.log('111')
     
-      document.write("<scr" + 'ipt src="' + src + '"></scr' + "ipt>");
-      document.write("<scr" + "ipt>eruda.init();</scr" + "ipt>");
-       console.log('222')
-    },
     imgToBase64(url) {
       var url = url + "?" + new Date().valueOf();
       return new Promise((resolve, reject) => {
@@ -94,8 +86,8 @@ export default {
     },
     getShare64() {
       html2canvas(document.querySelector(".poster_wrapper"), {
-        backgroundColor: "transparent"
-        //allowTaint: true
+        backgroundColor: "transparent",
+        allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
