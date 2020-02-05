@@ -4,7 +4,7 @@
     <div class="poster_wrapper">
       <!-- <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt /> -->
       <img class="bg" :src="bgSrc" alt />
-      <img :src="qrSrc" alt class="qr" />
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" />
     </div>
     <div v-show="!loadingShow" @click="getShare64" class="share_btn">分享</div>
     <div v-show="!loadingShow" class="tips">长按保存图片</div>
@@ -34,7 +34,7 @@ export default {
     Loading
   },
   mounted() {
-    QRCode.toDataURL("I am a pony!", {
+    QRCode.toDataURL("http://weixin.qq.com/q/02Cq_2Ncps9A_1broW1u1c", {
       margin: 1
     }).then(res => {
       this.qrSrc = res;
