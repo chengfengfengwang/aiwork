@@ -1,7 +1,8 @@
 <template>
   <div id="main">
     <div class="poster_wrapper">
-      <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt />
+      <!-- <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt /> -->
+      <img class="bg" :src="bgSrc" alt />
       <img :src="qrSrc" alt class="qr" />
     </div>
     <div @click="getShare64" class="share_btn">分享</div>
@@ -19,7 +20,8 @@ let resultBase64;
 export default {
   data() {
     return {
-      qrSrc: ""
+      qrSrc: "",
+      bgSrc:''
     };
   },
   created() {
@@ -31,7 +33,13 @@ export default {
     }).then(res => {
       this.qrSrc = res;
     });
-
+    // console.log(this.imgToBase64('http://kids.immusician.com/web/h5/img/poster.6df40fde.png').then(res=>{
+    //   console.log(res)
+    // }))
+     console.log(this.imgToBase64(require('../../../assets/img/yiqiac/poster.png')).then(res=>{
+      console.log(res)
+      this.bgSrc = res
+    }))
   },
   methods: {
     
@@ -41,9 +49,6 @@ export default {
         var img = new Image();
         img.setAttribute("crossOrigin", "Anonymous");
         img.src = url;
-        console.log(url);
-        console.log("------");
-        console.log(img.complete);
         img.onload = function() {
           var canvas = document.createElement("canvas");
           canvas.width = img.width;
@@ -51,7 +56,6 @@ export default {
           var ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
           var base64 = canvas.toDataURL("image/png");
-          console.log("------");
           //console.log(base64);
           resolve(base64);
           //document.querySelector('#test').src = base64
@@ -87,7 +91,7 @@ export default {
     getShare64() {
       html2canvas(document.querySelector(".poster_wrapper"), {
         backgroundColor: "transparent",
-        allowTaint: true
+        //allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
