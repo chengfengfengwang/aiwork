@@ -1,12 +1,13 @@
 <template>
   <div id="main">
+    <Loading v-show="loadingShow" />
     <div class="poster_wrapper">
       <!-- <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt /> -->
       <img class="bg" :src="bgSrc" alt />
       <img :src="qrSrc" alt class="qr" />
     </div>
-    <div @click="getShare64" class="share_btn">分享</div>
-    <div class="tips">长按保存图片</div>
+    <div v-show="!loadingShow" @click="getShare64" class="share_btn">分享</div>
+    <div v-show="!loadingShow" class="tips">长按保存图片</div>
     
   </div>
 </template>
@@ -15,17 +16,22 @@ var eruda = require('eruda');
 eruda.init();
 import { getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
+import Loading from './../../../components/Loading'
 const QRCode = require("qrcode");
 let resultBase64;
 export default {
   data() {
     return {
       qrSrc: "",
-      bgSrc:''
+      bgSrc:'',
+      loadingShow:true
     };
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
+  },
+  components:{
+    Loading
   },
   mounted() {
     QRCode.toDataURL("I am a pony!", {
@@ -38,7 +44,8 @@ export default {
     // }))
     this.imgToBase64(require('../../../assets/img/yiqiac/poster.png')).then(res=>{
       console.log(res)
-      this.bgSrc = res
+      this.bgSrc = res;
+      this.loadingShow = false
     })
   },
   methods: {

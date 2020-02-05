@@ -72,7 +72,7 @@ export default {
           this.vCode = "";
         }
         this.axios
-          .post(`${process.env.VUE_APP_SMS}/v9/tx_sms`, {
+          .post(`${process.env.VUE_APP_SMS}/v1/user/tx_sms/`, {
             phone: this.form.phone
           })
           .then(res => {
