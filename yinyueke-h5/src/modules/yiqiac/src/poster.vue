@@ -150,11 +150,11 @@ export default {
         //   console.log("onload");
         //   document.body.appendChild(img);
         // };
+        this.resultBase64 = canvas.toDataURL("image/png");
+        this.resultBase64Show = true;
         console.log("----------");
         console.log(this.resultBase64);
         console.log("----------");
-        this.resultBase64 = canvas.toDataURL("image/png");
-        this.resultBase64Show = true;
       });
     },
     share() {
