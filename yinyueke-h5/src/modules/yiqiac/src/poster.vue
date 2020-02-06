@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow"/>
-    <div v-show="!resultBase64Show" class="poster_wrapper">
+    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
       <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:isFree==0}">
     </div>
@@ -13,8 +13,8 @@
   </div>
 </template>
 <script>
-var eruda = require("eruda");
-eruda.init();
+// var eruda = require("eruda");
+// eruda.init();
 import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
@@ -64,7 +64,10 @@ export default {
       console.log(pArr);
       Promise.all(pArr).then(res => {
         console.log("--");
-        this.getResult64();
+        setTimeout(() => {
+          this.getResult64();
+        }, 100);
+        
       });
     },
     createQr() {
@@ -137,12 +140,14 @@ export default {
       });
     },
     getResult64() {
-      html2canvas(document.querySelector(".poster_wrapper"), {
-        backgroundColor: "transparent"
+      console.log(document.querySelector("#posterContainer"))
+      html2canvas(document.querySelector("#posterContainer"), {
+        //backgroundColor: "transparent"
         //allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
+        console.log(canvas);
         // var img = new Image();
         // img.classList.add("resultImg");
         // img.src = canvas.toDataURL("image/png");
@@ -152,9 +157,9 @@ export default {
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
         this.resultBase64Show = true;
-        console.log("----------");
-        console.log(this.resultBase64);
-        console.log("----------");
+        // console.log("----------");
+        // console.log(this.resultBase64);
+        // console.log("----------");
       });
     },
     share() {

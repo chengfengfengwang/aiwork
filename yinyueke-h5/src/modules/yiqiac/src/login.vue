@@ -40,10 +40,25 @@ export default {
     };
   },
   created() {
-    //this.getCourses();
+    this.inputevent();
   },
   mounted() {},
   methods: {
+    inputevent() {
+      var inputArr = document.querySelectorAll('input');
+      inputArr.forEach(function(ele){
+        let scrollTop;
+        ele.addEventListener("focus", function() {
+          scrollTop = document.body.scrollTop;
+          console.log(scrollTop)
+        });
+        ele.addEventListener("blur", function() {
+          //document.body.scrollTop = scrollTop;
+          window.scrollTo(0,0)
+          console.log(scrollTop)
+        });
+      })
+    },
     getCourses() {
       this.axios
         .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
