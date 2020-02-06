@@ -81,7 +81,7 @@ export default {
       window.location.href = "uniwebview://close";
     },
     toggleScreen() {
-      this.isFullscreen = !this.isFullscreen;
+      
       
       if (this.isFullscreen) {
         console.log('关闭全屏')
@@ -90,6 +90,7 @@ export default {
         console.log('打开全屏')
         window.location.href = "uniwebview://screen?full_screen=1";
       }
+      this.isFullscreen = !this.isFullscreen;
     },
     initImgMethods() {
       var that = this;
