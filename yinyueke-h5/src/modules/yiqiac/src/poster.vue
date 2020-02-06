@@ -1,22 +1,21 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow" />
+    <Loading v-show="loadingShow"/>
     <div v-show="!resultBase64Show" class="poster_wrapper">
-      <!-- <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt /> -->
-      <img class="bg" :src="bgSrc" alt />
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" />
+      <img class="bg" :src="bgSrc" alt>
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:isFree==0}">
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
-
+      <img class="bg"  :src="resultBase64" alt="">
     </div>
-    <div v-show="!loadingShow" @click="share" class="share_btn">分享</div>
-    <div v-show="!loadingShow" class="tips">长按保存图片</div>
+    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享</div>
+    <div v-show="!loadingShow" class="tips" :class="{nofree:isFree==0}">长按保存图片</div>
   </div>
 </template>
 <script>
 var eruda = require("eruda");
 eruda.init();
-import { getQueryVariable, platForm } from "../../../common/util.js";
+import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
@@ -25,9 +24,12 @@ export default {
     return {
       qrSrc: "",
       bgSrc: "",
+      wxMaterial: "",
       loadingShow: true,
-      resultBase64Show:false,
-      resultBase64:''
+      resultBase64Show: false,
+      resultBase64: "",
+      openInApp,
+      isFree:1
     };
   },
   created() {
@@ -37,38 +39,59 @@ export default {
     Loading
   },
   mounted() {
-    this.readyAll();
+    this.getWx();
+    //this.readyAll();
   },
   methods: {
+    getWx() {
+      this.axios
+        //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
+        .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
+          phone: localStorage.getItem("regPhone"),
+          share_id: getQueryVariable("share_id")
+        })
+        .then(res => {
+          this.wxMaterial = res.url;
+          this.isFree = res.is_free;
+          this.readyAll();
+          //this.courseList.unshift({ id: "-1", name: "全部" });
+        });
+    },
     readyAll() {
       let pArr = [];
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
-      console.log(pArr)
-      Promise.all(pArr).then(res=>{
-        console.log('--')
-          this.getResult64()
-      })
+      console.log(pArr);
+      Promise.all(pArr).then(res => {
+        console.log("--");
+        this.getResult64();
+      });
     },
     createQr() {
       return new Promise((resolve, reject) => {
-        QRCode.toDataURL("http://weixin.qq.com/q/02Cq_2Ncps9A_1broW1u1c", {
+        QRCode.toDataURL(this.wxMaterial, {
           margin: 1
         }).then(res => {
-           console.log('qr ready')
+          console.log("qr ready");
           this.qrSrc = res;
-          resolve()
+          resolve();
         });
       });
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        this.imgToBase64(require("../../../assets/img/yiqiac/poster.png")).then(
+        let url;
+        if(this.isFree===0){
+          url = require("../../../assets/img/yiqiac/poster1.png")
+        }else{
+          url = require("../../../assets/img/yiqiac/poster.png")
+        }
+        this.imgToBase64(url).then(
           res => {
-            console.log('poster64 ready')
+            console.log("poster64 ready");
             this.bgSrc = res;
             this.loadingShow = false;
-             resolve()
+            resolve();
           }
         );
       });
@@ -120,17 +143,18 @@ export default {
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
-        var img = new Image();
-        img.classList.add("resultImg");
-        this.resultBase64 = canvas.toDataURL("image/png");
-        img.src = canvas.toDataURL("image/png");
-        img.onload = function() {
-          console.log("onload");
-          document.body.appendChild(img);
-        };
+        // var img = new Image();
+        // img.classList.add("resultImg");
+        // img.src = canvas.toDataURL("image/png");
+        // img.onload = function() {
+        //   console.log("onload");
+        //   document.body.appendChild(img);
+        // };
         console.log("----------");
         console.log(this.resultBase64);
         console.log("----------");
+        this.resultBase64 = canvas.toDataURL("image/png");
+        this.resultBase64Show = true;
       });
     },
     share() {
@@ -156,6 +180,10 @@ export default {
     right: 31px;
     width: 90px;
     border-radius: 3px;
+  }
+  .qr.nofree{
+    bottom: 20px;
+    right: 22px;
   }
 }
 
@@ -185,5 +213,9 @@ export default {
   color: rgba(57, 57, 57, 1);
   -webkit-text-stroke: 1px undefined;
   text-stroke: 1px undefined;
+}
+.tips.nofree{
+  bottom: 28px;
+    right: 2px;
 }
 </style>

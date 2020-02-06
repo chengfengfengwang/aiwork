@@ -4,19 +4,19 @@
       <img src="../../../assets//img//yiqiac/loginb2.png" alt />
     </div>
     <div class="bottom_text">
-      点击领取课程确认同意
-      <a href="https://www.baidu.com">《音乐壳用户服务协议》</a>
+      点击生成确认同意
+      <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
     </div>
     <div class="form">
       <div class="input_wrapper phone">
-        <input v-model.number="form.phone" placeholder="请输入手机号" type="text" />
+        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
       </div>
       <div class="input_wrapper v_code">
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
       <div class="input_wrapper person">
-        <input v-model.number="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
+        <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
       </div>
       <div @click="reg" class="reg_btn">生成专属海报</div>
     </div>
@@ -47,6 +47,7 @@ export default {
   },
   mounted() {},
   methods: {
+    
     getCourses() {
       this.axios
         .post(`${process.env.VUE_APP_LIEBIAN}/v9/class_info/get_course_apply`, {
@@ -62,9 +63,11 @@ export default {
     reg() {
       //  console.log(this.form)
       //  return
+      
       this.axios
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
+          localStorage.setItem('regPhone',this.form.phone)
           if(res.error){
 
           }else{

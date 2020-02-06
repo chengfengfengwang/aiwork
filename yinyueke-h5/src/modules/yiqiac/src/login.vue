@@ -5,7 +5,7 @@
     </div>
     <div class="bottom_text">
       点击领取课程确认同意
-      <a href="https://www.baidu.com">《音乐壳用户服务协议》</a>
+      <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
     </div>
     <div class="form">
       <div class="input_wrapper phone">
@@ -31,12 +31,10 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
-        nickname: "",
         phone: "",
-        zone: 86,
         code: "",
-        institutions_id: getQueryVariable("orgId"),
-        course_ids: ""
+        share_id: getQueryVariable("share_id"),
+        share_phone: getQueryVariable("share_phone")
       },
       courseList: []
     };
@@ -59,11 +57,17 @@ export default {
         });
     },
     reg() {
-      this.form.course_ids = [Number(this.selectedCourse)];
       this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/create_student`, this.form)
+        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
-          this.$router.push("/success");
+          if(!res.error){
+            let data = res.data;
+            if(data instanceof(Array) && data.length==0){
+              this.$router.push('/download')
+            }else if(data instanceof(Object)){
+              location.href=data.url
+            }
+          }
         });
     },
     getVCode() {
