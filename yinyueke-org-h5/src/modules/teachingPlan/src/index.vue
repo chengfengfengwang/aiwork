@@ -72,7 +72,7 @@ export default {
     // Document.onfullscreenchange = function() {
     //   console.log("xxx");
     // };
-    //this.getTeachingPlan();
+    this.getTeachingPlan();
     this.initImgMethods();
   },
   methods: {
