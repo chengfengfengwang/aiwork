@@ -1,55 +1,78 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow" />
-    <div class="poster_wrapper">
+    <div v-show="!resultBase64Show" class="poster_wrapper">
       <!-- <img class="bg" src="../../../assets/img/yiqiac/poster.png" alt /> -->
       <img class="bg" :src="bgSrc" alt />
       <img v-show="!loadingShow" :src="qrSrc" alt class="qr" />
     </div>
-    <div v-show="!loadingShow" @click="getShare64" class="share_btn">分享</div>
+    <div v-show="resultBase64Show" class="poster_wrapper">
+
+    </div>
+    <div v-show="!loadingShow" @click="share" class="share_btn">分享</div>
     <div v-show="!loadingShow" class="tips">长按保存图片</div>
-    
   </div>
 </template>
 <script>
-var eruda = require('eruda');
+var eruda = require("eruda");
 eruda.init();
 import { getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
-import Loading from './../../../components/Loading'
+import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
-let resultBase64;
 export default {
   data() {
     return {
       qrSrc: "",
-      bgSrc:'',
-      loadingShow:true
+      bgSrc: "",
+      loadingShow: true,
+      resultBase64Show:false,
+      resultBase64:''
     };
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
   },
-  components:{
+  components: {
     Loading
   },
   mounted() {
-    QRCode.toDataURL("http://weixin.qq.com/q/02Cq_2Ncps9A_1broW1u1c", {
-      margin: 1
-    }).then(res => {
-      this.qrSrc = res;
-    });
-    // console.log(this.imgToBase64('http://kids.immusician.com/web/h5/img/poster.6df40fde.png').then(res=>{
-    //   console.log(res)
-    // }))
-    this.imgToBase64(require('../../../assets/img/yiqiac/poster.png')).then(res=>{
-      console.log(res)
-      this.bgSrc = res;
-      this.loadingShow = false
-    })
+    this.readyAll();
   },
   methods: {
-    
+    readyAll() {
+      let pArr = [];
+      pArr.push(this.createQr());
+      pArr.push(this.posterTo64());
+      console.log(pArr)
+      Promise.all(pArr).then(res=>{
+        console.log('--')
+          this.getResult64()
+      })
+    },
+    createQr() {
+      return new Promise((resolve, reject) => {
+        QRCode.toDataURL("http://weixin.qq.com/q/02Cq_2Ncps9A_1broW1u1c", {
+          margin: 1
+        }).then(res => {
+           console.log('qr ready')
+          this.qrSrc = res;
+          resolve()
+        });
+      });
+    },
+    posterTo64() {
+      return new Promise((resolve, reject) => {
+        this.imgToBase64(require("../../../assets/img/yiqiac/poster.png")).then(
+          res => {
+            console.log('poster64 ready')
+            this.bgSrc = res;
+            this.loadingShow = false;
+             resolve()
+          }
+        );
+      });
+    },
     imgToBase64(url) {
       var url = url + "?" + new Date().valueOf();
       return new Promise((resolve, reject) => {
@@ -70,9 +93,7 @@ export default {
       });
     },
     createResultImg() {
-      console.log("开始画图");
       this.imgToBase64(this.userInfo.avatar).then(res => {
-        console.log("base64生成完成");
         this.avatarBase64 = res;
         document.querySelector(".page.p6").classList.add("visi");
         html2canvas(document.querySelector(".result_wrapper"), {
@@ -87,44 +108,38 @@ export default {
           img.classList.add("resultImg");
           img.src = canvas.toDataURL("image/png");
           img.onload = function() {
-            console.log("onload");
             document.querySelector(".page.p6 .result_wrapper").appendChild(img);
           };
-          //document.querySelector(".page.p6 .result").appendChild(canvas);
-          //canvas.toDataURL("image/png");
         });
       });
     },
-    getShare64() {
+    getResult64() {
       html2canvas(document.querySelector(".poster_wrapper"), {
-        backgroundColor: "transparent",
+        backgroundColor: "transparent"
         //allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
         var img = new Image();
         img.classList.add("resultImg");
-        resultBase64 = canvas.toDataURL("image/png");
+        this.resultBase64 = canvas.toDataURL("image/png");
         img.src = canvas.toDataURL("image/png");
         img.onload = function() {
           console.log("onload");
           document.body.appendChild(img);
         };
         console.log("----------");
-        console.log(resultBase64)
+        console.log(this.resultBase64);
         console.log("----------");
-        this.share()
-        //document.querySelector(".page.p6 .result").appendChild(canvas);
-        //canvas.toDataURL("image/png");
       });
     },
     share() {
       if (platForm == "IOS") {
         webkit.messageHandlers.shareWebImage.postMessage({
-          data: resultBase64
+          data: this.resultBase64
         });
       } else {
-        PayFeedBack.shareWebImage(resultBase64);
+        PayFeedBack.shareWebImage(this.resultBase64);
       }
     }
   }

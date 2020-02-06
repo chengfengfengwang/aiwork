@@ -9,13 +9,16 @@
     </div>
     <div class="form">
       <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
+        <input v-model.number="form.phone" placeholder="请输入手机号" type="text" />
       </div>
       <div class="input_wrapper v_code">
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div @click="reg" class="reg_btn">领取课程</div>
+      <div class="input_wrapper person">
+        <input v-model.number="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
+      </div>
+      <div @click="reg" class="reg_btn">生成专属海报</div>
     </div>
     <!-- <img src="../../../assets/img/regist/rd1.png" alt class="d1">
     <img src="../../../assets/img/regist/rd2.png" alt class="d2">
@@ -31,12 +34,10 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
-        nickname: "",
         phone: "",
-        zone: 86,
         code: "",
-        institutions_id: getQueryVariable("orgId"),
-        course_ids: ""
+        //share_id: getQueryVariable("share_id"),
+        share_phone: ""
       },
       courseList: []
     };
@@ -48,7 +49,7 @@ export default {
   methods: {
     getCourses() {
       this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
+        .post(`${process.env.VUE_APP_LIEBIAN}/v9/class_info/get_course_apply`, {
           institutions_id: getQueryVariable("orgId")
         })
         .then(res => {
@@ -59,11 +60,17 @@ export default {
         });
     },
     reg() {
-      this.form.course_ids = [Number(this.selectedCourse)];
+      //  console.log(this.form)
+      //  return
       this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/create_student`, this.form)
+        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
-          this.$router.push("/success");
+          if(res.error){
+
+          }else{
+            this.$router.push("/poster");
+          }
+          
         });
     },
     getVCode() {
@@ -154,10 +161,11 @@ body {
 }
 .form {
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   top: 32%;
-  width: 100%;
-  padding: 0 30px;
+  width: 314px;
+  //padding: 0 30px;
   input {
     border: none;
     background-color: transparent;
@@ -226,7 +234,10 @@ body {
       //border-left: 1px solid #f1f1f1;
     }
   }
-
+.person{
+  background: url("../../../assets/img/yiqiac/person.png") no-repeat left 4.7%
+      center/7% 50%;
+}
   .reg_btn {
     width: 314px;
     height: 50px;
