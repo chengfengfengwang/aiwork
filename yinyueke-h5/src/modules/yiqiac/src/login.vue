@@ -59,7 +59,6 @@ export default {
         });
     },
     reg() {
-      this.form.course_ids = [Number(this.selectedCourse)];
       this.axios
         .post(`${process.env.VUE_APP_ORG}/v9/create_student`, this.form)
         .then(res => {
