@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     closePage(){
+      console.log('关闭网页')
       window.location.href = "uniwebview://close";
     },
     toggleScreen() {
