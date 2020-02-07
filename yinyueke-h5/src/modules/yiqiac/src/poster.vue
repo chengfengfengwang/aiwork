@@ -8,8 +8,8 @@
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
     </div>
-    <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div>
-    <!-- <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div> -->
+    <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
+    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
     <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
   </div>
 </template>
