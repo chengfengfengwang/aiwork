@@ -8,7 +8,8 @@
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
     </div>
-    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享</div>
+    <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div>
+    <!-- <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div> -->
     <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
   </div>
 </template>
@@ -204,11 +205,11 @@ export default {
   position: absolute;
   right: 15px;
   top: 25px;
-  width: 48px;
-  height: 25px;
-  line-height: 25px;
+  width: 88px;
+  height: 30px;
+  line-height: 30px;
   background: rgba(255, 203, 21, 1);
-  border-radius: 12px;
+  border-radius: 15px;
   text-align: center;
   font-size: 12px;
   font-family: PingFang SC;
