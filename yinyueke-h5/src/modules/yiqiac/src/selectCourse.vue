@@ -63,11 +63,11 @@ export default {
           if (!res.error) {
             Toast({
               message: "课程领取成功，请下载音乐壳App，登录后查看",
-              duration: 2300
+              duration: 2000
             });
             setTimeout(() => {
               this.$router.push("/download");
-            }, 2300);
+            }, 2000);
           }
         });
     },
