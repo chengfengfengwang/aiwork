@@ -42,8 +42,8 @@
           <div v-if="formValidate.type==0 || formValidate.type==1">
             <FormItem label="课程所属">
               <Select style="width: 260px" v-model="appName" placeholder>
-                <Option :value="1">AI</Option>
-                <Option :value="2">音乐壳</Option>
+                <Option :value="2">AI</Option>
+                <Option :value="1">音乐壳</Option>
               </Select>
             </FormItem>
             <FormItem label="课程id">
@@ -95,7 +95,7 @@
             </FormItem>
             <FormItem label="课程id">
               <span>{{formValidate.course_name}}</span>
-              <Button @click="yinjiModalShow=true;appName=2">选择课程</Button>
+              <Button @click="yinjiModalShow=true;appName=1">选择课程</Button>
             </FormItem>
             <FormItem label="开课天数">
               <Input v-model.number="formValidate.value" placeholder="请输入开课天数"></Input>
@@ -118,12 +118,12 @@
       <AllCourseAi
         :fromDataArr="fromCourseArr"
         ref="allYinjiCourse"
-        v-if="yinjiModalShow && appName===1"
+        v-if="yinjiModalShow && appName===2"
       />
       <AllCourseYinji
         :fromDataArr="fromCourseArr"
         ref="allYinjiCourse"
-        v-if="yinjiModalShow && appName===2"
+        v-if="yinjiModalShow && appName===1"
       />
       <div slot="footer">
         <Button @click="yinjiCourseSubmit" type="primary">确定</Button>
