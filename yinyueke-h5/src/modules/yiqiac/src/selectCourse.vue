@@ -5,7 +5,7 @@
     </div>
     <div class="bottom">
       <div class="course_container" v-show="arrowOpen">
-        <div v-for="course in courseList" class="course_item" :key="course.goods_id">{{course.name}}</div>
+        <div @click="acIndex=index" v-for="(course,index) in courseList" class="course_item" :class="{active:acIndex===index}" :key="course.goods_id">{{course.name}}</div>
       </div>
       <div class="select_sec" @click="toggleOpen">
         <img class="arrow" :class="{open:arrowOpen}" src="../../../assets/img/yiqiac/arrow.png" alt />
@@ -22,7 +22,8 @@ export default {
     return {
       arrowOpen: false,
       imgArr:[],
-      courseList:[]
+      courseList:[],
+      acIndex:''
     };
   },
   created() {
@@ -45,9 +46,13 @@ export default {
 };
 </script>
 <style lang="less">
-#main {
+#main  {
   //background-color: #78ce7d;
+  
   min-height: 100vh;
+}
+#main *{
+box-sizing: border-box;
 }
 .main_wrapper {
   // position: absolute;
@@ -88,6 +93,12 @@ export default {
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: rgba(102, 102, 102, 1);
+      border:1px solid transparent;
+    }
+    .course_item.active{
+      background-color: #FFF2E8;
+      border:1px solid #FF7203;
+      color: rgba(255,114,3,1);
     }
   }
   .select_sec {
