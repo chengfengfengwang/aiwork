@@ -8,6 +8,9 @@
       <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
     </div>
     <div class="form">
+      <div class="input_wrapper real_name">
+        <input v-model="form.real_name" placeholder="请输入姓名" type="text">
+      </div>
       <div class="input_wrapper phone">
         <input v-model="form.phone" placeholder="请输入手机号" type="text">
       </div>
@@ -34,6 +37,7 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
+        real_name:"",
         phone: "",
         code: "",
         //share_id: getQueryVariable("share_id"),
@@ -249,6 +253,10 @@ body {
       color: rgba(255, 87, 38, 1);
       //border-left: 1px solid #f1f1f1;
     }
+  }
+  .real_name{
+    background: url("../../../assets/img/yiqiac/name.png") no-repeat left 4.7%
+      center/7% 50%;
   }
   .person {
     background: url("../../../assets/img/yiqiac/person.png") no-repeat left 4.7%
