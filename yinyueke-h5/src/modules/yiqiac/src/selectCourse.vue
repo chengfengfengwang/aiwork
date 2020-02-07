@@ -1,15 +1,11 @@
 <template>
   <div id="main">
     <div class="main_wrapper">
-      <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
+      <img v-for="(courseImg,index) in imgArr" class="course_img" :key="index" :src=courseImg alt="">
     </div>
     <div class="bottom">
       <div class="course_container" v-show="arrowOpen">
-        <div class="course_item">LV1器乐王国之旅</div>
-        <div class="course_item">LV1器乐王国之旅</div>
-        <div class="course_item">LV1器乐王国之旅</div>
-        <div class="course_item">LV1器乐王国之旅</div>
-        <div class="course_item">LV1器乐王国之旅</div>
+        <div v-for="course in courseList" class="course_item" :key="course.goods_id">{{course.name}}</div>
       </div>
       <div class="select_sec" @click="toggleOpen">
         <img class="arrow" :class="{open:arrowOpen}" src="../../../assets/img/yiqiac/arrow.png" alt />
@@ -24,11 +20,18 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      arrowOpen: false
+      arrowOpen: false,
+      imgArr:[],
+      courseList:[]
     };
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
+    for(var i=0;i<20;i++){
+      this.imgArr.push(require(`../../../assets/img/yiqiac/${i}.png`))
+    }
+    this.courseList = JSON.parse(localStorage.getItem('multiCourse'));
+    console.log(this.courseList)
   },
 
   methods: {
@@ -54,7 +57,7 @@ export default {
   background-color: #fff6e1;
   min-height: 100vh;
   position: relative;
-  .bg {
+  .course_img {
     width: 100%;
   }
 }

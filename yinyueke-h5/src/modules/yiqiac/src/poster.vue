@@ -3,13 +3,13 @@
     <Loading v-show="loadingShow"/>
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:isFree==0}">
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}">
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
     </div>
     <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享</div>
-    <div v-show="!loadingShow" class="tips" :class="{nofree:isFree==0}">长按保存图片</div>
+    <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
   </div>
 </template>
 <script>
@@ -29,7 +29,8 @@ export default {
       resultBase64Show: false,
       resultBase64: "",
       openInApp,
-      isFree:1
+      posterId:getQueryVariable('c'),
+      
     };
   },
   created() {
@@ -52,7 +53,6 @@ export default {
         })
         .then(res => {
           this.wxMaterial = res.url;
-          this.isFree = res.is_free;
           this.readyAll();
           //this.courseList.unshift({ id: "-1", name: "全部" });
         });
@@ -83,12 +83,12 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url;
-        if(this.isFree===0){
-          url = require("../../../assets/img/yiqiac/poster1.png")
-        }else{
-          url = require("../../../assets/img/yiqiac/poster.png")
-        }
+        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`)
+        // if(this.isFree===0){
+        //   url = require("../../../assets/img/yiqiac/poster2.png")
+        // }else{
+        //   url = require("../../../assets/img/yiqiac/poster1.png")
+        // }
         this.imgToBase64(url).then(
           res => {
             console.log("poster64 ready");
