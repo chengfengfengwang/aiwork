@@ -23,6 +23,7 @@
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -41,7 +42,7 @@ export default {
     this.courseList = JSON.parse(localStorage.getItem("multiCourse"));
     console.log(this.courseList);
   },
-
+  mounted() {},
   methods: {
     activeCourse() {
       // console.log(this.courseList)
@@ -50,8 +51,8 @@ export default {
       //   id: this.courseList[this.acIndex].id
       // });
       // return;
-      if(this.courseText==='请选择课程'){
-        return
+      if (this.courseText === "请选择课程") {
+        return;
       }
       this.axios
         .post(`http://api.yinji.immusician.com/v1/share/active_free_course/`, {
@@ -59,8 +60,14 @@ export default {
           id: this.courseList[this.acIndex].id
         })
         .then(res => {
-          if(!res.error){
-            this.$router.push('/download')
+          if (!res.error) {
+            Toast({
+              message: "课程领取成功，请下载音乐壳App，登录后查看",
+              duration: 2300
+            });
+            setTimeout(() => {
+              this.$router.push("/download");
+            }, 2300);
           }
         });
     },
