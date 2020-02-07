@@ -5,7 +5,7 @@
     </div>
     <div class="bottom_text">
       点击领取课程确认同意
-      <a href="https://www.baidu.com">《音乐壳用户服务协议》</a>
+      <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
     </div>
     <div class="form">
       <div class="input_wrapper phone">
@@ -31,21 +31,36 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
-        nickname: "",
         phone: "",
-        zone: 86,
         code: "",
-        institutions_id: getQueryVariable("orgId"),
-        course_ids: ""
+        share_id: getQueryVariable("share_id"),
+        share_phone: getQueryVariable("share_phone")
       },
       courseList: []
     };
   },
   created() {
-    //this.getCourses();
+    
   },
-  mounted() {},
+  mounted() {
+    this.inputevent();
+  },
   methods: {
+    inputevent() {
+      var inputArr = document.querySelectorAll('input');
+      inputArr.forEach(function(ele){
+        let scrollTop;
+        ele.addEventListener("focus", function() {
+          scrollTop = document.body.scrollTop;
+          console.log(scrollTop)
+        });
+        ele.addEventListener("blur", function() {
+          //document.body.scrollTop = scrollTop;
+          window.scrollTo(0,0)
+          console.log(scrollTop)
+        });
+      })
+    },
     getCourses() {
       this.axios
         .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
@@ -60,9 +75,16 @@ export default {
     },
     reg() {
       this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/create_student`, this.form)
+        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
-          this.$router.push("/success");
+          if(!res.error){
+            let data = res.data;
+            if(data instanceof(Array) && data.length==0){
+              this.$router.push('/download')
+            }else if(data instanceof(Object)){
+              location.href=data.url
+            }
+          }
         });
     },
     getVCode() {
