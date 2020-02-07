@@ -40,9 +40,11 @@ export default {
     };
   },
   created() {
+    
+  },
+  mounted() {
     this.inputevent();
   },
-  mounted() {},
   methods: {
     inputevent() {
       var inputArr = document.querySelectorAll('input');
