@@ -45,10 +45,18 @@ export default {
   },
   methods: {
     getWx() {
+      //app里没有填写手机号，从url上面拿
+      //非app从上一步用户填写的自己手机号 里面拿
+      let phone;
+      if(openInApp){
+        pphone = getQueryVariable('user_phone')
+      }else{
+        phone = localStorage.getItem("regPhone")
+      }
       this.axios
         //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
         .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          phone: localStorage.getItem("regPhone"),
+          phone: phone,
           share_id: getQueryVariable("share_id")
         })
         .then(res => {
