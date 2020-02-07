@@ -49,7 +49,7 @@ export default {
       //非app从上一步用户填写的自己手机号 里面拿
       let phone;
       if(openInApp){
-        pphone = getQueryVariable('user_phone')
+        phone = getQueryVariable('user_phone')
       }else{
         phone = localStorage.getItem("regPhone")
       }
