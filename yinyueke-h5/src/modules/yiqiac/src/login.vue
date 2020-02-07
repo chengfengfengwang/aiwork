@@ -74,6 +74,7 @@ export default {
         });
     },
     reg() {
+      localStorage.setItem('loginPhone',this.form.phone)
       this.axios
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {

@@ -1,17 +1,23 @@
 <template>
   <div id="main">
     <div class="main_wrapper">
-      <img v-for="(courseImg,index) in imgArr" class="course_img" :key="index" :src=courseImg alt="">
+      <img v-for="(courseImg,index) in imgArr" class="course_img" :key="index" :src="courseImg" alt />
     </div>
     <div class="bottom">
       <div class="course_container" v-show="arrowOpen">
-        <div @click="acIndex=index" v-for="(course,index) in courseList" class="course_item" :class="{active:acIndex===index}" :key="course.goods_id">{{course.name}}</div>
+        <div
+          @click="selectCourse(index,course.name)"
+          v-for="(course,index) in courseList"
+          class="course_item"
+          :class="{active:acIndex===index}"
+          :key="course.id"
+        >{{course.name}}</div>
       </div>
       <div class="select_sec" @click="toggleOpen">
         <img class="arrow" :class="{open:arrowOpen}" src="../../../assets/img/yiqiac/arrow.png" alt />
-        请选择课程
+        {{courseText}}
       </div>
-      <div class="get_course">立即领取</div>
+      <div class="get_course" @click="activeCourse">立即领取</div>
     </div>
   </div>
 </template>
@@ -21,21 +27,48 @@ export default {
   data() {
     return {
       arrowOpen: false,
-      imgArr:[],
-      courseList:[],
-      acIndex:''
+      imgArr: [],
+      courseList: [],
+      acIndex: "",
+      courseText: "请选择课程"
     };
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
-    for(var i=0;i<20;i++){
-      this.imgArr.push(require(`../../../assets/img/yiqiac/${i}.png`))
+    for (var i = 0; i < 20; i++) {
+      this.imgArr.push(require(`../../../assets/img/yiqiac/${i}.png`));
     }
-    this.courseList = JSON.parse(localStorage.getItem('multiCourse'));
-    console.log(this.courseList)
+    this.courseList = JSON.parse(localStorage.getItem("multiCourse"));
+    console.log(this.courseList);
   },
 
   methods: {
+    activeCourse() {
+      // console.log(this.courseList)
+      // console.log({
+      //   phone: getQueryVariable("user_phone"),
+      //   id: this.courseList[this.acIndex].id
+      // });
+      // return;
+      if(this.courseText==='请选择课程'){
+        return
+      }
+      this.axios
+        .post(`http://api.yinji.immusician.com/v1/share/active_free_course/`, {
+          phone: localStorage.getItem("loginPhone"),
+          id: this.courseList[this.acIndex].id
+        })
+        .then(res => {
+          if(!res.error){
+            this.$router.push('/download')
+          }
+        });
+    },
+    selectCourse(index, name) {
+      this.acIndex = index;
+      this.courseText = name;
+      this.arrowOpen = false;
+    },
     toggleOpen() {
       this.arrowOpen = !this.arrowOpen;
     },
@@ -45,14 +78,14 @@ export default {
   }
 };
 </script>
-<style lang="less">
-#main  {
+<style lang="less" scoped>
+#main {
   //background-color: #78ce7d;
-  
+
   min-height: 100vh;
 }
-#main *{
-box-sizing: border-box;
+#main * {
+  box-sizing: border-box;
 }
 .main_wrapper {
   // position: absolute;
@@ -93,12 +126,12 @@ box-sizing: border-box;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: rgba(102, 102, 102, 1);
-      border:1px solid transparent;
+      border: 1px solid transparent;
     }
-    .course_item.active{
-      background-color: #FFF2E8;
-      border:1px solid #FF7203;
-      color: rgba(255,114,3,1);
+    .course_item.active {
+      background-color: #fff2e8;
+      border: 1px solid #ff7203;
+      color: rgba(255, 114, 3, 1);
     }
   }
   .select_sec {
@@ -109,7 +142,7 @@ box-sizing: border-box;
     display: flex;
     align-items: center;
     .arrow {
-        transition: all .2s;
+      transition: all 0.2s;
       width: 18px;
       margin-top: 3px;
       margin-right: 10px;
