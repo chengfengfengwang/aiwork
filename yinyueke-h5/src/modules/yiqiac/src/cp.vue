@@ -18,7 +18,7 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div class="input_wrapper person">
+      <div v-show="!hasPhone" class="input_wrapper person">
         <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text">
       </div>
       <div @click="reg" class="reg_btn">生成专属海报</div>
@@ -43,11 +43,15 @@ export default {
         //share_id: getQueryVariable("share_id"),
         share_phone: ""
       },
-      courseList: []
+      courseList: [],
+      hasPhone:false
     };
   },
   created() {
-    //this.getCourses();
+    if(getQueryVariable('p')){
+      this.hasPhone = true;
+      this.form.share_phone = getQueryVariable('p')
+    }
   },
   mounted() {
     this.inputevent()

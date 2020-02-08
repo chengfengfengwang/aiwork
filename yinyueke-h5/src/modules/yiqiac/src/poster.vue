@@ -31,7 +31,6 @@ export default {
       resultBase64: "",
       openInApp,
       posterId:getQueryVariable('c'),
-      
     };
   },
   created() {
