@@ -23,7 +23,7 @@ export default {
 .qr{
     display: block;
     margin: 50px auto 0 auto;
-    width: 40%;
+    width: 50%;
 }
 // .qr{
 //     position: absolute;
