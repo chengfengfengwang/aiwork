@@ -2,7 +2,6 @@ const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 module.exports = {
     devServer: {
-        host: '192.168.199.159',
         port: 5555,     // 端口 http://192.168.199.159:5555/
     },
     css: {
