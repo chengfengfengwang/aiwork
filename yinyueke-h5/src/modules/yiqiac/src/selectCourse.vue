@@ -1,10 +1,7 @@
 <template>
   <div id="main">
     <div class="main_wrapper">
-      <img class="course_img" src="../../../assets/img/yiqiac/0.1.png" alt />
-      <img class="course_img" src="../../../assets/img/yiqiac/0.2.png" alt />
       <img v-for="(courseImg,index) in imgArr" class="course_img" :key="index" :src="courseImg" alt />
-      <img class="course_img" src="../../../assets/img/yiqiac/20.png" alt />
     </div>
     <div class="bottom">
       <div class="course_container" v-show="arrowOpen">
@@ -39,8 +36,8 @@ export default {
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
-    for (var i = 1; i < 20; i++) {
-      this.imgArr.push(require(`../../../assets/img/yiqiac/${i}.png`));
+    for (var i = 1; i < 26; i++) {
+      this.imgArr.push(require(`../../../assets/img/yiqiac/detail/${i}.png`));
     }
     this.courseList = JSON.parse(localStorage.getItem("multiCourse"));
     console.log(this.courseList);
