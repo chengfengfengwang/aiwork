@@ -2,7 +2,7 @@
 <!-- 开学活动 -->
     <div id="pageWrapper">
        <!-- <img class="page_img" src="./../../assets//img//hapiCourse/main.jpg" alt=""> -->
-       <img class="qr" src="./../../assets//img//hapiCourse/qr.jpg" alt="">
+       <img class="qr" src="./../../assets//img//hapiCourse/qr1.png" alt="">
     </div>
 </template>
 <script>
