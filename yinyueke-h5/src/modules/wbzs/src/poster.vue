@@ -3,13 +3,14 @@
     <Loading v-show="loadingShow" />
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt />
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}" />
+      <span class="name">
+        恭喜 <span class="name_text">{{name}}</span> 小朋友
+      </span>
     </div>
-    <!-- <div v-show="resultBase64Show" class="poster_wrapper">
+    <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg" :src="resultBase64" alt />
-    </div> -->
-    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
+    </div>
+    <!-- <div v-show="!loadingShow" class="tips">长按保存图片</div> -->
   </div>
 </template>
 <script>
@@ -22,7 +23,10 @@ const QRCode = require("qrcode");
 export default {
   data() {
     return {
-      name: localStorage.getItem("zsName")
+      name: localStorage.getItem("zsName"),
+      loadingShow: false,
+      resultBase64Show: false,
+      bgSrc: ""
     };
   },
   created() {},
@@ -30,7 +34,7 @@ export default {
     Loading
   },
   mounted() {
-    //this.readyAll();
+    this.readyAll();
   },
   methods: {
     readyAll() {
@@ -43,17 +47,7 @@ export default {
         });
       });
     },
-    createQr() {
-      return new Promise((resolve, reject) => {
-        QRCode.toDataURL(this.wxMaterial, {
-          margin: 1
-        }).then(res => {
-          console.log("qr ready");
-          this.qrSrc = res;
-          resolve();
-        });
-      });
-    },
+
     posterTo64() {
       return new Promise((resolve, reject) => {
         let url = require(`../../../assets/img/wbzs/zs.png`);
@@ -145,16 +139,18 @@ export default {
   .bg {
     width: 100%;
   }
-  .qr {
+  .name {
     position: absolute;
-    bottom: 15px;
-    right: 31px;
-    width: 90px;
-    border-radius: 3px;
-  }
-  .qr.nofree {
-    bottom: 20px;
-    right: 22px;
+        top: 66px;
+    left: 53px;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #e19100;
+    font-weight: 500;
+    .name_text{
+      text-decoration: underline;
+      color: #000
+    }
   }
 }
 
