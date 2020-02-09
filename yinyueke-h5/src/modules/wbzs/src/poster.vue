@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       name: localStorage.getItem("zsName"),
-      loadingShow: false,
+      loadingShow: true,
       resultBase64Show: false,
       bgSrc: ""
     };
