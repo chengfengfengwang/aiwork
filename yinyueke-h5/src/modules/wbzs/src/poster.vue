@@ -3,7 +3,7 @@
     <Loading v-show="loadingShow" />
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt />
-      <span class="name">
+      <span v-show="bgSrc" class="name">
         恭喜 <span class="name_text">{{name}}</span> 小朋友
       </span>
     </div>
