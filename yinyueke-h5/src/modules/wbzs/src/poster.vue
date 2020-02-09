@@ -137,7 +137,16 @@ export default {
 };
 </script>
 <style lang="less">
+#main{
+  height: 100vh;
+  position: relative;
+}
 .poster_wrapper {
+  position: absolute;
+  left: 0;
+  top:50%;
+  width: 100%;
+  transform: translateY(-60%);
   .bg {
     width: 100%;
   }
