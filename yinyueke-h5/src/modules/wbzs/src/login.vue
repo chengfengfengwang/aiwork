@@ -4,13 +4,10 @@
       <img src="../../../assets//img//yiqiac/loginb2.png" alt />
     </div>
     <div class="bottom_text">
-      点击生成确认同意
+      点击领取课程确认同意
       <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
     </div>
     <div class="form">
-      <div class="input_wrapper real_name">
-        <input v-model="form.real_name" placeholder="请输入姓名" type="text" />
-      </div>
       <div class="input_wrapper phone">
         <input v-model="form.phone" placeholder="请输入手机号" type="text" />
       </div>
@@ -18,10 +15,7 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div v-show="!hasPhone" class="input_wrapper person">
-        <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
-      </div>
-      <div @click="reg" class="reg_btn">生成专属海报</div>
+      <div @click="reg" class="reg_btn">领取课程</div>
     </div>
     <!-- <img src="../../../assets/img/regist/rd1.png" alt class="d1">
     <img src="../../../assets/img/regist/rd2.png" alt class="d2">
@@ -37,46 +31,39 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
-        real_name: "",
         phone: "",
         code: "",
         share_id: getQueryVariable("share_id"),
-        share_phone: "",
-        is_proxy: 1,
-        share_stall: getQueryVariable("c")
+        share_phone: getQueryVariable("share_phone")
       },
-      courseList: [],
-      hasPhone: false
+      courseList: []
     };
   },
   created() {
-    if (getQueryVariable("p")) {
-      this.hasPhone = true;
-      this.form.share_phone = getQueryVariable("p");
-    }
+    
   },
   mounted() {
     this.inputevent();
   },
   methods: {
     inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
+      var inputArr = document.querySelectorAll('input');
+      inputArr.forEach(function(ele){
         let scrollTop;
         ele.addEventListener("focus", function() {
           scrollTop = document.body.scrollTop;
-          console.log(scrollTop);
+          console.log(scrollTop)
         });
         ele.addEventListener("blur", function() {
           //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-          console.log(scrollTop);
+          window.scrollTo(0,0)
+          console.log(scrollTop)
         });
-      });
+      })
     },
     getCourses() {
       this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v9/class_info/get_course_apply`, {
+        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
           institutions_id: getQueryVariable("orgId")
         })
         .then(res => {
@@ -87,15 +74,7 @@ export default {
         });
     },
     reg() {
-      this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
-        .then(res => {
-          localStorage.setItem("regPhone", this.form.phone);
-          if (res.error) {
-          } else {
-            this.$router.push("/poster");
-          }
-        });
+      localStorage.setItem('loginPhone',this.form.phone)
     },
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
@@ -121,7 +100,8 @@ export default {
           this.vcodeText = "重新获取";
         }
       }, 1000);
-    }
+    },
+    
   }
 };
 </script>
@@ -184,11 +164,10 @@ body {
 }
 .form {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   top: 32%;
-  width: 314px;
-  //padding: 0 30px;
+  width: 100%;
+  padding: 0 30px;
   input {
     border: none;
     background-color: transparent;
@@ -257,14 +236,7 @@ body {
       //border-left: 1px solid #f1f1f1;
     }
   }
-  .real_name {
-    background: url("../../../assets/img/yiqiac/name.png") no-repeat left 4.7%
-      center/7% 50%;
-  }
-  .person {
-    background: url("../../../assets/img/yiqiac/person.png") no-repeat left 4.7%
-      center/7% 50%;
-  }
+
   .reg_btn {
     width: 314px;
     height: 50px;

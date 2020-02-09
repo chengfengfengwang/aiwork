@@ -3,25 +3,18 @@
     <div class="logo">
       <img src="../../../assets//img//yiqiac/loginb2.png" alt />
     </div>
-    <div class="bottom_text">
-      点击生成确认同意
-      <a href="http://cdn.kids.immusician.com/app/privacy.html">《音乐壳用户服务协议》</a>
+    <div class="bottom_coco">
+      <img src="../../../assets/img/wbzs/coco.png" alt="">
     </div>
     <div class="form">
-      <div class="input_wrapper real_name">
-        <input v-model="form.real_name" placeholder="请输入姓名" type="text" />
+      <div class="input_wrapper name">
+        <input v-model="form.name" placeholder="请输入宝贝姓名领取证书" type="text" />
       </div>
-      <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
-      </div>
-      <div class="input_wrapper v_code">
+      <!-- <div class="input_wrapper v_code">
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
-      </div>
-      <div v-show="!hasPhone" class="input_wrapper person">
-        <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
-      </div>
-      <div @click="reg" class="reg_btn">生成专属海报</div>
+      </div> -->
+      <div @click="reg" class="reg_btn">领取证书</div>
     </div>
     <!-- <img src="../../../assets/img/regist/rd1.png" alt class="d1">
     <img src="../../../assets/img/regist/rd2.png" alt class="d2">
@@ -33,50 +26,37 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      vcodeText: "获取验证码",
-      vCode: "",
-      selectedCourse: "",
+    
       form: {
-        real_name: "",
-        phone: "",
-        code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: "",
-        is_proxy: 1,
-        share_stall: getQueryVariable("c")
-      },
-      courseList: [],
-      hasPhone: false
+        name: ""
+      }
     };
   },
   created() {
-    if (getQueryVariable("p")) {
-      this.hasPhone = true;
-      this.form.share_phone = getQueryVariable("p");
-    }
+    
   },
   mounted() {
     this.inputevent();
   },
   methods: {
     inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
+      var inputArr = document.querySelectorAll('input');
+      inputArr.forEach(function(ele){
         let scrollTop;
         ele.addEventListener("focus", function() {
           scrollTop = document.body.scrollTop;
-          console.log(scrollTop);
+          console.log(scrollTop)
         });
         ele.addEventListener("blur", function() {
           //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-          console.log(scrollTop);
+          window.scrollTo(0,0)
+          console.log(scrollTop)
         });
-      });
+      })
     },
     getCourses() {
       this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v9/class_info/get_course_apply`, {
+        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
           institutions_id: getQueryVariable("orgId")
         })
         .then(res => {
@@ -87,15 +67,8 @@ export default {
         });
     },
     reg() {
-      this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
-        .then(res => {
-          localStorage.setItem("regPhone", this.form.phone);
-          if (res.error) {
-          } else {
-            this.$router.push("/poster");
-          }
-        });
+      localStorage.setItem('zsName',this.form.name)
+      
     },
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
@@ -121,7 +94,8 @@ export default {
           this.vcodeText = "重新获取";
         }
       }, 1000);
-    }
+    },
+    
   }
 };
 </script>
@@ -168,34 +142,27 @@ body {
     width: 100%;
   }
 }
-.bottom_text {
+.bottom_coco {
   position: absolute;
-  bottom: 35px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  a {
-    color: #fbe54a;
+  bottom: 45px;
+  right: 10px;
+  img {
+    width: 145px;
   }
 }
 .form {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   top: 32%;
-  width: 314px;
-  //padding: 0 30px;
+  width: 100%;
+  padding: 0 30px;
   input {
     border: none;
     background-color: transparent;
     outline: none;
     color: rgba(51, 51, 51, 1);
     left: 17%;
-    top: 2%;
+    top: 8%;
     position: absolute;
     width: 70%;
     height: 40px;
@@ -226,45 +193,18 @@ body {
   .input_wrapper {
     position: relative;
     width: 100%;
-    height: 44px;
-    margin-bottom: 15px;
-    border-radius: 22px;
+    height: 50px;
+    margin-bottom: 30px;
+    border-radius: 25px;
     //border: 1px solid rgba(51, 51, 51, 0.2);
 
     background-color: #fff !important;
   }
+  .name input{
+    text-align: center
+  }
+  
 
-  .phone {
-    background: url("../../../assets/img/yiqiac/phone.png") no-repeat left 4.7%
-      center/5.7% 54%;
-  }
-  .v_code {
-    background: url("../../../assets/img/yiqiac/safe.png") no-repeat left 4.7%
-      center/7% 54%;
-    .v_code_btn {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 106px;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      font-size: 14px;
-      font-family: PingFang-SC-Regular, PingFang-SC;
-      font-weight: 400;
-      color: rgba(255, 87, 38, 1);
-      //border-left: 1px solid #f1f1f1;
-    }
-  }
-  .real_name {
-    background: url("../../../assets/img/yiqiac/name.png") no-repeat left 4.7%
-      center/7% 50%;
-  }
-  .person {
-    background: url("../../../assets/img/yiqiac/person.png") no-repeat left 4.7%
-      center/7% 50%;
-  }
   .reg_btn {
     width: 314px;
     height: 50px;

@@ -23,18 +23,10 @@ const QRCode = require("qrcode");
 export default {
   data() {
     return {
-      qrSrc: "",
-      bgSrc: "",
-      wxMaterial: "",
-      loadingShow: true,
-      resultBase64Show: false,
-      resultBase64: "",
-      openInApp,
-      posterId:getQueryVariable('c'),
+      name: localStorage.getItem('zsName'),
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
   },
   components: {
     Loading
@@ -56,7 +48,6 @@ export default {
       this.axios
         //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
         .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall:getQueryVariable("c"),
           phone: phone,
           share_id: getQueryVariable("share_id")
         })

@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="logo">
-      <img src="../../../assets//img//yiqiac/loginb2.png" alt />
+      <img src="../../../assets//img//yiqiac/loginb2.png" alt>
     </div>
     <div class="bottom_text">
       点击生成确认同意
@@ -9,17 +9,17 @@
     </div>
     <div class="form">
       <div class="input_wrapper real_name">
-        <input v-model="form.real_name" placeholder="请输入姓名" type="text" />
+        <input v-model="form.real_name" placeholder="请输入姓名" type="text">
       </div>
       <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
+        <input v-model="form.phone" placeholder="请输入手机号" type="text">
       </div>
       <div class="input_wrapper v_code">
-        <input v-model="form.code" placeholder="请输入验证码" type="text" />
+        <input v-model="form.code" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
       <div v-show="!hasPhone" class="input_wrapper person">
-        <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text" />
+        <input v-model="form.share_phone" placeholder="请输入邀请人手机号" type="text">
       </div>
       <div @click="reg" class="reg_btn">生成专属海报</div>
     </div>
@@ -37,42 +37,40 @@ export default {
       vCode: "",
       selectedCourse: "",
       form: {
-        real_name: "",
+        real_name:"",
         phone: "",
         code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: "",
-        is_proxy: 1,
-        share_stall: getQueryVariable("c")
+        //share_id: getQueryVariable("share_id"),
+        share_phone: ""
       },
       courseList: [],
-      hasPhone: false
+      hasPhone:false
     };
   },
   created() {
-    if (getQueryVariable("p")) {
+    if(getQueryVariable('p')){
       this.hasPhone = true;
-      this.form.share_phone = getQueryVariable("p");
+      this.form.share_phone = getQueryVariable('p')
     }
   },
   mounted() {
-    this.inputevent();
+    this.inputevent()
   },
   methods: {
     inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
+      var inputArr = document.querySelectorAll('input');
+      inputArr.forEach(function(ele){
         let scrollTop;
         ele.addEventListener("focus", function() {
           scrollTop = document.body.scrollTop;
-          console.log(scrollTop);
+          console.log(scrollTop)
         });
         ele.addEventListener("blur", function() {
           //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-          console.log(scrollTop);
+          window.scrollTo(0,0)
+          console.log(scrollTop)
         });
-      });
+      })
     },
     getCourses() {
       this.axios
@@ -87,15 +85,9 @@ export default {
         });
     },
     reg() {
-      this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
-        .then(res => {
-          localStorage.setItem("regPhone", this.form.phone);
-          if (res.error) {
-          } else {
-            this.$router.push("/poster");
-          }
-        });
+      //  console.log(this.form)
+      //  return
+
     },
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
@@ -257,7 +249,7 @@ body {
       //border-left: 1px solid #f1f1f1;
     }
   }
-  .real_name {
+  .real_name{
     background: url("../../../assets/img/yiqiac/name.png") no-repeat left 4.7%
       center/7% 50%;
   }

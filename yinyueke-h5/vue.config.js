@@ -88,5 +88,7 @@ module.exports = {
         hapiCourse:'src/modules/hapiCourse/hapiCourse.js',
         //疫期领课
         yiqiac:'src/modules/yiqiac/app.js', 
+        //微博证书
+        wbzs:'src/modules/wbzs/app.js'
     }   
 }
