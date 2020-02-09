@@ -43,6 +43,7 @@ export default {
     
   },
   mounted() {
+    console.log(getQueryVariable("share_phone"))
     this.inputevent();
   },
   methods: {

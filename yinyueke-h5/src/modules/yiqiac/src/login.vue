@@ -35,7 +35,6 @@ export default {
         code: "",
         share_id: getQueryVariable("share_id"),
         share_phone: getQueryVariable("share_phone"),
-        share_phone: "",
         is_proxy: 0,
         share_stall: getQueryVariable("c")
       },

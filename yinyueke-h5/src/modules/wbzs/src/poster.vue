@@ -1,14 +1,13 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow"/>
+    <Loading v-show="loadingShow" />
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
-      <img class="bg" :src="bgSrc" alt>
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}">
+      <img class="bg" :src="bgSrc" alt />
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}" />
     </div>
-    <div v-show="resultBase64Show" class="poster_wrapper">
-      <img class="bg"  :src="resultBase64" alt="">
-    </div>
-    <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
+    <!-- <div v-show="resultBase64Show" class="poster_wrapper">
+      <img class="bg" :src="resultBase64" alt />
+    </div> -->
     <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
     <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
   </div>
@@ -23,51 +22,25 @@ const QRCode = require("qrcode");
 export default {
   data() {
     return {
-      name: localStorage.getItem('zsName'),
+      name: localStorage.getItem("zsName")
     };
   },
-  created() {
-  },
+  created() {},
   components: {
     Loading
   },
   mounted() {
-    this.getWx();
     //this.readyAll();
   },
   methods: {
-    getWx() {
-      //app里没有填写手机号，从url上面拿
-      //非app从上一步用户填写的自己手机号 里面拿
-      let phone;
-      if(openInApp){
-        phone = getQueryVariable('user_phone')
-      }else{
-        phone = localStorage.getItem("regPhone")
-      }
-      this.axios
-        //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
-        .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          phone: phone,
-          share_id: getQueryVariable("share_id")
-        })
-        .then(res => {
-          this.wxMaterial = res.url;
-          this.readyAll();
-          //this.courseList.unshift({ id: "-1", name: "全部" });
-        });
-    },
     readyAll() {
       let pArr = [];
-      pArr.push(this.createQr());
+      //pArr.push(this.createQr());
       pArr.push(this.posterTo64());
-      console.log(pArr);
       Promise.all(pArr).then(res => {
-        console.log("--");
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.getResult64();
-        }, 100);
-        
+        });
       });
     },
     createQr() {
@@ -83,20 +56,13 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`)
-        // if(this.isFree===0){
-        //   url = require("../../../assets/img/yiqiac/poster2.png")
-        // }else{
-        //   url = require("../../../assets/img/yiqiac/poster1.png")
-        // }
-        this.imgToBase64(url).then(
-          res => {
-            console.log("poster64 ready");
-            this.bgSrc = res;
-            this.loadingShow = false;
-            resolve();
-          }
-        );
+        let url = require(`../../../assets/img/wbzs/zs.png`);
+        this.imgToBase64(url).then(res => {
+          console.log("poster64 ready");
+          this.bgSrc = res;
+          this.loadingShow = false;
+          resolve();
+        });
       });
     },
     imgToBase64(url) {
@@ -140,7 +106,7 @@ export default {
       });
     },
     getResult64() {
-      console.log(document.querySelector("#posterContainer"))
+      console.log(document.querySelector("#posterContainer"));
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
         //allowTaint: true
@@ -186,7 +152,7 @@ export default {
     width: 90px;
     border-radius: 3px;
   }
-  .qr.nofree{
+  .qr.nofree {
     bottom: 20px;
     right: 22px;
   }
@@ -219,8 +185,8 @@ export default {
   -webkit-text-stroke: 1px undefined;
   text-stroke: 1px undefined;
 }
-.tips.nofree{
+.tips.nofree {
   bottom: 28px;
-    right: 2px;
+  right: 2px;
 }
 </style>

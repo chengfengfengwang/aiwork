@@ -67,8 +67,8 @@ export default {
         });
     },
     reg() {
-      localStorage.setItem('zsName',this.form.name)
-      
+      localStorage.setItem('zsName',this.form.name);
+      this.$router.push('/poster')
     },
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
