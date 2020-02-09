@@ -43,7 +43,9 @@ export default {
       pArr.push(this.posterTo64());
       Promise.all(pArr).then(res => {
         this.$nextTick(() => {
-          this.getResult64();
+          setTimeout(() => {
+             this.getResult64();
+          }, 100);
         });
       });
     },
