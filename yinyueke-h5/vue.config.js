@@ -91,6 +91,7 @@ module.exports = {
         //微博证书
         wbzs:'src/modules/wbzs/app.js',
          //微博证书
-         livePoster:'src/modules/livePoster/livePoster.js'
+         livePoster:'src/modules/livePoster/livePoster.js',
+         liveQr:'src/modules/liveQr/liveQr.js',
     }   
 }
