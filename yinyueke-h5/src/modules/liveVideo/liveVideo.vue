@@ -89,22 +89,22 @@ export default {
     getList() {
       this.wxCode = getQueryVariable("code");
       console.log(this.wxCode);
-      if (this.wxCode) {
-        this.axios
-          .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
-            code: this.wxCode
-          })
-          .then(res => {
-            res.liveList.forEach((e, index) => {
-              this.liveList.videoUrl = e.videoUrl;
-            });
-            this.isWatch = res.isWatch;
-            console.log(res);
-            if (!this.isWatch) {
-              alert("未关注");
-            }
-          });
-      }
+    //   if (this.wxCode) {
+    //     this.axios
+    //       .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
+    //         code: this.wxCode
+    //       })
+    //       .then(res => {
+    //         res.liveList.forEach((e, index) => {
+    //           this.liveList.videoUrl = e.videoUrl;
+    //         });
+    //         this.isWatch = res.isWatch;
+    //         console.log(res);
+    //         if (!this.isWatch) {
+    //           alert("未关注");
+    //         }
+    //       });
+    //   }
     }
   }
 };
