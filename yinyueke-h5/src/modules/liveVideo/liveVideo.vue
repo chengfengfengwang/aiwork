@@ -88,7 +88,7 @@ export default {
       }
     },
     getList() {
-      console.log(location.href);
+      console.log(this.wxCode);
       if (this.wxCode) {
         this.axios
           .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
