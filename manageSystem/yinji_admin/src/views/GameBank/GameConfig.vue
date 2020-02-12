@@ -1984,7 +1984,10 @@ export default {
         this.curGame = "gsgbysf";
       } else if (newRow.game_type == 63) {
         this.curGame = "jgXuanze";
-      } else {
+      } else if (newRow.game_type == 67) {
+        this.curGame = "cpbf";
+      } 
+      else {
         this.curGame = "";
       }
 
