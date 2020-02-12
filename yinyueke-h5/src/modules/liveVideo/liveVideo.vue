@@ -59,12 +59,14 @@ export default {
   },
   created() {
     this.getCode();
+     this.getList();
     this.liveList.forEach((e, index) => {
       e.imgSrc = require("../../assets/img/liveVideo/" + (index + 1) + ".png");
     });
   },
   mounted() {
-    this.getList();
+      console.log('进入页面');
+   
   },
   methods: {
     goDetail(url) {
@@ -89,22 +91,23 @@ export default {
     getList() {
       this.wxCode = getQueryVariable("code");
       console.log(this.wxCode);
-    //   if (this.wxCode) {
-    //     this.axios
-    //       .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
-    //         code: this.wxCode
-    //       })
-    //       .then(res => {
-    //         res.liveList.forEach((e, index) => {
-    //           this.liveList.videoUrl = e.videoUrl;
-    //         });
-    //         this.isWatch = res.isWatch;
-    //         console.log(res);
-    //         if (!this.isWatch) {
-    //           alert("未关注");
-    //         }
-    //       });
-    //   }
+      if (this.wxCode) {
+           console.log('请求接口');
+        this.axios
+          .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
+            code: this.wxCode
+          })
+          .then(res => {
+            res.liveList.forEach((e, index) => {
+              this.liveList.videoUrl = e.videoUrl;
+            });
+            this.isWatch = res.isWatch;
+            console.log(res);
+            if (!this.isWatch) {
+              alert("未关注");
+            }
+          });
+      }
     }
   }
 };
