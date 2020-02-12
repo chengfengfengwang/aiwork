@@ -93,5 +93,6 @@ module.exports = {
          //微博证书
          livePoster:'src/modules/livePoster/livePoster.js',
          liveQr:'src/modules/liveQr/liveQr.js',
+         liveVideo:'src/modules/liveVideo/liveVideo.js',
     }   
 }
