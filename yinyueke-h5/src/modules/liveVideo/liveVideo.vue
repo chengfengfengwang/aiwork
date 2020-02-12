@@ -64,7 +64,6 @@ export default {
     });
   },
   mounted() {
-    this.wxCode = getQueryVariable("code");
     this.getList();
   },
   methods: {
@@ -78,7 +77,7 @@ export default {
         "http://cdn.kids-web.immusician.com/yinji/liveVideo.html"
       );
       //正式
-      var appId = 'wxebd76dff6ca15a2a';
+      var appId = "wxebd76dff6ca15a2a";
       //测试
       //var appId = "wx79d1426d8dc6654a";
       if (!getQueryVariable("code")) {
@@ -88,6 +87,7 @@ export default {
       }
     },
     getList() {
+      this.wxCode = getQueryVariable("code");
       console.log(this.wxCode);
       if (this.wxCode) {
         this.axios
@@ -96,12 +96,12 @@ export default {
           })
           .then(res => {
             res.liveList.forEach((e, index) => {
-              this.liveList.videoUrl = e.videoUrl
+              this.liveList.videoUrl = e.videoUrl;
             });
             this.isWatch = res.isWatch;
-            console.log(res)
-            if(!this.isWatch){
-                alert('未关注')
+            console.log(res);
+            if (!this.isWatch) {
+              alert("未关注");
             }
           });
       }
