@@ -3,7 +3,7 @@
   <div id="pageWrapper">
     <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
     <div class="list">
-      <div v-for="(item,index) in liveList" :key="index" class="item">
+      <div @click="goDetail" v-for="(item,index) in liveList" :key="index" class="item">
         <img class="text_img" :src="item.imgSrc" alt />
         <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
         <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
@@ -66,13 +66,16 @@ export default {
     this.getList()
   },
   methods: {
+      goDetail(url){
+
+      },
     getCode() {
       var ruri = encodeURIComponent(
         "http%3A%2F%2Fcdn.kids-web.immusician.com/liveVideo.html"
       );
       if (!getQueryVariable("code")) {
         location.replace(
-          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx79d1426d8dc6654a&redirect_uri${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx79d1426d8dc6654a&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
       }
     },
