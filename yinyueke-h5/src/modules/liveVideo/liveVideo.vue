@@ -27,7 +27,7 @@ export default {
       liveList: [
         {
           imgSrc: "",
-          videoUrl: "123"
+          videoUrl: ""
         },
         {
           imgSrc: "",
@@ -79,9 +79,9 @@ export default {
         "http://cdn.kids-web.immusician.com/yinji/liveVideo.html"
       );
       //正式
-      //var appId = "wxebd76dff6ca15a2a";
+      var appId = "wxebd76dff6ca15a2a";
       //测试
-      var appId = "wx79d1426d8dc6654a";
+      //var appId = "wx79d1426d8dc6654a";
       if (!getQueryVariable("code")) {
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
@@ -99,7 +99,7 @@ export default {
           })
           .then(res => {
             res.liveList.forEach((e, index) => {
-              this.liveList.videoUrl = e.videoUrl;
+              this.liveList[index].videoUrl = e.videoUrl;
             });
             this.isWatch = res.isWatch;
             console.log(res);
