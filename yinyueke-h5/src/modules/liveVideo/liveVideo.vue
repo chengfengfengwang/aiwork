@@ -3,7 +3,12 @@
   <div id="pageWrapper">
     <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
     <div class="list">
-      <div @click="goDetail" v-for="(item,index) in liveList" :key="index" class="item">
+      <div
+        @click="goDetail(item.videoUrl)"
+        v-for="(item,index) in liveList"
+        :key="index"
+        class="item"
+      >
         <img class="text_img" :src="item.imgSrc" alt />
         <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
         <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
@@ -55,27 +60,27 @@ export default {
   created() {
     this.getCode();
     this.liveList.forEach((e, index) => {
-      console.log(
-        require("../../assets/img/liveVideo/" + (index + 1) + ".png")
-      );
       e.imgSrc = require("../../assets/img/liveVideo/" + (index + 1) + ".png");
     });
   },
   mounted() {
     this.wxCode = getQueryVariable("code");
-    this.getList()
+    this.getList();
   },
   methods: {
-      goDetail(url){
-
-      },
+    goDetail(url) {
+      if (url) {
+        location.href = url;
+      }
+    },
     getCode() {
       var ruri = encodeURIComponent(
         "http%3A%2F%2Fcdn.kids-web.immusician.com/liveVideo.html"
       );
+      var appId = 'wxebd76dff6ca15a2a';
       if (!getQueryVariable("code")) {
         location.replace(
-          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx79d1426d8dc6654a&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
       }
     },
@@ -83,7 +88,7 @@ export default {
       console.log(location.href);
       if (this.wxCode) {
         this.axios
-          .post('http://api.yinji.immusician.com/v1/wechat/live_list', {
+          .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
             code: this.wxCode
           })
           .then(res => {});
