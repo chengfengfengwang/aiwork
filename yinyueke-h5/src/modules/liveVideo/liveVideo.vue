@@ -75,7 +75,7 @@ export default {
     },
     getCode() {
       var ruri = encodeURIComponent(
-        "http%3A%2F%2Fcdn.kids-web.immusician.com/liveVideo.html"
+        "http://cdn.kids-web.immusician.com/yinji/liveVideo.html"
       );
       var appId = 'wxebd76dff6ca15a2a';
       if (!getQueryVariable("code")) {
