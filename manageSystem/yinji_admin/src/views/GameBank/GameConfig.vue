@@ -987,6 +987,12 @@
               <Gsgbysf :obj="formValidate.material_data[0]" ref="gsgbysf"/>
             </FormItem>
           </div>
+          <!-- 唱片播放配置 -->
+          <div v-if="curGame=='cpbf' && modalShow">
+            <FormItem label="素材">
+              <Cpbf :obj="formValidate.material_data[0]" ref="cpbf"/>
+            </FormItem>
+          </div>
           <!-- 非洲鼓创意卡配置 -->
           <div v-if="curGame=='fzgcyk' && modalShow">
             <FormItem label="素材">
@@ -1139,7 +1145,8 @@ import Sgjz from "../../components/Sgjz/Sgjz";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
 import Jzyqsp from "../../components/Jzyqsp/Jzyqsp";
-import Gsgbysf from "../../components/Gsgbysf/Gsgbysf";
+import Gsgbysf from "../../components/Gsgbysf/Gsgbysf"; 
+import Cpbf from "../../components/Cpbf/Cpbf";
 import FzgCyk from "../../components/FzgCyk/FzgCyk";
 import Ukpz from "../../components/Ukpz/Ukpz";
 import Lhjjzhp from "../../components/Lhjjzhp/Lhjjzhp";
@@ -1527,7 +1534,8 @@ export default {
     Cyjzd,
     Jzyq,
     Jzyqsp,
-    Gsgbysf
+    Gsgbysf,
+    Cpbf
   },
   mounted() {
     //this.getProductList();
@@ -2569,6 +2577,11 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "gsgbysf") {
           var obj = this.$refs.gsgbysf.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "cpbf") {
+          var obj = this.$refs.cpbf.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
