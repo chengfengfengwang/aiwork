@@ -26,7 +26,7 @@
 </template>
 <script>
 import { getQueryVariable, testWeixin } from "../../common/util.js";
-
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -78,6 +78,11 @@ export default {
     goDetail(url) {
       if (url) {
         location.href = url;
+      }else{
+        Toast({
+              message: "直播还未开始或暂无视频回放",
+              duration: 1000
+            });
       }
     },
     getCode() {
