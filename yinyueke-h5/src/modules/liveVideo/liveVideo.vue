@@ -9,7 +9,9 @@
           v-for="(item,index) in liveList"
           :key="index"
           class="item"
+          :class="{canplay:item.videoUrl}"
         >
+          <div v-if="item.videoUrl" class="line"></div>
           <img class="text_img" :src="item.imgSrc" alt />
           <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
           <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
@@ -34,11 +36,11 @@ export default {
       liveList: [
         {
           imgSrc: "",
-          videoUrl: ""
+          videoUrl: "1"
         },
         {
           imgSrc: "",
-          videoUrl: ""
+          videoUrl: "2"
         },
         {
           videoUrl: ""
@@ -75,14 +77,18 @@ export default {
     console.log("进入页面");
   },
   methods: {
+    updateStyle() {
+      var canplayList = document.querySelectorAll(".item .line");
+      canplayList[canplayList.length - 1].style.display = "none";
+    },
     goDetail(url) {
       if (url) {
         location.href = url;
-      }else{
+      } else {
         Toast({
-              message: "直播还未开始或暂无视频回放",
-              duration: 1000
-            });
+          message: "直播还未开始或暂无视频回放",
+          duration: 1000
+        });
       }
     },
     getCode() {
@@ -93,6 +99,7 @@ export default {
       var appId = "wxebd76dff6ca15a2a";
       //测试
       //var appId = "wx79d1426d8dc6654a";
+      
       if (!getQueryVariable("code")) {
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
@@ -113,7 +120,9 @@ export default {
               this.liveList[index].videoUrl = e.videoUrl;
             });
             this.isWatch = res.isWatch;
-            // console.log(res);
+            this.$nextTick(() => {
+              this.updateStyle();
+            });
           });
       }
     }
@@ -163,6 +172,7 @@ html {
       left: -13%;
       top: 46%;
       transform: translateY(-50%);
+      z-index: 3;
     }
     img.text_img {
       width: 100%;
@@ -185,6 +195,21 @@ html {
       font-size: 16px;
     }
   }
+  .item .line {
+    content: "";
+    width: 1px;
+    background-color: #fff;
+    opacity: 0.3;
+    height: 80%;
+    position: absolute;
+    left: -5%;
+    top: 60%;
+    z-index: 2;
+    //transform: translateX(-50%);
+  }
+  // .item.canplay:last-of-type{
+  //   background-color: #000;
+  // }
 }
 .no_watch {
   position: absolute;
