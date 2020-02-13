@@ -2,7 +2,7 @@
   <!-- 开学活动 -->
   <div id="pageWrapper">
     <div v-show="isWatch==1">
-      <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
+      <img src="../../assets/img/liveVideo/bg1.png" alt class="bg" />
       <div class="list">
         <div
           @click="goDetail(item.videoUrl)"
