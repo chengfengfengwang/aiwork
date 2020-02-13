@@ -1,17 +1,24 @@
 <template>
   <!-- 开学活动 -->
   <div id="pageWrapper">
-    <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
-    <div class="list">
-      <div
-        @click="goDetail(item.videoUrl)"
-        v-for="(item,index) in liveList"
-        :key="index"
-        class="item"
-      >
-        <img class="text_img" :src="item.imgSrc" alt />
-        <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
-        <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
+    <div v-show="isWatch==1">
+      <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
+      <div class="list">
+        <div
+          @click="goDetail(item.videoUrl)"
+          v-for="(item,index) in liveList"
+          :key="index"
+          class="item"
+        >
+          <img class="text_img" :src="item.imgSrc" alt />
+          <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
+          <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
+        </div>
+      </div>
+    </div>
+    <div v-show="isWatch==0">
+      <div class="no_watch">
+        <img src="../../assets/img/liveVideo/no_watch.png" alt />
       </div>
     </div>
     <!-- <video src="https://www.w3school.com.cn/i/movie.ogg"></video> -->
@@ -23,7 +30,7 @@ import { getQueryVariable, testWeixin } from "../../common/util.js";
 export default {
   data() {
     return {
-      isWatch: 0,
+      isWatch: 1,
       liveList: [
         {
           imgSrc: "",
@@ -59,14 +66,13 @@ export default {
   },
   created() {
     this.getCode();
-     this.getList();
+    this.getList();
     this.liveList.forEach((e, index) => {
       e.imgSrc = require("../../assets/img/liveVideo/" + (index + 1) + ".png");
     });
   },
   mounted() {
-      console.log('进入页面');
-   
+    console.log("进入页面");
   },
   methods: {
     goDetail(url) {
@@ -92,7 +98,7 @@ export default {
       this.wxCode = getQueryVariable("code");
       console.log(this.wxCode);
       if (this.wxCode) {
-           console.log('请求接口');
+        console.log("请求接口");
         this.axios
           .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
             code: this.wxCode
@@ -102,10 +108,7 @@ export default {
               this.liveList[index].videoUrl = e.videoUrl;
             });
             this.isWatch = res.isWatch;
-            console.log(res);
-            if (!this.isWatch) {
-              alert("未关注");
-            }
+            // console.log(res);
           });
       }
     }
@@ -132,6 +135,7 @@ html {
 #pageWrapper {
   min-height: 100vh;
   position: relative;
+  font-size: 0;
   //   background: url("../../assets/img/liveVideo/bg.png");
   //   background-size: cover;
   //   background-position: 0 0;
@@ -173,7 +177,16 @@ html {
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 16px;
     }
+  }
+}
+.no_watch {
+  position: absolute;
+  left: 0;
+  top: 0;
+  img {
+    width: 100%;
   }
 }
 </style>
