@@ -1963,7 +1963,7 @@ export default {
       } else if (newRow.game_type == 54) {
         //尤克里里拍照
         this.curGame = "ukulelepz";
-      } else if (newRow.game_type == 55) {
+      } else if (newRow.game_type == 55 || newRow.game_type == 66) {
         //coco回家（选择题）
         this.curGame = "cocohj";
       } else if (newRow.game_type == 56) {
