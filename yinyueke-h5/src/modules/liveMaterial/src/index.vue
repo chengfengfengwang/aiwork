@@ -11,7 +11,7 @@
 
       <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
       <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-      <div v-for="(item,index) in xAudioArr" :key="index">
+      <div v-for="(item,index) in sxAudioArr" :key="index">
         <div class="audio_name">{{index+1 }}. {{item.name}}</div>
         <audio controls :src="item.src"></audio>
       </div>
