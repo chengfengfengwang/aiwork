@@ -36,11 +36,11 @@ export default {
       liveList: [
         {
           imgSrc: "",
-          videoUrl: "1"
+          videoUrl: ""
         },
         {
           imgSrc: "",
-          videoUrl: "2"
+          videoUrl: ""
         },
         {
           videoUrl: ""
@@ -119,6 +119,7 @@ export default {
             res.liveList.forEach((e, index) => {
               this.liveList[index].videoUrl = e.videoUrl;
             });
+            console.log(res)
             this.isWatch = res.isWatch;
             this.$nextTick(() => {
               this.updateStyle();
