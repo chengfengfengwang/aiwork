@@ -1,26 +1,32 @@
 <template>
   <!-- 开学活动 -->
   <div id="pageWrapper">
-    <h3 class="live_name">《亲子国际体态律动游戏》——谢呈</h3>
-    <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-    <div v-for="(item,index) in xAudioArr" :key="index">
-      <div class="audio_name">{{item.name}}</div>
-      <audio controls :src="item.src"></audio>
-    </div>
+    <div v-show="isWatch==1">
+      <h3 class="live_name">《亲子国际体态律动游戏》——谢呈</h3>
+      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
+      <div v-for="(item,index) in xAudioArr" :key="index">
+        <div class="audio_name">{{item.name}}</div>
+        <audio controls :src="item.src"></audio>
+      </div>
 
-    <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
-    <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-    <div v-for="(item,index) in xAudioArr" :key="index">
-      <div class="audio_name">{{item.name}}</div>
-      <audio controls :src="item.src"></audio>
+      <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
+      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
+      <div v-for="(item,index) in xAudioArr" :key="index">
+        <div class="audio_name">{{item.name}}</div>
+        <audio controls :src="item.src"></audio>
+      </div>
+      <h4 class="live_item_name" style="text-align:'center'">曲谱</h4>
+      <div class="qupu">
+        <img src="http://cdn.kids.immusician.com/live/1%E3%80%81%E6%98%A5%E6%99%93.png" alt />
+        <img src="http://cdn.kids.immusician.com/live/2.%E9%9D%99%E5%A4%9C%E6%80%9D.png" alt />
+        <img src="http://cdn.kids.immusician.com/live/3.%E5%92%8F%E9%B9%85.png" alt />
+      </div>
     </div>
-    <h4 class="live_item_name" style="text-align:'center'">曲谱</h4>
-    <div class="qupu">
-<img src="http://cdn.kids.immusician.com/live/1%E3%80%81%E6%98%A5%E6%99%93.png" alt />
-    <img src="http://cdn.kids.immusician.com/live/2.%E9%9D%99%E5%A4%9C%E6%80%9D.png" alt />
-    <img src="http://cdn.kids.immusician.com/live/3.%E5%92%8F%E9%B9%85.png" alt />
+     <div v-show="isWatch==0">
+      <div class="no_watch">
+        <img src="../../../assets/img/liveVideo/no_watch.png" alt />
+      </div>
     </div>
-    
   </div>
 </template>
 <script>
@@ -46,8 +52,8 @@ export default {
     };
   },
   created() {
-    //this.getCode(); http://cdn.kids.immusician.com/live/1.Alviverde.mp3
-    //this.getList();
+    this.getCode(); 
+    this.getList();
     this.xAudioArr = this.xAudioArr.map((e, index) => {
       return {
         name: e,
@@ -77,23 +83,9 @@ export default {
     console.log("进入页面");
   },
   methods: {
-    updateStyle() {
-      var canplayList = document.querySelectorAll(".item .line");
-      canplayList[canplayList.length - 1].style.display = "none";
-    },
-    goDetail(url) {
-      if (url) {
-        location.href = url;
-      } else {
-        Toast({
-          message: "直播还未开始或暂无视频回放",
-          duration: 1000
-        });
-      }
-    },
     getCode() {
       var ruri = encodeURIComponent(
-        "http://cdn.kids-web.immusician.com/yinji/liveVideo.html"
+        "http://cdn.kids-web.immusician.com/yinji/liveMaterial.html"
       );
       //正式
       var appId = "wxebd76dff6ca15a2a";
@@ -116,14 +108,7 @@ export default {
             code: this.wxCode
           })
           .then(res => {
-            res.liveList.forEach((e, index) => {
-              this.liveList[index].videoUrl = e.videoUrl;
-            });
-            console.log(res);
             this.isWatch = res.isWatch;
-            this.$nextTick(() => {
-              this.updateStyle();
-            });
           });
       }
     }
@@ -169,9 +154,9 @@ html {
   text-align: center;
   margin: 10px 10px;
 }
-.qupu{
+.qupu {
   text-align: center;
-  img{
+  img {
     width: 80%;
   }
 }
