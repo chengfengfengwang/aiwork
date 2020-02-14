@@ -5,14 +5,14 @@
       <h3 class="live_name">《亲子国际体态律动游戏》——谢呈</h3>
       <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
       <div v-for="(item,index) in xAudioArr" :key="index">
-        <div class="audio_name">{{index+1 }} {{item.name}}</div>
+        <div class="audio_name">{{index+1 }}. {{item.name}}</div>
         <audio controls :src="item.src"></audio>
       </div>
 
       <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
       <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
       <div v-for="(item,index) in xAudioArr" :key="index">
-        <div class="audio_name">{{index+1 }} {{item.name}}</div>
+        <div class="audio_name">{{index+1 }}. {{item.name}}</div>
         <audio controls :src="item.src"></audio>
       </div>
       <h4 class="live_item_name" style="text-align:'center'">曲谱</h4>
