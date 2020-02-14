@@ -5,3 +5,4 @@ http://kids.immusician.com/web/h5/courseDetail.html#/djembePac      非洲鼓亲
 http://kids.immusician.com/web/h5/courseDetail.html#/djembePac_ad   非洲鼓亲子进阶
 http://kids.immusician.com/web/h5/courseDetail.html#/qimeng     启蒙课
 http://kids.immusician.com/web/h5/courseDetail.html#/christmasUklele     小涛尤克里里圣诞课
+http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音乐大师奇遇计
