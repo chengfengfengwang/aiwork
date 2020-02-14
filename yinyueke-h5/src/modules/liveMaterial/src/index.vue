@@ -11,7 +11,7 @@
 
       <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
       <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-      <div v-for="(item,index) in sxAudioArr" :key="index">
+      <div v-for="(item,index) in sxAudioArr" :key="item.name">
         <div class="audio_name">{{index+1 }}. {{item.name}}</div>
         <audio controls :src="item.src"></audio>
       </div>
@@ -52,8 +52,8 @@ export default {
     };
   },
   created() {
-    this.getCode(); 
-    this.getList();
+    //this.getCode(); 
+    //this.getList();
     this.xAudioArr = this.xAudioArr.map((e, index) => {
       return {
         name: e,
@@ -71,13 +71,13 @@ export default {
         src:
           "http://cdn.kids.immusician.com/live/" +
           (index + 1) +
-          "、" +
+          "." +
           e +
           ".mp3"
       };
     });
     console.log("---z");
-    console.log(this.xAudioArr);
+    console.log(this.sxAudioArr);
   },
   mounted() {
     console.log("进入页面");
