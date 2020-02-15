@@ -17,7 +17,7 @@
         <img class="arrow" :class="{open:arrowOpen}" src="../../../assets/img/yiqiac/arrow.png" alt />
         {{courseText}}
       </div>
-      <div class="get_course" @click="activeCourse">立即领取</div>
+      <div class="get_course" @click="activeCourse">生成海报</div>
     </div>
   </div>
 </template>
@@ -36,11 +36,15 @@ export default {
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
-    for (var i = 1; i < 26; i++) {
-      this.imgArr.push(require(`../../../assets/img/yiqiac/detail/${i}.png`));
-    };
-     this.axios.defaults.headers.common["token"] = getQueryVariable('token');
-              this.axios.defaults.headers.common["uid"] =getQueryVariable('uid');
+     this.axios.defaults.headers.common["token"] = getQueryVariable("token");
+    this.axios.defaults.headers.common["uid"] = getQueryVariable("uid");
+    // for (var i = 1; i < 26; i++) {
+    //   this.imgArr.push(require(`../../../assets/img/newInvite/${i}.png`));
+    // }
+    for (var i = 1; i < 2; i++) {
+      this.imgArr.push(require(`../../../assets/img/newInvite/${i}.png`));
+    }
+   
   },
   mounted() {
     this.getLessonList();

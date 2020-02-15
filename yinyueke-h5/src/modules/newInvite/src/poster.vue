@@ -51,7 +51,7 @@ export default {
         .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
           share_stall:'1',
           phone: phone,
-          share_id: getQueryVariable("share_id")
+          share_id: getQueryVariable("share_id"),
         })
         .then(res => {
           this.wxMaterial = res.data.url;

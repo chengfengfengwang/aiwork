@@ -3,13 +3,16 @@
     <div class="main">
       <div class="nav">
         <div class="page_title">邀请记录</div>
-        <div class="poster_btn">我的海报</div>
+        <div class="poster_btn" @click="toPoster">我的海报</div>
       </div>
       <div class="top">
-        <img src="../../../assets/img/newInvite/already.png" alt />
-        <div class="num">{{count}}</div>
+        <img src="../../../assets/img/newInvite/user_bg.png" alt />
+        <div class="invite_text">
+          <span>您已经成功邀请了</span>
+          <span class="num"> {{count}} </span>位好友
+        </div>
       </div>
-      <div v-show="true" class="invite_data">
+      <div v-show="count!=0" class="invite_data">
         <img src="../../../assets/img/newInvite/chain.png" alt class="chain left" />
         <img src="../../../assets/img/newInvite/chain.png" alt class="chain right" />
         <div v-for="(value ,key) in inviteData" :key="key" class="date_box">
@@ -18,16 +21,17 @@
             <div class="avatar">
               <img :src="user.avatar_url" alt />
             </div>
-            <div class="name">王大锤</div>
+            <div class="name">{{user.nickname}}</div>
             <div class="phone">{{hidePhone(user.phone)}}</div>
           </div>
         </div>
       </div>
-      <div v-show="false" class="invite_data no_data">
+      <div v-show="count==0" class="invite_data no_data">
         <img src="../../../assets/img/newInvite/chain.png" alt class="chain left" />
         <img src="../../../assets/img/newInvite/chain.png" alt class="chain right" />
+        <img src="../../../assets/img/newInvite/coco.png" alt class="coco" />
         <div>您还没邀请好友哦，快去邀请吧</div>
-        <div class="invite_btn">邀请好友</div>
+        <div class="invite_btn" @click="toPoster">邀请好友</div>
       </div>
       <div class="bottom">
         <img src="../../../assets/img/newInvite/bottom.png" alt />
@@ -40,7 +44,7 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      count: "",
+      count: 0,
       inviteData: [
         {
           date: "02.14",
@@ -91,11 +95,17 @@ export default {
       ]
     };
   },
-  created() {},
+  created() {
+    this.axios.defaults.headers.common["token"] = getQueryVariable("token");
+    this.axios.defaults.headers.common["uid"] = getQueryVariable("uid");
+  },
   mounted() {
     this.getInviteData();
   },
   methods: {
+    toPoster() {
+      this.$router.push("/poster");
+    },
     hidePhone(phone) {
       if (phone.length > 0) {
         return phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
@@ -114,6 +124,8 @@ export default {
         if (!res.error) {
           this.inviteData = res.data.share_data;
           this.count = res.data.count;
+          this.count = 0;
+          this.inviteData = {};
         }
         console.log(res);
       });
@@ -187,10 +199,15 @@ body {
       width: 100%;
     }
     position: relative;
-    .num {
+    .invite_text {
       position: absolute;
-      right: 39.5%;
+      right: 15.5%;
       top: 20%;
+      font-size: 15px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      color: #fff;
+    }
+    .num {
       font-size: 30px;
       font-family: PingFangSC-Medium, PingFang SC;
       font-weight: 500;
@@ -289,6 +306,10 @@ body {
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: rgba(160, 87, 6, 1);
+    .coco {
+      margin-top: 70px;
+      width: 120px;
+    }
     .invite_btn {
       margin: 34px auto 130px auto;
       font-size: 16px;

@@ -70,14 +70,7 @@ export default {
         .then(res => {
           if(!res.error){
             let data = res.data;
-            if(data instanceof(Array) && data.length==0){
-              this.$router.push('/download')
-            }else if(data instanceof(Array) && data.length!=0){
-              localStorage.setItem('multiCourse',JSON.stringify(data));
-              this.$router.push('/selectCourse')
-            }else if(data instanceof(Object)){
-              location.href=data.url
-            }
+           location.href=data.url
           }
         });
     },
