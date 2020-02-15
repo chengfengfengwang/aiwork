@@ -96,5 +96,7 @@ module.exports = {
          liveVideo:'src/modules/liveVideo/liveVideo.js',
          //直播素材
          liveMaterial:'src/modules/liveMaterial/app.js',
+         //2.15新邀请裂变
+         newInvite:'src/modules/newInvite/app.js',
     }   
 }
