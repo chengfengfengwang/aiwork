@@ -52,8 +52,8 @@ export default {
     };
   },
   created() {
-    //this.getCode(); 
-    //this.getList();
+    this.getCode(); 
+    this.getList();
     this.xAudioArr = this.xAudioArr.map((e, index) => {
       return {
         name: e,
