@@ -34,9 +34,9 @@ export default {
         phone: "",
         code: "",
         share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("share_phone"),
+        share_phone: getQueryVariable("phone"),
         is_proxy: 0,
-        share_stall: getQueryVariable("c")
+        share_stall: '1'
       },
       courseList: []
     };
@@ -62,18 +62,6 @@ export default {
           console.log(scrollTop)
         });
       })
-    },
-    getCourses() {
-      this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
-          institutions_id: getQueryVariable("orgId")
-        })
-        .then(res => {
-          this.courseList = res.data;
-          console.log("---");
-          console.log(this.courseList);
-          //this.courseList.unshift({ id: "-1", name: "全部" });
-        });
     },
     reg() {
       localStorage.setItem('loginPhone',this.form.phone);

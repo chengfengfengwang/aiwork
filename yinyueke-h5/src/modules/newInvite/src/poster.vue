@@ -3,14 +3,14 @@
     <Loading v-show="loadingShow"/>
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}">
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr nofree">
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
     </div>
     <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
     <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
+    <div v-show="!loadingShow" class="tips nofree">长按保存图片</div>
   </div>
 </template>
 <script>
@@ -30,7 +30,6 @@ export default {
       resultBase64Show: false,
       resultBase64: "",
       openInApp,
-      posterId:getQueryVariable('c'),
     };
   },
   created() {
@@ -41,27 +40,21 @@ export default {
   },
   mounted() {
     this.getWx();
-    //this.readyAll();
+    //location.href.replace('poster','login')
   },
   methods: {
     getWx() {
       //app里没有填写手机号，从url上面拿
       //非app从上一步用户填写的自己手机号 里面拿
-      let phone;
-      if(openInApp){
-        phone = getQueryVariable('user_phone')
-      }else{
-        phone = localStorage.getItem("regPhone")
-      }
+      let phone =  getQueryVariable('phone');
       this.axios
-        //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
-        .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall:getQueryVariable("c"),
+        .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
+          share_stall:'1',
           phone: phone,
           share_id: getQueryVariable("share_id")
         })
         .then(res => {
-          this.wxMaterial = res.url;
+          this.wxMaterial = res.data.url;
           this.readyAll();
           //this.courseList.unshift({ id: "-1", name: "全部" });
         });
@@ -92,12 +85,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`)
-        // if(this.isFree===0){
-        //   url = require("../../../assets/img/yiqiac/poster2.png")
-        // }else{
-        //   url = require("../../../assets/img/yiqiac/poster1.png")
-        // }
+        let url = require(`../../../assets/img/newInvite/poster.png`)
         this.imgToBase64(url).then(
           res => {
             console.log("poster64 ready");

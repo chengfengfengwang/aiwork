@@ -1,22 +1,36 @@
 <template>
   <div class="page">
     <div class="main">
+      <div class="nav">
+        <div class="page_title">邀请记录</div>
+        <div class="poster_btn">我的海报</div>
+      </div>
       <div class="top">
         <img src="../../../assets/img/newInvite/already.png" alt />
+        <div class="num">{{count}}</div>
       </div>
-      <div class="invite_data">
-          <img src="../../../assets/img/newInvite/chain.png" alt="" class="chain left">
-          <img src="../../../assets/img/newInvite/chain.png" alt="" class="chain right">
-        <div v-for="(item,index) in inviteData" :key="index" class="date_box">
-          <div class="date">{{item.date}}</div>
-          <div class="user">
+      <div v-show="true" class="invite_data">
+        <img src="../../../assets/img/newInvite/chain.png" alt class="chain left" />
+        <img src="../../../assets/img/newInvite/chain.png" alt class="chain right" />
+        <div v-for="(value ,key) in inviteData" :key="key" class="date_box">
+          <div class="date">{{key}}</div>
+          <div v-for="(user,idx) in value" :key="idx" class="user">
             <div class="avatar">
-              <img src="http://img5.imgtn.bdimg.com/it/u=3526059149,524929962&fm=26&gp=0.jpg" alt />
+              <img :src="user.avatar_url" alt />
             </div>
             <div class="name">王大锤</div>
-            <div class="phone">18810240072</div>
+            <div class="phone">{{hidePhone(user.phone)}}</div>
           </div>
         </div>
+      </div>
+      <div v-show="false" class="invite_data no_data">
+        <img src="../../../assets/img/newInvite/chain.png" alt class="chain left" />
+        <img src="../../../assets/img/newInvite/chain.png" alt class="chain right" />
+        <div>您还没邀请好友哦，快去邀请吧</div>
+        <div class="invite_btn">邀请好友</div>
+      </div>
+      <div class="bottom">
+        <img src="../../../assets/img/newInvite/bottom.png" alt />
       </div>
     </div>
   </div>
@@ -26,18 +40,7 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      vcodeText: "获取验证码",
-      vCode: "",
-      selectedCourse: "",
-      form: {
-        phone: "",
-        code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("share_phone"),
-        is_proxy: 0,
-        share_stall: getQueryVariable("c")
-      },
-      courseList: [],
+      count: "",
       inviteData: [
         {
           date: "02.14",
@@ -90,78 +93,30 @@ export default {
   },
   created() {},
   mounted() {
-    this.inputevent();
+    this.getInviteData();
   },
   methods: {
-    inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
-        let scrollTop;
-        ele.addEventListener("focus", function() {
-          scrollTop = document.body.scrollTop;
-          console.log(scrollTop);
-        });
-        ele.addEventListener("blur", function() {
-          //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-          console.log(scrollTop);
-        });
-      });
-    },
-    getCourses() {
-      this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
-          institutions_id: getQueryVariable("orgId")
-        })
-        .then(res => {
-          this.courseList = res.data;
-          console.log("---");
-          console.log(this.courseList);
-          //this.courseList.unshift({ id: "-1", name: "全部" });
-        });
-    },
-    reg() {
-      localStorage.setItem("loginPhone", this.form.phone);
-      this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
-        .then(res => {
-          if (!res.error) {
-            let data = res.data;
-            if (data instanceof Array && data.length == 0) {
-              this.$router.push("/download");
-            } else if (data instanceof Array && data.length != 0) {
-              localStorage.setItem("multiCourse", JSON.stringify(data));
-              this.$router.push("/selectCourse");
-            } else if (data instanceof Object) {
-              location.href = data.url;
-            }
-          }
-        });
-    },
-    getVCode() {
-      if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
-        if (this.vcodeText === "获取验证码") {
-          this.vCode = "";
-        }
-        this.axios
-          .post(`${process.env.VUE_APP_SMS}/v1/user/tx_sms/`, {
-            phone: this.form.phone
-          })
-          .then(res => {
-            console.log(res);
-          });
-      } else {
-        return;
+    hidePhone(phone) {
+      if (phone.length > 0) {
+        return phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
       }
-      var count = 59;
-      this.vcodeText = count + "s";
-      var timer = setInterval(() => {
-        this.vcodeText = --count + "s";
-        if (count === 0) {
-          clearInterval(timer);
-          this.vcodeText = "重新获取";
+    },
+    getInviteData() {
+      if (process.env.NODE_ENV === "development") {
+        var url =
+          "http://api.yinji.immusician.com/v1/share/share_data/?god=84703&share_id=3";
+      } else {
+        var url =
+          "http://api.yinji.immusician.com/v1/share/share_data/?share_id=4";
+      }
+
+      this.axios.get(url).then(res => {
+        if (!res.error) {
+          this.inviteData = res.data.share_data;
+          this.count = res.data.count;
         }
-      }, 1000);
+        console.log(res);
+      });
     }
   }
 };
@@ -198,66 +153,153 @@ body {
   background-color: #fff8df;
 }
 .main {
+  font-size: 0;
+  text-align: center;
+  padding-bottom: 30px;
+  .nav {
+    position: relative;
+    padding: 25px 0 30px 0;
+    .page_title {
+      font-size: 20px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: rgba(160, 87, 6, 1);
+    }
+
+    .poster_btn {
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(255, 128, 48, 1);
+      width: 90px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 128, 48, 1);
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   .top {
     img {
       width: 100%;
     }
-  }
-  .invite_data{
-      position: relative;
-      .chain{
-          position: absolute;
-          width: 12px;
-          top:-28px;
-      }
-      .chain.left{
-          left: 34px;
-      }
-      .chain.right{
-          right: 34px;
-      }
-  }
-  .date_box {
-      margin-top:10px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 20px;
-    padding: 17px;
-    .date {
-      font-size: 21px;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      color: rgba(255, 148, 53, 1);
-      margin-bottom: 10px;
+    position: relative;
+    .num {
+      position: absolute;
+      right: 39.5%;
+      top: 20%;
+      font-size: 30px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(255, 235, 0, 1);
     }
-    .user {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      background:rgba(255,247,220,1);
-border-radius:23px;
-      .avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 8px;
-        img {
-          width: 100%;
+  }
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  .invite_data {
+    position: relative;
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    padding: 10px 0;
+    z-index: 3;
+    .chain {
+      position: absolute;
+      width: 12px;
+      top: -28px;
+    }
+    .chain.left {
+      left: 34px;
+    }
+    .chain.right {
+      right: 34px;
+    }
+    .date_box {
+      margin-top: 10px;
+
+      border-radius: 20px;
+      padding: 17px;
+      padding-bottom: 0;
+      .date {
+        position: relative;
+        padding-left: 13px;
+        font-size: 21px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        color: rgba(255, 148, 53, 1);
+        margin-bottom: 10px;
+        text-align: left;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0px;
+          top: 42%;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: rgba(255, 148, 53, 1);
         }
       }
-      .name {
-        flex-grow: 1;
-        font-size: 16px;
-        font-family: PingFangSC-Medium, PingFang SC;
-        font-weight: 500;
-        color: rgba(160, 87, 6, 1);
+      .user {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        background: rgba(255, 247, 220, 1);
+        border-radius: 23px;
+        margin-bottom: 10px;
+        .avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 8px;
+          img {
+            width: 100%;
+          }
+        }
+        .name {
+          flex-grow: 1;
+          font-size: 16px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: rgba(160, 87, 6, 1);
+        }
+        .phone {
+          font-size: 15px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: rgba(160, 87, 6, 1);
+        }
       }
-      .phone {
-        font-size: 15px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: rgba(160, 87, 6, 1);
-      }
+    }
+  }
+  .no_data {
+    text-align: center;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(160, 87, 6, 1);
+    .invite_btn {
+      margin: 34px auto 130px auto;
+      font-size: 16px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+      width: 160px;
+      height: 32px;
+      line-height: 32px;
+      background: rgba(255, 128, 48, 1);
+      border-radius: 16px;
     }
   }
 }

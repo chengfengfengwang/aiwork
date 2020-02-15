@@ -98,5 +98,8 @@ module.exports = {
          liveMaterial:'src/modules/liveMaterial/app.js',
          //2.15新邀请裂变
          newInvite:'src/modules/newInvite/app.js',
+         //2.15新邀请裂变
+         qr215:'src/modules/qr215/qr215.js'
+         
     }   
 }

@@ -38,38 +38,50 @@ export default {
     document.title = "疫期不孤单，爱心赠好课";
     for (var i = 1; i < 26; i++) {
       this.imgArr.push(require(`../../../assets/img/yiqiac/detail/${i}.png`));
-    }
-    this.courseList = JSON.parse(localStorage.getItem("multiCourse"));
-    console.log(this.courseList);
+    };
+     this.axios.defaults.headers.common["token"] = getQueryVariable('token');
+              this.axios.defaults.headers.common["uid"] =getQueryVariable('uid');
   },
-  mounted() {},
+  mounted() {
+    this.getLessonList();
+  },
   methods: {
+    getLessonList() {
+      this.axios
+        .get(
+          `http://api.yinji.immusician.com/v1/share/share_courses?share_id=${getQueryVariable(
+            "share_id"
+          )}`
+        )
+        .then(res => {
+          if (!res.error) {
+            this.courseList = res.data;
+          }
+        });
+    },
     activeCourse() {
-      // console.log(this.courseList)
-      // console.log({
-      //   phone: getQueryVariable("user_phone"),
-      //   id: this.courseList[this.acIndex].id
-      // });
-      // return;
       if (this.courseText === "请选择课程") {
         return;
       }
+
+      //return;
+
       this.axios
-        .post(`http://api.yinji.immusician.com/v1/share/active_free_course/`, {
-          phone: localStorage.getItem("loginPhone"),
-          id: this.courseList[this.acIndex].id
+        .post(`http://api.yinji.immusician.com/v1/share/choice_goods/`, {
+          goods_id: this.courseList[this.acIndex].goods_id
         })
         .then(res => {
-          if (!res.error) {
-            Toast({
-              message: "课程领取成功，请下载音乐壳App，登录后查看",
-              duration: 2000
-            });
-            setTimeout(() => {
-              this.$router.push("/download");
-            }, 2000);
-          }
+          // if (!res.error) {
+          //   Toast({
+          //     message: "课程领取成功，请下载音乐壳App，登录后查看",
+          //     duration: 2000
+          //   });
+          //   setTimeout(() => {
+          //     this.$router.push("/download");
+          //   }, 2000);
+          // }
         });
+      this.$router.push("/poster");
     },
     selectCourse(index, name) {
       this.acIndex = index;
