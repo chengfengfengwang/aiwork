@@ -76,8 +76,7 @@ export default {
           ".mp3"
       };
     });
-    console.log("---z");
-    console.log(this.sxAudioArr);
+    console.log(new Date())
   },
   mounted() {
     console.log("进入页面");
@@ -92,15 +91,16 @@ export default {
       //测试
       //var appId = "wx79d1426d8dc6654a";
 
-      if (!getQueryVariable("code")) {
+       this.wxCode = getQueryVariable("code");
+      console.log(this.wxCode);
+     console.log(Boolean(!this.wxCode));
+      if (!this.wxCode) {
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
       }
     },
     getList() {
-      this.wxCode = getQueryVariable("code");
-      console.log(this.wxCode);
       if (this.wxCode) {
         console.log("请求接口");
         this.axios
