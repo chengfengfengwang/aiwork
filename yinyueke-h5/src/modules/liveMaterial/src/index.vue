@@ -22,7 +22,7 @@
         <img src="http://cdn.kids.immusician.com/live/3.%E5%92%8F%E9%B9%85.png" alt />
       </div>
     </div>
-     <div v-show="isWatch==0">
+    <div v-show="isWatch==0">
       <div class="no_watch">
         <img src="../../../assets/img/liveVideo/no_watch.png" alt />
       </div>
@@ -52,7 +52,7 @@ export default {
     };
   },
   created() {
-    this.getCode(); 
+    this.getCode();
     this.getList();
     this.xAudioArr = this.xAudioArr.map((e, index) => {
       return {
