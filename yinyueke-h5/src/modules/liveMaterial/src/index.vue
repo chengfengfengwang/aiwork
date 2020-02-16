@@ -51,9 +51,7 @@ export default {
       sxAudioArr: ["春晓", "静夜思", "咏鹅"]
     };
   },
-  created() {
-    
-  },
+  created() {},
   mounted() {
     this.getCode();
     this.getList();
@@ -79,7 +77,7 @@ export default {
           ".mp3"
       };
     });
-    console.log(new Date())
+    console.log(new Date());
     console.log("进入页面");
   },
   methods: {
@@ -92,17 +90,20 @@ export default {
       //测试
       //var appId = "wx79d1426d8dc6654a";
 
-       this.wxCode = getQueryVariable("code");
+      this.wxCode = getQueryVariable("code");
       console.log(this.wxCode);
-     console.log(Boolean(!this.wxCode));
+      console.log(Boolean(!this.wxCode));
       if (!this.wxCode) {
-        console.log('执行跳转')
-        location.href = 
-          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
+        console.log("执行跳转");
+        location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
       }
     },
     getList() {
       if (this.wxCode) {
+        history.pushState(null, null, document.URL);
+        window.addEventListener("popstate", function() {
+          history.pushState(null, null, document.URL);
+        });
         console.log("请求接口");
         this.axios
           .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
