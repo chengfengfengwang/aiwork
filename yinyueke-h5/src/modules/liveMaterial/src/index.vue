@@ -95,7 +95,7 @@ export default {
       console.log(this.wxCode);
      console.log(Boolean(!this.wxCode));
       if (!this.wxCode) {
-        location.replace(
+        location.href = (
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
       }
