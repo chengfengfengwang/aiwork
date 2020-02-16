@@ -52,6 +52,9 @@ export default {
     };
   },
   created() {
+    
+  },
+  mounted() {
     this.getCode();
     this.getList();
     this.xAudioArr = this.xAudioArr.map((e, index) => {
@@ -77,8 +80,6 @@ export default {
       };
     });
     console.log(new Date())
-  },
-  mounted() {
     console.log("进入页面");
   },
   methods: {
