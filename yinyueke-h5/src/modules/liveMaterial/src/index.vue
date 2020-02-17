@@ -21,6 +21,10 @@
         <img src="http://cdn.kids.immusician.com/live/2.%E9%9D%99%E5%A4%9C%E6%80%9D.png" alt />
         <img src="http://cdn.kids.immusician.com/live/3.%E5%92%8F%E9%B9%85.png" alt />
       </div>
+      <h3 class="live_name">《当绘本遇上舞蹈》——王红丽</h3>
+      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
+      <div class="audio_name">1. 猜猜我有多爱你</div>
+      <audio controls src="http://cdn.kids.immusician.com/live/%E7%8C%9C%E7%8C%9C%E6%88%91%E6%9C%89%E5%A4%9A%E7%88%B1%E4%BD%A0--%E7%81%B5%E6%82%89.mp3"></audio>
     </div>
     <div v-show="isWatch==0">
       <div class="no_watch">
@@ -53,8 +57,11 @@ export default {
   },
   created() {},
   mounted() {
-    this.getCode();
-    this.getList();
+    if (!process.env.NODE_ENV === "development") {
+      this.getCode();
+      this.getList();
+    }
+
     this.xAudioArr = this.xAudioArr.map((e, index) => {
       return {
         name: e,

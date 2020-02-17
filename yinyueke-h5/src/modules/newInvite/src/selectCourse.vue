@@ -36,15 +36,17 @@ export default {
   },
   created() {
     document.title = "疫期不孤单，爱心赠好课";
-     this.axios.defaults.headers.common["token"] = getQueryVariable("token");
+    this.axios.defaults.headers.common["token"] = getQueryVariable("token");
     this.axios.defaults.headers.common["uid"] = getQueryVariable("uid");
     // for (var i = 1; i < 26; i++) {
     //   this.imgArr.push(require(`../../../assets/img/newInvite/${i}.png`));
     // }
-    for (var i = 1; i < 2; i++) {
+    for (var i = 1; i <= 26; i++) {
+      if (i == 3 || i == 12) {
+        continue;
+      }
       this.imgArr.push(require(`../../../assets/img/newInvite/${i}.png`));
     }
-   
   },
   mounted() {
     this.getLessonList();
