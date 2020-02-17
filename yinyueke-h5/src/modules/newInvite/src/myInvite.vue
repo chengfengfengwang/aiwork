@@ -124,8 +124,8 @@ export default {
         if (!res.error) {
           this.inviteData = res.data.share_data;
           this.count = res.data.count;
-          this.count = 0;
-          this.inviteData = {};
+          //this.count = 0;
+          //this.inviteData = {};
         }
         console.log(res);
       });
