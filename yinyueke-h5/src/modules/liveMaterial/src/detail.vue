@@ -241,8 +241,13 @@ export default {
       location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
     }
     window.addEventListener("popstate", function() {
-          alert('123')
-        });
+      var ruri = encodeURIComponent(
+        "http://cdn.kids-web.immusician.com/yinji/liveMaterial.html"
+      );
+      //正式
+      var appId = "wxebd76dff6ca15a2a";
+      location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
+    });
   },
   mounted() {
     console.log("进入页面");
