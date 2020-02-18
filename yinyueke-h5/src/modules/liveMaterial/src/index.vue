@@ -1,7 +1,7 @@
 <template>
   <!-- 开学活动 -->
   <div id="pageWrapper">
-    <div>
+    <div v-show="isWatch==1">
       <img src="../../../assets/img/liveMaterial/bg.png" alt class="bg" />
       <div class="list">
         <div
@@ -14,16 +14,20 @@
           <!-- <div class="text_img">
             <div>《亲子国际体态律动游戏》</div>
             <div class="name">-李珊珊</div>
-          </div> -->
-           <img class="text_img" :src="item.imgSrc" alt />
+          </div>-->
+          <img class="text_img" :src="item.imgSrc" alt />
           <!-- <div v-if="item.videoUrl" class="line"></div>
           <img class="text_img" :src="item.imgSrc" alt />
-          <img v-show="item.videoUrl" src="../../../assets/img/liveVideo/play.png" alt class="play" /> -->
-          <div  class="num">{{index+1}}</div>
+          <img v-show="item.videoUrl" src="../../../assets/img/liveVideo/play.png" alt class="play" />-->
+          <div class="num">{{index+1}}</div>
         </div>
       </div>
     </div>
-
+    <div v-show="isWatch==0">
+      <div class="no_watch">
+        <img src="../../../assets/img/liveVideo/no_watch.png" alt />
+      </div>
+    </div>
     <!-- <video src="https://www.w3school.com.cn/i/movie.ogg"></video> -->
   </div>
 </template>
@@ -38,56 +42,56 @@ export default {
         {
           imgSrc: "",
           name: "亲子国际体态律动游戏",
-          author:'谢呈',
-          end:1
+          author: "谢呈",
+          end: 1
         },
         {
           imgSrc: "",
           name: "奥尔夫打击乐趣味表演课",
-          author:'李珊珊',
-          end:1
+          author: "李珊珊",
+          end: 1
         },
         {
           imgSrc: "",
           name: "尤克里里唱游记",
-          author:'陈涛',
-          end:1
+          author: "陈涛",
+          end: 1
         },
         {
           imgSrc: "",
           name: "当绘本遇上舞蹈",
-          author:'王红丽',
-          end:1
+          author: "王红丽",
+          end: 1
         },
         {
           imgSrc: "",
           name: "趣味视唱练耳玩起来",
-          author:'田园',
-          end:1
+          author: "田园",
+          end: 1
         },
         {
           imgSrc: "",
           name: "器乐王国之旅-乐器diy",
-          author:'欣慰',
-          end:0
+          author: "欣慰",
+          end: 0
         },
         {
           imgSrc: "",
           name: "用音乐解锁大脑的神奇魔力",
-          author:'李添',
-          end:0
+          author: "李添",
+          end: 0
         },
         {
           imgSrc: "",
           name: "儿童快乐非洲鼓",
-          author:'董浩',
-          end:0
+          author: "董浩",
+          end: 0
         },
         {
           imgSrc: "",
           name: "美国最受孩子喜爱的钢琴启蒙课",
-          author:'Irina Gorin',
-          end:0
+          author: "Irina Gorin",
+          end: 0
         }
       ]
     };
@@ -101,7 +105,10 @@ export default {
   mounted() {
     console.log("进入页面");
     this.liveList.forEach((e, index) => {
-      e.imgSrc = require("../../../assets/img/liveMaterial/" + 'live'+ (index + 1) + ".png");
+      e.imgSrc = require("../../../assets/img/liveMaterial/" +
+        "live" +
+        (index + 1) +
+        ".png");
     });
   },
   methods: {
@@ -135,16 +142,17 @@ export default {
           })
           .then(res => {
             this.isWatch = res.isWatch;
+            localStorage.setItem('isWatch',this.isWatch)
           });
       }
     },
-    goDetail(index,end) {
-      if (end===1) {
+    goDetail(index, end) {
+      if (end === 1) {
         let item = this.liveList[index];
-        localStorage.setItem('liveIndex',index);
-        localStorage.setItem('name',item.name);
-        localStorage.setItem('author',item.author);
-        this.$router.push('/detail')
+        localStorage.setItem("liveIndex", index);
+        localStorage.setItem("name", item.name);
+        localStorage.setItem("author", item.author);
+        this.$router.push("/detail");
       } else {
         Toast({
           message: "直播还未开始或暂无直播资料",
@@ -201,7 +209,7 @@ html {
       transform: translateY(-50%);
       z-index: 3;
     }
-    .text_img{
+    .text_img {
       width: 280px;
       margin-left: 10px;
     }
