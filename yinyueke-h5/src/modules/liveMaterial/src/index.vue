@@ -93,7 +93,7 @@ export default {
     };
   },
   created() {
-    if (!process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV !== "development") {
       this.getCode();
       this.getList();
     }
