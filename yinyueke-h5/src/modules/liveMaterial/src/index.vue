@@ -1,36 +1,30 @@
 <template>
   <!-- 开学活动 -->
   <div id="pageWrapper">
-    <div v-show="isWatch==1">
-      <h3 class="live_name">《亲子国际体态律动游戏》——谢呈</h3>
-      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-      <div v-for="(item,index) in xAudioArr" :key="index">
-        <div class="audio_name">{{index+1 }}. {{item.name}}</div>
-        <audio controls :src="item.src"></audio>
+    <div>
+      <img src="../../../assets/img/liveMaterial/bg.png" alt class="bg" />
+      <div class="list">
+        <div
+          @click="goDetail(index,item.end)"
+          v-for="(item,index) in liveList"
+          :key="index"
+          class="item"
+          :class="{canplay:item.videoUrl}"
+        >
+          <!-- <div class="text_img">
+            <div>《亲子国际体态律动游戏》</div>
+            <div class="name">-李珊珊</div>
+          </div> -->
+           <img class="text_img" :src="item.imgSrc" alt />
+          <!-- <div v-if="item.videoUrl" class="line"></div>
+          <img class="text_img" :src="item.imgSrc" alt />
+          <img v-show="item.videoUrl" src="../../../assets/img/liveVideo/play.png" alt class="play" /> -->
+          <div  class="num">{{index+1}}</div>
+        </div>
       </div>
+    </div>
 
-      <h3 class="live_name">《奥尔夫打击乐趣味表演课》——李姗姗</h3>
-      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-      <div v-for="(item,index) in sxAudioArr" :key="item.name">
-        <div class="audio_name">{{index+1 }}. {{item.name}}</div>
-        <audio controls :src="item.src"></audio>
-      </div>
-      <h4 class="live_item_name" style="text-align:'center'">曲谱</h4>
-      <div class="qupu">
-        <img src="http://cdn.kids.immusician.com/live/1%E3%80%81%E6%98%A5%E6%99%93.png" alt />
-        <img src="http://cdn.kids.immusician.com/live/2.%E9%9D%99%E5%A4%9C%E6%80%9D.png" alt />
-        <img src="http://cdn.kids.immusician.com/live/3.%E5%92%8F%E9%B9%85.png" alt />
-      </div>
-      <h3 class="live_name">《当绘本遇上舞蹈》——王红丽</h3>
-      <h4 class="live_item_name" style="text-align:'center'">歌单</h4>
-      <div class="audio_name">1. 猜猜我有多爱你</div>
-      <audio controls src="http://cdn.kids.immusician.com/live/%E7%8C%9C%E7%8C%9C%E6%88%91%E6%9C%89%E5%A4%9A%E7%88%B1%E4%BD%A0--%E7%81%B5%E6%82%89.mp3"></audio>
-    </div>
-    <div v-show="isWatch==0">
-      <div class="no_watch">
-        <img src="../../../assets/img/liveVideo/no_watch.png" alt />
-      </div>
-    </div>
+    <!-- <video src="https://www.w3school.com.cn/i/movie.ogg"></video> -->
   </div>
 </template>
 <script>
@@ -40,52 +34,75 @@ export default {
   data() {
     return {
       isWatch: 1,
-      xAudioArr: [
-        "Alviverde",
-        "千尋のワルツ (千寻的华尔兹)",
-        "Oya (Primitive Fire)",
-        "Drop It Low",
-        "MV Mambo No.5",
-        "Red's Boogie",
-        "Aloha Heja He",
-        "energy flow",
-        "MV I Will Survive",
-        "火红的萨日朗"
-      ],
-      sxAudioArr: ["春晓", "静夜思", "咏鹅"]
+      liveList: [
+        {
+          imgSrc: "",
+          name: "亲子国际体态律动游戏",
+          author:'谢呈',
+          end:1
+        },
+        {
+          imgSrc: "",
+          name: "奥尔夫打击乐趣味表演课",
+          author:'李珊珊',
+          end:1
+        },
+        {
+          imgSrc: "",
+          name: "尤克里里唱游记",
+          author:'陈涛',
+          end:1
+        },
+        {
+          imgSrc: "",
+          name: "当绘本遇上舞蹈",
+          author:'王红丽',
+          end:1
+        },
+        {
+          imgSrc: "",
+          name: "趣味视唱练耳玩起来",
+          author:'田园',
+          end:1
+        },
+        {
+          imgSrc: "",
+          name: "器乐王国之旅-乐器diy",
+          author:'欣慰',
+          end:0
+        },
+        {
+          imgSrc: "",
+          name: "用音乐解锁大脑的神奇魔力",
+          author:'李添',
+          end:0
+        },
+        {
+          imgSrc: "",
+          name: "儿童快乐非洲鼓",
+          author:'董浩',
+          end:0
+        },
+        {
+          imgSrc: "",
+          name: "美国最受孩子喜爱的钢琴启蒙课",
+          author:'Irina Gorin',
+          end:0
+        }
+      ]
     };
   },
-  created() {},
-  mounted() {
+  created() {
     if (!process.env.NODE_ENV === "development") {
       this.getCode();
       this.getList();
     }
-
-    this.xAudioArr = this.xAudioArr.map((e, index) => {
-      return {
-        name: e,
-        src:
-          "http://cdn.kids.immusician.com/live/" +
-          (index + 1) +
-          "." +
-          e +
-          ".mp3"
-      };
-    });
-    this.sxAudioArr = this.sxAudioArr.map((e, index) => {
-      return {
-        name: e,
-        src:
-          "http://cdn.kids.immusician.com/live/" +
-          (index + 1) +
-          "." +
-          e +
-          ".mp3"
-      };
-    });
-    console.log(new Date());
+  },
+  mounted() {
     console.log("进入页面");
+    this.liveList.forEach((e, index) => {
+      e.imgSrc = require("../../../assets/img/liveMaterial/" + 'live'+ (index + 1) + ".png");
+    });
   },
   methods: {
     getCode() {
@@ -120,6 +137,20 @@ export default {
             this.isWatch = res.isWatch;
           });
       }
+    },
+    goDetail(index,end) {
+      if (end===1) {
+        let item = this.liveList[index];
+        localStorage.setItem('liveIndex',index);
+        localStorage.setItem('name',item.name);
+        localStorage.setItem('author',item.author);
+        this.$router.push('/detail')
+      } else {
+        Toast({
+          message: "直播还未开始或暂无直播资料",
+          duration: 1000
+        });
+      }
     }
   }
 };
@@ -144,7 +175,7 @@ html {
 #pageWrapper {
   min-height: 100vh;
   position: relative;
-  font-size: 16px;
+  //font-size: 0;
   //   background: url("../../assets/img/liveVideo/bg.png");
   //   background-size: cover;
   //   background-position: 0 0;
@@ -152,22 +183,76 @@ html {
     width: 100%;
   }
 }
-.live_name {
-  text-align: center;
-  margin: 20px 0;
-}
-.audio_name {
-  margin: 10px 10px;
-}
-.live_item_name {
-  text-align: center;
-  margin: 10px 10px;
-}
-.qupu {
-  text-align: center;
-  img {
-    width: 80%;
+
+.list {
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%);
+  top: 29%;
+  width: 80%;
+  .item {
+    position: relative;
+    margin-bottom: 15px;
+    img.play {
+      position: absolute;
+      width: 16%;
+      left: -13%;
+      top: 46%;
+      transform: translateY(-50%);
+      z-index: 3;
+    }
+    .text_img{
+      width: 280px;
+      margin-left: 10px;
+    }
+    // .text_img {
+    //   width: 285px;
+    //   height: 80px;
+    //   margin-left: 15px;
+    //   padding-top: 15px;
+    //   border-radius: 80px;
+    //   padding-left: 30px;
+    //   background: rgba(255, 255, 255, .95);
+    //   margin-bottom: 15px;
+    //   color: rgb(254, 170, 27);
+    //   .name{
+    //     margin-left: 10px;
+    //     color: #333;
+    //   }
+    // }
+    .num {
+      position: absolute;
+      width: 13%;
+      left: -10%;
+      top: 46%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: #fff;
+      background: #ffc633;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+    }
   }
+  .item .line {
+    content: "";
+    width: 1px;
+    background-color: #fff;
+    opacity: 0.3;
+    height: 80%;
+    position: absolute;
+    left: -5%;
+    top: 60%;
+    z-index: 2;
+    //transform: translateX(-50%);
+  }
+  // .item.canplay:last-of-type{
+  //   background-color: #000;
+  // }
 }
 .no_watch {
   position: absolute;

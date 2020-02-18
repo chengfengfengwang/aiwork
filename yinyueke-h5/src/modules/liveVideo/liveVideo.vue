@@ -67,8 +67,10 @@ export default {
     };
   },
   created() {
-    this.getCode();
-    this.getList();
+    if (!process.env.NODE_ENV === "development") {
+      this.getCode();
+      this.getList();
+    }
     this.liveList.forEach((e, index) => {
       e.imgSrc = require("../../assets/img/liveVideo/" + (index + 1) + ".png");
     });
@@ -99,7 +101,7 @@ export default {
       var appId = "wxebd76dff6ca15a2a";
       //测试
       //var appId = "wx79d1426d8dc6654a";
-      
+
       if (!getQueryVariable("code")) {
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
@@ -119,7 +121,7 @@ export default {
             res.liveList.forEach((e, index) => {
               this.liveList[index].videoUrl = e.videoUrl;
             });
-            console.log(res)
+            console.log(res);
             this.isWatch = res.isWatch;
             this.$nextTick(() => {
               this.updateStyle();
