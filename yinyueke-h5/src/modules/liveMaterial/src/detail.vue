@@ -187,7 +187,7 @@ export default {
       ],
       liveTyAudio: [
         {
-          name: "幽兰键-always width me",
+          name: "幽兰键-always with me",
           src:
             "http://cdn.kids.immusician.com/live/%E5%B9%BD%E8%93%9D%E9%94%AE%20-%20Always%20with%20Me%20%28%E9%92%A2%E7%90%B4%E6%9B%B2%29.mp3"
         },
