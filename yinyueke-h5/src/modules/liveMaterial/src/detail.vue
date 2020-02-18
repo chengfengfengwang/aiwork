@@ -230,6 +230,7 @@ export default {
     this.liveIndex = Number(localStorage.getItem("liveIndex")) ;
     this.liveName = localStorage.getItem("name");
     this.liveAuthor = localStorage.getItem("author");
+    console.log(localStorage.getItem('isWatch'))
     if (localStorage.getItem('isWatch')!=1) {
         console.log("执行跳转");
         location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
