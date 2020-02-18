@@ -131,10 +131,10 @@ export default {
     },
     getList() {
       if (this.wxCode) {
-        history.pushState(null, null, document.URL);
-        window.addEventListener("popstate", function() {
-          history.pushState(null, null, document.URL);
-        });
+        // history.pushState(null, null, document.URL);
+        // window.addEventListener("popstate", function() {
+        //   history.pushState(null, null, document.URL);
+        // });
         console.log("请求接口");
         this.axios
           .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
