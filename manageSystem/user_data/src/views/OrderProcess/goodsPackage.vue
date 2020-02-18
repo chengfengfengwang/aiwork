@@ -196,7 +196,7 @@ export default {
         : "",
       courseSlectList:[],
       page: 0,
-      pageSize: 10,
+      pageSize: 100,
       total:0
     };
   },

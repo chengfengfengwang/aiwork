@@ -1,199 +1,187 @@
 <template>
-  <div id="main">
-    <Loading v-show="loadingShow" />
-    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
-      <img class="bg" :src="bgSrc" alt />
-      <span v-show="bgSrc" class="name">
-        恭喜 <span class="name_text">{{name}}</span> 小朋友
-      </span>
+  <!-- 开学活动 -->
+  <div id="pageWrapper">
+    <div v-show="isWatch==1">
+      <img src="../../../assets/img/liveVideo/bg1.png" alt class="bg" />
+      <div class="list">
+        <div
+          @click="goDetail(item.videoUrl)"
+          v-for="(item,index) in liveList"
+          :key="index"
+          class="item"
+          :class="{canplay:item.videoUrl}"
+        >
+          <div v-if="item.videoUrl" class="line"></div>
+          <img class="text_img" :src="item.imgSrc" alt />
+          <img v-show="item.videoUrl" src="../../../assets/img/liveVideo/play.png" alt class="play" />
+          <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
+        </div>
+      </div>
     </div>
-    <div v-show="resultBase64Show" class="poster_wrapper">
-      <img class="bg" :src="resultBase64" alt />
+    <div v-show="isWatch==0">
+      <div class="no_watch">
+        <img src="../../../assets/img/liveVideo/no_watch.png" alt />
+      </div>
     </div>
-    <!-- <div v-show="!loadingShow" class="tips">长按保存图片</div> -->
+    <!-- <video src="https://www.w3school.com.cn/i/movie.ogg"></video> -->
   </div>
 </template>
 <script>
-// var eruda = require("eruda");
-// eruda.init();
-import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
-import html2canvas from "html2canvas";
-import Loading from "./../../../components/Loading";
-const QRCode = require("qrcode");
+import { getQueryVariable, testWeixin } from "../../../common/util.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {
-      name: localStorage.getItem("zsName"),
-      loadingShow: true,
-      resultBase64Show: false,
-      bgSrc: ""
+      isWatch: 1,
+      liveList: [
+        {
+          imgSrc: "",
+          videoUrl: ""
+        },
+        {
+          imgSrc: "",
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        }
+      ]
     };
   },
-  created() {},
-  components: {
-    Loading
+  created() {
+   
+    // this.liveList.forEach((e, index) => {
+    //   e.imgSrc = require("../../../assets/img/liveVideo/" + (index + 1) + ".png");
+    // });
   },
   mounted() {
-    this.readyAll();
+    console.log("进入页面");
   },
   methods: {
-    readyAll() {
-      let pArr = [];
-      //pArr.push(this.createQr());
-      pArr.push(this.posterTo64());
-      Promise.all(pArr).then(res => {
-        this.$nextTick(() => {
-          setTimeout(() => {
-             this.getResult64();
-          }, 100);
-        });
-      });
+    updateStyle() {
+      var canplayList = document.querySelectorAll(".item .line");
+      canplayList[canplayList.length - 1].style.display = "none";
     },
-
-    posterTo64() {
-      return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/wbzs/zs.png`);
-        this.imgToBase64(url).then(res => {
-          console.log("poster64 ready");
-          this.bgSrc = res;
-          this.loadingShow = false;
-          resolve();
-        });
-      });
-    },
-    imgToBase64(url) {
-      var url = url + "?" + new Date().valueOf();
-      return new Promise((resolve, reject) => {
-        var img = new Image();
-        img.setAttribute("crossOrigin", "Anonymous");
-        img.src = url;
-        img.onload = function() {
-          var canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          var ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          var base64 = canvas.toDataURL("image/png");
-          //console.log(base64);
-          resolve(base64);
-          //document.querySelector('#test').src = base64
-        };
-      });
-    },
-    createResultImg() {
-      this.imgToBase64(this.userInfo.avatar).then(res => {
-        this.avatarBase64 = res;
-        document.querySelector(".page.p6").classList.add("visi");
-        html2canvas(document.querySelector(".result_wrapper"), {
-          backgroundColor: "transparent"
-          //allowTaint: true
-        }).then(canvas => {
-          document.querySelector(".page.p6").classList.remove("visi");
-          //return
-          //把画好的canvas转成base64
-          document.querySelector(".result_wrapper").innerHTML = "";
-          var img = new Image();
-          img.classList.add("resultImg");
-          img.src = canvas.toDataURL("image/png");
-          img.onload = function() {
-            document.querySelector(".page.p6 .result_wrapper").appendChild(img);
-          };
-        });
-      });
-    },
-    getResult64() {
-      console.log(document.querySelector("#posterContainer"));
-      html2canvas(document.querySelector("#posterContainer"), {
-        //backgroundColor: "transparent"
-        //allowTaint: true
-      }).then(canvas => {
-        //return
-        //把画好的canvas转成base64
-        console.log(canvas);
-        // var img = new Image();
-        // img.classList.add("resultImg");
-        // img.src = canvas.toDataURL("image/png");
-        // img.onload = function() {
-        //   console.log("onload");
-        //   document.body.appendChild(img);
-        // };
-        this.resultBase64 = canvas.toDataURL("image/png");
-        this.resultBase64Show = true;
-        // console.log("----------");
-        // console.log(this.resultBase64);
-        // console.log("----------");
-      });
-    },
-    share() {
-      if (platForm == "IOS") {
-        webkit.messageHandlers.shareWebImage.postMessage({
-          data: this.resultBase64
-        });
+    goDetail(url) {
+      if (url) {
+        location.href = url;
       } else {
-        PayFeedBack.shareWebImage(this.resultBase64);
+        Toast({
+          message: "直播还未开始或暂无视频回放",
+          duration: 1000
+        });
       }
     }
   }
 };
 </script>
 <style lang="less">
-#main{
-  height: 100vh;
-  position: relative;
+.font-size(@sizeValue:16) {
+  @vw: 16 / 375 * 100;
+  @result: @sizeValue / 16 * @vw;
+  font-size: ~"@{result}vw";
 }
-.poster_wrapper {
-  position: absolute;
-  left: 0;
-  top:50%;
-  width: 100%;
-  transform: translateY(-60%);
+html {
+  .font-size(16);
+}
+html {
+  @media screen and (max-width: 320px) {
+    .font-size(16);
+  }
+  //   @media screen and (min-width: 480px) {
+  //     .font-size(13);
+  //   }
+}
+#pageWrapper {
+  min-height: 100vh;
+  position: relative;
+  font-size: 0;
+  //   background: url("../../assets/img/liveVideo/bg.png");
+  //   background-size: cover;
+  //   background-position: 0 0;
   .bg {
     width: 100%;
   }
-  .name {
-    position: absolute;
-        top: 66px;
-    left: 53px;
-    font-family: PingFangSC-Semibold;
-    font-size: 12px;
-    color: #e19100;
-    font-weight: 500;
-    .name_text{
-      text-decoration: underline;
-      color: #000
-    }
-  }
 }
 
-.share_btn {
+.list {
   position: absolute;
-  right: 15px;
-  top: 25px;
-  width: 88px;
-  height: 30px;
-  line-height: 30px;
-  background: rgba(255, 203, 21, 1);
-  border-radius: 15px;
-  text-align: center;
-  font-size: 12px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 1);
+  left: 55%;
+  transform: translateX(-50%);
+  top: 25%;
+  width: 80%;
+  .item {
+    position: relative;
+    img.play {
+      position: absolute;
+      width: 16%;
+      left: -13%;
+      top: 46%;
+      transform: translateY(-50%);
+      z-index: 3;
+    }
+    img.text_img {
+      width: 100%;
+    }
+    .num {
+      position: absolute;
+      width: 13%;
+      left: -10%;
+      top: 46%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: #fff;
+      background: #ffc633;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+    }
+  }
+  .item .line {
+    content: "";
+    width: 1px;
+    background-color: #fff;
+    opacity: 0.3;
+    height: 80%;
+    position: absolute;
+    left: -5%;
+    top: 60%;
+    z-index: 2;
+    //transform: translateX(-50%);
+  }
+  // .item.canplay:last-of-type{
+  //   background-color: #000;
+  // }
 }
-.tips {
+.no_watch {
   position: absolute;
-  bottom: 20px;
-  right: 8px;
-  writing-mode: vertical-rl;
-  font-size: 11px;
-  font-family: PingFang SC;
-  font-weight: 400;
-  color: rgba(57, 57, 57, 1);
-  -webkit-text-stroke: 1px undefined;
-  text-stroke: 1px undefined;
-}
-.tips.nofree {
-  bottom: 28px;
-  right: 2px;
+  left: 0;
+  top: 0;
+  img {
+    width: 100%;
+  }
 }
 </style>
+
