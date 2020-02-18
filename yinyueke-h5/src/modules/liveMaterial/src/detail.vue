@@ -1,8 +1,8 @@
 <template>
   <!-- 开学活动 -->
   <div id="pageWrapper">
-      <div class="round"></div>
-      <!-- <img src="../../../assets/img/liveMaterial/round.png" alt="" class="round"> -->
+    <div class="round"></div>
+    <!-- <img src="../../../assets/img/liveMaterial/round.png" alt="" class="round"> -->
     <div class="title">《{{liveName}}》</div>
     <div class="author">{{liveAuthor}}</div>
     <div class="content" v-if="liveIndex===0">
@@ -200,7 +200,7 @@ export default {
           name: "李云迪-彩云追月",
           src:
             "http://cdn.kids.immusician.com/live/%E6%9D%8E%E4%BA%91%E8%BF%AA%20-%20%E5%BD%A9%E4%BA%91%E8%BF%BD%E6%9C%88.mp3"
-        },
+        }
       ]
     };
   },
@@ -227,14 +227,22 @@ export default {
           ".mp3"
       };
     });
-    this.liveIndex = Number(localStorage.getItem("liveIndex")) ;
+    this.liveIndex = Number(localStorage.getItem("liveIndex"));
     this.liveName = localStorage.getItem("name");
     this.liveAuthor = localStorage.getItem("author");
-    console.log(localStorage.getItem('isWatch'))
-    if (localStorage.getItem('isWatch')!=1) {
-        console.log("执行跳转");
-        location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
-      }
+    console.log(localStorage.getItem("isWatch"));
+    if (localStorage.getItem("isWatch") != 1) {
+      console.log("执行跳转");
+      var ruri = encodeURIComponent(
+        "http://cdn.kids-web.immusician.com/yinji/liveMaterial.html"
+      );
+      //正式
+      var appId = "wxebd76dff6ca15a2a";
+      location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
+    }
+    window.addEventListener("popstate", function() {
+          alert('123')
+        });
   },
   mounted() {
     console.log("进入页面");
@@ -306,21 +314,21 @@ html {
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: #FF9D18;
+  background: #ff9d18;
   padding: 16px;
-  .round{
-      position: absolute;
-      top:-160px;
-      right: -160px;
-      width: 320px;
-        height: 320px;
-      background-color: #FF9211;
-      border-radius: 50%;
-      z-index: 1;
+  .round {
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 320px;
+    height: 320px;
+    background-color: #ff9211;
+    border-radius: 50%;
+    z-index: 1;
   }
   .title {
-      position: relative;
-      z-index: 2;
+    position: relative;
+    z-index: 2;
     font-family: PingFangSC-Semibold;
     font-size: 24px;
     color: #ffffff;
