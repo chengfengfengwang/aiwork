@@ -185,6 +185,7 @@ export default {
             "http://cdn.kids.immusician.com/live/%E4%B8%A4%E5%8F%AA%E8%80%81%E8%99%8E%EF%BC%88%E5%81%A5%E5%BA%B7%E6%AD%8C%EF%BC%89.mp3"
         }
       ],
+      //田园
       liveTyAudio: [
         {
           name: "幽兰键-always with me",
@@ -201,7 +202,45 @@ export default {
           src:
             "http://cdn.kids.immusician.com/live/%E6%9D%8E%E4%BA%91%E8%BF%AA%20-%20%E5%BD%A9%E4%BA%91%E8%BF%BD%E6%9C%88.mp3"
         }
-      ]
+      ],
+      //欣慰
+      liveTyAudio: [
+        {
+          name: "鸿雁 ZSwans",
+          src:
+            "http://cdn.kids.immusician.com/live/1.mp3"
+        },
+        {
+          name: "London BLKOWridge",
+          src:
+            "http://cdn.kids.immusician.com/live/2.mp3"
+        },
+        {
+          name: "敖包相会",
+          src:
+            "http://cdn.kids.immusician.com/live/3.mp3"
+        },
+        {
+          name: "晚安晚安Goodnight Song ",
+          src:
+            "http://cdn.kids.immusician.com/live/4.mp3"
+        },
+        {
+          name: "暖暖 (新编儿歌版)",
+          src:
+            "http://cdn.kids.immusician.com/live/5.mp3"
+        },
+        {
+          name: "Animaal Crackers",
+          src:
+            "http://cdn.kids.immusician.com/live/6.mp3"
+        },
+        {
+          name: "TwwcFsinkle, Twinkle, Little Star",
+          src:
+            "http://cdn.kids.immusician.com/live/7.mp3"
+        },
+      ],
     };
   },
   created() {

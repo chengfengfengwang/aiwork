@@ -73,7 +73,7 @@ export default {
           imgSrc: "",
           name: "器乐王国之旅-乐器diy",
           author: "欣慰",
-          end: 0
+          end: 1
         },
         {
           imgSrc: "",

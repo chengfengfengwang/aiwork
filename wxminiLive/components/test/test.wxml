@@ -1,0 +1,5 @@
+<!--components/test/test.wxml-->
+<text>
+<slot></slot>
+i am test
+</text>
