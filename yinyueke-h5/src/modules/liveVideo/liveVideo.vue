@@ -113,6 +113,10 @@ export default {
       console.log(this.wxCode);
       if (this.wxCode) {
         console.log("请求接口");
+         history.pushState(null, null, document.URL);
+        window.addEventListener("popstate", function() {
+          history.pushState(null, null, document.URL);
+        });
         this.axios
           .post("http://api.yinji.immusician.com/v1/wechat/live_list", {
             code: this.wxCode
