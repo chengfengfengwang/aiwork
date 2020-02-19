@@ -1799,7 +1799,7 @@ export default {
   left: 0;
   width: 100%;
   //height: 120px;
-  padding: 10px 16px;
+  padding: 10px 12px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.05);
   .left {
@@ -1808,7 +1808,7 @@ export default {
     align-items: center;
     .left_top {
        line-height: 20px;
-       margin-right: 20px;
+       margin-right: 15px;
       .pay_label {
         font-size: 14px;
         font-family: PingFang-SC-Regular, PingFang-SC;
@@ -1841,6 +1841,7 @@ export default {
       font-family: PingFang-SC-Regular, PingFang-SC;
       font-weight: 400;
       color: rgba(153, 153, 153, 1);
+      margin-top: 5px;
     }
   }
   .right {

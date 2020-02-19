@@ -10,6 +10,9 @@ import Router from 'vue-router'
 
 const home = () => import('./src/index.vue')
 const detail = () => import('./src/detail.vue')
+const test = () => import('./src/test.vue')
+const test1 = () => import('./src/test1.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +27,17 @@ export default new Router({
       name: 'detail',
       component: detail
     },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
+    {
+      path: '/test1',
+      name: 'test1',
+      component: test1
+    },
+
   ],
   // scrollBehavior(to, from, savedPosition) {
   //   console.log('--savedPosition--')
