@@ -334,7 +334,7 @@ export default {
     // }else{
     //   document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
     // }
-    this.good_img = localStorage.getItem('good_img')?localStorage.getItem('good_img'):getQueryVariable('good_img');
+    this.good_img = getQueryVariable('good_img')?getQueryVariable('good_img'):getQueryVariable('good_img');
     this.isIphonex = isIphonex();
     if(openApp()==='yinji'){
         this.host = process.env.JINKANG + '/v1';
