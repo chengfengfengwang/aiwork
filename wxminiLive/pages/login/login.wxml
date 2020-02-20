@@ -1,3 +1,14 @@
-<!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
-<test>i am slot</test>
+<view class="page">
+  <image class="top" src="../../assets/img/login_top.png" />
+  <image class="logo" src="../../assets/img/logo.png" />
+  <!-- <view class="form">
+    <view class="input_wrapper phone">
+      <input v-model="form.phone" placeholder="请输入手机号" type="text" />
+    </view>
+    <view class="input_wrapper v_code">
+      <input v-model="form.code" placeholder="请输入验证码" type="text" />
+      <view class="v_code_btn" bindtap="getVCode">{{vcodeText}}</view>
+    </view>
+    <view bindtap="reg" class="reg_btn">领取课程</view>
+  </view> -->
+</view>

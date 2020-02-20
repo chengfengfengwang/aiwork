@@ -2,24 +2,6 @@
   <div>
     <Loading v-show="loadingShow"/>
     <router-view/>
-    <!-- <div class="bottom_wrapper" :style="{paddingBottom:isIphonex?'10px':'0px'}">
-      <div class="bottom_pay_bar">
-        <div class="bar_main">
-          <div class="bar_main_top">
-            <div class="course_title">{{courseInfo.name}}</div>
-            <div class="origin_price">¥{{courseInfo.old_price/100}}</div>
-          </div>
-          <div class="bar_main_bottom">
-            <div class="buy_num">{{courseInfo.user_count}}人参与</div>
-            <div class="now_price">
-              <span class="text">限时特价</span>
-              <span class="num">¥{{courseInfo.price/100}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="bar_btn" @click="toPay">立即购买</div>
-      </div>
-    </div>-->
     <div class="outside_pay" v-show="haveOutsideGoods">
       <div class="pay_item" :class="{active:payIndex===1}" @click="payIndex=1">单买课程</div>
       <div class="pay_item" :class="{active:payIndex===2}" @click="payIndex=2">{{outsideInfo.goods_name}}</div>
@@ -154,6 +136,7 @@ export default {
           this.loadingShow = false;
           console.log(this.loadingShow);
           this.courseInfo = res.data;
+          localStorage.setItem('courseInfo',JSON.stringify(this.courseInfo))
           this.urlParams.good_img = res.data.good_img;
           this.urlParams.user_count = res.data.user_count;
           if(this.courseInfo.outside_goods_info && this.courseInfo.outside_goods_info.online){

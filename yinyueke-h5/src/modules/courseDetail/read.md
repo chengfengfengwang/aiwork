@@ -1,8 +1,36 @@
-http://kids.immusician.com/web/h5/courseDetail.html#/ukulelePac    尤克里里亲子
-http://kids.immusician.com/web/h5/courseDetail.html#/ukuleleGsc     尤克里里古诗词
-http://kids.immusician.com/web/h5/courseDetail.html#/ukuleleES      尤克里里英文歌曲
-http://kids.immusician.com/web/h5/courseDetail.html#/djembePac      非洲鼓亲子
-http://kids.immusician.com/web/h5/courseDetail.html#/djembePac_ad   非洲鼓亲子进阶
-http://kids.immusician.com/web/h5/courseDetail.html#/qimeng     启蒙课
-http://kids.immusician.com/web/h5/courseDetail.html#/christmasUklele     小涛尤克里里圣诞课
 http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音乐大师奇遇计
+音基考级
+    必修
+    1.中国音乐学院乐科考级1级 
+    2.中国音乐学院乐科考级2级 
+    3.中央音乐学院音基考级（初）
+
+    辅修
+    2.音基考前冲刺 http://kids.immusician.com/web/h5/courseDetail.html#/dash
+音乐素养
+    必修
+    1.器乐王国之旅
+    2.奥尔夫打击乐 http://kids.immusician.com/web/h5/courseDetail.html#/hitMusic
+    3.趣味乐理视唱练耳初级  http://kids.immusician.com/web/h5/courseDetail.html#/qimeng
+    4.趣味乐理视唱练耳中级  http://kids.immusician.com/web/h5/courseDetail.html#/qimeng_m
+
+    辅修
+    1.音乐星球之旅 
+    2.音基考前冲刺 http://kids.immusician.com/web/h5/courseDetail.html#/dash
+尤克里里
+    必修
+    1.儿童尤克里里必修  http://kids.immusician.com/web/h5/courseDetail.html#/travelUkulele
+    
+    辅修
+    1.珊珊老师尤克里里亲子启蒙 http://kids.immusician.com/web/h5/courseDetail.html#/ukulelePac
+    2.松涛叔叔尤克里里古诗词弹唱课 http://kids.immusician.com/web/h5/courseDetail.html#/ukuleleGsc
+    3.松涛叔叔尤克里里英文童谣弹唱亲子课 http://kids.immusician.com/web/h5/courseDetail.html#/ukuleleES
+    4.尤克里里节日弹唱表演课 http://kids.immusician.com/web/h5/courseDetail.html#/christmasUklele
+非洲鼓
+    必修
+    1.非洲鼓初级 http://kids.immusician.com/web/h5/courseDetail.html#/djembePac
+    2.非洲鼓中级 http://kids.immusician.com/web/h5/courseDetail.html#/djembePac_ad
+
+    辅修
+    1.非洲鼓节日表演课 http://kids.immusician.com/web/h5/courseDetail.html#/christmasDjembe
+

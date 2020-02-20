@@ -21,6 +21,7 @@ const christmasDjembe = () => import('./src/christmasDjembe.vue')
 const hitMusic = () => import('./src/hitMusic.vue') 
 const travelUkulele = () => import('./src/travelUkulele.vue')
 const worldTravel = () => import('./src/worldTravel.vue')
+const instrumentsKing = () => import('./src/instrumentsKing.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -89,6 +90,11 @@ export default new Router({
       path: '/worldTravel',
       name: 'worldTravel',
       component: worldTravel
+    }, 
+    {
+      path: '/instrumentsKing',
+      name: 'instrumentsKing',
+      component: instrumentsKing
     }
   ]
 })
