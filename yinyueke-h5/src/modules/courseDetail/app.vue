@@ -1,12 +1,16 @@
 <template>
   <div>
-    <Loading v-show="loadingShow"/>
-    <router-view/>
+    <Loading v-show="loadingShow" />
+    <router-view />
     <div class="outside_pay" v-show="haveOutsideGoods">
       <div class="pay_item" :class="{active:payIndex===1}" @click="payIndex=1">单买课程</div>
-      <div class="pay_item" :class="{active:payIndex===2}" @click="payIndex=2">{{outsideInfo.goods_name}}</div>
+      <div
+        class="pay_item"
+        :class="{active:payIndex===2}"
+        @click="payIndex=2"
+      >{{outsideInfo.goods_name}}</div>
     </div>
-    <div v-show="payIndex===2" class="section_pay" :style="{paddingBottom:isIphonex?'20px':'10px'}">
+    <!-- <div v-show="payIndex===2" class="section_pay" :style="{paddingBottom:isIphonex?'20px':'10px'}">
       <div class="left">
         <div class="left_top">
           <span class="pay_label">限时特价</span>
@@ -29,11 +33,62 @@
         <div class="left_bottom">{{courseInfo.user_count}}人参加</div>
       </div>
       <div class="right" @click="toPay">立即购买</div>
+    </div>-->
+    <div class="section_pay">
+      <div class="pay_btn" @click="showPop">立即购买</div>
     </div>
+    <popup v-model="popShow" position="bottom" :style="{ height: '60%' }">
+      <div class="card">
+        <div class="coco">
+          <img src="../../assets/img/courseDetail/common/coco.png" alt />
+        </div>
+        <div class="course">
+          <div class="course_title">趣味乐理初级</div>
+          <div class="course_intro">
+            <div>包含32节AI智能互动课课程</div>
+            <div>购课添加辅导老师微信，专业老师辅导</div>
+          </div>
+        </div>
+        <div class="price">
+          <div class="origin_price">
+            <span class="oi">￥</span>
+            <span class="onum">99</span>
+          </div>
+          <div class="price_dis">
+            <span class="price_dis_o">原价￥129</span>
+            <span>共节省了￥30</span>
+          </div>
+        </div>
+      </div>
+      <div class="card vip">
+        <div class="coco">
+          <img src="../../assets/img/courseDetail/common/coco.png" alt />
+        </div>
+        <div class="course">
+          <div class="course_title">趣味乐理初级</div>
+          <div class="course_intro">
+            <div>包含32节AI智能互动课课程</div>
+            <div>购课添加辅导老师微信，专业老师辅导</div>
+          </div>
+        </div>
+        <div class="price">
+          <div class="origin_price">
+            <span class="oi">￥</span>
+            <span class="onum">99</span>
+          </div>
+          <div class="price_dis">
+            <span class="price_dis_o">原价￥129</span>
+            <span>共节省了￥30</span>
+          </div>
+        </div>
+      </div>
+    </popup>
   </div>
 </template>
 <script>
 import Loading from "./../../components/Loading";
+import { Popup } from "vant";
+
 import { getQueryVariable, isIphonex } from "../../common/util.js";
 export default {
   data() {
@@ -46,15 +101,15 @@ export default {
         // user_count: 12,
         // price: 900
       },
-      outsideInfo:{
-
-      },
-      haveOutsideGoods:false,
-      loadingShow: false
+      outsideInfo: {},
+      haveOutsideGoods: false,
+      loadingShow: false,
+      popShow: true
     };
   },
   components: {
-    Loading
+    Loading,
+    Popup
   },
   created() {
     this.isIphonex = isIphonex();
@@ -78,7 +133,10 @@ export default {
     this.getCourseInfo();
   },
   methods: {
-    toYouzan(){
+    showPop() {
+      this.popShow = true;
+    },
+    toYouzan() {
       location.href = this.outsideInfo.goods_url;
     },
     toPay() {
@@ -90,19 +148,17 @@ export default {
       for (var key in urlParams) {
         str += `${key}=${urlParams[key]}&`;
       }
-      str += `name=${courseInfo["name"]}&price=${
-        courseInfo["price"]
-      }&hasParam=true&t=${t}&node=vertical`;
+      str += `name=${courseInfo["name"]}&price=${courseInfo["price"]}&hasParam=true&t=${t}&node=vertical`;
       if (process.env === "production") {
         this.callApp();
       }
-      if(process.env.NODE_ENV==='development'){
+      if (process.env.NODE_ENV === "development") {
         var host = "http://192.168.1.85:8090";
-      }else{
-        var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      } else {
+        var host =
+          "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
       }
-      
-      
+
       this.toPayUrl = `${host}?${str}#/`;
       console.log(this.toPayUrl);
       //return;
@@ -127,19 +183,20 @@ export default {
       this.loadingShow = true;
       this.axios
         .get(
-          `${process.env.VUE_APP_COURSE_DETAIL}/v1/goods/detail?id=${
-            this.urlParams.goodsId
-          }`
+          `${process.env.VUE_APP_COURSE_DETAIL}/v1/goods/detail?id=${this.urlParams.goodsId}`
         )
         .then(res => {
           console.log("zzz");
           this.loadingShow = false;
           console.log(this.loadingShow);
           this.courseInfo = res.data;
-          localStorage.setItem('courseInfo',JSON.stringify(this.courseInfo))
+          localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
           this.urlParams.good_img = res.data.good_img;
           this.urlParams.user_count = res.data.user_count;
-          if(this.courseInfo.outside_goods_info && this.courseInfo.outside_goods_info.online){
+          if (
+            this.courseInfo.outside_goods_info &&
+            this.courseInfo.outside_goods_info.online
+          ) {
             this.haveOutsideGoods = true;
             this.outsideInfo = this.courseInfo.outside_goods_info;
           }
@@ -349,6 +406,89 @@ html {
     font-weight: 500;
     color: rgba(255, 255, 255, 1);
     border-radius: 20px;
+  }
+}
+.pay_btn {
+  margin: 0 auto;
+  width: 260px;
+  height: 40px;
+  background: #fd752a;
+  font-size: 18px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+.card {
+  position: relative;
+  margin: 13px auto;
+  width: 357px;
+  box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 0.72);
+  border-radius: 15px;
+  overflow: hidden;
+  .coco {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: -5px;
+    width: 130px;
+    img {
+      width: 100%;
+    }
+  }
+  .course {
+    background-color: #fff7df;
+    padding: 20px;
+    .course_title {
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: rgba(255, 116, 43, 1);
+    }
+    .course_intro {
+      font-size: 12px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(159, 86, 5, 1);
+    }
+  }
+
+  .price {
+    background: rgba(255, 255, 255, 1);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    .origin_price {
+      margin-right: 27px;
+      font-size: 11px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(255, 38, 38, 1);
+      .onum {
+        font-size: 20px;
+      }
+    }
+    .price_dis {
+       position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 12px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(192, 143, 89, 1);
+      background: rgba(241, 241, 241, 0.47);
+      border-radius: 13px;
+      height: 24px;
+      .price_dis_o {
+        margin-right: 10px;
+        text-decoration: line-through;
+      }
+    }
   }
 }
 </style>
