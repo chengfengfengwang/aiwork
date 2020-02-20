@@ -35,6 +35,10 @@ export default {
         {
           label: "钢琴",
           value: "piano"
+        },
+        {
+          label: "口琴",
+          value: "harmonica"
         }
       ],
       myInstrumentList: [
@@ -61,6 +65,10 @@ export default {
         {
           label: "钢琴",
           value: "piano"
+        },
+         {
+          label: "口琴",
+          value: "harmonica"
         }
       ]
     };
