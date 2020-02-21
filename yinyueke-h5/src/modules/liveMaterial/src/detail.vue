@@ -169,6 +169,33 @@
         </div>
       </div>
     </div>
+    <div class="content" v-if="liveIndex===5">
+      <div class="audio">
+        <div class="audio_title">
+          <img src="../../../assets/img/liveMaterial/audio_title.png" alt />
+        </div>
+        <div v-for="(item,index) in livelTAudio" :key="index">
+          <div class="audio_item">
+            <div class="audio_index">{{index+1 }}</div>
+            <div class="audio_name">{{item.name}}</div>
+            <div class="audio_icon" @click="playOrPause(index)">
+              <img
+                v-show="playingIndex!==index"
+                src="../../../assets/img/liveMaterial/play.png"
+                alt
+              />
+              <img
+                v-show="playingIndex===index"
+                src="../../../assets/img/liveMaterial/pause.png"
+                alt
+              />
+            </div>
+          </div>
+          <audio :src="item.src"></audio>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -266,6 +293,24 @@ export default {
           src:
             "http://cdn.kids.immusician.com/live/7.mp3"
         },
+      ],
+      //李添
+      livelTAudio: [
+        {
+          name: "Bingo",
+          src:
+            "http://cdn.kids.immusician.com/live/lt1.mp3"
+        },
+        {
+          name: "who took the cookie?",
+          src:
+            "http://cdn.kids.immusician.com/live/lt2.mp3"
+        },
+        {
+          name: "who took the cookie?(sing-along)",
+          src:
+            "http://cdn.kids.immusician.com/live/lt3.mp3"
+        }
       ],
     };
   },

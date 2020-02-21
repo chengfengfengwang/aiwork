@@ -79,7 +79,7 @@ export default {
           imgSrc: "",
           name: "用音乐解锁大脑的神奇魔力",
           author: "李添",
-          end: 0
+          end: 1
         },
         {
           imgSrc: "",
