@@ -452,6 +452,7 @@ export default {
       }
     },
     getCoursetype(name) {
+      console.log(name)
       switch (name) {
         case "中国音乐学院音基考级一级课程":
           this.courseType = "G1";
