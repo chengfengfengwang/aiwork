@@ -2,7 +2,7 @@
   <div>
     <Loading v-show="loadingShow" />
     <router-view />
-    <div class="outside_pay" v-show="haveOutsideGoods">
+    <!-- <div class="outside_pay" v-show="haveOutsideGoods">
       <div class="pay_item" :class="{active:payIndex===1}" @click="payIndex=1">单买课程</div>
       <div
         class="pay_item"
@@ -10,7 +10,7 @@
         @click="payIndex=2"
       >{{outsideInfo.goods_name}}</div>
     </div>
-    <!-- <div v-show="payIndex===2" class="section_pay" :style="{paddingBottom:isIphonex?'20px':'10px'}">
+    <div v-show="payIndex===2" class="section_pay" :style="{paddingBottom:isIphonex?'20px':'10px'}">
       <div class="left">
         <div class="left_top">
           <span class="pay_label">限时特价</span>
@@ -37,10 +37,17 @@
     <div class="section_pay">
       <div class="pay_btn" @click="showPop">立即购买</div>
     </div>
-    <popup v-model="popShow" position="bottom" :style="{ height: '60%' }">
-      <div class="card">
+    <popup v-model="popShow" position="bottom" :style="{ height: '80%' }">
+      <div :class="{selected:index===curCardIndex}" class="card vip" @click="selectCard(index)">
+        <div class="vip_type">月度会员</div>
         <div class="coco">
           <img src="../../assets/img/courseDetail/common/coco.png" alt />
+        </div>
+        <div class="vip_coco">
+          <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
+          <div class="dis_text">
+            <span class="num">7</span><span class="dis">折</span>
+          </div>
         </div>
         <div class="course">
           <div class="course_title">趣味乐理初级</div>
@@ -70,6 +77,10 @@
             <div>包含32节AI智能互动课课程</div>
             <div>购课添加辅导老师微信，专业老师辅导</div>
           </div>
+          <div class="course_date">
+            <span>有效期30天</span>
+            <span class="right">查看权益>></span>
+          </div>
         </div>
         <div class="price">
           <div class="origin_price">
@@ -82,6 +93,7 @@
           </div>
         </div>
       </div>
+      <div class="next_btn">下一步</div>
     </popup>
   </div>
 </template>
@@ -104,7 +116,8 @@ export default {
       outsideInfo: {},
       haveOutsideGoods: false,
       loadingShow: false,
-      popShow: true
+      popShow: true,
+      curCardIndex: 0
     };
   },
   components: {
@@ -428,6 +441,21 @@ html {
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 0.72);
   border-radius: 15px;
   overflow: hidden;
+  .vip_type {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    background: rgba(255, 116, 43, 1);
+    border-radius: 15px 0px 15px 0;
+    font-size: 13px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: rgba(255, 243, 0, 1);
+    text-align: center;
+  }
   .coco {
     position: absolute;
     z-index: 2;
@@ -436,6 +464,38 @@ html {
     width: 130px;
     img {
       width: 100%;
+    }
+  }
+  .vip_coco {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: -5px;
+    width: 130px;
+    img {
+      width: 100%;
+    }
+    .dis_text {
+      position: absolute;
+      left: 14px;
+      bottom: 50px;
+       color: rgba(255, 245, 38, 1);
+      .dis{
+        display: inline-block;
+        transform: rotate(-8deg);
+        font-family: PingFangSC-Regular, PingFang SC;
+     
+      font-size: 9px;
+      }
+      .num {
+        display: inline-block;
+        transform: rotate(-8deg);
+        font-size: 22px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        position: relative;
+    top: 3px;
+      }
     }
   }
   .course {
@@ -454,8 +514,21 @@ html {
       font-weight: 400;
       color: rgba(159, 86, 5, 1);
     }
+    .course_date {
+      margin-top: 3px;
+      font-size: 12px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(159, 86, 5, 1);
+      .right {
+        margin-left: 20px;
+        font-size: 12px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 600;
+        color: rgba(160, 87, 7, 1);
+      }
+    }
   }
-
   .price {
     background: rgba(255, 255, 255, 1);
     padding: 10px 20px;
@@ -472,7 +545,7 @@ html {
       }
     }
     .price_dis {
-       position: relative;
+      position: relative;
       z-index: 3;
       display: flex;
       align-items: center;
@@ -490,6 +563,27 @@ html {
       }
     }
   }
+}
+.card.selected {
+  border: 2px solid rgba(255, 116, 43, 1);
+}
+.card.vip {
+  .course {
+    padding: 40px 20px 20px 20px;
+  }
+}
+.next_btn {
+  margin: 0 auto;
+  width: 260px;
+  height: 40px;
+  background: #fd752a;
+  font-size: 18px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40px;
+  border-radius: 20px;
+  text-align: center;
 }
 </style>
 

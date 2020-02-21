@@ -23,7 +23,7 @@
         <img src="../../assets/img/play.png" alt class="play">
         <!-- <div class="video_info">
           <div class="info_title">音乐基础理论</div>
-          <div class="info_sub_title">699元考级保过</div>
+          <div class="info_sub_title">999元考级保过</div>
         </div>-->
         <video ref="music_basis" v-show="music_basis_video" controls="controls">
           <source src="../../assets/video/index_music_base.mp4" type="video/mp4">
@@ -49,7 +49,7 @@
       <div class="price_item">
         <div class="now_price">
           <span class="label">限时特价：</span>
-          <span class="num">¥699</span>
+          <span class="num">¥999</span>
         </div>
         <div class="middle_line"></div>
         <div class="old_price">
@@ -501,7 +501,7 @@ export default {
   width: 100%;
   height: 150px;
   .slide1 {
-    background: url("./../../assets/mob_assets/img/mob_banner2.png")
+    background: url("./../../assets/mob_assets/img/mob_banner999.png")
       no-repeat center;
     background-size: cover;
   }

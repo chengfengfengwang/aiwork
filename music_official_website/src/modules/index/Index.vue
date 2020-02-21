@@ -32,7 +32,7 @@
             <span class="title_zh">音乐理论基础</span>
             <span class="title_en">/ Music Basis</span>
           </div>
-          <div class="sub_title">699元考级保过</div>
+          <div class="sub_title">999元考级保过</div>
           <div class="title_line"></div>
         </div>
         <div class="content">

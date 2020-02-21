@@ -85,7 +85,7 @@
         <div class="price_item">
           <div class="now_price">
             <span class="label">限时特价：</span>
-            <span class="num">¥699</span>
+            <span class="num">¥999</span>
           </div>
           <div class="middle_line"></div>
           <div class="old_price">
@@ -536,7 +536,7 @@ export default {
   width: 100%;
   height: 650px;
   .slide1 {
-    background: url("./../../assets/img/course_banner399.png") no-repeat center;
+    background: url("./../../assets/img/course_banner999.png") no-repeat center;
     background-size: cover;
   }
 }

@@ -37,7 +37,7 @@
           <img src="../../assets/img/play.png" alt class="play">
           <div class="video_info">
             <div class="info_title">音乐基础理论</div>
-            <div class="info_sub_title">699元考级保过</div>
+            <div class="info_sub_title">999元考级保过</div>
           </div>
           <video ref="music_basis" v-show="music_basis_video" controls="controls">
             <source src="../../assets/video/index_music_base.mp4" type="video/mp4">
