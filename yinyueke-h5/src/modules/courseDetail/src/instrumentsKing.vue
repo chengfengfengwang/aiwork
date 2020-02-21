@@ -407,7 +407,7 @@ export default {
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
     this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
     //this.getCoursetype(this.courseInfo.name);
-    this.getCoursetype('器乐王国之旅');
+    this.getCoursetype(this.courseInfo.name);
   },
   destroyed() {
     if (document.documentElement.clientWidth < 900) {
