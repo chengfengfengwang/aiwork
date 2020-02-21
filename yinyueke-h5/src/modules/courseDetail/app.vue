@@ -64,7 +64,7 @@
           </div>
           <div v-show="card.isVip" class="vip_coco">
             <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
-            <div class="dis_text">
+            <div class="dis_text" :class="{m:(card.discount+'').length>1}">
               <span class="num">{{card.discount}}</span>
               <span class="dis">折</span>
             </div>
@@ -587,8 +587,16 @@ html {
         font-weight: 600;
         position: relative;
         top: 3px;
+        
       }
     }
+     .m.dis_text .num{
+font-size: 16px
+      }
+      .m.dis_text{
+        left: 9px;
+        bottom: 55px;
+      }
   }
   .course {
     background-color: #fff7df;
