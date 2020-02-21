@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+    <title>退款说明 - AI音乐学院，七天学会尤克里里弹唱</title>
+    <meta name="apple-mobile-web-app-capable" />
+    <meta name="referrer" content="no-referrer" />
+    <link href="http://s.immusician.com/static/iTunesArtwork.png" rel="shortcut icon" type="image/x-icon">
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <script type="text/javascript">
+      (function (doc, win) {
+          var docEl = doc.documentElement,
+          isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+          dpr = isIOS? Math.min(win.devicePixelRatio, 3) : 1,
+          dpr = window.top === window.self? dpr : 1, //被iframe引用时，禁止缩放
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+          docEl.dataset.dpr = dpr;
+          var recalc = function () {
+              var width = docEl.clientWidth;
+              if (width / dpr > 750) {
+                  width = 750 * dpr;
+              }
+              docEl.dataset.width = width
+              docEl.dataset.percent = 100 * (width / 750);
+              docEl.style.fontSize = 100 * (width / 750) + 'px';
+          };
+          recalc()
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window);
+    </script>
+    <meta name="format-detection" content="telephone=no" />
+    <style type="text/css">
+      * {margin:0;padding:0;border:0;-webkit-user-select:text}
+      a,img {-webkit-touch-callout:none}
+      ol,ul {list-style:none;}
+      *,:after,:before {-webkit-box-sizing:border-box;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent}
+      body,html {font-family:'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;font-size:.35rem;font-weight:300;line-height:.5rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:center;overflow-x:hidden}
+      body {width:7.5rem; background: #eef4f5;}
+      img {vertical-align:top}
+      header{width: 100%; margin: 0;padding:0;clear: both;overflow: hidden;}
+      header img{width: 100%;height: auto;}
+      .container{margin: 0 auto; padding:.2rem;width: 100%;}
+      .leftPart{float: left;width: 75%;font-size: .2rem; text-align: left;}
+      .leftPart ul li{color: red;line-height: .45rem;}
+      .leftPart ul li b{font-weight: 400;}
+      .leftPart p{line-height: .35rem; font-size: .18rem;}
+      .rightPart{float: right;width: 24.9%;font-size: .18rem; text-align: center;padding-top: .35rem; line-height: .4rem;}
+      .rightPart img{width: 80%;}
+    </style> 
+  </head>
+  <body ontouchstart="">
+      <div class="container">
+          <div class="leftPart">
+            <p>一、您在AI音乐学院购买的商品为虚拟内容服务，购买后不支持转让。</p>
+            <p>二、会员商品：会员商品一经购买，不得要求退款。</p>
+            <p>三、课程商品：针对课程商品，我们提供不满意可退款服务，如您对课程不满意，符合以下退款条件，可向客服申请退款。</p>
+            <ul>
+                <li>1、课程购买或激活7日内；</li>
+                <li>2、完成学习的课程未超过六节课（包含试学课程）；</li>
+                <li>3、您的练琴时间不少于6小时；</li>
+            </ul>
+            <p>满足以上3个条件的同学，<br />请联系客服申请退款，我们将在5个工作日内完成退款。</p>
+          </div>
+          <div class="rightPart">
+              <p>扫一扫或搜索添加</p>
+              <img src="http://s.immusician.com/static/imgs/refund_qrcode.png">
+              <p>微信客服：rainpleliu</p>
+          </div>
+      </div>
+  </body>
+</html>
