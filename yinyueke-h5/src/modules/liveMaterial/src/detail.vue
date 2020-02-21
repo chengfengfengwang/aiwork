@@ -169,7 +169,7 @@
         </div>
       </div>
     </div>
-    <div class="content" v-if="liveIndex===5">
+    <div class="content" v-if="liveIndex===6">
       <div class="audio">
         <div class="audio_title">
           <img src="../../../assets/img/liveMaterial/audio_title.png" alt />
