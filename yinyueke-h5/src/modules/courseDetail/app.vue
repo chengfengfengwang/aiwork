@@ -298,6 +298,16 @@ export default {
            console.log(this.cardDataArr)
         });
     }
+  },
+  watch:{
+    popShow(){
+      if(this.popShow){
+        setTimeout(() => {
+          document.querySelector('.van-popup--bottom').scroll(0,1000)
+        }, 100);
+        
+      }
+    }
   }
 };
 </script>
@@ -676,7 +686,7 @@ font-size: 16px
   background-color: #fff;
   text-align: center;
   position: relative;
-  top: -20px;
+  //top: -20px;
   padding: 10px 0;
   z-index: 9;
 }
