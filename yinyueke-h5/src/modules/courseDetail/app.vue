@@ -34,7 +34,19 @@
       </div>
       <div class="right" @click="toPay">立即购买</div>
     </div>-->
-    <div class="section_pay">
+    <div v-if="!newCardPay" class="section_pay" :style="{paddingBottom:isIphonex?'20px':'10px'}">
+      <div class="left">
+        <div class="left_top">
+          <span class="pay_label">限时特价</span>
+          <span class="money_icon">¥</span>
+          <span class="price_num">{{courseInfo.price/100}}</span>
+          <span class="old_price_num">{{courseInfo.old_price/100}}</span>
+        </div>
+        <div class="left_bottom">{{courseInfo.user_count}}人参加</div>
+      </div>
+      <div class="right" @click="toPay">立即购买</div>
+    </div>
+    <div v-if="newCardPay" class="section_pay">
       <div class="pay_btn" @click="showPop">立即购买</div>
     </div>
     <popup v-model="popShow" position="bottom" :style="{ height: popHeight }">
@@ -117,7 +129,8 @@ export default {
       popShow: false,
       curCardIndex: 0,
       cardDataArr: [],
-      popHeight: 0
+      popHeight: 0,
+      newCardPay:true
     };
   },
   components: {
@@ -226,6 +239,13 @@ export default {
           this.urlParams.good_img = res.data.good_img;
           this.urlParams.user_count = res.data.user_count;
          
+          if(this.courseInfo.vip_goods &&
+            this.courseInfo.vip_goods.length === 0){
+              this.newCardPay = false
+          }else{
+              this.newCardPay = true
+          }
+
           //cardDataArr数据处理
           let youzanArr = [];
           let vipArr = [];
@@ -428,7 +448,7 @@ html {
   left: 0;
   width: 100%;
   //height: 120px;
-  padding: 10px 16px;
+  padding: 10px 8px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px -4px 16px 0px rgba(0, 0, 0, 0.05);
   .left {
