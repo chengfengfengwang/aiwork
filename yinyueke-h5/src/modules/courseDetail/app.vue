@@ -50,59 +50,61 @@
       <div class="pay_btn" @click="showPop">立即购买</div>
     </div>
     <popup v-model="popShow" position="bottom" :style="{ height: popHeight }">
-      <div class="card_wrapper">
-        <div
-          v-for="(card,index) in cardDataArr"
-          :key="index"
-          :class="{selected:curCardIndex===index,vip:card.isVip}"
-          class="card"
-          @click="selectCard(index)"
-        >
-          <div class="vip_type" v-show="card.isVip">{{card.name}}</div>
-          <div v-show="!card.isVip" class="coco">
-            <img src="../../assets/img/courseDetail/common/coco.png" alt />
-          </div>
-          <div v-show="card.isVip" class="vip_coco">
-            <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
-            <div class="dis_text" :class="{m:(card.discount+'').length>1}">
-              <span class="num">{{card.discount}}</span>
-              <span class="dis">折</span>
+      <div class="pop_wrapper">
+        <div class="card_wrapper">
+          <div
+            v-for="(card,index) in cardDataArr"
+            :key="index"
+            :class="{selected:curCardIndex===index,vip:card.isVip}"
+            class="card"
+            @click="selectCard(index)"
+          >
+            <div class="vip_type" v-show="card.isVip">{{card.name}}</div>
+            <div v-show="!card.isVip" class="coco">
+              <img src="../../assets/img/courseDetail/common/coco.png" alt />
             </div>
-          </div>
-          <div v-if="!card.isVip" class="course">
-            <div class="course_title">{{card.name}}</div>
-            <div class="course_intro">
-              <div>有趣的AI智能互动课程</div>
-              <div>购课添加辅导老师微信，专业老师辅导</div>
+            <div v-show="card.isVip" class="vip_coco">
+              <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
+              <div class="dis_text" :class="{m:(card.discount+'').length>1}">
+                <span class="num">{{card.discount}}</span>
+                <span class="dis">折</span>
+              </div>
             </div>
-          </div>
+            <div v-if="!card.isVip" class="course">
+              <div class="course_title">{{card.name}}</div>
+              <div class="course_intro">
+                <div>有趣的AI智能互动课程</div>
+                <div>购课添加辅导老师微信，专业老师辅导</div>
+              </div>
+            </div>
 
-          <div v-if="card.isVip" class="course">
-            <div class="course_title">购会员解锁全部课程</div>
-            <div class="course_intro">
-              <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
-              <div>未来上线的AI智能互动课程</div>
+            <div v-if="card.isVip" class="course">
+              <div class="course_title">购会员解锁全部课程</div>
+              <div class="course_intro">
+                <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
+                <div>未来上线的AI智能互动课程</div>
+              </div>
+              <div class="course_date">
+                <span v-show="card.isVip && card.name==='月度会员'">有效期30天</span>
+                <span v-show="card.isVip && card.name==='超级会员'">终身有效</span>
+                <span @click="goVipDetail(card.buy_url)" class="right">查看权益>></span>
+              </div>
             </div>
-            <div class="course_date">
-              <span v-show="card.isVip && card.name==='月度会员'">有效期30天</span>
-              <span v-show="card.isVip && card.name==='超级会员'">终身有效</span>
-              <span @click="goVipDetail(card.buy_url)" class="right">查看权益>></span>
-            </div>
-          </div>
-          <div class="price">
-            <div class="origin_price">
-              <span class="oi">￥</span>
-              <span class="onum">{{card.price/100}}</span>
-            </div>
-            <div class="price_dis">
-              <span class="price_dis_o">原价￥{{card.old_price/100}}</span>
-              <span>共节省了￥{{(card.old_price-card.price)/100}}</span>
+            <div class="price">
+              <div class="origin_price">
+                <span class="oi">￥</span>
+                <span class="onum">{{card.price/100}}</span>
+              </div>
+              <div class="price_dis">
+                <span class="price_dis_o">原价￥{{card.old_price/100}}</span>
+                <span>共节省了￥{{(card.old_price-card.price)/100}}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="next_btn_wrapper">
-        <div class="next_btn" @click="goNext">下一步</div>
+        <div class="next_btn_wrapper">
+          <div class="next_btn" @click="goNext">下一步</div>
+        </div>
       </div>
     </popup>
   </div>
@@ -130,7 +132,7 @@ export default {
       curCardIndex: 0,
       cardDataArr: [],
       popHeight: 0,
-      newCardPay:true
+      newCardPay: true
     };
   },
   components: {
@@ -158,7 +160,12 @@ export default {
     this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
     this.getCourseInfo();
 
-    this.popHeight = (533 / window.innerHeight) * 100 + "%";
+    this.popHeight = (533 / window.innerHeight) * 100 + 5 + "%";
+    
+    
+  },
+  mounted(){
+    
   },
   methods: {
     goVipDetail(url) {
@@ -238,51 +245,50 @@ export default {
           localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
           this.urlParams.good_img = res.data.good_img;
           this.urlParams.user_count = res.data.user_count;
-         
-          if(this.courseInfo.vip_goods &&
-            this.courseInfo.vip_goods.length === 0){
-              this.newCardPay = false
-          }else{
-              this.newCardPay = true
+
+          if (
+            this.courseInfo.vip_goods &&
+            this.courseInfo.vip_goods.length === 0
+          ) {
+            this.newCardPay = false;
+          } else {
+            this.newCardPay = true;
           }
 
           //cardDataArr数据处理
           let youzanArr = [];
           let vipArr = [];
-        
-           if (
+
+          if (
             this.courseInfo.vip_goods &&
             this.courseInfo.vip_goods.length > 0
           ) {
-            vipArr = (
-              this.courseInfo.vip_goods.map(e => {
-                return {
-                  isVip: true,
-                  name: e.name,
-                  price: e.price,
-                  old_price: e.old_price,
-                  discount: e.discount,
-                  buy_url: "https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue"
-                };
-              })
-            );
+            vipArr = this.courseInfo.vip_goods.map(e => {
+              return {
+                isVip: true,
+                name: e.name,
+                price: e.price,
+                old_price: e.old_price,
+                discount: e.discount,
+                buy_url:
+                  "https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue"
+              };
+            });
           }
           if (
             this.courseInfo.outside_goods_info &&
             this.courseInfo.outside_goods_info.length > 0
           ) {
-            youzanArr = (
-              this.courseInfo.outside_goods_info.map(e => {
-                return {
-                  isVip: false,
-                   isYouzan:true,
-                  name: e.goods_name,
-                  price: e.goods_price,
-                  old_price: e.goods_old_price,
-                  buy_url:e.goods_url
-                };
-              })
-            );
+            youzanArr = this.courseInfo.outside_goods_info.map(e => {
+              return {
+                isVip: false,
+                isYouzan: true,
+                name: e.goods_name,
+                price: e.goods_price,
+                old_price: e.goods_old_price,
+                buy_url: e.goods_url
+              };
+            });
           }
           this.cardDataArr = youzanArr;
           this.cardDataArr = this.cardDataArr.concat(vipArr);
@@ -294,18 +300,17 @@ export default {
               old_price: this.courseInfo.old_price
             });
           }
-          console.log('---')
-           console.log(this.cardDataArr)
+          console.log("---");
+          console.log(this.cardDataArr);
         });
     }
   },
-  watch:{
-    popShow(){
-      if(this.popShow){
-        setTimeout(() => {
-          document.querySelector('.van-popup--bottom').scroll(0,1000)
-        }, 100);
-        
+  watch: {
+    popShow() {
+      if (this.popShow) {
+        this.$nextTick(()=>{
+              this.popHeight = document.querySelector('.pop_wrapper').offsetHeight + 'px';
+        })
       }
     }
   }
@@ -313,6 +318,7 @@ export default {
 </script>
 <style lang="less">
 .van-popup {
+  //position: relative;
   border-radius: 20px 20px 0 0;
 }
 @import url("./../../common/common.less");
@@ -530,9 +536,13 @@ html {
   border-radius: 20px;
   text-align: center;
 }
+.pop_wrapper{
+  position: relative;
+}
 .card_wrapper {
   height: 500px;
   overflow: scroll;
+  padding-bottom: 70px
 }
 .card {
   position: relative;
@@ -597,16 +607,15 @@ html {
         font-weight: 600;
         position: relative;
         top: 3px;
-        
       }
     }
-     .m.dis_text .num{
-font-size: 16px
-      }
-      .m.dis_text{
-        left: 9px;
-        bottom: 55px;
-      }
+    .m.dis_text .num {
+      font-size: 16px;
+    }
+    .m.dis_text {
+      left: 9px;
+      bottom: 55px;
+    }
   }
   .course {
     background-color: #fff7df;
@@ -683,9 +692,13 @@ font-size: 16px
   }
 }
 .next_btn_wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: #fff;
   text-align: center;
-  position: relative;
+  //position: relative;
   //top: -20px;
   padding: 10px 0;
   z-index: 9;
