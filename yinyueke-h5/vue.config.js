@@ -99,7 +99,9 @@ module.exports = {
          //2.15新邀请裂变
          newInvite:'src/modules/newInvite/app.js',
          //2.15新邀请裂变
-         qr215:'src/modules/qr215/qr215.js'
+         qr215:'src/modules/qr215/qr215.js',
+         //超级会员详情页
+         superVip:'src/modules/superVip/app.js'
          
     }   
 }

@@ -37,63 +37,61 @@
     <div class="section_pay">
       <div class="pay_btn" @click="showPop">立即购买</div>
     </div>
-    <popup v-model="popShow" position="bottom" :style="{ height: '80%' }">
-      <div :class="{selected:index===curCardIndex}" class="card vip" @click="selectCard(index)">
-        <div class="vip_type">月度会员</div>
-        <div class="coco">
-          <img src="../../assets/img/courseDetail/common/coco.png" alt />
-        </div>
-        <div class="vip_coco">
-          <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
-          <div class="dis_text">
-            <span class="num">7</span><span class="dis">折</span>
+    <popup v-model="popShow" position="bottom" :style="{ height: popHeight }">
+      <div class="card_wrapper">
+        <div
+          v-for="(card,index) in cardDataArr"
+          :key="index"
+          :class="{selected:curCardIndex===index,vip:card.isVip}"
+          class="card"
+          @click="selectCard(index)"
+        >
+          <div class="vip_type" v-show="card.isVip">{{card.name}}</div>
+          <div v-show="!card.isVip" class="coco">
+            <img src="../../assets/img/courseDetail/common/coco.png" alt />
           </div>
-        </div>
-        <div class="course">
-          <div class="course_title">趣味乐理初级</div>
-          <div class="course_intro">
-            <div>包含32节AI智能互动课课程</div>
-            <div>购课添加辅导老师微信，专业老师辅导</div>
+          <div v-show="card.isVip" class="vip_coco">
+            <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
+            <div class="dis_text">
+              <span class="num">{{card.discount}}</span>
+              <span class="dis">折</span>
+            </div>
           </div>
-        </div>
-        <div class="price">
-          <div class="origin_price">
-            <span class="oi">￥</span>
-            <span class="onum">99</span>
+          <div v-if="!card.isVip" class="course">
+            <div class="course_title">{{card.name}}</div>
+            <div class="course_intro">
+              <div>有趣的AI智能互动课程</div>
+              <div>购课添加辅导老师微信，专业老师辅导</div>
+            </div>
           </div>
-          <div class="price_dis">
-            <span class="price_dis_o">原价￥129</span>
-            <span>共节省了￥30</span>
+
+          <div v-if="card.isVip" class="course">
+            <div class="course_title">购会员解锁全部课程</div>
+            <div class="course_intro">
+              <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
+              <div>未来上线的AI智能互动课程</div>
+            </div>
+            <div class="course_date">
+              <span v-show="card.isVip && card.name==='月度会员'">有效期30天</span>
+              <span v-show="card.isVip && card.name==='超级会员'">终身有效</span>
+              <span @click="goVipDetail(card.buy_url)" class="right">查看权益>></span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="card vip">
-        <div class="coco">
-          <img src="../../assets/img/courseDetail/common/coco.png" alt />
-        </div>
-        <div class="course">
-          <div class="course_title">趣味乐理初级</div>
-          <div class="course_intro">
-            <div>包含32节AI智能互动课课程</div>
-            <div>购课添加辅导老师微信，专业老师辅导</div>
-          </div>
-          <div class="course_date">
-            <span>有效期30天</span>
-            <span class="right">查看权益>></span>
-          </div>
-        </div>
-        <div class="price">
-          <div class="origin_price">
-            <span class="oi">￥</span>
-            <span class="onum">99</span>
-          </div>
-          <div class="price_dis">
-            <span class="price_dis_o">原价￥129</span>
-            <span>共节省了￥30</span>
+          <div class="price">
+            <div class="origin_price">
+              <span class="oi">￥</span>
+              <span class="onum">{{card.price/100}}</span>
+            </div>
+            <div class="price_dis">
+              <span class="price_dis_o">原价￥{{card.old_price/100}}</span>
+              <span>共节省了￥{{(card.old_price-card.price)/100}}</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="next_btn">下一步</div>
+      <div class="next_btn_wrapper">
+        <div class="next_btn" @click="goNext">下一步</div>
+      </div>
     </popup>
   </div>
 </template>
@@ -116,8 +114,10 @@ export default {
       outsideInfo: {},
       haveOutsideGoods: false,
       loadingShow: false,
-      popShow: true,
-      curCardIndex: 0
+      popShow: false,
+      curCardIndex: 0,
+      cardDataArr: [],
+      popHeight: 0
     };
   },
   components: {
@@ -144,8 +144,27 @@ export default {
     this.axios.defaults.headers.common["token"] = this.urlParams.token;
     this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
     this.getCourseInfo();
+
+    this.popHeight = (533 / window.innerHeight) * 100 + "%";
   },
   methods: {
+    goVipDetail(url) {
+      location.href = "superVip.html";
+      localStorage.setItem("vip_youzan_url", url);
+    },
+    goNext() {
+      this.curCard = this.cardDataArr[this.curCardIndex];
+      if (this.curCard.isVip) {
+        location.href = this.curCard.buy_url;
+      } else if (this.curCard.buy_url) {
+        location.href = this.curCard.buy_url;
+      } else {
+        this.toPay();
+      }
+    },
+    selectCard(index) {
+      this.curCardIndex = index;
+    },
     showPop() {
       this.popShow = true;
     },
@@ -165,13 +184,13 @@ export default {
       if (process.env === "production") {
         this.callApp();
       }
-      if (process.env.NODE_ENV === "development") {
-        var host = "http://192.168.1.85:8090";
-      } else {
-        var host =
-          "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
-      }
-
+      // if (process.env.NODE_ENV === "development") {
+      //   var host = "http://192.168.1.85:8090";
+      // } else {
+      //   var host =
+      //     "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      // }
+      var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
       this.toPayUrl = `${host}?${str}#/`;
       console.log(this.toPayUrl);
       //return;
@@ -206,19 +225,66 @@ export default {
           localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
           this.urlParams.good_img = res.data.good_img;
           this.urlParams.user_count = res.data.user_count;
+         
+          //cardDataArr数据处理
+          let youzanArr = [];
+          let vipArr = [];
+        
+           if (
+            this.courseInfo.vip_goods &&
+            this.courseInfo.vip_goods.length > 0
+          ) {
+            vipArr = (
+              this.courseInfo.vip_goods.map(e => {
+                return {
+                  isVip: true,
+                  name: e.name,
+                  price: e.price,
+                  old_price: e.old_price,
+                  discount: e.discount,
+                  buy_url: "https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue"
+                };
+              })
+            );
+          }
           if (
             this.courseInfo.outside_goods_info &&
-            this.courseInfo.outside_goods_info.online
+            this.courseInfo.outside_goods_info.length > 0
           ) {
-            this.haveOutsideGoods = true;
-            this.outsideInfo = this.courseInfo.outside_goods_info;
+            youzanArr = (
+              this.courseInfo.outside_goods_info.map(e => {
+                return {
+                  isVip: false,
+                   isYouzan:true,
+                  name: e.goods_name,
+                  price: e.goods_price,
+                  old_price: e.goods_old_price,
+                  buy_url:e.goods_url
+                };
+              })
+            );
           }
+          this.cardDataArr = youzanArr;
+          this.cardDataArr = this.cardDataArr.concat(vipArr);
+          if (this.courseInfo.online) {
+            this.cardDataArr.unshift({
+              isVip: false,
+              name: this.courseInfo.name,
+              price: this.courseInfo.price,
+              old_price: this.courseInfo.old_price
+            });
+          }
+          console.log('---')
+           console.log(this.cardDataArr)
         });
     }
   }
 };
 </script>
 <style lang="less">
+.van-popup {
+  border-radius: 20px 20px 0 0;
+}
 @import url("./../../common/common.less");
 .font-size(@sizeValue:16) {
   @vw: 16 / 375 * 100;
@@ -434,13 +500,19 @@ html {
   border-radius: 20px;
   text-align: center;
 }
+.card_wrapper {
+  height: 500px;
+  overflow: scroll;
+}
 .card {
   position: relative;
   margin: 13px auto;
   width: 357px;
+  box-sizing: content-box;
   box-shadow: 0px 2px 6px 0px rgba(229, 229, 229, 0.72);
   border-radius: 15px;
   overflow: hidden;
+  border: 2px solid transparent;
   .vip_type {
     position: absolute;
     left: 0;
@@ -479,13 +551,13 @@ html {
       position: absolute;
       left: 14px;
       bottom: 50px;
-       color: rgba(255, 245, 38, 1);
-      .dis{
+      color: rgba(255, 245, 38, 1);
+      .dis {
         display: inline-block;
         transform: rotate(-8deg);
         font-family: PingFangSC-Regular, PingFang SC;
-     
-      font-size: 9px;
+
+        font-size: 9px;
       }
       .num {
         display: inline-block;
@@ -494,7 +566,7 @@ html {
         font-family: PingFangSC-Semibold, PingFang SC;
         font-weight: 600;
         position: relative;
-    top: 3px;
+        top: 3px;
       }
     }
   }
@@ -572,8 +644,16 @@ html {
     padding: 40px 20px 20px 20px;
   }
 }
+.next_btn_wrapper {
+  background-color: #fff;
+  text-align: center;
+  position: relative;
+  top: -20px;
+  padding: 10px 0;
+  z-index: 9;
+}
 .next_btn {
-  margin: 0 auto;
+  display: inline-block;
   width: 260px;
   height: 40px;
   background: #fd752a;
