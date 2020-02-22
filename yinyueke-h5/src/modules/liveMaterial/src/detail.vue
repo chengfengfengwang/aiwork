@@ -221,6 +221,9 @@
         </div>
       </div>
     </div>
+    <div class="content" v-if="liveIndex===8">
+     <a href="http://cdn.kids.immusician.com/live/talk.pdf">访谈文档--《如何做一名优秀的琴童家长》</a>
+    </div>
   </div>
 </template>
 <script>

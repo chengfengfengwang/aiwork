@@ -91,7 +91,7 @@ export default {
           imgSrc: "",
           name: "美国最受孩子喜爱的钢琴启蒙课",
           author: "Irina Gorin",
-          end: 0
+          end: 1
         }
       ]
     };
