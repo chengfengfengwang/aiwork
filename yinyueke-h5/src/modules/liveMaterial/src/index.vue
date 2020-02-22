@@ -85,7 +85,7 @@ export default {
           imgSrc: "",
           name: "儿童快乐非洲鼓",
           author: "董浩",
-          end: 0
+          end: 1
         },
         {
           imgSrc: "",
