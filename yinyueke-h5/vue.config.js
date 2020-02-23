@@ -101,7 +101,9 @@ module.exports = {
          //2.15新邀请裂变
          qr215:'src/modules/qr215/qr215.js',
          //超级会员详情页
-         superVip:'src/modules/superVip/app.js'
+         superVip:'src/modules/superVip/app.js',
+         //机构激活课程
+         orgActive:'src/modules/orgActive/app.js',
          
     }   
 }

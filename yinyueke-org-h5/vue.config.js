@@ -42,6 +42,8 @@ module.exports = {
         test: 'src/modules/test/test.js',
         regist: 'src/modules/regist/regist.js', 
         teachingPlan: 'src/modules/teachingPlan/teachingPlan.js', 
-        learnReport: 'src/modules/learnReport/learnReport.js'
+        learnReport: 'src/modules/learnReport/learnReport.js',
+        //激活课程 
+        activeCourse: 'src/modules/activeCourse/app.js',
     }
 }
