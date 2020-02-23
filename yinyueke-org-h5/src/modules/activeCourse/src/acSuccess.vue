@@ -36,78 +36,78 @@ export default {
   },
   created() {
     this.acCourseList = JSON.parse(localStorage.getItem("acCourseList"));
-    this.acCourseList = [
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      },
-      {
-        goods_cover_url:
-          "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
-        goods_item_id: 40,
-        goods_id: "5db262b5f156d84930287b81",
-        cover_url_2:
-          "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
-        goods_title: "音乐星球之旅",
-        goods_type: 0
-      }
-    ];
+    // this.acCourseList = [
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   },
+    //   {
+    //     goods_cover_url:
+    //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
+    //     goods_item_id: 40,
+    //     goods_id: "5db262b5f156d84930287b81",
+    //     cover_url_2:
+    //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
+    //     goods_title: "音乐星球之旅",
+    //     goods_type: 0
+    //   }
+    // ];
     if(this.acCourseList.length>1){
         this.multiStyle = true
     }
