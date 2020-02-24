@@ -222,7 +222,8 @@
       </div>
     </div>
     <div class="content" v-if="liveIndex===8">
-     <a href="http://cdn.kids.immusician.com/live/talk.pdf">访谈文档--《如何做一名优秀的琴童家长》</a>
+     <img src="../../../assets/img/liveMaterial/talk1.jpg" alt="" class="talk">
+     <img src="../../../assets/img/liveMaterial/talk2.jpg" alt="" class="talk">
     </div>
   </div>
 </template>
@@ -582,6 +583,9 @@ html {
         width: 100%;
       }
     }
+  }
+  img.talk{
+    width: 100%;
   }
 }
 </style>
