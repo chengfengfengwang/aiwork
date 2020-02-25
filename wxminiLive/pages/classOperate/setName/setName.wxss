@@ -48,11 +48,15 @@
 }
 .main {
   background-color: #fff;
+  padding: 320rpx 60rpx 0 60rpx;
 }
 .main .class_name {
+  height: 100rpx !important;
   text-align: center;
   font-size: 36rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #333333;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.09);
+  padding: 20rpx;
 }

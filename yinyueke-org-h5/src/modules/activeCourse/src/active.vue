@@ -20,6 +20,8 @@ export default {
   methods: {
     ac() {
       //this.form.is_trial = this.isTrial ? 1 : 0;
+      console.log('uid:' + localStorage.getItem("uid"));
+      console.log('token:' + localStorage.getItem("token"))
       this.axios
         .post(
           `http://api.agency.immusician.com/v9/code/active_code`,

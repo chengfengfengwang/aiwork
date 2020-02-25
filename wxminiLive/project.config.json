@@ -75,6 +75,13 @@
 					"pathName": "pages/classOperate/setName/setName",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/classOperate/selStudents/selStudents",
+					"pathName": "pages/classOperate/selStudents/selStudents",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

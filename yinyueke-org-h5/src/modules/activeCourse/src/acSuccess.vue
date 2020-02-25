@@ -3,7 +3,7 @@
     <div class="main" :class="{multiStyle:multiStyle}">
       <div v-show="acCourseList.length===1">
         <div v-for=" (course,index) in acCourseList" :key="index">
-          <img class="course_img" :src="course.cover_url_2" alt />
+          <img class="course_img" :src="course.goods_cover_url" alt />
           <div class="course_title">{{course.goods_title}}</div>
           <div class="success_info">
             <img class="i_right" src="../../../assets/img/activeCourse/right.png" alt />成功激活
@@ -14,9 +14,9 @@
         <div class="success_tip">
           <img class="i_right" src="../../../assets/img/activeCourse/right.png" alt />以下课程成功激活
         </div>
-        <div v-for=" (course,index) in acCourseList" :key="index" >
+        <div class="muiti_course_list" v-for=" (course,index) in acCourseList" :key="index" >
           <div class="course_item">
-            <img class="i_right" :src="course.cover_url_2" alt />
+            <img class="i_right" :src="course.goods_cover_url" alt />
             {{course.goods_title}}
           </div>
         </div>
@@ -42,7 +42,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -52,7 +52,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -62,7 +62,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -72,7 +72,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -82,7 +82,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -92,7 +92,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -102,7 +102,7 @@ export default {
     //       "http://iguitar-new.iguitar.immusician.com/FsDi1mQazN4S6J7VXmQgNauSXb_L",
     //     goods_item_id: 40,
     //     goods_id: "5db262b5f156d84930287b81",
-    //     cover_url_2:
+    //     goods_cover_url:
     //       "http://iguitar-new.iguitar.immusician.com/FgRRXDNnKj1z1e_fAdN7rMrJShjM",
     //     goods_title: "音乐星球之旅",
     //     goods_type: 0
@@ -245,6 +245,9 @@ img.top {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(160, 87, 6, 1);
+}
+.muiti_course_list .course_item{
+  text-align: left
 }
 </style>
 
