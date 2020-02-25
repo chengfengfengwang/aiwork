@@ -1,6 +1,24 @@
 <view class="page">
   <image class="top" src="../../assets/img/login_top.png" />
   <image class="logo" src="../../assets/img/logo.png" />
+  <view class="title">
+    <view class="title1">音乐壳直播陪练</view>
+    <view class="title2">管理系统</view>
+  </view>
+  <form class="form" bindsubmit="formSubmit" bindreset="formReset">
+    <view class="section">
+      <image class="phone" src="../../assets/img/phone.png" />
+      <input name="input" placeholder="请输入手机号" />
+    </view>
+    <view class="section">
+      <image class="phone_code" src="../../assets/img/phone_code.png" />
+      <input name="input" placeholder="请输入验证码" />
+      <view class="get_code" bindtap="getPhoneCode">{{phoneCode}}</view>
+    </view>
+    <view class="btn-area">
+      <button formType="submit">登录</button>
+    </view>
+  </form>
   <!-- <view class="form">
     <view class="input_wrapper phone">
       <input v-model="form.phone" placeholder="请输入手机号" type="text" />
