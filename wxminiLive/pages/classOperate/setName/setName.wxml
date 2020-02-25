@@ -1,0 +1,25 @@
+<!-- pages/classOperate/setName/setName.wxml -->
+<view class="page">
+    <view class="guide">
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/course_active.png" />
+            <view class="item_text">选择课程</view>
+            <view class="step_line active"></view>
+        </view>
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/student_active.png" />
+            <view class="item_text">添加学生</view>
+            <view class="step_line active"></view>
+        </view>
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/class_active.png" />
+            <view class="item_text">添加小班名称</view>
+        </view>
+    </view>
+    <view class="main">
+        <input class="weui-input class_name" maxlength="10" bindinput="bindKeyInput" placeholder="输入同步到view中" />
+    </view>
+    <view class="next_btn">
+        <button class="btn" type="default">小组创建完成</button>
+    </view>
+</view>

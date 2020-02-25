@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/login/login",
     "pages/liveList/liveList",
-    "pages/classOperate/add/add"
+    "pages/classOperate/selCourse/selCourse",
+    "pages/classOperate/setName/setName"
   ],
   "window": {
     "backgroundTextStyle": "light",

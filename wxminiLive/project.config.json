@@ -68,6 +68,13 @@
 					"pathName": "pages/classOperate/selCourse/selCourse",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/classOperate/setName/setName",
+					"pathName": "pages/classOperate/setName/setName",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

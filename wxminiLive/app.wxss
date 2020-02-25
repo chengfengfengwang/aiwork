@@ -17,7 +17,7 @@ video, live-player, live-pusher, open-data, web-view {
     box-sizing: border-box;
 }
 .btn{
-width: 686rpx;
+width: 686rpx !important;
 height:88rpx;
 background-color:rgba(255,111,49,1) !important;
 border-radius:44px;
