@@ -24,6 +24,6 @@
         </radio-group>
     </view>
     <view class="next_btn">
-        
+        <button class="btn" type="default">下一步</button>
     </view>
 </view>

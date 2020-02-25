@@ -16,3 +16,16 @@ picker-view, radio-group, slider, switch, textarea, navigator, audio, image,
 video, live-player, live-pusher, open-data, web-view {
     box-sizing: border-box;
 }
+.btn{
+width: 686rpx;
+height:88rpx;
+background-color:rgba(255,111,49,1) !important;
+border-radius:44px;
+font-size:36rpx;
+font-family:PingFangSC-Semibold,PingFang SC;
+font-weight:600;
+color:rgba(255,255,255,1) !important;
+display: flex;
+justify-content: center;
+align-items: center;
+}

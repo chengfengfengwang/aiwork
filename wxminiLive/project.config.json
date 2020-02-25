@@ -63,9 +63,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/classOperate/add/add",
-					"pathName": "pages/classOperate/add/add",
+					"id": 2,
+					"name": "pages/classOperate/selCourse/selCourse",
+					"pathName": "pages/classOperate/selCourse/selCourse",
 					"query": "",
 					"scene": null
 				}
