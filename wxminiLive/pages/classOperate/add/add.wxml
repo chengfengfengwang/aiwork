@@ -1,0 +1,29 @@
+<view class="page">
+    <view class="guide">
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/course_active.png" />
+            <view class="item_text">选择课程</view>
+            <view class="step_line"></view>
+        </view>
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/student.png" />
+            <view class="item_text">添加学生</view>
+            <view class="step_line"></view>
+        </view>
+        <view class="item">
+            <image class="top" src="../../../assets/img/classOperate/class.png" />
+            <view class="item_text">添加小班名称</view>
+        </view>
+    </view>
+    <view class="course_type">
+        <view class="type_title">音基</view>
+        <radio-group class="radio-group" bindchange="radioChange">
+            <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.value}}" checked="{{item.checked}}">
+                <text class="radio_text">{{item.name}}</text>
+            </radio>
+        </radio-group>
+    </view>
+    <view class="next_btn">
+        
+    </view>
+</view>

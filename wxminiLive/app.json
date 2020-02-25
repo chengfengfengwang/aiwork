@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/login/login",
-    "pages/liveList/liveList"
+    "pages/liveList/liveList",
+    "pages/classOperate/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",
