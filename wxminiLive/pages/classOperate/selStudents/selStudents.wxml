@@ -1,0 +1,7 @@
+<!-- pages/classOperate/selStudents/selStudents.wxml -->
+<view class="page">
+    qwer
+        <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
+            <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+        </mp-checkbox-group>
+</view>
