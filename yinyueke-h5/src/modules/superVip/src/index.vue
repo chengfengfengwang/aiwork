@@ -19,7 +19,9 @@ export default {
       this.imgArr.push(require("../../../assets/img/superVip/" + i + ".jpg"));
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(localStorage.getItem('vip_youzan_url'))
+  },
   methods: {
     goNext(){
         location.href = localStorage.getItem('vip_youzan_url')

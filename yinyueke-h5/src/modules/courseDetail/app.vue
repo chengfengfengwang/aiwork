@@ -84,10 +84,10 @@
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
-              <div class="course_date">
-                <span v-show="card.isVip && card.name==='月度会员'">有效期30天</span>
-                <span v-show="card.isVip && card.name==='超级会员'">终身有效</span>
-                <span @click="goVipDetail(card.buy_url)" class="right">查看权益>></span>
+              <div class="course_date"> 
+                <span v-show="card.isVip && card.vip_type==='vip_days_30'">有效期30天</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
+                <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
             </div>
             <div class="price">
@@ -110,6 +110,8 @@
   </div>
 </template>
 <script>
+//超级会员 vip_inf
+//月会员： vip_days_30
 import Loading from "./../../components/Loading";
 import { Popup } from "vant";
 
@@ -161,21 +163,18 @@ export default {
     this.getCourseInfo();
 
     this.popHeight = (533 / window.innerHeight) * 100 + 5 + "%";
-    
-    
   },
-  mounted(){
-    
-  },
+  mounted() {},
   methods: {
-    goVipDetail(url) {
+    goVipDetail(index) {
+      this.curCardIndex = index;
+       localStorage.setItem("vip_youzan_url", this.getVipPayUrl());
       location.href = "superVip.html";
-      localStorage.setItem("vip_youzan_url", url);
     },
     goNext() {
       this.curCard = this.cardDataArr[this.curCardIndex];
       if (this.curCard.isVip) {
-        this.viPay(this.curCard)
+        this.viPay();
       } else if (this.curCard.buy_url) {
         location.href = this.curCard.buy_url;
       } else {
@@ -191,30 +190,34 @@ export default {
     toYouzan() {
       location.href = this.outsideInfo.goods_url;
     },
-    viPay(e){
-      if(e.buy_url){
-        location.href = e.buy_url
-      }else{
+    getVipPayUrl(){
+      let e  = this.cardDataArr[this.curCardIndex];
+      console.log(e)
+      if (e.buy_url) {
+        return e.buy_url;
+      } else {
         this.urlParams.goodsId = e.goods_id;
-      this.urlParams.good_img = e.good_img;
-      this.urlParams.user_count = e.user_count;
-      var urlParams = this.urlParams;
-      var str = "";
-      var t = Date.now();
-      for (var key in urlParams) {
-        str += `${key}=${urlParams[key]}&`;
+        this.urlParams.good_img = e.good_img;
+        this.urlParams.user_count = e.user_count;
+        var urlParams = this.urlParams;
+        var str = "";
+        var t = Date.now();
+        for (var key in urlParams) {
+          str += `${key}=${urlParams[key]}&`;
+        }
+        str += `name=${e["name"]}&price=${e["price"]}&hasParam=true&t=${t}&node=vertical`;
+        if (process.env === "production") {
+          this.callApp();
+        }
+        var host =
+          "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+        this.toPayUrl = `${host}?${str}#/`;
+        //return;
+        return  this.toPayUrl;
       }
-      str += `name=${e["name"]}&price=${e["price"]}&hasParam=true&t=${t}&node=vertical`;
-      if (process.env === "production") {
-        this.callApp();
-      }
-      var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
-      this.toPayUrl = `${host}?${str}#/`;
-      console.log(this.toPayUrl);
-      //return;
-      location.href = this.toPayUrl;
-      }
-      
+    },
+    viPay() {
+      location.href = this.getVipPayUrl()
     },
     toPay() {
       localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
@@ -295,10 +298,11 @@ export default {
                 price: e.price,
                 old_price: e.old_price,
                 discount: e.discount,
-                user_count:e.user_count,
-                goods_id:e.goods_id,
-                good_img:e.good_img,
-                buy_url:e.buy_url
+                user_count: e.user_count,
+                goods_id: e.goods_id,
+                good_img: e.good_img,
+                buy_url: e.buy_url,
+                vip_type:e.vip_type
               };
             });
           }
@@ -335,9 +339,10 @@ export default {
   watch: {
     popShow() {
       if (this.popShow) {
-        this.$nextTick(()=>{
-              this.popHeight = document.querySelector('.pop_wrapper').offsetHeight + 'px';
-        })
+        this.$nextTick(() => {
+          this.popHeight =
+            document.querySelector(".pop_wrapper").offsetHeight + "px";
+        });
       }
     }
   }
@@ -563,13 +568,13 @@ html {
   border-radius: 20px;
   text-align: center;
 }
-.pop_wrapper{
+.pop_wrapper {
   position: relative;
 }
 .card_wrapper {
   height: 500px;
   overflow: scroll;
-  padding-bottom: 70px
+  padding-bottom: 70px;
 }
 .card {
   position: relative;
@@ -660,6 +665,8 @@ html {
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: rgba(159, 86, 5, 1);
+      position: relative;
+      z-index: 5;
     }
     .course_date {
       margin-top: 3px;
