@@ -192,7 +192,10 @@ export default {
       location.href = this.outsideInfo.goods_url;
     },
     viPay(e){
-      this.urlParams.goodsId = e.goods_id;
+      if(e.buy_url){
+        location.href = e.buy_url
+      }else{
+        this.urlParams.goodsId = e.goods_id;
       this.urlParams.good_img = e.good_img;
       this.urlParams.user_count = e.user_count;
       var urlParams = this.urlParams;
@@ -210,6 +213,8 @@ export default {
       console.log(this.toPayUrl);
       //return;
       location.href = this.toPayUrl;
+      }
+      
     },
     toPay() {
       localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
@@ -292,7 +297,8 @@ export default {
                 discount: e.discount,
                 user_count:e.user_count,
                 goods_id:e.goods_id,
-                good_img:e.good_img
+                good_img:e.good_img,
+                buy_url:e.buy_url
               };
             });
           }
