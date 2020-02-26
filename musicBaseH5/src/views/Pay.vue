@@ -152,7 +152,7 @@
       <div class="price">¥ {{courseInfo.price/100}}</div>
     </div>
     <div class="box box2">
-      <div class="item px1-bottom-f1" @click="couponsShow=!couponsShow">
+      <div v-show="!hideJxj" class="item px1-bottom-f1" @click="couponsShow=!couponsShow">
         <div class="item_left">
           <div class="item_title">优惠券</div>
         </div>
@@ -190,7 +190,7 @@
           </div>
         </div>
       </div>
-      <div class="item" @click="modalShow=true">
+      <div v-show="!hideYhq" class="item" @click="modalShow=true">
         <div class="item_left">
           <div class="item_title">奖学金</div>
         </div>
@@ -315,7 +315,9 @@ export default {
       qrSrc:'',
       qrModalShow:false,
       isIphonex: false,
-      good_img:''
+      good_img:'',
+      hideYhq:false,
+      hideJxj:false
     };
   },
   components: {
@@ -334,6 +336,8 @@ export default {
     // }else{
     //   document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
     // }
+    this.hideYhq = getQueryVariable('hideYhq')==='1'?true:false;
+    this.hideJxj = getQueryVariable('hideJxj')==='1'?true:false;
     this.good_img = getQueryVariable('good_img')?getQueryVariable('good_img'):localStorage.getItem('good_img');
     this.isIphonex = isIphonex();
     if(openApp()==='yinji'){
@@ -397,6 +401,7 @@ export default {
     this.downKeyBord();
   },
   methods: {
+    getQueryVariable:getQueryVariable,
     goBack(){
       history.go(-1);
     },

@@ -205,7 +205,7 @@ export default {
         for (var key in urlParams) {
           str += `${key}=${urlParams[key]}&`;
         }
-        str += `name=${e["name"]}&price=${e["price"]}&hasParam=true&t=${t}&node=vertical`;
+        str += `name=${e["name"]}&price=${e["price"]}&hasParam=true&hideYhq=1&hideJxj=1&t=${t}&node=vertical`;
         if (process.env === "production") {
           this.callApp();
         }
