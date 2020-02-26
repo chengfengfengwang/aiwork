@@ -175,7 +175,7 @@ export default {
     goNext() {
       this.curCard = this.cardDataArr[this.curCardIndex];
       if (this.curCard.isVip) {
-        location.href = this.curCard.buy_url;
+        this.viPay(this.curCard)
       } else if (this.curCard.buy_url) {
         location.href = this.curCard.buy_url;
       } else {
@@ -190,6 +190,26 @@ export default {
     },
     toYouzan() {
       location.href = this.outsideInfo.goods_url;
+    },
+    viPay(e){
+      this.urlParams.goodsId = e.goods_id;
+      this.urlParams.good_img = e.good_img;
+      this.urlParams.user_count = e.user_count;
+      var urlParams = this.urlParams;
+      var str = "";
+      var t = Date.now();
+      for (var key in urlParams) {
+        str += `${key}=${urlParams[key]}&`;
+      }
+      str += `name=${e["name"]}&price=${e["price"]}&hasParam=true&t=${t}&node=vertical`;
+      if (process.env === "production") {
+        this.callApp();
+      }
+      var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      this.toPayUrl = `${host}?${str}#/`;
+      console.log(this.toPayUrl);
+      //return;
+      location.href = this.toPayUrl;
     },
     toPay() {
       localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
@@ -212,7 +232,7 @@ export default {
       // }
       var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
       this.toPayUrl = `${host}?${str}#/`;
-      console.log(this.toPayUrl);
+      //console.log(this.toPayUrl);
       //return;
       location.href = this.toPayUrl;
     },
@@ -270,8 +290,9 @@ export default {
                 price: e.price,
                 old_price: e.old_price,
                 discount: e.discount,
-                buy_url:
-                  "https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue"
+                user_count:e.user_count,
+                goods_id:e.goods_id,
+                good_img:e.good_img
               };
             });
           }
@@ -557,7 +578,8 @@ html {
     position: absolute;
     left: 0;
     top: 0;
-    width: 80px;
+    //width: 80px;
+    padding: 0 10px;
     height: 24px;
     line-height: 24px;
     background: rgba(255, 116, 43, 1);

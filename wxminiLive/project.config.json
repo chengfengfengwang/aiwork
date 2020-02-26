@@ -82,6 +82,12 @@
 					"pathName": "pages/classOperate/selStudents/selStudents",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/liveOperate/add/add",
+					"pathName": "pages/liveOperate/add/add",
+					"scene": null
 				}
 			]
 		}

@@ -15,25 +15,25 @@ Page({
    */
   onLoad: function(options) {},
   checkboxChange: function(e) {
-    console.log("checkbox发生change事件，携带value值为：", e.detail.value);
+    // console.log("checkbox发生change事件，携带value值为：", e.detail.value);
 
-    var checkboxItems = this.data.checkboxItems,
-      values = e.detail.value;
-    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-      checkboxItems[i].checked = false;
+    // var checkboxItems = this.data.checkboxItems,
+    //   values = e.detail.value;
+    // for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
+    //   checkboxItems[i].checked = false;
 
-      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-        if (checkboxItems[i].value == values[j]) {
-          checkboxItems[i].checked = true;
-          break;
-        }
-      }
-    }
+    //   for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+    //     if (checkboxItems[i].value == values[j]) {
+    //       checkboxItems[i].checked = true;
+    //       break;
+    //     }
+    //   }
+    // }
 
-    this.setData({
-      checkboxItems: checkboxItems,
-      [`formData.checkbox`]: e.detail.value
-    });
+    // this.setData({
+    //   checkboxItems: checkboxItems,
+    //   [`formData.checkbox`]: e.detail.value
+    // });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

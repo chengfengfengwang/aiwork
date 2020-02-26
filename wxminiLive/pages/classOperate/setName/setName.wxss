@@ -39,13 +39,7 @@
 .guide .item.active {
   color: #ff6f31;
 }
-.next_btn {
-  position: fixed;
-  bottom: 32rpx;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+
 .main {
   background-color: #fff;
   padding: 320rpx 60rpx 0 60rpx;

@@ -1,0 +1,73 @@
+.page {
+  background-color: #fff;
+  min-height: 100vh;
+}
+.time {
+  background-color: #fff;
+  padding: 32rpx 32rpx 46rpx 32rpx;
+}
+.time .time_title {
+  margin-bottom: 32rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(51, 51, 51, 0.4);
+}
+.time .time_btn {
+  position: relative;
+  width: 688rpx;
+  height: 90rpx;
+  border-radius: 90rpx;
+  border: 2rpx solid #ff6f31;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #ff6f31;
+}
+.time .time_btn .btn_text {
+  position: relative;
+  z-index: 2;
+}
+.time .time_btn picker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 90rpx;
+  opacity: 0;
+}
+.time .time_btn picker .weui-input {
+  width: 100%;
+  height: 90rpx;
+}
+.gap {
+  height: 20rpx;
+  background-color: #f8f8f8;
+}
+.course {
+  margin-top: 20rpx;
+  padding: 32rpx;
+  background-color: #fff;
+}
+.course .course_title {
+  margin-bottom: 48rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: rgba(51, 51, 51, 0.4);
+}
+.course .radio {
+  display: block;
+  margin-bottom: 48rpx;
+}
+.course .radio .radio_text {
+  margin-left: 32rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #333333;
+}
