@@ -8,12 +8,12 @@
   <form class="form" bindsubmit="formSubmit" bindreset="formReset">
     <view class="section">
       <image class="phone" src="../../assets/img/phone.png" />
-      <input name="input" placeholder="请输入手机号" />
+      <input bindinput="phoneInput"   name="input" placeholder="请输入手机号" />
     </view>
     <view class="section">
       <image class="phone_code" src="../../assets/img/phone_code.png" />
       <input name="input" placeholder="请输入验证码" />
-      <view class="get_code" bindtap="getPhoneCode">{{phoneCode}}</view>
+      <view class="get_code" bindtap="getPhoneCode">{{vcodeText}}</view>
     </view>
     <view class="btn-area">
       <button formType="submit">登录</button>

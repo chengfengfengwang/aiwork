@@ -94,6 +94,13 @@
 					"id": -1,
 					"name": "pages/classDetail/classDetail",
 					"pathName": "pages/classDetail/classDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/classOperate/searchStudents/searchStudents",
+					"pathName": "pages/classOperate/searchStudents/searchStudents",
 					"scene": null
 				}
 			]

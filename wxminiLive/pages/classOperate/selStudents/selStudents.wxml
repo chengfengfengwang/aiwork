@@ -1,12 +1,59 @@
 <!-- pages/classOperate/selStudents/selStudents.wxml -->
-<!-- <view class="page">
-    <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
-        <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
-    </mp-checkbox-group>
-</view> -->
+<view class="guide">
+    <view class="item">
+        <image class="top" src="../../../assets/img/classOperate/course_active.png" />
+        <view class="item_text">选择课程</view>
+        <view class="step_line active"></view>
+    </view>
+    <view class="item">
+        <image class="top" src="../../../assets/img/classOperate/student_active.png" />
+        <view class="item_text">添加学生</view>
+        <view class="step_line active"></view>
+    </view>
+    <view class="item">
+        <image class="top" src="../../../assets/img/classOperate/class.png" />
+        <view class="item_text">添加小班名称</view>
+    </view>
+</view>
 <view class="page">
     <view class="search">
         <image class="search_icon" src="../../../assets/img/classOperate/search.png" />
         <input name="input" placeholder="请输入搜索内容" />
+    </view>
+    <view class="checked_user">
+        <view class="title">已选择成员（人数不得超过4人）</view>
+        <view class="checked_user_wrapper">
+            <view bindtap="selectUser" data-index="{{index}}" class="user {{item.checked?'checked':''}}" wx:key="index" wx:for="{{items}}">
+                <view class="remove">
+                    <image src="../../../assets/img/classOperate/remove.png" />
+                </view>
+                <view class="avatar">
+                    <image src="../../../assets/img/logo.png" />
+                </view>
+                <view class="user_info">
+                    <view class="name">王大锤</view>
+                    <view class="phone">18810240072</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="gap"></view>
+    <view class="user_wrapper">
+        <view bindtap="selectUser" data-index="{{index}}" class="user {{item.checked?'checked':''}}" wx:key="index" wx:for="{{items}}">
+            <view class="select_i">
+                <image wx:if="{{!item.checked}}" src="../../../assets/img/classOperate/select.png" />
+                <image wx:else src="../../../assets/img/classOperate/selected.png" />
+            </view>
+            <view class="avatar">
+                <image src="../../../assets/img/logo.png" />
+            </view>
+            <view class="user_info">
+                <view class="name">王大锤</view>
+                <view class="phone">18810240072</view>
+            </view>
+        </view>
+    </view>
+    <view class="next_btn">
+        <button class="btn" type="default">确认</button>
     </view>
 </view>

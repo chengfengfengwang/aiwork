@@ -1,9 +1,0 @@
-.page {
-  padding: 20rpx 32rpx;
-  background-color: #fff;
-}
-.search {
-  height: 72px;
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 40px;
-}

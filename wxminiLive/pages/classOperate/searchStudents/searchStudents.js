@@ -7,7 +7,7 @@ Page({
     items: [
       { checked:false },
       { checked:true },
-      { checked:true },{ checked:false },
+      { checked:true },
     ]
   },
 

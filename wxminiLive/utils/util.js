@@ -13,7 +13,18 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+const $get = (url, data) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url,
+      data,
+      header: { 'Content-Type': 'json' },
+      success: resolve,
+      fail: reject
+    })
+  })
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  $get
 }

@@ -1,0 +1,129 @@
+@import "./../common.less";
+
+.page {
+  padding: 0rpx 0rpx;
+  background-color: #fff;
+}
+.search {
+  display: flex;
+  align-items: center;
+  height: 72rpx;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 40rpx;
+  margin: 0 32rpx;
+  image {
+    margin: 0 24rpx;
+    width: 48rpx;
+    height: 48rpx;
+  }
+}
+.checked_user {
+  padding: 32rpx;
+  .title {
+    margin-bottom: 28rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    font-weight: 600;
+    color: rgba(53, 53, 53, .4);
+  }
+  .checked_user_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    .user {
+      position: relative;
+      width: 312rpx;
+      margin-bottom: 25rpx;
+      display: flex;
+      align-items: center;
+      &:nth-child(2n+1){
+        margin-right: 32rpx;
+      }
+      .remove {
+        position: absolute;
+        right: 0;
+        top:0;
+        width: 32rpx;
+        height: 32rpx;
+        image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .avatar {
+        margin-right: 20rpx;
+        width: 64rpx;
+        height: 64rpx;
+        image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .user_info {
+        flex-grow: 1;
+        position: relative;
+        .name {
+          font-size: 28rpx;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: rgba(51, 51, 51, 1);
+        }
+        .phone {
+          font-size: 24rpx;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: rgba(51, 51, 51, 0.4);
+        }
+      }
+    }
+  }
+}
+.user_wrapper {
+  .user {
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+    .select_i {
+      margin-right: 32rpx;
+      width: 48rpx;
+      height: 48rpx;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .avatar {
+      margin-right: 24rpx;
+      width: 80rpx;
+      height: 80rpx;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .user_info {
+      flex-grow: 1;
+      position: relative;
+      .name {
+        font-size: 32rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: rgba(53, 53, 53, 1);
+      }
+      .phone {
+        font-size: 28rpx;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -16rpx;
+        left: 0;
+        width: 100%;
+        height: 2rpx;
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
