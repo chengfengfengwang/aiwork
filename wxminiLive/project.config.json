@@ -87,6 +87,13 @@
 					"id": -1,
 					"name": "pages/liveOperate/add/add",
 					"pathName": "pages/liveOperate/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/classDetail/classDetail",
+					"pathName": "pages/classDetail/classDetail",
 					"scene": null
 				}
 			]

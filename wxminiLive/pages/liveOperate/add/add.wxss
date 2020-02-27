@@ -44,10 +44,6 @@
   width: 100%;
   height: 90rpx;
 }
-.gap {
-  height: 20rpx;
-  background-color: #f8f8f8;
-}
 .course {
   margin-top: 20rpx;
   padding: 32rpx;

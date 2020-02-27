@@ -104,6 +104,7 @@ module.exports = {
          superVip:'src/modules/superVip/app.js',
          //机构激活课程
          orgActive:'src/modules/orgActive/app.js',
-         
+         //音乐壳证书
+         zsYyk:'src/modules/zsYyk/app.js',
     }   
 }

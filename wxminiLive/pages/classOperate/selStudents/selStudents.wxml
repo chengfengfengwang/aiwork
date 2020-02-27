@@ -1,7 +1,12 @@
 <!-- pages/classOperate/selStudents/selStudents.wxml -->
+<!-- <view class="page">
+    <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
+        <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+    </mp-checkbox-group>
+</view> -->
 <view class="page">
-    qwer
-        <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
-            <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
-        </mp-checkbox-group>
+    <view class="search">
+        <image class="search_icon" src="../../../assets/img/classOperate/search.png" />
+        <input name="input" placeholder="请输入搜索内容" />
+    </view>
 </view>

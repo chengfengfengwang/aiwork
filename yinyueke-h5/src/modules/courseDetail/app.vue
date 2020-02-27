@@ -64,7 +64,16 @@
               <img src="../../assets/img/courseDetail/common/coco.png" alt />
             </div>
             <div v-show="card.isVip" class="vip_coco">
-              <img src="../../assets/img/courseDetail/common/vip_coco.png" alt />
+              <img
+                v-show="card.vip_type==='vip_days_30'"
+                src="../../assets/img/courseDetail/common/vip_coco.png"
+                alt
+              />
+              <img
+                v-show="card.vip_type==='vip_inf'"
+                src="../../assets/img/courseDetail/common/super_vip.png"
+                alt
+              />
               <div class="dis_text" :class="{m:(card.discount+'').length>1}">
                 <span class="num">{{card.discount}}</span>
                 <span class="dis">折</span>
@@ -84,7 +93,7 @@
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
-              <div class="course_date"> 
+              <div class="course_date">
                 <span v-show="card.isVip && card.vip_type==='vip_days_30'">有效期30天</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
@@ -168,7 +177,7 @@ export default {
   methods: {
     goVipDetail(index) {
       this.curCardIndex = index;
-       localStorage.setItem("vip_youzan_url", this.getVipPayUrl());
+      localStorage.setItem("vip_youzan_url", this.getVipPayUrl());
       location.href = "superVip.html";
     },
     goNext() {
@@ -190,9 +199,9 @@ export default {
     toYouzan() {
       location.href = this.outsideInfo.goods_url;
     },
-    getVipPayUrl(){
-      let e  = this.cardDataArr[this.curCardIndex];
-      console.log(e)
+    getVipPayUrl() {
+      let e = this.cardDataArr[this.curCardIndex];
+      console.log(e);
       if (e.buy_url) {
         return e.buy_url;
       } else {
@@ -213,11 +222,11 @@ export default {
           "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
         this.toPayUrl = `${host}?${str}#/`;
         //return;
-        return  this.toPayUrl;
+        return this.toPayUrl;
       }
     },
     viPay() {
-      location.href = this.getVipPayUrl()
+      location.href = this.getVipPayUrl();
     },
     toPay() {
       localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
@@ -302,7 +311,7 @@ export default {
                 goods_id: e.goods_id,
                 good_img: e.good_img,
                 buy_url: e.buy_url,
-                vip_type:e.vip_type
+                vip_type: e.vip_type
               };
             });
           }
@@ -340,7 +349,7 @@ export default {
     popShow() {
       if (this.popShow) {
         this.$nextTick(() => {
-          this.popHeight =
+         this.popHeight =
             document.querySelector(".pop_wrapper").offsetHeight + "px";
         });
       }
@@ -575,6 +584,9 @@ html {
   height: 500px;
   overflow: scroll;
   padding-bottom: 70px;
+  @media (max-width: 400px) and (min-height: 700px) {
+     height: 630px;
+    }
 }
 .card {
   position: relative;

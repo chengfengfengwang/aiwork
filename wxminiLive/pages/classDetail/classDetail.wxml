@@ -1,0 +1,60 @@
+<!-- pages/classDetail/classDetail.wxml -->
+<view class="page">
+    <view class="class_info">
+        <view class="class_name">课程：中国音乐学院音基考级一级课程</view>
+        <view class="group">
+            <view class="group_title">小组成员</view>
+            <view class="edit_btn">修改信息</view>
+            <view class="user_wrapper">
+                <view class="user">
+                    <view class="avatar">
+                        <image src="../../assets/img/logo.png" />
+                    </view>
+                    <view class="user_info">
+                        <view class="name">王大锤</view>
+                        <view class="phone">18810240072</view>
+                    </view>
+                </view>
+                <view class="user">
+                    <view class="avatar">
+                        <image src="../../assets/img/logo.png" />
+                    </view>
+                    <view class="user_info">
+                        <view class="name">王大锤</view>
+                        <view class="phone">18810240072</view>
+                    </view>
+                </view>
+                <view class="user">
+                    <view class="avatar">
+                        <image src="../../assets/img/logo.png" />
+                    </view>
+                    <view class="user_info">
+                        <view class="name">王大锤</view>
+                        <view class="phone">18810240072</view>
+                    </view>
+                </view>
+                <view class="user">
+                    <view class="avatar">
+                        <image src="../../assets/img/logo.png" />
+                    </view>
+                    <view class="user_info">
+                        <view class="name">王大锤</view>
+                        <view class="phone">18810240072</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="gap"></view>
+    <view class="live_info">
+        <view class="live_title">小班直播计划表</view>
+        <view class="live_item">
+            <view class="time">2020-03-08  11:00</view>
+            <view class="line1">
+                <text>直播倒计时</text>
+                <text class="count_down">5天3小时12分</text>
+            </view>
+            <view class="line2">第二课：什么是二分音符</view>
+        </view>
+    </view>
+</view>

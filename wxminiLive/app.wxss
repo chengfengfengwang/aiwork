@@ -63,3 +63,7 @@ web-view {
   justify-content: center;
   align-items: center;
 }
+.gap{
+  height: 20rpx;
+  background-color: #f8f8f8;
+}

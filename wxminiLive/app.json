@@ -7,7 +7,8 @@
     "pages/classOperate/selCourse/selCourse",
     "pages/classOperate/setName/setName",
     "pages/classOperate/selStudents/selStudents",
-    "pages/liveOperate/add/add"
+    "pages/liveOperate/add/add",
+    "pages/classDetail/classDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
