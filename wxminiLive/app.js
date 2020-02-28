@@ -35,6 +35,17 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:''
+    v9:'http://api.agency.immusician.com/v9',
+    baseUrl:'',
+    instruments:[
+      '吉他',
+      '尤克里里',
+      '卡琳吧',
+      '非洲鼓',
+      '钢琴',
+      '音基',
+      '口琴',
+      '音乐素养'
+    ]
   }
 })

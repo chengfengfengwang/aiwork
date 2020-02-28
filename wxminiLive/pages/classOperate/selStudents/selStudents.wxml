@@ -1,11 +1,11 @@
 <!-- pages/classOperate/selStudents/selStudents.wxml -->
 <view class="guide">
-    <view class="item">
+    <view class="item active">
         <image class="top" src="../../../assets/img/classOperate/course_active.png" />
         <view class="item_text">选择课程</view>
         <view class="step_line active"></view>
     </view>
-    <view class="item">
+    <view class="item active">
         <image class="top" src="../../../assets/img/classOperate/student_active.png" />
         <view class="item_text">添加学生</view>
         <view class="step_line active"></view>

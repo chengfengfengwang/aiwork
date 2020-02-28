@@ -1,10 +1,32 @@
 <view class="page">
     <view class="tabs">
-        <view data-num="0" bindtap="tabClick" class="tab {{acIndex==0?'active':''}}">音基</view>
-        <view data-num="1" bindtap="tabClick" class="tab {{acIndex==1?'active':''}}">音乐素养</view>
-        <view data-num="2" bindtap="tabClick" class="tab {{acIndex==2?'active':''}}">趣味乐理</view>
+        <view wx:for="{{liveClassList}}" wx:key="index" data-num="{{index}}" data-item="{{item}}" bindtap="tabClick" class="tab {{acIndex==index?'active':''}}">
+            {{item.name}}
+        </view>
     </view>
-    <view class="live_class">
+    <view wx:if="{{acIndex==index}}" wx:for="{{liveClassList}}" wx:key="index" class="live_class">
+        <view class="empty" wx:if="{{item.list.length==0}}">
+            <view class="empty_main">
+                <image class="logo" src="../../assets/img/noclass.png" />
+                <view class="empty_text">暂无小班</view>
+            </view>
+        </view>
+        <view class="havedata" wx:else>
+            <view class="avatar_box">
+                <image class="logo" src="../../assets/img/logo.png" />
+            </view>
+            <view class="info">
+                <view class="class_name">国院一级考级1班</view>
+                <view class="course_name">中国音乐学院音基考级一级课程</view>
+                <view class="live_time">
+                    <view class="recent">最近直播：03-01 10:00</view>
+                    <view class="count_down">5天3小时12分</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <tabar></tabar>
+    <!-- <view class="live_class">
         <view class="avatar_box">
             <image class="logo" src="../../assets/img/logo.png" />
         </view>
@@ -29,24 +51,11 @@
                 <view class="count_down">5天3小时12分</view>
             </view>
         </view>
-    </view>
-    <view class="live_class">
-        <view class="avatar_box">
-            <image class="logo" src="../../assets/img/logo.png" />
-        </view>
-        <view class="info">
-            <view class="class_name">国院一级考级1班</view>
-            <view class="course_name">中国音乐学院音基考级一级课程</view>
-            <view class="live_time">
-                <view class="recent">最近直播：03-01 10:00</view>
-                <view class="count_down">5天3小时12分</view>
-            </view>
-        </view>
-    </view>
-    <view class="live_class empty">
+    </view> -->
+    <!-- <view class="live_class empty">
         <view class="empty_main">
             <image class="logo" src="../../assets/img/noclass.png" />   
             <view class="empty_text">暂无小班</view>
         </view>
-    </view>
+    </view> -->
 </view>

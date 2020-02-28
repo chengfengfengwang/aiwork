@@ -1,0 +1,21 @@
+<!--pages/tabBar/tabBar.wxml-->
+<page class="bar">
+<image bindtap="addClass" class="add" src="../../assets/img/tabBar/add.png" />   
+    <view class="item">
+        <view class="icon">
+             <image src="../../assets/img/tabBar/class_active.png" />   
+        </view>
+        <view class="text">小班列表</view>
+    </view>
+    <view class="item">
+        <view class="icon">
+             
+        </view>
+        <view class="text">新建小班</view>
+    </view><view class="item">
+        <view class="icon">
+             <image src="../../assets/img/tabBar/help.png" />   
+        </view>
+        <view class="text">帮助</view>
+    </view>
+</page>

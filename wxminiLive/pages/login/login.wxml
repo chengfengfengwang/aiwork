@@ -12,11 +12,11 @@
     </view>
     <view class="section">
       <image class="phone_code" src="../../assets/img/phone_code.png" />
-      <input name="input" placeholder="请输入验证码" />
+      <input bindinput="vcodeInput" name="input" placeholder="请输入验证码" />
       <view class="get_code" bindtap="getPhoneCode">{{vcodeText}}</view>
     </view>
     <view class="btn-area">
-      <button formType="submit">登录</button>
+      <button class="{{loginBtnActive?'active':''}}" bindtap="login" formType="submit">登录</button>
     </view>
   </form>
   <!-- <view class="form">

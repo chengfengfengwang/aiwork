@@ -1,16 +1,16 @@
-// pages/liveList/liveList.js
+// pages/tabBar/tabBar.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    acIndex:0
+
   },
-  tabClick(e){
-    this.setData({
-      acIndex: e.currentTarget.dataset.num
-    })
+  addClass(){
+    wx.navigateTo({
+      url: "/pages/classOperate/selCourse/selCourse" 
+    });
   },
   /**
    * 生命周期函数--监听页面加载

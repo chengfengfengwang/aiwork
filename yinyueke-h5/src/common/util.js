@@ -59,6 +59,21 @@ function formatTime(date) {
     //秒没有返回
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':');
 }
+function getDate(date) {
+    var date = date; //项目返回的是秒级的时间戳
+    var date = new Date(date);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    //秒没有返回
+    console.log(year, month, day)
+    return year+'年'+month+'月'+day+'日'
+}
 const baseSize = 36
 function setRem() {
     // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
@@ -88,4 +103,4 @@ function testWeixin() { //判断是否是微信
 };
 var u = navigator.userAgent, app = navigator.appVersion;
 var openInApp = u.indexOf('immusician') != -1 || u.indexOf('buluobang') != -1 || u.indexOf('bangtabs') != -1;
-export { openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
+export { getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }

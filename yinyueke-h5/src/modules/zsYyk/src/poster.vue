@@ -6,6 +6,7 @@
       <span v-show="bgSrc" class="name">
         <span class="name_text">{{name}}</span> 爱心捐赠者
       </span>
+      <div v-show="bgSrc" class="date">{{date}}</div>
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg" :src="resultBase64" alt />
@@ -16,7 +17,12 @@
 <script>
 // var eruda = require("eruda");
 // eruda.init();
-import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
+import {
+  openInApp,
+  getQueryVariable,
+  platForm,
+  getDate
+} from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
@@ -26,10 +32,14 @@ export default {
       name: localStorage.getItem("zsName"),
       loadingShow: true,
       resultBase64Show: false,
-      bgSrc: ""
+      resultBase64: "",
+      bgSrc: "",
+      date: ""
     };
   },
-  created() {},
+  created() {
+    this.date = getDate(new Date().valueOf());
+  },
   components: {
     Loading
   },
@@ -119,9 +129,6 @@ export default {
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
         this.resultBase64Show = true;
-        // console.log("----------");
-        // console.log(this.resultBase64);
-        // console.log("----------");
       });
     },
     share() {
@@ -154,15 +161,25 @@ export default {
     position: absolute;
     top: 85px;
     left: 33px;
-
-    font-size:9px;
-    font-family:PingFangSC-Semibold, PingFangSC-Regular, PingFang SC;
+    font-size: 9px;
+    font-family: PingFangSC-Semibold, PingFangSC-Regular, PingFang SC;
     font-weight: 500;
     color: #333333;
     .name_text {
       text-decoration: underline;
       color: #e19100;
     }
+  }
+  .date {
+    position: absolute;
+    width: 100%;
+    padding-left: 68%;
+    bottom: 18px;
+    right: 0;
+    font-size: 7px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
   }
 }
 

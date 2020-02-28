@@ -95,3 +95,6 @@
   font-weight: 400;
   color: #ffffff;
 }
+.form .btn-area button.active {
+  opacity: 1;
+}

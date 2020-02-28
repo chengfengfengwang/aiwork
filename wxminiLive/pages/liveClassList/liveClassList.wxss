@@ -23,48 +23,52 @@
   border-bottom: 4rpx solid #ff6f31;
 }
 .live_class {
-  display: flex;
-  align-items: center;
   margin-top: 60rpx;
   margin-bottom: 96rpx;
 }
-.live_class .avatar_box {
+.live_class .havedata {
+  display: flex;
+  align-items: center;
+}
+.live_class .havedata .avatar_box {
   width: 136rpx;
   height: 136rpx;
+  margin-left: 32rpx;
   margin-right: 24rpx;
 }
-.live_class .avatar_box image {
+.live_class .havedata .avatar_box image {
   width: 136rpx;
   height: 136rpx;
 }
-.live_class .info {
+.live_class .havedata .info {
+  flex-grow: 1;
   position: relative;
 }
-.live_class .info .class_name {
+.live_class .havedata .info .class_name {
   font-size: 32rpx;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #333333;
 }
-.live_class .info .course_name {
+.live_class .havedata .info .course_name {
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #333333;
 }
-.live_class .info .live_time {
+.live_class .havedata .info .live_time {
   display: flex;
   align-items: center;
   margin-top: 20rpx;
 }
-.live_class .info .live_time .recent {
+.live_class .havedata .info .live_time .recent {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #333333;
   margin-right: 40rpx;
 }
-.live_class .info .live_time .count_down {
+.live_class .havedata .info .live_time .count_down {
   padding: 0 15rpx;
   text-align: center;
   font-size: 28rpx;
@@ -74,7 +78,7 @@
   background: #ff6f31;
   border-radius: 23rpx;
 }
-.live_class .info:after {
+.live_class .havedata .info:after {
   content: "";
   position: absolute;
   bottom: -45rpx;
@@ -83,22 +87,22 @@
   height: 2rpx;
   background: rgba(0, 0, 0, 0.1);
 }
-.live_class.empty {
+.live_class .empty {
   width: 100%;
-  height: 100vh;
+  height: 600rpx;
   position: relative;
 }
-.live_class.empty .empty_main {
+.live_class .empty .empty_main {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.live_class.empty .empty_main image {
+.live_class .empty .empty_main image {
   width: 120rpx;
   height: 114rpx;
 }
-.live_class.empty .empty_main .empty_text {
+.live_class .empty .empty_main .empty_text {
   font-size: 32rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
