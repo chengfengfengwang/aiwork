@@ -11,14 +11,14 @@
     </view>
     <view class="gap"></view>
      <view class="course">
-        <view class="course_title">音基</view>
+        <view class="course_title">选择课程章节</view>
         <radio-group class="radio-group" bindchange="radioChange">
-            <radio class="radio" wx:for-items="{{items}}" wx:key="name" value="{{item.value}}" checked="{{item.checked}}">
+            <radio class="radio" wx:for-items="{{lessons}}" wx:key="name" value="{{item.lesson_id}}" checked="{{item.checked}}">
                 <text class="radio_text">{{item.name}}</text>
             </radio>
         </radio-group>
     </view>
-    <view class="next_btn">
+    <view bindtap="nextStep" class="next_btn">
         <button class="btn" type="default">确认</button>
     </view>
     <!-- <view class="container">

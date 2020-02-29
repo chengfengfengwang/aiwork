@@ -74,7 +74,7 @@
 					"id": 2,
 					"name": "pages/classOperate/selCourse/selCourse",
 					"pathName": "pages/classOperate/selCourse/selCourse",
-					"query": "",
+					"query": "edit=1&courseId=49",
 					"scene": null
 				},
 				{
@@ -85,24 +85,24 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "pages/classOperate/selStudents/selStudents",
 					"pathName": "pages/classOperate/selStudents/selStudents",
-					"query": "",
+					"query": "course_id=49",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "pages/liveOperate/add/add",
 					"pathName": "pages/liveOperate/add/add",
-					"query": "",
+					"query": "classId=5e58d72227e0155d620fce83&courseId=49",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "pages/classDetail/classDetail",
 					"pathName": "pages/classDetail/classDetail",
-					"query": "",
+					"query": "classId=5e58d72227e0155d620fce83",
 					"scene": null
 				},
 				{
@@ -117,6 +117,13 @@
 					"name": "pages/tabBar/tabBar",
 					"pathName": "pages/tabBar/tabBar",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/liveOperate/add/add",
+					"pathName": "pages/liveOperate/add/add",
+					"query": "classId=5e58d72227e0155d620fce83",
 					"scene": null
 				}
 			]

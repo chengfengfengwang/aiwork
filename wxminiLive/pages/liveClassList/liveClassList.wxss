@@ -26,59 +26,59 @@
   margin-top: 60rpx;
   margin-bottom: 96rpx;
 }
-.live_class .havedata {
+.live_class .havedata .class_item {
   display: flex;
   align-items: center;
 }
-.live_class .havedata .avatar_box {
+.live_class .havedata .class_item .avatar_box {
   width: 136rpx;
   height: 136rpx;
   margin-left: 32rpx;
   margin-right: 24rpx;
 }
-.live_class .havedata .avatar_box image {
+.live_class .havedata .class_item .avatar_box image {
   width: 136rpx;
   height: 136rpx;
 }
-.live_class .havedata .info {
+.live_class .havedata .class_item .info {
   flex-grow: 1;
   position: relative;
 }
-.live_class .havedata .info .class_name {
+.live_class .havedata .class_item .info .class_name {
   font-size: 32rpx;
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: #333333;
 }
-.live_class .havedata .info .course_name {
+.live_class .havedata .class_item .info .course_name {
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #333333;
 }
-.live_class .havedata .info .live_time {
+.live_class .havedata .class_item .info .live_time {
   display: flex;
   align-items: center;
   margin-top: 20rpx;
 }
-.live_class .havedata .info .live_time .recent {
+.live_class .havedata .class_item .info .live_time .recent {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #333333;
-  margin-right: 40rpx;
+  margin-right: 20rpx;
 }
-.live_class .havedata .info .live_time .count_down {
+.live_class .havedata .class_item .info .live_time .count_down {
   padding: 0 15rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #ffffff;
   background: #ff6f31;
   border-radius: 23rpx;
 }
-.live_class .havedata .info:after {
+.live_class .havedata .class_item .info:after {
   content: "";
   position: absolute;
   bottom: -45rpx;

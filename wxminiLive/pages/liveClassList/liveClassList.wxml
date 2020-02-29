@@ -1,3 +1,4 @@
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view class="page">
     <view class="tabs">
         <view wx:for="{{liveClassList}}" wx:key="index" data-num="{{index}}" data-item="{{item}}" bindtap="tabClick" class="tab {{acIndex==index?'active':''}}">
@@ -12,15 +13,17 @@
             </view>
         </view>
         <view class="havedata" wx:else>
-            <view class="avatar_box">
-                <image class="logo" src="../../assets/img/logo.png" />
-            </view>
-            <view class="info">
-                <view class="class_name">国院一级考级1班</view>
-                <view class="course_name">中国音乐学院音基考级一级课程</view>
-                <view class="live_time">
-                    <view class="recent">最近直播：03-01 10:00</view>
-                    <view class="count_down">5天3小时12分</view>
+            <view data-id="{{item.id}}" bindtap="goClassDetail"  class="class_item"  wx:for="{{item.list}}" wx:key="index">
+                <view class="avatar_box">
+                    <image class="logo" src="../../assets/img/logo.png" />
+                </view>
+                <view class="info">
+                    <view class="class_name">国院一级考级1班</view>
+                    <view class="course_name">{{item.name}}</view>
+                    <view class="live_time">
+                        <view class="recent">最近直播：{{filter.formatTime(item.lately_live_time)}}</view>
+                        <view class="count_down">{{filter.getCountDown(item.lately_live_time)}}</view>
+                    </view>
                 </view>
             </view>
         </view>

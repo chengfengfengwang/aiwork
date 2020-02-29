@@ -1,4 +1,5 @@
 const formatTime = date => {
+  date = date* 1000;
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -65,8 +66,22 @@ const resDataHandler = function(res,resolve,reject){
     resolve(res);
   }
 }
+const findInstrumentType = function(id){
+  let myInstruments = JSON.parse(wx.getStorageSync("myInstruments"));
+  if(!myInstruments && !id){
+    return
+  }
+  for(var i=0;i<myInstruments.length;i++){
+    for(var k=0;k<myInstruments[i].courses.length;k++){
+      if(id==myInstruments[i].courses[k].id){
+        return myInstruments[i].value
+      }
+    }
+  }
+};
 module.exports = {
   formatTime,
   $get,
-  $post
+  $post,
+  findInstrumentType
 };

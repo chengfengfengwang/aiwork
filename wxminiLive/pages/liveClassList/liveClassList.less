@@ -26,63 +26,65 @@
   margin-top: 60rpx;
   margin-bottom: 96rpx;
   .havedata {
-    display: flex;
-    align-items: center;
-    .avatar_box {
-      width: 136rpx;
-      height: 136rpx;
-      margin-left: 32rpx;
-      margin-right: 24rpx;
-      image {
+    .class_item {
+      display: flex;
+      align-items: center;
+      .avatar_box {
         width: 136rpx;
         height: 136rpx;
-      }
-    }
-    .info {
-      flex-grow: 1;
-      position: relative;
-      .class_name {
-        font-size: 32rpx;
-        font-family: PingFangSC-Semibold, PingFang SC;
-        font-weight: 600;
-        color: rgba(51, 51, 51, 1);
-      }
-      .course_name {
-        font-size: 28rpx;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: rgba(51, 51, 51, 1);
-      }
-      .live_time {
-        display: flex;
-        align-items: center;
-        margin-top: 20rpx;
-        .recent {
-          font-size: 24rpx;
-          font-family: PingFangSC-Regular, PingFang SC;
-          font-weight: 400;
-          color: rgba(51, 51, 51, 1);
-          margin-right: 40rpx;
+        margin-left: 32rpx;
+        margin-right: 24rpx;
+        image {
+          width: 136rpx;
+          height: 136rpx;
         }
-        .count_down {
-          padding: 0 15rpx;
-          text-align: center;
+      }
+      .info {
+        flex-grow: 1;
+        position: relative;
+        .class_name {
+          font-size: 32rpx;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: rgba(51, 51, 51, 1);
+        }
+        .course_name {
           font-size: 28rpx;
           font-family: PingFangSC-Regular, PingFang SC;
           font-weight: 400;
-          color: rgba(255, 255, 255, 1);
-          background: rgba(255, 111, 49, 1);
-          border-radius: 23rpx;
+          color: rgba(51, 51, 51, 1);
         }
-      }
-      &:after {
-        content: "";
-        position: absolute;
-        bottom: -45rpx;
-        left: 0;
-        width: 100%;
-        height: 2rpx;
-        background: rgba(0, 0, 0, 0.1);
+        .live_time {
+          display: flex;
+          align-items: center;
+          margin-top: 20rpx;
+          .recent {
+            font-size: 24rpx;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            margin-right: 20rpx;
+          }
+          .count_down {
+            padding: 0 15rpx;
+            text-align: center;
+            font-size: 24rpx;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            background: rgba(255, 111, 49, 1);
+            border-radius: 23rpx;
+          }
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: -45rpx;
+          left: 0;
+          width: 100%;
+          height: 2rpx;
+          background: rgba(0, 0, 0, 0.1);
+        }
       }
     }
   }

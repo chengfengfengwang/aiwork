@@ -1,4 +1,5 @@
 // pages/classOperate/add/add.js
+let courseId='';
 Page({
 
   /**
@@ -7,28 +8,45 @@ Page({
   data: {
     Allcourses:[],
     items: [
-      { name: '奥尔夫打击乐', value: '0' },
-      { name: '果园一级', value: '1', checked: 'true' },
     ]
   },
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
-    console.log(e.detail)
-  },
-  nextStep(){
-    wx.navigateTo({
-      url: "/pages/classOperate/selStudents/selStudents" //实际路径要写全
-    });
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       Allcourses:  JSON.parse(wx.getStorageSync('myInstruments'))
     });
-    console.log(this.data.Allcourses)
+    if(wx.getStorageSync("createOrEdit")==2){
+      courseId = wx.getStorageSync("selCourseId")
+      this.checkCourse(courseId)
+    }
+    
   },
+  radioChange: function (e) {
+    courseId = e.detail.value;
+  },
+  checkCourse(id){
+    let Allcourses = this.data.Allcourses;
+    if(!id){
+      return
+    }
+    for(var i=0;i<Allcourses.length;i++){
+      for(var k=0;k<Allcourses[i].courses.length;k++){
+        if(id==Allcourses[i].courses[k].id){
+          Allcourses[i].courses[k].checked=true
+        }
+      }
+    }
+    this.setData({
+      Allcourses
+    })
+  },
+  nextStep(){
+    wx.setStorageSync("selCourseId",courseId);
+    wx.navigateTo({
+      url: `/pages/classOperate/selStudents/selStudents`
+    });
+  },
+
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

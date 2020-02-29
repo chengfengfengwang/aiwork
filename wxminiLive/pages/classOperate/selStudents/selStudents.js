@@ -1,47 +1,83 @@
 // pages/classOperate/selStudents/selStudents.js
+const util = require("../../../utils/util.js");
+const baseUrl = getApp().globalData.baseUrl;
+const v9 = getApp().globalData.v9;
+
+let courseId = "";
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    items: [
-      { checked:false },
-      { checked:true },
-      { checked:true },{ checked:false },
-    ]
+    students: [],
+    selected:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
-  selectUser(e){
-    let index = e.currentTarget.dataset.index;
-    this.data.items[index].checked = !this.data.items[index].checked
-    this.setData({
-      items:this.data.items
-    })
+  onLoad: function(options) {
+    courseId = wx.getStorageSync("selCourseId");
+    this.getStudents();
   },
-  checkboxChange: function(e) {
-    // console.log("checkbox发生change事件，携带value值为：", e.detail.value);
-
-    // var checkboxItems = this.data.checkboxItems,
-    //   values = e.detail.value;
-    // for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-    //   checkboxItems[i].checked = false;
-
-    //   for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-    //     if (checkboxItems[i].value == values[j]) {
-    //       checkboxItems[i].checked = true;
-    //       break;
-    //     }
-    //   }
-    // }
-
-    // this.setData({
-    //   checkboxItems: checkboxItems,
-    //   [`formData.checkbox`]: e.detail.value
-    // });
+  getStudents() {
+    util
+      .$get(`${v9}/live_info/users`, {
+        institutions_id: wx.getStorageSync("institutions_id"),
+        course_id: courseId,
+        page: 0,
+        size: 999
+      })
+      .then(res => {
+        this.setData({
+          students: res.data
+        });
+      });
+  },
+  checkStudents(){
+    let students = this.data.students;
+    for(var i=0;i<students.length;i++){
+      for(var k=0;k<selected.length;k++){
+        
+      }
+    }
+  },
+  selectUser(e) {
+    let index = e.currentTarget.dataset.index;
+    this.data.students[index].checked = !this.data.students[index].checked;
+    this.setData({
+      students: this.data.students
+    });
+    let selected =  this.data.students.filter((e)=>{
+      return e.checked
+    })
+    this.setData({
+      selected
+    });
+    console.log(this.data.students)
+  },
+  removeUser(e){
+    const index = e.currentTarget.dataset.index;
+    let selected =  this.data.selected;
+    let user = selected[index];
+    selected.splice(index,1);
+    this.setData({
+      selected
+    });
+    this.data.students.forEach((e)=>{
+      if(e.uid=== user.uid){
+        e.checked = false;
+      }
+    });
+    this.setData({
+      students:this.data.students
+    });
+  },
+  nextStep(){
+    wx.setStorageSync('selStudents',JSON.stringify(this.data.selected));
+    wx.navigateTo({
+      url: `/pages/classOperate/setName/setName`
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

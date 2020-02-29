@@ -10,31 +10,29 @@ Page({
   data: {
     acIndex: 0,
     liveClassList:[
-      {
-        name:'qwer',
-        list:[]
-      },
-      {
-        name:'asdf',
-        list:[1,2]
-      },
-      {
-        name:'zxcv',
-        list:[]
-      },
+     
     ]
   },
   tabClick(e) {
     this.setData({
       acIndex: e.currentTarget.dataset.num
     });
-    this.getliveClass(e.currentTarget.dataset.item.value)
+    this.getliveClass(this.data.acIndex,e.currentTarget.dataset.item.value)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+    });
     this.getInstruments()
+  },
+  goClassDetail(e){
+    wx.setStorageSync("createOrEdit",1);
+    wx.navigateTo({
+      url: `/pages/classDetail/classDetail?classId=${e.currentTarget.dataset.id}`
+    });
   },
   getInstruments() {
     util
@@ -59,10 +57,13 @@ Page({
         this.setData({
           liveClassList:instruments
         })
-        this.getliveClass(instruments[0].value);
+        this.getliveClass(0,instruments[0].value);
       });
   }, 
-  getliveClass(instrument_type) {
+  getliveClass(index,instrument_type) {
+    wx.showLoading({
+      title: '加载中',
+    });
     util
       .$get(`${v9}/live_info/group_list`, {
         instrument_type:instrument_type,
@@ -70,7 +71,11 @@ Page({
         size:20
       })
       .then(res => {
-        console.log(res);
+        this.data.liveClassList[index].list = res.data.group_list;
+        this.setData({
+          liveClassList:this.data.liveClassList
+        });
+        wx.hideLoading();
       });
   },
   /**
