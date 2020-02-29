@@ -106,5 +106,7 @@ module.exports = {
          orgActive:'src/modules/orgActive/app.js',
          //音乐壳证书
          zsYyk:'src/modules/zsYyk/app.js',
+         qr1:'src/modules/qr1/qr1.js',
+         
     }   
 }
