@@ -1,0 +1,12 @@
+.account_section {
+  height: 240rpx;
+}
+.ope_section {
+  padding: 52rpx 0 0 32rpx;
+}
+.ope_section .title {
+  font-size: 32px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #333333;
+}

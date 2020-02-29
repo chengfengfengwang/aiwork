@@ -125,6 +125,13 @@
 					"pathName": "pages/liveOperate/add/add",
 					"query": "classId=5e58d72227e0155d620fce83",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/help/help",
+					"pathName": "pages/help/help",
+					"query": "edit=1&courseId=49",
+					"scene": null
 				}
 			]
 		}

@@ -17,7 +17,7 @@
         </view>
     </view>
     <view class="main">
-        <input class="weui-input class_name" maxlength="10" bindinput="bindKeyInput" placeholder="输入小班名称" />
+        <input value='{{inputValue}}' class="weui-input class_name" maxlength="10" bindinput="bindKeyInput" placeholder="输入小班名称" />
     </view>
     <view class="next_btn">
         <button bindtap="nextStep" class="btn" type="default">小组创建完成</button>

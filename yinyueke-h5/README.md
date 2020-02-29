@@ -44,3 +44,5 @@ http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音�
     辅修
     1.非洲鼓节日表演课 http://kids.immusician.com/web/h5/courseDetail.html#/christmasDjembe
 
+http://cdn.kids-web.immusician.com/yinji/qr1.html
+

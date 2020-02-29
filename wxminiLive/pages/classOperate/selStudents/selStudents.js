@@ -18,6 +18,12 @@ Page({
    */
   onLoad: function(options) {
     courseId = wx.getStorageSync("selCourseId");
+    if(wx.getStorageSync("createOrEdit")==2){
+      let selected = JSON.parse(wx.getStorageSync("selStudents"));
+      this.setData({
+        selected
+      })
+    }
     this.getStudents();
   },
   getStudents() {
@@ -32,15 +38,23 @@ Page({
         this.setData({
           students: res.data
         });
+        this.checkStudents();
       });
   },
   checkStudents(){
     let students = this.data.students;
+    let selected = this.data.selected;
     for(var i=0;i<students.length;i++){
       for(var k=0;k<selected.length;k++){
-        
+        if(selected[k].uid==students[i].uid){
+          students[i].checked = true
+        }
       }
-    }
+    };
+    this.setData({
+      students
+    })
+    console.log(this.data.students)
   },
   selectUser(e) {
     let index = e.currentTarget.dataset.index;
@@ -54,7 +68,6 @@ Page({
     this.setData({
       selected
     });
-    console.log(this.data.students)
   },
   removeUser(e){
     const index = e.currentTarget.dataset.index;

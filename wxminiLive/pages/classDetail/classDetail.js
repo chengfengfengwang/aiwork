@@ -6,7 +6,6 @@ const app = getApp()
 
 let classId = '';
 let courseId = '';
-let studentIds = '';
 Page({
 
   /**
@@ -41,15 +40,14 @@ Page({
           liveList:res.data.plan_list
         });
         courseId = res.data.course_id;
-        studentIds   = res.data.students
         wx.hideLoading();
       });
   },
   editClass(){
     wx.setStorageSync('createOrEdit',2);
     wx.setStorageSync('selCourseId',courseId);
-    wx.setStorageSync('selStudents',studentIds);
-    wx.setStorageSync('selName',JSON.stringify(this.data.className));
+    wx.setStorageSync('selStudents',JSON.stringify(this.data.userList));
+    wx.setStorageSync('selName',this.data.className);
     wx.navigateTo({
       url: `/pages/classOperate/selCourse/selCourse`
     });

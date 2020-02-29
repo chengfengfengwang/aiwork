@@ -584,9 +584,9 @@ html {
   height: 500px;
   overflow: scroll;
   padding-bottom: 70px;
-  @media (max-width: 400px) and (min-height: 700px) {
-     height: 630px;
-    }
+  // @media (max-width: 400px) and (min-height: 700px) {
+  //    height: 630px;
+  //   }
 }
 .card {
   position: relative;

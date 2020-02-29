@@ -17,12 +17,38 @@ Page({
    */
   onLoad: function(options) {
     instrumentType = util.findInstrumentType(wx.getStorageSync("selCourseId"));
-    //this.createLiveClass()
+    if(wx.getStorageSync("createOrEdit")==2){
+      let selName = wx.getStorageSync("selName");
+      this.setData({
+        inputValue:selName
+      })
+    }
   },
   bindKeyInput: function(e) {
     this.setData({
       inputValue: e.detail.value
     });
+  },
+  editLiveClass(){
+    let selStudents =  JSON.parse( wx.getStorageSync("selStudents"));
+    let studentIds = selStudents.map(e=>e.uid);
+    util
+      .$post(`${v9}/live_info/up_group`, {
+        name:this.data.inputValue,
+        students: studentIds,
+        course_id:wx.getStorageSync("selCourseId"), 
+        teacher_id: wx.getStorageSync("uid"),
+        instrument_type: instrumentType
+      })
+      .then(res => {
+        console.log(res);
+        this.setData({
+          students: res.data
+        });
+        wx.navigateTo({
+          url: `/pages/classDetail/classDetail`
+        });
+      });
   },
   createLiveClass() {
     let selStudents =  JSON.parse( wx.getStorageSync("selStudents"));
@@ -40,13 +66,18 @@ Page({
         this.setData({
           students: res.data
         });
+        wx.navigateTo({
+          url: `/pages/classDetail/classDetail`
+        });
       });
   },
   nextStep() {
-    this.createLiveClass();
-    wx.navigateTo({
-      url: `/pages/classDetail/classDetail`
-    });
+    if(wx.getStorageSync("createOrEdit")==1){
+      this.createLiveClass();
+    }else{
+      this.editLiveClass();
+    }
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
