@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "mp-cells": "../../components/weui/cells/cells",
+    "mp-cell": "../../components/weui/cell/cell",
+    "mp-slideview": "../../components/weui/slideview/slideview"
+  }
+}

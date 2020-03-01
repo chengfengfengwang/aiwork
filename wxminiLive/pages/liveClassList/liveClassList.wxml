@@ -14,8 +14,8 @@
         </view>
         <view class="havedata" wx:else>
             <view data-id="{{item.id}}" bindtap="goClassDetail"  class="class_item"  wx:for="{{item.list}}" wx:key="index">
-                <view class="avatar_box">
-                    <image class="logo" src="../../assets/img/logo.png" />
+                <view class="avatar_box {{'l'+item.avatar_list.length}}">
+                    <image wx:for="{{item.avatar_list}}"  src="{{item}}" />
                 </view>
                 <view class="info">
                     <view class="class_name">国院一级考级1班</view>
@@ -28,7 +28,7 @@
             </view>
         </view>
     </view>
-    <tabar></tabar>
+    <tabar active-index="0"></tabar>
     <!-- <view class="live_class">
         <view class="avatar_box">
             <image class="logo" src="../../assets/img/logo.png" />

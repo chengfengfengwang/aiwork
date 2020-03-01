@@ -66,18 +66,22 @@ Page({
     }, 1000);
   },
   login() {
+    wx.showLoading({
+      title: '加载中',
+    });
     util
       .$post(`${v9}/phone_login`, {
         phone: this.data.phone,
         code: this.data.vcode
       })
       .then(res => {
-        console.log(res);
+        wx.hideLoading();
+        wx.setStorageSync('userAcount', this.data.phone);
         wx.setStorageSync('uid', res.data.uid);
         wx.setStorageSync('token', res.data.token);
         wx.setStorageSync('institutions_id', res.data.institutions_id);
         wx.navigateTo({
-          url: "/pages/liveClassList/liveClassList" //实际路径要写全
+          url: "/pages/liveClassList/liveClassList" 
         });
       });
   },

@@ -1,17 +1,31 @@
 <!--pages/help/help.wxml-->
 <view class="page">
     <view class="account_section">
-        
+    <view class="acount_main">
+        <view class="left">
+            <view class="line1">您好</view>
+            <view class="phone">{{userAcount}}</view>
+        </view>
+        <view bindtap="logout" class="right">
+            <image  src="../../assets/img/help/change_acount.png" />
+        </view>
+    </view>
+        <image class="acount_bg" src="../../assets/img/help/acount.png" />
     </view>
     <view class="ope_section">
         <view class="title">新建直播操作流程</view>
         <view class="step_section">
             <view class="step_title">第一部分：新建直播班级</view>
             <view class="step_item_wrapper">
-                <view class="step_item">选择班级成员</view>
-                <view class="step_item">选择班级成员</view>
-                <view class="step_item">选择班级成员</view>
+                <view wx:for="{{section1}}" wx:key="index" class="step_item"><text class="index_count">{{index+1}}</text><text >{{item}}</text> </view>
+            </view>
+        </view>
+        <view class="step_section">
+            <view class="step_title">第二部分：新建班级直播计划</view>
+            <view class="step_item_wrapper">
+                <view wx:for="{{section2}}" wx:key="index" class="step_item"><text class="index_count">{{index+1}}</text><text >{{item}}</text> </view>
             </view>
         </view>
     </view>
+    <tabar active-index="2"></tabar>
 </view>

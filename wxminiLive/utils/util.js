@@ -27,8 +27,8 @@ const $get = (url, data) => {
       data,
       header: { 
         "Content-Type": "json",
-        uid,
-        token
+        uid:wx.getStorageSync("uid"),
+        token:wx.getStorageSync("token")
       },
       success: function(res){
         resDataHandler(res,resolve,reject)
@@ -43,8 +43,8 @@ const $post = (url, data) => {
       url,
       method: "POST",
       header: { 
-        uid,
-        token
+        uid:wx.getStorageSync("uid"),
+        token:wx.getStorageSync("token")
       },
       data,
       success: function(res) {

@@ -1,24 +1,24 @@
 <view class="page">
     <view class="search">
         <image class="search_icon" src="../../../assets/img/classOperate/search.png" />
-        <input name="input" placeholder="请输入搜索内容" />
+        <input bindinput="searchInput" name="input" placeholder="请输入搜索内容" />
     </view>
     <view class="user_wrapper">
-        <view bindtap="selectUser" data-index="{{index}}"  class="user {{item.checked?'checked':''}}" wx:key="index" wx:for="{{items}}">
+        <view bindtap="selectUser" data-index="{{index}}"  class="user {{item.checked?'checked':''}}" wx:key="index" wx:for="{{students}}">
             <view class="select_i">
                 <image wx:if="{{!item.checked}}" src="../../../assets/img/classOperate/select.png" />
                  <image wx:else src="../../../assets/img/classOperate/selected.png" />
             </view>
             <view class="avatar">
-                <image src="../../../assets/img/logo.png" />
+                <image src="{{item.avatar}}" />
             </view>
             <view class="user_info">
-                <view class="name">王大锤</view>
-                <view class="phone">18810240072</view>
+                <view class="name">{{item.nickname}}</view>
+                <view class="phone">{{item.phone}}</view>
             </view>
         </view>
     </view>
-    <view class="next_btn">
+    <!-- <view class="next_btn">
         <button class="btn" type="default">确认</button>
-    </view>
+    </view> -->
 </view>

@@ -10,7 +10,8 @@
     "pages/liveOperate/add/add",
     "pages/classDetail/classDetail",
     "pages/classOperate/searchStudents/searchStudents",
-    "pages/help/help"
+    "pages/help/help",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

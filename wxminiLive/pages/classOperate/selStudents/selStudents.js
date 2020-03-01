@@ -26,7 +26,19 @@ Page({
     }
     this.getStudents();
   },
+  goSearch(){
+    
+    wx.setStorageSync('allStudents',JSON.stringify(this.data.students));
+    wx.setStorageSync('selStudents',JSON.stringify(this.data.selected));
+    
+    wx.navigateTo({
+      url: "/pages/classOperate/searchStudents/searchStudents" 
+    });
+  },
   getStudents() {
+    wx.showLoading({
+      title: '加载中',
+    });
     util
       .$get(`${v9}/live_info/users`, {
         institutions_id: wx.getStorageSync("institutions_id"),
@@ -35,6 +47,7 @@ Page({
         size: 999
       })
       .then(res => {
+        wx.hideLoading();
         this.setData({
           students: res.data
         });
@@ -58,7 +71,18 @@ Page({
   },
   selectUser(e) {
     let index = e.currentTarget.dataset.index;
+    if(!this.data.students[index].checked && this.data.selected.length>=4){
+      if(this.data.selected.length>=4){
+        wx.showToast({
+          title: '人数不能超过4个',
+          icon: 'none',
+          duration: 2000
+        });
+        return
+      }
+    }
     this.data.students[index].checked = !this.data.students[index].checked;
+
     this.setData({
       students: this.data.students
     });

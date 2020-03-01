@@ -34,5 +34,8 @@
   font-size: 20rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
+  color:rgba(53,53,53,.35);
+}
+.bar .item.active .text {
   color: #ff6f31;
 }

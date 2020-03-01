@@ -1,20 +1,21 @@
-<!--pages/tabBar/tabBar.wxml-->
+<!-- pages/tabBar/tabBar.wxml -->
 <page class="bar">
-<image bindtap="addClass" class="add" src="../../assets/img/tabBar/add.png" />   
-    <view class="item">
+    <image bindtap="addClass" class="add" src="../../assets/img/tabBar/add.png" />
+    <view bindtap="goClassList" class="item {{activeIndex==0?'active':''}}">
         <view class="icon">
-             <image src="../../assets/img/tabBar/class_active.png" />   
+            <image wx:if="{{activeIndex==0}}" src="../../assets/img/tabBar/class_active.png" />
+            <image wx:else src="../../assets/img/tabBar/class.png" />
         </view>
         <view class="text">小班列表</view>
     </view>
-    <view class="item">
-        <view class="icon">
-             
-        </view>
+    <view class="item {{activeIndex==1?'active':''}}" >
+        <view class="icon"></view>
         <view class="text">新建小班</view>
-    </view><view class="item">
+    </view>
+    <view bindtap="goHelp" class="item {{activeIndex==2?'active':''}}">
         <view class="icon">
-             <image src="../../assets/img/tabBar/help.png" />   
+            <image wx:if="{{activeIndex==2}}" src="../../assets/img/tabBar/help_active.png" />
+            <image wx:else src="../../assets/img/tabBar/help.png" />
         </view>
         <view class="text">帮助</view>
     </view>
