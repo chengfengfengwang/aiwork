@@ -94,7 +94,7 @@ Page({
       .$get(`${v9}/live_info/group_list`, {
         instrument_type: instrument_type,
         page: 0,
-        size: 20
+        size: 999
       })
       .then(res => {
         this.data.liveClassList[index].list = res.data.group_list;
