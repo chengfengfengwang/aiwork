@@ -53,17 +53,18 @@ const router = new Router({
           component: Group,
           meta: { parentMenu: 'User' }   
         },
-        {
-          name: 'OpenVip',
-          path: '/OpenVip',
-          component: OpenVip,
-        }
+        
       ]
     },
     {
       path: '/Login',
       name: 'Login',
       component: Login,
+    },
+    {
+      name: 'OpenVip',
+      path: '/OpenVip',
+      component: OpenVip,
     }
   ],
   scrollBehavior (to, from, savedPosition) {

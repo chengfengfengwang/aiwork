@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding:30px">
     <div style="margin-bottom:50px">
       <h2>ai vip开通</h2>
       <Input v-model="aiForm.uid" placeholder="输入uid" style="width: 300px" />
