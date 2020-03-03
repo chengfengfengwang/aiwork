@@ -2,6 +2,7 @@
   "usingComponents": {
     "mp-checkbox-group": "../../../components/weui/checkbox-group/checkbox-group",
     "mp-checkbox": "../../../components/weui/checkbox/checkbox",
-    "mp-cells": "../../../components/weui/cells/cells"
+    "mp-cells": "../../../components/weui/cells/cells",
+    "mp-toptips": "../../../components/weui/toptips/toptips"
   }
 }

@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/login/login",
     "pages/liveClassList/liveClassList",
     "pages/classOperate/selCourse/selCourse",
     "pages/classOperate/setName/setName",

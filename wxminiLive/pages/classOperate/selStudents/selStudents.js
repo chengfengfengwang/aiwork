@@ -10,7 +10,8 @@ Page({
    */
   data: {
     students: [],
-    selected:[]
+    selected:[],
+    error: ""
   },
 
   /**
@@ -18,11 +19,19 @@ Page({
    */
   onLoad: function(options) {
     courseId = wx.getStorageSync("selCourseId");
-    if(wx.getStorageSync("createOrEdit")==2){
+    if(wx.getStorageSync("createOrEditClass")==2){
       let selected = JSON.parse(wx.getStorageSync("selStudents"));
-      this.setData({
-        selected
-      })
+      if(wx.getStorageSync("editClassHasChangeCourse")==1){
+        this.setData({
+          selected:[]
+        })
+      }else{
+        this.setData({
+          selected
+        })
+      }
+      
+      
     }
     this.getStudents();
   },
@@ -111,6 +120,12 @@ Page({
     });
   },
   nextStep(){
+    if (this.data.selected.length==0) {
+      this.setData({
+        error: "请将信息填写完整"
+      });
+      return
+    }
     wx.setStorageSync('selStudents',JSON.stringify(this.data.selected));
     wx.navigateTo({
       url: `/pages/classOperate/setName/setName`

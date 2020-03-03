@@ -1,5 +1,6 @@
 .page {
   background-color: #fff;
+  padding-bottom: 120rpx;
 }
 .class_info {
   padding: 32rpx;
@@ -81,10 +82,11 @@
     color: rgba(51, 51, 51, 1);
   }
   .live_item {
+    position: relative;
     width: 686rpx;
-    height: 200rpx;
+    //height: 200rpx;
     margin-bottom: 24rpx;
-    padding: 22rpx 40rpx;
+    padding: 22rpx 40rpx 26rpx 40rpx;
     box-shadow: 0rpx 8rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
     border-radius: 8rpx 24rpx 24rpx 8rpx;
     font-size: 28rpx;
@@ -92,6 +94,21 @@
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-left: 8rpx solid rgba(255, 111, 49, 1);
+    .edit {
+      position: absolute;
+      right: 14rpx;
+      top: 14rpx;
+      width: 72rpx;
+      height: 72rpx;
+      padding: 20rpx;
+    }
+    .done_icon {
+      position: absolute;
+      right: 12rpx;
+      top: 38rpx;
+      width: 124rpx;
+      height: 124rpx;
+    }
     .time {
       margin-bottom: 20rpx;
       font-size: 32rpx;
@@ -117,14 +134,30 @@
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
         color: rgba(255, 255, 255, 1);
+        &.done {
+          background: rgba(0, 0, 0, 0.04);
+          color: rgba(51, 51, 51, 0.48);
+        }
       }
     }
 
     &.done {
       border-left: 8rpx solid rgba(0, 0, 0, 0.24);
-      background: rgba(51, 51, 51, 1);
+      background: #fefbff;
       box-shadow: 0rpx 8rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
       border-radius: 8rpx 0rpx 0rpx 8rpx;
     }
+  }
+  .nolive {
+    text-align: center;
+    image {
+      margin: 152rpx 0 0 32rpx;
+      width: 120rpx;
+      height: 117rpx;
+    }
+    font-size: 32rpx;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(53, 53, 53, 0.6);
   }
 }

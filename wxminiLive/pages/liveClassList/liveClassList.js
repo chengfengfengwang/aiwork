@@ -9,27 +9,54 @@ Page({
    */
   data: {
     acIndex: 0,
-    liveClassList:[
-     
+    acInstrument:'',
+    liveClassList: [
+
     ]
   },
   tabClick(e) {
     this.setData({
-      acIndex: e.currentTarget.dataset.num
+      acIndex: e.currentTarget.dataset.num,
+      acInstrument:e.currentTarget.dataset.item.value
     });
-    this.getliveClass(this.data.acIndex,e.currentTarget.dataset.item.value)
+    this.getliveClass(this.data.acIndex, this.data.acInstrument)
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    this.setData({
+      slideButtons: [{
+        type: 'warn',
+        text: '删除',
+        extClass: 'test',
+        src: '/page/weui/cell/icon_del.svg', // icon的路径
+      }],
+    });
     wx.showLoading({
       title: '加载中',
     });
     this.getInstruments()
   },
-  goClassDetail(e){
-    wx.setStorageSync("createOrEdit",1);
+  slideButtonTap(e) {
+    console.log('slide button tap', e)
+    this.removeLive(e.currentTarget.dataset.id)
+  },
+  removeLive(id){
+    wx.showLoading({
+      title: '加载中',
+    });
+    util
+      .$post(`${v9}/live_info/del_group`, {
+        group_id: id
+      })
+      .then(res => {
+        this.getliveClass(this.data.acIndex, this.data.acInstrument)
+      });
+    
+  },
+  goClassDetail(e) {
+    wx.setStorageSync("createOrEditClass", 1);
     wx.navigateTo({
       url: `/pages/classDetail/classDetail?classId=${e.currentTarget.dataset.id}`
     });
@@ -40,40 +67,39 @@ Page({
         institutions_id: wx.getStorageSync("institutions_id")
       })
       .then(res => {
-        console.log(res);
         let instruments = Object.keys(res.data);
         var res = res.data;
-        instruments = instruments.map((e)=>{
+        instruments = instruments.map((e) => {
           return {
-            name:app.globalData.instruments[e],
-            value:e,
-            courses:res[e]
+            name: app.globalData.instruments[e],
+            value: e,
+            courses: res[e]
           }
         });
         wx.setStorageSync('myInstruments', JSON.stringify(instruments));
-        instruments.forEach((e)=>{
-          e.list=[]
+        instruments.forEach((e) => {
+          e.list = []
         });
         this.setData({
-          liveClassList:instruments
+          liveClassList: instruments
         })
-        this.getliveClass(0,instruments[0].value);
+        this.getliveClass(0, instruments[0].value);
       });
-  }, 
-  getliveClass(index,instrument_type) {
+  },
+  getliveClass(index, instrument_type) {
     wx.showLoading({
       title: '加载中',
     });
     util
       .$get(`${v9}/live_info/group_list`, {
-        instrument_type:instrument_type,
-        page:0,
-        size:20
+        instrument_type: instrument_type,
+        page: 0,
+        size: 20
       })
       .then(res => {
         this.data.liveClassList[index].list = res.data.group_list;
         this.setData({
-          liveClassList:this.data.liveClassList
+          liveClassList: this.data.liveClassList
         });
         wx.hideLoading();
       });
@@ -81,35 +107,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function () { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function () { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {},
+  onReachBottom: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  onShareAppMessage: function () { }
 });

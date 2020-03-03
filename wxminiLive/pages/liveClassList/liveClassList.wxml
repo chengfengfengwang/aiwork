@@ -13,52 +13,31 @@
             </view>
         </view>
         <view class="havedata" wx:else>
-            <view data-id="{{item.id}}" bindtap="goClassDetail"  class="class_item"  wx:for="{{item.list}}" wx:key="index">
-                <view class="avatar_box {{'l'+item.avatar_list.length}}">
-                    <image wx:for="{{item.avatar_list}}"  src="{{item}}" />
-                </view>
-                <view class="info">
-                    <view class="class_name">国院一级考级1班</view>
-                    <view class="course_name">{{item.name}}</view>
-                    <view class="live_time">
-                        <view class="recent">最近直播：{{filter.formatTime(item.lately_live_time)}}</view>
-                        <view class="count_down">{{filter.getCountDown(item.lately_live_time)}}</view>
+            <view data-id="{{item.id}}" bindtap="goClassDetail" wx:for="{{item.list}}" wx:key="index">
+                <mp-slideview buttons="{{slideButtons}}" data-id="{{item.id}}" bindbuttontap="slideButtonTap">
+                    <view class="class_item">
+                        <view class="avatar_box {{'l'+item.avatar_list.length}}">
+                            <image wx:for="{{item.avatar_list}}" src="{{item}}" />
+                        </view>
+                        <view class="info">
+                            <view class="class_name">国院一级考级1班</view>
+                            <view class="course_name">{{item.name}}</view>
+                            <view wx:if="{{item.lately_live_time==0}}" class="live_time">
+                                <view class="recent">暂无直播</view>
+                            </view>
+                            <view wx:else class="live_time">
+                                <view class="recent">
+                                    最近直播：{{filter.formatTime(item.lately_live_time)}}
+                                </view>
+                                <view class="count_down {{item.countdown==0?'done':''}}">
+                                    {{filter.getCountDown(item.lately_live_time)}}
+                                </view>
+                            </view>
+                        </view>
                     </view>
-                </view>
+                </mp-slideview>
             </view>
         </view>
     </view>
     <tabar active-index="0"></tabar>
-    <!-- <view class="live_class">
-        <view class="avatar_box">
-            <image class="logo" src="../../assets/img/logo.png" />
-        </view>
-        <view class="info">
-            <view class="class_name">国院一级考级1班</view>
-            <view class="course_name">中国音乐学院音基考级一级课程</view>
-            <view class="live_time">
-                <view class="recent">最近直播：03-01 10:00</view>
-                <view class="count_down">5天3小时12分</view>
-            </view>
-        </view>
-    </view>
-    <view class="live_class">
-        <view class="avatar_box">
-            <image class="logo" src="../../assets/img/logo.png" />
-        </view>
-        <view class="info">
-            <view class="class_name">国院一级考级1班</view>
-            <view class="course_name">中国音乐学院音基考级一级课程</view>
-            <view class="live_time">
-                <view class="recent">最近直播：03-01 10:00</view>
-                <view class="count_down">5天3小时12分</view>
-            </view>
-        </view>
-    </view> -->
-    <!-- <view class="live_class empty">
-        <view class="empty_main">
-            <image class="logo" src="../../assets/img/noclass.png" />   
-            <view class="empty_text">暂无小班</view>
-        </view>
-    </view> -->
 </view>

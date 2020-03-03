@@ -8,13 +8,14 @@ Page({
   data: {
     Allcourses:[],
     items: [
-    ]
+    ],
+    error: ""
   },
   onLoad: function (options) {
     this.setData({
       Allcourses:  JSON.parse(wx.getStorageSync('myInstruments'))
     });
-    if(wx.getStorageSync("createOrEdit")==2){
+    if(wx.getStorageSync("createOrEditClass")==2){
       courseId = wx.getStorageSync("selCourseId")
       this.checkCourse(courseId)
     }
@@ -40,6 +41,17 @@ Page({
     })
   },
   nextStep(){
+    if (!courseId) {
+      this.setData({
+        error: "请将信息填写完整"
+      });
+      return
+    }
+    if(wx.getStorageSync("createOrEditClass")==2 && courseId!=wx.getStorageSync("selCourseId")){
+      wx.setStorageSync("editClassHasChangeCourse",1);
+    }else{
+      wx.setStorageSync("editClassHasChangeCourse",0);
+    }
     wx.setStorageSync("selCourseId",courseId);
     wx.navigateTo({
       url: `/pages/classOperate/selStudents/selStudents`

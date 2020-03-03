@@ -95,7 +95,7 @@ Page({
     });
     //跳转
     if(this.data.students[index].checked){
-      wx.setStorageSync("createOrEdit",2);
+      wx.setStorageSync("createOrEditClass",2);
       wx.setStorageSync('selStudents',JSON.stringify(this.data.selected));
       wx.redirectTo({
         url: '/pages/classOperate/selStudents/selStudents'

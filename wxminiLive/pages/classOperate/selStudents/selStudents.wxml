@@ -1,5 +1,6 @@
 <!-- pages/classOperate/selStudents/selStudents.wxml -->
 <view class="guide">
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
     <view class="item active">
         <image class="top" src="../../../assets/img/classOperate/course_active.png" />
         <view class="item_text">选择课程</view>
@@ -54,6 +55,6 @@
         </view>
     </scroll-view>
     <view class="next_btn">
-        <button bindtap="nextStep" class="btn" type="default">确认</button>
+        <button bindtap="nextStep" class="mbtn" type="default">下一步</button>
     </view>
 </view>

@@ -13,7 +13,28 @@ const formatTime = date => {
     [hour, minute, second].map(formatNumber).join(":")
   );
 };
+const formatTimeN = date => {
+  date = new Date(date* 1000) ;
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
 
+  return (
+    year + '年' + month + '月' + day + '日' + 
+    " " +
+    [hour, minute].map(formatNumber).join(":")
+  );
+};
+const NformatTime = date => {
+  date = date.replace('年','-');
+  date = date.replace('月','-');
+  date = date.replace('日','-');
+  var times = new Date(date).valueOf()/1000
+  return times
+};
 const formatNumber = n => {
   n = n.toString();
   return n[1] ? n : "0" + n;
@@ -81,6 +102,8 @@ const findInstrumentType = function(id){
 };
 module.exports = {
   formatTime,
+  formatTimeN,
+  NformatTime,
   $get,
   $post,
   findInstrumentType

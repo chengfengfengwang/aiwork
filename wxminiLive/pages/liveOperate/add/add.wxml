@@ -1,5 +1,6 @@
 <!-- pages/liveOperate/add/add.wxml -->
 <view class="page">
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
     <view class="time">
         <view class="time_title">选择直播开始时间</view>
         <view class="time_btn">
@@ -19,20 +20,6 @@
         </radio-group>
     </view>
     <view bindtap="nextStep" class="next_btn">
-        <button class="btn" type="default">确认</button>
+        <button class="mbtn" type="default">确认</button>
     </view>
-    <!-- <view class="container">
-        <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-                <view class="weui-label">日期时间(分)</view>
-            </view>
-            <view class="weui-cell__bd">
-                <picker mode="multiSelector" value="{{dateTimeMinute}}" bindchange="changeDateTimeMinute" bindcolumnchange="changeDateTimeMinuteColumn" range="{{dateTimeMinuteArray}}">
-                    <view class="weui-input">
-                         {{dateTimeMinuteArray[0][dateTimeMinute[0]]}}:{{dateTimeMinuteArray[1][dateTimeMinute[1]]}}-{{dateTimeMinuteArray[2][dateTimeMinute[2]]}} {{dateTimeMinuteArray[3][dateTimeMinute[3]]}}:{{dateTimeMinuteArray[4][dateTimeMinute[4]]}} 
-                    </view>
-                </picker>
-            </view>
-        </view>
-    </view> -->
 </view>

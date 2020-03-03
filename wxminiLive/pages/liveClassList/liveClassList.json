@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "tabar":"/components/tabBar/tabBar"
+    "tabar":"/components/tabBar/tabBar",
+    "mp-cells": "../../components/weui/cells/cells",
+    "mp-cell": "../../components/weui/cell/cell",
+    "mp-slideview": "../../components/weui/slideview/slideview"
   }
 }

@@ -12,6 +12,7 @@ Component({
   },
   methods: {
     addClass() {
+      wx.setStorageSync("createOrEditClass", 1);
       wx.navigateTo({
         url: "/pages/classOperate/selCourse/selCourse"
       });

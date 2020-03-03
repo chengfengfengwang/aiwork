@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputValue: ""
+    inputValue: "",
+    error: ""
   },
  
   /**
@@ -17,7 +18,7 @@ Page({
    */
   onLoad: function(options) {
     instrumentType = util.findInstrumentType(wx.getStorageSync("selCourseId"));
-    if(wx.getStorageSync("createOrEdit")==2){
+    if(wx.getStorageSync("createOrEditClass")==2){
       let selName = wx.getStorageSync("selName");
       this.setData({
         inputValue:selName
@@ -41,12 +42,8 @@ Page({
         instrument_type: instrumentType
       })
       .then(res => {
-        console.log(res);
-        this.setData({
-          students: res.data
-        });
         wx.navigateTo({
-          url: `/pages/classDetail/classDetail`
+          url: `/pages/classDetail/classDetail?classId=${res.data}`
         });
       });
   },
@@ -62,17 +59,19 @@ Page({
         instrument_type: instrumentType
       })
       .then(res => {
-        console.log(res);
-        this.setData({
-          students: res.data
-        });
         wx.navigateTo({
-          url: `/pages/classDetail/classDetail`
+          url: `/pages/classDetail/classDetail?classId=${res.data}`
         });
       });
   },
   nextStep() {
-    if(wx.getStorageSync("createOrEdit")==1){
+    if (!this.data.inputValue) {
+      this.setData({
+        error: "请将信息填写完整"
+      });
+      return
+    }
+    if(wx.getStorageSync("createOrEditClass")==1){
       this.createLiveClass();
     }else{
       this.editLiveClass();

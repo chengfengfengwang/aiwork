@@ -1,5 +1,5 @@
 .page {
-  padding: 20rpx 32rpx;
+  padding: 20rpx 32rpx 120rpx 32rpx;
   background-color: #fff;
 }
 .search {

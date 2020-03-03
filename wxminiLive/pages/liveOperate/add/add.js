@@ -17,8 +17,8 @@ Page({
     startYear: 2020,
     endYear: 2050,
     resultTimeValue: "请选择直播开始时间",
-    lessons: [
-    ]
+    lessons: [],
+    error: ""
   },
 
   onLoad: function(option) {
@@ -43,10 +43,12 @@ Page({
       dateTimeMinute: obj2.dateTime,
       dateTimeMinuteArray: obj2.dateTimeArray
     });
+
+    this.editFormatTime();
   },
-  radioChange: function (e) {
-    lessonId = e.detail.value
-    
+  radioChange: function(e) {
+    console.log(e);
+    lessonId = e.detail.value;
   },
   getLessons() {
     wx.showLoading({
@@ -58,19 +60,43 @@ Page({
       })
       .then(res => {
         this.setData({
-          lessons:res.data,
+          lessons: res.data
         });
+        this.lessonCheck();
         wx.hideLoading();
       });
   },
-  cteateLive() {
+  editFormatTime() {
+    if (wx.getStorageSync("createOrEditLive") == 2) {
+      let Live_start_time = wx.getStorageSync("Live_start_time");
+      this.setData({
+        resultTimeValue: util.formatTimeN(Live_start_time)
+      });
+      console.log(this.data.resultTimeValue);
+    }
+  },
+  lessonCheck() {
+    if (wx.getStorageSync("createOrEditLive") == 2) {
+      lessonId = wx.getStorageSync("Live_lesson_id");
+      let lessons = this.data.lessons;
+      for (var i = 0; i < lessons.length; i++) {
+        if (lessons[i].lesson_id == lessonId) {
+          lessons[i].checked = true;
+        }
+      }
+      this.setData({
+        lessons: this.data.lessons
+      });
+    }
+  },
+  editLive() {
     wx.showLoading({
       title: "加载中"
     });
     util
-      .$post(`${v9}/live_info/add_plan`, {
-        group_id: classId,
-        start_time: new Date(oTempTime).valueOf()/1000,
+      .$post(`${v9}/live_info/up_plan`, {
+        id: wx.getStorageSync("Live_id"),
+        start_time: util.NformatTime(this.data.resultTimeValue),
         lesson_id: lessonId
       })
       .then(res => {
@@ -80,8 +106,37 @@ Page({
         });
       });
   },
-  nextStep() {
-    this.cteateLive();
+  cteateLive() {
+    wx.showLoading({
+      title: "加载中"
+    });
+    util
+      .$post(`${v9}/live_info/add_plan`, {
+        group_id: classId,
+        start_time: util.NformatTime(this.data.resultTimeValue),
+        lesson_id: lessonId
+      })
+      .then(res => {
+        wx.hideLoading();
+        wx.navigateTo({
+          url: `/pages/classDetail/classDetail?classId=${classId}`
+        });
+      });
+  },
+  nextStep() {    
+    if (!lessonId || this.data.resultTimeValue == "请选择直播开始时间") {
+      console.log(this.data.resultTimeValue == "请选择直播开始时间")
+      this.setData({
+        error: "请将信息填写完整"
+      });
+      return
+    }
+    
+    if (wx.getStorageSync("createOrEditLive") == 1) {
+      this.cteateLive();
+    } else if (wx.getStorageSync("createOrEditLive") == 2) {
+      this.editLive();
+    }
   },
   changeDateTimeMinute(e) {
     console.log("changeDateTimeMinute: " + e.detail.value);
@@ -95,13 +150,6 @@ Page({
         tempTime += `${timeGroup}:`;
       } else {
         tempTime += `${timeGroup} `;
-      };
-      if (i == 3) {
-        oTempTime += `${timeGroup}:`;
-      } else if(i == 4){
-        oTempTime += `${timeGroup}`;
-      }else {
-        oTempTime += timeGroup.substring(0, timeGroup.length - 1) + ' ';
       }
     }
     this.setData({ dateTime1: e.detail.value, resultTimeValue: tempTime });

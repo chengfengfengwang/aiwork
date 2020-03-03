@@ -19,6 +19,6 @@
         </view>
     </view>
     <!-- <view class="next_btn">
-        <button class="btn" type="default">确认</button>
+        <button class="mbtn" type="default">确认</button>
     </view> -->
 </view>

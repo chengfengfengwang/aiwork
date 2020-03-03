@@ -16,23 +16,34 @@
                         <view class="phone">{{item.phone}}</view>
                     </view>
                 </view>
-               
             </view>
         </view>
     </view>
     <view class="gap"></view>
     <view class="live_info">
         <view class="live_title">小班直播计划表</view>
-        <view class="live_item" wx:for="{{liveList}}">
-            <view class="time">{{filter.formatTime(item.start_time)}}</view>
-            <view class="line1">
-                <text>直播倒计时</text>
-                <text class="count_down">{{filter.getCountDown(item.start_time)}}</text>
+        <view wx:if="{{liveList.length>0}}">
+            <view class="live_item {{item.completed==1?'done':''}}" wx:key="index" wx:for="{{liveList}}">
+                <image wx:if="{{item.completed==1}}" class="done_icon" src="../../assets/img/classDetail/done.png" />
+                <image data-liveid="{{item.id}}" data-lesson_id="{{item.lesson_id}}" data-start_time="{{item.start_time}}" bindtap="editLive" wx:else class="edit" src="../../assets/img/classDetail/edit.png" />
+                <view class="time">{{filter.formatTime(item.start_time)}}</view>
+                <view class="line1">
+                    <view>直播倒计时</view>
+                    <view class="count_down {{item.countdown==0?'done':''}}">
+                        {{filter.getCountDown(item.start_time)}}
+                    </view>
+                </view>
+                <view class="line2">{{item.lesson_name}}</view>
             </view>
-            <view class="line2">第二课：什么是二分音符</view>
+        </view>
+        <view wx:else>
+            <view class="nolive">
+                <image src="../../assets/img/classDetail/nolive.png" />
+                <view>暂无直播计划</view>
+            </view>
         </view>
     </view>
-     <view bindtap="createLive" class="next_btn">
-        <button class="btn" type="default">新建直播计划</button>
+    <view bindtap="createLive" class="next_btn">
+        <button class="mbtn" type="default">新建直播计划</button>
     </view>
 </view>
