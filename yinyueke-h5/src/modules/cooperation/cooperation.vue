@@ -295,7 +295,7 @@ html {
 }
 .tel_box {
   width: 345px;
-  height: 519px;
+  height: 524px;
   //height: 320px;
   margin: auto;
   background: url("../../assets/img/cooperation/box3.png") no-repeat center/100%
