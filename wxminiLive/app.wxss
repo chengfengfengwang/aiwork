@@ -44,6 +44,7 @@ web-view {
 }
 .next_btn {
   position: fixed;
+  z-index: 99;
   padding: 22rpx 0 32rpx 0;
   bottom: 0rpx;
   width: 100%;

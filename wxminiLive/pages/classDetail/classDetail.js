@@ -13,7 +13,13 @@ Page({
   data: {
     userList: [],
     className: "",
-    liveList: []
+    liveList: [],
+    slideButtons: [{
+      type: 'warn',
+      text: '删除',
+      extClass: 'test',
+      src: '/page/weui/cell/icon_del.svg', // icon的路径
+    }],
   },
 
   /**
@@ -24,7 +30,21 @@ Page({
     classId = options.classId;
     this.getClassDetail();
   },
- 
+  slideButtonTap(e) {
+    this.removeLivePlan(e.currentTarget.dataset.planid)
+  },
+  removeLivePlan(planId){
+      wx.showLoading({
+        title: "加载中"
+      });
+      util
+        .$post(`${v9}/live_info/del_plan`, {
+          plan_id: planId
+        })
+        .then(res => {
+          this.getClassDetail()
+        });
+  },
   getClassDetail(index, instrument_type) {
     wx.showLoading({
       title: "加载中"
@@ -44,6 +64,7 @@ Page({
       });
   },
   editClass() {
+    wx.setStorageSync("classId", classId);
     wx.setStorageSync("createOrEditClass", 2);
     wx.setStorageSync("selCourseId", courseId);
     wx.setStorageSync("selStudents", JSON.stringify(this.data.userList));

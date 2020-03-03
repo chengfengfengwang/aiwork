@@ -94,8 +94,8 @@
 }
 .live_info .live_item .edit {
   position: absolute;
-  right: 14rpx;
-  top: 14rpx;
+  right: -20rpx;
+  top: -10rpx;
   width: 72rpx;
   height: 72rpx;
   padding: 20rpx;

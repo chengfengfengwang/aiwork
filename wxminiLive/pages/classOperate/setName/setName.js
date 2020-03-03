@@ -3,7 +3,7 @@ const util = require("../../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
 const v9 = getApp().globalData.v9;
 
-let instrumentType='';
+let instrumentType = "";
 Page({
   /**
    * 页面的初始数据
@@ -12,17 +12,17 @@ Page({
     inputValue: "",
     error: ""
   },
- 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     instrumentType = util.findInstrumentType(wx.getStorageSync("selCourseId"));
-    if(wx.getStorageSync("createOrEditClass")==2){
+    if (wx.getStorageSync("createOrEditClass") == 2) {
       let selName = wx.getStorageSync("selName");
       this.setData({
-        inputValue:selName
-      })
+        inputValue: selName
+      });
     }
   },
   bindKeyInput: function(e) {
@@ -30,31 +30,31 @@ Page({
       inputValue: e.detail.value
     });
   },
-  editLiveClass(){
-    let selStudents =  JSON.parse( wx.getStorageSync("selStudents"));
-    let studentIds = selStudents.map(e=>e.uid);
+  editLiveClass() {
+    let selStudents = JSON.parse(wx.getStorageSync("selStudents"));
+    let studentIds = selStudents.map(e => e.uid);
+    let classId = wx.getStorageSync("classId")
     util
       .$post(`${v9}/live_info/up_group`, {
-        name:this.data.inputValue,
+        id: classId,
+        name: this.data.inputValue,
         students: studentIds,
-        course_id:wx.getStorageSync("selCourseId"), 
-        teacher_id: wx.getStorageSync("uid"),
-        instrument_type: instrumentType
+        course_id: wx.getStorageSync("selCourseId")
       })
       .then(res => {
         wx.navigateTo({
-          url: `/pages/classDetail/classDetail?classId=${res.data}`
+          url: `/pages/classDetail/classDetail?classId=${classId}`
         });
       });
   },
   createLiveClass() {
-    let selStudents =  JSON.parse( wx.getStorageSync("selStudents"));
-    let studentIds = selStudents.map(e=>e.uid);
+    let selStudents = JSON.parse(wx.getStorageSync("selStudents"));
+    let studentIds = selStudents.map(e => e.uid);
     util
       .$post(`${v9}/live_info/add_group`, {
-        name:this.data.inputValue,
+        name: this.data.inputValue,
         students: studentIds,
-        course_id:wx.getStorageSync("selCourseId"), 
+        course_id: wx.getStorageSync("selCourseId"),
         teacher_id: wx.getStorageSync("uid"),
         instrument_type: instrumentType
       })
@@ -69,14 +69,13 @@ Page({
       this.setData({
         error: "请将信息填写完整"
       });
-      return
+      return;
     }
-    if(wx.getStorageSync("createOrEditClass")==1){
+    if (wx.getStorageSync("createOrEditClass") == 1) {
       this.createLiveClass();
-    }else{
+    } else {
       this.editLiveClass();
     }
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
