@@ -10,6 +10,8 @@ import ClassInfo from '../views/ClassInfo.vue'
 import OpenClassYinji from '../views/OpenClassYinji.vue'
 import OpenClassAi from '../views/OpenClassAi.vue'
 import Group from '../views/Group.vue'
+import OpenVip from '../views/OpenVip'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -50,6 +52,11 @@ const router = new Router({
           path: '/User/Group',
           component: Group,
           meta: { parentMenu: 'User' }   
+        },
+        {
+          name: 'OpenVip',
+          path: '/OpenVip',
+          component: OpenVip,
         }
       ]
     },
