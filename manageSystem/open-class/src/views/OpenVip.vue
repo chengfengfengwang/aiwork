@@ -20,7 +20,7 @@
 
      <div>
       <h2>音乐壳 vip开通</h2>
-      <Input v-model="yinjiForm.phone" placeholder="输入uid" style="width: 300px" />
+      <Input v-model="yinjiForm.phone" placeholder="输入手机号" style="width: 300px" />
       <Button type="info" @click="acYinji">开通</Button>
     </div>
   </div>
