@@ -1,6 +1,5 @@
 const util = require("../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 Page({
   /**
    * 页面的初始数据
@@ -12,6 +11,9 @@ Page({
     vcode: "",
     vcodeText: "获取验证码",
     loginBtnActive: false
+  },
+  onLoad: function(options) {
+    console.log('love3')
   },
   phoneInput(e) {
     this.setData({
@@ -40,7 +42,7 @@ Page({
     let vcodeText = this.data.vcodeText;
     if (vcodeText === "重新获取" || vcodeText === "获取验证码") {
       util
-        .$post(`${v9}/tx_sms`, {
+        .$post(`${baseUrl}/tx_sms`, {
           phone: this.data.phone
         })
         .then(res => {
@@ -70,7 +72,7 @@ Page({
       title: '加载中',
     });
     util
-      .$post(`${v9}/phone_login`, {
+      .$post(`${baseUrl}/phone_login`, {
         phone: this.data.phone,
         code: this.data.vcode
       })
@@ -110,9 +112,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    
-  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

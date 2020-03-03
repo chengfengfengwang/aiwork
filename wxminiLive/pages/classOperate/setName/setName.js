@@ -1,7 +1,6 @@
 // pages/classOperate/setName/setName.js
 const util = require("../../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 
 let instrumentType = "";
 Page({
@@ -35,23 +34,26 @@ Page({
     let studentIds = selStudents.map(e => e.uid);
     let classId = wx.getStorageSync("classId")
     util
-      .$post(`${v9}/live_info/up_group`, {
+      .$post(`${baseUrl}/live_info/up_group`, {
         id: classId,
         name: this.data.inputValue,
         students: studentIds,
         course_id: wx.getStorageSync("selCourseId")
       })
       .then(res => {
-        wx.navigateTo({
-          url: `/pages/classDetail/classDetail?classId=${classId}`
+        wx.reLaunch({
+          url: "/pages/liveClassList/liveClassList" 
         });
+        // wx.navigateTo({
+        //   url: `/pages/classDetail/classDetail?classId=${classId}`
+        // });
       });
   },
   createLiveClass() {
     let selStudents = JSON.parse(wx.getStorageSync("selStudents"));
     let studentIds = selStudents.map(e => e.uid);
     util
-      .$post(`${v9}/live_info/add_group`, {
+      .$post(`${baseUrl}/live_info/add_group`, {
         name: this.data.inputValue,
         students: studentIds,
         course_id: wx.getStorageSync("selCourseId"),
@@ -59,9 +61,12 @@ Page({
         instrument_type: instrumentType
       })
       .then(res => {
-        wx.navigateTo({
-          url: `/pages/classDetail/classDetail?classId=${res.data}`
+        wx.reLaunch({
+          url: "/pages/liveClassList/liveClassList" 
         });
+        // wx.navigateTo({
+        //   url: `/pages/classDetail/classDetail?classId=${res.data}`
+        // });
       });
   },
   nextStep() {

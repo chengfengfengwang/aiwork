@@ -35,8 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    v9:'http://api.agency.immusician.com/v9',
-    baseUrl:'',
+    baseUrl:'http://api.agency.immusician.com/v9',
     instruments:[
       '吉他',
       '尤克里里',

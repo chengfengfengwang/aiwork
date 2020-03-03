@@ -4,7 +4,7 @@
     <view class="class_info">
         <view class="class_name">{{className}}</view>
         <view class="group">
-            <view class="group_title">小组成员</view>
+            <view class="group_title">小班成员</view>
             <view class="edit_btn" bindtap="editClass">修改信息</view>
             <view class="user_wrapper">
                 <view wx:for="{{userList}}" wx:key="index" class="user">

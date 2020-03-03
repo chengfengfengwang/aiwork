@@ -2,7 +2,6 @@
 //获取应用实例
 const util = require("../../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 const app = getApp();
 
 const dateTimePicker = require("../../../utils/dateTimePicker.js");
@@ -55,7 +54,7 @@ Page({
       title: "加载中"
     });
     util
-      .$get(`${v9}/live_info/course_detail`, {
+      .$get(`${baseUrl}/live_info/course_detail`, {
         course_id: courseId
       })
       .then(res => {
@@ -94,16 +93,19 @@ Page({
       title: "加载中"
     });
     util
-      .$post(`${v9}/live_info/up_plan`, {
+      .$post(`${baseUrl}/live_info/up_plan`, {
         id: wx.getStorageSync("Live_id"),
         start_time: util.NformatTime(this.data.resultTimeValue),
         lesson_id: lessonId
       })
       .then(res => {
         wx.hideLoading();
-        wx.navigateTo({
-          url: `/pages/classDetail/classDetail?classId=${classId}`
+        wx.reLaunch({
+          url: "/pages/liveClassList/liveClassList" 
         });
+        // wx.navigateTo({
+        //   url: `/pages/classDetail/classDetail?classId=${classId}`
+        // });
       });
   },
   cteateLive() {
@@ -111,21 +113,23 @@ Page({
       title: "加载中"
     });
     util
-      .$post(`${v9}/live_info/add_plan`, {
+      .$post(`${baseUrl}/live_info/add_plan`, {
         group_id: classId,
         start_time: util.NformatTime(this.data.resultTimeValue),
         lesson_id: lessonId
       })
       .then(res => {
         wx.hideLoading();
-        wx.navigateTo({
-          url: `/pages/classDetail/classDetail?classId=${classId}`
+        wx.reLaunch({
+          url: "/pages/liveClassList/liveClassList" 
         });
+        // wx.navigateTo({
+        //   url: `/pages/classDetail/classDetail?classId=${classId}`
+        // });
       });
   },
   nextStep() {    
-    if (!lessonId || this.data.resultTimeValue == "请选择直播开始时间") {
-      console.log(this.data.resultTimeValue == "请选择直播开始时间")
+    if (!lessonId || this.data.resultTimeValue == "请选择直播开始时间" || !this.data.resultTimeValue) {
       this.setData({
         error: "请将信息填写完整"
       });
@@ -139,7 +143,7 @@ Page({
     }
   },
   changeDateTimeMinute(e) {
-    console.log("changeDateTimeMinute: " + e.detail.value);
+    //console.log("changeDateTimeMinute: " + e.detail.value);
 
     let tempTime = "";
     for (var i = 0; i < 5; i++) {

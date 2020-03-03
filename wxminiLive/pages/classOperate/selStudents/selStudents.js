@@ -1,7 +1,6 @@
 // pages/classOperate/selStudents/selStudents.js
 const util = require("../../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 
 let courseId = "";
 Page({
@@ -19,7 +18,7 @@ Page({
    */
   onLoad: function(options) {
     courseId = wx.getStorageSync("selCourseId");
-    if(wx.getStorageSync("createOrEditClass")==2){
+    if(wx.getStorageSync("createOrEditClass")==2 || options.from=='search'){
       let selected = JSON.parse(wx.getStorageSync("selStudents"));
       if(wx.getStorageSync("editClassHasChangeCourse")==1){
         this.setData({
@@ -49,7 +48,7 @@ Page({
       title: '加载中',
     });
     util
-      .$get(`${v9}/live_info/users`, {
+      .$get(`${baseUrl}/live_info/users`, {
         institutions_id: wx.getStorageSync("institutions_id"),
         course_id: courseId,
         page: 0,

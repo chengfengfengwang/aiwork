@@ -20,8 +20,8 @@
                             <image wx:for="{{item.avatar_list}}" src="{{item}}" />
                         </view>
                         <view class="info">
-                            <view class="class_name">国院一级考级1班</view>
-                            <view class="course_name">{{item.name}}</view>
+                            <view class="class_name">{{item.name}}</view> 
+                            <view class="course_name">{{item.course_name}}</view>
                             <view wx:if="{{item.lately_live_time==0}}" class="live_time">
                                 <view class="recent">暂无直播</view>
                             </view>

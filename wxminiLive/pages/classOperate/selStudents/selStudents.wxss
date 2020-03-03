@@ -40,7 +40,6 @@
   color: #ff6f31;
 }
 .page {
-  padding: 0rpx 0rpx;
   background-color: #fff;
 }
 .search {
@@ -120,6 +119,7 @@
 }
 .user_wrapper {
   height: 642rpx;
+  padding-bottom: 120rpx;
 }
 .user_wrapper .user {
   margin: 30rpx;

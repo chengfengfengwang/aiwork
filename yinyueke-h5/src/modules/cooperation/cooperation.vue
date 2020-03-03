@@ -97,6 +97,16 @@
           </div>
           <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'13810352513'">复制号码</button>
         </div>
+        <div class="item">
+          <img class="teacher_avatar xin" src="../../assets/img/cooperation/area5.png" alt>
+          <div style="color:#FFA006" class="item_title">线上机构</div>
+          <div class="name">欣慰老师</div>
+          <div class="tel">
+            16619868360
+            <span class="wx">(微信同号)</span>
+          </div>
+          <button @click="copyWx" class="item_btn copy_wx" :data-clipboard-text="'16619868360'">复制号码</button>
+        </div>
       </div>
     </div>
   </div>
@@ -285,7 +295,7 @@ html {
 }
 .tel_box {
   width: 345px;
-  height: 419px;
+  height: 519px;
   //height: 320px;
   margin: auto;
   background: url("../../assets/img/cooperation/box3.png") no-repeat center/100%
@@ -300,6 +310,10 @@ html {
       position: absolute;
       left: 5px;
       top: 19px;
+    }
+    .teacher_avatar.xin{
+      width: 13px;
+       height: 12px;
     }
     &:not(:last-child){
         .px1-bottom-ffe6e6;

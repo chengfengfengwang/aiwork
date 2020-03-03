@@ -1,7 +1,6 @@
 // pages/classOperate/selStudents/selStudents.js
 const util = require("../../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 Page({
   /**
    * 页面的初始数据
@@ -40,7 +39,7 @@ Page({
       title: '加载中',
     });
     util
-      .$get(`${v9}/live_info/users`, {
+      .$get(`${baseUrl}/live_info/users`, {
         institutions_id: wx.getStorageSync("institutions_id"),
         course_id: wx.getStorageSync("selCourseId"),
         page: 0,
@@ -95,10 +94,9 @@ Page({
     });
     //跳转
     if(this.data.students[index].checked){
-      wx.setStorageSync("createOrEditClass",2);
       wx.setStorageSync('selStudents',JSON.stringify(this.data.selected));
       wx.redirectTo({
-        url: '/pages/classOperate/selStudents/selStudents'
+        url: '/pages/classOperate/selStudents/selStudents?from=search'
       })
     }
     

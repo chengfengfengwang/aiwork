@@ -1,6 +1,5 @@
 const util = require("../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 const app = getApp()
 
 Page({
@@ -47,7 +46,7 @@ Page({
       title: '加载中',
     });
     util
-      .$post(`${v9}/live_info/del_group`, {
+      .$post(`${baseUrl}/live_info/del_group`, {
         group_id: id
       })
       .then(res => {
@@ -56,14 +55,13 @@ Page({
     
   },
   goClassDetail(e) {
-    wx.setStorageSync("createOrEditClass", 1);
     wx.navigateTo({
       url: `/pages/classDetail/classDetail?classId=${e.currentTarget.dataset.id}`
     });
   },
   getInstruments() {
     util
-      .$get(`${v9}/live_info/course`, {
+      .$get(`${baseUrl}/live_info/course`, {
         institutions_id: wx.getStorageSync("institutions_id")
       })
       .then(res => {
@@ -91,7 +89,7 @@ Page({
       title: '加载中',
     });
     util
-      .$get(`${v9}/live_info/group_list`, {
+      .$get(`${baseUrl}/live_info/group_list`, {
         instrument_type: instrument_type,
         page: 0,
         size: 999

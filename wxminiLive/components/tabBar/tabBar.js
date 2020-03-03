@@ -18,12 +18,12 @@ Component({
       });
     },
     goClassList() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: "/pages/liveClassList/liveClassList"
       });
     },
     goHelp() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: "/pages/help/help"
       });
     }

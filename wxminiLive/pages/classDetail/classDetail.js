@@ -1,7 +1,6 @@
 // pages/classDetail/classDetail.js
 const util = require("../../utils/util.js");
 const baseUrl = getApp().globalData.baseUrl;
-const v9 = getApp().globalData.v9;
 const app = getApp();
 
 let classId = "";
@@ -38,7 +37,7 @@ Page({
         title: "加载中"
       });
       util
-        .$post(`${v9}/live_info/del_plan`, {
+        .$post(`${baseUrl}/live_info/del_plan`, {
           plan_id: planId
         })
         .then(res => {
@@ -50,7 +49,7 @@ Page({
       title: "加载中"
     });
     util
-      .$get(`${v9}/live_info/group_detail`, {
+      .$get(`${baseUrl}/live_info/group_detail`, {
         group_id: classId
       })
       .then(res => {

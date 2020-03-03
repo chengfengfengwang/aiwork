@@ -40,6 +40,10 @@
 .guide .item.active {
   color: #ff6f31;
 }
+.page {
+  background-color: #fff;
+  padding-bottom: 120rpx;
+}
 .course_type {
   padding: 32rpx;
   background-color: #fff;

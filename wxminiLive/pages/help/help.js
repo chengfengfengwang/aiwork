@@ -28,7 +28,7 @@ Page({
   },
 logout(){
   wx.clearStorage()
-  wx.navigateTo({
+  wx.reLaunch({
     url: "/pages/login/login" 
   });
 },

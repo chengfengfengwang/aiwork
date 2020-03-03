@@ -29,10 +29,13 @@ const formatTimeN = date => {
   );
 };
 const NformatTime = date => {
-  date = date.replace('年','-');
-  date = date.replace('月','-');
-  date = date.replace('日','-');
-  var times = new Date(date).valueOf()/1000
+  date = date.replace('年 ','/');
+  date = date.replace('月 ','/');
+  date = date.replace('日','');
+  console.log(date)
+  console.log(new Date(date))
+  var times = (new Date(date)).valueOf()/1000;
+  console.log(times)
   return times
 };
 const formatNumber = n => {
