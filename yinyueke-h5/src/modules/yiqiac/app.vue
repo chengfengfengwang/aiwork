@@ -51,11 +51,14 @@ body {
 
 html {
   @media screen and (min-width: 1025px) {
-    //.font-size(5);
-    font-size: 24px;
-    height: 969px;
-    width: 600px;
+    font-size: 20px;
+    height: 580px !important;
+    width: 400px;
     margin: auto;
+    .page{
+       min-height: 580px !important;
+       max-height: 580px !important
+    }
   }
 }
 </style>
