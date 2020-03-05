@@ -48,4 +48,7 @@
     <view bindtap="createLive" class="next_btn">
         <button class="mbtn" type="default">新建直播计划</button>
     </view>
+    <view bindtap="goHome" class="home">
+        <image src="../../assets/img/classDetail/home.png" />
+    </view>
 </view>

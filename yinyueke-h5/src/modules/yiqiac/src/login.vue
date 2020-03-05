@@ -124,27 +124,6 @@ export default {
 </script>
 <style lang="less">
 @import url("./../../../common/common.less");
-.font-size(@sizeValue:16) {
-  @vw: 16 / 375 * 100;
-  @result: @sizeValue / 16 * @vw;
-  font-size: ~"@{result}vw";
-}
-html {
-  .font-size(16);
-}
-html {
-  @media screen and (max-width: 320px) {
-    .font-size(16);
-  }
-  @media screen and (min-width: 480px) {
-    .font-size(13);
-  }
-}
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
 .page {
   width: 100%;
   min-height: 100vh;
@@ -183,6 +162,10 @@ body {
   position: absolute;
   left: 0;
   top: 32%;
+  //top: 220px;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    top: 36%;
+  }
   width: 100%;
   padding: 0 30px;
   input {
@@ -255,7 +238,7 @@ body {
   }
 
   .reg_btn {
-    width: 314px;
+    //width: 314px;
     height: 50px;
     margin-left: auto;
     margin-right: auto;

@@ -7,8 +7,8 @@ Page({
   data: {
     userAcount:'',
     section1:[
-      '选择班级成员',
       '选择班级对应课程',
+      '选择班级成员',
       '班级名称命名'
     ],
     section2:[

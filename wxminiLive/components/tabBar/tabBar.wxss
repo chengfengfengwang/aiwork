@@ -21,6 +21,10 @@
 .bar .item {
   width: 33.333%;
   text-align: center;
+  color: rgba(53, 53, 53, 0.3);
+}
+.bar .item.active {
+  color: #ff6f31;
 }
 .bar .item .icon {
   width: 48rpx;
@@ -35,5 +39,4 @@
   font-size: 20rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
-  color: #ff6f31;
 }

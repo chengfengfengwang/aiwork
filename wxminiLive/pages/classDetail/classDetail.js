@@ -89,6 +89,11 @@ Page({
       url: `/pages/liveOperate/add/add?classId=${classId}&courseId=${courseId}`
     });
   },
+  goHome(){
+    wx.reLaunch({
+      url: "/pages/liveClassList/liveClassList" 
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

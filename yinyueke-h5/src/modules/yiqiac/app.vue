@@ -15,6 +15,7 @@ export default {
   },
   components: {},
   created() {
+    console.log('vvv')
     this.isIphonex = isIphonex();
   },
   methods: {
@@ -34,14 +35,11 @@ export default {
 html {
   .font-size(16);
 }
-// html {
-//   @media screen and (max-width: 320px) {
-//     .font-size(16);
-//   }
-//   @media screen and (min-width: 480px) {
-//     .font-size(13);
-//   }
-// }
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
 * {
   box-sizing: border-box;
@@ -49,6 +47,16 @@ html {
 #main {
   position: relative;
   font-size: 0;
+}
+
+html {
+  @media screen and (min-width: 1025px) {
+    //.font-size(5);
+    font-size: 24px;
+    height: 969px;
+    width: 600px;
+    margin: auto;
+  }
 }
 </style>
 
