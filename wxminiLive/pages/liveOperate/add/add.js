@@ -100,12 +100,12 @@ Page({
       })
       .then(res => {
         wx.hideLoading();
-        wx.reLaunch({
-          url: "/pages/liveClassList/liveClassList" 
-        });
-        // wx.navigateTo({
-        //   url: `/pages/classDetail/classDetail?classId=${classId}`
+        // wx.reLaunch({
+        //   url: "/pages/liveClassList/liveClassList" 
         // });
+        wx.navigateTo({
+          url: `/pages/classDetail/classDetail?classId=${classId}`
+        });
       });
   },
   cteateLive() {
@@ -120,12 +120,12 @@ Page({
       })
       .then(res => {
         wx.hideLoading();
-        wx.reLaunch({
-          url: "/pages/liveClassList/liveClassList" 
-        });
-        // wx.navigateTo({
-        //   url: `/pages/classDetail/classDetail?classId=${classId}`
+        // wx.reLaunch({
+        //   url: "/pages/liveClassList/liveClassList" 
         // });
+        wx.navigateTo({
+          url: `/pages/classDetail/classDetail?classId=${classId}`
+        });
       });
   },
   nextStep() {    
