@@ -107,6 +107,7 @@ module.exports = {
          //音乐壳证书
          zsYyk:'src/modules/zsYyk/app.js',
          qr1:'src/modules/qr1/qr1.js',
+         facChannel:'src/modules/facChannel/app.js'
          
     }   
 }
