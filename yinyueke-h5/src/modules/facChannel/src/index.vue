@@ -15,7 +15,7 @@
       <div class="input_wrapper course_option">
         <select required v-model="selInstrument">
           <!-- <option disabled value>请选择</option> -->
-          <option value disabled selected>请选择课程</option>
+          <option value disabled selected>选择课程品类</option>
           <option
             v-for="course in instrumentList"
             :key="course.value"
