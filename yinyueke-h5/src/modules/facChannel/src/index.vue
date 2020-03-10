@@ -231,7 +231,9 @@ export default {
       font-family: PingFang-SC-Regular, PingFang-SC;
       font-weight: 400;
       //color: rgba(255, 87, 38, 1);
-      color: rgba(153, 153, 153, 1);
+      //color: rgba(153, 153, 153, 1);
+      color:#9726FF
+      
       //border-left: 1px solid #f1f1f1;
     }
   }
