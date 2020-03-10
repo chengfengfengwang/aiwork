@@ -23,7 +23,7 @@
           >{{course.name}}</option>
         </select>
       </div>
-      <div @click="reg" class="reg_btn">免费领取</div>
+      <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
     </div>
   </div>
 </template>
@@ -50,7 +50,8 @@ export default {
           name: "尤克里里",
           value: "2"
         }
-      ]
+      ],
+      btnActive:false
     };
   },
   created() {
@@ -60,6 +61,13 @@ export default {
     this.inputevent();
   },
   methods: {
+    btnChange(){
+      if(this.form.code && this.form.phone && this.selInstrument){
+        this.btnActive=true
+      }else{
+        this.btnActive=false
+      }
+    },
     inputevent() {
       var inputArr = document.querySelectorAll("input");
       inputArr.forEach(function(ele) {
@@ -89,6 +97,9 @@ export default {
         });
     },
     reg() {
+      if(!this.btnActive){
+        return
+      }
       this.form.instrument = this.selInstrument;
       //  console.log(this.form);
       //  return;
@@ -128,6 +139,17 @@ export default {
         }
       }, 1000);
     }
+  },
+  watch:{
+    form:{ //监听的对象
+     deep:true, //深度监听设置为 true
+     handler:function(newV,oldV){
+       this.btnChange()
+     }
+   },
+   selInstrument(){
+     this.btnChange()
+   }
   }
 };
 </script>
@@ -213,11 +235,11 @@ export default {
 
   .phone {
     background: url("../../../assets/img/facChannel/phone.png") no-repeat left
-      4.7% center/4.7% 45%;
+      6.7% center/4.7% 45%;
   }
   .v_code {
     background: url("../../../assets/img/facChannel/safe.png") no-repeat left
-      4.7% center/6.2% 45%;
+      6.7% center/6.2% 45%;
     .v_code_btn {
       position: absolute;
       right: 10px;
@@ -239,7 +261,7 @@ export default {
   }
   .course_option {
     background: url("../../../assets/img/facChannel/book.png") no-repeat left
-      4.7% center/6.2% 38%;
+     6.7% center/6.2% 38%;
     margin-bottom: 30px;
   }
   .reg_btn {
@@ -258,7 +280,10 @@ export default {
     color: rgba(255, 255, 255, 1);
     line-height: 50px;
     text-align: center;
-    opacity: 0.75;
+    opacity: 0.6;
+  }
+  .reg_btn.active{
+    opacity: 1;
   }
 }
 .d1 {
