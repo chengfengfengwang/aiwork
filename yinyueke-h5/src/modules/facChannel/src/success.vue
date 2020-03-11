@@ -13,7 +13,7 @@
         <div class="qr_section">
           <img class="qr_bg" src="../../../assets/img/facChannel/suc_qr.png" alt />
           <img
-            src="../../../assets/img/facChannel/qr.jpg"
+            :src="qrSrc"
             alt
             class="qr"
           />
@@ -27,11 +27,21 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      courses: []
+      courses: [],
+      qrSrc:''
     };
   },
   created() {
+    //{0: "吉他", 1: "尤克里里", 2: "拇指琴"}
     this.courses = JSON.parse(sessionStorage.getItem("acCourse"));
+    this.acInstrument = sessionStorage.getItem("acInstrument");
+    if(this.acInstrument==0){
+      this.qrSrc = require('../../../assets/img/facChannel/an-jt.jpg')
+    }else if(this.acInstrument==1){
+      this.qrSrc = require('../../../assets/img/facChannel/an-uk.jpg')
+    }else if(this.acInstrument==2){
+      this.qrSrc = require('../../../assets/img/facChannel/an-mzq.jpg')
+    }
   },
   mounted() {},
   methods: {

@@ -107,6 +107,7 @@ export default {
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {
           if (!res.error) {
+            sessionStorage.setItem('acInstrument',this.form.instrument)
             sessionStorage.setItem('acCourse',JSON.stringify(res.data.words))
             this.$router.push("/success");
            
