@@ -29,6 +29,8 @@
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import { Toast } from "vant";
+
 export default {
   data() {
     return {
@@ -46,12 +48,12 @@ export default {
           name: "尤克里里",
           value: "1"
         },
-          {
+        {
           name: "尤克里里",
           value: "2"
         }
       ],
-      btnActive:false
+      btnActive: false
     };
   },
   created() {
@@ -61,11 +63,11 @@ export default {
     this.inputevent();
   },
   methods: {
-    btnChange(){
-      if(this.form.code && this.form.phone && this.selInstrument){
-        this.btnActive=true
-      }else{
-        this.btnActive=false
+    btnChange() {
+      if (this.form.code && this.form.phone && this.selInstrument) {
+        this.btnActive = true;
+      } else {
+        this.btnActive = false;
       }
     },
     inputevent() {
@@ -97,20 +99,32 @@ export default {
         });
     },
     reg() {
-      if(!this.btnActive){
-        return
+       this.form.instrument = this.selInstrument;
+      if (!this.btnActive) {
+        var msg = "";
+        if (!this.form.phone) {
+          msg = "请填写手机号";
+        }else if (!this.form.code) {
+          msg = "请填写验证码";
+        }else if (!this.form.instrument) {
+          msg = "请选择课程品类";
+        }
+        Toast({
+          message: msg,
+          duration: 1000
+        });
+        return;
       }
-      this.form.instrument = this.selInstrument;
+     
       //  console.log(this.form);
       //  return;
       this.axios
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {
           if (!res.error) {
-            sessionStorage.setItem('acInstrument',this.form.instrument)
-            sessionStorage.setItem('acCourse',JSON.stringify(res.data.words))
+            sessionStorage.setItem("acInstrument", this.form.instrument);
+            sessionStorage.setItem("acCourse", JSON.stringify(res.data.words));
             this.$router.push("/success");
-           
           }
         });
     },
@@ -141,16 +155,17 @@ export default {
       }, 1000);
     }
   },
-  watch:{
-    form:{ //监听的对象
-     deep:true, //深度监听设置为 true
-     handler:function(newV,oldV){
-       this.btnChange()
-     }
-   },
-   selInstrument(){
-     this.btnChange()
-   }
+  watch: {
+    form: {
+      //监听的对象
+      deep: true, //深度监听设置为 true
+      handler: function(newV, oldV) {
+        this.btnChange();
+      }
+    },
+    selInstrument() {
+      this.btnChange();
+    }
   }
 };
 </script>
@@ -255,14 +270,14 @@ export default {
       font-weight: 400;
       //color: rgba(255, 87, 38, 1);
       //color: rgba(153, 153, 153, 1);
-      color:#9726FF
-      
+      color: #9726ff;
+
       //border-left: 1px solid #f1f1f1;
     }
   }
   .course_option {
     background: url("../../../assets/img/facChannel/book.png") no-repeat left
-     6.7% center/6.2% 38%;
+      6.7% center/6.2% 38%;
     margin-bottom: 30px;
   }
   .reg_btn {
@@ -283,7 +298,7 @@ export default {
     text-align: center;
     opacity: 0.6;
   }
-  .reg_btn.active{
+  .reg_btn.active {
     opacity: 1;
   }
 }
