@@ -16,7 +16,13 @@ export default {
   },
   created() {
   },
-  mounted() {},
+  mounted() {
+     this.axios
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=msg311`)
+        .then(res => {
+         
+        });
+  },
   methods: {
     
   }
