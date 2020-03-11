@@ -107,7 +107,9 @@ module.exports = {
          //音乐壳证书
          zsYyk:'src/modules/zsYyk/app.js',
          qr1:'src/modules/qr1/qr1.js',
-         facChannel:'src/modules/facChannel/app.js'
+         facChannel:'src/modules/facChannel/app.js',
+         //赵伟入群二维码
+         msgInGroup:'src/modules/msgInGroup/app.js',
          
     }   
 }
