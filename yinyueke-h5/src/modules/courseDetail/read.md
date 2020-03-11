@@ -20,6 +20,7 @@ http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音�
 尤克里里
     必修
     1.儿童尤克里里必修  http://kids.immusician.com/web/h5/courseDetail.html#/travelUkulele
+    2.儿童尤克里里必修中级  http://kids.immusician.com/web/h5/courseDetail.html#/travelUkuleleMid
     
     辅修
     1.珊珊老师尤克里里亲子启蒙 http://kids.immusician.com/web/h5/courseDetail.html#/ukulelePac
@@ -34,4 +35,5 @@ http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音�
     辅修
     1.非洲鼓节日表演课 http://kids.immusician.com/web/h5/courseDetail.html#/christmasDjembe
 
-goodsId good_img user_count name price
+谢呈博士体态律动课
+http://kids.immusician.com/web/h5/courseDetail.html#/doctorXieBody

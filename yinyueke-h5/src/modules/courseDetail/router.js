@@ -20,8 +20,10 @@ const christmasUklele = () => import('./src/christmasUklele.vue')
 const christmasDjembe = () => import('./src/christmasDjembe.vue')
 const hitMusic = () => import('./src/hitMusic.vue') 
 const travelUkulele = () => import('./src/travelUkulele.vue')
+const travelUkuleleMid = () => import('./src/travelUkuleleMid.vue')
 const worldTravel = () => import('./src/worldTravel.vue')
 const instrumentsKing = () => import('./src/instrumentsKing.vue')
+const doctorXieBody = () => import('./src/doctorXieBody.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -87,6 +89,11 @@ export default new Router({
       component: travelUkulele
     }, 
     {
+      path: '/travelUkuleleMid',
+      name: 'travelUkuleleMid',
+      component: travelUkuleleMid
+    },
+    {
       path: '/worldTravel',
       name: 'worldTravel',
       component: worldTravel
@@ -95,6 +102,11 @@ export default new Router({
       path: '/instrumentsKing',
       name: 'instrumentsKing',
       component: instrumentsKing
+    },
+    {
+      path: '/doctorXieBody',
+      name: 'doctorXieBody',
+      component: doctorXieBody
     }
   ]
 })
