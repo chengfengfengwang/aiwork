@@ -78,13 +78,23 @@ Page({
       })
       .then(res => {
         wx.hideLoading();
-        wx.setStorageSync('userAcount', this.data.phone);
-        wx.setStorageSync('uid', res.data.uid);
-        wx.setStorageSync('token', res.data.token);
-        wx.setStorageSync('institutions_id', res.data.institutions_id);
-        wx.navigateTo({
-          url: "/pages/liveClassList/liveClassList" 
-        });
+        console.log(res.data.role)
+        if(res.data.role!=1){
+          wx.showToast({
+            title: '请使用教师账号登录',
+            icon: 'none',
+            duration: 3000
+          });
+        }else{
+          wx.setStorageSync('userAcount', this.data.phone);
+          wx.setStorageSync('uid', res.data.uid);
+          wx.setStorageSync('token', res.data.token);
+          wx.setStorageSync('institutions_id', res.data.institutions_id);
+          wx.navigateTo({
+            url: "/pages/liveClassList/liveClassList" 
+          });
+        }
+       
       });
   },
   getList(type) {

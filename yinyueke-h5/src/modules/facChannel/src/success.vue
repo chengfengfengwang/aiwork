@@ -43,7 +43,8 @@ export default {
 </script>
 <style lang="less">
 #main {
-  //background-color: #78ce7d;
+  font-size: 0;
+  background-color: #540FA7;
   min-height: 100vh;
 }
 .main_wrapper {
@@ -51,13 +52,14 @@ export default {
   // bottom: 0;
   // left: 0;
   // width: 100%;
-  background-color: #fff6e1;
+    background-color: #540FA7;
   min-height: 100vh;
   position: relative;
   .content_main {
     position: absolute;
     width: 100%;
-    top: 20%;
+    //top: 20%;
+    top:113px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -98,10 +100,10 @@ export default {
     z-index: 9;
   }
   .qr_section {
-    // position: absolute;
-    // top: 34%;
-    // left: 0%;
-    position: relative;
+     position: absolute;
+    top: 94px;
+    left: 0%;
+    //position: relative;
     width: 100%;
     .qr_bg {
       width: 100%;
