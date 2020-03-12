@@ -441,17 +441,17 @@
                 <div class="logo">
                   <img src="../../assets/img/music_test/logo.png" alt>
                 </div>
-                <!-- <div v-show="!isApp" class="slogan">了解更多AI智能音乐课程，请戳二维码</div>
-                <div v-show="isApp" class="slogan">了解更多AI智能音乐课程，请戳二维码</div> -->
-                <div  class="slogan">了解更多AI智能音乐课程，请戳二维码<img src="../../assets/img/music_test/chuo.png" alt ></div>
+                <div v-show="!isApp && !isD312" class="slogan">了解更多AI智能音乐课程，请戳二维码</div>
+                <div v-show="isApp && !isD312" class="slogan">了解更多AI智能音乐课程，请戳二维码</div>
+                <div v-show="isD312"  class="slogan">了解更多AI智能音乐课程，请戳二维码<img src="../../assets/img/music_test/chuo.png" alt ></div>
               </div>
               <div v-show="isLangyue" class="right">
                 <img  src="../../assets/img/music_test/langyue_qr.jpg" alt class="qr">
               </div>
               <div v-show="!isLangyue" class="right">
-                <!-- <img v-show="!isApp" src="../../assets/img/music_test/qr.png" alt class="qr">
-                <img v-show="isApp" src="../../assets/img/music_test/yyk_qr.jpg" alt class="qr"> -->
-                 <img  src="../../assets/img/music_test/new_qr.png" alt class="qr">
+                <img v-show="!isApp && !isD312" src="../../assets/img/music_test/qr.png" alt class="qr">
+                <img v-show="isApp && !isD312" src="../../assets/img/music_test/yyk_qr.jpg" alt class="qr">
+                 <img v-show="isD312"  src="../../assets/img/music_test/new_qr.png" alt class="qr">
               </div>
             </div>
           </div>
@@ -567,7 +567,8 @@ export default {
       resultNum:"",
       resultName:"",
       resultTitleShow:false,
-      isLangyue:''
+      isLangyue:'',
+      isD312:false
     };
   },
   computed: {
@@ -1634,7 +1635,7 @@ export default {
     this.isWeixin = this.testWeixin();
     this.isApp = this.$util.getQueryVariable("from") === "app";
     this.isLangyue = this.$util.getQueryVariable('langyue') === '1';
-
+    this.isD312 = this.$util.getQueryVariable("isD312") === "1";
     if (this.isIos) {
       this.error = 700;
     } else {

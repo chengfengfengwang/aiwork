@@ -18,3 +18,4 @@ npm run dev
 npm run deploy
 
 ```
+http://s.immusician.com/web/h5/musicTest.html
