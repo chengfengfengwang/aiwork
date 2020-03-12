@@ -8,6 +8,7 @@
     <img class="page_img" src="../../../assets/img/courseDetail/doctorXieBody/5.jpg" alt>
     <img class="page_img" src="../../../assets/img/courseDetail/doctorXieBody/6.jpg" alt>
     <img class="page_img" src="../../../assets/img/courseDetail/doctorXieBody/7.jpg" alt>
+    <img class="page_img" src="../../../assets/img/courseDetail/doctorXieBody/8.jpg" alt>
   </div>
 </template>
 <script>

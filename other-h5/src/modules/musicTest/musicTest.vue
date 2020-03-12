@@ -441,15 +441,17 @@
                 <div class="logo">
                   <img src="../../assets/img/music_test/logo.png" alt>
                 </div>
-                <div v-show="!isApp" class="slogan">音乐壳-帮助0基础小朋友轻松通过音基考试</div>
-                <div v-show="isApp" class="slogan">扫码下载音乐壳，免费测试音乐天赋</div>
+                <!-- <div v-show="!isApp" class="slogan">了解更多AI智能音乐课程，请戳二维码</div>
+                <div v-show="isApp" class="slogan">了解更多AI智能音乐课程，请戳二维码</div> -->
+                <div  class="slogan">了解更多AI智能音乐课程，请戳二维码<img src="../../assets/img/music_test/chuo.png" alt ></div>
               </div>
               <div v-show="isLangyue" class="right">
                 <img  src="../../assets/img/music_test/langyue_qr.jpg" alt class="qr">
               </div>
               <div v-show="!isLangyue" class="right">
-                <img v-show="!isApp" src="../../assets/img/music_test/qr.png" alt class="qr">
-                <img v-show="isApp" src="../../assets/img/music_test/yyk_qr.jpg" alt class="qr">
+                <!-- <img v-show="!isApp" src="../../assets/img/music_test/qr.png" alt class="qr">
+                <img v-show="isApp" src="../../assets/img/music_test/yyk_qr.jpg" alt class="qr"> -->
+                 <img v-show="isApp" src="../../assets/img/music_test/new_qr.png" alt class="qr">
               </div>
             </div>
           </div>
@@ -2132,6 +2134,11 @@ left: -24px;
           font-family: PingFangSC-Regular;
           font-weight: 400;
           color: rgba(137, 57, 0, 1);
+          display: flex;
+          align-items: center;
+          img{
+            width: 10px;
+          }
           @media screen and (max-width: 370px) {
             & {
               font-size: 9px;
