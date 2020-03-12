@@ -451,7 +451,7 @@
               <div v-show="!isLangyue" class="right">
                 <!-- <img v-show="!isApp" src="../../assets/img/music_test/qr.png" alt class="qr">
                 <img v-show="isApp" src="../../assets/img/music_test/yyk_qr.jpg" alt class="qr"> -->
-                 <img v-show="isApp" src="../../assets/img/music_test/new_qr.png" alt class="qr">
+                 <img  src="../../assets/img/music_test/new_qr.png" alt class="qr">
               </div>
             </div>
           </div>
