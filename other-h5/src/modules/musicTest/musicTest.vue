@@ -2137,7 +2137,7 @@ left: -24px;
           display: flex;
           align-items: center;
           img{
-            width: 10px;
+            width: 18px;
           }
           @media screen and (max-width: 370px) {
             & {
