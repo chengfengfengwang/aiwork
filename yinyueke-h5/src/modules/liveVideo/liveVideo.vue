@@ -2,7 +2,7 @@
   <!-- 开学活动 -->
   <div id="pageWrapper">
     <div v-show="isWatch==1">
-      <img src="../../assets/img/liveVideo/bg1.png" alt class="bg" />
+      <img src="../../assets/img/liveVideo/bg.png" alt class="bg" />
       <div class="list">
         <div
           @click="goDetail(item.videoUrl)"
@@ -71,9 +71,15 @@ export default {
       this.getCode();
       this.getList();
     }
-    this.liveList.forEach((e, index) => {
-      e.imgSrc = require("../../assets/img/liveVideo/" + (index + 1) + ".png");
-    });
+    var liveList = [];
+    for(var i=0;i<10;i++){
+       liveList.push({
+         imgSrc:require("../../assets/img/liveVideo/" + (i + 1) + ".png"),
+         videoUrl:''
+       });
+      
+    }
+    this.liveList = liveList;
   },
   mounted() {
     console.log("进入页面");
@@ -157,9 +163,6 @@ html {
   min-height: 100vh;
   position: relative;
   font-size: 0;
-  //   background: url("../../assets/img/liveVideo/bg.png");
-  //   background-size: cover;
-  //   background-position: 0 0;
   .bg {
     width: 100%;
   }
@@ -169,7 +172,7 @@ html {
   position: absolute;
   left: 55%;
   transform: translateX(-50%);
-  top: 25%;
+  top: 22.5%;
   width: 80%;
   .item {
     position: relative;
