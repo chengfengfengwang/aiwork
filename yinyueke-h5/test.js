@@ -14,7 +14,7 @@ var assetsPrefix = 'web/h5/';
 main()
 
 function main(){
-    displayFile(path.resolve('dist'))
+    displayFile(path.resolve('test.html'))
 }
 
 function upload(key,localFile,fileType) {
@@ -69,7 +69,6 @@ function upload(key,localFile,fileType) {
 //遍历文件夹
 function displayFile(param) {
     //转换为绝对路径
-    //var param = path.resolve(param);
     fs.stat(param, function (err, stats) {
         //如果是目录的话，遍历目录下的文件信息
         if(err){
@@ -83,20 +82,22 @@ function displayFile(param) {
                     //遍历之后递归调用查看文件函数
                     //遍历目录得到的文件名称是不含路径的，需要将前面的绝对路径拼接
                     var absolutePath = path.join(param, e);
-                    //var absolutePath = path.resolve(path.join(param, e));
                     displayFile(absolutePath)
                 })
             })
         } else {
             //如果不是目录，打印文件信息
-            //console.log(param)
-            //console.log(param);
+           
             
             var localFile = path.resolve(param);
-            // console.log(param);
-            // console.log(webPrefix);
+            console.log('---------------------')
+            console.log(param)
+            console.log(localFile)
+            console.log(path.sep=='\\')
+            
+            console.log('---------------------')
             if(param.indexOf('.html')>-1){
-                var key = path.join(webPrefix,param.split('dist')[1].substr(1))
+                var key = path.join(webPrefix,param.split('yinyueke-h5')[1].substr(1))
 
                 //var key = webPrefix + param.split('dist')[1].substr(1);
                 //var key = key.replace(/\\/g, "/");
