@@ -110,6 +110,9 @@ module.exports = {
          facChannel:'src/modules/facChannel/app.js',
          //赵伟入群二维码
          msgInGroup:'src/modules/msgInGroup/app.js',
+         //分销
+         promote:'src/modules/promote/app.js'
+         
          
     }   
 }

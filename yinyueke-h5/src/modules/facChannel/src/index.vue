@@ -2,9 +2,18 @@
   <div class="page">
     <img src="../../../assets/img/facChannel/bg.png" alt class="bg" />
     <div class="bottom">
-      <img src="../../../assets/img/facChannel/bottom.png" alt class="bg" />
+      <img src="../../../assets/img/facChannel/bottom1.png" alt class="bg" />
     </div>
     <div class="form">
+      <div class="tips">
+        <img src="../../../assets/img/facChannel/tip_left.png" alt class="left" />
+        <img src="../../../assets/img/facChannel/tip_right.png" alt class="right" />
+        <div>
+          填写下方号码， 点击
+          <span style="color:#FF5327">免费领取</span>立即获得
+        </div>
+        <div>群内7天免费指导+300首电子曲谱</div>
+      </div>
       <div class="input_wrapper phone">
         <input v-model="form.phone" placeholder="请输入手机号" type="text" />
       </div>
@@ -99,14 +108,14 @@ export default {
         });
     },
     reg() {
-       this.form.instrument = this.selInstrument;
+      this.form.instrument = this.selInstrument;
       if (!this.btnActive) {
         var msg = "";
         if (!this.form.phone) {
           msg = "请填写手机号";
-        }else if (!this.form.code) {
+        } else if (!this.form.code) {
           msg = "请填写验证码";
-        }else if (!this.form.instrument) {
+        } else if (!this.form.instrument) {
           msg = "请选择课程品类";
         }
         Toast({
@@ -115,7 +124,7 @@ export default {
         });
         return;
       }
-     
+
       //  console.log(this.form);
       //  return;
       this.axios
@@ -176,6 +185,7 @@ export default {
   min-height: 100vh;
   position: relative;
   background-color: #710fd4;
+  font-size: 0;
 }
 .bg {
   width: 100%;
@@ -194,7 +204,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 39%;
+  top: 33%;
   //top: 220px;
   width: 335px;
   padding: 24px 30px;
@@ -202,7 +212,7 @@ export default {
   border-radius: 15px;
 
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    top: 39%;
+    top: 33%;
   }
   input {
     border: none;
@@ -237,6 +247,27 @@ export default {
     font-family: PingFang-SC-Regular, PingFang-SC;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
+  }
+  .tips {
+    position: relative;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 12px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(151, 38, 255, 1);
+    img.left {
+      position: absolute;
+      left: 10px;
+      top: 3px;
+      width: 17px;
+    }
+    img.right {
+      position: absolute;
+      right: 10px;
+      top: 3px;
+      width: 17px;
+    }
   }
   .input_wrapper {
     position: relative;
