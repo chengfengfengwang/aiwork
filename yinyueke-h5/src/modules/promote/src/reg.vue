@@ -1,8 +1,19 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow" />
-    <img src="../../../assets/img/reg/bg.png" alt="" class="bg">
-    <div class="mask">
+    <img src="../../../assets/img/promote/reg/bg.png" alt class="bg" />
+    <div class="rule_btn">活动规则</div>
+    <div class="form">
+      <div class="input_wrapper phone">
+        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
+      </div>
+      <div class="input_wrapper v_code">
+        <input v-model="form.code" placeholder="请输入验证码" type="text" />
+        <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
+      </div>
+      <div @click="reg" class="reg_btn">领取福利</div>
+    </div>
+    <div v-show="maskShow" class="mask">
       <div class="ac_rule">
         <div class="rule_item">
           <div class="item_index">1</div>
@@ -55,22 +66,22 @@ const QRCode = require("qrcode");
 export default {
   data() {
     return {
-      remarkArr: [],
       loadingShow: false,
-      openInApp
+      openInApp,
+      maskShow: false,
+      form: {
+        phone: "",
+        code: "",
+        share_id: getQueryVariable("share_id"),
+        share_phone: getQueryVariable("share_phone"),
+        is_proxy: 0,
+        share_stall: getQueryVariable("c")
+      },
+      vcodeText: "获取验证码",
+      vCode: ""
     };
   },
-  created() {
-    for (var i = 4; i < 10; i++) {
-      var str = require(`../../../assets/img/promote/poster/reward_bg.png`);
-      this.remarkArr.push(str);
-    }
-    this.$nextTick(() => {
-      this.initRemarkSwiper();
-    });
-
-    //document.documentElement.style.fontSize = '50px'
-  },
+  created() {},
   components: {
     Loading,
     ImagePreview
@@ -80,146 +91,48 @@ export default {
     //this.readyAll();
   },
   methods: {
-    previewRemark(index) {
-      ImagePreview({
-        images: this.remarkArr,
-        startPosition: index
-      });
-    },
-    initRemarkSwiper() {
-      console.log(Swiper);
-      this.mySwiper = new Swiper("#remarkSwiper", {
-        direction: "horizontal",
-        initialSlide: 1,
-        //loop: true,
-        slidesPerView: 3,
-        centeredSlides: true,
-        spaceBetween: 15
-      });
-    },
-    getWx() {
-      //app里没有填写手机号，从url上面拿
-      //非app从上一步用户填写的自己手机号 里面拿
-      let phone;
-      if (openInApp) {
-        phone = getQueryVariable("user_phone");
-      } else {
-        phone = localStorage.getItem("regPhone");
-      }
+    reg() {
+      localStorage.setItem("loginPhone", this.form.phone);
       this.axios
-        //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
-        .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall: getQueryVariable("c"),
-          phone: phone,
-          share_id: getQueryVariable("share_id")
-        })
+        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
-          this.wxMaterial = res.url;
-          this.readyAll();
-          //this.courseList.unshift({ id: "-1", name: "全部" });
+          if (!res.error) {
+            let data = res.data;
+            if (data instanceof Array && data.length == 0) {
+              this.$router.push("/download");
+            } else if (data instanceof Array && data.length != 0) {
+              localStorage.setItem("multiCourse", JSON.stringify(data));
+              this.$router.push("/selectCourse");
+            } else if (data instanceof Object) {
+              location.href = data.url;
+            }
+          }
         });
     },
-    readyAll() {
-      let pArr = [];
-      pArr.push(this.createQr());
-      pArr.push(this.posterTo64());
-      console.log(pArr);
-      Promise.all(pArr).then(res => {
-        console.log("--");
-        setTimeout(() => {
-          this.getResult64();
-        }, 100);
-      });
-    },
-    createQr() {
-      return new Promise((resolve, reject) => {
-        QRCode.toDataURL(this.wxMaterial, {
-          margin: 1
-        }).then(res => {
-          console.log("qr ready");
-          this.qrSrc = res;
-          resolve();
-        });
-      });
-    },
-    posterTo64() {
-      return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`);
-        // if(this.isFree===0){
-        //   url = require("../../../assets/img/yiqiac/poster2.png")
-        // }else{
-        //   url = require("../../../assets/img/yiqiac/poster1.png")
-        // }
-        this.imgToBase64(url).then(res => {
-          console.log("poster64 ready");
-          this.bgSrc = res;
-          this.loadingShow = false;
-          resolve();
-        });
-      });
-    },
-    imgToBase64(url) {
-      var url = url + "?" + new Date().valueOf();
-      return new Promise((resolve, reject) => {
-        var img = new Image();
-        img.setAttribute("crossOrigin", "Anonymous");
-        img.src = url;
-        img.onload = function() {
-          var canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          var ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          var base64 = canvas.toDataURL("image/png");
-          //console.log(base64);
-          resolve(base64);
-          //document.querySelector('#test').src = base64
-        };
-      });
-    },
-    createResultImg() {
-      this.imgToBase64(this.userInfo.avatar).then(res => {
-        this.avatarBase64 = res;
-        document.querySelector(".page.p6").classList.add("visi");
-        html2canvas(document.querySelector(".result_wrapper"), {
-          backgroundColor: "transparent"
-          //allowTaint: true
-        }).then(canvas => {
-          document.querySelector(".page.p6").classList.remove("visi");
-          //return
-          //把画好的canvas转成base64
-          document.querySelector(".result_wrapper").innerHTML = "";
-          var img = new Image();
-          img.classList.add("resultImg");
-          img.src = canvas.toDataURL("image/png");
-          img.onload = function() {
-            document.querySelector(".page.p6 .result_wrapper").appendChild(img);
-          };
-        });
-      });
-    },
-    getResult64() {
-      console.log(document.querySelector("#posterContainer"));
-      html2canvas(document.querySelector("#posterContainer"), {
-        //backgroundColor: "transparent"
-        //allowTaint: true
-      }).then(canvas => {
-        //return
-        //把画好的canvas转成base64
-        console.log(canvas);
-        // var img = new Image();
-        // img.classList.add("resultImg");
-        // img.src = canvas.toDataURL("image/png");
-        // img.onload = function() {
-        //   console.log("onload");
-        //   document.body.appendChild(img);
-        // };
-        this.resultBase64 = canvas.toDataURL("image/png");
-        this.resultBase64Show = true;
-        // console.log("----------");
-        // console.log(this.resultBase64);
-        // console.log("----------");
-      });
+    getVCode() {
+      if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
+        if (this.vcodeText === "获取验证码") {
+          this.vCode = "";
+        }
+        this.axios
+          .post(`${process.env.VUE_APP_SMS}/v1/user/tx_sms/`, {
+            phone: this.form.phone
+          })
+          .then(res => {
+            console.log(res);
+          });
+      } else {
+        return;
+      }
+      var count = 59;
+      this.vcodeText = count + "s";
+      var timer = setInterval(() => {
+        this.vcodeText = --count + "s";
+        if (count === 0) {
+          clearInterval(timer);
+          this.vcodeText = "重新获取";
+        }
+      }, 1000);
     },
     share() {
       if (platForm == "IOS") {
@@ -233,9 +146,11 @@ export default {
   }
 };
 </script>
-<style lang="less">
-.main {
+<style lang="less" scoped>
+#main {
   position: relative;
+  min-height: 100vh;
+  background-color: #f52722;
 }
 .top {
   img {
@@ -243,7 +158,124 @@ export default {
   }
 }
 
-.bg{
-    
+.bg {
+  width: 100%;
+}
+.form {
+  position: absolute;
+  left: 0;
+  //top: 65%;
+  top: 439px;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    top: 66%;
+  }
+  width: 100%;
+  padding: 0 46px;
+  input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: rgba(51, 51, 51, 1);
+    left: 17%;
+    top: 2%;
+    position: absolute;
+    width: 70%;
+    height: 40px;
+    font-size: 14px;
+  }
+  input::placeholder,
+  select:invalid {
+    font-size: 14px;
+    font-family: PingFang-SC-Regular, PingFang-SC;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
+  }
+  select {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    //color: #fff;
+    left: 17%;
+    top: 2%;
+    position: absolute;
+    width: 80%;
+    height: 40px;
+    font-size: 14px;
+    font-family: PingFang-SC-Regular, PingFang-SC;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+  }
+  .input_wrapper {
+    position: relative;
+    width: 100%;
+    height: 44px;
+    margin-bottom: 12px;
+    border-radius: 22px;
+    //border: 1px solid rgba(51, 51, 51, 0.2);
+
+    background-color: #fff !important;
+  }
+
+  .phone {
+    background: url("../../../assets/img/yiqiac/phone.png") no-repeat left 4.7%
+      center/5.7% 54%;
+  }
+  .v_code {
+    background: url("../../../assets/img/yiqiac/safe.png") no-repeat left 4.7%
+      center/7% 54%;
+    .v_code_btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 106px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-size: 14px;
+      font-family: PingFang-SC-Regular, PingFang-SC;
+      font-weight: 400;
+      color: rgba(255, 87, 38, 1);
+      //border-left: 1px solid #f1f1f1;
+    }
+  }
+
+  .reg_btn {
+    width: 234px;
+    height: 80px;
+    position: absolute;
+    left: 50%;
+    top: 92%;
+    padding-top: 20px;
+    transform: translateX(-50%);
+    background: url("../../../assets/img/promote/reg/reg_btn.png") no-repeat
+      center;
+    background-size: cover;
+    font-size: 22px;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: rgba(243, 47, 34, 1);
+    text-align: center;
+  }
+}
+.rule_btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 80px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  padding-left: 4px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 143, 22, 1) 0%,
+    rgba(255, 203, 113, 1) 100%
+  );
+  border-radius: 14px 0px 0px 14px;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 600;
+  color: rgba(128, 51, 0, 1);
 }
 </style>

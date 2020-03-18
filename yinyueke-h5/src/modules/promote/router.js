@@ -18,6 +18,8 @@ const selectCourse = () => import('./src/selectCourse.vue')
 
 const reward = () => import('./src/reward.vue')
 const reg = () => import('./src/reg.vue')
+const regSuccess = () => import('./src/regSuccess.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -66,6 +68,11 @@ export default new Router({
       path: '/reg',
       name: 'reg',
       component: reg,
+    }, 
+    {
+      path: '/regSuccess',
+      name: 'regSuccess',
+      component: regSuccess,
     },
   ],
   // scrollBehavior(to, from, savedPosition) {
