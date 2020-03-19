@@ -1,21 +1,104 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow"/>
-    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
-      <img class="bg" :src="bgSrc" alt>
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}">
+    <Loading v-show="loadingShow" />
+    <div @click="maskShow=true" class="rule_btn">
+      <img src="../../../assets/img/promote/poster/rule_btn.png" alt />
     </div>
-    <div v-show="resultBase64Show" class="poster_wrapper">
-      <img class="bg"  :src="resultBase64" alt="">
+    <div class="top">
+      <img src="../../../assets/img/promote/poster/top.png" alt />
     </div>
-    <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
-    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
+    <div class="reward">
+      <img src="../../../assets/img/promote/poster/reward_bg.png" alt class="top_bg" />
+      <div class="top_main">
+        <div class="current">
+          <div class="label_text">当前收益(元)</div>
+          <div class="num">{{rewardData.total/100}}</div>
+        </div>
+        <div class="detail">
+          <div class="detail_item">
+            <div class="label_text">已注册</div>
+            <div class="num">{{rewardData.reg_count/100}}</div>
+          </div>
+          <div class="detail_item">
+            <div class="label_text">付费人数</div>
+            <div class="num">{{rewardData.number/100}}</div>
+          </div>
+          <div class="detail_item">
+            <div class="label_text">付费金额(元)</div>
+            <div class="num">{{rewardData.amount/100}}</div>
+          </div>
+        </div>
+        <div class="detail_link" @click="toRewardDetail">
+          查看奖励明细
+          <img class="arrow" src="../../../assets/img/promote/poster/arrow.png" alt />
+        </div>
+      </div>
+    </div>
+    <div class="remark_container wrapper">
+      <div id="remarkSwiper" class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(item,index) in remarkArr" :key="index">
+            <img @click="previewRemark(index)" :src="item" alt />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn_wrapper">
+      <div class="reward_detail_btn" @click="toRewardDetail">查看奖励明细</div>
+      <div class="share_btn">分享海报给好友</div>
+    </div>
+    <div class="mask" v-show="maskShow">
+      <div class="ac_rule">
+        <div class="rule_title">
+          活动规则
+        </div>
+        <div class="close_icon" @click="maskShow=false">
+          <img src="../../../assets/img/promote/poster/close.png" alt />
+        </div>
+        <div class="rule_item">
+          <div class="item_index">1</div>
+          <span class="rule_lab">邀请对象：</span>
+          <span>您邀请的好友必须是从未注册过音乐壳的新用户，且必须成功购买音乐壳超级会员。</span>
+        </div>
+        <div class="rule_item">
+          <div class="item_index">2</div>
+          <span class="rule_lab">邀请方法：</span>
+          <span>您必须生成自己的专属海报邀请好友，我们将依据您的邀请记录发放奖励。</span>
+        </div>
+        <div class="rule_item">
+          <div class="item_index">3</div>
+          <span class="rule_lab">邀请人奖励：</span>
+          <span>每成功邀请1个好友注册并购买音乐壳超级会员，您可享受好友实付金额的20%作为现金奖励。您获得的现金奖励，可在每月10日申请提现。申请提现后，系统会在10个工作日内审核并发放。</span>
+        </div>
+        <div class="rule_item">
+          <div class="item_index">4</div>
+          <span class="rule_lab">被邀请人奖励：</span>
+          <span>
+            您邀请的好友注册后，即可领取一张300元音乐壳超级会员专享券和
+            <span class="color">购买大牌乐器8折卡</span>
+          </span>
+        </div>
+        <div class="rule_item">
+          <div class="item_index">5</div>
+          <span>
+            您邀请的好友中，每月月初起，最先下单的2个可使用300元优惠购买音乐壳会员 ;
+            <br />2个好友支付成功后，其它好友获得的300元优惠券会立即失效。
+          </span>
+        </div>
+        <div class="rule_item">
+          <span>其他问题，添加后方微信咨询：yxymiusic</span>
+        </div>
+        <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 // var eruda = require("eruda");
 // eruda.init();
+import Swiper from "swiper";
+import "swiper/dist/css/swiper.min.css";
+import { ImagePreview } from "vant";
 import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
@@ -23,40 +106,85 @@ const QRCode = require("qrcode");
 export default {
   data() {
     return {
-      qrSrc: "",
-      bgSrc: "",
-      wxMaterial: "",
-      loadingShow: true,
-      resultBase64Show: false,
-      resultBase64: "",
+      remarkArr: [],
+      loadingShow: false,
       openInApp,
-      posterId:getQueryVariable('c'),
+      maskShow: false,
+      rewardData: {
+        total: 0,
+        amount: 0,
+        reg_count: 0,
+        number: 0
+      }
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
+    for (var i = 4; i < 10; i++) {
+      var str = require(`../../../assets/img/promote/poster/reward_bg.png`);
+      this.remarkArr.push(str);
+    }
+    this.$nextTick(() => {
+      this.initRemarkSwiper();
+    });
+
+    //document.documentElement.style.fontSize = '50px'
   },
   components: {
-    Loading
+    Loading,
+    ImagePreview
+  },
+  created() {
+    this.getMyAccountData();
   },
   mounted() {
-    this.getWx();
+    //this.getWx();
     //this.readyAll();
   },
   methods: {
+    getMyAccountData() {
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=39`)
+        .then(res => {
+          let rewardData = res.data.stats;
+          if (rewardData.total) {
+            rewardData.total = rewardData.total.toFixed(2);
+          }
+          this.rewardData = rewardData;
+        });
+    },
+    toRewardDetail() {
+      this.$router.push("/reward");
+    },
+    previewRemark(index) {
+      ImagePreview({
+        images: this.remarkArr,
+        startPosition: index
+      });
+    },
+    initRemarkSwiper() {
+      console.log(Swiper);
+      this.mySwiper = new Swiper("#remarkSwiper", {
+        direction: "horizontal",
+        initialSlide: 1,
+        //loop: true,
+        slidesPerView: 3,
+        centeredSlides: true,
+        spaceBetween: 15
+      });
+    },
     getWx() {
       //app里没有填写手机号，从url上面拿
       //非app从上一步用户填写的自己手机号 里面拿
       let phone;
-      if(openInApp){
-        phone = getQueryVariable('user_phone')
-      }else{
-        phone = localStorage.getItem("regPhone")
+      if (openInApp) {
+        phone = getQueryVariable("user_phone");
+      } else {
+        phone = localStorage.getItem("regPhone");
       }
       this.axios
         //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
         .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall:getQueryVariable("c"),
+          share_stall: getQueryVariable("c"),
           phone: phone,
           share_id: getQueryVariable("share_id")
         })
@@ -76,7 +204,6 @@ export default {
         setTimeout(() => {
           this.getResult64();
         }, 100);
-        
       });
     },
     createQr() {
@@ -92,20 +219,18 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`)
+        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`);
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
         //   url = require("../../../assets/img/yiqiac/poster1.png")
         // }
-        this.imgToBase64(url).then(
-          res => {
-            console.log("poster64 ready");
-            this.bgSrc = res;
-            this.loadingShow = false;
-            resolve();
-          }
-        );
+        this.imgToBase64(url).then(res => {
+          console.log("poster64 ready");
+          this.bgSrc = res;
+          this.loadingShow = false;
+          resolve();
+        });
       });
     },
     imgToBase64(url) {
@@ -149,7 +274,7 @@ export default {
       });
     },
     getResult64() {
-      console.log(document.querySelector("#posterContainer"))
+      console.log(document.querySelector("#posterContainer"));
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
         //allowTaint: true
@@ -183,53 +308,164 @@ export default {
   }
 };
 </script>
-<style lang="less">
-.poster_wrapper {
-  .bg {
+<style lang="less" scoped>
+#main {
+  position: relative;
+  min-height: 100vh;
+}
+.top {
+  img {
     width: 100%;
   }
-  .qr {
-    position: absolute;
-    bottom: 15px;
-    right: 31px;
-    width: 90px;
-    border-radius: 3px;
+}
+.rule_btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 80px;
+  height: 28px;
+  img {
+    width: 100%;
   }
-  .qr.nofree{
-    bottom: 20px;
-    right: 22px;
+}
+.reward {
+  position: absolute;
+  top: 172px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+
+  background-size: cover;
+  text-align: center;
+  img.top_bg {
+    width: 100%;
+  }
+  .top_main {
+    padding-top: 80px;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 100%;
+    .current {
+      // margin-top: 80px;
+      .label_text {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(252, 225, 57, 1);
+      }
+      .num {
+        // position: relative;
+        // top: -5px;
+        margin-top: -5px;
+        font-size: 44px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+    .detail {
+      margin-top: 0px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-evenly;
+      .detail_item {
+        width: 33.333%;
+        flex-grow: 1;
+        .label_text {
+          font-size: 14px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: rgba(134, 35, 0, 1);
+        }
+        .num {
+          font-size: 24px;
+          font-family: SF UI Text;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+    .detail_link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(252, 225, 57, 1);
+      img {
+        margin-left: 3px;
+        margin-top: 1px;
+        width: 9px;
+      }
+    }
+  }
+}
+#remarkSwiper.swiper-container {
+  width: 100%;
+  margin: 0 auto;
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 300ms;
+    img {
+      width: 120%;
+      background-color: #fbf7f1;
+    }
+  }
+  .swiper-slide:not(.swiper-slide-active) {
+    transform: scale(0.8);
+  }
+}
+.btn_wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 246, 235, 1);
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  .reward_detail_btn {
+    width: 160px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(246, 105, 52, 1);
+
+    background: rgba(255, 246, 235, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(246, 105, 52, 1);
+  }
+  .share_btn {
+    width: 160px;
+    height: 40px;
+    background: linear-gradient(
+      0deg,
+      rgba(254, 147, 13, 1) 0%,
+      rgba(252, 247, 67, 1) 100%
+    );
+    box-shadow: 0px 6px 7px 0px rgba(255, 255, 255, 0.86);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(230, 24, 11, 1);
   }
 }
 
-.share_btn {
-  position: absolute;
-  right: 15px;
-  top: 25px;
-  width: 88px;
-  height: 30px;
-  line-height: 30px;
-  background: rgba(255, 203, 21, 1);
-  border-radius: 15px;
-  text-align: center;
-  font-size: 12px;
-  font-family: PingFang SC;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 1);
-}
-.tips {
-  position: absolute;
-  bottom: 20px;
-  right: 8px;
-  writing-mode: vertical-rl;
-  font-size: 11px;
-  font-family: PingFang SC;
-  font-weight: 400;
-  color: rgba(57, 57, 57, 1);
-  -webkit-text-stroke: 1px undefined;
-  text-stroke: 1px undefined;
-}
-.tips.nofree{
-  bottom: 28px;
-    right: 2px;
-}
 </style>

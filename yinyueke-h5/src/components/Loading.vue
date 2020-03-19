@@ -3,7 +3,7 @@
       <img class="loading_icon" src="./../assets/img/common/audio.svg" alt="">
     </div>
 </template>
-<style>
+<style scoped>
 .mask{
     position: fixed;
     top:0;

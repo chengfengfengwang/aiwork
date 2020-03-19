@@ -1,24 +1,26 @@
 <template>
   <div id="main">
+    <Loading v-show="loadingShow" />
+
     <div class="top">
       <img src="../../../assets/img/promote/reward/top_bg.png" alt class="top_bg" />
       <div class="top_main">
         <div class="current">
-          <div class="label_text">当前收益</div>
-          <div class="num">300.00</div>
+          <div class="label_text">当前收益(元)</div>
+          <div class="num">{{rewardData.total/100}}</div>
         </div>
         <div class="detail">
           <div class="detail_item">
             <div class="label_text">已注册</div>
-            <div class="num">5</div>
+            <div class="num">{{rewardData.reg_count/100}}</div>
           </div>
           <div class="detail_item">
             <div class="label_text">付费人数</div>
-            <div class="num">5</div>
+            <div class="num">{{rewardData.number/100}}</div>
           </div>
           <div class="detail_item">
             <div class="label_text">付费金额(元)</div>
-            <div class="num">99</div>
+            <div class="num">{{rewardData.amount/100}}</div>
           </div>
         </div>
         <div class="cash_btn">
@@ -28,69 +30,92 @@
     </div>
     <div class="record">
       <img src="../../../assets/img/promote/reward/reward_title.png" alt class="record_title" />
-      <div class="have_data">
+      <div v-show="recordItem.length>0" class="have_data">
         <div class="record_item_title">
           <div class="user">用户</div>
           <div class="time">时间</div>
           <div class="reward_money">奖励</div>
         </div>
-        <div class="record_item">
+        <div v-for="(item,index) in recordItem" :key="index" class="record_item">
           <div class="user">
             <div class="avatar">
-              <img
-                src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1967122488,1967216897&fm=26&gp=0.jpg"
-                alt
-              />
+              <img :src="item.avatar_url" alt />
             </div>
             <div class="user_detail">
-              <div class="name">卡布奇诺</div>
-              <div class="phone">185****6253</div>
+              <div class="name">{{item.nickname}}</div>
+              <div class="phone">{{item.phone}}</div>
             </div>
           </div>
-          <div class="time">03/12</div>
-          <div class="reward_money">99元</div>
-        </div>
-        <div class="record_item">
-          <div class="user">
-            <div class="avatar">
-              <img
-                src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1967122488,1967216897&fm=26&gp=0.jpg"
-                alt
-              />
-            </div>
-            <div class="user_detail">
-              <div class="name">卡布奇诺</div>
-              <div class="phone">185****6253</div>
-            </div>
-          </div>
-          <div class="time">03/12</div>
-          <div class="reward_money">99元</div>
+          <div class="time">{{item.v_time}}</div>
+          <div class="reward_money">{{item.fee/100}}元</div>
         </div>
       </div>
-      <!-- <div class="no_data">
+      <div v-show="recordItem.length==0" class="no_data">
         <img src="../../../assets/img/promote/reward/coco.png" alt class="coco" />
         <div class="text">您还没邀请好友，快去邀请吧～</div>
         <img src="../../../assets/img/promote/reward/invite_btn.png" alt class="invite_btn" />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import Loading from "./../../../components/Loading";
+
+import { getQueryVariable, formatePhone } from "../../../common/util.js";
 export default {
   data() {
-    return {};
+    return {
+      rewardData: {
+        total: 0,
+        amount: 0,
+        reg_count: 0,
+        number: 0
+      },
+      recordItem: [],
+      loadingShow:false
+    };
   },
-  created() {},
+  components: {
+    Loading
+  },
+  created() {
+    this.getMyAccountData();
+  },
 
   methods: {
+    getMyAccountData() {
+      this.loadingShow = true;
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=39`)
+        .then(res => {
+          this.loadingShow = false;
+          let rewardData = res.data.stats;
+          if (rewardData.total) {
+            rewardData.total = rewardData.total.toFixed(2);
+          }
+          this.rewardData = rewardData;
+          this.recordItem = res.data.flow;
+          this.recordItem.forEach(e => {
+            e.phone = formatePhone(e.phone);
+          });
+          console.log(this.recordItem);
+        });
+    },
     toPoster() {
       this.$router.push("/poster");
     }
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
+#main {
+  min-height: 100vh;
+  background: linear-gradient(
+    0deg,
+    rgba(249, 127, 56, 1) 0%,
+    rgba(251, 218, 131, 1) 100%
+  );
+}
 .top {
   position: relative;
   width: 350px;
@@ -116,6 +141,9 @@ export default {
         color: rgba(252, 225, 57, 1);
       }
       .num {
+        // position: relative;
+        // top: -5px;
+        margin-top: -5px;
         font-size: 44px;
         font-family: PingFang SC;
         font-weight: 600;
@@ -123,21 +151,25 @@ export default {
       }
     }
     .detail {
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin-top: 0px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-evenly;
-      .label_text {
-        font-size: 14px;
-        font-family: PingFang SC;
-        font-weight: 400;
-        color: rgba(134, 35, 0, 1);
-      }
-      .num {
-        font-size: 24px;
-        font-family: SF UI Text;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 1);
+      .detail_item {
+        width: 33.333%;
+        flex-grow: 1;
+        .label_text {
+          font-size: 14px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: rgba(134, 35, 0, 1);
+        }
+        .num {
+          font-size: 24px;
+          font-family: SF UI Text;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 1);
+        }
       }
     }
     .cash_btn {
@@ -159,8 +191,8 @@ export default {
   .no_data {
     text-align: center;
     .coco {
-        width: 96px;
-      margin-top: 80px;
+      width: 96px;
+      margin-top: 60px;
     }
     .text {
       margin: 10px 0 18px 0;
@@ -170,6 +202,7 @@ export default {
       color: rgba(160, 87, 6, 1);
     }
     .invite_btn {
+      margin: 8px 0 20px 0;
       width: 280px;
     }
   }
@@ -178,7 +211,7 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     width: 207px;
-    top: -10px;
+    top: -5px;
   }
   .record_item_title {
     margin-bottom: 20px;

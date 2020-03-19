@@ -1,9 +1,9 @@
 <template>
   <div id="main">
     <div class="main_wrapper">
-      <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
-      <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt="">
-      <div id="download">立即下载</div>
+      <img class="bg" src="../../../assets/img/promote/regSuccess/bg.png" alt />
+      <!-- <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt=""> -->
+      <div id="download">立即使用</div>
     </div>
     <!-- <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
     <div id="download">立即下载</div>-->
@@ -20,8 +20,8 @@ export default {
   created() {
     document.title = "疫期不孤单，爱心赠好课";
   },
-  mounted(){
-    this.initShareInstall()
+  mounted() {
+    //this.initShareInstall()
   },
   methods: {
     toPoster() {
@@ -30,9 +30,9 @@ export default {
     initShareInstall() {
       var data = ShareInstall.parseUrlParams(); //shareinstall.js中提供的工具函数，解析url中的所有查询参数
       data.channel = data.channel ? data.channel : "liebian-defu";
-       console.log('---channel----')
-       console.log(data.channel)
-       console.log('---channel----')
+      console.log("---channel----");
+      console.log(data.channel);
+      console.log("---channel----");
       new ShareInstall(
         {
           appKey: "2KBKKFAK2E26FF",
@@ -75,13 +75,13 @@ export default {
   // bottom: 0;
   // left: 0;
   // width: 100%;
-  background-color: #FFF6E1;
+  background-color: #FE3714;
   min-height: 100vh;
   position: relative;
   .bg {
     width: 100%;
   }
-  .bottom{
+  .bottom {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -89,19 +89,25 @@ export default {
   }
   #download {
     position: absolute;
-    top: 495px;
+        top: 521px;
     left: 50%;
     transform: translateX(-50%);
-    width: 270px;
-    height: 45px;
+    width: 315px;
+    height: 54px;
+    line-height: 54px;
     text-align: center;
-    line-height: 45px;
-    background: rgba(255, 116, 43, 1);
-    border-radius: 25px;
-    font-size: 17px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    background: linear-gradient(
+      0deg,
+      rgba(254, 147, 13, 1) 0%,
+      rgba(252, 247, 67, 1) 100%
+    );
+    box-shadow: 0px 11px 22px 0px rgba(171, 21, 5, 0.29),
+      0px 6px 7px 0px rgba(223, 52, 52, 0.86);
+    border-radius: 27px;
+    font-size: 22px;
+    font-family: PingFang SC;
     font-weight: 500;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(230, 24, 11, 1);
   }
 }
 </style>

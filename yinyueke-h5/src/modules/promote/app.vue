@@ -61,5 +61,84 @@ html {
     }
   }
 }
+.ac_rule {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 325px;
+  padding: 56px 20px 20px 20px;
+  background-color: #fff;
+  border: 6px solid #facb9f;
+  border-radius: 20px;
+  font-size: 13px;
+  font-family: PingFangSC-Regular;
+  color: #666666;
+  .rule_title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 213px;
+    height: 36px;
+    top: -11px;
+    background: url(../../assets/img/promote/poster/rule_title.png) no-repeat
+      center/cover;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(142, 49, 18, 1);
+    text-align: center;
+    padding-top: 6px;
+    // img{
+    //   width: 100%;
+    // }
+  }
+  .close_icon {
+    position: absolute;
+    bottom: -86px;
+    left: 50%;
+    padding: 20px;
+    transform: translateX(-50%);
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .rule_item {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    .item_index {
+      position: absolute;
+      left: -4px;
+      top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: rgba(240, 144, 87, 1);
+      border-radius: 50%;
+      font-size: 12px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+    }
+    .rule_lab {
+      font-family: PingFangSC-Semibold;
+      font-weight: 600;
+    }
+    .color {
+      color: #f54815;
+    }
+  }
+  .rule_bottom {
+    font-size: 13px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
+    text-align: center;
+  }
+}
 </style>
 

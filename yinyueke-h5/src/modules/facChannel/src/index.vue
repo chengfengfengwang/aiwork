@@ -9,7 +9,8 @@
         <img src="../../../assets/img/facChannel/tip_left.png" alt class="left" />
         <img src="../../../assets/img/facChannel/tip_right.png" alt class="right" />
         <div>
-          填写下方号码，点击<span style="color:#FF5327">免费领取</span>立即获得
+          填写下方号码，点击
+          <span style="color:#FF5327">免费领取</span>立即获得
         </div>
         <div>群内7天免费指导+300首电子曲谱</div>
       </div>
@@ -106,6 +107,11 @@ export default {
           //this.instrumentList.unshift({ id: "-1", name: "全部" });
         });
     },
+    count() {
+      this.axios
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu`)
+        .then(res => {});
+    },
     reg() {
       this.form.instrument = this.selInstrument;
       if (!this.btnActive) {
@@ -126,6 +132,7 @@ export default {
 
       //  console.log(this.form);
       //  return;
+      this.count();
       this.axios
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {

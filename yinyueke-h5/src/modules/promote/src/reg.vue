@@ -2,7 +2,7 @@
   <div id="main">
     <Loading v-show="loadingShow" />
     <img src="../../../assets/img/promote/reg/bg.png" alt class="bg" />
-    <div class="rule_btn">活动规则</div>
+    <div @click="maskShow=true" class="rule_btn">活动规则</div>
     <div class="form">
       <div class="input_wrapper phone">
         <input v-model="form.phone" placeholder="请输入手机号" type="text" />
@@ -15,40 +15,36 @@
     </div>
     <div v-show="maskShow" class="mask">
       <div class="ac_rule">
-        <div class="rule_item">
-          <div class="item_index">1</div>
-          <span class="rule_lab">邀请对象：</span>
-          <span>您邀请的好友必须是从未注册过音乐壳的新用户，且必须成功购买音乐壳超级会员。</span>
+        <div class="close_icon" @click="maskShow=false">
+          <img src="../../../assets/img/promote/poster/close.png" alt />
         </div>
-        <div class="rule_item">
-          <div class="item_index">2</div>
-          <span class="rule_lab">邀请方法：</span>
-          <span>您必须生成自己的专属海报邀请好友，我们将依据您的邀请记录发放奖励。</span>
+        <div class="rule_title"></div>
+        <div class="rule_container">
+          <div class="rule_item">
+            <div class="item_index">1</div>
+            <div class="item_title">新人专享注册好礼有什么？</div>
+            <div class="sub_title">1、300元音乐壳超级会员优惠券</div>
+            <div>限在音乐壳购买超级会员使用。</div>
+            <div class="item_content">
+              每个音乐壳超级会员老用户可邀请多个新用户注册；<span class="color">每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）前2名下单者可使用300元优惠券购买超级会员，其它新用户的300元优惠券会失效。</span><span>失效后，系统会自动补发一张50元优惠券给新用户，用于购买音乐壳app所有课程。</span>
+            </div>
+            <div class="sub_title">2、购买大牌乐器8折卡</div>
+            <div class="item_content"><span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span><span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span><span class="color">可向对应的辅导老师截图自己的会员头像展示会员身份，即可享受折购买乐器权益。</span> </div>
+            <div>如有其他问题，添加后方微信：<span class="wx_color">YXYMIUSIC</span></div>
+          </div>
+          <div class="rule_item">
+            <div class="item_index">2</div>
+            <span class="item_title">新人专享好礼领取规则？</span>
+            <div class="item_content">仅限扫码音乐壳老用户海报，并在本页注册的新用户领取；每个用户（手机号）限领1次。</div>
+          </div>
+          <div class="rule_item">
+            <div class="item_index">3</div>
+            <span class="item_title">新人专享好礼如何查看和使用？</span>
+            <div class="item_content">下载音乐壳app，登录您的账号，点击“我的”—“优惠券”即可查看。如有其它问题，添加后方微信咨询:<span class="wx_color">YXYMIUSIC</span> </div>
+          </div>
+          <!-- <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div> -->
         </div>
-        <div class="rule_item">
-          <div class="item_index">3</div>
-          <span class="rule_lab">邀请人奖励：</span>
-          <span>每成功邀请1个好友注册并购买音乐壳超级会员，您可享受好友实付金额的20%作为现金奖励。您获得的现金奖励，可在每月10日申请提现。申请提现后，系统会在10个工作日内审核并发放。</span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">4</div>
-          <span class="rule_lab">被邀请人奖励：</span>
-          <span>
-            您邀请的好友注册后，即可领取一张300元音乐壳超级会员专享券和
-            <span class="color">购买大牌乐器8折卡</span>
-          </span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">5</div>
-          <span>
-            您邀请的好友中，每月月初起，最先下单的2个可使用300元优惠购买音乐壳会员 ;
-            <br />2个好友支付成功后，其它好友获得的300元优惠券会立即失效。
-          </span>
-        </div>
-        <div class="rule_item">
-          <span>其他问题，添加后方微信咨询：yxymiusic</span>
-        </div>
-        <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div>
+        
       </div>
     </div>
   </div>
@@ -68,7 +64,7 @@ export default {
     return {
       loadingShow: false,
       openInApp,
-      maskShow: false,
+      maskShow: true,
       form: {
         phone: "",
         code: "",
@@ -258,6 +254,57 @@ export default {
     text-align: center;
   }
 }
+.ac_rule{
+  padding: 36px 20px 10px 20px;
+  .rule_container{
+    max-height: 460px;
+    overflow: auto;
+  }
+  .rule_item{
+    .item_index{
+      position: absolute;
+      left: -4px;
+      top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width:16px;
+      height:16px;
+      background:rgba(255,241,230,1);
+      border-radius:50%;
+      font-size:12px;
+      font-family:PingFang SC;
+      font-weight:400;
+      color:rgba(232,180,139,1);
+    }
+    .item_title{
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-size:16px;
+      font-family:PingFang SC;
+      font-weight:600;
+      color:rgba(215,101,0,1);
+    }
+    .sub_title{
+      margin-bottom: 7px;
+      color:rgba(0,0,0,1);
+    }
+    .item_content{
+      margin: 7px 0;
+      font-size:13px;
+      font-family:PingFang SC;
+      font-weight:400;
+      color:rgba(102,102,102,1);
+    }
+    .scolor{
+      font-family: PingFangSC-Semibold;
+      color: #FF2D0B;
+    }
+    .wx_color{
+       font-family: PingFangSC-Semibold;
+    }
+  }
+}
 .rule_btn {
   position: absolute;
   top: 20px;
@@ -277,5 +324,9 @@ export default {
   font-family: PingFang SC;
   font-weight: 600;
   color: rgba(128, 51, 0, 1);
+}
+.rule_title {
+  background: url("../../../assets/img/promote/reg/rule_title.png") no-repeat
+    center/cover;
 }
 </style>
