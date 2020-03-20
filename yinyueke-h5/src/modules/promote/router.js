@@ -19,6 +19,8 @@ const poster = () => import('./src/poster.vue')
 const reward = () => import('./src/reward.vue')
 const reg = () => import('./src/reg.vue')
 const regSuccess = () => import('./src/regSuccess.vue')
+const getCash = () => import('./src/getCash.vue')
+const writeCardInfo = () => import('./src/writeCardInfo.vue')
 
 Vue.use(Router)
 
@@ -51,6 +53,16 @@ export default new Router({
       path: '/regSuccess',
       name: 'regSuccess',
       component: regSuccess,
+    }, 
+    {
+      path: '/getCash',
+      name: 'getCash',
+      component: getCash,
+    }, 
+    {
+      path: '/writeCardInfo',
+      name: 'writeCardInfo',
+      component: writeCardInfo,
     },
   ],
   // scrollBehavior(to, from, savedPosition) {

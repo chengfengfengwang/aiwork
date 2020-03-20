@@ -26,11 +26,22 @@
             <div class="sub_title">1、300元音乐壳超级会员优惠券</div>
             <div>限在音乐壳购买超级会员使用。</div>
             <div class="item_content">
-              每个音乐壳超级会员老用户可邀请多个新用户注册；<span class="color">每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）前2名下单者可使用300元优惠券购买超级会员，其它新用户的300元优惠券会失效。</span><span>失效后，系统会自动补发一张50元优惠券给新用户，用于购买音乐壳app所有课程。</span>
+              每个音乐壳超级会员老用户可邀请多个新用户注册；
+              <span
+                class="color"
+              >每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）前2名下单者可使用300元优惠券购买超级会员，其它新用户的300元优惠券会失效。</span>
+              <span>失效后，系统会自动补发一张50元优惠券给新用户，用于购买音乐壳app所有课程。</span>
             </div>
             <div class="sub_title">2、购买大牌乐器8折卡</div>
-            <div class="item_content"><span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span><span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span><span class="color">可向对应的辅导老师截图自己的会员头像展示会员身份，即可享受折购买乐器权益。</span> </div>
-            <div>如有其他问题，添加后方微信：<span class="wx_color">YXYMIUSIC</span></div>
+            <div class="item_content">
+              <span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span>
+              <span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span>
+              <span class="color">可向对应的辅导老师截图自己的会员头像展示会员身份，即可享受折购买乐器权益。</span>
+            </div>
+            <div>
+              如有其他问题，添加后方微信：
+              <span class="wx_color">YXYMIUSIC</span>
+            </div>
           </div>
           <div class="rule_item">
             <div class="item_index">2</div>
@@ -40,11 +51,13 @@
           <div class="rule_item">
             <div class="item_index">3</div>
             <span class="item_title">新人专享好礼如何查看和使用？</span>
-            <div class="item_content">下载音乐壳app，登录您的账号，点击“我的”—“优惠券”即可查看。如有其它问题，添加后方微信咨询:<span class="wx_color">YXYMIUSIC</span> </div>
+            <div class="item_content">
+              下载音乐壳app，登录您的账号，点击“我的”—“优惠券”即可查看。如有其它问题，添加后方微信咨询:
+              <span class="wx_color">YXYMIUSIC</span>
+            </div>
           </div>
           <!-- <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div> -->
         </div>
-        
       </div>
     </div>
   </div>
@@ -83,10 +96,20 @@ export default {
     ImagePreview
   },
   mounted() {
-    //this.getWx();
-    //this.readyAll();
+    //this.countPageData();
   },
   methods: {
+    countPageData() {
+      this.axios
+        .get(
+          `${
+            process.env.VUE_APP_LIEBIAN
+          }/v1/share/save_scan_data/?share_id=6&share_phone=${getQueryVariable(
+            share_phone
+          )}&share_stall=${getQueryVariable(share_stall)}`
+        )
+        .then(res => {});
+    },
     reg() {
       localStorage.setItem("loginPhone", this.form.phone);
       this.axios
@@ -254,54 +277,54 @@ export default {
     text-align: center;
   }
 }
-.ac_rule{
+.ac_rule {
   padding: 36px 20px 10px 20px;
-  .rule_container{
+  .rule_container {
     max-height: 460px;
     overflow: auto;
   }
-  .rule_item{
-    .item_index{
+  .rule_item {
+    .item_index {
       position: absolute;
-      left: -4px;
+      left: -2px;
       top: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width:16px;
-      height:16px;
-      background:rgba(255,241,230,1);
-      border-radius:50%;
-      font-size:12px;
-      font-family:PingFang SC;
-      font-weight:400;
-      color:rgba(232,180,139,1);
+      width: 16px;
+      height: 16px;
+      background: rgba(255, 241, 230, 1);
+      border-radius: 50%;
+      font-size: 12px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(232, 180, 139, 1);
     }
-    .item_title{
+    .item_title {
       margin-top: 16px;
       margin-bottom: 10px;
-      font-size:16px;
-      font-family:PingFang SC;
-      font-weight:600;
-      color:rgba(215,101,0,1);
+      font-size: 16px;
+      font-family: PingFang SC;
+      font-weight: 600;
+      color: rgba(215, 101, 0, 1);
     }
-    .sub_title{
+    .sub_title {
       margin-bottom: 7px;
-      color:rgba(0,0,0,1);
+      color: rgba(0, 0, 0, 1);
     }
-    .item_content{
+    .item_content {
       margin: 7px 0;
-      font-size:13px;
-      font-family:PingFang SC;
-      font-weight:400;
-      color:rgba(102,102,102,1);
+      font-size: 13px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(102, 102, 102, 1);
     }
-    .scolor{
+    .scolor {
       font-family: PingFangSC-Semibold;
-      color: #FF2D0B;
+      color: #ff2d0b;
     }
-    .wx_color{
-       font-family: PingFangSC-Semibold;
+    .wx_color {
+      font-family: PingFangSC-Semibold;
     }
   }
 }

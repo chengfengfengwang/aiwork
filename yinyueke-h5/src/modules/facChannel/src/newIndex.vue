@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <img src="../../../assets/img/facChannel/bg.png" alt class="bg" />
+    <!-- <img src="../../../assets/img/facChannel/bg.png" alt class="bg" />
     <div class="bottom">
       <img src="../../../assets/img/facChannel/bottom1.png" alt class="bg" />
     </div>
@@ -32,13 +32,13 @@
         </select>
       </div>
       <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
-    </div>
+    </div> -->
+    <img src="../../../assets/img/facChannel/bg320.jpg" alt class="bg" />
   </div>
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
-import { Toast,Dialog } from "vant";
-
+import { Toast } from "vant";
 
 export default {
   data() {
@@ -66,110 +66,17 @@ export default {
     };
   },
   created() {
-    this.getInstruments();
+    //this.getInstruments();
   },
   mounted() {
-    this.inputevent();
+    this.count();
   },
-  methods: {
-    btnChange() {
-      if (this.form.code && this.form.phone && this.selInstrument) {
-        this.btnActive = true;
-      } else {
-        this.btnActive = false;
-      }
-    },
-    inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
-        let scrollTop;
-        ele.addEventListener("focus", function() {
-          scrollTop = document.body.scrollTop;
-        });
-        ele.addEventListener("blur", function() {
-          //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-        });
-      });
-    },
-    getInstruments() {
-      this.axios
-        .get(`http://58.87.125.111:6363/v1/third/vendor_activity?vendor=andelu`)
-        .then(res => {
-          var data = res.data;
-          this.instrumentList = [];
-          for (let key in data) {
-            this.instrumentList.push({
-              name: data[key],
-              value: key
-            });
-          }
-          //this.instrumentList.unshift({ id: "-1", name: "全部" });
-        });
-    },
+  methods:{
     count() {
       this.axios
-        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_wx`)
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_dx`)
         .then(res => {});
     },
-    reg() {
-      this.form.instrument = this.selInstrument;
-      if (!this.btnActive) {
-        var msg = "";
-        if (!this.form.phone) {
-          msg = "请填写手机号";
-        } else if (!this.form.code) {
-          msg = "请填写验证码";
-        } else if (!this.form.instrument) {
-          msg = "请选择课程品类";
-        }
-        Toast({
-          message: msg,
-          duration: 1000
-        });
-        return;
-      }
-
-      //  console.log(this.form);
-      //  return;
-      this.count();
-      this.axios
-        .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
-        .then(res => {
-          if (!res.error) {
-            Dialog.alert({message: '课程已领取成功'})
-            // sessionStorage.setItem("acInstrument", this.form.instrument);
-            // sessionStorage.setItem("acCourse", JSON.stringify(res.data.words));
-            //this.$router.push("/success");
-          }
-        });
-    },
-    getVCode() {
-      if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
-        if (this.vcodeText === "获取验证码") {
-          this.vCode = "";
-        }
-        this.axios
-          .post(`http://58.87.125.111:6363/v1/txsms/send`, {
-            phone: this.form.phone,
-            zone: 86
-          })
-          .then(res => {
-            console.log(res);
-          });
-      } else {
-        return;
-      }
-      var count = 59;
-      this.vcodeText = count + "s";
-      var timer = setInterval(() => {
-        this.vcodeText = --count + "s";
-        if (count === 0) {
-          clearInterval(timer);
-          this.vcodeText = "重新获取";
-        }
-      }, 1000);
-    }
   },
   watch: {
     form: {

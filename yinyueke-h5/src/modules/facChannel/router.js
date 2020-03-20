@@ -10,21 +10,27 @@ import Router from 'vue-router'
 
 const home = () => import('./src/index.vue')
 const success = () => import('./src/success.vue')
+const newIndex = () => import('./src/newIndex.vue')
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      name: 'newIndex',
+      component: newIndex
     },
 
     {
       path: '/success',
       name: 'success',
       component: success,
-    }
+    }, 
+    {
+      path: '/newIndex',
+      name: 'home',
+      component: home,
+    },
   ],
   // scrollBehavior(to, from, savedPosition) {
   //   console.log('--savedPosition--')

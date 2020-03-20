@@ -34,7 +34,13 @@
         </div>
       </div>
     </div>
-    <div class="remark_container wrapper">
+    <div class="poster_wrapper">
+      <div class="nick_name">宝贝 琪琪</div>
+      <img src="../../../assets/img/promote/poster/poster1.png" alt class="qr" />
+      <img class="poster" src="../../../assets/img/promote/poster/poster1.png" alt />
+      <img src="../../../assets/img/promote/poster/poster_bottom.png" alt class="poster_bottom" />
+    </div>
+    <!-- <div class="remark_container wrapper">
       <div id="remarkSwiper" class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(item,index) in remarkArr" :key="index">
@@ -42,16 +48,14 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="btn_wrapper">
       <div class="reward_detail_btn" @click="toRewardDetail">查看奖励明细</div>
-      <div class="share_btn">分享海报给好友</div>
+      <div class="share_btn" @click="shareToFriends" v-show="openInApp">分享海报给好友</div>
     </div>
     <div class="mask" v-show="maskShow">
       <div class="ac_rule">
-        <div class="rule_title">
-          活动规则
-        </div>
+        <div class="rule_title">活动规则</div>
         <div class="close_icon" @click="maskShow=false">
           <img src="../../../assets/img/promote/poster/close.png" alt />
         </div>
@@ -120,24 +124,22 @@ export default {
   },
   created() {
     for (var i = 4; i < 10; i++) {
-      var str = require(`../../../assets/img/promote/poster/reward_bg.png`);
+      var str = require(`../../../assets/img/promote/poster/poster1.png`);
       this.remarkArr.push(str);
     }
     this.$nextTick(() => {
       this.initRemarkSwiper();
     });
 
-    //document.documentElement.style.fontSize = '50px'
+    this.getMyAccountData();
   },
   components: {
     Loading,
     ImagePreview
   },
-  created() {
-    this.getMyAccountData();
-  },
+
   mounted() {
-    //this.getWx();
+    //this.getQrUrl();
     //this.readyAll();
   },
   methods: {
@@ -172,26 +174,16 @@ export default {
         spaceBetween: 15
       });
     },
-    getWx() {
-      //app里没有填写手机号，从url上面拿
-      //非app从上一步用户填写的自己手机号 里面拿
-      let phone;
-      if (openInApp) {
-        phone = getQueryVariable("user_phone");
-      } else {
-        phone = localStorage.getItem("regPhone");
-      }
+    getQrUrl() {
       this.axios
-        //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
-        .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall: getQueryVariable("c"),
-          phone: phone,
+        .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
+          share_stall: getQueryVariable("share_stall"),
+          phone: getQueryVariable("user_phone"),
           share_id: getQueryVariable("share_id")
         })
         .then(res => {
-          this.wxMaterial = res.url;
+          this.qrUrl = res.url;
           this.readyAll();
-          //this.courseList.unshift({ id: "-1", name: "全部" });
         });
     },
     readyAll() {
@@ -208,7 +200,7 @@ export default {
     },
     createQr() {
       return new Promise((resolve, reject) => {
-        QRCode.toDataURL(this.wxMaterial, {
+        QRCode.toDataURL(this.qrUrl, {
           margin: 1
         }).then(res => {
           console.log("qr ready");
@@ -219,7 +211,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`);
+        let url = require(`../../../assets/img/promote/poster/poster1.png`);
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
@@ -296,7 +288,7 @@ export default {
         // console.log("----------");
       });
     },
-    share() {
+    shareToFriends() {
       if (platForm == "IOS") {
         webkit.messageHandlers.shareWebImage.postMessage({
           data: this.resultBase64
@@ -312,6 +304,7 @@ export default {
 #main {
   position: relative;
   min-height: 100vh;
+  background-color: #faaf78;
 }
 .top {
   img {
@@ -402,6 +395,47 @@ export default {
     }
   }
 }
+.poster_wrapper {
+  margin-top: -20px;
+  position: relative;
+  text-align: center;
+  padding-bottom: 120px;
+  overflow: hidden;
+  .nick_name {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    font-size: 20px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(255, 240, 150, 1);
+    text-decoration: underline;
+    z-index: 5;
+  }
+  .qr {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    width: 80px;
+    height: 80px;
+    z-index: 5;
+  }
+  img.poster {
+    position: relative;
+    z-index: 8;
+    width: 270px;
+    border-radius: 15px;
+    border: 4px solid #fff;
+  }
+  .poster_bottom {
+    z-index: 3;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -81px;
+    width: 660px;
+  }
+}
 #remarkSwiper.swiper-container {
   width: 100%;
   margin: 0 auto;
@@ -416,7 +450,7 @@ export default {
     align-items: center;
     transition: 300ms;
     img {
-      width: 120%;
+      width: 200%;
       background-color: #fbf7f1;
     }
   }
@@ -425,6 +459,7 @@ export default {
   }
 }
 .btn_wrapper {
+  z-index: 9;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -467,5 +502,4 @@ export default {
     color: rgba(230, 24, 11, 1);
   }
 }
-
 </style>
