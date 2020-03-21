@@ -7,16 +7,16 @@
       <div class="top_main">
         <div class="current">
           <div class="label_text">累计收益(元)</div>
-          <div class="num">{{rewardData.total/100}}</div>
+          <div class="num">{{wData.total/100}}</div>
         </div>
         <div class="detail">
           <div class="detail_item">
             <div class="label_text">已经提现(元)</div>
-            <div class="num">{{rewardData.reg_count/100}}</div>
+            <div class="num">{{wData.withdrawal/100}}</div>
           </div>
           <div class="detail_item">
             <div class="label_text">可提现(元)</div>
-            <div class="num">{{rewardData.number/100}}</div>
+            <div class="num">{{wData.balance/100}}</div>
           </div>
         </div>
         <div class="cash_section">
@@ -24,9 +24,9 @@
             <div class="title_text">提现金额</div>
           </div>
           <div class="input_wrapper">
-            <input v-model="cashNum" placeholder="大于50元时可申请提现" type="text" />
+            <input v-model.number="cashNum" placeholder="大于50元时可申请提现" type="text" />
           </div>
-          <div class="cash_btn">申请提现</div>
+          <div @click="goWidthDraw" class="cash_btn">申请提现</div>
         </div>
       </div>
     </div>
@@ -58,11 +58,10 @@ import { getQueryVariable, formatePhone } from "../../../common/util.js";
 export default {
   data() {
     return {
-      rewardData: {
+      wData: {
         total: 0,
-        amount: 0,
-        reg_count: 0,
-        number: 0
+        balance: 0,
+        withdrawal: 0
       },
       recordItem: [],
       loadingShow: false,
@@ -73,30 +72,28 @@ export default {
     Loading
   },
   created() {
-    this.getMyAccountData();
+    this.getWidthDrawData();
   },
 
   methods: {
-    getMyAccountData() {
+    goWidthDraw() {
+      if (this.cashNum) {
+        sessionStorage.setItem('cashNum',this.cashNum);
+        this.$router.push("/writeCardInfo");
+      }
+    },
+    getWidthDrawData() {
       this.loadingShow = true;
       this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=39`)
+        .get(`http://58.87.125.111:55555/v1/account/get_my_withdrawal/?god=${getQueryVariable('uid')}`)
         .then(res => {
           this.loadingShow = false;
-          let rewardData = res.data.stats;
-          if (rewardData.total) {
-            rewardData.total = rewardData.total.toFixed(2);
+          let wData = res.data.stats;
+          if (wData.total) {
+            wData.total = wData.total.toFixed(2);
           }
-          this.rewardData = rewardData;
-          this.recordItem = res.data.flow;
-          this.recordItem.forEach(e => {
-            e.phone = formatePhone(e.phone);
-          });
-          console.log(this.recordItem);
+          this.wData = wData;
         });
-    },
-    toPoster() {
-      this.$router.push("/poster");
     }
   }
 };
@@ -280,7 +277,7 @@ export default {
     font-size: 16px;
     font-family: PingFang SC;
     font-weight: 400;
-    color: rgba(51, 51, 51, .6);
+    color: rgba(51, 51, 51, 0.6);
   }
 
   .input_wrapper {

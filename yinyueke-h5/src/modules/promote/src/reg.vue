@@ -11,7 +11,7 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div @click="reg" class="reg_btn">领取福利</div>
+      <div @click="regVip" class="reg_btn">领取福利</div>
     </div>
     <div v-show="maskShow" class="mask">
       <div class="ac_rule">
@@ -77,12 +77,12 @@ export default {
     return {
       loadingShow: false,
       openInApp,
-      maskShow: true,
+      maskShow: false,
       form: {
         phone: "",
         code: "",
         share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("share_phone"),
+        share_phone: getQueryVariable("phone"),
         is_proxy: 0,
         share_stall: getQueryVariable("c")
       },
@@ -96,7 +96,7 @@ export default {
     ImagePreview
   },
   mounted() {
-    //this.countPageData();
+    this.countPageData();
   },
   methods: {
     countPageData() {
@@ -105,26 +105,18 @@ export default {
           `${
             process.env.VUE_APP_LIEBIAN
           }/v1/share/save_scan_data/?share_id=6&share_phone=${getQueryVariable(
-            share_phone
-          )}&share_stall=${getQueryVariable(share_stall)}`
+            'phone'
+          )}&share_stall=${getQueryVariable('share_stall')}`
         )
         .then(res => {});
     },
-    reg() {
+    regVip() {
       localStorage.setItem("loginPhone", this.form.phone);
       this.axios
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
           if (!res.error) {
-            let data = res.data;
-            if (data instanceof Array && data.length == 0) {
-              this.$router.push("/download");
-            } else if (data instanceof Array && data.length != 0) {
-              localStorage.setItem("multiCourse", JSON.stringify(data));
-              this.$router.push("/selectCourse");
-            } else if (data instanceof Object) {
-              location.href = data.url;
-            }
+            location.href = res.data.url
           }
         });
     },

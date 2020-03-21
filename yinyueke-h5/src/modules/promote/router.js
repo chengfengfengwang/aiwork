@@ -14,7 +14,6 @@ import Router from 'vue-router'
 // const cp = () => import('./src/cp.vue')
 // const selectCourse = () => import('./src/selectCourse.vue')
 
-const login = () => import('./src/login.vue')
 const poster = () => import('./src/poster.vue')
 const reward = () => import('./src/reward.vue')
 const reg = () => import('./src/reg.vue')
@@ -33,11 +32,7 @@ export default new Router({
       component: poster
     },
    
-    {
-      path: '/login',
-      name: 'login',
-      component: login,
-    },
+   
  
     {
       path: '/reward',

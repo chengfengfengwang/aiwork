@@ -63,11 +63,11 @@ html {
 }
 .ac_rule {
   position: absolute;
-  top: 70px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   width: 325px;
-  padding: 56px 20px 20px 20px;
+  padding: 36px 20px 20px 20px;
   background-color: #fff;
   border: 6px solid #facb9f;
   border-radius: 20px;
@@ -95,7 +95,7 @@ html {
   }
   .close_icon {
     position: absolute;
-    bottom: -86px;
+    bottom: -76px;
     left: 50%;
     padding: 20px;
     transform: translateX(-50%);

@@ -34,10 +34,19 @@
         </div>
       </div>
     </div>
-    <div class="poster_wrapper">
-      <div class="nick_name">宝贝 琪琪</div>
-      <img src="../../../assets/img/promote/poster/poster1.png" alt class="qr" />
-      <img class="poster" src="../../../assets/img/promote/poster/poster1.png" alt />
+    <div class="poster_container">
+      <div id="posterContainer">
+        <div class="nick_name">宝贝 琪琪</div>
+        <img :src="qrSrc" alt class="qr" />
+        <img v-show="posterSrc" class="poster" :src="posterSrc" alt />
+        <img
+          v-show="!posterSrc"
+          class="poster"
+          src="../../../assets/img/promote/poster/poster1.png"
+          alt
+        />
+      </div>
+
       <img src="../../../assets/img/promote/poster/poster_bottom.png" alt class="poster_bottom" />
     </div>
     <!-- <div class="remark_container wrapper">
@@ -111,7 +120,7 @@ export default {
   data() {
     return {
       remarkArr: [],
-      loadingShow: false,
+      loadingShow: true,
       openInApp,
       maskShow: false,
       rewardData: {
@@ -119,19 +128,22 @@ export default {
         amount: 0,
         reg_count: 0,
         number: 0
-      }
+      },
+      posterSrc: "",
+      qrSrc: ""
     };
   },
   created() {
-    for (var i = 4; i < 10; i++) {
-      var str = require(`../../../assets/img/promote/poster/poster1.png`);
-      this.remarkArr.push(str);
-    }
-    this.$nextTick(() => {
-      this.initRemarkSwiper();
-    });
+    // for (var i = 4; i < 10; i++) {
+    //   var str = require(`../../../assets/img/promote/poster/poster1.png`);
+    //   this.remarkArr.push(str);
+    // }
+    // this.$nextTick(() => {
+    //   this.initRemarkSwiper();
+    // });
 
     this.getMyAccountData();
+    this.getQrUrl();
   },
   components: {
     Loading,
@@ -139,13 +151,12 @@ export default {
   },
 
   mounted() {
-    //this.getQrUrl();
     //this.readyAll();
   },
   methods: {
     getMyAccountData() {
       this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=39`)
+        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable('uid')}`)
         .then(res => {
           let rewardData = res.data.stats;
           if (rewardData.total) {
@@ -164,7 +175,6 @@ export default {
       });
     },
     initRemarkSwiper() {
-      console.log(Swiper);
       this.mySwiper = new Swiper("#remarkSwiper", {
         direction: "horizontal",
         initialSlide: 1,
@@ -177,12 +187,12 @@ export default {
     getQrUrl() {
       this.axios
         .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
-          share_stall: getQueryVariable("share_stall"),
+          share_stall: 0,
           phone: getQueryVariable("user_phone"),
-          share_id: getQueryVariable("share_id")
+          share_id: 6
         })
         .then(res => {
-          this.qrUrl = res.url;
+          this.qrUrl = res.data.url;
           this.readyAll();
         });
     },
@@ -190,18 +200,17 @@ export default {
       let pArr = [];
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
-      console.log(pArr);
       Promise.all(pArr).then(res => {
         console.log("--");
         setTimeout(() => {
           this.getResult64();
-        }, 100);
+        }, 350);
       });
     },
     createQr() {
       return new Promise((resolve, reject) => {
         QRCode.toDataURL(this.qrUrl, {
-          margin: 1
+          margin: 2
         }).then(res => {
           console.log("qr ready");
           this.qrSrc = res;
@@ -219,7 +228,7 @@ export default {
         // }
         this.imgToBase64(url).then(res => {
           console.log("poster64 ready");
-          this.bgSrc = res;
+          this.posterSrc = res;
           this.loadingShow = false;
           resolve();
         });
@@ -266,23 +275,27 @@ export default {
       });
     },
     getResult64() {
+      this.loadingShow = false;
       console.log(document.querySelector("#posterContainer"));
+      console.log("----开始截取------");
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
-        //allowTaint: true
+          // width: 270 * 2 + 'px',
+          // height: 473 * 2 + 'px',
+          scale: 3,
+        allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
-        console.log(canvas);
+        console.log("----截取完成------");
         // var img = new Image();
         // img.classList.add("resultImg");
         // img.src = canvas.toDataURL("image/png");
         // img.onload = function() {
-        //   console.log("onload");
         //   document.body.appendChild(img);
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
-        this.resultBase64Show = true;
+        //this.resultBase64Show = true;
         // console.log("----------");
         // console.log(this.resultBase64);
         // console.log("----------");
@@ -395,30 +408,36 @@ export default {
     }
   }
 }
-.poster_wrapper {
+.poster_container {
   margin-top: -20px;
   position: relative;
   text-align: center;
   padding-bottom: 120px;
   overflow: hidden;
+  #posterContainer {
+    margin: auto;
+    width: 270px;
+    height: 473px;
+  }
   .nick_name {
     position: absolute;
-    left: 10%;
-    bottom: 10%;
-    font-size: 20px;
+    left: 20%;
+    bottom: 29%;
+    font-size: 14px;
     font-family: PingFang SC;
     font-weight: 600;
     color: rgba(255, 240, 150, 1);
     text-decoration: underline;
-    z-index: 5;
+    z-index: 9;
   }
   .qr {
     position: absolute;
-    left: 10%;
-    bottom: 10%;
-    width: 80px;
-    height: 80px;
-    z-index: 5;
+
+    right: 20%;
+    bottom: 24%;
+    width: 56px;
+    height: 56px;
+    z-index: 9;
   }
   img.poster {
     position: relative;

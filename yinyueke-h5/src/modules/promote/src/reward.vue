@@ -23,7 +23,7 @@
             <div class="num">{{rewardData.amount/100}}</div>
           </div>
         </div>
-        <div class="cash_btn">
+        <div @click="toGetCash" class="cash_btn">
           <img src="../../../assets/img/promote/reward/cash_btn.png" alt />
         </div>
       </div>
@@ -83,10 +83,13 @@ export default {
   },
 
   methods: {
+    toGetCash(){
+      this.$router.push('/getCash')
+    },
     getMyAccountData() {
       this.loadingShow = true;
       this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=39`)
+        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable('uid')}`)
         .then(res => {
           this.loadingShow = false;
           let rewardData = res.data.stats;
