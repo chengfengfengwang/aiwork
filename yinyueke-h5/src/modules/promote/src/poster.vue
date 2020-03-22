@@ -36,7 +36,8 @@
     </div>
     <div class="poster_container">
       <div id="posterContainer">
-        <div class="nick_name">宝贝 琪琪</div>
+        <!-- <div class="nick_name">宝贝 琪琪</div> -->
+        <div class="nick_name">宝贝 {{nickName}}</div>
         <img :src="qrSrc" alt class="qr" />
         <img v-show="posterSrc" class="poster" :src="posterSrc" alt />
         <img
@@ -130,7 +131,8 @@ export default {
         number: 0
       },
       posterSrc: "",
-      qrSrc: ""
+      qrSrc: "",
+      nickName: getQueryVariable('nick_name')
     };
   },
   created() {
@@ -427,8 +429,17 @@ export default {
     font-family: PingFang SC;
     font-weight: 600;
     color: rgba(255, 240, 150, 1);
-    text-decoration: underline;
+    //text-decoration: underline;
     z-index: 9;
+    &::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      background-color: rgba(255, 240, 150, 1);
+    }
   }
   .qr {
     position: absolute;

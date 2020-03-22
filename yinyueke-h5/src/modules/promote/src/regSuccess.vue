@@ -3,7 +3,7 @@
     <div class="main_wrapper">
       <img class="bg" src="../../../assets/img/promote/regSuccess/bg.png" alt />
       <!-- <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt=""> -->
-      <div id="download">立即使用</div>
+      <div @click="toYouzan" id="download">立即使用</div>
     </div>
     <!-- <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
     <div id="download">立即下载</div>-->
@@ -24,8 +24,11 @@ export default {
     //this.initShareInstall()
   },
   methods: {
-    toPoster() {
-      this.$router.push("/poster");
+    toYouzan(){
+      let url  = sessionStorage.getItem('successUrl');
+      if(url){
+        location.href = url;
+      }
     },
     initShareInstall() {
       var data = ShareInstall.parseUrlParams(); //shareinstall.js中提供的工具函数，解析url中的所有查询参数

@@ -116,7 +116,8 @@ export default {
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
           if (!res.error) {
-            location.href = res.data.url
+            sessionStorage.setItem('successUrl',res.data.url);
+            this.$router.push('/regSuccess')
           }
         });
     },
