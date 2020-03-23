@@ -94,7 +94,7 @@ export default {
         .then(res => {});
     },
     btnChange() {
-      if (this.form.code && this.form.phone && this.selInstrument) {
+      if (this.form.code && this.form.phone && this.selInstrument!==undefined) {
         this.btnActive = true;
       } else {
         this.btnActive = false;
