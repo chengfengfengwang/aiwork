@@ -15,7 +15,7 @@ export default {
   },
   components: {},
   created() {
-    console.log('vvv')
+    console.log(location.href)
     this.isIphonex = isIphonex();
   },
   methods: {
