@@ -83,7 +83,6 @@ export default {
         code: "",
         share_id: getQueryVariable("share_id"),
         share_phone: getQueryVariable("phone"),
-        is_proxy: 0,
         share_stall: getQueryVariable("c")
       },
       vcodeText: "获取验证码",
@@ -113,7 +112,7 @@ export default {
     regVip() {
       localStorage.setItem("loginPhone", this.form.phone);
       this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
+        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_login/`, this.form)
         .then(res => {
           if (!res.error) {
             sessionStorage.setItem('successUrl',res.data.url);

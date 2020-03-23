@@ -55,6 +55,8 @@
 import Loading from "./../../../components/Loading";
 
 import { getQueryVariable, formatePhone } from "../../../common/util.js";
+import { Toast } from "vant";
+
 export default {
   data() {
     return {
@@ -77,15 +79,26 @@ export default {
 
   methods: {
     goWidthDraw() {
-      if (this.cashNum) {
-        sessionStorage.setItem('cashNum',this.cashNum);
+      if (this.cashNum < 50) {
+        Toast({
+          message: "提现金额需要大于50才能提现",
+          duration: 2000
+        });
+        return
+      }
+      if (this.cashNum && this.cashNum >= 50) {
+        sessionStorage.setItem("cashNum", this.cashNum);
         this.$router.push("/writeCardInfo");
       }
     },
     getWidthDrawData() {
       this.loadingShow = true;
       this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_withdrawal/?god=${getQueryVariable('uid')}`)
+        .get(
+          `http://58.87.125.111:55555/v1/account/get_my_withdrawal/?god=${getQueryVariable(
+            "uid"
+          )}`
+        )
         .then(res => {
           this.loadingShow = false;
           let wData = res.data.stats;
@@ -208,7 +221,7 @@ export default {
     .item_index {
       position: absolute;
       left: -4px;
-      top: 2px;
+      top: 1.4px;
       display: flex;
       align-items: center;
       justify-content: center;
