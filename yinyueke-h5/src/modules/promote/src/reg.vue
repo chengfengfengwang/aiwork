@@ -65,9 +65,7 @@
 <script>
 // var eruda = require("eruda");
 // eruda.init();
-import Swiper from "swiper";
-import "swiper/dist/css/swiper.min.css";
-import { ImagePreview } from "vant";
+import { ImagePreview, Dialog } from "vant";
 import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
@@ -115,8 +113,14 @@ export default {
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_login/`, this.form)
         .then(res => {
           if (!res.error) {
-            sessionStorage.setItem('successUrl',res.data.url);
-            this.$router.push('/regSuccess')
+            if(res.data.has_received){
+              Dialog.alert({message: '亲爱的用户，您已经领取过优惠了，可以点击确定直接使用'}).then(() => {
+                location.href = res.data.url
+              });
+            }else{
+              sessionStorage.setItem('successUrl',res.data.url);
+              this.$router.push('/regSuccess');
+            }
           }
         });
     },
