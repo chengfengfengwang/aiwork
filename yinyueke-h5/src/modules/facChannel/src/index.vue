@@ -21,16 +21,6 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div class="input_wrapper course_option">
-        <select required v-model="selInstrument">
-          <option value disabled selected>选择课程品类</option>
-          <option
-            v-for="course in instrumentList"
-            :key="course.value"
-            :value="course.value"
-          >{{course.name}}</option>
-        </select>
-      </div>
       <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
     </div>
   </div>
@@ -62,16 +52,34 @@ export default {
           value: "2"
         }
       ],
-      btnActive: false
+      instrumentMenu:[
+        'guitar',
+        'ukulele',
+        'kalimba'
+      ],
+      btnActive: false,
+      showOrigin:false
     };
   },
   created() {
-    this.getInstruments();
+    this.selInstrument = this.instrumentMenu.indexOf(getQueryVariable('instrument'));
+    let key = `andelu_${getQueryVariable('instrument')}`
+    this.countPage(key);
+    if(!getQueryVariable('instrument')){
+      this.showOrigin = true;
+      this.getInstruments();
+    }
+    
   },
   mounted() {
     this.inputevent();
   },
   methods: {
+    countPage(key) {
+      this.axios
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=${key}`)
+        .then(res => {});
+    },
     btnChange() {
       if (this.form.code && this.form.phone && this.selInstrument) {
         this.btnActive = true;
@@ -107,13 +115,10 @@ export default {
           //this.instrumentList.unshift({ id: "-1", name: "全部" });
         });
     },
-    count() {
-      this.axios
-        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_wx`)
-        .then(res => {});
-    },
     reg() {
       this.form.instrument = this.selInstrument;
+      // console.log(this.form)
+      // return
       if (!this.btnActive) {
         var msg = "";
         if (!this.form.phone) {
@@ -129,9 +134,6 @@ export default {
         });
         return;
       }
-
-      //  console.log(this.form);
-      //  return;
       this.count();
       this.axios
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
@@ -211,7 +213,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 33%;
+  top: 35.5%;
   //top: 220px;
   width: 335px;
   padding: 24px 30px;
@@ -219,7 +221,7 @@ export default {
   border-radius: 15px;
 
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    top: 33%;
+    top: 35.5%;
   }
   input {
     border: none;
