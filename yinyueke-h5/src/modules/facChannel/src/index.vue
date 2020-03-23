@@ -4,7 +4,7 @@
     <div class="bottom">
       <img src="../../../assets/img/facChannel/bottom1.png" alt class="bg" />
     </div>
-    <div class="form">
+    <div class="form" :class="{origin:showOrigin}">
       <div class="tips">
         <img src="../../../assets/img/facChannel/tip_left.png" alt class="left" />
         <img src="../../../assets/img/facChannel/tip_right.png" alt class="right" />
@@ -21,14 +21,24 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text" />
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
+      <div v-show="showOrigin" class="input_wrapper course_option">
+        <select required v-model="selInstrument">
+          <option value disabled selected>选择课程品类</option>
+          <option
+            v-for="course in instrumentList"
+            :key="course.value"
+            :value="course.value"
+          >{{course.name}}</option>
+        </select>
+      </div>
+
       <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
     </div>
   </div>
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
-import { Toast,Dialog } from "vant";
-
+import { Toast, Dialog } from "vant";
 
 export default {
   data() {
@@ -52,24 +62,22 @@ export default {
           value: "2"
         }
       ],
-      instrumentMenu:[
-        'guitar',
-        'ukulele',
-        'kalimba'
-      ],
+      instrumentMenu: ["guitar", "ukulele", "kalimba"],
       btnActive: false,
-      showOrigin:false
+      showOrigin: false
     };
   },
   created() {
-    this.selInstrument = this.instrumentMenu.indexOf(getQueryVariable('instrument'));
-    let key = `andelu_${getQueryVariable('instrument')}`
-    this.countPage(key);
-    if(!getQueryVariable('instrument')){
+    if (!getQueryVariable("instrument")) {
       this.showOrigin = true;
       this.getInstruments();
+    } else {
+      this.selInstrument = this.instrumentMenu.indexOf(
+        getQueryVariable("instrument")
+      );
+      let key = `andelu_${getQueryVariable("instrument")}`;
+      this.countPage(key);
     }
-    
   },
   mounted() {
     this.inputevent();
@@ -139,7 +147,7 @@ export default {
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {
           if (!res.error) {
-            Dialog.alert({message: '课程已领取成功'})
+            Dialog.alert({ message: "课程已领取成功" });
             // sessionStorage.setItem("acInstrument", this.form.instrument);
             // sessionStorage.setItem("acCourse", JSON.stringify(res.data.words));
             //this.$router.push("/success");
@@ -206,6 +214,12 @@ export default {
   width: 100%;
   img {
     width: 100%;
+  }
+}
+.form.origin{
+  top: 32%;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    top: 32%;
   }
 }
 .form {
