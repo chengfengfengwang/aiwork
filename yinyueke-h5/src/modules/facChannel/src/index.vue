@@ -88,6 +88,11 @@ export default {
         .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=${key}`)
         .then(res => {});
     },
+    successCount() {
+      this.axios
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_wx`)
+        .then(res => {});
+    },
     btnChange() {
       if (this.form.code && this.form.phone && this.selInstrument) {
         this.btnActive = true;
@@ -124,16 +129,16 @@ export default {
         });
     },
     reg() {
-      this.form.instrument = this.selInstrument;
-      // console.log(this.form)
-      // return
+      this.form.instrument = Number(this.selInstrument);
+      //console.log(this.form)
+
       if (!this.btnActive) {
         var msg = "";
         if (!this.form.phone) {
           msg = "请填写手机号";
         } else if (!this.form.code) {
           msg = "请填写验证码";
-        } else if (!this.form.instrument) {
+        } else if (this.form.instrument === undefined) {
           msg = "请选择课程品类";
         }
         Toast({
@@ -142,7 +147,7 @@ export default {
         });
         return;
       }
-      this.count();
+      this.successCount();
       this.axios
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {
@@ -216,7 +221,7 @@ export default {
     width: 100%;
   }
 }
-.form.origin{
+.form.origin {
   top: 32%;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     top: 32%;
