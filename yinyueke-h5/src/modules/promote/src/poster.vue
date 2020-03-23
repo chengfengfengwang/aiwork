@@ -282,9 +282,11 @@ export default {
       console.log("----开始截取------");
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
-          // width: 270 * 2 + 'px',
-          // height: 473 * 2 + 'px',
-          scale: 3,
+        onclone: function(document) {
+            document.querySelector('#posterContainer img.poster').style.border='none';
+            document.querySelector('#posterContainer img.poster').style.borderRadius=0;
+        },
+        scale: 3,
         allowTaint: true
       }).then(canvas => {
         //return
