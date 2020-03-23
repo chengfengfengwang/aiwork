@@ -143,7 +143,7 @@ export default {
     // this.$nextTick(() => {
     //   this.initRemarkSwiper();
     // });
-
+    this.nickName = decodeURIComponent(this.nickName);
     this.getMyAccountData();
     this.getQrUrl();
   },

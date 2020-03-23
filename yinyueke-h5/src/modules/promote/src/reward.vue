@@ -53,7 +53,7 @@
       <div v-show="recordItem.length==0" class="no_data">
         <img src="../../../assets/img/promote/reward/coco.png" alt class="coco" />
         <div class="text">您还没邀请好友，快去邀请吧～</div>
-        <img src="../../../assets/img/promote/reward/invite_btn.png" alt class="invite_btn" />
+        <img @click="toPoster" src="../../../assets/img/promote/reward/invite_btn.png" alt class="invite_btn" />
       </div>
     </div>
   </div>
