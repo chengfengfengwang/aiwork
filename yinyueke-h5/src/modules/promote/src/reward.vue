@@ -12,11 +12,11 @@
         <div class="detail">
           <div class="detail_item">
             <div class="label_text">已注册</div>
-            <div class="num">{{rewardData.reg_count/100}}</div>
+            <div class="num">{{rewardData.reg_count}}</div>
           </div>
           <div class="detail_item">
             <div class="label_text">付费人数</div>
-            <div class="num">{{rewardData.number/100}}</div>
+            <div class="num">{{rewardData.number}}</div>
           </div>
           <div class="detail_item">
             <div class="label_text">付费金额(元)</div>
