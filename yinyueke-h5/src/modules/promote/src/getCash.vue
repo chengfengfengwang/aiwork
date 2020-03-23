@@ -305,7 +305,9 @@ export default {
     margin: auto;
     width: 240px;
     height: 40px;
-    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(
       0deg,
       rgba(254, 147, 13, 1) 0%,

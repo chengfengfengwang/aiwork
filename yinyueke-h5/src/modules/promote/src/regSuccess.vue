@@ -97,7 +97,9 @@ export default {
     transform: translateX(-50%);
     width: 315px;
     height: 54px;
-    line-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     background: linear-gradient(
       0deg,

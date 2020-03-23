@@ -39,6 +39,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  font-family: PingFang SC, Microsoft Yahei,Helvetica Neue,Helvetica,Arial;
 }
 
 * {

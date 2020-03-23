@@ -65,8 +65,9 @@ export default {
   margin: 25px auto 0 auto;
   width: 335px;
   height: 40px;
-  text-align: center;
-  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(252, 225, 57, 1);
   border-radius: 20px;
   font-size: 18px;
