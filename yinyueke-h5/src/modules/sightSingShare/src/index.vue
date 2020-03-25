@@ -2,8 +2,10 @@
   <div class="page">
     <img class="bg" src="../../../assets/img/sightSingShare/top.png" alt />
     <img class="bg round" src="../../../assets/img/sightSingShare/round.png" alt />
-    <img class="bottom" src="../../../assets/img/sightSingShare/bottom.png" alt />
-    <div class="main">
+    <img v-show="!isXStyle" class="bottom" src="../../../assets/img/sightSingShare/bottom.png" alt />
+    <img v-show="isXStyle" class="bottom" src="../../../assets/img/sightSingShare/xbottom.png" alt />
+    <div class="main" :class="{xStyle:isXStyle}">
+      <img src="../../../assets/img/sightSingShare/coco.png" alt="" class="coco">
       <div class="avatar">
         <img
           src="https://t7.baidu.com/it/u=2046080325,1937962445&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1585720677&t=66fb57e87c02143807f86762a06e449f"
@@ -12,8 +14,7 @@
       </div>
       <div class="name">小了他</div>
       <div class="rank">
-        入选音乐小天才榜单第
-        <span style="color:#FF4F1F">50</span>位
+        入选音乐小天才榜单第<span style="color:#FF4F1F">50</span>位
       </div>
       <div class="intro_wrapper">
         <div class="intro">我刚刚用音乐壳学会了一条新的视唱</div>
@@ -72,17 +73,19 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { getQueryVariable, xStyle } from "../../../common/util.js";
 import { Toast } from "vant";
 
 export default {
   data() {
     return {
-      btnActive: false
+      btnActive: false,
+      isXStyle:false
     };
   },
   created() {
-    //this.getInstruments();
+    this.isXStyle = xStyle()
+    console.log(this.isXStyle)
   },
   mounted() {},
   methods: {
@@ -98,7 +101,9 @@ export default {
 @import url("./../../../common/common.less");
 .page {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 667px;
+  //max-height: 100vh;
   position: relative;
   background-color: #fff2cc;
   font-size: 0;
@@ -179,11 +184,14 @@ export default {
     height: 10%;
   }
 }
+.main.xStyle{
+  top:22%
+}
 .main {
   //margin-top: 100px;
   position: absolute;
   left: 50%;
-  top: 18%;
+  top: 20.5%;
   //top:145px;
   transform: translateX(-50%);
   border-radius: 25px;
@@ -193,6 +201,12 @@ export default {
   margin: auto;
   background: rgba(255, 255, 255, 0.96);
   text-align: center;
+  .coco{
+    position: absolute;
+    bottom: -30px;
+    right: -17px;
+    width: 93px;
+  }
   .avatar {
     position: absolute;
     top: -37px;
@@ -226,7 +240,7 @@ export default {
     color: rgba(51, 51, 51, 1);
   }
   .intro_wrapper {
-    margin: 23px 0 12px 0;
+    margin: 18px 0 12px 0;
     .intro {
       margin-bottom: 5px;
       font-size: 16px;
@@ -265,7 +279,7 @@ export default {
     }
   }
   .learn_wrapper {
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;

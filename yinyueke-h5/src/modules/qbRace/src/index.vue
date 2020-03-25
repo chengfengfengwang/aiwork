@@ -21,33 +21,48 @@ export default {
     };
   },
   created() {
-    this.originCountdown = Number(getQueryVariable("countdown"));
-    this.beginCountDown()
+    // this.originCountdown = Number(getQueryVariable("countdown"));
+    // this.beginCountDown();
+    this.getCourses()
   },
   mounted() {},
-  destroyed(){
-    clearInterval(this.timer)
+  destroyed() {
+    clearInterval(this.timer);
   },
   methods: {
-    beginCountDown(){
-    this.countdown = getCountDown(this.originCountdown--);
-     this.timer = setInterval(() => {
-          this.countdown = getCountDown(this.originCountdown--);
+    getCourses() {
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/operate/activity_match/?uid=${getQueryVariable("uid")}`)
+        .then(res => {
+            this.res = res.data;
+           this.originCountdown = Number(this.res.countdown);
+           this.beginCountDown();
+        });
+    },
+    beginCountDown() {
+      this.countdown = getCountDown(this.originCountdown--);
+      this.timer = setInterval(() => {
+        this.countdown = getCountDown(this.originCountdown--);
       }, 1000);
     },
     toQbRace() {
-      console.log(this.originCountdown)
-      if (this.countdown!='已开始') {
+      console.log(this.originCountdown);
+      var res = this.res;
+      if (res.has_join) {
+        Toast({
+          message: "亲爱的小朋友，您已经参加过比赛了哦",
+          duration: 3000
+        });
+        return
+      }
+      if (this.countdown != "已开始") {
         Toast({
           message: "亲爱的用户，比赛还没有正式开始哦，请您耐心等待",
           duration: 3000
         });
       } else {
-        let url = `open://mock?question_bank=${getQueryVariable(
-          "question_bank"
-        )}&type=${getQueryVariable("type")}&mock_id=${getQueryVariable(
-          "mock_id"
-        )}`;
+        
+        let url = `open://mock?question_bank=${res.question_bank}&type=${res.type}&mock_id=${res.mock_id}`;
         console.log(url);
         location.href = url;
       }
