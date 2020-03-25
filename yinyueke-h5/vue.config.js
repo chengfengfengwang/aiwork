@@ -111,7 +111,9 @@ module.exports = {
          //赵伟入群二维码
          msgInGroup:'src/modules/msgInGroup/app.js',
          //分销
-         promote:'src/modules/promote/app.js'
+         promote:'src/modules/promote/app.js',
+         //最强大脑音乐挑战赛
+         qbRace:'src/modules/qbRace/app.js'
          
          
     }   
