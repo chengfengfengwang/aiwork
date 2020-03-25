@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     beginCountDown(){
+    this.countdown = getCountDown(this.originCountdown--);
      this.timer = setInterval(() => {
           this.countdown = getCountDown(this.originCountdown--);
       }, 1000);
