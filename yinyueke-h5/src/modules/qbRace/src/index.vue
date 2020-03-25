@@ -71,7 +71,7 @@ export default {
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 19%;
+  top: 20.8%;
   left: 0;
   //left: 30%;
   font-size: 13px;
@@ -82,7 +82,7 @@ export default {
 .enbtn {
   position: absolute;
   width: 222px;
-  top: 16.1%;
+  top: 17.6%;
   left: 50%;
   transform: translateX(-50%);
 }

@@ -35,12 +35,9 @@
           <div class="two"></div>
           <div class="three"></div>
           <div class="four"></div>
-          <!-- <div class="two"></div>
-          <div class="one"></div>
-          <div class="four"></div>
-          <div class="three"></div>
-          <div class="five"></div> -->
-
+        </div>
+        <div class="audio_play">
+          <img src="../../../assets/img/sightSingShare/audio_play.png" alt="">
         </div>
       </div>
       <div class="learn_wrapper">
@@ -253,6 +250,9 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      img{
+        width: 80px;
+      }
       div {
         width: 3px;
         height: 100%;

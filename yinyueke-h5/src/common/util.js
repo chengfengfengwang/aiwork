@@ -82,9 +82,9 @@ function getCountDown(lefttime) {
     var h = parseInt(lefttime / (60 * 60) % 24);
     var m = parseInt(lefttime / 60 % 60);
     var s = parseInt(lefttime % 60);
-    // h = formatNumber(h);
-    // m = formatNumber(m);
-    // s = formatNumber(s);
+     //h = formatNumber(h);
+     //m = formatNumber(m);
+     s = formatNumber(s);
     var str = d + "天" + h + "小时" + m + "分" + s + '秒';
     if(lefttime<=0){
         str = "已开始";
