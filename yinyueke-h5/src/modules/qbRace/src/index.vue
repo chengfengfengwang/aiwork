@@ -29,7 +29,7 @@ export default {
   methods: {
     toQbRace(){
       console.log('跳转')
-      location.href = `open://mock?question_bank=1&type=1&mock_id=`
+      location.href = `open://mock?question_bank=13&type=1&mock_id=5dfc786106981e000a60132b`
     }
   },
   watch: {}
