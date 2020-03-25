@@ -101,7 +101,7 @@ export default {
           "第五课《Hot Cross Buns》",
           "第六课《Little Star》",
           "第七课《Row Row Row Your Boat》",
-          "第八课《Marry Had A Little Lamb》",
+          "第八课《Mary Had A Little Lamb》",
           "第九课《Five Little Ducks》",
           "第十课《两只老虎》",
           "第十一课《Jack And Jill》",
