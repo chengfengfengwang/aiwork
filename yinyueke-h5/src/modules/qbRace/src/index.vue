@@ -1,7 +1,7 @@
 <template>
   <div class="page">
-    <div v-show="originCountdown==0" class="count">比赛已开始</div>
-    <div v-show="originCountdown!=0" class="count">开赛倒计时：{{countdown}}</div>
+    <div v-show="countdown=='已开始'" class="count">比赛已开始</div>
+    <div v-show="countdown!='已开始'" class="count">开赛倒计时：{{countdown}}</div>
     <img @click="toQbRace" class="enbtn breath" src="../../../assets/img/qbRace/enterBtn.png" alt />
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
@@ -21,13 +21,22 @@ export default {
     };
   },
   created() {
-    this.originCountdown = getQueryVariable("countdown");
-    this.countdown = getCountDown(getQueryVariable("countdown"));
+    this.originCountdown = Number(getQueryVariable("countdown"));
+    this.beginCountDown()
   },
   mounted() {},
+  destroyed(){
+    clearInterval(this.timer)
+  },
   methods: {
+    beginCountDown(){
+     this.timer = setInterval(() => {
+          this.countdown = getCountDown(this.originCountdown--);
+      }, 1000);
+    },
     toQbRace() {
-      if (this.originCountdown) {
+      console.log(this.originCountdown)
+      if (this.countdown!='已开始') {
         Toast({
           message: "亲爱的用户，比赛还没有正式开始哦，请您耐心等待",
           duration: 3000
