@@ -1,12 +1,7 @@
 <template>
   <div class="page">
     <div class="count">开赛倒计时：0时10分56秒</div>
-    <img
-    @click="toQbRace"
-      class="enbtn breath"
-      src="../../../assets/img/qbRace/enterBtn.png"
-      alt
-    />
+    <img @click="toQbRace" class="enbtn breath" src="../../../assets/img/qbRace/enterBtn.png" alt />
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/3.jpg" alt class="bg" />
@@ -27,9 +22,14 @@ export default {
   },
   mounted() {},
   methods: {
-    toQbRace(){
-      console.log('跳转')
-      location.href = `open://mock?question_bank=13&type=1&mock_id=5dfc786106981e000a60132b`
+    toQbRace() {
+      let url = `open://mock?question_bank=${getQueryVariable(
+        "question_bank"
+      )}&type=${getQueryVariable("type")}&mock_id=${getQueryVariable(
+        "mock_id"
+      )}`;
+      console.log(url);
+      location.href = url;
     }
   },
   watch: {}
@@ -67,11 +67,11 @@ export default {
   transform: translateX(-50%);
 }
 
-.breath{
+.breath {
   animation-duration: 1s;
-    animation-fill-mode: both;
-    animation-name: pulse;
-    animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
 }
 @keyframes pulse {
   0% {
@@ -79,10 +79,10 @@ export default {
   }
 
   50% {
-    transform:translateX(-50%) scale3d(1.05, 1.05, 1.05);
+    transform: translateX(-50%) scale3d(1.05, 1.05, 1.05);
   }
   100% {
-    transform:translateX(-50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1);
   }
 }
 </style>

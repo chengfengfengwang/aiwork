@@ -113,8 +113,8 @@ module.exports = {
          //分销
          promote:'src/modules/promote/app.js',
          //最强大脑音乐挑战赛
-         qbRace:'src/modules/qbRace/app.js'
-         
-         
+         qbRace:'src/modules/qbRace/app.js',
+         //视唱分享
+         sightSingShare:'src/modules/sightSingShare/app.js'
     }   
 }
