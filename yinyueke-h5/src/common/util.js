@@ -74,6 +74,23 @@ function getDate(date) {
     console.log(year, month, day)
     return year+'年'+month+'月'+day+'日'
 }
+function getCountDown(lefttime) {
+    // var nowtime = new Date().valueOf();
+    // var future = future * 1000;
+    // var lefttime = parseInt((future - nowtime) / 1000);
+    var d = parseInt(lefttime / (24 * 60 * 60));
+    var h = parseInt(lefttime / (60 * 60) % 24);
+    var m = parseInt(lefttime / 60 % 60);
+    var s = parseInt(lefttime % 60);
+    // h = formatNumber(h);
+    // m = formatNumber(m);
+    // s = formatNumber(s);
+    var str = d + "天" + h + "小时" + m + "分";
+    if(lefttime<=0){
+        str = "已开始";
+    };
+    return str
+}
 const baseSize = 36
 function setRem() {
     // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
@@ -112,4 +129,4 @@ function formatePhone(phone){
 }
 var u = navigator.userAgent, app = navigator.appVersion;
 var openInApp = u.indexOf('immusician') != -1 || u.indexOf('buluobang') != -1 || u.indexOf('bangtabs') != -1;
-export { formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
+export { getCountDown, formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }

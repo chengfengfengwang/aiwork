@@ -1,6 +1,7 @@
 <template>
   <div class="page">
-    <div class="count">开赛倒计时：0时10分56秒</div>
+    <div v-show="originCountdown==0" class="count">比赛已开始</div>
+    <div v-show="originCountdown!=0" class="count">开赛倒计时：{{countdown}}</div>
     <img @click="toQbRace" class="enbtn breath" src="../../../assets/img/qbRace/enterBtn.png" alt />
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
@@ -8,31 +9,38 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { getCountDown, getQueryVariable } from "../../../common/util.js";
 import { Toast } from "vant";
 
 export default {
   data() {
     return {
-      btnActive: false
+      btnActive: false,
+      originCountdown: 0,
+      countdown: 0
     };
   },
   created() {
-    //this.getInstruments();
+    this.originCountdown = getQueryVariable("countdown");
+    this.countdown = getCountDown(getQueryVariable("countdown"));
   },
-  mounted() {
-    console.log(getQueryVariable('countdown'))
-  },
+  mounted() {},
   methods: {
-    
     toQbRace() {
-      let url = `open://mock?question_bank=${getQueryVariable(
-        "question_bank"
-      )}&type=${getQueryVariable("type")}&mock_id=${getQueryVariable(
-        "mock_id"
-      )}`;
-      console.log(url);
-      location.href = url;
+      if (this.originCountdown) {
+        Toast({
+          message: "亲爱的用户，比赛还没有正式开始哦，请您耐心等待",
+          duration: 3000
+        });
+      } else {
+        let url = `open://mock?question_bank=${getQueryVariable(
+          "question_bank"
+        )}&type=${getQueryVariable("type")}&mock_id=${getQueryVariable(
+          "mock_id"
+        )}`;
+        console.log(url);
+        location.href = url;
+      }
     }
   },
   watch: {}
@@ -44,7 +52,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: #710fd4;
+  background-color: #fff2cc;
   font-size: 0;
 }
 .bg {
