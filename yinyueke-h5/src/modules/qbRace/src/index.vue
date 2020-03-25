@@ -2,6 +2,7 @@
   <div class="page">
     <div class="count">开赛倒计时：0时10分56秒</div>
     <img
+    @click="toQbRace"
       class="enbtn breath"
       src="../../../assets/img/qbRace/enterBtn.png"
       alt
@@ -25,7 +26,12 @@ export default {
     //this.getInstruments();
   },
   mounted() {},
-  methods: {},
+  methods: {
+    toQbRace(){
+      console.log('跳转')
+      location.href = `open://mock/question_bank=1&type=1&mock_id=`
+    }
+  },
   watch: {}
 };
 </script>
