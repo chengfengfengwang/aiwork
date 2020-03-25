@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div v-show="countdown=='已开始'" class="count">比赛已开始</div>
-    <div v-show="countdown!='已开始'" class="count">开赛倒计时：{{countdown}}</div>
+    <div v-show="countdown!='已开始'" class="count">开赛倒计时：<span v-show="countdown">{{countdown}}</span></div>
     <img @click="toQbRace" class="enbtn breath" src="../../../assets/img/qbRace/enterBtn.png" alt />
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
