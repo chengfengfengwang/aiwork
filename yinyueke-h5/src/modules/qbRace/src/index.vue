@@ -20,8 +20,11 @@ export default {
   created() {
     //this.getInstruments();
   },
-  mounted() {},
+  mounted() {
+    console.log(getQueryVariable('countdown'))
+  },
   methods: {
+    
     toQbRace() {
       let url = `open://mock?question_bank=${getQueryVariable(
         "question_bank"
