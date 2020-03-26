@@ -593,7 +593,7 @@ html {
   position: relative;
 }
 .card_wrapper {
-  min-height: 470px;
+  min-height: 280px;
   max-height: 80vh;
   overflow: scroll;
   padding-bottom: 70px;
