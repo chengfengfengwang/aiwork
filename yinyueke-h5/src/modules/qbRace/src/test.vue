@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <button style="font-size:30px" @click="test">跳转</button>
+    <button style="font-size:30px;margin-top:150px" @click="test">跳转</button>
   </div>
 </template>
 <script>
