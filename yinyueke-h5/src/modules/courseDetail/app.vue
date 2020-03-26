@@ -185,7 +185,12 @@ export default {
       if (this.curCard.isVip) {
         this.viPay();
       } else if (this.curCard.buy_url) {
-        location.href = this.curCard.buy_url;
+        var originUrl = encodeURIComponent(this.curCard.buy_url);
+        let url = `open://webBrowser?url=${originUrl}`
+        console.log(url)
+        location.href = url;
+
+        //location.href = this.curCard.buy_url;
       } else {
         this.toPay();
       }

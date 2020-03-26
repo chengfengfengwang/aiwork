@@ -24,7 +24,12 @@ export default {
   },
   methods: {
     goNext(){
-        location.href = localStorage.getItem('vip_youzan_url')
+        var originUrl = encodeURIComponent(this.curCard.buy_url);
+        let url = `open://webBrowser?url=${originUrl}`
+        console.log(url)
+        location.href = url;
+
+        //location.href = localStorage.getItem('vip_youzan_url')
     }
   }
 };
