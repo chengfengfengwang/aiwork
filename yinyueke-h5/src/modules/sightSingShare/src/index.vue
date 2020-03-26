@@ -8,13 +8,13 @@
       <img src="../../../assets/img/sightSingShare/coco.png" alt="" class="coco">
       <div class="avatar">
         <img
-          src="https://t7.baidu.com/it/u=2046080325,1937962445&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1585720677&t=66fb57e87c02143807f86762a06e449f"
+          :src="info.avatar_url"
           alt
         />
       </div>
-      <div class="name">小了他</div>
+      <div class="name">{{info.nickname}}</div>
       <div class="rank">
-        入选音乐小天才榜单第<span style="color:#FF4F1F">50</span>位
+        入选音乐小天才榜单第<span style="color:#FF4F1F">{{info.ranking}}</span>位
       </div>
       <div class="intro_wrapper">
         <div class="intro">我刚刚用音乐壳学会了一条新的视唱</div>
@@ -45,26 +45,26 @@
         <div class="learn_item">
           <div class="label">累计学习</div>
           <div class="num_row">
-            <span class="num">90</span>天
+            <span class="num">{{info.study_days}}</span>天
           </div>
         </div>
         <div class="learn_item">
-          <div class="label">累计学习</div>
+          <div class="label">本周学习</div>
           <div class="num_row">
-            <span class="num">90</span>天
+            <span class="num">{{info.week_days}}</span>天
           </div>
         </div>
         <div class="learn_item">
-          <div class="label">累计学习</div>
+          <div class="label">累计学习课程</div>
           <div class="num_row">
-            <span class="num">90</span>天
+            <span class="num">{{info.study_lesson}}</span>天
           </div>
         </div>
       </div>
       <div class="qr_section">
         <img
           class="qr"
-          src="https://t7.baidu.com/it/u=2046080325,1937962445&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1585720677&t=66fb57e87c02143807f86762a06e449f"
+          :src="info.qr_url"
           alt
         />
         <div>邀请您加入音乐壳，与我一起快乐学音乐</div>
@@ -80,15 +80,23 @@ export default {
   data() {
     return {
       btnActive: false,
-      isXStyle:false
+      isXStyle:false,
+      info:{}
     };
   },
   created() {
-    this.isXStyle = xStyle()
-    console.log(this.isXStyle)
+    this.isXStyle = xStyle();
+    this.getInfo()
   },
   mounted() {},
   methods: {
+    getInfo() {
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/students/sing_share/?uid=${getQueryVariable('uid')}`)
+        .then(res => {
+            this.info = res.data;
+        });
+    },
     toQbRace() {
       console.log("跳转");
       location.href = `open://mock?question_bank=13&type=1&mock_id=5dfc786106981e000a60132b`;

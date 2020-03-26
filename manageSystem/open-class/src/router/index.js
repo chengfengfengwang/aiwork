@@ -11,6 +11,7 @@ import OpenClassYinji from '../views/OpenClassYinji.vue'
 import OpenClassAi from '../views/OpenClassAi.vue'
 import Group from '../views/Group.vue'
 import OpenVip from '../views/OpenVip'
+import searchVip from '../views/searchVip'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ const router = new Router({
       name: 'OpenVip',
       path: '/OpenVip',
       component: OpenVip,
+    },
+    {
+      name: 'searchVip',
+      path: '/searchVip',
+      component: searchVip,
     }
   ],
   scrollBehavior (to, from, savedPosition) {
