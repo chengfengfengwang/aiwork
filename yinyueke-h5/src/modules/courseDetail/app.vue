@@ -593,7 +593,8 @@ html {
   position: relative;
 }
 .card_wrapper {
-  height: 470px;
+  min-height: 470px;
+  max-height: 80vh;
   overflow: scroll;
   padding-bottom: 70px;
   // @media (max-width: 400px) and (min-height: 700px) {
