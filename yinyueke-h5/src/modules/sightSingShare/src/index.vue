@@ -21,6 +21,7 @@
         <div class="intro">快来听听我的作品吧</div>
       </div>
       <div class="audio_section" @click="togglePlay">
+        <div class="audio_time">{{audioTime}}s</div>
         <div v-show="playing" class="audio_play">
           <div class="one"></div>
           <div class="two"></div>
@@ -82,7 +83,8 @@ export default {
       btnActive: false,
       isXStyle:false,
       info:{},
-      playing:false
+      playing:false,
+      audioTime:''
     };
   },
   created() {
@@ -108,6 +110,10 @@ export default {
             this.myAudio = new Audio();
             this.myAudio.src = this.info.video_record_url;
             //this.myAudio.src = 'https://www.runoob.com/try/demo_source/horse.ogg';
+            this.myAudio.addEventListener("canplay", ()=>{
+              console.log(this.myAudio.duration)
+                this.audioTime=parseInt(this.myAudio.duration);
+            });
             this.myAudio.addEventListener('ended',  ()=> {  
                 this.playing = false
             }, false);
@@ -277,13 +283,23 @@ export default {
     height: 36px;
     background: rgba(255, 147, 54, 1);
     border-radius: 20px;
+    .audio_time{
+      position: absolute;
+      top:48%;
+      transform: translateY(-50%);
+      right: 16px;
+      font-size:16px;
+      font-family:PingFangSC-Medium,PingFang SC;
+      font-weight:500;
+      color:rgba(255,255,255,1);
+    }
     .audio_play {
       //width: 80px;
       width: 100%;
       height: 18px;
       position: absolute;
       top: 50%;
-      left: 50%;
+      left: 46%;
       transform: translate(-50%, -50%);
       img{
         width: 80px;
