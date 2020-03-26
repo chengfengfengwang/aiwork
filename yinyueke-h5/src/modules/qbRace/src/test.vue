@@ -19,7 +19,7 @@ export default {
  
   methods: {
     test(){
-        var originUrl = encodeURIComponent('https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue');
+        var originUrl = encodeURIComponent('https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue?a=a123&b=b123');
         let url = `open://webBrowser?url=${originUrl}`
         console.log(url)
         location.href = url;
