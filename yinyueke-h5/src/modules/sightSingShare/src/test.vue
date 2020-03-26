@@ -1,72 +1,6 @@
 <template>
   <div class="page">
-    <img class="bg" src="../../../assets/img/sightSingShare/top.png" alt />
-    <img class="bg round" src="../../../assets/img/sightSingShare/round.png" alt />
-    <img v-show="!isXStyle" class="bottom" src="../../../assets/img/sightSingShare/bottom.png" alt />
-    <img v-show="isXStyle" class="bottom" src="../../../assets/img/sightSingShare/xbottom.png" alt />
-    <div class="main" :class="{xStyle:isXStyle}">
-          <audio controls id="myaudio" preload src="http://image.yinji.immusician.com/record/6892711291671391724941204957"></audio>
-
-      <img src="../../../assets/img/sightSingShare/coco.png" alt class="coco" />
-      <div class="avatar">
-        <img :src="info.avatar_url" alt />
-      </div>
-      <div class="name">{{info.nickname}}</div>
-      <div class="rank">
-        入选音乐小天才榜单第
-        <span style="color:#FF4F1F">{{info.ranking}}</span>位
-      </div>
-      <div class="intro_wrapper">
-        <div class="intro">我刚刚用音乐壳学会了一条新的视唱</div>
-        <div class="intro">快来听听我的作品吧</div>
-      </div>
-      <div class="audio_section" @click="togglePlay">
-        <div class="audio_time">{{audioTime}}s</div>
-        <div v-show="playing" class="audio_play">
-          <div class="one"></div>
-          <div class="two"></div>
-          <div class="three"></div>
-          <div class="four"></div>
-
-          <div class="one"></div>
-          <div class="two"></div>
-          <div class="three"></div>
-          <div class="four"></div>
-
-          <div class="one"></div>
-          <div class="two"></div>
-          <div class="three"></div>
-          <div class="four"></div>
-        </div>
-        <div v-show="!playing" class="audio_play">
-          <img src="../../../assets/img/sightSingShare/audio_play.png" alt />
-        </div>
-      </div>
-      <div class="learn_wrapper">
-        <div class="learn_item">
-          <div class="label">累计学习</div>
-          <div class="num_row">
-            <span class="num">{{info.study_days}}</span>天
-          </div>
-        </div>
-        <div class="learn_item">
-          <div class="label">本周学习</div>
-          <div class="num_row">
-            <span class="num">{{info.week_days}}</span>天
-          </div>
-        </div>
-        <div class="learn_item">
-          <div class="label">累计学习课程</div>
-          <div class="num_row">
-            <span class="num">{{info.study_lesson}}</span>天
-          </div>
-        </div>
-      </div>
-      <div class="qr_section">
-        <img class="qr" :src="info.qr_url" alt />
-        <div>邀请您加入音乐壳，与我一起快乐学音乐</div>
-      </div>
-    </div>
+    <button  @click="test">跳转</button>
   </div>
 </template>
 <script>
@@ -76,94 +10,18 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
-      btnActive: false,
-      isXStyle: false,
-      info: {},
-      playing: false,
-      audioTime: ""
+     
     };
   },
   created() {
-    this.isXStyle = xStyle();
-    this.getInfo();
+   
   },
-  mounted() {
-    wx.config({
-      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-      appId: "", // 必填，公众号的唯一标识
-      timestamp: "", // 必填，生成签名的时间戳
-      nonceStr: "", // 必填，生成签名的随机串
-      signature: "", // 必填，签名
-      jsApiList: [] // 必填，需要使用的JS接口列表
-    });
-    let audio = document.querySelector('#myaudio'); //生成一个audio元素
-      console.log(audio)
-      audio.play();
-    wx.ready(function() {
-      let audio = document.querySelector('#myaudio'); //生成一个audio元素
-      console.log(audio)
-      audio.play();
-      //audio.pause();
-      console.log("--test-");
-      audio.addEventListener("canplay", function() {
-        console.log("---");
-        console.log(parseInt(audio.duration));
-      });
-    });
-    //this.getAudioDuration();
-  },
+ 
   methods: {
-    togglePlay() {
-      this.playing = !this.playing;
-      if (this.playing) {
-        this.myAudio.play();
-        this.countdown();
-      } else {
-        this.myAudio.pause();
-        clearInterval(this.timer);
-      }
-    },
-    countdown() {
-      this.timer = setInterval(() => {
-        this.audioTime--;
-      }, 1000);
-    },
-    getAudioDuration(src) {
-      let audio = new Audio(); //生成一个audio元素
-      audio.src = "https://www.runoob.com/try/demo_source/horse.ogg"; //音乐的路径
-      audio.play();
-      audio.pause();
-      
-      audio.addEventListener("canplay", function() {
-        console.log("---");
-        console.log(parseInt(audio.duration));
-      });
-    },
-    getInfo() {
-      this.axios
-        .get(
-          `http://58.87.125.111:55555/v1/students/sing_share/?uid=${getQueryVariable(
-            "uid"
-          )}`
-        )
-        .then(res => {
-          this.info = res.data;
-          this.myAudio = new Audio();
-          this.myAudio.src = this.info.video_record_url;
-          //this.myAudio.src = 'https://www.runoob.com/try/demo_source/horse.ogg';
-          this.myAudio.addEventListener("canplay", () => {
-            this.audioTime = parseInt(this.myAudio.duration);
-          });
-          this.myAudio.addEventListener(
-            "ended",
-            () => {
-              this.playing = false;
-              this.audioTime = parseInt(this.myAudio.duration);
-              clearInterval(this.timer);
-            },
-            false
-          );
-        });
+    test(){
+        var originUrl = encodeURIComponent('https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue');
+        let url = `open://webBrowser?url=${originUrl}`
+        location.href = url;
     }
   },
   watch: {}
