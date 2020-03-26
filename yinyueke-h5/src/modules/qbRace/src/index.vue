@@ -26,9 +26,9 @@ export default {
     this.getCourses()
   },
   mounted() {},
-  destroyed() {
-    clearInterval(this.timer);
-  },
+  // destroyed() {
+  //   clearInterval(this.timer);
+  // },
   methods: {
     getCourses() {
       this.axios
