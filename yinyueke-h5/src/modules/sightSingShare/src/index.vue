@@ -5,12 +5,9 @@
     <img v-show="!isXStyle" class="bottom" src="../../../assets/img/sightSingShare/bottom.png" alt />
     <img v-show="isXStyle" class="bottom" src="../../../assets/img/sightSingShare/xbottom.png" alt />
     <div class="main" :class="{xStyle:isXStyle}">
-      <img src="../../../assets/img/sightSingShare/coco.png" alt="" class="coco">
+      <img src="../../../assets/img/sightSingShare/coco.png" alt class="coco" />
       <div class="avatar">
-        <img
-          :src="info.avatar_url"
-          alt
-        />
+        <img :src="info.avatar_url" alt />
       </div>
       <div class="name">{{info.nickname}}</div>
       <div class="rank">
@@ -21,7 +18,7 @@
         <div class="intro">快来听听我的作品吧</div>
       </div>
       <div class="audio_section" @click="togglePlay">
-        <div class="audio_time">{{audioTime}}s</div>
+        <div v-show="audioTime" class="audio_time">{{audioTime}}s</div>
         <div v-show="playing" class="audio_play">
           <div class="one"></div>
           <div class="two"></div>
@@ -39,7 +36,7 @@
           <div class="four"></div>
         </div>
         <div v-show="!playing" class="audio_play">
-          <img src="../../../assets/img/sightSingShare/audio_play.png" alt="">
+          <img src="../../../assets/img/sightSingShare/audio_play.png" alt />
         </div>
       </div>
       <div class="learn_wrapper">
@@ -58,76 +55,128 @@
         <div class="learn_item">
           <div class="label">累计学习课程</div>
           <div class="num_row">
-            <span class="num">{{info.study_lesson}}</span>天
+            <span class="num">{{info.study_lesson}}</span>节
           </div>
         </div>
       </div>
       <div class="qr_section">
-        <img
-          class="qr"
-          :src="info.qr_url"
-          alt
-        />
+        <img class="qr" :src="info.qr_url" alt />
         <div>邀请您加入音乐壳，与我一起快乐学音乐</div>
       </div>
     </div>
+    <audio id="myaudio" preload src="https://www.runoob.com/try/demo_source/horse.ogg"></audio>
   </div>
 </template>
 <script>
-import { getQueryVariable, xStyle } from "../../../common/util.js";
+import { getQueryVariable, xStyle, platForm } from "../../../common/util.js";
 import { Toast } from "vant";
 
 export default {
   data() {
     return {
       btnActive: false,
-      isXStyle:false,
-      info:{},
-      playing:false,
-      audioTime:''
+      isXStyle: false,
+      info: {},
+      playing: false,
+      audioTime: ""
     };
   },
   created() {
     this.isXStyle = xStyle();
-    this.getInfo()
+    this.getInfo();
   },
-  mounted() {},
+  mounted() {
+    wx.config({
+      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: "", // 必填，公众号的唯一标识
+      timestamp: "", // 必填，生成签名的时间戳
+      nonceStr: "", // 必填，生成签名的随机串
+      signature: "", // 必填，签名
+      jsApiList: [] // 必填，需要使用的JS接口列表
+    });
+  },
   methods: {
-    togglePlay(){
+    togglePlay() {
       this.playing = !this.playing;
-      if(this.playing){
-        this.myAudio.play()
-        this.countdown()
-      }else{
+      if (this.playing) {
+        this.myAudio.play();
+        this.countdown();
+      } else {
         this.myAudio.pause();
-        clearInterval(this.timer)
+        clearInterval(this.timer);
       }
-      
     },
-    countdown(){
+    countdown() {
       this.timer = setInterval(() => {
-        this.audioTime--
+        this.audioTime--;
+        if(this.audioTime==0){
+          clearInterval(this.timer)
+        }
       }, 1000);
+    },
+    getAudioDuration(src) {
+      let audio = new Audio(); //生成一个audio元素
+      audio.src = "https://www.runoob.com/try/demo_source/horse.ogg"; //音乐的路径
+      audio.play();
+      audio.pause();
+
+      audio.addEventListener("canplay", function() {
+        console.log("---");
+        console.log(parseInt(audio.duration));
+      });
     },
     getInfo() {
       this.axios
-        .get(`http://58.87.125.111:55555/v1/students/sing_share/?uid=${getQueryVariable('uid')}`)
+        .get(
+          `http://58.87.125.111:55555/v1/students/sing_share/?uid=${getQueryVariable(
+            "uid"
+          )}`
+        )
         .then(res => {
-            this.info = res.data;
-            this.myAudio = new Audio();
-            this.myAudio.src = this.info.video_record_url;
-            //this.myAudio.src = 'https://www.runoob.com/try/demo_source/horse.ogg';
-            this.myAudio.addEventListener("canplay", ()=>{
-                this.audioTime=parseInt(this.myAudio.duration);
+          this.info = res.data;
+          var that = this;
+          if(platForm==='IOS'){
+            wx.ready(function() {
+            console.log("ready");
+            that.myAudio = new Audio();
+            that.myAudio.src = that.info.video_record_url;
+            console.log(that.myAudio)
+            that.myAudio.play();
+            that.myAudio.pause();
+            that.myAudio.addEventListener("canplay", () => {
+              that.audioTime = parseInt(that.myAudio.duration);
+              console.log("--");
+              console.log(that.audioTime);
             });
-            this.myAudio.addEventListener('ended',  ()=> {  
-                this.playing = false;
-                this.audioTime=parseInt(this.myAudio.duration);
-                clearInterval(this.timer)
-            }, false);
+            that.myAudio.addEventListener(
+              "ended",
+              () => {
+                that.playing = false;
+                that.audioTime = parseInt(that.myAudio.duration);
+                clearInterval(that.timer);
+              },
+              false
+            );
+          });
+          }else{
+            that.myAudio = new Audio();
+            that.myAudio.src = that.info.video_record_url;
+            that.myAudio.addEventListener("canplay", () => {
+              that.audioTime = parseInt(that.myAudio.duration);
+            });
+            that.myAudio.addEventListener(
+              "ended",
+              () => {
+                that.playing = false;
+                that.audioTime = parseInt(that.myAudio.duration);
+                clearInterval(that.timer);
+              },
+              false
+            );
+          }
+          
         });
-    },
-   
+    }
   },
   watch: {}
 };
@@ -197,9 +246,9 @@ export default {
 .audio_play .five {
   animation: play 0.8s infinite 0.5s;
 }
-.audio_play.pause{
-  div{
-    animation-play-state:paused;
+.audio_play.pause {
+  div {
+    animation-play-state: paused;
   }
 }
 @keyframes play {
@@ -219,8 +268,8 @@ export default {
     height: 10%;
   }
 }
-.main.xStyle{
-  top:22%
+.main.xStyle {
+  top: 22%;
 }
 .main {
   //margin-top: 100px;
@@ -236,7 +285,7 @@ export default {
   margin: auto;
   background: rgba(255, 255, 255, 0.96);
   text-align: center;
-  .coco{
+  .coco {
     position: absolute;
     bottom: -30px;
     right: -17px;
@@ -291,15 +340,15 @@ export default {
     height: 36px;
     background: rgba(255, 147, 54, 1);
     border-radius: 20px;
-    .audio_time{
+    .audio_time {
       position: absolute;
-      top:48%;
+      top: 48%;
       transform: translateY(-50%);
       right: 16px;
-      font-size:16px;
-      font-family:PingFangSC-Medium,PingFang SC;
-      font-weight:500;
-      color:rgba(255,255,255,1);
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 1);
     }
     .audio_play {
       //width: 80px;
@@ -309,7 +358,7 @@ export default {
       top: 50%;
       left: 46%;
       transform: translate(-50%, -50%);
-      img{
+      img {
         width: 80px;
       }
       div {
@@ -320,7 +369,7 @@ export default {
         background-color: #fff;
         vertical-align: middle;
         display: inline-block;
-        opacity: .7;
+        opacity: 0.7;
       }
     }
   }
