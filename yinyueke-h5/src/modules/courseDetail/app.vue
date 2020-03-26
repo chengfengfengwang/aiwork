@@ -124,7 +124,7 @@
 import Loading from "./../../components/Loading";
 import { Popup } from "vant";
 
-import { getQueryVariable, isIphonex } from "../../common/util.js";
+import { getQueryVariable, isIphonex, platForm } from "../../common/util.js";
 export default {
   data() {
     return {
@@ -185,10 +185,17 @@ export default {
       if (this.curCard.isVip) {
         this.viPay();
       } else if (this.curCard.buy_url) {
-        var originUrl = encodeURIComponent(this.curCard.buy_url);
-        let url = `open://webBrowser?url=${originUrl}`
-        console.log(url)
-        location.href = url;
+        if(platForm!=='IOS'){
+          console.log('andriod')
+          var originUrl = encodeURIComponent(this.curCard.buy_url);
+          let url = `open://webBrowser?url=${originUrl}`
+          console.log(url)
+          location.href = url;
+        }else{
+          console.log('ios')
+          location.href = this.curCard.buy_url;
+        }
+        
 
         //location.href = this.curCard.buy_url;
       } else {
