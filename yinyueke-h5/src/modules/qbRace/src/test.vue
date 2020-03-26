@@ -24,6 +24,7 @@ export default {
     // this.originCountdown = Number(getQueryVariable("countdown"));
     // this.beginCountDown();
     //this.getCourses()
+    console.log('测试')
   },
   mounted() {},
   // destroyed() {
