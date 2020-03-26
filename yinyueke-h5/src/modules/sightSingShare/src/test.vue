@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <button  @click="test">跳转</button>
+    <button style="font-size:30px" @click="test">跳转</button>
   </div>
 </template>
 <script>
@@ -21,6 +21,7 @@ export default {
     test(){
         var originUrl = encodeURIComponent('https://shop43817630.m.youzan.com/wscgoods/detail/27bfs5j5yomue');
         let url = `open://webBrowser?url=${originUrl}`
+        console.log(url)
         location.href = url;
     }
   },
