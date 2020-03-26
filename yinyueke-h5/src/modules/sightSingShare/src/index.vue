@@ -86,14 +86,7 @@ export default {
     this.getInfo();
   },
   mounted() {
-    wx.config({
-      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-      appId: "", // 必填，公众号的唯一标识
-      timestamp: "", // 必填，生成签名的时间戳
-      nonceStr: "", // 必填，生成签名的随机串
-      signature: "", // 必填，签名
-      jsApiList: [] // 必填，需要使用的JS接口列表
-    });
+    
   },
   methods: {
     togglePlay() {
@@ -136,27 +129,35 @@ export default {
           this.info = res.data;
           var that = this;
           if(platForm==='IOS'){
-            wx.ready(function() {
-            console.log("ready");
-            that.myAudio = new Audio();
-            that.myAudio.src = that.info.video_record_url;
-            console.log(that.myAudio)
-            that.myAudio.play();
-            that.myAudio.pause();
-            that.myAudio.addEventListener("canplay", () => {
-              that.audioTime = parseInt(that.myAudio.duration);
-              console.log("--");
-              console.log(that.audioTime);
+            wx.config({
+              debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              appId: "", // 必填，公众号的唯一标识
+              timestamp: "", // 必填，生成签名的时间戳
+              nonceStr: "", // 必填，生成签名的随机串
+              signature: "", // 必填，签名
+              jsApiList: [] // 必填，需要使用的JS接口列表
             });
-            that.myAudio.addEventListener(
-              "ended",
-              () => {
-                that.playing = false;
+            wx.ready(function() {
+              console.log("ready");
+              that.myAudio = new Audio();
+              that.myAudio.src = that.info.video_record_url;
+              console.log(that.myAudio)
+              that.myAudio.play();
+              that.myAudio.pause();
+              that.myAudio.addEventListener("canplay", () => {
                 that.audioTime = parseInt(that.myAudio.duration);
-                clearInterval(that.timer);
-              },
-              false
-            );
+                console.log("--");
+                console.log(that.audioTime);
+              });
+              that.myAudio.addEventListener(
+                "ended",
+                () => {
+                  that.playing = false;
+                  that.audioTime = parseInt(that.myAudio.duration);
+                  clearInterval(that.timer);
+                },
+                false
+              );
           });
           }else{
             that.myAudio = new Audio();
@@ -369,7 +370,7 @@ export default {
         background-color: #fff;
         vertical-align: middle;
         display: inline-block;
-        opacity: 0.7;
+        opacity: 0.9;
       }
     }
   }
