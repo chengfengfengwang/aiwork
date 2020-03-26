@@ -9,6 +9,8 @@ import Router from 'vue-router'
 // import qimeng from './src/qimeng_new.vue'
 
 const home = () => import('./src/index.vue')
+const test = () => import('./src/test.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -18,7 +20,11 @@ export default new Router({
       name: 'home',
       component: home
     },
-
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
   
   ],
   // scrollBehavior(to, from, savedPosition) {
