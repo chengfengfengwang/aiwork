@@ -20,8 +20,8 @@
         <div class="intro">我刚刚用音乐壳学会了一条新的视唱</div>
         <div class="intro">快来听听我的作品吧</div>
       </div>
-      <div class="audio_section">
-        <div class="audio_play">
+      <div class="audio_section" @click="togglePlay">
+        <div v-show="playing" class="audio_play">
           <div class="one"></div>
           <div class="two"></div>
           <div class="three"></div>
@@ -37,7 +37,7 @@
           <div class="three"></div>
           <div class="four"></div>
         </div>
-        <div class="audio_play">
+        <div v-show="!playing" class="audio_play">
           <img src="../../../assets/img/sightSingShare/audio_play.png" alt="">
         </div>
       </div>
@@ -81,7 +81,8 @@ export default {
     return {
       btnActive: false,
       isXStyle:false,
-      info:{}
+      info:{},
+      playing:false
     };
   },
   created() {
@@ -90,17 +91,29 @@ export default {
   },
   mounted() {},
   methods: {
+    togglePlay(){
+      this.playing = !this.playing;
+      if(this.playing){
+        this.myAudio.play()
+      }else{
+        this.myAudio.pause()
+      }
+      
+    },
     getInfo() {
       this.axios
         .get(`http://58.87.125.111:55555/v1/students/sing_share/?uid=${getQueryVariable('uid')}`)
         .then(res => {
             this.info = res.data;
+            this.myAudio = new Audio();
+            this.myAudio.src = this.info.video_record_url;
+            //this.myAudio.src = 'https://www.runoob.com/try/demo_source/horse.ogg';
+            this.myAudio.addEventListener('ended',  ()=> {  
+                this.playing = false
+            }, false);
         });
     },
-    toQbRace() {
-      console.log("跳转");
-      location.href = `open://mock?question_bank=13&type=1&mock_id=5dfc786106981e000a60132b`;
-    }
+   
   },
   watch: {}
 };
@@ -159,13 +172,13 @@ export default {
   animation: play 0.8s infinite 0.1s;
 }
 .audio_play .two {
-  animation: play 0.8s infinite 0.2s;
-}
-.audio_play .three {
   animation: play 0.8s infinite 0.3s;
 }
+.audio_play .three {
+  animation: play 0.8s infinite 0.5s;
+}
 .audio_play .four {
-  animation: play 0.8s infinite 0.4s;
+  animation: play 0.8s infinite 0.7s;
 }
 .audio_play .five {
   animation: play 0.8s infinite 0.5s;
@@ -278,11 +291,12 @@ export default {
       div {
         width: 3px;
         height: 100%;
-        margin-left: 5px;
+        margin-left: 3px;
         border-radius: 50px;
         background-color: #fff;
         vertical-align: middle;
         display: inline-block;
+        opacity: .7;
       }
     }
   }
