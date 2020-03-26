@@ -97,10 +97,17 @@ export default {
       this.playing = !this.playing;
       if(this.playing){
         this.myAudio.play()
+        this.countdown()
       }else{
-        this.myAudio.pause()
+        this.myAudio.pause();
+        clearInterval(this.timer)
       }
       
+    },
+    countdown(){
+      this.timer = setInterval(() => {
+        this.audioTime--
+      }, 1000);
     },
     getInfo() {
       this.axios
@@ -111,11 +118,12 @@ export default {
             this.myAudio.src = this.info.video_record_url;
             //this.myAudio.src = 'https://www.runoob.com/try/demo_source/horse.ogg';
             this.myAudio.addEventListener("canplay", ()=>{
-              console.log(this.myAudio.duration)
                 this.audioTime=parseInt(this.myAudio.duration);
             });
             this.myAudio.addEventListener('ended',  ()=> {  
-                this.playing = false
+                this.playing = false;
+                this.audioTime=parseInt(this.myAudio.duration);
+                clearInterval(this.timer)
             }, false);
         });
     },
