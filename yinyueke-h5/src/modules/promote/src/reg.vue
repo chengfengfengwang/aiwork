@@ -23,16 +23,15 @@
           <div class="rule_item">
             <div class="item_index">1</div>
             <div class="item_title">新人专享注册好礼有什么？</div>
-            <div class="sub_title">1、300元音乐壳超级会员优惠券</div>
-            <div>限在音乐壳购买超级会员使用。</div>
+            <div class="sub_title" style="color:#FF2D0B">1、免费领取3天音乐壳超级会员权益</div>
+            <div class="sub_title" style="color:#FF2D0B">2、每月每个会员老用户邀请的新用户中，前2名下单者可获得音乐壳永久超级会员权益</div>
             <div class="item_content">
               每个音乐壳超级会员老用户可邀请多个新用户注册；
               <span
                 class="color"
-              >每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）前2名下单者可使用300元优惠券购买超级会员，其它新用户的300元优惠券会失效。</span>
-              <span>失效后，系统会自动补发一张50元优惠券给新用户，用于购买音乐壳app所有课程。</span>
+              >每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）最先购买音乐壳会员的2个用户获得音乐壳永久超级会员权益；</span>其它购买音乐壳会员的新用户，可获得10年的音乐壳超级会员权益。
             </div>
-            <div class="sub_title">2、购买大牌乐器8折卡</div>
+            <div class="sub_title">3、购买大牌乐器8折卡</div>
             <div class="item_content">
               <span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span>
               <span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span>
