@@ -86,6 +86,13 @@ export default {
         });
         return
       }
+      if (this.cashNum > this.wData.balance/100) {
+        Toast({
+          message: "提现金额需要小于可提现金额",
+          duration: 2000
+        });
+        return
+      }
       if (this.cashNum && this.cashNum >= 50) {
         sessionStorage.setItem("cashNum", this.cashNum);
         this.$router.push("/writeCardInfo");
@@ -132,7 +139,7 @@ export default {
     width: 100%;
   }
   .top_main {
-    padding-top: 80px;
+    padding-top: 70px;
     position: absolute;
     left: 0;
     top: 0;
