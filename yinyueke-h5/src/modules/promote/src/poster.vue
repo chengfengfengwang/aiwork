@@ -88,18 +88,17 @@
           <div class="item_index">4</div>
           <span class="rule_lab">被邀请人奖励：</span>
           <span>
-            您邀请的好友注册后，即<span class="color">可免费领取一张300元音乐壳超级会员专享券</span>和<span class="color">购买大牌乐器8折卡</span>
+            您邀请的好友注册后，即可<span class="color">免费领取3天音乐壳超级会员权益</span>和<span class="color">购买大牌乐器8折卡</span>
           </span>
         </div>
         <div class="rule_item">
           <div class="item_index">5</div>
           <span>
-            您邀请的好友中，每月月初起，最先下单的2个可使用300元优惠购买音乐壳会员 ;
-            <br />2个好友支付成功后，其它好友获得的300元优惠券会立即失效。
+            您邀请的好友中，每月月初起，<span class="color">最先购买音乐壳会员的2个用户，可获得音乐壳永久超级会员权益</span> ，其他购买音乐壳会员的用户，可获得10年的音乐壳超级会员权益
           </span>
         </div>
         <div class="rule_item">
-          <span>其他问题，添加后方微信咨询：yxymiusic</span>
+          <span>其他问题，添加后方微信咨询：YXYMIUSIC</span>
         </div>
         <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div>
       </div>
