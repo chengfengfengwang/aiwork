@@ -115,6 +115,8 @@ module.exports = {
          //最强大脑音乐挑战赛
          qbRace:'src/modules/qbRace/app.js',
          //视唱分享
-         sightSingShare:'src/modules/sightSingShare/app.js'
+         sightSingShare:'src/modules/sightSingShare/app.js',
+         //图片背景
+         imgbg:'src/modules/imgbg/app.js',
     }   
 }

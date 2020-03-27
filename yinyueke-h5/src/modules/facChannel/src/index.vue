@@ -152,7 +152,9 @@ export default {
         .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
         .then(res => {
           if (!res.error) {
-            Dialog.alert({ message: "课程已领取成功" });
+            Dialog.alert({ message: "课程领取成功，下载APP学习" }).then(res=>{
+              location.href = 'http://s.immusician.com/static/html/channel_page_auto.html?channel=&channel=andelu7tianrumen'
+            });
             // sessionStorage.setItem("acInstrument", this.form.instrument);
             // sessionStorage.setItem("acCourse", JSON.stringify(res.data.words));
             //this.$router.push("/success");

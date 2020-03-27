@@ -88,8 +88,7 @@
           <div class="item_index">4</div>
           <span class="rule_lab">被邀请人奖励：</span>
           <span>
-            您邀请的好友注册后，即可领取一张300元音乐壳超级会员专享券和
-            <span class="color">购买大牌乐器8折卡</span>
+            您邀请的好友注册后，即<span class="color">可免费领取一张300元音乐壳超级会员专享券</span>和<span class="color">购买大牌乐器8折卡</span>
           </span>
         </div>
         <div class="rule_item">
