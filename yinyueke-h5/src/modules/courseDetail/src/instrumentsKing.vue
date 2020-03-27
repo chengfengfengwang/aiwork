@@ -58,7 +58,7 @@
         ></video>
       </div>
       <div class="text">
-        <div class="intro_title" v-show="courseInfo.name">《{{courseInfo.name}}》</div>
+        <div class="intro_title" v-show="courseInfo.name">{{courseInfo.name}}</div>
         <div class="intro_item" v-for="(item,index) in brief" :key="index">
           <div class="intro_label">{{item.label}}</div>
           <div class="intro_item_content">{{item.content}}</div>
@@ -406,8 +406,7 @@ export default {
     };
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
     this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
-    //this.getCoursetype(this.courseInfo.name);
-    this.getCoursetype(this.courseInfo.name);
+    this.getCoursetype(getQueryVariable('goodsId'));
   },
   destroyed() {
     if (document.documentElement.clientWidth < 900) {
@@ -1289,7 +1288,9 @@ export default {
             this.catalogueBottom1.length
           }</span>个》`;
           break;
-        case "器乐王国之旅":
+        
+        //器乐王国之旅
+        case "5d312e70f156d8527588a746":
           this.brief = [
             {
               label: "适用范围",
