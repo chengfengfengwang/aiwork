@@ -342,7 +342,7 @@ export default {
               };
             });
           }
-          
+          this.curCardIndex = vipArr.length;
           this.cardDataArr = vipArr;
           if (this.courseInfo.online) {
             this.cardDataArr.push({
@@ -353,9 +353,6 @@ export default {
             });
           }
           this.cardDataArr = this.cardDataArr.concat(youzanArr);
-          //this.curCardIndex = vipArr.length;
-          console.log("---");
-          console.log(this.cardDataArr);
         });
     }
   },
