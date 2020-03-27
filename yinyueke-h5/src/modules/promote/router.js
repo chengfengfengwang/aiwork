@@ -13,7 +13,7 @@ import Router from 'vue-router'
 // const download = () => import('./src/download.vue')
 // const cp = () => import('./src/cp.vue')
 // const selectCourse = () => import('./src/selectCourse.vue')
-
+ const test = () => import('./src/test.vue')
 const poster = () => import('./src/poster.vue')
 const reward = () => import('./src/reward.vue')
 const reg = () => import('./src/reg.vue')
@@ -58,6 +58,11 @@ export default new Router({
       path: '/writeCardInfo',
       name: 'writeCardInfo',
       component: writeCardInfo,
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test,
     },
   ],
   // scrollBehavior(to, from, savedPosition) {

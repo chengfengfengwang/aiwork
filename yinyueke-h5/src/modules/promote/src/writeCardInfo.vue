@@ -82,7 +82,7 @@ export default {
       let isError = false;
       for (var i = 0; i < keys.length; i++) {
         if (!this.form[keys[i]]) {
-          this.errorInfo[keys[i]] = "请填写信息";
+          this.errorInfo[keys[i]] = "请填写此信息";
           isError = true;
         } else {
           this.errorInfo[keys[i]] = "";
