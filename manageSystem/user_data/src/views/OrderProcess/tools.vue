@@ -24,6 +24,8 @@
           <Input v-model="company" style="width: 260px" placeholder="请输入快递公司"></Input>
           <span>快递单号</span>
           <Input v-model="out_sid" style="width: 260px" placeholder="请输入快递单号"></Input>
+          <span>订单编号</span>
+          <Input v-model="oid2" style="width: 260px" placeholder="请输入订单编号"></Input>
         </div>
         <div>
           <span>sku</span>
@@ -70,7 +72,8 @@ export default {
       ///
       company: "",
       out_sid: "",
-      order_items: ""
+      order_items: "",
+      oid2:''
     };
   },
   mounted() {},
@@ -94,7 +97,8 @@ export default {
         company: this.company,
         out_sid: this.out_sid,
         order_items: this.order_items,
-        account: this.account
+        account: this.account,
+        oid2:this.oid2
       };
       // console.log(form)
       // return
