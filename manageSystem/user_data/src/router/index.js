@@ -28,7 +28,7 @@ import uploadList from './../views/OrderProcess/uploadList.vue'
 import orderListToday from './../views/OrderProcess/orderListToday.vue'
 import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
-
+import tools from './../views/OrderProcess/tools'
 import Test from './../views/Test.vue';
 
 Vue.use(Router)
@@ -157,6 +157,11 @@ const router = new Router({
           path: '/factoryBills',
           component: factoryBills,
           meta: { parentMenu: 'Bills' }
+        },
+        {
+          name: 'tools',
+          path: '/tools',
+          component: tools
         },
         {
           name: 'Test',

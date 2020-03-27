@@ -186,6 +186,12 @@ const myMenus = [
         link: "/factoryBills"
       }
     ]
+  },
+   {
+    hasChild: false,
+    name: "tools",
+    text: "万物工具",
+    link: "/tools"
   }
 ];
 export default {
