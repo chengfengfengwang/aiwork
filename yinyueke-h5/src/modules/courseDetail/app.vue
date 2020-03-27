@@ -342,16 +342,17 @@ export default {
               };
             });
           }
-          this.cardDataArr = youzanArr;
-          this.cardDataArr = this.cardDataArr.concat(vipArr);
+          
+          this.cardDataArr = vipArr;
           if (this.courseInfo.online) {
-            this.cardDataArr.unshift({
+            this.cardDataArr.push({
               isVip: false,
               name: this.courseInfo.name,
               price: this.courseInfo.price,
               old_price: this.courseInfo.old_price
             });
           }
+          this.cardDataArr = this.cardDataArr.concat(youzanArr);
           console.log("---");
           console.log(this.cardDataArr);
         });
