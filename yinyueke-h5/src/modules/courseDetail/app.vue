@@ -353,6 +353,7 @@ export default {
             });
           }
           this.cardDataArr = this.cardDataArr.concat(youzanArr);
+          this.curCardIndex = vipArr.length;
           console.log("---");
           console.log(this.cardDataArr);
         });
