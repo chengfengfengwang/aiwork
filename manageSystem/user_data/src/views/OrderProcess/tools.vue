@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="sec">
-      <h1>万物订单/发货处理</h1>
+      <h1>订单同步处理、订单回传(已上传发货单)</h1>
       <div class="table_top_tool">
         <span>订单编号</span>
         <Input v-model="oid" style="width: 260px" placeholder="请输入订单编号"></Input>
