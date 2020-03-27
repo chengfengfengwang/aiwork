@@ -406,7 +406,7 @@ export default {
     };
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
     this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
-    this.getCoursetype(getQueryVariable('goodsId'));
+    this.getCoursetype(this.courseInfo.goods_id);
   },
   destroyed() {
     if (document.documentElement.clientWidth < 900) {
