@@ -8,6 +8,7 @@
 </template>
 <script>
 import { getQueryVariable, platForm } from "../../../common/util.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -32,14 +33,24 @@ export default {
     }
   },
   mounted() {
-    console.log(localStorage.getItem("vip_youzan_url"));
   },
   methods: {
     goNext() {
       if (getQueryVariable("from") === "banner") {
-        console.log(this.resultUrl);
-        //return;
-        location.href = this.resultUrl;
+        if (getQueryVariable("vip") == 1) {
+          Toast({
+            message: '您已经是超级会员，无需重复购买',
+            duration: 2000
+          });
+          return
+        } else {
+          //console.log(this.resultUrl);
+          //return;
+          if(this.resultUrl){
+            location.href = this.resultUrl;
+          }
+          
+        }
       } else {
         console.log(localStorage.getItem("vip_youzan_url"));
         location.href = localStorage.getItem("vip_youzan_url");
