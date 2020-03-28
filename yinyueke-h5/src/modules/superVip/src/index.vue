@@ -109,6 +109,7 @@ body {
   img {
     width: 100%;
   }
+  font-size: 0;
 }
 .next_btn_wrapper {
   z-index: 999;
