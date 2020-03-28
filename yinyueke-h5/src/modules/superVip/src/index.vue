@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { getQueryVariable, platForm } from "../../../common/util.js";
 export default {
   data() {
     return {
@@ -24,18 +24,18 @@ export default {
   },
   methods: {
     goNext(){
-      
-        if(platForm!=='IOS'){
-          console.log('andriod')
-            var originUrl = encodeURIComponent(localStorage.getItem('vip_youzan_url'));
-            let url = `open://webBrowser?url=${originUrl}`
-            console.log(url)
-            location.href = url;
-        }else{
-          console.log('ios')
-          location.href = localStorage.getItem('vip_youzan_url');
-        }
-        //location.href = localStorage.getItem('vip_youzan_url')
+        console.log(localStorage.getItem('vip_youzan_url'))
+        // if(platForm!=='IOS'){
+        //   console.log('andriod')
+        //     var originUrl = encodeURIComponent(localStorage.getItem('vip_youzan_url'));
+        //     let url = `open://webBrowser?url=${originUrl}`
+        //     console.log(url)
+        //     location.href = url;
+        // }else{
+        //   console.log('ios')
+        //   location.href = localStorage.getItem('vip_youzan_url');
+        // }
+        location.href = localStorage.getItem('vip_youzan_url')
     }
   }
 };
