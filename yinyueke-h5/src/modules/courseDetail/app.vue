@@ -178,7 +178,8 @@ export default {
     goVipDetail(index) {
       this.curCardIndex = index;
       localStorage.setItem("vip_youzan_url", this.getVipPayUrl());
-      location.href = "superVip.html";
+      let d = new Date().valueOf();
+      location.href = `superVip.html?t=${d}`;
     },
     goNext() {
       this.curCard = this.cardDataArr[this.curCardIndex];
