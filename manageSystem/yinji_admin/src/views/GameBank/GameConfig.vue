@@ -969,6 +969,12 @@
               <Sgjz :obj="formValidate.material_data[0]" ref="sgjz"/>
             </FormItem>
           </div>
+          <!-- 节奏游戏配置 -->
+          <div v-if="curGame=='jzyx' && modalShow">
+            <FormItem label="素材">
+              <Jzyx :obj="formValidate.material_data[0]" ref="jzyx"/>
+            </FormItem>
+          </div>
           <!-- 节奏乐器小火车配置 -->
           <div v-if="curGame=='jzyq' && modalShow">
             <FormItem label="素材">
@@ -1142,6 +1148,7 @@ const passGrades=[
 import Gqdfj from "../../components/GqDfj/GqDfj";
 import Buyu from "../../components/Buyu/Buyu";
 import Sgjz from "../../components/Sgjz/Sgjz";
+import Jzyx from "../../components/Jzyx/Jzyx";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
 import Jzyqsp from "../../components/Jzyqsp/Jzyqsp";
@@ -1529,6 +1536,7 @@ export default {
     Lhjfzg,
     Buyu,
     Sgjz,
+    Jzyx,
     Ccht,
     Cocohj,
     Cyjzd,
@@ -1994,6 +2002,9 @@ export default {
         this.curGame = "jgXuanze";
       } else if (newRow.game_type == 67) {
         this.curGame = "cpbf";
+      } else if (newRow.game_type == 68) {
+        //节奏游戏
+        this.curGame = "jzyx";
       } 
       else {
         this.curGame = "";
@@ -2557,6 +2568,11 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "sgjz") {
           var obj = this.$refs.sgjz.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }  else if (this.curGame == "jsyx") {
+          var obj = this.$refs.jsyx.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
