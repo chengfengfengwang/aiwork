@@ -2571,8 +2571,8 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }  else if (this.curGame == "jsyx") {
-          var obj = this.$refs.jsyx.submit();
+        }  else if (this.curGame == "jzyx") {
+          var obj = this.$refs.jzyx.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
