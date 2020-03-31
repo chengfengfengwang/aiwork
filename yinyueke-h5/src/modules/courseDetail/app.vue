@@ -96,7 +96,7 @@
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">10年有效期</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">有效期5年 限时买再送5年</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -167,7 +167,7 @@
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">10年有效期</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">有效期5年 限时买再送5年</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -444,6 +444,11 @@ export default {
           this.popHeight =
             document.querySelector(".pop_wrapper").offsetHeight + "px";
         });
+      }
+    },
+    maskShow(){
+      if(!this.maskShow){
+        this.curCardIndex = 0;
       }
     }
   }
