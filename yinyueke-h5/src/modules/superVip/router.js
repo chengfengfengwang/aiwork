@@ -9,7 +9,7 @@ import Router from 'vue-router'
 // import qimeng from './src/qimeng_new.vue'
 
 const home = () => import('./src/index.vue')
-const poster = () => import('./src/poster.vue')
+const vip10 = () => import('./src/vip10')
 
 Vue.use(Router)
 
@@ -21,9 +21,9 @@ export default new Router({
       component: home
     },
     {
-      path: '/poster',
-      name: 'poster',
-      component: poster
+      path: '/vip10',
+      name: 'vip10',
+      component: vip10
     }
   ],
   // scrollBehavior(to, from, savedPosition) {

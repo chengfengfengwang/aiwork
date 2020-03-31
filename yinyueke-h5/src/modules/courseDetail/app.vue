@@ -53,6 +53,7 @@
       <div class="pop_wrapper">
         <div class="card_wrapper">
           <div
+            v-show="card.default !== 0"
             v-for="(card,index) in cardDataArr"
             :key="index"
             :class="{selected:curCardIndex===index,vip:card.isVip}"
@@ -88,13 +89,14 @@
             </div>
 
             <div v-if="card.isVip" class="course">
-              <div class="course_title">购会员解锁全部课程</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf_10'" class="course_title">购会员解锁全部课程   买5年送5年</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf'" class="course_title"> 购会员解锁全部课程</div>
               <div class="course_intro">
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">有效期十年</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">10年有效期</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -158,13 +160,14 @@
             </div>
 
             <div v-if="card.isVip" class="course">
-              <div class="course_title">购会员解锁全部课程</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf_10'" class="course_title">购会员解锁全部课程   买5年送5年</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf'" class="course_title"> 购会员解锁全部课程</div>
               <div class="course_intro">
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">有效期30天</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">10年有效期</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -236,7 +239,6 @@ export default {
       console.log("是优学派");
       this.urlParams.from = "youxuepai";
     }
-    console.log(this.urlParams);
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
     this.axios.defaults.headers.common["token"] = this.urlParams.token;
     this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
@@ -248,12 +250,20 @@ export default {
   methods: {
     goVipDetail(index) {
       this.curCardIndex = index;
+      let card =  this.cardDataArr[this.curCardIndex];
       localStorage.setItem("vip_youzan_url", this.getVipPayUrl());
       let d = new Date().valueOf();
+      console.log(card)
+      if(card.vip_type==='vip_inf'){
+          location.href = `superVip.html?t=${d}#/`;
+      }else if(card.vip_type==='vip_inf_10'){
+        location.href = `superVip.html?t=${d}#/vip10`;
+      } 
+      return
       location.href = `superVip.html?t=${d}`;
     },
     vipGoNext(){
-      this.viPay();
+      location.href = this.getVipPayUrl();
     },
     goNext() {
       this.curCard = this.cardDataArr[this.curCardIndex];
@@ -287,7 +297,6 @@ export default {
     },
     getVipPayUrl() {
       let e = this.cardDataArr[this.curCardIndex];
-      console.log(e);
       if (e.buy_url) {
         return e.buy_url;
       } else {
@@ -310,9 +319,6 @@ export default {
         //return;
         return this.toPayUrl;
       }
-    },
-    viPay() {
-      location.href = this.getVipPayUrl();
     },
     toPay() {
       localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
@@ -397,7 +403,8 @@ export default {
                 goods_id: e.goods_id,
                 good_img: e.good_img,
                 buy_url: e.buy_url,
-                vip_type: e.vip_type
+                vip_type: e.vip_type,
+                default:e.default
               };
             });
           }
