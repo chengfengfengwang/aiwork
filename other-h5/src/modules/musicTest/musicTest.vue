@@ -78,7 +78,7 @@
             alt
             class="play_icon pause"
           >
-          <img class="cover" src="../../assets/img/music_test/test_cover.png" alt>
+          <img class="cover" src="../../assets/img/music_test/test_cover1.png" alt>
           <div class="begin_btn next_dot" @click="beginClick">
             <img src="../../assets/img/music_test/begin_btn.png" alt>
           </div>
@@ -281,7 +281,7 @@
         </div>
         <!-- 调试使用 -->
         <!-- <div v-show="true" class="page last swiper-slide stop-swiping">
-          <img class="cover" src="../../assets/img/music_test/test_cover.png" alt>
+          <img class="cover" src="../../assets/img/music_test/test_cover1.png" alt>
           <div class="result_bg_wrapper">
             <div class="content">
               <div class="core">{{score}}分</div>
@@ -844,7 +844,7 @@ export default {
       var fakeTemp = 0;
       var uk = require("../../assets/img/music_test/uk.png");
       var bg2 = require("../../assets/img/music_test/bg.jpg");
-      var bg1 = require("../../assets/img/music_test/test_cover.png");
+      var bg1 = require("../../assets/img/music_test/test_cover1.png");
       var bg3 = require("../../assets/img/music_test/sfq.png");
       var bg4 = require("../../assets/img/music_test/topic_card.png");
       var bgArr = [bg1, bg3, bg4];
@@ -1914,7 +1914,7 @@ body {
   }
   background: #2e5dad;
   //background: #2e797d;
-  //background: no-repeat top 0 left 0 ~"/" cover url("../../assets/img/music_test/test_cover.png");
+  //background: no-repeat top 0 left 0 ~"/" cover url("../../assets/img/music_test/test_cover1.png");
   //background-color: rgba(255, 194, 149, 1);
 }
 //最后一屏

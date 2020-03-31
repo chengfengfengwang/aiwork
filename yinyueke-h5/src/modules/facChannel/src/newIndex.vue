@@ -33,7 +33,7 @@
       </div>
       <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
     </div> -->
-    <img src="../../../assets/img/facChannel/bg320.jpg" alt class="bg" />
+    <img src="../../../assets/img/facChannel/bg331.jpg" alt class="bg" />
   </div>
 </template>
 <script>
