@@ -18,10 +18,13 @@ export default {
     console.log(location.href)
     this.isIphonex = isIphonex();
   },
+  mounted(){
+  },
   methods: {
     toggleLoading(status) {
       this.loadingShow = status;
-    }
+    },
+    
   }
 };
 </script>
@@ -64,7 +67,7 @@ html {
 }
 .ac_rule {
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   width: 325px;
@@ -75,6 +78,7 @@ html {
   font-size: 13px;
   font-family: PingFangSC-Regular;
   color: #666666;
+ 
   .rule_title {
     position: absolute;
     left: 50%;
@@ -108,7 +112,7 @@ html {
   .rule_item {
     position: relative;
     margin-bottom: 10px;
-    padding-left: 20px;
+    padding-left: 28px;
     .item_index {
       position: absolute;
       left: -4px;
@@ -141,5 +145,10 @@ html {
     text-align: center;
   }
 }
+ @media screen and (max-width: 420px) and (min-height: 750px) {
+    .ac_rule{
+      top: 70px;
+    } 
+  }
 </style>
 

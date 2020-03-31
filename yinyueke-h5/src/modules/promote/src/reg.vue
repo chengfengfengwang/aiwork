@@ -93,8 +93,22 @@ export default {
   },
   mounted() {
     this.countPageData();
+    this.inputevent()
   },
   methods: {
+    inputevent() {
+      var inputArr = document.querySelectorAll("input");
+      inputArr.forEach(function(ele) {
+        let scrollTop;
+        ele.addEventListener("focus", function() {
+          scrollTop = document.body.scrollTop;
+        });
+        ele.addEventListener("blur", function() {
+          //document.body.scrollTop = scrollTop;
+          window.scrollTo(0, 0);
+        });
+      });
+    },
     countPageData() {
       this.axios
         .get(
@@ -273,7 +287,7 @@ export default {
   }
 }
 .ac_rule {
-  padding: 36px 20px 10px 20px;
+  padding: 36px 20px 10px 10px;
   .rule_container {
     max-height: 460px;
     overflow: auto;
@@ -281,8 +295,8 @@ export default {
   .rule_item {
     .item_index {
       position: absolute;
-      left: -2px;
-      top: 2px;
+      left: -0px;
+      top: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
