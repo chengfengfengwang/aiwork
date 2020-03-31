@@ -15,7 +15,7 @@ export default {
   },
   created() {
     for (var i = 1; i < 16; i++) {
-      this.imgArr.push(require("../../../assets/img/superVip/vip_infi/" + i + ".jpg"));
+      this.imgArr.push(require("../../../assets/img/superVip/vip10/" + i + ".jpg"));
     }
     
   },

@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var qiniu = require("qiniu");
 //空间名称
-var webBuckName = 'yinji-web';
+var webBuckName = 'immusician';
 //前缀名
 var webPrefix = 'yinji/';
 
