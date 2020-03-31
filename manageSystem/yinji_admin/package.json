@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cross-env": "^7.0.2",
     "iview": "^3.2.2",
     "iview-area": "^1.6.0",
     "lodash.differenceby": "^4.8.0",
