@@ -116,6 +116,74 @@
         </div>
       </div>
     </popup>
+    <div class="n_mask" v-show="maskShow">
+      <div :class="[maskShow?'up':'down']"  class="pop_wrapper new">
+        <div class="card_wrapper">
+          <div
+            v-for="(card,index) in cardDataArr"
+            :key="index"
+            :class="{selected:curCardIndex===index,vip:card.isVip}"
+            class="card"
+            @click="selectCard(index)"
+          >
+            <div class="vip_type" v-show="card.isVip">{{card.name}}</div>
+            <div v-show="!card.isVip" class="coco">
+              <img src="../../assets/img/courseDetail/common/coco.png" alt />
+            </div>
+            <div v-show="card.isVip" class="vip_coco">
+              <img
+                v-show="card.vip_type==='vip_days_30'"
+                src="../../assets/img/courseDetail/common/vip_coco.png"
+                alt
+              />
+              <img
+                v-show="card.vip_type==='vip_inf'"
+                src="../../assets/img/courseDetail/common/super_vip.png"
+                alt
+              />
+              <div class="dis_text" :class="{m:(card.discount+'').length>1}">
+                <span class="num">{{card.discount}}</span>
+                <span class="dis">折</span>
+              </div>
+            </div>
+            <div v-if="!card.isVip" class="course">
+              <div class="course_title">{{card.name}}</div>
+              <div class="course_intro">
+                <div>有趣的AI智能互动课程</div>
+                <div>购课添加辅导老师微信，专业老师辅导</div>
+              </div>
+            </div>
+
+            <div v-if="card.isVip" class="course">
+              <div class="course_title">购会员解锁全部课程</div>
+              <div class="course_intro">
+                <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
+                <div>未来上线的AI智能互动课程</div>
+              </div>
+              <div class="course_date">
+                <span v-show="card.isVip && card.vip_type==='vip_days_30'">有效期30天</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
+                <span @click="goVipDetail(index)" class="right">查看权益>></span>
+              </div>
+            </div>
+            <div class="price">
+              <div class="origin_price">
+                <span class="oi">￥</span>
+                <span class="onum">{{card.price/100}}</span>
+              </div>
+              <div class="price_dis">
+                <span class="price_dis_o">原价￥{{card.old_price/100}}</span>
+                <span>共节省了￥{{(card.old_price-card.price)/100}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="next_btn_wrapper">
+          <div class="next_btn" @click="goNext">下一步</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -143,7 +211,8 @@ export default {
       curCardIndex: 0,
       cardDataArr: [],
       popHeight: 0,
-      newCardPay: true
+      newCardPay: true,
+      maskShow: false
     };
   },
   components: {
@@ -182,21 +251,22 @@ export default {
       location.href = `superVip.html?t=${d}`;
     },
     goNext() {
+      this.maskShow = true;
+      return;
       this.curCard = this.cardDataArr[this.curCardIndex];
       if (this.curCard.isVip) {
         this.viPay();
       } else if (this.curCard.buy_url) {
-        if(platForm!=='IOS'){
-          console.log('andriod')
+        if (platForm !== "IOS") {
+          console.log("andriod");
           var originUrl = encodeURIComponent(this.curCard.buy_url);
-          let url = `open://webBrowser?url=${originUrl}`
-          console.log(url)
+          let url = `open://webBrowser?url=${originUrl}`;
+          console.log(url);
           location.href = url;
-        }else{
-          console.log('ios')
+        } else {
+          console.log("ios");
           location.href = this.curCard.buy_url;
         }
-        
 
         //location.href = this.curCard.buy_url;
       } else {
@@ -361,7 +431,7 @@ export default {
     popShow() {
       if (this.popShow) {
         this.$nextTick(() => {
-         this.popHeight =
+          this.popHeight =
             document.querySelector(".pop_wrapper").offsetHeight + "px";
         });
       }
@@ -391,7 +461,15 @@ html {
     .font-size(13);
   }
 }
-
+.n_mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 // .bottom_wrapper {
 //   position: fixed;
 //   bottom: 0;
@@ -592,6 +670,7 @@ html {
 .pop_wrapper {
   position: relative;
 }
+
 .card_wrapper {
   min-height: 280px;
   max-height: 80vh;
@@ -775,6 +854,20 @@ html {
   line-height: 40px;
   border-radius: 20px;
   text-align: center;
+}
+.pop_wrapper.new {
+  position: absolute;
+  left: 0;
+  bottom: -100vh;
+  width: 100%;
+  background-color: #fff;
+  transition: all .8s;
+}
+.pop_wrapper.down {
+  bottom: -100vh;
+}
+.pop_wrapper.up {
+  bottom: 0;
 }
 </style>
 
