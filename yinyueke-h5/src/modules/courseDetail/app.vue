@@ -116,7 +116,7 @@
         </div>
       </div>
     </popup>
-    <div class="n_mask" v-show="maskShow">
+    <!-- <div class="n_mask" v-show="maskShow">
       <div :class="[maskShow?'up':'down']"  class="pop_wrapper new">
         <div class="card_wrapper">
           <div
@@ -183,7 +183,7 @@
           <div class="next_btn" @click="goNext">下一步</div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -251,8 +251,8 @@ export default {
       location.href = `superVip.html?t=${d}`;
     },
     goNext() {
-      this.maskShow = true;
-      return;
+      // this.maskShow = true;
+      // return;
       this.curCard = this.cardDataArr[this.curCardIndex];
       if (this.curCard.isVip) {
         this.viPay();
