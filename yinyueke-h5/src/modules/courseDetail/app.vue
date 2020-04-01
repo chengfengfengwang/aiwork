@@ -66,7 +66,7 @@
             </div>
             <div v-show="card.isVip" class="vip_coco">
               <img
-                v-show="card.vip_type==='vip_inf_10'"
+                v-show="card.vip_type==='vip_inf_5'"
                 src="../../assets/img/courseDetail/common/vip_coco.png"
                 alt
               />
@@ -89,14 +89,14 @@
             </div>
 
             <div v-if="card.isVip" class="course">
-              <div v-show="card.isVip && card.vip_type==='vip_inf_10'" class="course_title">购会员解锁全部课程   有效期5年</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf_5'" class="course_title">购会员解锁全部课程   有效期5年</div>
               <div v-show="card.isVip && card.vip_type==='vip_inf'" class="course_title"> 购会员解锁全部课程</div>
               <div class="course_intro">
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">5年有效期</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_5'">5年有效期</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -137,7 +137,7 @@
             </div>
             <div v-show="card.isVip" class="vip_coco">
               <img
-                v-show="card.vip_type==='vip_inf_10'"
+                v-show="card.vip_type==='vip_inf_5'"
                 src="../../assets/img/courseDetail/common/vip_coco.png"
                 alt
               />
@@ -160,14 +160,14 @@
             </div>
 
             <div v-if="card.isVip" class="course">
-              <div v-show="card.isVip && card.vip_type==='vip_inf_10'" class="course_title">购会员解锁全部课程   有效期5年</div>
+              <div v-show="card.isVip && card.vip_type==='vip_inf_5'" class="course_title">购会员解锁全部课程   有效期5年</div>
               <div v-show="card.isVip && card.vip_type==='vip_inf'" class="course_title"> 购会员解锁全部课程</div>
               <div class="course_intro">
                 <div>包含音乐素养、非洲鼓、尤克里里三大品类所有课程（含</div>
                 <div>未来上线的AI智能互动课程</div>
               </div>
               <div class="course_date">
-                <span v-show="card.isVip && card.vip_type==='vip_inf_10'">5年有效期</span>
+                <span v-show="card.isVip && card.vip_type==='vip_inf_5'">5年有效期</span>
                 <span v-show="card.isVip && card.vip_type==='vip_inf'">终身有效</span>
                 <span @click="goVipDetail(index)" class="right">查看权益>></span>
               </div>
@@ -193,7 +193,7 @@
 </template>
 <script>
 //超级会员 vip_inf
-//十年会员： vip_inf_10
+//十年会员： vip_inf_5
 import Loading from "./../../components/Loading";
 import { Popup } from "vant";
 
@@ -256,7 +256,7 @@ export default {
       console.log(card)
       if(card.vip_type==='vip_inf'){
           location.href = `superVip.html?t=${d}#/`;
-      }else if(card.vip_type==='vip_inf_10'){
+      }else if(card.vip_type==='vip_inf_5'){
         location.href = `superVip.html?t=${d}#/vip10`;
       } 
       return
