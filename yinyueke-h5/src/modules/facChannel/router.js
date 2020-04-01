@@ -11,6 +11,8 @@ import Router from 'vue-router'
 const home = () => import('./src/index.vue')
 const success = () => import('./src/success.vue')
 const newIndex = () => import('./src/newIndex.vue')
+const newQrPage = () => import('./src/newQrPage.vue')
+const newInput = () => import('./src/newInput')
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +32,16 @@ export default new Router({
       path: '/newIndex',
       name: 'home',
       component: home,
+    },
+    {
+      path: '/newQrPage',
+      name: 'newQrPage',
+      component: newQrPage,
+    }, 
+    {
+      path: '/newInput',
+      name: 'newInput',
+      component: newInput,
     },
   ],
   // scrollBehavior(to, from, savedPosition) {
