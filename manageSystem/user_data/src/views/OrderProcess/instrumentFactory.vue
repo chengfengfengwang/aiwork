@@ -85,6 +85,10 @@
               :value="status.value"
             >{{status.name}}</Option>
           </Select>
+          <span>渠道：</span>
+          <Select style="width: 160px" v-model="downloadChannel" placeholder>
+            <Option v-for="option in channelList" :key="option.id" :value="option.id">{{option.name}}</Option>
+          </Select>
           <Button type="info" @click="downloadSingleFile">下载</Button>
         </div>
 
@@ -328,13 +332,23 @@ export default {
       ///
       downloadStartTime:'',
       downloadEndTime:'',
-      downloadStatus:''
+      downloadStatus:'',
+      channelList:[],
+      downloadChannel:''
     };
   },
   mounted() {
+    this.getChannels()
     this.getTableList();
   },
   methods: {
+    getChannels() {
+      this.axios
+        .get(`${process.env.WULIU}/channel/index?page=0&size=999&status=1`)
+        .then(res => {
+          this.channelList = res.data.list;
+        });
+    },
     downloadSingleFile() {
       const formObj = {
         start_time: this.downloadStartTime.valueOf() / 1000,
@@ -342,7 +356,11 @@ export default {
         status: this.downloadStatus,
         id: this.curFactoryId
       };
+      if(this.downloadChannel){
+        formObj.channel_id = this.downloadChannel
+      }
       console.log(formObj);
+      //return
       this.axios
         .post(`${process.env.WULIU}/form/channel/download`, formObj)
         .then(res => {
