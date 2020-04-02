@@ -112,6 +112,10 @@
           :value="status.value"
         >{{status.name}}</Option>
       </Select>
+      <span>渠道：</span>
+          <Select style="width: 160px" v-model="mulDownloadChannel" placeholder>
+            <Option v-for="option in channelList" :key="option.id" :value="option.id">{{option.name}}</Option>
+          </Select>
       <Button type="primary" @click="downloadFileToVendor2">批量下载</Button>
     </div>
   </div>
@@ -334,7 +338,8 @@ export default {
       downloadEndTime:'',
       downloadStatus:'',
       channelList:[],
-      downloadChannel:''
+      downloadChannel:'',
+      mulDownloadChannel:''
     };
   },
   mounted() {
@@ -376,6 +381,9 @@ export default {
         end_time: this.endTime2.valueOf() / 1000,
         status: this.searchStatus2
       };
+      if(this.mulDownloadChannel){
+        formObj.channel_id = this.mulDownloadChannel
+      }
       console.log(formObj);
       this.axios
         .post(`${process.env.WULIU}/form/channels/download`, formObj)
