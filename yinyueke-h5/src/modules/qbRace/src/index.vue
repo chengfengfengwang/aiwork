@@ -23,7 +23,7 @@ export default {
   created() {
     // this.originCountdown = Number(getQueryVariable("countdown"));
     // this.beginCountDown();
-    //this.getCourses()
+    this.getCourses()
   },
   mounted() {},
   // destroyed() {
