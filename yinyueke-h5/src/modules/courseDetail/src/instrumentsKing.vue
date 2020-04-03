@@ -406,6 +406,8 @@ export default {
     };
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
     this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
+    console.log('---')
+    console.log(this.courseInfo.goods_id)
     this.getCoursetype(this.courseInfo.goods_id);
   },
   destroyed() {
@@ -1439,7 +1441,8 @@ export default {
           this.catalogueBottomTitle = `《主课内容》`;
           this.catalogueBottom1Title = `《器乐文化小故事》`;
           break;
-        case "音乐星球之旅":
+        //音乐星球之旅
+        case "5db262b5f156d84930287b81":
           this.brief = [
             {
               label: "适用范围",
