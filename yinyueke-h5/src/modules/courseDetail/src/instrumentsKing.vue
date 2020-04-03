@@ -16,9 +16,13 @@
         class="video_box"
         v-if="courseInfo.name=='音基启蒙课'"
         @click="handleClick('music_basis','music_basis_video')"
-      > 
-        <img src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png" alt class="cover">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play">
+      >
+        <img
+          src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png"
+          alt
+          class="cover"
+        />
+        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play" />
         <video
           src="http://iguitar-new.iguitar.immusician.com/lhP_WrN7p2RcqL04_KtfqB38QMZ5"
           ref="music_basis"
@@ -31,8 +35,12 @@
         v-if="courseInfo.name=='器乐王国之旅'"
         @click="handleClick('music_basis','music_basis_video')"
       >
-        <img src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png" alt class="cover">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play">
+        <img
+          src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png"
+          alt
+          class="cover"
+        />
+        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play" />
         <video
           src="http://iguitar-new.iguitar.immusician.com/ltfiQvA_ljoYfy12IeYrMBXsoSEh"
           ref="music_basis"
@@ -45,11 +53,15 @@
         v-else-if="courseInfo.name=='音乐星球之旅'"
         @click="handleClick('music_basis','music_basis_video')"
       >
-        <img src="../../../assets/img/courseDetail/instrumentsKing/course11.jpg" alt class="cover">
+        <img src="../../../assets/img/courseDetail/instrumentsKing/course11.jpg" alt class="cover" />
       </div>
       <div class="video_box" v-else @click="handleClick('music_basis','music_basis_video')">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png" alt class="cover">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play">
+        <img
+          src="../../../assets/img/courseDetail/instrumentsKing/video_cover.png"
+          alt
+          class="cover"
+        />
+        <img src="../../../assets/img/courseDetail/instrumentsKing/play.png" alt class="play" />
         <video
           src="http://cdn.kids.immusician.com/web/music-base-h5/mp4/course_introduction/1556018694068132.mp4"
           ref="music_basis"
@@ -67,7 +79,7 @@
     </div>
     <div class="teacher ac11teacher" v-show="courseInfo.name==='音乐星球之旅'">
       <div class="teacher_img" style="border-radius:0%">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/logo.jpg" alt>
+        <img src="../../../assets/img/courseDetail/instrumentsKing/logo.jpg" alt />
       </div>
       <div class="teacher_info">
         <!-- <div class="teacher_title">主讲老师：田园</div> -->
@@ -78,7 +90,7 @@
     </div>
     <div class="teacher" v-show="courseInfo.name!=='器乐王国之旅' && courseInfo.name!=='音乐星球之旅'">
       <div class="teacher_img">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/mobile_teacher.png" alt>
+        <img src="../../../assets/img/courseDetail/instrumentsKing/mobile_teacher.png" alt />
       </div>
       <div class="teacher_info">
         <div class="teacher_title">主讲老师：田园</div>
@@ -89,7 +101,7 @@
     </div>
     <div class="teacher" v-show="courseInfo.name=='器乐王国之旅'">
       <div class="teacher_img">
-        <img src="../../../assets/img/courseDetail/instrumentsKing/teacher.png" alt>
+        <img src="../../../assets/img/courseDetail/instrumentsKing/teacher.png" alt />
       </div>
       <div class="teacher_info">
         <div class="teacher_title">主讲老师：姗姗老师</div>
@@ -106,29 +118,29 @@
     <div v-show="courseInfo.name!=='音乐星球之旅'" class="feature">
       <div class="feature_row">
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature1.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature1.png" alt />
           <div>名师讲授</div>
         </div>
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature2.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature2.png" alt />
           <div>游戏互动</div>
         </div>
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature3.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature3.png" alt />
           <div>模拟题库</div>
         </div>
       </div>
       <div class="feature_row">
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature4.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature4.png" alt />
           <div>实时答疑</div>
         </div>
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature5.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature5.png" alt />
           <div>动画故事</div>
         </div>
         <div class="feature_item">
-          <img src="../../../assets/img/courseDetail/instrumentsKing/feature6.png" alt>
+          <img src="../../../assets/img/courseDetail/instrumentsKing/feature6.png" alt />
           <div>一对一辅导</div>
         </div>
       </div>
@@ -146,7 +158,11 @@
             <span class="text_title">{{this.outLineTop[0].sub}}</span>
             <span class="sub_title" v-show="this.outLineTop[0].text">—{{this.outLineTop[0].text}}</span>
           </div>
-          <img class="top_img" src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png" alt>
+          <img
+            class="top_img"
+            src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png"
+            alt
+          />
         </div>
 
         <div class="introduction_item_content">
@@ -168,7 +184,11 @@
             <span class="text_title">{{this.outLineTop[1].sub}}</span>
             <span class="sub_title" v-show="this.outLineTop[1].text">—{{this.outLineTop[1].text}}</span>
           </div>
-          <img class="top_img" src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png" alt>
+          <img
+            class="top_img"
+            src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png"
+            alt
+          />
         </div>
         <div class="introduction_item_content">
           <div class="intro_list_wrapper" v-for="(item,index) in outLine[1]" :key="index">
@@ -189,7 +209,11 @@
             <span class="text_title">{{this.outLineTop[2].sub}}</span>
             <span class="sub_title" v-show="this.outLineTop[2].text">—{{this.outLineTop[2].text}}</span>
           </div>
-          <img class="top_img" src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png" alt>
+          <img
+            class="top_img"
+            src="../../../assets/img/courseDetail/instrumentsKing/mob_intro.png"
+            alt
+          />
         </div>
         <div class="introduction_item_content" style="background: #FFFAF7;">
           <div class="intro_list_wrapper" v-for="(item,index) in outLine[2]" :key="index">
@@ -309,9 +333,7 @@
         <template v-slot:title_zh>用户评论</template>
         <template v-slot:title_en>User reviews</template>
       </CourseCommonTitle>
-      <div class="remark_container wrapper">
-       
-      </div>
+      <div class="remark_container wrapper"></div>
     </section>
   </div>
 </template>
@@ -343,7 +365,7 @@ const brief = [
 export default {
   data() {
     return {
-      payIndex:1,
+      payIndex: 1,
       courseInfo: {
         course: []
       },
@@ -363,10 +385,8 @@ export default {
       catalogueBottom1: [],
       catalogueBottomTitle: "",
       catalogueBottom1Title: "",
-      outsideInfo:{
-
-      },
-      haveOutsideGoods:false,
+      outsideInfo: {},
+      haveOutsideGoods: false
     };
   },
   components: {
@@ -405,14 +425,7 @@ export default {
       coupon_id: getQueryVariable("coupon_id")
     };
     localStorage.setItem("urlParams", JSON.stringify(this.urlParams));
-    this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
-    console.log('---')
-    if(this.courseInfo.goods_id=='5db262b5f156d84930287b81'){
-      this.$set(this.courseInfo, 'name', '音乐星球之旅');
-      console.log(this.courseInfo)
-    }
-    
-    this.getCoursetype(this.courseInfo.goods_id);
+    this.getCourseInfo()
   },
   destroyed() {
     if (document.documentElement.clientWidth < 900) {
@@ -424,23 +437,30 @@ export default {
   methods: {
     formatNumber,
     formatTime: formatTime,
-    toYouzan(){
+    toYouzan() {
       location.href = this.outsideInfo.goods_url;
     },
-  
+
     handleClick(ref, video) {
       this.$refs[ref].play();
       this[video] = true;
     },
-    toPay() {
-      localStorage.setItem("courseInfo", JSON.stringify(this.courseInfo));
-      if (process.env === "production") {
-        this.callApp();
-      }
-
-      this.$router.push({
-        name: "Pay"
-      });
+    getCourseInfo() {
+      this.loadingShow = true;
+      this.axios
+        .get(
+          `${process.env.VUE_APP_COURSE_DETAIL}/v1/goods/detail?id=${this.urlParams.goodsId}`
+        )
+        .then(res => {
+          this.loadingShow = false;
+          this.courseInfo = res.data;
+          if (this.courseInfo.goods_id == "5db262b5f156d84930287b81") {
+            this.$set(this.courseInfo, "name", "音乐星球之旅");
+            console.log(this.courseInfo);
+          }
+          console.log(this.courseInfo)
+          this.getCoursetype(this.courseInfo.goods_id);
+        });
     },
     callApp() {
       // 由于对象映射，所以调用hello对象等于调用Android映射的对象
@@ -457,7 +477,7 @@ export default {
       }
     },
     getCoursetype(name) {
-      console.log(name)
+      console.log(name);
       switch (name) {
         case "中国音乐学院音基考级一级课程":
           this.courseType = "G1";
@@ -623,9 +643,7 @@ export default {
               line2: "冼星海、王洛宾、聂耳等"
             }
           ];
-          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${
-            this.catalogueBottom.length
-          }</span>个》`;
+          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${this.catalogueBottom.length}</span>个》`;
           break;
         case "中国音乐学院音基考级二级课程":
           this.courseType = "G2";
@@ -782,9 +800,7 @@ export default {
               line2: "冼星海、王洛宾、聂耳等"
             }
           ];
-          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${
-            this.catalogueBottom.length
-          }</span>个》`;
+          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${this.catalogueBottom.length}</span>个》`;
           break;
         case "中央音乐学院音基考级初级课程":
           this.courseType = "Y1";
@@ -992,12 +1008,8 @@ export default {
               line2: "俄罗斯民歌、苏格兰民歌等"
             }
           ];
-          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${
-            this.catalogueBottom.length
-          }</span>个》`;
-          this.catalogueBottom1Title = `《音乐壳TV音乐会<span class="title_num">${
-            this.catalogueBottom1.length
-          }</span>个》`;
+          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${this.catalogueBottom.length}</span>个》`;
+          this.catalogueBottom1Title = `《音乐壳TV音乐会<span class="title_num">${this.catalogueBottom1.length}</span>个》`;
           break;
         case "中央音乐学院音基考级二级课程":
           this.courseType = "Y2";
@@ -1086,9 +1098,7 @@ export default {
               }
             ]
           ];
-          this.catalogueBottomTitle = `《音乐星球小动画${
-            this.catalogueBottom.length
-          }个》`;
+          this.catalogueBottomTitle = `《音乐星球小动画${this.catalogueBottom.length}个》`;
           break;
         case "音基启蒙课":
           //this.courseType = "Q1";
@@ -1287,14 +1297,10 @@ export default {
               line2: "俄罗斯民歌、苏格兰民歌等"
             }
           ];
-          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${
-            this.catalogueBottom.length
-          }</span>个》`;
-          this.catalogueBottom1Title = `《音乐壳TV音乐会<span class="title_num">${
-            this.catalogueBottom1.length
-          }</span>个》`;
+          this.catalogueBottomTitle = `《音乐星球小动画<span class="title_num">${this.catalogueBottom.length}</span>个》`;
+          this.catalogueBottom1Title = `《音乐壳TV音乐会<span class="title_num">${this.catalogueBottom1.length}</span>个》`;
           break;
-        
+
         //器乐王国之旅
         case "5d312e70f156d8527588a746":
           this.brief = [
@@ -1522,7 +1528,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
- @import url("../../../common/common.less");
+@import url("../../../common/common.less");
 
 .page_wrapper {
   margin-bottom: 60px;
@@ -1624,7 +1630,8 @@ export default {
 .sale_package {
   width: 100%;
   height: 120px;
-  background: url("./../../../assets/img/courseDetail/instrumentsKing/pic_bundle_bg.png") no-repeat center;
+  background: url("./../../../assets/img/courseDetail/instrumentsKing/pic_bundle_bg.png")
+    no-repeat center;
   background-size: cover;
   box-sizing: border-box;
   margin: 10px 0;
@@ -1643,7 +1650,8 @@ export default {
     height: 40px;
     padding: 0 10px;
     border-radius: 4px;
-    background: url("./../../../assets/img/courseDetail/instrumentsKing/price_bg.png") no-repeat center;
+    background: url("./../../../assets/img/courseDetail/instrumentsKing/price_bg.png")
+      no-repeat center;
     background-size: cover;
     .origin_price {
       font-family: PingFangSC-Semibold;
@@ -1788,7 +1796,6 @@ export default {
   }
 }
 
-
 .lesson_wrapper {
   border-radius: 8px;
   padding: 0 20px;
@@ -1842,7 +1849,7 @@ export default {
     top: 0;
     right: 0;
     padding: 5px 5px 10px 10px;
-    width:12px;
+    width: 12px;
   }
 }
 .video_model {
