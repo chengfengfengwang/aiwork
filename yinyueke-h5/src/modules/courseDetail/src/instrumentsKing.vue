@@ -408,6 +408,10 @@ export default {
     this.courseInfo =  JSON.parse(localStorage.getItem('courseInfo'))
     console.log('---')
     console.log(this.courseInfo.goods_id)
+    if(this.courseInfo.goods_id=='5db262b5f156d84930287b81'){
+      this.courseInfo.name==='音乐星球之旅'
+    }
+    
     this.getCoursetype(this.courseInfo.goods_id);
   },
   destroyed() {
