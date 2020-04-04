@@ -10,7 +10,7 @@ import Router from 'vue-router'
 
 const home = () => import('./src/index.vue')
 const poster = () => import('./src/poster.vue')
-
+const test = () => import('./src/test.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -24,7 +24,12 @@ export default new Router({
       path: '/poster',
       name: 'poster',
       component: poster
-    }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
   ],
   // scrollBehavior(to, from, savedPosition) {
   //   console.log('--savedPosition--')
