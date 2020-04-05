@@ -11,6 +11,9 @@ import Router from 'vue-router'
 const home = () => import('./src/index.vue')
 const poster = () => import('./src/poster.vue')
 const test = () => import('./src/test.vue')
+const qr04051 = () => import('./src/qr04051.vue')
+const qr04052 = () => import('./src/qr04052.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +33,16 @@ export default new Router({
       name: 'test',
       component: test
     },
+    {
+      path: '/qr04051',
+      name: 'qr04051',
+      component: qr04051
+    },
+    {
+      path: '/qr04052',
+      name: 'qr04052',
+      component: qr04052
+    }
   ],
   // scrollBehavior(to, from, savedPosition) {
   //   console.log('--savedPosition--')
