@@ -1,37 +1,34 @@
 <template>
   <div class="page">
-    <!-- <img class="bg" v-for="(myimg,index) in imgArr" :key="index" :src="myimg" alt /> -->
-    <!-- <img src="../../../assets/img/imgbg/327/1.jpg" alt="" class="bg"> -->
+    <img v-show="conIphoneStyle" class="bg" src="../../../assets/img/imgbg/0405/2.png" alt />
+    <img v-show="!conIphoneStyle" class="bg" src="../../../assets/img/imgbg/0405/2x.png" alt />
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { conIphoneStyle } from "../../../common/util.js";
 export default {
-  data() {
+   data() {
     return {
-      imgArr: []
+      conIphoneStyle: conIphoneStyle
     };
   },
   created() {
-    // for (var i = 1; i < 17; i++) {
-    //   this.imgArr.push(require("../../../assets/img/superVip/" + i + ".jpg"));
-    // }
   },
   mounted() {
+    console.log(conIphoneStyle);
   },
-  methods: {
-    
-  }
+  methods: {}
 };
 </script>
 <style lang="less" scoped>
-img.bg{
+img.bg {
   width: 100%;
 }
-.page{
-    min-height: 100vh;
-    background: url('../../../assets/img/imgbg/0405/2.png') no-repeat center;
-    background-size: contain;
+.page {
+  font-size: 0;
+  // min-height: 100vh;
+  // background: url('../../../assets/img/imgbg/0405/1.png') no-repeat center;
+  // background-size: contain;
 }
 </style>
 

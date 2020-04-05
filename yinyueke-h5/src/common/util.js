@@ -97,7 +97,16 @@ function xStyle(){
     }else{
         return false
     }
+} 
+function conIphoneStyleFn(){
+    let ratio  = 375 / 667;
+    if(window.innerWidth/window.innerHeight<ratio){
+        return false
+    }else{
+        return true
+    }
 }
+const conIphoneStyle = conIphoneStyleFn();
 const baseSize = 36
 function setRem() {
     // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
@@ -136,4 +145,4 @@ function formatePhone(phone){
 }
 var u = navigator.userAgent, app = navigator.appVersion;
 var openInApp = u.indexOf('immusician') != -1 || u.indexOf('buluobang') != -1 || u.indexOf('bangtabs') != -1;
-export { xStyle, getCountDown, formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
+export { conIphoneStyle, xStyle, getCountDown, formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
