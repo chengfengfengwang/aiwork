@@ -25,6 +25,8 @@ const worldTravel = () => import('./src/worldTravel.vue')
 const instrumentsKing = () => import('./src/instrumentsKing.vue')
 const doctorXieBody = () => import('./src/doctorXieBody.vue')
 const doctorXieBody1 = () => import('./src/doctorXieBody1.vue')
+const musicCastle = () => import('./src/musicCastle.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -113,6 +115,11 @@ export default new Router({
       path: '/doctorXieBody1',
       name: 'doctorXieBody1',
       component: doctorXieBody1
+    },
+    {
+      path: '/musicCastle',
+      name: 'musicCastle',
+      component: musicCastle
     }
   ]
 })
