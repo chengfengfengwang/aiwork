@@ -90,6 +90,7 @@ export default {
         .post(`${process.env.WULIU}/third/wanwu/process_order`, form)
         .then(res => {
           this.channelList = res.data.list;
+           this.$Message.success("操作成功");
         });
     },
     submit1() {
@@ -106,6 +107,7 @@ export default {
         .post(`${process.env.WULIU}/third/wanwu/hand_wanwu_return`, form)
         .then(res => {
           this.channelList = res.data.list;
+           this.$Message.success("操作成功");
         });
     }
   }
