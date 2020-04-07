@@ -57,13 +57,19 @@ export default {
   },
   methods: {
     handleSubmit({ username, password }) {
+      let url;
+      if(process.env.APP_NAME === 'org'){
+        url = `${process.env.JINKANG}/${process.env.VERSION}/agency_teacher/admin_login`
+       
+      }else{
+        url = `${process.env.JINKANG}/${process.env.VERSION}/teacher/admin_login`
+      }
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           console.log(this.form);
           this.axios
-            //.post(`${process.env.JINKANG}/${process.env.VERSION}/teacher/admin_login`, this.form)
             .post(
-              `${process.env.JINKANG}/${process.env.VERSION}/teacher/admin_login`,
+              url,
               this.form
             )
             .then(res => {
