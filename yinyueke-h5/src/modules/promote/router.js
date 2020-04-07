@@ -20,9 +20,10 @@ const reg = () => import('./src/reg.vue')
 const regSuccess = () => import('./src/regSuccess.vue')
 const getCash = () => import('./src/getCash.vue')
 const writeCardInfo = () => import('./src/writeCardInfo.vue')
+////老用户
+const ou_reg = () => import('./src/ou_reg')
 
 Vue.use(Router)
-
 export default new Router({
   routes: [
   
@@ -58,6 +59,11 @@ export default new Router({
       path: '/writeCardInfo',
       name: 'writeCardInfo',
       component: writeCardInfo,
+    },
+    {
+      path: '/ou_reg',
+      name: 'ou_reg',
+      component: ou_reg,
     },
     {
       path: '/test',
