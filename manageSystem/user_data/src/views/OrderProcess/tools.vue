@@ -121,11 +121,11 @@ export default {
       d_account: "",
       d_account_list: [
         {
-          name: "大礼包",
+          name: "音乐荚",
           value: 0
         },
         {
-          name: "音乐壳",
+          name: "大礼包",
           value: 1
         }
       ],
