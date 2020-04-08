@@ -54,7 +54,16 @@
           <Select style="width: 160px" v-model="d_status" placeholder>
             <Option v-for="item in d_status_list" :key="item.value" :value="item.value">{{item.name}}</Option>
           </Select>
-          <span>开始日期</span>
+         
+          
+        </div>
+        <div>
+         <!-- <span>从第</span>
+          <Input v-model="d_page" style="width: 60px" placeholder=""></Input>
+          <span>页开始，</span>
+          <Input v-model="d_size" style="width: 60px" placeholder=""></Input>
+          <span>条</span> -->
+           <span>开始日期</span>
           <DatePicker
             v-model="d_start_time"
             type="date"
@@ -68,15 +77,6 @@
             placeholder="Select date"
             style="width: 200px"
           ></DatePicker>
-          
-        </div>
-        <div>
-         <span>从第</span>
-          <Input v-model="d_page" style="width: 60px" placeholder=""></Input>
-          <span>页开始，</span>
-          <Input v-model="d_size" style="width: 60px" placeholder=""></Input>
-          <span>条</span>
-          
           <Button type="primary" @click="submit_download">下载</Button>
         </div>
       </div>
@@ -189,8 +189,6 @@ export default {
         account: this.d_account,
         start_time: this.d_start_time.valueOf() / 1000,
         end_time: this.d_end_time.valueOf() / 1000,
-        page: this.d_page,
-        size: this.d_size,
         status: this.d_status,
       };
       console.log(form)
