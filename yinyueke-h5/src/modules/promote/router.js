@@ -22,6 +22,10 @@ const getCash = () => import('./src/getCash.vue')
 const writeCardInfo = () => import('./src/writeCardInfo.vue')
 ////老用户
 const ou_reg = () => import('./src/ou_reg')
+const ou_regSuccess = () => import('./src/ou_regSuccess')
+const ou_poster = () => import('./src/ou_poster')
+const ou_getCash = () => import('./src/ou_getCash')
+const ou_intro = () => import('./src/ou_intro')
 
 Vue.use(Router)
 export default new Router({
@@ -64,6 +68,26 @@ export default new Router({
       path: '/ou_reg',
       name: 'ou_reg',
       component: ou_reg,
+    }, 
+    {
+      path: '/ou_regSuccess',
+      name: 'ou_regSuccess',
+      component: ou_regSuccess,
+    },
+    {
+      path: '/ou_poster',
+      name: 'ou_poster',
+      component: ou_poster,
+    }, 
+    {
+      path: '/ou_getCash',
+      name: 'ou_getCash',
+      component: ou_getCash,
+    }, 
+    {
+      path: '/ou_intro',
+      name: 'ou_intro',
+      component: ou_intro,
     },
     {
       path: '/test',

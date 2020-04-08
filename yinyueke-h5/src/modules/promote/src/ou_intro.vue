@@ -1,18 +1,9 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow" />
-    <img src="../../../assets/img/promote/ou_reg/bg.png" alt class="bg" />
+    <img src="../../../assets/img/promote/reg/bg.png" alt class="bg" />
     <div @click="maskShow=true" class="rule_btn">活动规则</div>
-    <div class="form">
-      <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入手机号" type="text" />
-      </div>
-      <div class="input_wrapper v_code">
-        <input v-model="form.code" placeholder="请输入验证码" type="text" />
-        <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
-      </div>
-      <div @click="regVip" class="reg_btn">领取课程</div>
-    </div>
+   
     <div v-show="maskShow" class="mask">
       <div class="ac_rule">
         <div class="close_icon" @click="maskShow=false">
@@ -75,15 +66,7 @@ export default {
       loadingShow: false,
       openInApp,
       maskShow: false,
-      form: {
-        phone: "",
-        code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("phone"),
-        share_stall: getQueryVariable("c")
-      },
-      vcodeText: "获取验证码",
-      vCode: ""
+     
     };
   },
   created() {},
@@ -92,76 +75,12 @@ export default {
     ImagePreview
   },
   mounted() {
-    this.countPageData();
-    this.inputevent()
   },
   methods: {
-    inputevent() {
-      var inputArr = document.querySelectorAll("input");
-      inputArr.forEach(function(ele) {
-        let scrollTop;
-        ele.addEventListener("focus", function() {
-          scrollTop = document.body.scrollTop;
-        });
-        ele.addEventListener("blur", function() {
-          //document.body.scrollTop = scrollTop;
-          window.scrollTo(0, 0);
-        });
-      });
-    },
-    countPageData() {
-      this.axios
-        .get(
-          `${
-            process.env.VUE_APP_LIEBIAN
-          }/v1/share/save_scan_data/?share_id=6&share_phone=${getQueryVariable(
-            'phone'
-          )}&share_stall=${getQueryVariable('share_stall')}`
-        )
-        .then(res => {});
-    },
-    regVip() {
-      localStorage.setItem("loginPhone", this.form.phone);
-      this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_login/`, this.form)
-        .then(res => {
-          if (!res.error) {
-            if(res.data.has_received){
-              Dialog.alert({message: '亲爱的用户，您已经领取过优惠了，可以点击确定直接使用'}).then(() => {
-                location.href = res.data.url
-              });
-            }else{
-              sessionStorage.setItem('successUrl',res.data.url);
-              this.$router.push('/regSuccess');
-            }
-          }
-        });
-    },
-    getVCode() {
-      if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
-        if (this.vcodeText === "获取验证码") {
-          this.vCode = "";
-        }
-        this.axios
-          .post(`${process.env.VUE_APP_SMS}/v1/user/tx_sms/`, {
-            phone: this.form.phone
-          })
-          .then(res => {
-            console.log(res);
-          });
-      } else {
-        return;
-      }
-      var count = 59;
-      this.vcodeText = count + "s";
-      var timer = setInterval(() => {
-        this.vcodeText = --count + "s";
-        if (count === 0) {
-          clearInterval(timer);
-          this.vcodeText = "重新获取";
-        }
-      }, 1000);
-    },
+   
+   
+   
+   
     share() {
       if (platForm == "IOS") {
         webkit.messageHandlers.shareWebImage.postMessage({
@@ -188,103 +107,6 @@ export default {
 
 .bg {
   width: 100%;
-}
-.form {
-  position: absolute;
-  left: 0;
-  //top: 65%;
-  top: 439px;
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    top: 66%;
-  }
-  width: 100%;
-  padding: 0 46px;
-  input {
-    border: none;
-    background-color: transparent;
-    outline: none;
-    color: rgba(51, 51, 51, 1);
-    left: 17%;
-    top: 2%;
-    position: absolute;
-    width: 70%;
-    height: 40px;
-    font-size: 14px;
-  }
-  input::placeholder,
-  select:invalid {
-    font-size: 14px;
-    font-family: PingFang-SC-Regular, PingFang-SC;
-    font-weight: 400;
-    color: rgba(153, 153, 153, 1);
-  }
-  select {
-    border: none;
-    background-color: transparent;
-    outline: none;
-    //color: #fff;
-    left: 17%;
-    top: 2%;
-    position: absolute;
-    width: 80%;
-    height: 40px;
-    font-size: 14px;
-    font-family: PingFang-SC-Regular, PingFang-SC;
-    font-weight: 400;
-    color: rgba(51, 51, 51, 1);
-  }
-  .input_wrapper {
-    position: relative;
-    width: 100%;
-    height: 44px;
-    margin-bottom: 12px;
-    border-radius: 22px;
-    //border: 1px solid rgba(51, 51, 51, 0.2);
-
-    background-color: #fff !important;
-  }
-
-  .phone {
-    background: url("../../../assets/img/yiqiac/phone.png") no-repeat left 4.7%
-      center/5.7% 54%;
-  }
-  .v_code {
-    background: url("../../../assets/img/yiqiac/safe.png") no-repeat left 4.7%
-      center/7% 54%;
-    .v_code_btn {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 106px;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      font-size: 14px;
-      font-family: PingFang-SC-Regular, PingFang-SC;
-      font-weight: 400;
-      color: rgba(255, 87, 38, 1);
-      //border-left: 1px solid #f1f1f1;
-    }
-  }
-
-  .reg_btn {
-    width: 234px;
-    height: 80px;
-    position: absolute;
-    left: 50%;
-    top: 92%;
-    padding-top: 20px;
-    transform: translateX(-50%);
-    background: url("../../../assets/img/promote/reg/reg_btn.png") no-repeat
-      center;
-    background-size: cover;
-    font-size: 22px;
-    font-family: PingFang SC;
-    font-weight: 500;
-    color: rgba(243, 47, 34, 1);
-    text-align: center;
-  }
 }
 .ac_rule {
   padding: 36px 20px 10px 10px;
@@ -341,8 +163,8 @@ export default {
   position: absolute;
   top: 20px;
   right: 0;
-  width: 80px;
-  height: 28px;
+  width: 32px;
+  height: 90px;
   line-height: 28px;
   text-align: center;
   padding-left: 4px;

@@ -118,5 +118,7 @@ module.exports = {
          sightSingShare:'src/modules/sightSingShare/app.js',
          //图片背景
          imgbg:'src/modules/imgbg/app.js',
+         //wx调查获取openid
+         wxbind:'src/modules/wxbind/app.js',
     }   
 }
