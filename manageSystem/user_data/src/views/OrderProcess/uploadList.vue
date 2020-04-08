@@ -150,19 +150,44 @@ export default {
           }
         },
         {
+          title: "渠道",
+          key: "channel_name"
+        },
+        {
+          title: "sku",
+          key: "name"
+        },
+         {
+          title: "姓名",
+          key: "username"
+        },
+         {
+          title: "地址",
+          key: "address"
+        },
+        {
           title: "开课手机号",
           key: "app_account"
         },
-        // {
-        //   title: "上传时间",
-        //   key: "create_time",
-        //   render: (h, params) => {
-        //     return h("div", formatTime(params.row.create_time));
-        //   }
-        // },
         {
           title: "收件人手机号",
           key: "receive_phone"
+        },
+        {
+          title: "快递公司",
+          key: "courier_name"
+        },
+         {
+          title: "快递单号",
+          key: "courier_number"
+        },
+        {
+          title: "创建时间",
+          key: "create_time"
+        },
+        {
+          title: "处理状态",
+          key: "msg"
         }
       ],
       detailModalShow: false
