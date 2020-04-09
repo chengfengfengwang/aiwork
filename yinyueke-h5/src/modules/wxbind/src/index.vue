@@ -30,8 +30,8 @@
 <script>
 import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Popup } from "vant";
-//let baseUrl = 'http://api.yinji.immusician.com';
-let baseUrl = 'http://192.168.2.16';
+let baseUrl = 'http://api.yinji.immusician.com';
+//let baseUrl = 'http://192.168.2.16';
 
 export default {
   data() {
@@ -63,11 +63,16 @@ export default {
     }else{
       sessionStorage.setItem('code',getQueryVariable('code'))
     }
+    let sessionCode = sessionStorage.getItem('code');
+    //后退到了没有code的链接
+    if(sessionCode && !getQueryVariable('code')){
+      history.back()
+    }
     console.log('---------')
     console.log(getQueryVariable('code'))
     console.log(sessionStorage.getItem('code'))
-    this.courseId = getQueryVariable("course_id");
     console.log('---------')
+    this.courseId = getQueryVariable("course_id");
     // this.getSignInfo().then(param => {
     //   this.shareReady(param);
     // });
