@@ -7,6 +7,7 @@
       <img src="../../../assets/img/wbzs/coco.png" alt>
     </div>
     <div class="form">
+      <div class="course_name">{{courseItem.course_name}}</div>
       <div class="input_wrapper phone">
         <input v-model="form.phone" placeholder="请输入手机号" type="text">
       </div>
@@ -14,7 +15,7 @@
         <input v-model="form.code" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div @click="reg" class="reg_btn">提交</div>
+      <div @click="reg" class="reg_btn">立即报名</div>
     </div>
      <popup v-model="popShow">
       <div class="pop_wrapper">
@@ -30,6 +31,8 @@
 <script>
 import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Popup } from "vant";
+import { Toast } from "vant";
+
 let baseUrl = 'http://api.yinji.immusician.com';
 //let baseUrl = 'http://192.168.2.16';
 
@@ -48,7 +51,8 @@ export default {
       },
       popShow:false,
       qrSrc:'',
-      wxCode:''
+      wxCode:'',
+      courseName:''
     };
   },
   components: {
@@ -86,7 +90,7 @@ export default {
   methods: {
     findQr() {
       return this.courseList.find(e => {
-        return (e.course_id = this.courseId);
+        return (e.course_id == this.courseId);
       });
     },
     getCourseList() {
@@ -95,6 +99,12 @@ export default {
         .then(res => {
           this.courseList = res.data;
           this.courseItem = this.findQr();
+          if(!this.courseItem){
+            Toast({
+              message: "该课程未配置",
+              duration: 2000
+            });
+          }
         });
     },
     inputevent() {
@@ -112,7 +122,7 @@ export default {
     },
     reg() {
       this.axios
-        .post(`${baseUrl}/v1/wechat/record_bind/`, {
+        .post(`${baseUrl}/v1/wechat/record_bind`, {
           course_id: Number(getQueryVariable("course_id")),
           sms_code: this.form.code,
           phone: this.form.phone,
@@ -256,6 +266,12 @@ body {
   img {
     width: 145px;
   }
+}
+.course_name{
+  text-align: center;
+  margin: -10px 0 50px 0;
+    color: rgb(250, 111, 22);
+    font-weight: 600;
 }
 .form {
   position: absolute;

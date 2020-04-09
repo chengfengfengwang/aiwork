@@ -66,7 +66,7 @@ export default {
         },
         {
           title: "收货电话",
-          key: "receive_phone"
+          key: "receiver_phone"
         },
         {
           title: "创建时间",
@@ -74,13 +74,13 @@ export default {
         },
         {
           title: "地址",
-          key: "address",
+          key: "receiver_address",
           render: (h, params) => {
-            return h("div", cutOffStr(params.row.address));
+            return h("div", cutOffStr(params.row.receiver_address,20));
           }
         },
         {
-          title: " ",
+          title: "商品详情",
           key: "action",
           minWidth: 50,
           width: 300,
@@ -96,7 +96,7 @@ export default {
                   },
                   style: {
                     marginRight: "5px",
-                    display: this.editShow ? "inline-block" : "none"
+                    //display: this.editShow ? "inline-block" : "none"
                   },
                   on: {
                     click: () => {
@@ -143,19 +143,28 @@ export default {
       modlaDataList:[],
       modalColumns:[
         {
+          title: "sku",
+          key: "outer_id"
+        },
+        {
           title: "课程",
           key: "title"
         },
         {
+          title: "数量",
+          key: "num"
+        },
+        {
           title: "价格",
           key: "cost_price",
-          render: (h, params) => {
-            return h("div", params.row.address / 100);
-          }
         },
         {
           title: "数量",
           key: "num"
+        },
+         {
+          title: "规格",
+          key: "ship_city_property"
         },
       ]
     };

@@ -192,6 +192,12 @@ const myMenus = [
     name: "tools",
     text: "万物工具",
     link: "/tools"
+  },
+  {
+    hasChild: false,
+    name: "wanwuOrderList",
+    text: "万物订单",
+    link: "/wanwuOrderList"
   }
 ];
 export default {
