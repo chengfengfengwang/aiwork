@@ -30,6 +30,8 @@ import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
 import tools from './../views/OrderProcess/tools'
 import wanwuOrderList from './../views/OrderProcess/wanwuOrderList.vue'
+import SumerCamp from './../views/SumerCamp.vue'
+
 import Test from './../views/Test.vue';
 
 Vue.use(Router)
@@ -46,6 +48,12 @@ const router = new Router({
         //   path: '/',
         //   component: GroupList 
         // },
+        //夏令营
+        {
+          name: 'SumerCamp',
+          path: '/SumerCamp',
+          component: SumerCamp
+        },
         {
           name: 'GroupUserList',
           path: '/GroupUserList',
