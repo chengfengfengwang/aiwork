@@ -141,11 +141,11 @@ export default {
         },
         {
           name: "部分发货",
-          value: 1
+          value: 2
         },
         {
           name: "全部发货",
-          value: 1
+          value: 3
         }
       ]
     };

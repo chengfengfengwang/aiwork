@@ -120,5 +120,7 @@ module.exports = {
          imgbg:'src/modules/imgbg/app.js',
          //wx调查获取openid
          wxbind:'src/modules/wxbind/app.js',
+         //下载提示
+         downloadTip:'src/modules/downloadTip/app.js',
     }   
 }

@@ -1,21 +1,27 @@
 <template>
   <div class="page">
     <div class="logo">
-      <img src="../../../assets//img//yiqiac/loginb2.png" alt />
+      <img src="../../../assets//img//yiqiac/loginb2.png" alt>
     </div>
     <div class="bottom_coco">
-      <img src="../../../assets/img/wbzs/coco.png" alt="">
+      <img src="../../../assets/img/wbzs/coco.png" alt>
     </div>
     <div class="form">
       <div class="input_wrapper phone">
-        <input v-model="form.name" placeholder="请输入手机号" type="text" />
+        <input v-model="form.phone" placeholder="请输入手机号" type="text">
       </div>
       <div class="input_wrapper v_code">
-        <input v-model="form.code" placeholder="请输入验证码" type="text" />
+        <input v-model="form.code" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
-      <div @click="reg" class="reg_btn">领取证书</div>
+      <div @click="reg" class="reg_btn">提交</div>
     </div>
+     <popup v-model="popShow">
+      <div class="pop_wrapper">
+        <div>扫描下方二维码入群</div>
+        <img class="qr" :src="courseItem.qr" alt="">
+      </div>
+    </popup>
     <!-- <img src="../../../assets/img/regist/rd1.png" alt class="d1">
     <img src="../../../assets/img/regist/rd2.png" alt class="d2">
     <img src="../../../assets/img/regist/rd3.png" alt class="d3">-->
@@ -23,54 +29,76 @@
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import { Popup } from "vant";
+
 export default {
   data() {
     return {
-    
       form: {
-        name: ""
+        phone: "",
+        code:""
       },
       vcodeText: "获取验证码",
-      vCode: ""
+      vCode: "",
+      courseId: "",
+      courseItem:{},
+      popShow:false,
+      qrSrc:''
     };
   },
+  components: {
+    Popup
+  },
   created() {
-    
+    this.courseId = getQueryVariable("course_id");
+    this.getSignInfo().then(param => {
+      this.shareReady(param);
+    });
   },
   mounted() {
     this.inputevent();
+    this.getCourseList();
   },
   methods: {
-    inputevent() {
-      var inputArr = document.querySelectorAll('input');
-      inputArr.forEach(function(ele){
-        let scrollTop;
-        ele.addEventListener("focus", function() {
-          scrollTop = document.body.scrollTop;
-          console.log(scrollTop)
-        });
-        ele.addEventListener("blur", function() {
-          //document.body.scrollTop = scrollTop;
-          window.scrollTo(0,0)
-          console.log(scrollTop)
-        });
-      })
+    findQr() {
+      return this.courseList.find(e => {
+        return (e.course_id = this.courseId);
+      });
     },
-    getCourses() {
+    getCourseList() {
       this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
+        .get(`http://api.yinji.immusician.com/v1/wechat/get_records`, {
           institutions_id: getQueryVariable("orgId")
         })
         .then(res => {
           this.courseList = res.data;
-          console.log("---");
-          console.log(this.courseList);
-          //this.courseList.unshift({ id: "-1", name: "全部" });
+          this.courseItem = this.findQr();
         });
     },
+    inputevent() {
+      var inputArr = document.querySelectorAll("input");
+      inputArr.forEach(function(ele) {
+        let scrollTop;
+        ele.addEventListener("focus", function() {
+          scrollTop = document.body.scrollTop;
+        });
+        ele.addEventListener("blur", function() {
+          //document.body.scrollTop = scrollTop;
+          window.scrollTo(0, 0);
+        });
+      });
+    },
     reg() {
-      localStorage.setItem('zsName',this.form.name);
-      this.$router.push('/poster')
+      this.axios
+        .post(`http://api.yinji.immusician.com/v1/wechat/record_bind/`, {
+          course_id: getQueryVariable("course_id"),
+          sms_code: this.form.code,
+          phone: this.form.phone,
+          code:'openid'
+        })
+        .then(res => {
+          this.popShow = true
+        });
     },
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
@@ -82,7 +110,6 @@ export default {
             phone: this.form.phone
           })
           .then(res => {
-            console.log(res);
           });
       } else {
         return;
@@ -97,7 +124,61 @@ export default {
         }
       }, 1000);
     },
-    
+    shareReady(param) {
+      var that = this;
+      wx.config({
+        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: param.appId, // 必填，公众号的唯一标识
+        timestamp: param.timestamp, // 必填，生成签名的时间戳
+        nonceStr: param.nonceStr, // 必填，生成签名的随机串
+        signature: param.signature, // 必填，签名
+        jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"] // 必填，需要使用的JS接口列表
+      });
+      wx.ready(function() {
+        wx.updateAppMessageShareData({
+          title: "高考作文被音乐霸屏了！你家孩子音乐知识学好了吗？", // 分享标题
+          desc:
+            "5分钟就让孩子爱上的趣味音乐课程，音乐基础一学就会，快来领取免费体验课程吧！", // 分享描述
+          imgUrl: "https://s.immusician.com/web/h5/share1.jpeg", // 分享图标
+          link: `http://s.immusician.com/web/h5/music.html?channel=cp_tiyan&v=${
+            that.shareVersion
+          }`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          success: function() {
+            //console.log("分享的success");
+            // 设置成功
+          }
+        });
+        wx.updateTimelineShareData({
+          title: "高考作文被音乐霸屏了！你家孩子音乐知识学好了吗？", // 分享标题
+          imgUrl: "https://s.immusician.com/web/h5/share1.jpeg", // 分享图标
+          link: `http://s.immusician.com/web/h5/music.html?channel=cp_tiyan&v=${
+            that.shareVersion
+          }`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          success: function() {
+            // 设置成功
+          }
+        });
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+      });
+    },
+    getSignInfo() {
+      return new Promise((resolve, reject) => {
+        this.axios
+          .post(`http://api.yinji.immusician.com:55555/v1/wechat/config/`, {
+            url: location.href
+          })
+          .then(res => {
+            //var res = res.data;
+            let param = {
+              appId: res.appId,
+              timestamp: res.timestamp,
+              nonceStr: res.nonceStr,
+              signature: res.signature
+            };
+            resolve(param);
+          });
+      });
+    },
   }
 };
 </script>
@@ -202,8 +283,8 @@ body {
 
     background-color: #fff !important;
   }
-  .name input{
-    text-align: center
+  .name input {
+    text-align: center;
   }
   .phone {
     background: url("../../../assets/img/yiqiac/phone.png") no-repeat left 4.7%
@@ -262,6 +343,26 @@ body {
   top: 210px;
   width: 80px;
   z-index: -1;
+}
+.van-popup{
+  border-radius: 10px;
+  overflow: hidden;
+}
+.pop_wrapper{
+  text-align: center;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  padding-top: 15px;
+  border-radius: 10px;
+  .qr{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width: 200px;
+    height: 200px;
+  }
 }
 </style>
 

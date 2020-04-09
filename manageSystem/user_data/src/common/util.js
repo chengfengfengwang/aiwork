@@ -153,4 +153,7 @@ function selectQuestionOption(question) {
     }
     return myOptions
 }
-export { formatNumber, formatTimeOnlyDate, formatTimeY, formatTime, getTime, timeToTimeStamp, getDate, compare, getIndex, getTagName, selectQuestionFilter, selectQuestionOption, find, findkey, encodeSearchParams }
+function cutOffStr(str,length){
+    return str.substr(0,length) + '...'
+}
+export { cutOffStr,formatNumber, formatTimeOnlyDate, formatTimeY, formatTime, getTime, timeToTimeStamp, getDate, compare, getIndex, getTagName, selectQuestionFilter, selectQuestionOption, find, findkey, encodeSearchParams }

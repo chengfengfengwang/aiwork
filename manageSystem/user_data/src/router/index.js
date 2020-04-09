@@ -29,6 +29,7 @@ import orderListToday from './../views/OrderProcess/orderListToday.vue'
 import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
 import tools from './../views/OrderProcess/tools'
+import wanwuOrderList from './../views/OrderProcess/wanwuOrderList.vue'
 import Test from './../views/Test.vue';
 
 Vue.use(Router)
@@ -167,6 +168,11 @@ const router = new Router({
           name: 'Test',
           path: '/test',
           component: Test
+        },
+        {
+          name: 'wanwuOrderList',
+          path: '/wanwuOrderList',
+          component: wanwuOrderList
         }
       ]
     },
