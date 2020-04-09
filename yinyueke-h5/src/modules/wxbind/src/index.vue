@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Popup } from "vant";
 
 export default {
@@ -50,6 +50,10 @@ export default {
     Popup
   },
   created() {
+    if(!getQueryVariable('code') && testWeixin()){
+      let encodedUrl = encodeURIComponent('http://cdn.kids-web.immusician.com/yinji/wxbind.html');
+      location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
+    }
     this.courseId = getQueryVariable("course_id");
     this.getSignInfo().then(param => {
       this.shareReady(param);
@@ -94,7 +98,7 @@ export default {
           course_id: getQueryVariable("course_id"),
           sms_code: this.form.code,
           phone: this.form.phone,
-          code:'openid'
+          code:getQueryVariable("code")
         })
         .then(res => {
           this.popShow = true
