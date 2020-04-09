@@ -9,8 +9,8 @@ import { getQueryVariable, isIphonex } from "../../common/util.js";
 //   var eruda = require('eruda');
 //   eruda.init()
 // }
-var eruda = require('eruda');
-  eruda.init()
+// var eruda = require('eruda');
+//   eruda.init()
 export default {
   data() {
     return {
