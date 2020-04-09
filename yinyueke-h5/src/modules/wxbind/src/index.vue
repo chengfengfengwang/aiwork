@@ -47,7 +47,8 @@ export default {
         qr:''
       },
       popShow:false,
-      qrSrc:''
+      qrSrc:'',
+      wxCode:''
     };
   },
   components: {
@@ -61,12 +62,13 @@ export default {
       console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
       location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
     }else{
+      this.wxCode = getQueryVariable('code');
       sessionStorage.setItem('code',getQueryVariable('code'))
     }
     let sessionCode = sessionStorage.getItem('code');
     //后退到了没有code的链接
     if(sessionCode && !getQueryVariable('code')){
-      history.back()
+      this.wxCode = sessionCode;
     }
     console.log('---------')
     console.log(getQueryVariable('code'))
@@ -114,7 +116,7 @@ export default {
           course_id: Number(getQueryVariable("course_id")),
           sms_code: this.form.code,
           phone: this.form.phone,
-          code:getQueryVariable("code")
+          code:this.wxCode
         })
         .then(res => {
           if(!res.error){
