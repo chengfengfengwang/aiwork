@@ -55,9 +55,9 @@ export default {
       location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
     }
     this.courseId = getQueryVariable("course_id");
-    this.getSignInfo().then(param => {
-      this.shareReady(param);
-    });
+    // this.getSignInfo().then(param => {
+    //   this.shareReady(param);
+    // });
   },
   mounted() {
     this.inputevent();
