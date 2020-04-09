@@ -51,8 +51,10 @@ export default {
   },
   created() {
     if(!getQueryVariable('code') && testWeixin()){
+      let originUrl = `${location.origin}${location.pathname}?course_id=${getQueryVariable('course_id')}`
       let encodedUrl = encodeURIComponent('http://cdn.kids-web.immusician.com/yinji/wxbind.html');
-      location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
+      let scope = 'snsapi_base';
+      location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
     }
     this.courseId = getQueryVariable("course_id");
     // this.getSignInfo().then(param => {
