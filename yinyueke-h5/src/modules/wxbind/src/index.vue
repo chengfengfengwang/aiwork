@@ -99,13 +99,15 @@ export default {
     reg() {
       this.axios
         .post(`http://api.yinji.immusician.com/v1/wechat/record_bind/`, {
-          course_id: getQueryVariable("course_id"),
+          course_id: Number(getQueryVariable("course_id")),
           sms_code: this.form.code,
           phone: this.form.phone,
           code:getQueryVariable("code")
         })
         .then(res => {
-          this.popShow = true
+          if(!res.error){
+            this.popShow = true
+          }
         });
     },
     getVCode() {
