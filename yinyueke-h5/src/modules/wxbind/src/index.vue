@@ -30,6 +30,8 @@
 <script>
 import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Popup } from "vant";
+let baseUrl = 'http://api.yinji.immusician.com';
+let baseUrl = 'http://192.168.2.16';
 
 export default {
   data() {
@@ -56,6 +58,7 @@ export default {
       let originUrl = `${location.origin}${location.pathname}?course_id=${getQueryVariable('course_id')}`
       let encodedUrl = encodeURIComponent(originUrl);
       let scope = 'snsapi_base';
+      console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
       location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
     }
     this.courseId = getQueryVariable("course_id");
@@ -75,9 +78,7 @@ export default {
     },
     getCourseList() {
       this.axios
-        .get(`http://api.yinji.immusician.com/v1/wechat/get_records`, {
-          institutions_id: getQueryVariable("orgId")
-        })
+        .get(`${baseUrl}/v1/wechat/get_records`)
         .then(res => {
           this.courseList = res.data;
           this.courseItem = this.findQr();
@@ -98,7 +99,7 @@ export default {
     },
     reg() {
       this.axios
-        .post(`http://api.yinji.immusician.com/v1/wechat/record_bind/`, {
+        .post(`${baseUrl}/v1/wechat/record_bind/`, {
           course_id: Number(getQueryVariable("course_id")),
           sms_code: this.form.code,
           phone: this.form.phone,
