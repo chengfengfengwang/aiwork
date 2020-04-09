@@ -30,7 +30,7 @@
 <script>
 import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Popup } from "vant";
-let baseUrl = 'http://api.yinji.immusician.com';
+//let baseUrl = 'http://api.yinji.immusician.com';
 let baseUrl = 'http://192.168.2.16';
 
 export default {
@@ -60,8 +60,14 @@ export default {
       let scope = 'snsapi_base';
       console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
       location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
+    }else{
+      sessionStorage.setItem('code',getQueryVariable('code'))
     }
+    console.log('---------')
+    console.log(getQueryVariable('code'))
+    console.log(sessionStorage.getItem('code'))
     this.courseId = getQueryVariable("course_id");
+    console.log('---------')
     // this.getSignInfo().then(param => {
     //   this.shareReady(param);
     // });

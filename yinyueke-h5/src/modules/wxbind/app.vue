@@ -5,6 +5,12 @@
 </template>
 <script>
 import { getQueryVariable, isIphonex } from "../../common/util.js";
+// if(process.env.NODE_ENV !== 'production'){
+//   var eruda = require('eruda');
+//   eruda.init()
+// }
+var eruda = require('eruda');
+  eruda.init()
 export default {
   data() {
     return {
