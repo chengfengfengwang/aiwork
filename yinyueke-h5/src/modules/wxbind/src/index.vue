@@ -41,7 +41,9 @@ export default {
       vcodeText: "获取验证码",
       vCode: "",
       courseId: "",
-      courseItem:{},
+      courseItem:{
+        qr:''
+      },
       popShow:false,
       qrSrc:''
     };
@@ -52,7 +54,7 @@ export default {
   created() {
     if(!getQueryVariable('code') && testWeixin()){
       let originUrl = `${location.origin}${location.pathname}?course_id=${getQueryVariable('course_id')}`
-      let encodedUrl = encodeURIComponent('http://cdn.kids-web.immusician.com/yinji/wxbind.html');
+      let encodedUrl = encodeURIComponent(originUrl);
       let scope = 'snsapi_base';
       location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
     }
