@@ -12,7 +12,7 @@
           :class="{canplay:item.videoUrl}"
         >
           <div v-if="item.videoUrl" class="line"></div>
-          <img class="text_img" :src="item.imgSrc" alt />
+          <img :class="{ img11: index==10,img12: index==11 }" class="text_img" :src="item.imgSrc" alt />
           <img v-show="item.videoUrl" src="../../assets/img/liveVideo/play.png" alt class="play" />
           <div v-show="!item.videoUrl" class="num">{{index+1}}</div>
         </div>
@@ -178,7 +178,7 @@ html {
   position: absolute;
   left: 55%;
   transform: translateX(-50%);
-  top: 22.5%;
+  top: 18.5%;
   width: 80%;
   .item {
     position: relative;
@@ -234,6 +234,12 @@ html {
   img {
     width: 100%;
   }
+}
+.img11{
+  padding: 10px
+}
+.img12{
+  padding: 10px
 }
 </style>
 
