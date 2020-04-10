@@ -62,6 +62,12 @@ export default {
         },
         {
           videoUrl: ""
+        },
+        {
+          videoUrl: ""
+        },
+        {
+          videoUrl: ""
         }
       ]
     };
@@ -72,7 +78,7 @@ export default {
       this.getList();
     }
     var liveList = [];
-    for(var i=0;i<10;i++){
+    for(var i=0;i<12;i++){
        liveList.push({
          imgSrc:require("../../assets/img/liveVideo/" + (i + 1) + ".png"),
          videoUrl:''

@@ -6,17 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
 </head>
 
 <body>
     <script>
-        var client = AgoraRTC.createClient({ mode: 'live', codec: "h264" });
+        // var client = AgoraRTC.createClient({ mode: 'live', codec: "h264" });
 
-        client.init(<APPID>, function () {
-            console.log("AgoraRTC client initialized");
-            }, function (err) {
-                console.log("AgoraRTC client init failed", err);
-});
+        // client.init(<APPID>, function () {
+        //     console.log("AgoraRTC client initialized");
+        //     }, function (err) {
+        //         console.log("AgoraRTC client init failed", err);
+        // });
+        navigator.getUserMedia = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+
+        if (navigator.getUserMedia) {
+            // 支持
+            console.log('支持')
+        } else {
+            // 不支持
+            console.log('不支持')
+        }
+        navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+            .then(function (stream) {
+                console.log(stream)
+                var video = document.querySelector('video');
+                video.srcObject = mediaStream;
+                video.onloadedmetadata = function (e) {
+                    video.play();
+                };
+            })
+            .catch(function (err) {
+                console.log(err)
+            });
     </script>
 </body>
 
