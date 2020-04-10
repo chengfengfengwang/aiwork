@@ -99,6 +99,9 @@ export default {
         .then(res => {
           this.courseList = res.data;
           this.courseItem = this.findQr();
+          if(this.courseItem.course_id==57){
+              this.$set(this.courseItem, "course_name", '奥尔夫+体态律动');
+          }
           if(!this.courseItem){
             Toast({
               message: "该课程未配置",
