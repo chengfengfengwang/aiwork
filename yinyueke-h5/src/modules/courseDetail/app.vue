@@ -270,18 +270,18 @@ export default {
       if (this.curCard.isVip) {
         this.maskShow = true;
       } else if (this.curCard.buy_url) {
-        if (platForm !== "IOS") {
-          console.log("andriod");
-          var originUrl = encodeURIComponent(this.curCard.buy_url);
-          let url = `open://webBrowser?url=${originUrl}`;
-          console.log(url);
-          location.href = url;
-        } else {
-          console.log("ios");
-          location.href = this.curCard.buy_url;
-        }
+        // if (platForm !== "IOS") {
+        //   console.log("andriod");
+        //   var originUrl = encodeURIComponent(this.curCard.buy_url);
+        //   let url = `open://webBrowser?url=${originUrl}`;
+        //   console.log(url);
+        //   location.href = url;
+        // } else {
+        //   console.log("ios");
+        //   location.href = this.curCard.buy_url;
+        // }
 
-        //location.href = this.curCard.buy_url;
+        location.href = this.curCard.buy_url;
       } else {
         this.toPay();
       }

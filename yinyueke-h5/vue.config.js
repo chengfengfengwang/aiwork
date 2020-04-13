@@ -122,5 +122,7 @@ module.exports = {
          wxbind:'src/modules/wxbind/app.js',
          //下载提示
          downloadTip:'src/modules/downloadTip/app.js',
+         //分享领课活动
+         shareAc413:'src/modules/shareAc413/app.js',
     }   
 }
