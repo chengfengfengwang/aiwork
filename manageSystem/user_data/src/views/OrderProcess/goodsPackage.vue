@@ -12,7 +12,7 @@
       <Option v-for="option in channelList" :key="option.id" :value="option.id">{{option.name}}</Option>
     </Select>-->
     <Table :loading="tableLoading" border :columns="columns" :data="dataList"></Table>
-     <div style="margin-top:10px">
+    <div style="margin-top:10px">
       <Page
         @on-page-size-change="pageSizeChange"
         @on-change="pageChange"
@@ -43,12 +43,9 @@
           </FormItem>
           <!-- <FormItem label="第三方sku编号">
             <Input v-model="formValidate.third_id" placeholder="请输入第三方sku编号"></Input>
-          </FormItem> -->
+          </FormItem>-->
           <FormItem label="商品列表">
-            <span
-              v-for="(goods,idx) in courseSlectList"
-              :key="idx"
-            >({{goods.name}})  </span>
+            <span v-for="(goods,idx) in courseSlectList" :key="idx">({{goods.name}})</span>
             <Button @click="childGoodsModalShow=true">选择子商品</Button>
             <!-- <Input v-model="formValidate.goods_list" placeholder="请输入商品列表"></Input> -->
           </FormItem>
@@ -77,15 +74,40 @@
         <Button @click="modalShow=false">关闭</Button>
       </div>
     </Modal>
+    <Modal v-model="downloadModalShow" width="760" :mask-closable="false">
+      <p slot="header" style>
+        <span>导单</span>
+      </p>
+      <div>
+        <Form ref="formValidate" :label-width="100">
+          <FormItem label="开始时间">
+            <DatePicker
+              v-model="startTime1"
+              type="date"
+              placeholder="Select date"
+              style="width: 200px"
+            ></DatePicker>
+          </FormItem>
+          <FormItem label="结束时间">
+            <DatePicker
+              v-model="endTime1"
+              type="date"
+              placeholder="Select date"
+              style="width: 200px"
+            ></DatePicker>
+          </FormItem>
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button @click="downloadModalSubmit" type="primary">确定</Button>
+        <Button @click="downloadModalShow=false">关闭</Button>
+      </div>
+    </Modal>
     <Modal v-model="childGoodsModalShow" width="760" :mask-closable="false">
       <p slot="header" style>
         <span>音乐壳课程</span>
       </p>
-      <AllChildGoods
-        :fromDataArr="courseSlectList"
-        ref="allChildGoods"
-        v-if="childGoodsModalShow"
-      />
+      <AllChildGoods :fromDataArr="courseSlectList" ref="allChildGoods" v-if="childGoodsModalShow"/>
       <div slot="footer">
         <Button @click="yinjiCourseSubmit" type="primary">确定</Button>
         <Button @click="childGoodsModalShow=false">关闭</Button>
@@ -162,6 +184,26 @@ export default {
                 "Button",
                 {
                   props: {
+                    type: "info",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.downloadModalShow = true;
+                      this.name = params.row.name;
+                      this.channel_id = params.row.channel_id;
+                    }
+                  }
+                },
+                "导单"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
                     type: "error",
                     size: "small"
                   },
@@ -194,10 +236,13 @@ export default {
       channelName: localStorage.getItem("channelName")
         ? localStorage.getItem("channelName")
         : "",
-      courseSlectList:[],
+      courseSlectList: [],
       page: 0,
       pageSize: 100,
-      total:0
+      total: 0,
+      downloadModalShow: false,
+      startTime1: "",
+      endTime1: ""
     };
   },
   components: {
@@ -208,6 +253,19 @@ export default {
     //this.getChannelList();
   },
   methods: {
+    downloadModalSubmit() {
+      const formObj = {
+        start_time: this.startTime1.valueOf() / 1000,
+        end_time: this.endTime1.valueOf() / 1000,
+        channel_id: this.channel_id,
+        name: this.name
+      };
+      this.axios
+        .post(`${process.env.WULIU}/tongji/order_down`, formObj)
+        .then(res => {
+          window.open(res.data.down_url, "_blank");
+        });
+    },
     pageChange(page) {
       this.page = page - 1;
       this.getTableList();
@@ -218,14 +276,16 @@ export default {
       this.getTableList();
     },
     yinjiCourseSubmit() {
-      this.formValidate.goods_map = this.$refs.allChildGoods.selected.map(e=>{
+      this.formValidate.goods_map = this.$refs.allChildGoods.selected.map(e => {
         return {
-          id:e.id,
-          course_name:e.name
-        }
+          id: e.id,
+          course_name: e.name
+        };
       });
       //console.log(this.courseSlectList)
-      this.formValidate.goods_list = this.$refs.allChildGoods.selected.map(e=>e.id);
+      this.formValidate.goods_list = this.$refs.allChildGoods.selected.map(
+        e => e.id
+      );
       this.childGoodsModalShow = false;
     },
     getChannelList() {
@@ -256,7 +316,10 @@ export default {
       let param = JSON.parse(JSON.stringify(this.formValidate));
       // param.bro_percent
       console.log(typeof param.bro_percent);
-      if (param.bro_percent && param.bro_percent.toString().indexOf("%") != -1) {
+      if (
+        param.bro_percent &&
+        param.bro_percent.toString().indexOf("%") != -1
+      ) {
         param.bro_percent = param.bro_percent.slice(
           0,
           param.bro_percent.length - 1
@@ -295,30 +358,30 @@ export default {
 
       this.axios
         .get(
-          `${
-            process.env.WULIU
-          }/fgoods/index?page=${this.page}&size=${this.pageSize}&status=1&channel_id=${channel_id}`
+          `${process.env.WULIU}/fgoods/index?page=${this.page}&size=${
+            this.pageSize
+          }&status=1&channel_id=${channel_id}`
         )
         .then(res => {
           this.tableLoading = false;
           this.dataList = res.data.list;
-           this.total = res.data.total;
+          this.total = res.data.total;
         });
     }
   },
-  watch:{
-    formValidate:{
-      deep:true,
-      handler(){
-        if(this.formValidate.goods_map){
-          this.courseSlectList = this.formValidate.goods_map.map(e=>{
-            return{
-              id:e.id,
-              name:e.course_name
-            }
-          })
-        }else{
-          this.courseSlectList = []
+  watch: {
+    formValidate: {
+      deep: true,
+      handler() {
+        if (this.formValidate.goods_map) {
+          this.courseSlectList = this.formValidate.goods_map.map(e => {
+            return {
+              id: e.id,
+              name: e.course_name
+            };
+          });
+        } else {
+          this.courseSlectList = [];
         }
       }
     }
