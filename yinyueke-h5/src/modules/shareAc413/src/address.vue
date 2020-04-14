@@ -9,7 +9,7 @@
       <div class="form">
         <div class="input_wrapper">
           <div class="label">收货人：</div>
-          <input v-model="form.phone" placeholder="请输入您的姓名" type="text">
+          <input v-model="form.name" placeholder="请输入您的姓名" type="text">
         </div>
         <div class="input_wrapper">
           <div class="label">电话：</div>
@@ -26,7 +26,7 @@
         </div>
         <div class="input_wrapper textarea">
           <div class="label">收货地址：</div>
-          <textarea v-model="form.phone" placeholder="请填写您的收货地址"></textarea>
+          <textarea v-model="form.address" placeholder="请填写您的收货地址"></textarea>
         </div>
         <div @click="submit" class="reg_btn">点击提交</div>
       </div>
@@ -54,10 +54,6 @@ export default {
       form: {
         phone: "",
         code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("share_phone"),
-        is_proxy: 0,
-        share_stall: getQueryVariable("c")
       },
       courseList: [],
       areaList: AreaJson,
@@ -112,10 +108,12 @@ export default {
       });
     },
     submit() {
+      this.form.code = this.wxCode;
+      this.form.zone = this.location;
       console.log(this.form);
-      return
+      //return
       this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
+        .post(`58.87.125.111:55555/v1/share/upload_address/`, this.form)
         .then(res => {
           if (!res.error) {
             let data = res.data;
@@ -133,13 +131,13 @@ export default {
   
     addressConfirm(arr) {
       this.selectAddressShow = false;
-      console.log(arr);
+      //console.log(arr);
       this.location = arr
         .map(e => {
           return e.name;
         })
         .join(" ");
-      console.log(arr);
+      console.log(this.location);
     }
   }
 };
@@ -200,6 +198,8 @@ export default {
     height: 40px;
   }
   textarea {
+    border: none;
+    outline: none;
     resize: none;
   }
   input,
@@ -253,7 +253,7 @@ export default {
     height: 80px;
     align-items: flex-start;
     textarea {
-      width: 60%;
+      width: 70%;
     }
   }
   .reg_btn {
