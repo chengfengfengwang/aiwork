@@ -28,7 +28,7 @@
           <div class="label">收货地址：</div>
           <textarea v-model="form.phone" placeholder="请填写您的收货地址"></textarea>
         </div>
-        <div @click="reg" class="reg_btn">点击提交</div>
+        <div @click="submit" class="reg_btn">点击提交</div>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { testWeixin, getQueryVariable } from "../../../common/util.js";
 import { Area, Popup } from "vant";
 
 import AreaJson from "../../../common/area.js";
@@ -69,7 +69,31 @@ export default {
     vanArea: Area,
     vanPopup: Popup
   },
-  created() {},
+  created() {
+    if (!getQueryVariable("code") && testWeixin()) {
+      let originUrl = `${location.origin}${location.pathname}#/poster`;
+      let encodedUrl = encodeURIComponent(originUrl);
+      let scope = "snsapi_base";
+      console.log(
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`
+      );
+      location.replace(
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`
+      );
+    } else {
+      this.wxCode = getQueryVariable("code");
+      sessionStorage.setItem("code", getQueryVariable("code"));
+    }
+    let sessionCode = sessionStorage.getItem("code");
+    //后退到了没有code的链接
+    if (sessionCode && !getQueryVariable("code")) {
+      this.wxCode = sessionCode;
+    }
+    console.log("---------");
+    console.log(getQueryVariable("code"));
+    console.log(sessionStorage.getItem("code"));
+    console.log("---------");
+  },
   mounted() {
     this.inputevent();
   },
@@ -80,30 +104,16 @@ export default {
         let scrollTop;
         ele.addEventListener("focus", function() {
           scrollTop = document.body.scrollTop;
-          console.log(scrollTop);
         });
         ele.addEventListener("blur", function() {
           //document.body.scrollTop = scrollTop;
           window.scrollTo(0, 0);
-          console.log(scrollTop);
         });
       });
     },
-    getCourses() {
-      this.axios
-        .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
-          institutions_id: getQueryVariable("orgId")
-        })
-        .then(res => {
-          this.courseList = res.data;
-          console.log("---");
-          console.log(this.courseList);
-          //this.courseList.unshift({ id: "-1", name: "全部" });
-        });
-    },
-    reg() {
-      localStorage.setItem("loginPhone", this.form.phone);
-      this.form.open_id = getQueryVariable("open_id");
+    submit() {
+      console.log(this.form);
+      return
       this.axios
         .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_reg/`, this.form)
         .then(res => {
@@ -120,31 +130,7 @@ export default {
           }
         });
     },
-    getVCode() {
-      if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
-        if (this.vcodeText === "获取验证码") {
-          this.vCode = "";
-        }
-        this.axios
-          .post(`${process.env.VUE_APP_SMS}/v1/user/tx_sms/`, {
-            phone: this.form.phone
-          })
-          .then(res => {
-            console.log(res);
-          });
-      } else {
-        return;
-      }
-      var count = 59;
-      this.vcodeText = count + "s";
-      var timer = setInterval(() => {
-        this.vcodeText = --count + "s";
-        if (count === 0) {
-          clearInterval(timer);
-          this.vcodeText = "重新获取";
-        }
-      }, 1000);
-    },
+  
     addressConfirm(arr) {
       this.selectAddressShow = false;
       console.log(arr);
@@ -153,6 +139,7 @@ export default {
           return e.name;
         })
         .join(" ");
+      console.log(arr);
     }
   }
 };

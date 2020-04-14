@@ -75,7 +75,7 @@
             appID: "edb9dab86c2c4f92ac5d0074e589d4d7",
             channel: "test123",
             uid: null,
-            token: "006edb9dab86c2c4f92ac5d0074e589d4d7IADsMI1HSACte+pGjitQCjjUKn801gdrurOAsAEx3fPs47uiVPAAAAAAEABEVnw0SWWRXgEAAQBJZZFe"
+            token: "006edb9dab86c2c4f92ac5d0074e589d4d7IABMBGmeZdtMcLi3T/db0yzjIdaeqCc+2NEEzoTSQGH3SLuiVPAAAAAAEABEVnw0iGqWXgEAAQCIapZe"
         }
         // Create a client
         rtc.client = AgoraRTC.createClient({ mode: "rtc", codec: "h264" });
@@ -110,6 +110,27 @@
                 });
             }, function (err) {
                 console.error("client join failed", err)
+            });
+            //当有远端流加入时订阅该流
+            rtc.client.on("stream-added", function (evt) {
+                var remoteStream = evt.stream;
+                var id = remoteStream.getId();
+                if (id !== rtc.params.uid) {
+                    rtc.client.subscribe(remoteStream, function (err) {
+                        console.log("stream subscribe failed", err);
+                    })
+                }
+                console.log('stream-added remote-uid: ', id);
+            });
+            //订阅成功后播放远端流
+            rtc.client.on("stream-subscribed", function (evt) {
+                var remoteStream = evt.stream;
+                var id = remoteStream.getId();
+                // Add a view for the remote stream.
+                addView(id);
+                // Play the remote stream.
+                remoteStream.play("remote_video_" + id);
+                console.log('stream-subscribed remote-uid: ', id);
             })
         }, (err) => {
             console.error(err);

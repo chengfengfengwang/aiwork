@@ -50,10 +50,7 @@ export default {
     };
   },
   created() {
-    if (getQueryVariable("p")) {
-      this.hasPhone = true;
-      this.form.share_phone = getQueryVariable("p");
-    }
+    
   },
   mounted() {
     this.inputevent();

@@ -3,20 +3,20 @@
     <Loading v-show="loadingShow"/>
     <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
-      <img v-show="!loadingShow" :src="qrSrc" alt class="qr" :class="{nofree:posterId!=1}">
+      <img v-show="!loadingShow" :src="qrSrc" alt class="qr">
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
     </div>
     <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
     <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips" :class="{nofree:posterId!=1}">长按保存图片</div>
+    <div v-show="!loadingShow" class="tips">长按保存图片</div>
   </div>
 </template>
 <script>
 // var eruda = require("eruda");
 // eruda.init();
-import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
+import { testWeixin, openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
@@ -26,39 +26,54 @@ export default {
       qrSrc: "",
       bgSrc: "",
       wxMaterial: "",
-      loadingShow: true,
+      loadingShow: false,
       resultBase64Show: false,
       resultBase64: "",
       openInApp,
-      posterId:getQueryVariable('c'),
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
+    console.log(!getQueryVariable('code') && testWeixin())
+    if(!getQueryVariable('code') && testWeixin()){
+      let originUrl = `${location.origin}${location.pathname}#/poster`
+      let encodedUrl = encodeURIComponent(originUrl);
+      let scope = 'snsapi_base';
+      console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
+      location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
+    }else{
+      this.wxCode = getQueryVariable('code');
+      sessionStorage.setItem('code',getQueryVariable('code'))
+    }
+    let sessionCode = sessionStorage.getItem('code');
+    //后退到了没有code的链接
+    if(sessionCode && !getQueryVariable('code')){
+      this.wxCode = sessionCode;
+    }
+    console.log('---------')
+    console.log(getQueryVariable('code'))
+    console.log(sessionStorage.getItem('code'))
+    console.log('---------')
+    // this.getSignInfo().then(param => {
+    //   this.shareReady(param);
+    // });
   },
+  
   components: {
     Loading
   },
   mounted() {
     this.getWx();
-    //this.readyAll();
   },
   methods: {
     getWx() {
       //app里没有填写手机号，从url上面拿
       //非app从上一步用户填写的自己手机号 里面拿
-      let phone;
-      if(openInApp){
-        phone = getQueryVariable('user_phone')
-      }else{
-        phone = localStorage.getItem("regPhone")
-      }
       this.axios
         //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
         .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall:getQueryVariable("c"),
-          phone: phone,
-          share_id: getQueryVariable("share_id")
+          share_stall:0,
+          code: this.wxCode,
+          share_id: 8
         })
         .then(res => {
           this.wxMaterial = res.url;
@@ -92,7 +107,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster${this.posterId}.png`)
+        let url = require(`../../../assets/img/yiqiac/poster1.png`)
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
