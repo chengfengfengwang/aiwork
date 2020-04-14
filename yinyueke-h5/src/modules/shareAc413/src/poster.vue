@@ -35,7 +35,7 @@ export default {
   created() {
     console.log(!getQueryVariable('code') && testWeixin())
     if(!getQueryVariable('code') && testWeixin()){
-      let originUrl = `${location.origin}${location.pathname}#/poster`
+      let originUrl = `${location.origin}${location.pathname}${location.hash}`
       let encodedUrl = encodeURIComponent(originUrl);
       let scope = 'snsapi_base';
       console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)

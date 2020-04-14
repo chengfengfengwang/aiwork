@@ -42,7 +42,7 @@
 </template>
 <script>
 import { testWeixin, getQueryVariable } from "../../../common/util.js";
-import { Area, Popup } from "vant";
+import { Area, Popup, Toast } from "vant";
 
 import AreaJson from "../../../common/area.js";
 export default {
@@ -53,7 +53,7 @@ export default {
       selectedCourse: "",
       form: {
         phone: "",
-        code: "",
+        code: ""
       },
       courseList: [],
       areaList: AreaJson,
@@ -67,7 +67,7 @@ export default {
   },
   created() {
     if (!getQueryVariable("code") && testWeixin()) {
-      let originUrl = `${location.origin}${location.pathname}#/poster`;
+      let originUrl = `${location.origin}${location.pathname}${location.hash}`;
       let encodedUrl = encodeURIComponent(originUrl);
       let scope = "snsapi_base";
       console.log(
@@ -113,22 +113,17 @@ export default {
       console.log(this.form);
       //return
       this.axios
-        .post(`58.87.125.111:55555/v1/share/upload_address/`, this.form)
+        .post(`http://58.87.125.111:55555/v1/share/upload_address/`, this.form)
         .then(res => {
           if (!res.error) {
-            let data = res.data;
-            if (data instanceof Array && data.length == 0) {
-              this.$router.push("/download");
-            } else if (data instanceof Array && data.length != 0) {
-              localStorage.setItem("multiCourse", JSON.stringify(data));
-              this.$router.push("/selectCourse");
-            } else if (data instanceof Object) {
-              location.href = data.url;
-            }
+            Toast.success({
+              duration: 1000,
+              message: "提交成功"
+            });
           }
         });
     },
-  
+
     addressConfirm(arr) {
       this.selectAddressShow = false;
       //console.log(arr);
