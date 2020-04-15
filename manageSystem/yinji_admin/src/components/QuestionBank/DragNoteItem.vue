@@ -35,6 +35,13 @@
         <Radio label="false">不上线</Radio>
       </RadioGroup>
     </div>
+    <div class="question_item">
+      <span class="select_label">答案解析：</span>
+      <div class="select_content">
+        <div>{{answerDetail}}</div>
+        <!-- <BasicDisplay :content="question.answer_detail"></BasicDisplay> -->
+      </div>
+    </div>
     <!-- <div>
       <span class="select_label">知识分类：</span>
       <span class="select_content">{{getTagName(this.tagListAll,question.tag)}}</span>
@@ -42,7 +49,7 @@
     <div>
       <span class="select_label">位置：</span>
       <span class="select_content">{{question.source | Qposition}}</span>
-    </div> -->
+    </div>-->
     <div>
       <Button @click="editShow = !editShow">编辑</Button>
     </div>
@@ -58,11 +65,11 @@
       <div style="margin-bottom:10px">
         <span>倒计时：</span>
         <Input v-model="question.data.count_down" placeholder="输入倒计时" style="width: 300px"/>
-      </div> 
+      </div>
       <!-- <div style="margin-bottom:10px">
         <span>节拍：</span>
         <Input v-model="question.data.beat" placeholder="输入节拍，如3/4" style="width: 300px"/>
-      </div> -->
+      </div>-->
       <div>
         <Upload
           style="display:inline-block;vertical-align: top;"
@@ -120,7 +127,34 @@
         <OptionGroup label="视唱">
           <Option v-for="item in tagList[3]" :value="item.value" :key="item.value">{{ item.name }}</Option>
         </OptionGroup>
-      </Select> -->
+      </Select>-->
+      <div style="margin:10px 0">
+        <div class="label" style="font-size:16px;font-weight:bold">答案解析：</div>
+        <div>
+          <span>视频：</span>
+          <AnswerDetailUpload v-on:uploadSuccess="handleUploaded" ref="videoUpload" :type="2"></AnswerDetailUpload>
+        </div>
+        <div>
+          <span>音频：</span>
+          <AnswerDetailUpload v-on:uploadSuccess="handleUploaded" ref="audioUpload" :type="1"></AnswerDetailUpload>
+        </div>
+        <div>
+          <span>图：</span>
+          <AnswerDetailUpload v-on:uploadSuccess="handleUploaded" ref="imgUpload" :type="0"></AnswerDetailUpload>
+        </div>
+        <div>
+          <span>文：</span>
+          <Input v-model="answerDetail.text" ref="textAnswerDetail" style="width: 300px"/>
+        </div>
+        <div>
+          <span>考点：</span>
+          <Input v-model="answerDetail.point" ref="pointAnswerDetail" style="width: 300px"/>
+        </div>
+        <div>
+          <span>难易度：</span>
+          <Input v-model="answerDetail.difficult" ref="difficultAnswerDetail" style="width: 300px"/>
+        </div>
+      </div>
       <Button @click="handleSubmit">确定</Button>
       <Button @click="remove">删除</Button>
     </div>
@@ -129,6 +163,7 @@
 <script>
 import BasicDisplay from "./../../components/QuestionBank/BasicDisplay";
 import { getTagName } from "./../../common/util.js";
+import AnswerDetailUpload from "./../../components/AnswerDetailUpload";
 const uniqWith = require("lodash.uniqwith");
 const isEqual = require("lodash.isequal");
 export default {
@@ -147,7 +182,15 @@ export default {
       initArr: [],
       boxArr: [],
       previewUrl: "",
-      fileUrl: "" // https://tkimg.yinji100.com/file/FB/2f06dce082d16488865ba885abf91798.png!iyinji
+      fileUrl: "", // https://tkimg.yinji100.com/file/FB/2f06dce082d16488865ba885abf91798.png!iyinji
+      answerDetail: {
+        text: "",
+        point: "",
+        difficult: "",
+        video: "",
+        audio: "",
+        img: ""
+      }
     };
   },
   created() {},
@@ -155,35 +198,39 @@ export default {
     this.wrapper = this.$refs.mywrapper;
 
     this.dragging = false;
-    // this.initArr = [
-    //     {
-    //       height: "0.0951",
-    //       isCorrect: false,
-    //       width: "0.0312",
-    //       x: "0.1417",
-    //       y: "0.6295"
-    //     }
-    //   ];
     this.previewUrl = this.question.data.music_img;
     //插入坐标区域数据
     this.bindEvent();
+    if (typeof this.question.data.answer_detail !== "object") {
+        this.answerDetail = {
+          text: "",
+          point: "",
+          difficult: "",
+          video: "",
+          audio: "",
+          img: ""
+        };
+      } else {
+        this.answerDetail = this.question.data.answer_detail;
+      }
   },
   components: {
-    BasicDisplay
+    BasicDisplay,
+    AnswerDetailUpload
   },
   methods: {
     getTagName: getTagName,
     remove() {
-      if(process.env.NODE_ENV==='production'){
-        alert('联系管理员删除')
-        return
+      if (process.env.NODE_ENV === "production") {
+        alert("联系管理员删除");
+        return;
       }
       var id = this.question.question_id;
       this.axios
         .get(
-          `${
-            process.env.JINKANG
-          }/${process.env.VERSION}/question/delete_material/?question_id=${id}`
+          `${process.env.JINKANG}/${
+            process.env.VERSION
+          }/question/delete_material/?question_id=${id}`
         )
         .then(res => {
           this.$parent.getQuestionList();
@@ -220,10 +267,17 @@ export default {
       var data = {};
       data.music_img = resultParam.data.music_img;
       data.topic_request = resultParam.data.topic_request;
-      data.count_down = resultParam.data.count_down?resultParam.data.count_down:0;
-      data.beat = resultParam.data.beat?resultParam.data.beat:'';
+      data.count_down = resultParam.data.count_down
+        ? resultParam.data.count_down
+        : 0;
+      data.beat = resultParam.data.beat ? resultParam.data.beat : "";
       data.topic_voice = resultParam.data.topic_voice;
       data.target_area = this.boxArr;
+      //答案解析
+      this.answerDetail.difficult = Number(this.answerDetail.difficult);
+      this.answerDetail.video_cover =
+        "http://cdn.kids.immusician.com/app/resource/timg.jpeg";
+      data.answer_detail = this.answerDetail;
       resultParam.data = JSON.stringify(data);
       if (resultParam.online == "true") {
         resultParam.online = 1;
@@ -236,7 +290,9 @@ export default {
       //return;
       this.axios
         .post(
-          `${process.env.JINKANG}/${process.env.VERSION}/question/create_material/`,
+          `${process.env.JINKANG}/${
+            process.env.VERSION
+          }/question/create_material/`,
           resultParam
         )
         .then(res => {
@@ -262,6 +318,19 @@ export default {
       });
       obj.data = JSON.stringify(newObj);
       return obj;
+    },
+    handleUploaded(param) {
+      switch (param.type) {
+        case 0:
+          this.$set(this.answerDetail, "img", param.url);
+          break;
+        case 1:
+          this.$set(this.answerDetail, "audio", param.url);
+          break;
+        case 2:
+          this.$set(this.answerDetail, "video", param.url);
+          break;
+      }
     },
     handleUpload(file) {
       this.previewUrl = window.URL.createObjectURL(file);
