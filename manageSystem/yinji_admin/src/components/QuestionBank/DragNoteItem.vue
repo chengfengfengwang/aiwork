@@ -1,6 +1,7 @@
 <template>
   <div class="dragitem">
     <div>
+      <div>序号：{{question.index}}</div>
       <span class="preview_label">题目要求：</span>
       <BasicDisplay style="display:inline-block" :content="question.data.topic_request"></BasicDisplay>
     </div>
