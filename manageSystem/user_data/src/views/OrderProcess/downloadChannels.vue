@@ -17,7 +17,7 @@
       </Select>
       <span>sku：</span>
       <Select v-model="skuName" style="width: 160px" filterable>
-        <Option v-for="item in skuList" :value="item.name" :key="item.name">{{ item.name }}</Option>
+        <Option v-for="item in skuList" :value="item.name" :key="item.name">{{ item.show_name }}</Option>
       </Select>
       <span>开始时间</span>
       <DatePicker v-model="startTime" type="date" placeholder="Select date" style="width: 200px"></DatePicker>
