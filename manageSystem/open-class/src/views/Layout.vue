@@ -38,6 +38,9 @@
               <router-link to="/">
                 <MenuItem name="OpenClassYinji">音基课程开通</MenuItem> 
               </router-link>
+              <router-link to="/book415">
+                <MenuItem name="book415">赠书发货信息</MenuItem> 
+              </router-link>
               <!-- <router-link to="/OpenClassAi">
                 <MenuItem name="OpenClassAi">AI课程开通</MenuItem> 
               </router-link> -->

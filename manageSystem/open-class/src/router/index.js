@@ -12,6 +12,7 @@ import OpenClassAi from '../views/OpenClassAi.vue'
 import Group from '../views/Group.vue'
 import OpenVip from '../views/OpenVip'
 import searchVip from '../views/searchVip'
+import book415 from '../views/book415.vue'
 
 Vue.use(Router)
 
@@ -54,7 +55,12 @@ const router = new Router({
           component: Group,
           meta: { parentMenu: 'User' }   
         },
-        
+        //导流送书活动415
+        {
+          name: 'book415',
+          path: '/book415',
+          component: book415
+        },
       ]
     },
     {
