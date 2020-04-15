@@ -34,6 +34,10 @@
       <BasicDisplay style="display:inline-block" :content="question.data.end_beat_index"></BasicDisplay>
     </div>
     <div>
+      <span class="preview_label">6/8拍：</span>
+      <BasicDisplay style="display:inline-block" :content="question.data.mult"></BasicDisplay>
+    </div>
+    <div>
       <span class="preview_label">模式：</span>
       <BasicDisplay style="display:inline-block" :content="question.data.play_mode"></BasicDisplay>
     </div>
@@ -98,6 +102,10 @@
       <div style="margin-bottom:10px">
         <span>结束节拍：</span>
         <Input v-model="question.data.end_beat_index" placeholder="输入结束节拍" style="width: 300px"/>
+      </div>
+      <div style="margin-bottom:10px">
+        <span>6/8拍：</span>
+        <Input v-model.number="question.data.mult" placeholder="输入数值" style="width: 300px"/>
       </div>
       <div style="margin-bottom:10px">
         <span>模式：</span>
@@ -335,6 +343,7 @@ export default {
       data.pass_rate = resultParam.data.pass_rate;
       data.start_beat_index = resultParam.data.start_beat_index;
       data.end_beat_index = resultParam.data.end_beat_index;
+      data.mult = resultParam.data.mult;
       data.play_mode = resultParam.data.play_mode;
       data.topic_voice = resultParam.data.topic_voice;
       data.music_file = resultParam.data.music_file;
