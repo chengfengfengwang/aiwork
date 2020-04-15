@@ -2,7 +2,13 @@
   <div>
     <div class="table_top_tool">
       <span>渠道：</span>
-      <Select @on-change="channelChange" style="width: 160px" v-model="channelId" filterable placeholder>
+      <Select
+        @on-change="channelChange"
+        style="width: 160px"
+        v-model="channelId"
+        filterable
+        placeholder
+      >
         <Option
           v-for="channel in channelList"
           :key="channel.id"
@@ -11,8 +17,8 @@
       </Select>
       <span>sku：</span>
       <Select v-model="skuName" style="width: 160px" filterable>
-                <Option v-for="item in skuList" :value="item.name" :key="item.name">{{ item.name }}</Option>
-            </Select>
+        <Option v-for="item in skuList" :value="item.name" :key="item.name">{{ item.name }}</Option>
+      </Select>
       <span>开始时间</span>
       <DatePicker v-model="startTime" type="date" placeholder="Select date" style="width: 200px"></DatePicker>
       <span>结束时间</span>
@@ -48,7 +54,7 @@ export default {
       pageSize: 10,
       columns: [
         {
-          title: "渠道",
+          title: "渠道名称",
           key: "channel_name"
         },
         {
@@ -56,12 +62,20 @@ export default {
           key: "company_name"
         },
         {
-          title: "合同类型",
+          title: "返佣类型",
           key: "pay_way"
         },
         {
-          title: "商品规格",
+          title: "商品名称",
           key: "goods_name"
+        },
+        {
+          title: "数量",
+          key: "all_count"
+        },
+        {
+          title: "数量(去重)",
+          key: "set_count"
         },
         {
           title: "团购价格",
@@ -78,56 +92,16 @@ export default {
           }
         },
         {
-          title: "采购数量",
-          key: "all_count"
-        },
-        {
-          title: "交货数量",
-          key: "done_coune"
-        },
-        {
-          title: "未交货数量",
-          key: "not_count"
-        },
-        {
-          title: "营收款",
-          key: "income_money",
-          render: (h, params) => {
-            return h("div", params.row.income_money / 100);
-          }
-        },
-        {
-          title: "供货结算",
-          key: "supply_money",
-          render: (h, params) => {
-            return h("div", params.row.supply_money / 100);
-          }
-        },
-        {
           title: "返佣比例",
           key: "bro_percent"
-        },
-        {
-          title: "佣金",
-          key: "commission",
-          render: (h, params) => {
-            return h("div", params.row.commission / 100);
-          }
-        },
-        {
-          title: "实际收入",
-          key: "reality_money",
-          render: (h, params) => {
-            return h("div", params.row.reality_money / 100);
-          }
         }
       ],
 
       channelList: [],
       dataList: [],
-      skuList:[],
+      skuList: [],
       channelId: "",
-      skuName:''
+      skuName: ""
     };
   },
   created() {
@@ -137,9 +111,9 @@ export default {
     //this.getTableList();
   },
   methods: {
-    channelChange(){
-      this.skuName='';
-      this.getSkuList()
+    channelChange() {
+      this.skuName = "";
+      this.getSkuList();
     },
     getSkuList(channel_id = this.channelId) {
       if (!channel_id) {
@@ -148,10 +122,16 @@ export default {
 
       this.axios
         .get(
-          `${process.env.WULIU}/fgoods/index?page=0&size=9999&status=1&channel_id=${channel_id}`
+          `${
+            process.env.WULIU
+          }/fgoods/index?page=0&size=9999&status=1&channel_id=${channel_id}`
         )
         .then(res => {
           this.skuList = res.data.list;
+          this.skuList.unshift({
+            name:'全部',
+            id:-1
+          })
         });
     },
     pageChange(page) {
@@ -171,29 +151,29 @@ export default {
           this.channelList = res.data.list;
         });
     },
-    downloadTableList(){
-      this.getTableList(1)
+    downloadTableList() {
+      this.getTableList(1);
     },
     getTableList(need_down) {
-      if(!need_down){
-        need_down=0
+      if (!need_down) {
+        need_down = 0;
       }
       const formObj = {
-        name:this.skuName,
-        channel_id:this.channelId,
-        need_down:need_down,
+        name: this.skuName=='全部'?'':this.skuName,
+        channel_id: this.channelId,
+        need_down: need_down,
         start_time: this.startTime.valueOf() / 1000,
         end_time: this.endTime.valueOf() / 1000
       };
-      console.log(formObj)
+      console.log(formObj);
       //return
       this.axios
         .post(`${process.env.WULIU}/order/statistics/channel_form`, formObj)
         .then(res => {
           this.tableLoading = false;
           this.dataList = res.data.data_list;
-          if(res.data.down_url){
-            window.open(res.data.down_url,'_blank');
+          if (res.data.down_url) {
+            window.open(res.data.down_url, "_blank");
           }
         });
     }
