@@ -1,0 +1,2660 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>购买页面</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="referrer" content="no-referrer" />
+
+  <link href="http://s.immusician.com/static/iTunesArtwork.png" rel="shortcut icon" type="image/x-icon">
+
+  <style>
+
+    .loading {
+      display: none;
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      z-index:100000;
+      background-color: black;
+      opacity: 0.5;
+      -moz-opacity: 0.5;
+      filter: alpha(opacity=50);
+    }
+
+    .loading-image {
+      position: absolute;
+      display: none;
+      width: 0.64rem;
+      height: 0.64rem;
+      z-index:100000;
+      top: 50%;
+      left: 50%;
+      margin-left: -0.32rem;
+      margin-top: -0.32rem;
+    }
+
+    #first-page {
+      background: linear-gradient(to right,#461b49,#2f1a40);
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+      padding-bottom: 0.9rem;
+    }
+
+    #alert-code-edit-title {
+      position: absolute;
+      width: 2.8rem;
+      height: 0.3rem;
+      font-size: 0.3rem;
+      font-family: "PingFang SC";
+      text-align: center;
+      top: 0.74rem;
+      left: 50%;
+      margin-left: -1.4rem;
+      color: white;
+    }
+
+    #alert-code-edit-subtitle {
+      position: absolute;
+      width: 4rem;
+      height: 0.22rem;
+      top: 1.24rem;
+      left: 50%;
+      margin-left: -2rem;
+      font-size: 0.22rem;
+      font-family: "PingFang SC";
+      text-align: center;
+      color: white;
+    }
+
+    #alert-code-edit-input {
+      position: absolute;
+      -web-kit-appearance:none;
+      -moz-appearance: none;
+      width: 4.59rem;
+      height: 0.7rem;
+      top: 1.74rem;
+      left: 50%;
+      margin-left: -2.225rem;
+      font-size: 0.22rem;
+      text-align: center;
+      background-image: url("http://s.immusician.com/static/payment_material/inputBg.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+      outline:none;
+      border-radius: 3px;
+      border:0px;
+    }
+
+    #alert-code-edit-submit {
+      position: absolute;
+      background-image: url("http://s.immusician.com/static/payment_material/sure.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+      width: 1.87rem;
+      height: 0.81rem;
+      top: 2.84rem;
+      left: 50%;
+      margin-left: -0.935rem;
+      border-radius: 0.405rem;
+    }
+
+    #alert-code-edit-link {
+      position: absolute;
+      width: auto;
+      height: 0.22rem;
+      line-height: 0.22rem;
+      font-size: 0.22rem;
+      top: 3.24rem;
+      right: 50%;
+      margin-right: -2.6rem;
+      color: #c2c2c2;
+      text-decoration: none;
+      border-bottom: 1px solid #c2c2c2;
+    }
+
+    #alert-code-edit-close {
+      position: absolute;
+      width: 0.3rem;
+      height: 0.3rem;
+      font-size: 0.25rem;
+      line-height: 0.3rem;
+      text-align: center;
+      color: white;
+      font-family: "PingFang SC";
+      top: 0.77rem;
+      right: 1.03rem;
+    }
+
+    .alert {
+      font-size: 0.24rem;
+      position: fixed;
+      top: 8%;
+      left: 50%;
+      min-width: 3rem;
+      max-width: 6rem;
+      transform: translate(-50%,-50%);
+      z-index: 9999;
+      text-align: center;
+      padding: 0.15rem;
+      border-radius: 0.03rem;
+    }
+
+    .alert-success {
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+    }
+
+    .alert-info {
+      color: #31708f;
+      background-color: #d9edf7;
+      border-color: #bce8f1;
+    }
+
+    .alert-warning {
+      color: #8a6d3b;
+      background-color: #fcf8e3;
+      border-color: #faebcc;
+    }
+
+    .alert-danger {
+      color: #a94442;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+    }
+
+    * {margin:0;padding:0;-webkit-user-select:text}
+    a,img {-webkit-touch-callout:none}
+    ol,ul {list-style:none}
+    body {background: #180d22;}
+
+    #top {
+      position: fixed;
+      width: 100%;
+      height: 0.6rem;
+      padding: 0.175rem 0rem;
+      text-align: center;
+      background: linear-gradient(to right,#58205F,#431B63);
+      z-index: 2;
+    }
+
+    #top-left-button {
+      position: absolute;
+      display: none;
+      left: 0.1rem;
+      top: 0.1rem;
+      height: 0.6rem;
+      width: 0.4rem;
+      color: #fff;
+      text-align: center;
+      font-size: 0.49rem;
+      margin-left: 0.1rem;
+    }
+
+    #top-label-add {
+      position: absolute;
+      height: 0.95rem;
+      line-height: 0.95rem;
+      text-align: center;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    #top-middle-button,#top-middle-button2 {
+      /*position: absolute;*/
+      position: relative;
+      /*display: inline-block;*/
+      /*float: left;*/
+      height: 0.6rem;
+      line-height: 0.6rem;
+      width: auto;
+      color: #fff;
+      /*margin: auto;*/
+      font-size: 0.34rem;
+      bottom: 0.175rem;
+      /*left: 0;*/
+      /*right: 0;*/
+      /*top: 0;*/
+      /*bottom: 0;*/
+    }
+
+    #top-middle-button {
+      padding-left: 0.4rem;
+    }
+
+    #top-right-button {
+      position: relative;
+      /*float: left;*/
+      /*display: inline-block;*/
+      text-decoration: none;
+      border-bottom: 1px solid #A6C1FF;
+      /*right: 0;*/
+      height: 0.5rem;
+      line-height: 0.4rem;
+      bottom: 0.2rem;
+      margin-left: 0.04rem;
+      width: auto;
+      color: #A6C1FF;
+      font-size: 0.28rem;
+    }
+
+    /*content*/
+    /*#content {*/
+    /*padding: 30px;*/
+    /*}*/
+
+    /*courses*/
+    #courses {
+      /* position: relative; */
+      height: 3.3rem;
+      padding: 1.4rem 4.13rem 0 4.635rem;
+      /* margin: 0rem 0.2rem 0 0.2rem; */
+      display: flex;
+      display: -webkit-flex;
+      overflow-x: auto;
+      border: 1px solid transparent;
+    }
+
+    #courses .course_label {
+      position: relative;
+      text-align: center;
+      /*width: 3.1rem;*/
+      /* width: 2.1rem; */
+      width: 2.52rem;
+      /* height: 3.61em; */
+      height: 3.01rem;
+      margin-left: 0.5rem;
+      margin-right: 0.25rem;
+      /* margin-top: 0.4rem; */
+      border-radius: 0.25rem;
+      background: #fff;
+      flex-shrink: 0
+    }
+
+    #courses_4 {
+      margin-right: .4rem;
+    }
+
+    #courses .course_image {
+      width: 100%;
+      /* height: 3.0rem; */
+      height: 2.4rem;
+      border-radius: 0.25rem 0.25rem 0 0;
+      /*margin: 0.15rem;*/
+    }
+
+    #courses .course_title {
+      position: absolute;
+      width: auto;
+      height: 0.6rem;
+      line-height: 0.6rem;
+      font-size: 0.18rem;
+      text-indent: 0.2rem;
+      color: #333;
+      /*margin-top: 0.1rem;*/
+      /*bottom: 0.2rem;*/
+      bottom: 0
+    }
+
+    #courses .course_teacher_name {
+      position: absolute;
+      width: auto;
+      height: 0.3rem;
+      line-height: 0.3rem;
+      font-size: 0.18rem;
+      text-indent: 0.2rem;
+      color: #333;
+      /*margin-top: 0.1rem;*/
+      bottom: 0.5rem;
+    }
+
+    #courses .course_price {
+      position: absolute;
+      width: auto;
+      height: 0.6rem;
+      line-height: 0.6rem;
+      font-size: 0.18rem;
+      color: #E3517E;
+      right: 0.2rem;
+      /*bottom:0.2rem;*/
+    }
+
+    #pageTwo{
+      display: none;
+      padding-top: 0.95rem;
+    }
+
+    #courses-label{
+      /* position: relative; */
+      width: 100%;
+      height: 0.35rem;
+      line-height: 0.3rem;
+      /* font-family: "PingFang SC"; */
+      font-size: 0.25rem;
+      color: #fff;
+      /* background-color: red; */
+      text-align: center;
+      /* border-top: 1px solid #7c5e80; */
+    }
+
+    #outspread-label {
+      position: fixed;
+      bottom: 0.9rem;
+    }
+
+    #courses-label{
+      padding-top: 0.1rem;
+      /* position: fixed; */
+      /* z-index: 1; */
+      width: 100%;
+      background: linear-gradient(to right,#461b49,#2f1a40);
+    }
+
+    .courses-label-inner{
+      display: inline-block;
+      border-bottom: 0.35rem solid rgba(255, 255, 255, 0.1);
+      border-left: 0.35rem solid transparent;
+      border-right: 0.35rem solid transparent;
+    }
+
+    /* .outspread-label-inner{
+      display: inline-block;
+      padding: 0.1rem 0.2rem;
+      background-color: grey;
+      opacity: 0.5;
+      border-radius: 2px;
+    }
+
+    .outspread-label-inner img,.courses-label-inner img{
+      width: 0.364rem;
+      height: 0.23rem;
+      padding: 0 0.2rem;
+    }
+
+    .courses-label-inner img {
+      transform: rotate(180deg);
+    }
+
+    .outspread-label-inner span,.courses-label-inner span{
+      width: 0.364rem;
+      height: 0.23rem;
+    }
+
+    .courses-label-inner span{
+      padding: 0 10px;
+    } */
+
+    /*outspread*/
+    #outspread {
+      position: relative;
+    }
+
+    #outspread-1 {
+      /*position: relative;*/
+      /*margin: 0.1rem 0.3rem 0.1rem 0.3rem;*/
+      /*height:1.56rem;*/
+      /*display: flex;*/
+      /*justify-content: space-around;*/
+      background: rgba(255,255,255,.1);
+      border-radius: 0.2rem;
+      margin: 0rem 0.68rem 0.4rem 0.68rem;
+      padding-top:.4rem;
+      padding-bottom:.4rem;
+      padding-left:.8rem;
+      padding-right:.8rem;
+      display:-webkit-box;
+      display:-webkit-flex;
+      display:-moz-box;
+      display:-ms-flexbox;
+      display:flex;
+      -webkit-box-pack:justify;
+      -webkit-justify-content:space-between;
+      -moz-box-pack:justify;
+      -ms-flex-pack:justify;
+      justify-content:space-between;
+    }
+
+    #outspread-1 .outspread-1 {
+      /*position: relative;*/
+      /*width: 4.1rem;*/
+      /*height: 1.56rem;*/
+
+
+      width:2.44rem;
+      height:2.44rem;
+      color:#fff;
+      text-align:center;
+      display:-webkit-box;
+      display:-webkit-flex;
+      display:-moz-box;
+      display:-ms-flexbox;
+      display:flex;
+      -webkit-box-orient:vertical;
+      -webkit-box-direction:normal;
+      -webkit-flex-direction:column;
+      -moz-box-orient:vertical;
+      -moz-box-direction:normal;
+      -ms-flex-direction:column;
+      flex-direction:column;
+      -webkit-box-pack:center;
+      -webkit-justify-content:center;
+      -moz-box-pack:center;
+      -ms-flex-pack:center;
+      justify-content:center
+    }
+
+    #outspread-1 #outspread-1-1 {
+      background-image: url("http://s.immusician.com/static/payment_material/buypn@2x.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+    #outspread-1 #outspread-1-2 {
+      background-image: url("http://s.immusician.com/static/payment_material/buyp@2x.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+    #outspread-1 #outspread-1-3 {
+      background-image: url("http://s.immusician.com/static/payment_material/buy@2x.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+
+    /*outspread-2*/
+    #outspread-2 {
+      position: relative;
+      padding-top: 0.1rem;
+      height: 4.15rem;
+      background: rgba(255,255,255,.1);
+      border-radius: 0.2rem;
+      color: #fff;
+      margin: 0 0.68rem 0.4rem 0.68rem;
+    }
+
+    #outspread-2-title span {
+      display: inline-block;
+      text-indent: 0.6rem;
+      background: url("http://s.immusician.com/static/payment_material/title_icon.png") 0.1rem 0.08rem no-repeat;
+      background-size:auto 80%;
+      -moz-background-size:auto 80%;
+    }
+
+    #outspread-2-title {
+      text-align: center;
+      /* font-family: "PingFang SC" ; */
+      height: 0.5rem;
+      line-height: 0.5rem;
+      font-size: 0.36rem;
+      color: #fff;
+      margin: 0.4rem 0 0.3rem 0;
+    }
+
+    #outspread-2-ul {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    #outspread-2-ul ul {
+      position: relative;
+      display: inline-block;
+      width: 5rem;
+      height: 2.5rem;
+      margin-left: 0.4rem;
+    }
+
+    #outspread-2-ul li {
+      font-size: 0.28rem;
+      height: 0.62rem;
+      line-height: 0.62rem;
+      font-family: "PingFang SC";
+      text-indent: 0.68rem;
+      /*background: url("http://s.immusician.com/static/payment_material/tick.png") 0.02rem 0.12rem no-repeat;*/
+      background: url("http://s.immusician.com/static/payment_material/wc@2x.png") 0.03rem 0.08rem no-repeat;
+      background-size: auto 80%;
+      -moz-background-size:auto 80%;
+
+      color: #fff;
+    }
+
+    #outspread-3 {
+      position: relative;
+      margin: 0.3rem 0 0.3rem 0;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      font-family: "PingFang SC";
+      font-size: 0.3rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    #outspread-3 b {
+      display: inline-block;
+      width: 2rem;
+      text-indent: 0.4rem;
+      background: url("http://s.immusician.com/static/payment_material/curriculum.png") 0.1rem 0.06rem no-repeat;
+      background-size:auto 80%;
+      -moz-background-size:auto 80%;
+    }
+
+    #outspread-4 {
+      position: relative;
+      height: auto;
+      margin: 0 0.68rem 0 0.68rem;
+      border-radius: 0.2rem;
+      overflow: hidden;
+      /*height: 18.25rem;*/
+      background-size: 100% auto;
+      /*background: url("http://s.immusician.com/static/payment_material/tmp.png") no-repeat center center fixed;*/
+    }
+
+
+    #outspread-4 img {
+      height: 100%;
+      width: 100%;
+      border-radius: 0.2rem;
+    }
+
+    #outspread-5 {
+      position: relative;
+      margin: 0.4rem 0 1rem 0;
+      height: 0.2rem;
+      line-height: 0.2rem;
+      font-family: "PingFang SC";
+      font-size: 0.18rem;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+
+    #outspread-5 b {
+      width: 0.01rem;
+      height: 0.2rem;
+      background: #999999;
+      margin: 0 0.32rem 0 0.32rem;
+    }
+
+    #outspread-5 a {
+      text-decoration: none;
+      color: #A6C1FF;
+    }
+
+    #outspread-6 {
+      display: none;
+      background: rgba(255,255,255,.1);
+      border-radius: 0.2rem;
+      margin: 0rem 0.68rem 0.4rem 0.68rem;
+      padding-top:.4rem;
+      padding-bottom:.4rem;
+      padding-left:.8rem;
+      padding-right:.8rem;
+    }
+
+    #renew-btn{
+      /* border: 1px solid black; */
+      padding: 0.4rem;
+    }
+
+    #renew-btn::after{
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    #renew-btn-left{
+      width: 4.5rem;
+      height: 2.16rem;
+      float: left;
+      background-image: url("http://s.immusician.com/static/payment_material/1m_act@3x.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: relative;
+      border-radius: 0.1rem;
+    }
+
+    #renew-btn-right{
+      width: 4.5rem;
+      height: 1.76rem;
+      float: right;
+      background-image: url("http://s.immusician.com/static/payment_material/1y_nm@3x.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: relative;
+      border-radius: 0.1rem;
+    }
+
+    .renew-price{
+      font-size: 0.42rem;
+      display: inline-block;
+      margin-top: 1.04rem;
+      margin-left: 1.94rem;
+      color: white;
+    }
+    
+    #attention{
+      font-size: 0.25rem;
+      color: white;
+    }
+
+    .bottom {
+      position: fixed;
+      height: 0.9rem;
+      width: 100%;
+      bottom: 0;
+      /*background-color: #986ba3;*/
+      background-color: #8651BE;
+    }
+
+    .bottom div {
+      position: relative;
+      height: 0.9rem;
+      line-height: 0.9rem;
+    }
+
+    .bottom .bottom-price-label {
+      float: left;
+      margin-left: 0.6rem;
+      font-size: 0.33rem;
+      color: #ffffff;
+    }
+
+    .bottom .bottom-price {
+      margin-left: 0.2rem;
+      float: left;
+      font-size: 0.6rem;
+      /*color: orange;*/
+      color: #FFD300;
+    }
+
+    .bottom .bottom-old-price {
+      margin-left: 0.2rem;
+      float: left;
+      font-size: 0.31rem;
+      color: #eee;
+      text-align: center;
+      text-decoration:line-through;
+    }
+
+    .bottom #coupon-countdown {
+      font-size: 0.2rem;
+      color: white;
+      float: right;
+      width: 3.8rem;
+      margin-right: 0.2rem;
+    }
+
+    .bottom #coupon-countdown span{
+      /* font-size: 0.2rem;
+      color: white; */
+      float: left;
+      /* width: 3.8rem;
+      margin-right: 0.2rem; */
+    }
+
+    .bottom .bottom-purchase {
+      height: 0.9rem;
+      width: 3.5rem;
+      text-align: center;
+      float: right;
+      right: 0;
+      background: linear-gradient(-90deg,#3EC36F 23%,#2DBC72 100%);
+      font-size: 0.4rem;
+      color: #ffffff;
+    }
+
+    /* 结算窗口样式 */
+    #alert-payment {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #F7F7F5;
+      z-index: 1002;
+    }
+
+    #alert-top {
+      position: relative;
+      height: 1.05rem;
+      border-bottom: 1px solid #d9d9d9;
+      text-align: center;
+      background: white;
+      font-size: 0.34rem;
+    }
+
+    #alert-top-left-button {
+      position: absolute;
+      height: 1.05rem;
+      line-height: 1.05rem;
+      width: 0.25rem;
+      color: #333;
+      left: 0.1rem;
+      font-size: 0.49rem;
+      margin-left: 0.3rem;
+    }
+
+    #alert-top-left-button img{
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+    }
+
+    #alert-top-middle-button {
+      display: inline-block;
+      height: 1.05rem;
+      line-height: 1.05rem;
+      font-size: 0.44rem;
+      font-weight: bold;
+    }
+
+    #countdown{
+      color: #666666;
+      font-size: 0.31rem;
+      display: inline-block;
+      height: 1.05rem;
+      line-height: 1.05rem;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      padding-left: 1.1rem;
+    }
+
+    #alert-top-right-button {
+      position: absolute;
+      text-decoration: none;
+      right: 0.3rem;
+      height: 0.6rem;
+      border-radius: 0.3rem;
+      font-size: 0.18rem;
+      color: white;
+      width: 1.8rem;
+      text-align: center;
+      line-height: 0.6rem;
+      background-image: url("http://s.immusician.com/static/payment_material/qin-link.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+
+    #alert-payment .alert-label {
+      position: relative;
+      height: 1.05rem;
+      line-height: 1.05rem;
+      margin-bottom: 0.1rem;
+      color: #333;
+      font-family: "PingFang SC";
+      font-size: 0.32rem;
+      background: white;
+    }
+
+    #alert-payment #alert-coupon{
+      margin-bottom: 0;
+      border-bottom: 1px solid #F7F7F5;
+    }
+
+    #alert-coupon #alert-coupon-label, #alert-title {
+      position: relative;
+      float: left;
+      text-indent: 0.6rem;
+    }
+
+    #alert-title {
+      font-size: 0.35rem;
+    }
+
+    #alert-money {
+      font-size: 0.40rem;
+    }
+
+    #alert-coupon #alert-coupon-state, #alert-money {
+      position: relative;
+      float: right;
+      margin: 0 0.3rem 0 0;
+      color: #999999;
+      height: 100%;
+    }
+
+    #alert-coupon-state #btn_list{
+      width: 0.25rem;
+      display: inline-block;
+      text-align: center;
+      padding-left: 0.2rem;
+    }
+
+    #btn_list img{
+      width: 100%;
+      vertical-align: middle;
+      /* transform: rotate(90deg); */
+      
+    }
+
+    #alert-money {
+      color: #000;
+    }
+
+    #alert-code #alert-code-label {
+      position: relative;
+      float: left;
+      text-indent: 0.6rem;
+    }
+
+    #alert-code #alert-code-wenhao img{
+      position: relative;
+      margin-top:0.38rem;
+      margin-left:0.2rem;
+      float: left;
+      width: 0.28rem;
+      height: 0.28rem;
+    }
+
+    #alert-code #alert-code-button {
+      position: relative;
+      float: right;
+      margin: 0.25rem 0.3rem 0 0;
+      width: 1.8rem;
+      height: 0.51rem;
+      text-align: center;
+      border: 0.02rem solid #999999;
+      border-radius: 0.26rem;
+      line-height: 0.51rem;
+    }
+
+    #alert-bottom {
+      background: white;
+      position: fixed;
+      height: 0.9rem;
+      width: 100%;
+      bottom: 0;
+      border-top: 1px solid #d9d9d9;
+    }
+
+    #alert-bottom::after{
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    #alert-bottom div {
+      position: relative;
+      height: 0.9rem;
+      line-height: 0.9rem;
+    }
+
+    #alert-bottom-price-label {
+      float: left;
+      margin-left: 0.6rem;
+      font-size: 0.33rem;
+      color: #333;
+    }
+
+    #alert-bottom-price {
+      /* margin-left: 0.2rem; */
+      float: left;
+      font-size: 0.6rem;
+      /* color: orange; */
+      color: #EC545E;
+    }
+
+    #alert-bottom-coupon-price{
+      margin-left: 0.2rem;
+      font-size: 0.3rem;
+      float: left;
+      /* text-decoration: line-through; */
+      color: #aaaaaa;
+    }
+
+    #alert-bottom-alipay {
+      height: 0.9rem;
+      width: 2rem;
+      text-align: center;
+      float: right;
+      right: 0rem;
+      background: dodgerblue;
+      font-size: 0.3rem;
+      color: #ffffff;
+    }
+
+    #alert-bottom-wechatpay {
+      height: 0.9rem;
+      width: 2rem;
+      text-align: center;
+      float: right;
+      right: 0;
+      margin-left: 2px;
+      /* background: lawngreen; */
+      background-color: #19B223;
+      font-size: 0.3rem;
+      color: #ffffff;
+    }
+
+    .alert-auto {
+      /* height: 5rem; */
+      height: calc(100vh - 1.95rem);
+      position: relative;
+      /*display: flex;*/
+      /*display: inline-block;*/
+      /*padding-bottom: 1rem;*/
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-top: 0.1rem;
+    }
+
+    #alert-description {
+      display: block;
+      position: relative;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    #alert-coupon {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+
+    #alert-code {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+
+    #alert-coupon-content {
+      display: none;
+    }
+
+    .alert-coupon-content {
+      position: relative;
+      height: 1.65rem;
+      margin: 0.2rem 0.3rem 0.2rem 0.3rem;
+    }
+
+    #alert-coupon-content-price {
+      position: absolute;
+      display: block;
+      left: 0;
+      color: #f23030;
+      font-family: "PingFang SC";
+      font-size: 0.6rem;
+      font-weight: bold;
+      width: 2rem;
+      height: 1.65rem;
+      text-align: center;
+      line-height: 1.65rem;
+      background: #ffffff;
+      border-bottom-left-radius: 0.12rem;
+      border-top-left-radius: 0.12rem;
+    }
+
+    #alert-coupon-content-line {
+      position: absolute;
+      left: 2rem;
+      width: 0.34rem;
+      height: 1.65rem;
+      background-image: url("http://s.immusician.com/static/payment_material/youhuiquan.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+
+    #alert-coupon-content-body {
+      position: relative;
+      margin-left: 2.33rem;
+      height: 1.65rem;
+      background: #ffffff;
+      border-bottom-right-radius: 0.12rem;
+      border-top-right-radius: 0.12rem;
+    }
+
+    #alert-coupon-content-title {
+      position: relative;
+      color: #333;
+      font-size: 0.32rem;
+      font-family: "PingFang SC";
+    }
+
+    #alert-coupon-content-describe, #alert-coupon-content-time {
+      position: relative;
+      color: #656565;
+      font-family: "PingFang SC";
+      font-size: 0.18rem;
+    }
+
+    #alert-coupon-content-remind {
+      color: #f23030;
+      font-size: 0.22rem;
+      font-family: "PingFang SC";
+      position: absolute;
+      width: auto;
+      margin-top: 0.33rem;
+      right: 0.3rem;
+    }
+
+    #alert-coupon-content-title {
+      position: absolute;
+      width: auto;
+      margin-top: 0.2rem;
+      margin-left: 0.3rem;
+    }
+
+    #alert-coupon-content-describe {
+      position: absolute;
+      width: auto;
+      margin-top: 0.79rem;
+      margin-left: 0.3rem;
+    }
+
+    #alert-coupon-content-time {
+      position: absolute;
+      width: auto;
+      margin-top: 1.1rem;
+      margin-left: 0.3rem;
+    }
+
+    .alert-coupon-content-choice {
+      position: absolute;
+      width: 0.5rem;
+      bottom: 0.25rem;
+      right: 0.6rem;
+      height: 0.5rem;
+      border-radius: 0.5rem;
+      background-image: url("http://s.immusician.com/static/payment_material/not-select.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+    }
+
+    /* #alert-coupon-content-choice-0 {
+      background-image: url("http://s.immusician.com/static/payment_material/select.png");
+    } */
+
+    .course_pri {
+      position: absolute;
+      width: 1.1rem;
+      height: 1.1rem;
+      text-align: center;
+      border-radius: 0.55rem;
+      font-size: 0.24rem;
+      color: white;
+      background: hotpink;
+      bottom: 0.15rem;
+      right: 0.28rem;
+    }
+
+    .outspread-1-1-sum {
+      font-size:.48rem;line-height:.5rem;margin-bottom:.1rem;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500
+    }
+
+    .outspread-1 span {
+      font-size:.24rem;
+      line-height:.3rem;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-weight:300
+    }
+
+
+
+    /* ===================================弹框css部分 start by:songfayuan========================================= */
+    .black_overlay{
+      display: none;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index:1001;
+      -moz-opacity: 0.8;
+      opacity:.50;
+      filter: alpha(opacity=50);
+    }
+    .white_content {
+      display: none;
+      position: fixed;
+      top: 35%;
+      left: 36%;
+      width: 33%;
+      border: 0.02rem solid #d3d3d3;
+      background-color: white;
+      z-index: 1002;
+      /* overflow: auto; */
+    }
+    .code_black_overlay {
+      display: none;
+      position: fixed;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index:1003;
+      -moz-opacity: 0.8;
+      opacity:.50;
+      filter: alpha(opacity=50);
+    }
+    .code_white_content {
+      display: none;
+      position: fixed;
+      top: 50%;
+      margin-top: -2.44rem;
+      left: 50%;
+      margin-left: -3.9rem;
+      width: 6rem;
+      /*width: 5.3rem;*/
+      padding: 0.64rem 0.9rem 0.64rem 0.9rem;
+      /*height: 3.6rem;*/
+      height: 4.88rem;
+      /*border: 2px solid #d3d3d3;*/
+      border-radius: 0.1rem;
+      background-image: url("http://s.immusician.com/static/payment_material/inputPanelBg.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+      -webkit-background-size: 100% 100%;
+      z-index: 1004;
+    }
+    .white_content_small {
+      display: none;
+      position: absolute;
+      top: 20%;
+      left: 30%;
+      width: 40%;
+      height: 50%;
+      border: 0.16rem solid lightblue;
+      background-color: white;
+      z-index:1002;
+      overflow: auto;
+    }
+    /* ===================================弹框css部分 end by:songfayuan========================================= */
+
+    .course_tag {
+      position: absolute;
+      display: none;
+      top: 0;
+      right: 0;
+      width: 1.22rem;
+      height: 1.22rem;
+      background-image: url("http://s.immusician.com/static/payment_material/purchased.png");
+      background-size:100% 100%;
+      -moz-background-size:100% 100%;
+      -webkit-background-size: 100% 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="first-page">
+    <div id="top">
+      <div id="top-left-button">
+        &lt;
+      </div>
+      <div id="top-label-add">
+        <label id="top-middle-button">
+          购买尤克里里课程
+        </label>
+        <a id="top-right-button" href="http://s.immusician.com/static/web/buy_ukulele_new.html">
+          (还没有琴？进来看看)
+        </a>
+      </div>
+    </div>
+
+    <div id="courses"></div>
+
+    <!-- <div id="outspread-label">
+      <span class="outspread-label-inner">
+        <img src="http://s.immusician.com/static/payment_material/xiala.png">
+        <br>
+        <span>点击查看详情</span>
+      </span>
+    </div> -->
+
+    <div id="courses-label">
+      <span class="courses-label-inner">
+        <!-- <img src="http://s.immusician.com/static/payment_material/xiala.png">
+        <br>
+        <span>下拉查看详情</span> -->
+      </span>
+    </div>
+    <div id="outspread">
+      <div id="outspread-1">
+        <div id="outspread-1-1" class="outspread-1">
+          <div class="outspread-1-1-sum">
+            121593
+            <span class="outspread-1-1-2">人</span>
+          </div>
+          <span class="outspread-1-1-3">已购买课程</span>
+        </div>
+        <div id="outspread-1-2" class="outspread-1">
+          <div class="outspread-1-1-sum">
+            81593
+            <span class="outspread-1-1-2">人</span>
+          </div>
+          <span class="outspread-1-1-3">已从学院毕业</span>
+        </div>
+        <div id="outspread-1-3" class="outspread-1">
+          <div class="outspread-1-1-sum">
+            21
+            <span class="outspread-1-1-2">小时</span>
+          </div>
+          <span class="outspread-1-1-3">平均毕业时间</span>
+        </div>
+      </div>
+      <div id="outspread-2">
+        <div id="outspread-2-title">
+          <span>尊享服务</span>
+        </div>
+        <div id="outspread-2-ul">
+          <ul id="outspread-2-left"></ul>
+          <ul id="outspread-2-right"></ul>
+        </div>
+      </div>
+      <!-- <div id="outspread-3"><b>课程介绍</b></div> -->
+      <div id="outspread-4"><img src="http://s.immusician.com/static/payment_material/tmp.png"></div>
+
+      <div id="outspread-6">
+        <div id="renew-btn">
+          <div id="renew-btn-left">
+            <span id="renew-btn-left-price" class="renew-price">￥23</span>
+          </div>
+          <div id="renew-btn-right">
+            <span id="renew-btn-right-price" class="renew-price">￥235</span>
+          </div>
+        </div>
+        <div id="attention">
+          注意：
+          <br>
+          &#x3000;&#x3000;1.您购买续期的课程将从购买之日起往后延长30天/365天；
+          <br>
+          &#x3000;&#x3000;2.购买续期后，您的所有学习记录仍将保留；
+          <br>
+          &#x3000;&#x3000;3.您最晚可以在过期后的15日内续费，若超过15日，您将需要重新购买完整课程。
+        </div>
+      </div>
+
+      <div id="outspread-5">
+        <a id="outspread-5-a-1" href="http://s.immusician.com/static/web/refund.html">《退款协议》</a>
+        <b id="outspread-5-a-line"></b>
+        <a id="outspread-5-a-2" href="http://s.immusician.com/static/web/privacy.html">《隐私政策》</a>
+        <b id="outspread-5-a-line2"></b>
+        <a id="outspread-5-a-3" href="http://s.immusician.com/static/web/service.html">《服务协议》</a>
+      </div>
+    </div>
+
+    <div id="bottom" class="bottom">
+      <div id="bottom-price-label" class="bottom-price-label"></div>
+      <div id="bottom-price" class="bottom-price"></div>
+      <div id="bottom-old-price" class="bottom-old-price"></div>
+      <div id="bottom-purchase" class="bottom-purchase">购买</div>
+      <div id="coupon-countdown">
+          <span>特价倒计时：</span>
+          <span id="coupon-countdown-content">3天20小时30分钟</span>
+        </div>
+    </div>
+  </div>
+
+  <!--弹出层时背景层DIV---start-->
+  <div id="fade" class="black_overlay"></div>
+  <div id="code_fade" class="code_black_overlay"></div>
+  <div id="MyDiv" class="white_content">
+    <div style="text-align: right; cursor: default; margin-top:10px;margin-bottom:10px;">
+      <span style="font-size: 16px; margin-right: 17px; color: #56BE2D; font-weight: 600;cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">关闭</span>
+    </div>
+    <div class="itempanel" style="margin-left: 13%;">
+      <div class="floatleft title" style="text-align: left;">二级分类名称：</div>
+      <div class="floatleft editor" style="font-size:16px;height: 24px;line-height: 24px;"><input type="text" id="label"
+          name="label" placeholder="请输入二级分类名称" /></div>
+      <div class="floatleft message"></div>
+      <div class="clear"></div>
+    </div>
+    <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3); margin-top: 39px;" width="90%" color=#ddd SIZE=2>
+    <div style="margin-bottom: 23px; margin-top: 23px; margin-left: 23%;">
+      <input type="button" class="greenbutton2" style="width: 123px;margin-left: 30px;" onclick="javasrcipt:goToAdd()"
+        value="添加" style="width: 123px; margin-left: 20%; ">
+      <input type="button" class="greenbutton2" style="width: 123px;margin-left: 30px;" onclick="CloseDiv('MyDiv','fade')"
+        value="取消" style="width: 123px; margin-left: 20%; ">
+    </div>
+  </div>
+
+  <!-- 支付页面 -->
+  <div id="alert-payment" class="white_content">
+    <div id="alert-top">
+      <div id="alert-top-left-button" onclick="CloseDiv('alert-payment','fade')">
+        <img src="http://s.immusician.com//static/payment_material/goback.png" alt="">
+      </div>
+      <span id="alert-top-middle-button">确认订单</span>
+      <span id="countdown">
+        <span>支付剩余时间：</span>
+        <span id="minute">15</span>
+        <span>:</span>
+        <span id="second">00</span>
+      </span>
+    </div>
+    <div class="alert-auto">
+      <div id="alert-description" class="alert-label">
+        <div id="alert-title"></div>
+        <div id="alert-money"></div>
+      </div>
+
+      <div id="alert-coupon" class="alert-label">
+        <div id="alert-coupon-label">
+          优惠券
+        </div>
+        <div id="alert-coupon-state">
+
+        </div>
+      </div>
+      <div id="alert-coupon-content">
+
+      </div>
+
+      <div id="alert-code" class="alert-label">
+        <div id="alert-code-label">
+          奖学金抵扣
+        </div>
+        <a href="http://s.immusician.com/static/web/channel.html">
+          <div id="alert-code-wenhao">
+            <img src="http://s.immusician.com/static/you/imgs/wenhao.png" alt="">
+          </div>
+        </a>
+        <div id="alert-code-button" onclick="javasrcipt:ShowSmallDiv('alert-code-edit','code_fade')">
+          输入兑换码
+        </div>
+      </div>
+    </div>
+
+    <div id="alert-bottom">
+      <div id="alert-bottom-price-label">实付金额：</div>
+      <div id="alert-bottom-price"></div>
+      <div id="alert-bottom-coupon-price"></div>
+      <div id="alert-bottom-wechatpay">微信支付</div>
+      <div id="alert-bottom-alipay">支付宝支付</div>
+    </div>
+
+  </div>
+  <!--弹出层时背景层DIV---end-->
+
+  <!-- 抵扣劵兑换 -->
+  <div id="alert-code-edit" class="code_white_content">
+    <div id="alert-code-edit-title">请输入奖学金兑换码</div>
+    <div id="alert-code-edit-subtitle">可在官方渠道合作处获取奖学金</div>
+    <input id="alert-code-edit-input" placeholder="输入您的兑换码">
+    <div id="alert-code-edit-submit"></div>
+    <a id="alert-code-edit-link" href="http://s.immusician.com/static/web/channel.html">查看如何获取</a>
+    <div id="alert-code-edit-close" onclick="javasrcipt: CloseDiv('alert-code-edit','code_fade')">x</div>
+  </div>
+
+  <div class="alert"></div>
+  <div class="loading"></div>
+  <img class="loading-image" src="http://s.immusician.com/static/payment_material/loading_image.GIF">
+
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+  var bundle_id = 0
+  var user_aget = navigator.userAgent.toLowerCase()
+  if (user_aget.search("com.buluobang.bangtabs") != -1) {
+    bundle_id = 1
+  }
+  else {
+    bundle_id = 0
+  }
+
+  function callApp(){
+	  // 由于对象映射，所以调用hello对象等于调用Android映射的对象
+    // AndroidJS.hello("js调用了android中的hello方法");
+    console.log("--- js调用了原生app中的方法 ---")
+    var isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+    console.log(isIOS)
+    if(isIOS) {
+      window.webkit.messageHandlers.onBuyClick.postMessage({
+        "onBuyClick":"ture"
+      });
+    }else{
+      PayFeedBack.onBuyClick("true")
+    }
+  }
+
+  //弹出隐藏层
+  function ShowDiv(show_div, bg_div) {
+    // var scrollHeight = document.body.scrollHeight; //文档高度
+    var scrollHeight = document.documentElement.clientHeight; //文档高度
+    document.getElementById(bg_div).style.height = scrollHeight + 'px';
+    document.getElementById(show_div).style.height = scrollHeight + 'px';
+
+    document.getElementById(show_div).style.display = 'block';
+    document.getElementById(bg_div).style.display = 'block';
+    $('.alert-coupon-content-choice').css({ 'background-image': 'url(http://s.immusician.com/static/payment_material/not-select.png)', 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+    $('#alert-coupon-content').css({ 'display': 'none' });
+  };
+
+  // 弹出激活码
+  function ShowSmallDiv(show_div, bg_div) {
+    var scrollHeight = document.body.scrollHeight; //文档高度
+    var smallScrollHeight = document.documentElement.clientHeight; //文档高度
+    document.getElementById(bg_div).style.height = smallScrollHeight + 'px';
+    // document.getElementById(show_div).style.height=parseInt(smallScrollHeight * 0.4)+'px';
+    document.getElementById(show_div).style.height = 3.05 + 'rem';
+
+    document.getElementById(show_div).style.display = 'block';
+    document.getElementById(bg_div).style.display = 'block';
+    $('.alert-coupon-content-choice').css({ 'background-image': 'url(http://s.immusician.com/static/payment_material/not-select.png)', 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+    $('#alert-coupon-content').css({ 'display': 'none' });
+  };
+
+  //关闭弹出层
+  function CloseDiv(show_div, bg_div) {
+    document.getElementById("label").value = '';
+    document.getElementById(show_div).style.display = 'none';
+    document.getElementById(bg_div).style.display = 'none';
+  };
+
+
+
+  //===================================弹框js部分 end by:songfayuan=========================================
+
+  // 详细介绍按钮
+
+  (function ($) {
+
+    var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+      a256 = '',
+      r64 = [256],
+      r256 = [256],
+      i = 0;
+
+    var UTF8 = {
+
+      /**
+       * Encode multi-byte Unicode string into utf-8 multiple single-byte characters
+       * (BMP / basic multilingual plane only)
+       *
+       * Chars in range U+0080 - U+07FF are encoded in 2 chars, U+0800 - U+FFFF in 3 chars
+       *
+       * @param {String} strUni Unicode string to be encoded as UTF-8
+       * @returns {String} encoded string
+       */
+      encode: function (strUni) {
+        // use regular expressions & String.replace callback function for better efficiency
+        // than procedural approaches
+        var strUtf = strUni.replace(/[\u0080-\u07ff]/g, // U+0080 - U+07FF => 2 bytes 110yyyyy, 10zzzzzz
+          function (c) {
+            var cc = c.charCodeAt(0);
+            return String.fromCharCode(0xc0 | cc >> 6, 0x80 | cc & 0x3f);
+          })
+          .replace(/[\u0800-\uffff]/g, // U+0800 - U+FFFF => 3 bytes 1110xxxx, 10yyyyyy, 10zzzzzz
+            function (c) {
+              var cc = c.charCodeAt(0);
+              return String.fromCharCode(0xe0 | cc >> 12, 0x80 | cc >> 6 & 0x3F, 0x80 | cc & 0x3f);
+            });
+        return strUtf;
+      },
+
+      /**
+       * Decode utf-8 encoded string back into multi-byte Unicode characters
+       *
+       * @param {String} strUtf UTF-8 string to be decoded back to Unicode
+       * @returns {String} decoded string
+       */
+      decode: function (strUtf) {
+        // note: decode 3-byte chars first as decoded 2-byte strings could appear to be 3-byte char!
+        var strUni = strUtf.replace(/[\u00e0-\u00ef][\u0080-\u00bf][\u0080-\u00bf]/g, // 3-byte chars
+          function (c) { // (note parentheses for precence)
+            var cc = ((c.charCodeAt(0) & 0x0f) << 12) | ((c.charCodeAt(1) & 0x3f) << 6) | (c.charCodeAt(2) & 0x3f);
+            return String.fromCharCode(cc);
+          })
+          .replace(/[\u00c0-\u00df][\u0080-\u00bf]/g, // 2-byte chars
+            function (c) { // (note parentheses for precence)
+              var cc = (c.charCodeAt(0) & 0x1f) << 6 | c.charCodeAt(1) & 0x3f;
+              return String.fromCharCode(cc);
+            });
+        return strUni;
+      }
+    };
+
+    while (i < 256) {
+      var c = String.fromCharCode(i);
+      a256 += c;
+      r256[i] = i;
+      r64[i] = b64.indexOf(c);
+      ++i;
+    }
+
+    function code(s, discard, alpha, beta, w1, w2) {
+      s = String(s);
+      var buffer = 0,
+        i = 0,
+        length = s.length,
+        result = '',
+        bitsInBuffer = 0;
+
+      while (i < length) {
+        var c = s.charCodeAt(i);
+        c = c < 256 ? alpha[c] : -1;
+
+        buffer = (buffer << w1) + c;
+        bitsInBuffer += w1;
+
+        while (bitsInBuffer >= w2) {
+          bitsInBuffer -= w2;
+          var tmp = buffer >> bitsInBuffer;
+          result += beta.charAt(tmp);
+          buffer ^= tmp << bitsInBuffer;
+        }
+        ++i;
+      }
+      if (!discard && bitsInBuffer > 0) result += beta.charAt(buffer << (w2 - bitsInBuffer));
+      return result;
+    }
+
+    var Plugin = $.base64 = function (dir, input, encode) {
+      return input ? Plugin[dir](input, encode) : dir ? null : this;
+    };
+
+    Plugin.btoa = Plugin.encode = function (plain, utf8encode) {
+      plain = Plugin.raw === false || Plugin.utf8encode || utf8encode ? UTF8.encode(plain) : plain;
+      plain = code(plain, false, r256, b64, 8, 6);
+      return plain + '===='.slice((plain.length % 4) || 4);
+    };
+
+    Plugin.atob = Plugin.decode = function (coded, utf8decode) {
+      coded = coded.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+      coded = String(coded).split('=');
+      var i = coded.length;
+      do {
+        --i;
+        coded[i] = code(coded[i], true, r64, a256, 6, 8);
+      } while (i > 0);
+      coded = coded.join('');
+      return Plugin.raw === false || Plugin.utf8decode || utf8decode ? UTF8.decode(coded) : coded;
+    };
+  }(jQuery));
+
+
+
+  jQuery(function ($) {
+
+    //    另一种webview回调方式
+    //    function callAndroid(data) {
+    //      PINGPP_ANDROID.callPay(data)
+    //      console.log('-------')
+    //    }
+
+    // 字典转数组
+    function dictToList(d) {
+      var res = [];
+      for (var k in d) {
+        res[parseInt(k)] = d[k];
+      }
+      return res
+    }
+
+    // 优惠券开始时间与结束时间转换显示格式 eg: 2018.08.16
+    function getMyDate(str) {
+      var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth() + 1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear + '.' + getzf(oMonth) + '.' + getzf(oDay);
+      return oTime;
+    };
+    //补0操作
+    function getzf(num) {
+      if (parseInt(num) < 10) {
+        num = '0' + num;
+      }
+      return num;
+    }
+
+    // 优惠券剩余时间显示 eg: 剩余59分钟过期
+    function getResidueTime(t) {
+      var now = Date.parse(new Date());
+      var residue = parseInt((parseInt(t) * 1000 - now) / 1000);
+      if (residue > 24 * 3600) {
+        return '剩余' + parseInt(residue / (24 * 3600)) + '天过期'
+      } else if (residue > 3600) {
+        return '剩余' + parseInt(residue / 3600) + '小时过期'
+      } else {
+        return '剩余' + parseInt(residue / 60) + '分钟过期'
+      }
+    }
+
+    function countdown(){
+
+      var minute = 15
+      var second = 00
+
+      var timer = setInterval(function() {
+
+        if(second == 00 && minute == 00) {
+          $('#alert-bottom-wechatpay').unbind("click").css({"background-color": "grey"})
+          $('#alert-bottom-alipay').unbind("click").css({"background-color": "grey"})
+          clearInterval(timer)
+          alert("您的订单已超时，请重新下订单!")
+          return
+        }
+
+        if(second == 00) {
+          second = 59
+          minute--
+        }else{
+          second--
+        }
+
+        minute = Number(minute)
+        second = Number(second)
+
+        if(minute < 10){
+          minute = "0" + minute
+        }
+        if(second < 10) {
+          second = "0" + second
+        }
+
+        $("#minute").text(minute)
+        $("#second").text(second)
+        
+        if($("#alert-payment").css("display") == "none"){
+          clearInterval(timer)
+          $("#minute").text("15")
+          $("#second").text("00")
+        }
+
+      }, 1000)
+    }
+
+    $.getUrlParam = function (name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = (window.location.search.substr(1)).replace(/%26/g, '&').replace(/%3d/g, '=').match(reg);
+      if (r != null) return decodeURIComponent(r[2]); return null;
+    };
+
+    var goods_id_global = $.getUrlParam('goods_id');
+    // console.log(goods_id)
+    // console.log(Boolean(goods_id))
+    var goods_sel = 0
+
+    // 当前购买goods_id
+    var goods_id = null
+
+    // 上次点击优惠券的index
+    var lastIndex = null;
+
+    // 是否选择优惠券
+    var isChoicedCoupon = false;
+    var choicedCouponId = '';
+
+    // 是否选择奖学金
+    var isChoicedCode = false;
+    var choicedCodeId = '';
+
+    var orderPrice = 0;
+
+    // 是否续费
+    var is_renew = false
+    var is_year_renew = false
+
+    // 选择奖学金
+    function choiceCode() {
+      verifyCode = $('#alert-code-edit-input').val();
+      if (verifyCode.length !== 6) {
+        $('.alert').html('奖学金码长度错误').addClass('alert-danger').show().delay(1500).fadeOut();
+      } else {
+        $('.loading').css({ 'display': 'block' });
+        $('.loading-image').css({ 'display': 'block' });
+        $.ajax({
+          type: "GET",
+          url: 'http://iguitar.immusician.com:2525/v3/check_valid',
+          data: { 'code': verifyCode, 'goods_id': goods_id },
+          dataType: 'json',
+          error: function (data) {
+            // $.showModalDialog('hello');
+            $('.loading').css({ 'display': 'none' });
+            $('.loading-image').css({ 'display': 'none' });
+            $('.alert').html(data.message).addClass('alert-danger').show().delay(1500).fadeOut();
+          },
+          success: function (data) {
+            $('.loading').css({ 'display': 'none' });
+            $('.loading-image').css({ 'display': 'none' });
+            error_code = data.data.error_code;
+            if (error_code === 0) {
+              CloseDiv('alert-code-edit', 'code_fade');
+              $('#alert-bottom-price').text('¥' + (orderPrice - 50));
+              // 重置优惠券
+              isChoicedCoupon = false;
+              choicedCouponId = '';
+              // 选择奖学金
+              isChoicedCode = true;
+              choicedCodeId = verifyCode;
+              $('.alert').html(data.message).addClass('alert-success').show().delay(1500).fadeOut();
+            } else {
+              $('.alert').html(data.message).addClass('alert-danger').show().delay(1500).fadeOut();
+            }
+          }
+        })
+      }
+
+    }
+    $('#alert-code-edit-submit').click(function () {
+      choiceCode();
+    });
+
+    // 选择优惠券
+    function choiceCoupon(data) {
+      console.log(data)
+      var index = data.index;
+      var coupon = data.coupon;
+      var choicedCouponValue = 0;
+      choicedCouponId = '';
+      if (index != lastIndex) {
+        // console.log(index)
+        $('.alert-coupon-content-choice').css({ 'background-image': 'url(http://s.immusician.com/static/payment_material/not-select.png)', 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+        // console.log($('#alert-coupon-content-choice-' + index))
+        $('#alert-coupon-content-choice-' + index).css({ 'background-image': 'url(http://s.immusician.com/static/payment_material/select.png)', 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+        isChoicedCoupon = true;
+        choicedCouponValue = coupon.value;
+        choicedCouponId = coupon;
+
+        // 重置奖学金
+        isChoicedCode = false;
+        choicedCodeId = '';
+        $('#alert-coupon-content-choice-' + index).attr({ 'is_choiced': 'yes' });
+      } else {
+
+        var isChoicedCoupon = $('#alert-coupon-content-choice-' + index).attr('is_choiced') === 'yes';
+        $('#alert-coupon-content-choice-' + index).attr({ 'is_choiced': (isChoicedCoupon ? 'no' : 'yes') })
+        $('#alert-coupon-content-choice-' + index).css({ 'background-image': (isChoicedCoupon ? 'url(http://s.immusician.com/static/payment_material/not-select.png)' : 'url(http://s.immusician.com/static/payment_material/select.png)'), 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+
+        if (!isChoicedCoupon) {
+          choicedCouponValue = coupon.value;
+          choicedCouponId = coupon;
+
+          // 重置奖学金
+          isChoicedCode = false;
+          choicedCodeId = '';
+        }
+      }
+      lastIndex = index;
+
+      $('#alert-bottom-price').text('¥' + (orderPrice - choicedCouponValue))
+      $('#alert-bottom-coupon-price').text('已优惠¥' + choicedCouponValue)
+    }
+
+
+    
+    
+    // 乐器类型 0 or 1
+    var instrument_type = $.getUrlParam('instrument_type');
+    // console.log(window.location.search)
+
+    if (instrument_type === '0') {
+      var instrument = 'guitar'
+    }
+    if (instrument_type === '1') {
+      var instrument = 'ukulele'
+    }
+    if (instrument_type === '2') {
+      var instrument = 'kalimba'
+    }
+    if (instrument_type === '3') {
+      var instrument = 'djembe'
+    }
+
+    if (instrument_type === '0') {
+      $('#top-middle-button').text('购买吉他课程');
+    }
+    if (instrument_type === '2') {
+      $('#top-middle-button').text('购买拇指琴课程');
+    }
+    if (instrument_type === '3'){
+      $('#alert-top-right-button').attr({'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=feizhougu'});
+      $('#top-right-button').attr({'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=feizhougu'});
+      $('#top-middle-button').text('购买非洲鼓课程');
+      $('#alert-top-middle-button').text('确认订单');
+      $('#top-right-button').text('(还没有鼓？进来看看)');
+      $('#alert-top-right-button').text('(还没有鼓？进来看看)');
+    }
+
+    
+
+    // 课程id
+    var course_id = $.getUrlParam('course_id');
+
+    // 用户uid
+    var uid = $.getUrlParam('uid');
+
+    // 用户ip
+    var ip = $.getUrlParam('ip');
+
+    var outspreadNeedNone = false;
+
+    // 用户购买状态
+    var purchase_states_ = $.getUrlParam('purchase_states');
+    var purchase_states = JSON.parse(purchase_states_);
+    if (!purchase_states) {
+      purchase_states = [];
+    }
+
+    // 用户是否是体验课状态
+    var buy_status_ = $.getUrlParam('buy_status');
+    var buy_status = JSON.parse(buy_status_);
+    // console.log(buy_status)
+    if (!buy_status) {
+      buy_status = [];
+    }
+
+    // 用户是否可续费
+    var is_expiration_ = $.getUrlParam('is_expiration');
+    var is_expiration = JSON.parse(is_expiration_);
+    // console.log(is_expiration)
+    
+
+    // 用户购买课程集合
+    var purchase_ids_ = $.getUrlParam('purchase_ids');
+    var purchase_ids = JSON.parse(purchase_ids_);
+    if (!purchase_ids) {
+      purchase_ids = [];
+    }
+
+    var goods_index = -1;
+
+    // 修改 还没有琴 按钮的链接地址
+    $('#alert-top-right-button').attr({ 'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=' + instrument });
+    $('#top-right-button').attr({ 'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=' + instrument });
+
+    $('.loading').css({ 'display': 'block' });
+    $('.loading-image').css({ 'display': 'block' });
+
+    // console.log(course_id)
+    
+    var tempurl = 'http://iguitar.immusician.com:2525/v3/get_purcahse_data';
+    var tempurl = 'http://192.168.2.16:22222/v3/get_purcahse_data'
+    $.ajax({
+      type: "GET",
+      url: tempurl,
+      // url: 'http://192.168.1.171:22222/v3/get_purcahse_data',
+      data: { 'instrument_type': instrument_type, 'course_id': course_id, 'purchase_states': purchase_states_, 'buy_status': buy_status_ },
+      dataType: 'json',
+      error: function (data) {
+        $('.loading').css({ 'display': 'none' });
+        $('.loading-image').css({ 'display': 'none' });
+      },
+      success: function (data) {
+        console.log(data)
+        $('.loading').css({ 'display': 'none' });
+        $('.loading-image').css({ 'display': 'none' });
+
+        
+        data.forEach(function (t, index, all) {
+          if (t.goods_id == '5bc54f8eab9a70000bb7aefd') {
+            $('#alert-top-right-button').attr({ 'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=feizhougu' });
+            $('#top-right-button').attr({ 'href': 'http://s.immusician.com/static/web/buy_ukulele_new.html?instrument_type=feizhougu' });
+            $('#top-middle-button').text('购买非洲鼓课程');
+            // $('#alert-top-middle-button').text('确认订单');
+            $('#top-right-button').text('(还没有鼓？进来看看)');
+            $('#alert-top-right-button').text('(还没有鼓？进来看看)');
+          }
+          goods_index = $.inArray(t.goods_id, purchase_ids);
+          if (course_id || purchase_ids.length === 0 || goods_index !== -1) {
+            // $('#courses').append(`<div id=course_${index} class="course_label" ><div id=course_image_${index} class="course_image"></div><div id=course_title_${index} class="course_title">${t.title}</div><div id=course_price_${index} class="course_price">¥${t.price}</div><div id=course_pri_${index} class="course_pri"><br/>限时特价<br/>¥${t.price}</div><div id="course_tag_${index}" class="course_tag"></div></div>`)
+            // $('#courses').append('<div id=course_' + index + ' class="course_label" ><div id=course_image_' + index + ' class="course_image"></div><div id=course_title_' + index + ' class="course_title">' + t.title + '</div><div id=course_price_' + index + ' class="course_price">¥' + t.price + '</div><div id=course_pri_' + index + ' class="course_pri"><br/>活动特价<br/>¥' + t.price + '</div><div id="course_tag_' + index + '" class="course_tag"></div></div>')
+            $('#courses').append('<div id=course_' + index + ' class="course_label" ><div id=course_image_' + index + ' class="course_image"></div><div id=course_title_' + index + ' class="course_title">' + t.title + '</div><div id=course_price_' + index + ' class="course_price">¥' + t.price + '</div><div id="course_tag_' + index + '" class="course_tag"></div></div>')
+
+            // 有加老师字段   $('#courses').append('<div id=course_' + index + ' class="course_label" ><div id=course_image_' + index + ' class="course_image"></div><div id=course_teacher_name_'+ index +' class="course_teacher_name">' + t.teacher_name + '</div><div id=course_title_' + index + ' class="course_title">' + t.title + '</div><div id=course_price_' + index + ' class="course_price">¥' + t.price + '</div><div id=course_pri_' + index + ' class="course_pri"><br/>限时特价<br/>¥' + t.price + '</div><div id="course_tag_' + index + '" class="course_tag"></div></div>')
+            // $('#course_price_' + index).hide()
+            
+            if (purchase_ids.length > goods_index && purchase_states.length > goods_index && purchase_states[goods_index] && buy_status.length > goods_index && buy_status[goods_index] != 2) {
+              $('#course_tag_' + index).css({ 'display': 'block' });
+              $('#course_price_' + index).hide()
+
+            }
+            $('#course_image_' + index).css({
+              'background-image': 'url(' + t.new_purchase_image + ')',
+              'background-size': '100% 100%',
+              '-moz-background-size': '100% 100%'
+            });
+
+            if(goods_id_global){
+              if(goods_id_global == t.goods_id){
+                goods_sel = index
+              }
+            }
+
+            $('#course_' + index).click(function () {
+              currentChoiceIndex = index;
+              var subData = t;
+              console.log(subData.goods_id)
+              // console.log(subData)
+              // console.log(this)
+              $('.course_label').css({
+                // 'width': '3.1rem',
+                // 'width': '2.9rem',
+                // 'width': '2.32rem',
+                'width': '2.52rem',
+                // 'height': '3.61rem',
+                // 'height': '2.61rem',
+                'height': '3.01rem',
+                'margin-top': '0px',
+                'background-image': 'none'
+              });
+              $('.course_price').css({ 'height': '0.6rem', 'line-height': '0.6rem', 'font-size': '0.18rem' });
+              $('.course_title').css({ 'height': '0.6rem', 'line-height': '0.6rem', 'font-size': '0.18rem' });
+              // $('.course_teacher_name').css({'height': '0.3rem', 'line-hight': '0.28rem', 'font-size': '0.18rem'});
+              $('.course_image').css({ 
+                // 'width': '2.9rem', 
+                // 'width': '2.32rem',
+                'width': '2.52rem',
+                // 'height': '3.0rem', 
+                'height': '2.4rem', 
+                'border-radius': '0.25rem 0.25rem 0 0',
+                'box-sizing': 'border-box',
+                'border': '0px solid white'
+              });
+              $('.course_pri').css({ 'display': 'none' });
+              $('#course_' + index).css({
+                // 'width': '3.58rem',
+                // 'width': '2.72rem',
+                'width': '3.07rem',
+                // 'height': '4.15rem',
+                // 'height': '3.15rem',
+                'height': '3.55rem',
+                // 'height': '4.5rem',
+                'margin-top': '-0.25rem',
+                // 'background-image': 'url(http://s.immusician.com/static/payment_material/course_bg.png)',
+                'background-size': '100% 100%',
+                '-moz-background-size': '100% 100%'
+              });
+              $('#course_price_' + index).css({ 'height': '0.67rem', 'line-height': '0.67rem', 'font-size': '0.24rem' });
+              $('#course_title_' + index).css({ 'height': '0.67rem', 'line-height': '0.67rem', 'font-size': '0.24rem' });
+              // $('#course_teacher_name_' + index).css({'height': '0.33.rem', 'line-height': '0.3rem', 'font-size': '0.24rem'});
+              $('#course_image_' + index).css({ 
+                // 'width': '3.58rem', 
+                // 'width': '2.72rem', 
+                'width': '3.07rem',
+                // 'height': '3.48rem', 
+                // 'height': '2.48rem',
+                'height': '2.88rem', 
+                'border-radius': '0.25rem 0.25rem 0 0',
+                'box-sizing': 'border-box',
+                'border': '1px solid #8EC0FF',
+              });
+              $('#bottom-price-label').empty();
+              $('#bottom-price').empty();
+              $('#bottom-old-price').empty();
+              $('#outspread-2-left').empty();
+              $('#outspread-2-right').empty();
+              if ($('.course_image').css('width') > $('.course_label').css('width')) {
+                $('.course_image').css({ 'width': '100%' });
+              }
+
+              if (subData.features.length === 6) {
+                subData.features.forEach(function (t2, index2) {
+                  if (index2 < 3) {
+                    $('#outspread-2-left').append('<li>' + t2 + '</li>')
+                  } else if (index2 < 6) {
+                    $('#outspread-2-right').append('<li>' + t2 + '</li>')
+                  }
+                });
+              } else {
+                subData.features.forEach(function (t2, index2) {
+                  if (index2 < 4) {
+                    $('#outspread-2-left').append('<li>' + t2 + '</li>')
+                  } else if (index2 < 8) {
+                    $('#outspread-2-right').append('<li>' + t2 + '</li>')
+                  }
+                });
+              }
+
+              // console.log(index)
+              var oneImg = $('#course_0').outerWidth(true)
+              // console.log(oneImg)
+
+              var widthVariation = oneImg * index
+
+              // console.log(widthVariation)
+
+              $('#courses').unbind('scroll')
+
+              $('#courses').scrollLeft(widthVariation)
+              // $('#courses').animate({scrollLeft:widthVariation},300)
+
+              setTimeout(function(){
+
+                // function throttle(method, mustRunDelay) {
+                //   let timer,
+                //       args = arguments,
+                //       start;
+                //   return function loop() {
+                //     let self = this;
+                //     let now = Date.now();
+                //     if(!start){
+                //       start = now;
+                //     }
+                //     if(timer){
+                //       clearTimeout(timer);
+                //     }
+                //     if(now - start >= mustRunDelay){
+                //       method.apply(self, args);
+                //       start = now;
+                //     }else {
+                //       timer = setTimeout(function () {
+                //         loop.apply(self, args);
+                //       }, 50);
+                //     }
+                //   }
+                // }
+                // $('#courses').bind('scroll',throttle(function () {
+                //   var leftScroll = $('#courses').scrollLeft()
+                //   // console.log($('#courses').scrollLeft())
+                //   // console.log(leftScroll/3.65/50)
+                //   var num = Math.floor((leftScroll + oneImg/2)/oneImg)
+                //   console.log(num)
+                //   $('#course_' + num).click();
+                // },500))
+
+                function debounce(method,delay) {
+                  var timer = null;
+                  return function () {
+                    var self = this,
+                      args = arguments;
+                    timer && clearTimeout(timer);
+                    timer = setTimeout(function () {
+                      method.apply(self,args);
+                    },delay);
+                  }
+                }
+                $('#courses').bind('scroll',debounce(function () {
+                  var leftScroll = $('#courses').scrollLeft()
+                  // console.log($('#courses').scrollLeft())
+                  // console.log(leftScroll/3.65/50)
+                  var num = Math.floor((leftScroll + oneImg/2)/oneImg)
+                  console.log(num)
+                  $('#course_' + num).click();
+                },300))
+
+              },400);
+
+              $('#bottom-price-label').append(subData.priceTitle);
+              $('#bottom-price').append('¥' + subData.price);
+              $('#bottom-old-price').append(subData.old_price);
+              goods_id = subData.goods_id;
+
+              // 价格小于100元禁止使用优惠券
+              if (subData.price < 100) {
+                $('#alert-code').css({ 'display': 'none' });
+              }
+
+              // 隐藏购买按钮
+              var purIndex = $.inArray(goods_id, purchase_ids);
+              if (purIndex !== -1 && purchase_states[purIndex]) {
+                $('#bottom-purchase').text('已购买');
+                $('#bottom-purchase').unbind('click');
+                $('#bottom-purchase').css({ 'background': '#986ba3' });
+                // $('#bottom-purchase').css({ 'background-color': 'gray' })
+                // $('#bottom-purchase').hide()
+                $('#bottom').hide()
+              } else {
+                $('#bottom-purchase').text('购买');
+                $('#bottom-purchase').bind('click', function () {
+                  ShowDiv('alert-payment', 'fade');
+                  countdown()
+                  selectCoupon();
+                  callApp()
+                });
+                $('#bottom-purchase').css({ 'background-color': '#47cf4b' });
+                $('#bottom').show()
+                $('#bottom-purchase').show()
+              }
+              if (purIndex !== -1 && buy_status[purIndex]) {
+                $('#bottom-purchase').text('续费');
+                $('#bottom-purchase').bind('click', function () {
+                  ShowDiv('alert-payment', 'fade');
+                  countdown()
+                  selectCoupon();
+                  callApp()
+                });
+                $('#bottom-purchase').css({ 'background-color': '#47cf4b' });
+                $('#bottom').show()
+                $('#bottom-purchase').show()
+              }
+
+              //更换介绍图片
+              if ($.inArray(goods_id, ['5a39e67048c214000a0ea644', '5a561ac64255bf6657065cb2', '5a583a0f4255bf6658fc12c3', '5a5839564255bf6658fc1296']) !== -1) {
+                $('#outspread-4 img').attr('src', 'http://s.immusician.com/static/payment_material/' + goods_id + '_2.png');
+                $('#outspread-4').css({ 'display': 'block' });
+                $('#outspread-3').css({ 'display': 'block' });
+              } else {
+                $('#outspread-4').css({ 'display': 'none' });
+                $('#outspread-3').css({ 'display': 'none' });
+              }
+
+              orderPrice = subData.price;
+              $('#alert-bottom-price').text('¥' + orderPrice);
+              $('#alert-title').text(subData.title);
+              $('#alert-money').text('¥' + subData.price);
+
+              var selIndex = $.inArray(goods_id_global, purchase_ids)
+
+              if(selIndex !== -1){
+
+                if (!is_expiration) {
+                  is_expiration = [];
+                }else if(is_expiration[selIndex] == 1){
+
+                  $('#top-middle-button').text(subData.title + "续费")
+                  $('#top-right-button').remove()
+
+                  $("#courses").css({'display':'none'})
+                  $("#courses-label").css({'margin-bottom':'0.6rem'})
+
+                  $('#outspread-6').css({"display":"block"});
+                  $('#outspread-1').css({"display":"none"});
+                  $('#outspread-2').css({"display":"none"});
+                  $('#outspread-4').css({"display":"none"});
+
+                  $('#renew-btn-left-price').text('¥' + subData.renew_price);
+                  $('#renew-btn-right-price').text('¥' + subData.year_price);
+                  // var priceAverage = (subData.year_price / 12).toFixed(1)
+                  // $('#renew-btn-right-price-average').text('平均¥' + priceAverage + "/月");
+
+                  $('#bottom').show()
+
+                  $('#bottom-purchase').css({ 'background-color': '#47cf4b' });
+                  // $('#bottom').show()
+                  // $('#bottom-purchase').show()
+
+                  $('#bottom-price-label').text("续期价格：");
+                  $('#bottom-price').text('¥' + subData.renew_price + "/月");
+                  $('#bottom-old-price').text("");
+                  $('#coupon-countdown').css({"display":"none"})
+
+                  $('#bottom-purchase').text('续费');
+                  $('#bottom-purchase').unbind('click');
+                  $('#bottom-purchase').bind('click', function () {
+                    ShowDiv('alert-payment', 'fade');
+                    countdown()
+                    // selectCoupon();
+                    // callApp()
+                  });
+
+                  orderPrice = subData.renew_price;
+                  $('#alert-bottom-price').text('¥' + orderPrice);
+                  $('#alert-title').text(subData.title);
+                  $('#alert-money').text('¥' + orderPrice);
+
+                  $('#alert-code').css({"display":"none"});
+                  $('#alert-coupon-label').text("续费时间");
+                  $('#alert-coupon-state').text("1个月");
+                  $('.alert-auto').append('<p style="font-size:0.4rem;padding:0.5rem;">温馨提示：课程到期15日内仍可续期，超过15日则需重新购买课程。</p>')
+                  
+                  is_renew = true
+
+                  $('#renew-btn-left').bind('click',function(){
+                    $('#renew-btn-left').css({"background-image":'url("http://s.immusician.com/static/payment_material/1m_act@3x.png")','width': '4.5rem','height': '2.16rem'})
+                    $('#renew-btn-right').css({"background-image":'url("http://s.immusician.com/static/payment_material/1y_nm@3x.png")','width': '4.5rem','height': '1.76rem'})
+                    $('#bottom-price').text('¥' + subData.renew_price + "/月");
+                    $('#bottom-old-price').text("");
+                    $('#alert-bottom-price').text('¥' + orderPrice);
+                    $('#alert-money').text('¥' + orderPrice);
+                    $('#alert-coupon-state').text("1个月");
+                    is_year_renew = false
+                  })
+
+                  $('#renew-btn-right').bind('click',function(){
+                    $('#renew-btn-left').css({"background-image":'url("http://s.immusician.com/static/payment_material/1m_nm@3x.png")','width': '4.5rem','height': '1.76rem'})
+                    $('#renew-btn-right').css({"background-image":'url("http://s.immusician.com/static/payment_material/1y_act@3x.png")','width': '4.5rem','height': '2.16rem'})
+                    $('#bottom-price').text('¥' + subData.year_price + "/年");
+                    $('#bottom-old-price').text('¥' + subData.price + '/年');
+                    $('#alert-bottom-price').text('¥' + subData.year_price);
+                    $('#alert-money').text('¥' + subData.year_price);
+                    $('#alert-coupon-state').text("12个月");
+                    is_year_renew = true
+                  })
+                  
+                }
+
+              }
+
+              if(course_id){
+
+                if(is_expiration && is_expiration[0] == 1){
+                  
+                  $('#top-middle-button').text(subData.title + "续费")
+                  $('#top-right-button').remove()
+
+                  $("#courses").css({'display':'none'})
+                  $("#courses-label").css({'margin-bottom':'0.6rem'})
+
+                  $('#outspread-6').css({"display":"block"});
+                  $('#outspread-1').css({"display":"none"});
+                  $('#outspread-2').css({"display":"none"});
+                  $('#outspread-4').css({"display":"none"});
+
+                  $('#renew-btn-left-price').text('¥' + subData.renew_price);
+                  $('#renew-btn-right-price').text('¥' + subData.year_price);
+                  // var priceAverage = (subData.year_price / 12).toFixed(1)
+                  // $('#renew-btn-right-price-average').text('平均¥' + priceAverage + "/月");
+
+                  $('#bottom').show()
+
+                  $('#bottom-purchase').css({ 'background-color': '#47cf4b' });
+                  // $('#bottom').show()
+                  // $('#bottom-purchase').show()
+
+                  $('#bottom-price-label').text("续期价格：");
+                  $('#bottom-price').text('¥' + subData.renew_price + "/月");
+                  $('#bottom-old-price').text("");
+                  $('#coupon-countdown').css({"display":"none"})
+
+                  $('#bottom-purchase').text('续费');
+                  $('#bottom-purchase').unbind('click');
+                  $('#bottom-purchase').bind('click', function () {
+                    ShowDiv('alert-payment', 'fade');
+                    countdown()
+                    // selectCoupon();
+                    // callApp()
+                  });
+
+                  orderPrice = subData.renew_price;
+                  $('#alert-bottom-price').text('¥' + orderPrice);
+                  $('#alert-title').text(subData.title);
+                  $('#alert-money').text('¥' + orderPrice);
+
+                  $('#alert-code').css({"display":"none"});
+                  $('#alert-coupon-label').text("续费时间");
+                  $('#alert-coupon-state').text("1个月");
+                  $('.alert-auto').append('<p style="font-size:0.4rem;padding:0.5rem;">温馨提示：课程到期15日内仍可续期，超过15日则需重新购买课程。</p>')
+                  
+                  is_renew = true
+
+                  $('#renew-btn-left').bind('click',function(){
+                    $('#renew-btn-left').css({"background-image":'url("http://s.immusician.com/static/payment_material/1m_act@3x.png")','width': '4.5rem','height': '2.16rem'})
+                    $('#renew-btn-right').css({"background-image":'url("http://s.immusician.com/static/payment_material/1y_nm@3x.png")','width': '4.5rem','height': '1.76rem'})
+                    $('#bottom-price').text('¥' + subData.renew_price + "/月");
+                    $('#bottom-old-price').text("");
+                    $('#alert-bottom-price').text('¥' + orderPrice);
+                    $('#alert-money').text('¥' + orderPrice);
+                    $('#alert-coupon-state').text("1个月");
+                    is_year_renew = false
+                  })
+
+                  $('#renew-btn-right').bind('click',function(){
+                    console.log("111")
+                    $('#renew-btn-left').css({"background-image":'url("http://s.immusician.com/static/payment_material/1m_nm@3x.png")','width': '4.5rem','height': '1.76rem'})
+                    $('#renew-btn-right').css({"background-image":'url("http://s.immusician.com/static/payment_material/1y_act@3x.png")','width': '4.5rem','height': '2.16rem'})
+                    $('#bottom-price').text('¥' + subData.year_price + '/年');
+                    var str = '¥' + subData.price + '/年'
+                    console.log(str)
+                    $('#bottom-old-price').text('¥' + subData.price + '/年');
+                    $('#alert-bottom-price').text('¥' + subData.year_price);
+                    $('#alert-money').text('¥' + subData.year_price);
+                    $('#alert-coupon-state').text("12个月");
+                    is_year_renew = true
+                  })
+
+                }
+
+              }
+
+            })
+          }
+
+        });
+
+        $('#courses').append('<div style="width: 5.06rem;flex-shrink: 0"></div>')
+
+        // console.log(goods_sel)
+
+        $('#course_' + goods_sel).click();
+
+        var time_arr = getDuration(data[0].countdown)
+        
+        function getDuration(my_time) {
+          // console.log(my_time)
+          var days  = my_time / 1000 / 60 / 60 / 24;
+          var daysRound = Math.floor(days);
+          var hours = my_time / 1000 / 60 / 60 - (24 * daysRound);
+          var hoursRound = Math.floor(hours);
+          var minutes = my_time / 1000 / 60 - (24 * 60 * daysRound) - (60 * hoursRound);
+          var minutesRound = Math.floor(minutes);
+          var seconds = my_time / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound);
+          var secondsRound = Math.floor(seconds);
+          return [daysRound,hoursRound,minutesRound,secondsRound]
+        }
+
+        var days = time_arr[0]
+        var hours = time_arr[1]
+        var minutes = time_arr[2]
+        var seconds = time_arr[3]
+
+        if(isNaN(parseInt(days))){
+          days = 5
+        }
+        if(isNaN(parseInt(hours))){
+          hours = 0
+        }
+        if(isNaN(parseInt(minutes))){
+          minutes = 0
+        }
+        if(isNaN(parseInt(seconds))){
+          seconds = 0
+        }
+
+        // var days = 5
+        // var hours = 0
+        // var minutes = 0
+        // var seconds = 0
+
+        var times = days + "天" + hours + "小时" + minutes + "分" + seconds + "秒"
+        $("#coupon-countdown-content").text(times)
+
+        var timer = setInterval(function() {
+
+          if(seconds == 0) {
+            if(minutes == 0){
+              if(hours == 0){
+                if(days == 0){
+                  // clearInterval(timer)
+                  // console.log("--- times end ---")
+                  days = 5
+                }else{
+                  seconds = 59
+                  minutes = 59
+                  hours = 23
+                  days--
+                }
+              }else{
+                seconds = 59
+                minutes = 59
+                hours--
+              }
+            }else{
+              seconds = 59
+              minutes--
+            }
+          }else{
+            seconds--
+          }
+
+          times = days + "天" + hours + "小时" + minutes + "分" + seconds + "秒"
+          $("#coupon-countdown-content").text(times)
+
+        }, 1000)
+        
+
+      }
+    });
+
+    var couponData_ = $.getUrlParam('coupon_data');
+    $.ajax({
+      type: "GET",
+      url: 'http://iguitar.immusician.com:2525/v3/web_bug_coupon',
+      // url: 'http://192.168.1.77:22222/v3/web_bug_coupon',
+      data: { 'coupon_list': JSON.stringify(couponData_), 'uid': uid },
+      dataType: 'json',
+      error: function () {
+      },
+      success: function (data) {
+        couponData = data.data
+        if (!couponData) {
+          couponData = [];
+        } else {
+          couponData.forEach(function (t) {
+            t['labelone'] = dictToList(t.label_one);
+            t['labeltwo'] = dictToList(t.label_two);
+            t['ids'] = dictToList(t.ids);
+            t['_id'] = t._id;
+            t['value'] = t.coupon_value;
+          });
+        }
+      }
+    });
+    
+    var currentChoiceIndex = 0;
+
+    
+
+    // 切换课程匹配优惠券
+    function selectCoupon() {
+      var couponCount = 0;
+      var sel_coupon_index = -1
+      $('#alert-coupon-content').empty();
+      function sortPrice(a,b){  
+        return b.coupon_value - a.coupon_value  
+      }
+      couponData.sort(sortPrice)
+      console.log(couponData)
+      couponData.forEach(function (t, index, all) {
+        if ((course_id && course_id !== '') || ((!course_id || course_id === '') && (t.instrument === -1 || t.instrument === 2 || t.instrument === 3 || t.instrument === parseInt(instrument_type)) && ((t.ids.length === 0) || ($.inArray(goods_id, t.ids) !== -1)) && ((t.labelone.length === 0) || ($.inArray(0, t.labelone) !== -1)))) {
+          couponCount += 1;
+          console.log(sel_coupon_index)
+          if(sel_coupon_index == -1){
+            sel_coupon_index = index
+          }
+          $('#alert-coupon-content').append('<div id="alert-coupon-content-' + index + '" class="alert-coupon-content">\
+            <div id="alert-coupon-content-price">¥' + t.value + '</div>\
+            <div id="alert-coupon-content-line">\
+            </div>\
+            <div id="alert-coupon-content-body">\
+            <div id="alert-coupon-content-title">' + t.name + '</div>\
+            <div id="alert-coupon-content-describe">' + t.describe + '</div>\
+            <div id="alert-coupon-content-time">' + getMyDate(parseInt(t.start_time + "000")) + ' - ' + getMyDate(parseInt(t.end_time + "000")) + '</div>\
+            <div id="alert-coupon-content-remind">' + (getResidueTime(t.end_time)) + '</div>\
+            <div class="alert-coupon-content-choice" id="alert-coupon-content-choice-' + index + '"></div>\
+            </div>\
+            </div>');
+
+          $('#alert-coupon-content-choice-' + index).click(function () {
+            console.log("aaaaa")
+            choiceCoupon(data = { coupon: t, index: index })
+          })
+          if(index == 0){
+            // $('#alert-coupon-content-choice-' + index).click()
+            // $('#alert-coupon-content-choice-' + index).trigger("click")
+            // $('#alert-coupon-content-choice-0').css({ 'background-image': 'url(http://s.immusician.com/static/payment_material/select.png)', 'background-size': '100% 100%', '-moz-background-size': '100% 100%' })
+
+          }
+        }
+      });
+
+      if(couponCount>0){
+        console.log(couponCount)
+        console.log(sel_coupon_index)
+        // console.log($('#alert-coupon-content .alert-coupon-content'))
+        // console.log($('#alert-coupon-content .alert-coupon-content')[0])
+        // $('#alert-coupon-content .alert-coupon-content')[0].click()
+        $('#alert-coupon-content-choice-' + sel_coupon_index).click()
+      }
+
+      if (couponCount > 0) {
+        $('#alert-coupon-state').text('有' + couponCount + '张优惠券可用,已勾选1张').css({"color" : "red"}).append('<div id="btn_list"><img src="http://s.immusician.com/static/you/imgs/list.png" alt=""></div>')
+      } else {
+        $('#alert-coupon-state').text('无可用优惠券').css({"color" : "#999999"});
+      }
+      if(is_renew){
+        $('#alert-coupon-state').text("1个月")    
+      }
+      if(is_year_renew){
+        $('#alert-coupon-state').text("12个月")    
+      }
+      
+    }
+
+    $('#alert-coupon-state').click(function () {
+      $('#alert-coupon-content').css({ 'display': ($('#alert-coupon-content').css('display') === 'none' ? 'block' : 'none') });
+      $('#btn_list img').css({ 'transform': ($('#alert-coupon-content').css('display') === 'none' ? 'rotate(0deg)' : 'rotate(90deg)') })
+    });
+    var purchaseData = null;
+    $('#alert-bottom-wechatpay').click(function () {
+
+      $('.loading').css({ 'display': 'block' });
+      $('.loading-image').css({ 'display': 'block' });
+      var requestWxBody = { 'goods': JSON.stringify([[goods_id, '\u8bfe\u7a0b', 1]]), 'channel': 'wx', 'receiver': uid, 'client_ip': ip, 'user_id': parseInt(uid) };
+      if (choicedCouponId !== "") {
+        requestWxBody['coupon'] = JSON.stringify(choicedCouponId);
+      } else if (choicedCodeId !== "") {
+        requestWxBody['code'] = choicedCodeId;
+        requestWxBody['goods'] = JSON.stringify([[goods_id, '\u4f18\u60e0\u5238', 1]]);
+      }
+      if(is_renew){
+        requestWxBody['goods'] = JSON.stringify([[goods_id, '\u6708\u7eed\u8d39', 1]]);
+      }
+      if(is_year_renew){
+        requestWxBody['goods'] = JSON.stringify([[goods_id, '\u5e74\u7eed\u8d39', 1]]);
+      }
+      console.log(requestWxBody)
+      requestWxBody['bundle_id'] = bundle_id;
+      htmlobj = $.ajax({
+        type: "POST",
+        url: 'http://api.iguitar.immusician.com/api/payment',
+        // url: 'http://192.168.1.171:7001/api/payment',
+        data: requestWxBody,
+        dataType: 'json',
+        error: function (data) {
+          // console.log(data)
+          $('.loading').css({ 'display': 'none' });
+          $('.loading-image').css({ 'display': 'none' });
+        },
+        success: function (data) {
+          console.log(data)
+          $('.loading').css({ 'display': 'none' });
+          $('.loading-image').css({ 'display': 'none' });
+          // console.log($.base64.btoa(encodeURI(encodeURI(JSON.stringify(data.data)))))
+          window.location.href = 'pay://' + $.base64.btoa(encodeURI(encodeURI(JSON.stringify(data.data))));
+        }
+      })
+    });
+    $('#alert-bottom-alipay').click(function () {
+      $('.loading').css({ 'display': 'block' });
+      $('.loading-image').css({ 'display': 'block' });
+      var requestAliBody = { 'goods': JSON.stringify([[goods_id, '\u8bfe\u7a0b', 1]]), 'channel': 'alipay', 'receiver': uid, 'client_ip': ip, 'user_id': parseInt(uid) }
+      // console.log(requestAliBody) 
+      if (choicedCouponId !== "") {
+        requestAliBody['coupon'] = JSON.stringify(choicedCouponId);
+      } else if (choicedCodeId !== "") {
+        requestAliBody['code'] = choicedCodeId;
+        requestAliBody['goods'] = JSON.stringify([[goods_id, '\u4f18\u60e0\u5238', 1]]);
+      }
+      requestAliBody['bundle_id'] = bundle_id;
+      if(is_renew){
+        requestAliBody['goods'] = JSON.stringify([[goods_id, '\u6708\u7eed\u8d39', 1]]);
+      }
+      if(is_year_renew){
+        requestAliBody['goods'] = JSON.stringify([[goods_id, '\u5e74\u7eed\u8d39', 1]]);
+      }
+      console.log(requestAliBody)
+      htmlobj = $.ajax({
+        type: "POST",
+        url: 'http://api.iguitar.immusician.com/api/payment',
+        // url: 'http://192.168.1.171:7001/api/payment',
+        data: requestAliBody,
+        dataType: 'json',
+        error: function (data) {
+          // console.log(data)
+          $('.loading').css({ 'display': 'none' });
+          $('.loading-image').css({ 'display': 'none' });
+        },
+        success: function (data) {
+          console.log(data)
+          $('.loading').css({ 'display': 'none' });
+          $('.loading-image').css({ 'display': 'none' });
+          // console.log($.base64.btoa(encodeURI(encodeURI(JSON.stringify(data.data)))))
+          window.location.href = 'pay://' + $.base64.btoa(encodeURI(encodeURI(JSON.stringify(data.data))));
+        }
+      })
+    });
+
+    // 特殊操作
+    if ($('#outspread').css('display') === 'none') {
+      $('#outspread').css({ 'display': 'block' });
+    };
+
+    // if (course_id || is_expiration.length != 0) {
+    if (course_id) {
+      $('#courses').css({ 'display': 'none' });
+      $("#courses-label").css({'margin-bottom':'0.6rem'})
+    }
+    
+  })
+
+</script>
+
+
+<script type="text/javascript">
+
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+      docEl.dataset.dpr = dpr;
+      var recalc = function () {
+        var width = docEl.clientWidth;
+        if (width / dpr > 1334) {
+          width = 1334 * dpr;
+        }
+        docEl.dataset.width = width
+        docEl.dataset.percent = 100 * (width / 1334);
+        docEl.style.fontSize = 100 * (width / 1334) + 'px';
+      };
+      recalc()
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);
+
+    // 横屏适配
+    // (function (doc, win) {
+    //   var docEl = doc.documentElement,
+    //     isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+    //     dpr = isIOS? Math.min(win.devicePixelRatio, 3) : 1,
+    //     dpr = window.top === window.self? dpr : 1, //被iframe引用时，禁止缩放
+    //     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+    //     docWidth = document.body.offsetHeight;
+    //   docEl.dataset.dpr = dpr;
+    //   var recalc = function () {
+    //     var width = docEl.clientHeight;
+    //     if (width / dpr > 600) {
+    //       width = 600 * dpr;
+    //     }
+    //     docEl.dataset.width = width;
+    //     if (width < 330) {
+    //       docEl.dataset.percent = 100 * (width / 733);
+    //       docEl.style.fontSize = 100 * (width / 733) + 'px';
+    //       } else if (docWidth > 500) {
+    //       docEl.dataset.percent = 100 * (width / 875);
+    //       docEl.style.fontSize = 100 * (width / 875) + 'px';
+    //         // docEl.dataset.percent = 100 * (width / 2000);
+    //         // docEl.style.fontSize = 100 * (width / 2000) + 'px';
+    //     } else {
+    //       docEl.dataset.percent = 100 * (width / 750);
+    //       docEl.style.fontSize = 100 * (width / 750) + 'px';
+    //     }
+    //   };
+    //   recalc();
+    //   if (!doc.addEventListener) return;
+    //   win.addEventListener(resizeEvt, recalc, false);
+    // })(document, window);
+
+</script>
+
+</html>

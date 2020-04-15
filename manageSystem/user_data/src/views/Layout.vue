@@ -173,12 +173,12 @@ const myMenus = [
     name: "Bills",
     menuText: "财务报表",
     children: [
-      {
-        hasChild: false,
-        name: "channelBills",
-        text: "渠道对账单",
-        link: "/channelBills"
-      },
+      // {
+      //   hasChild: false,
+      //   name: "channelBills",
+      //   text: "渠道对账单",
+      //   link: "/channelBills"
+      // },
       {
         hasChild: false,
         name: "factoryBills",
@@ -188,7 +188,7 @@ const myMenus = [
       {
         hasChild: false,
         name: "downloadChannels",
-        text: "下载渠道对账单",
+        text: "渠道对账单",
         link: "/downloadChannels"
       }
     ]

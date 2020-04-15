@@ -6,6 +6,8 @@
       <BreadcrumbItem>子商品</BreadcrumbItem>
     </Breadcrumb>
     <div class="table_top_tool">
+      <span>搜索：</span>
+      <Input style="width:160px" v-model="searchKey" placeholder="请输入关键字搜索"></Input>
       <Button type="primary" @click="createNewBank" style="margin-right:30px">新建子商品</Button>
     </div>
     <!-- <Select style="width: 160px" @on-change="getTableList" v-model="searchFactory" placeholder>
@@ -269,7 +271,8 @@ export default {
       fromCourseArr: [],
       tuids: [],
       allTuid: {},
-      trains: []
+      trains: [],
+      searchKey:''
     };
   },
   mounted() {
@@ -367,7 +370,7 @@ export default {
         .get(
           `${
             process.env.WULIU
-          }/cgoods/index?page=0&size=999&status=1&vendor_id=${vendor_id}`
+          }/cgoods/index?page=0&size=999&status=1&vendor_id=${vendor_id}&key=${this.searchKey}`
         )
         .then(res => {
           this.tableLoading = false;
@@ -402,6 +405,9 @@ export default {
           this.tuids = [];
         }
       }
+    },
+    searchKey(){
+      this.getTableList()
     }
   }
 };

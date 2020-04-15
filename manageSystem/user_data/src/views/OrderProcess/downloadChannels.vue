@@ -192,6 +192,9 @@ export default {
         .then(res => {
           this.tableLoading = false;
           this.dataList = res.data.data_list;
+          if(res.data.down_url){
+            window.open(res.data.down_url,'_blank');
+          }
         });
     }
   }

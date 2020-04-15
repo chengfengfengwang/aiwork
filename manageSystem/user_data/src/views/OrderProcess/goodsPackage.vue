@@ -6,6 +6,8 @@
       <BreadcrumbItem>sku</BreadcrumbItem>
     </Breadcrumb>
     <div class="table_top_tool">
+      <span>搜索：</span>
+      <Input style="width:160px" v-model="searchKey" placeholder="请输入关键字搜索"></Input>
       <Button type="primary" @click="createNewBank" style="margin-right:30px">新建sku</Button>
     </div>
     <!-- <Select style="width: 160px" @on-change="getTableList" v-model="searchChannel" placeholder>
@@ -63,6 +65,9 @@
           </FormItem>
           <FormItem v-if="formValidate.pay_way===1" label="供货价格">
             <Input v-model="formValidate.supply_price" placeholder="单位：元"></Input>
+          </FormItem>
+          <FormItem label="标记名称">
+            <Input v-model="formValidate.show_name" placeholder="请输入备注"></Input>
           </FormItem>
           <FormItem label="备注">
             <Input v-model="formValidate.note" placeholder="请输入备注"></Input>
@@ -126,7 +131,7 @@ export default {
       columns: [
         {
           title: "名称",
-          key: "name"
+          key: "show_name"
         },
         // {
         //   title: "联系人",
@@ -242,7 +247,8 @@ export default {
       total: 0,
       downloadModalShow: false,
       startTime1: "",
-      endTime1: ""
+      endTime1: "",
+      searchKey:""
     };
   },
   components: {
@@ -360,7 +366,7 @@ export default {
         .get(
           `${process.env.WULIU}/fgoods/index?page=${this.page}&size=${
             this.pageSize
-          }&status=1&channel_id=${channel_id}`
+          }&status=1&channel_id=${channel_id}&key=${this.searchKey}`
         )
         .then(res => {
           this.tableLoading = false;
@@ -384,6 +390,9 @@ export default {
           this.courseSlectList = [];
         }
       }
+    },
+    searchKey(){
+      this.getTableList()
     }
   }
 };
