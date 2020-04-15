@@ -184,6 +184,12 @@ const myMenus = [
         name: "factoryBills",
         text: "厂商对账单",
         link: "/factoryBills"
+      },
+      {
+        hasChild: false,
+        name: "downloadChannels",
+        text: "下载渠道对账单",
+        link: "/downloadChannels"
       }
     ]
   },

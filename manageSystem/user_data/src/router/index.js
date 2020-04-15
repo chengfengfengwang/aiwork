@@ -30,7 +30,9 @@ import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
 import tools from './../views/OrderProcess/tools'
 import wanwuOrderList from './../views/OrderProcess/wanwuOrderList.vue'
+//夏令营活动
 import SumerCamp from './../views/SumerCamp.vue'
+import downloadChannels from './../views/OrderProcess/downloadChannels.vue'
 
 import Test from './../views/Test.vue';
 
@@ -159,6 +161,12 @@ const router = new Router({
           name: 'channelBills',
           path: '/channelBills',
           component: channelBills,
+          meta: { parentMenu: 'Bills' }
+        },
+        {
+          name: 'downloadChannels',
+          path: '/downloadChannels',
+          component: downloadChannels,
           meta: { parentMenu: 'Bills' }
         },
         {

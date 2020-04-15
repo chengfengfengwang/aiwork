@@ -5,7 +5,7 @@
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
           <!-- <div class="layout-logo"></div> -->
-          <div class="app_name">课程激活管理后台</div>
+          <!-- <div class="app_name">课程激活管理后台</div> -->
           <div class="layout-nav"></div>
           <div class="user">
             <!-- <Avatar>A</Avatar> -->
