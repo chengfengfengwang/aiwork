@@ -376,7 +376,13 @@ const myMenus = [
         link: "/CountData/CountDataActivityYinji"
       }
     ]
-  }
+  },
+  {
+    hasChild: false,
+    name: "ShareConfig",
+    text: "app分享配置",
+    link: "/ShareConfig"
+  },
 ];
 const shanshanMenus = [
   {

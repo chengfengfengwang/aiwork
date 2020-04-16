@@ -106,7 +106,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/shareAc413/poster1.jpg`)
+        let url = require(`../../../assets/img/shareAc413/poster2.jpg`)
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{

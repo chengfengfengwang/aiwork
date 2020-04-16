@@ -44,5 +44,9 @@ export default {
     '刮胡': 'guiro',
     '沙蛋': 'egg_shaker',
     '沙锤': 'sand_hammer',
-    '毛毛虫': 'caterpillar'
+    '毛毛虫': 'caterpillar',
+    '二胡': 'erhu',
+    '琵琶': 'pipa',
+    '古筝': 'guzheng',
+    '箫':'xiao'
 }
