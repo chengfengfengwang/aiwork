@@ -18,7 +18,7 @@ npm run deploy
 
 ```
 # 线上地址
-http://cdn.kids.immusician.com/web/music-base-h5/index.html#/QuestionBankPay
+http://s.immusician.com/web/admin/open_class/index.html#/book415
 
 
 

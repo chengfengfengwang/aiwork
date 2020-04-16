@@ -1,16 +1,15 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow"/>
-    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
+    <div v-show="resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
       <img v-show="!loadingShow" :src="qrSrc" alt class="qr">
     </div>
-    <div v-show="resultBase64Show" class="poster_wrapper">
+    <!-- <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
-    </div>
-    <!-- <div v-show="!loadingShow" @click="share" class="share_btn">分享给好友</div> -->
-    <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips">长按保存图片</div>
+    </div> -->
+    <!-- <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
+    <div v-show="!loadingShow" class="tips">长按保存图片</div> -->
   </div>
 </template>
 <script>
@@ -107,7 +106,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/yiqiac/poster1.png`)
+        let url = require(`../../../assets/img/shareAc413/poster1.jpg`)
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
@@ -205,9 +204,11 @@ export default {
   }
   .qr {
     position: absolute;
-    bottom: 15px;
-    right: 31px;
-    width: 90px;
+    // bottom: 15px;
+    // right: 31px;
+    top: 502px;
+    left: 260px;
+    width: 60px;
     border-radius: 3px;
   }
   .qr.nofree{

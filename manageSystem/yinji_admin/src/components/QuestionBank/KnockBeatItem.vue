@@ -34,10 +34,6 @@
       <BasicDisplay style="display:inline-block" :content="question.data.end_beat_index"></BasicDisplay>
     </div>
     <div>
-      <span class="preview_label">6/8拍：</span>
-      <BasicDisplay style="display:inline-block" :content="question.data.mult"></BasicDisplay>
-    </div>
-    <div>
       <span class="preview_label">模式：</span>
       <BasicDisplay style="display:inline-block" :content="question.data.play_mode"></BasicDisplay>
     </div>
@@ -344,6 +340,11 @@ export default {
       data.start_beat_index = resultParam.data.start_beat_index;
       data.end_beat_index = resultParam.data.end_beat_index;
       data.mult = resultParam.data.mult;
+      if(data.mult===undefined){
+        data.mult = 1;
+      }else{
+        data.mult = Number(data.mult)
+      }
       data.play_mode = resultParam.data.play_mode;
       data.topic_voice = resultParam.data.topic_voice;
       data.music_file = resultParam.data.music_file;
@@ -361,6 +362,7 @@ export default {
         resultParam.online = 0;
       }
       var resultParam = JSON.parse(JSON.stringify(resultParam));
+      console.log(resultParam)
       //return;
       this.axios
         .post(
@@ -517,7 +519,6 @@ export default {
   watch: {
     initQuestion() {
       this.question = this.initQuestion;
-      //console.log("执行了reset");
       //this.reset();
       //this.init()
     }

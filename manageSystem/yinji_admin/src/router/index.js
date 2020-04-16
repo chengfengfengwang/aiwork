@@ -51,6 +51,7 @@ import CountDataActivityAi from './../views/CountData/ActivityAi.vue'
 
 import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
+import ShareConfig from './../views/ShareConfig.vue';
 import test from './../views/myTest.vue';
 Vue.use(Router)
 
@@ -235,6 +236,11 @@ const router = new Router({
           path: '/AddWx',
           component: AddWx
         },  
+        {
+          name: 'ShareConfig',
+          path: '/ShareConfig',
+          component: ShareConfig
+        }, 
         {
           name: 'CountDataCourseAi',
           path: '/CountData/CountDataCourseAi',
