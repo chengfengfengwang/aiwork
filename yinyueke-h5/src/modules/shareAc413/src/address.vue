@@ -1,7 +1,10 @@
 <template>
   <div class="page">
+    <img src="../../../assets/img/shareAc413/bg.png" alt="" class="bg">
     <div class="wrapper">
+      
       <div class="book">
+        <img src="../../../assets/img/shareAc413/title.png" alt="" class="page_title">
         <div class="book_name">《器乐王国之旅》</div>
         <div>课程及精美教材</div>
       </div>
@@ -26,7 +29,7 @@
         </div>
         <div class="input_wrapper textarea">
           <div class="label">收货地址：</div>
-          <textarea v-model="form.address" placeholder="请填写您的收货地址"></textarea>
+          <textarea v-model="form.address" placeholder="请填写您的收货详细地址"></textarea>
         </div>
         <div @click="submit" class="reg_btn">点击提交</div>
       </div>
@@ -106,6 +109,17 @@ export default {
           window.scrollTo(0, 0);
         });
       });
+      var textAreaArr = document.querySelectorAll("textarea");
+      textAreaArr.forEach(function(ele) {
+        let scrollTop;
+        ele.addEventListener("focus", function() {
+          scrollTop = document.body.scrollTop;
+        });
+        ele.addEventListener("blur", function() {
+          //document.body.scrollTop = scrollTop;
+          window.scrollTo(0, 0);
+        });
+      });
     },
     submit() {
       this.form.code = this.wxCode;
@@ -139,23 +153,29 @@ export default {
 </script>
 <style lang="less">
 @import url("./../../../common/common.less");
+body{
+  background-color: #CBD26B;
+}
 .page {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  padding: 0 30px;
-  background: url("../../../assets/img/shareAc413/bg.png") no-repeat top
-    center/100%;
+  padding-bottom: 30px;
+  // background: url("../../../assets/img/shareAc413/bg.png") no-repeat top
+  //   center/100%;
 
-  background-color: #fff8df;
+  //background-color: #CBD26B;
+  img.bg{
+    width: 100%;
+  }
 }
 .wrapper {
   position: absolute;
   left: 0;
-  top: 22%;
+  top: 5%;
   //top: 220px;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    top: 26%;
+    top: 6%;
   }
   width: 100%;
   padding: 0 30px;
@@ -166,6 +186,12 @@ export default {
     font-family: PingFang SC;
     font-weight: 600;
     color: rgba(203, 121, 11, 1);
+    .page_title{
+      display: block;
+      margin: auto;
+      margin-bottom: 16px;
+      width: 244px;
+    }
     .book_name {
       font-family: PingFangSC-Semibold;
       font-size: 36px;
@@ -260,8 +286,9 @@ export default {
     height: 44px;
     margin-left: auto;
     margin-right: auto;
-    background: rgba(255, 116, 43, 0.7);
-    border-radius: 25px;
+    background:rgba(255,104,49,1);
+
+    border-radius: 22px;
     font-size: 18px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
