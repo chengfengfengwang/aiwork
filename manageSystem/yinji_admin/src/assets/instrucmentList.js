@@ -48,5 +48,7 @@ export default {
     '二胡': 'erhu',
     '琵琶': 'pipa',
     '古筝': 'guzheng',
-    '笛子':'dizi'
+    '笛子':'dizi',
+    '唢呐': 'suona',
+    '扬琴':'yangqin',
 }
