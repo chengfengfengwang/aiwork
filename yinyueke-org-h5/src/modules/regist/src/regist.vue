@@ -22,7 +22,7 @@
           <option v-for="course in courseList" :key="course.id" :value="course.id">{{course.name}}</option>
         </select>
       </div>
-      <div @click="reg" class="reg_btn"> {{isTrial?'注册体验课':'立即注册'}} </div>
+      <div @click="reg" class="reg_btn">{{isTrial?'注册体验课':'立即注册'}}</div>
     </div>
     <img src="../../../assets/img/regist/rd1.png" alt class="d1">
     <img src="../../../assets/img/regist/rd2.png" alt class="d2">
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {
@@ -70,6 +71,13 @@ export default {
         });
     },
     reg() {
+      if (!this.selectedCourse) {
+        Toast({
+          message: "请选择课程信息",
+          duration: 2000
+        });
+        return
+      }
       this.form.course_ids = [Number(this.selectedCourse)];
       this.form.is_trial = this.isTrial ? 1 : 0;
       this.axios

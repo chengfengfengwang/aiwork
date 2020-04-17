@@ -25,7 +25,7 @@ export default {
       qrSrc: "",
       bgSrc: "",
       wxMaterial: "",
-      loadingShow: false,
+      loadingShow: true,
       resultBase64Show: false,
       resultBase64: "",
       openInApp,
@@ -198,22 +198,22 @@ export default {
 };
 </script>
 <style lang="less">
+#main{
+  min-height: 100vh
+}
 .poster_wrapper {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
   .bg {
     width: 100%;
   }
   .qr {
     position: absolute;
-    // bottom: 15px;
-    // right: 31px;
-    top: 502px;
-    left: 260px;
-    width: 60px;
+    top: 239px;
+    left: 144px;
+    width: 88px;
     border-radius: 3px;
-  }
-  .qr.nofree{
-    bottom: 20px;
-    right: 22px;
   }
 }
 
@@ -242,10 +242,6 @@ export default {
   font-weight: 400;
   color: rgba(57, 57, 57, 1);
   -webkit-text-stroke: 1px undefined;
-  text-stroke: 1px undefined;
 }
-.tips.nofree{
-  bottom: 28px;
-    right: 2px;
-}
+
 </style>

@@ -6,6 +6,7 @@
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/3.jpg" alt class="bg" />
+    <img src="../../../assets/img/qbRace/4.jpg" alt class="bg" />
   </div>
 </template>
 <script>

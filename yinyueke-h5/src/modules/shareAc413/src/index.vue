@@ -1,9 +1,8 @@
 <template>
   <div id="main">
-    <img class="bg" src="../../../assets/img/yiqiac/bg1.png" alt />
+    <img class="bg" src="../../../assets/img/shareAc413/index_bg.jpg" alt />
     <div @click="toPoster" class="btn_wrapper">
-      <div class="text">生成我的专属海报</div>
-      <img  class="btn" src="../../../assets/img/yiqiac/btn1.png" alt />
+      <img class="btn" src="../../../assets/img/shareAc413/index_btn.jpg" alt />
     </div>
   </div>
 </template>
@@ -12,11 +11,10 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      topText: "趣味乐理启蒙配套教材音频（上）"
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
+    //document.title = "疫期不孤单，爱心赠好课";
   },
 
   methods: {
@@ -36,7 +34,7 @@ export default {
 }
 .btn_wrapper {
   position: absolute;
-  bottom: 0;
+  bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
   .text {

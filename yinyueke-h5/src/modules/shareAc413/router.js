@@ -20,8 +20,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'poster',
-      component: poster
+      name: 'home',
+      component: home
     },
     {
       path: '/address',
