@@ -37,7 +37,7 @@ export default {
   width: 100%;
 }
 .btn_wrapper {
-  position: absolute;
+  position: fixed;
   bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
