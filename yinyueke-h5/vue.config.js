@@ -129,5 +129,7 @@ module.exports = {
         downloadTip: 'src/modules/downloadTip/app.js',
         //分享领课活动
         shareAc413: 'src/modules/shareAc413/app.js',
+        //惠娟书的二维码
+        book417: 'src/modules/book417/app.js',
     }
 }

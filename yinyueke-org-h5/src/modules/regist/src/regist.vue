@@ -32,6 +32,8 @@
 <script>
 import { getQueryVariable } from "../../../common/util.js";
 import { Toast } from "vant";
+import validator from 'validator';
+
 export default {
   data() {
     return {
@@ -54,9 +56,15 @@ export default {
     this.getCourses();
   },
   mounted() {
-    console.log(location.href);
+    var str = undefined;
+    console.log(validator.isInt(str,{min:0, max: undefined}));
   },
   methods: {
+    validator(){
+      for(let key  in this.form){
+        console.log(key + '---' + obj[key])
+      }
+    },
     getCourses() {
       this.axios
         .post(`${process.env.VUE_APP_ORG}/v9/class_info/get_course_apply`, {
@@ -65,8 +73,6 @@ export default {
         })
         .then(res => {
           this.courseList = res.data;
-          console.log("---");
-          console.log(this.courseList);
           //this.courseList.unshift({ id: "-1", name: "全部" });
         });
     },

@@ -1,44 +1,40 @@
 <template>
   <div id="main">
-    <img class="bg" src="../../../assets/img/shareAc413/index_bg.jpg" alt />
-    <div @click="toPoster" class="btn_wrapper">
-      <img class="btn" src="../../../assets/img/shareAc413/index_btn.jpg" alt />
-    </div>
+    {{book}}
   </div>
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import bookDir from "../bookDir.js";
 export default {
   data() {
     return {
+      book:''
     };
   },
   created() {
-    //document.title = "疫期不孤单，爱心赠好课";
+    console.log(bookDir);
+    this.book = bookDir[getQueryVariable('index')]
+    console.log(this.book);
   },
 
   methods: {
-    toPoster() {
-      //this.$router.push("/poster");
-      let url = `http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=http://cdn.kids-web.immusician.com/yinji/shareAc413.html%23/poster`;
-      //let url = `http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=${param}`;
-      location.href = url
-    }
+    
   }
 };
 </script>
 <style lang="less">
 #main {
   position: relative;
-  font-size: 0;
-  overflow: hidden;
+  font-size: 16px;
+  text-align: center
 }
 .bg {
   width: 100%;
 }
 .btn_wrapper {
   position: absolute;
-  bottom: -7px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   .text {
