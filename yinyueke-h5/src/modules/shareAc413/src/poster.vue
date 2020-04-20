@@ -1,21 +1,31 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow"/>
-    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
+    <div
+      v-show="!resultBase64Show"
+      id="posterContainer"
+      :class="{absolute_style:absoluteStyle}"
+      class="poster_wrapper"
+    >
       <img class="bg" :src="bgSrc" alt>
       <img v-show="!loadingShow" :src="qrSrc" alt class="qr">
     </div>
-    <div v-show="resultBase64Show" class="poster_wrapper">
-      <img class="bg"  :src="resultBase64" alt="">
+    <div v-show="resultBase64Show" :class="{absolute_style:absoluteStyle}" class="poster_wrapper">
+      <img class="bg" :src="resultBase64" alt>
     </div>
     <!-- <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
-    <div v-show="!loadingShow" class="tips">长按保存图片</div> -->
+    <div v-show="!loadingShow" class="tips">长按保存图片</div>-->
   </div>
 </template>
 <script>
 // var eruda = require("eruda");
 // eruda.init();
-import { testWeixin, openInApp, getQueryVariable, platForm } from "../../../common/util.js";
+import {
+  testWeixin,
+  openInApp,
+  getQueryVariable,
+  platForm
+} from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
@@ -29,34 +39,39 @@ export default {
       resultBase64Show: false,
       resultBase64: "",
       openInApp,
+      absoluteStyle: false
     };
   },
   created() {
-    console.log(!getQueryVariable('code') && testWeixin())
-    if(!getQueryVariable('code') && testWeixin()){
-      let originUrl = `${location.origin}${location.pathname}${location.hash}`
+    if (!getQueryVariable("code") && testWeixin()) {
+      let originUrl = `${location.origin}${location.pathname}${location.hash}`;
       let encodedUrl = encodeURIComponent(originUrl);
-      let scope = 'snsapi_base';
-      console.log(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
-      location.replace(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`)
-    }else{
-      this.wxCode = getQueryVariable('code');
-      sessionStorage.setItem('code',getQueryVariable('code'))
+      let scope = "snsapi_base";
+      console.log(
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`
+      );
+      location.replace(
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxebd76dff6ca15a2a&redirect_uri=${encodedUrl}&response_type=code&scope=${scope}&state=STATE#wechat_redirect`
+      );
+    } else {
+      this.wxCode = getQueryVariable("code");
+      sessionStorage.setItem("code", getQueryVariable("code"));
     }
-    let sessionCode = sessionStorage.getItem('code');
+    let sessionCode = sessionStorage.getItem("code");
     //后退到了没有code的链接
-    if(sessionCode && !getQueryVariable('code')){
+    if (sessionCode && !getQueryVariable("code")) {
       this.wxCode = sessionCode;
     }
-    console.log('---------')
-    console.log(getQueryVariable('code'))
-    console.log(sessionStorage.getItem('code'))
-    console.log('---------')
+    console.log("---------");
+    console.log(getQueryVariable("code"));
+    console.log(sessionStorage.getItem("code"));
+    console.log("---------");
     // this.getSignInfo().then(param => {
     //   this.shareReady(param);
     // });
+    this.getAbsoluteStyle()
   },
-  
+
   components: {
     Loading
   },
@@ -64,13 +79,24 @@ export default {
     this.getWx();
   },
   methods: {
+    getAbsoluteStyle() {
+      let sWidth = window.innerWidth;
+      let sHeight = window.innerHeight;
+      let sRatio = sWidth / sHeight;
+      let posterRatio = 375 / 574;
+      if (sRatio < posterRatio) {
+        this.absoluteStyle = true;
+      } else {
+        this.absoluteStyle = false;
+      }
+    },
     getWx() {
       //app里没有填写手机号，从url上面拿
       //非app从上一步用户填写的自己手机号 里面拿
       this.axios
         //.post(`${process.env.VUE_APP_LIEBIAN}/v1/wechat/share_qrcode/`,{
         .post(`http://api.yinji.immusician.com/v1/wechat/share_qrcode/`, {
-          share_stall:0,
+          share_stall: 0,
           code: this.wxCode,
           share_id: 8
         })
@@ -84,13 +110,10 @@ export default {
       let pArr = [];
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
-      console.log(pArr);
       Promise.all(pArr).then(res => {
-        console.log("--");
         setTimeout(() => {
           this.getResult64();
         }, 100);
-        
       });
     },
     createQr() {
@@ -106,20 +129,18 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/shareAc413/poster2.jpg`)
+        let url = require(`../../../assets/img/shareAc413/poster2.jpg`);
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
         //   url = require("../../../assets/img/yiqiac/poster1.png")
         // }
-        this.imgToBase64(url).then(
-          res => {
-            console.log("poster64 ready");
-            this.bgSrc = res;
-            this.loadingShow = false;
-            resolve();
-          }
-        );
+        this.imgToBase64(url).then(res => {
+          console.log("poster64 ready");
+          this.bgSrc = res;
+          this.loadingShow = false;
+          resolve();
+        });
       });
     },
     imgToBase64(url) {
@@ -163,14 +184,12 @@ export default {
       });
     },
     getResult64() {
-      console.log(document.querySelector("#posterContainer"))
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
         //allowTaint: true
       }).then(canvas => {
         //return
         //把画好的canvas转成base64
-        console.log(canvas);
         // var img = new Image();
         // img.classList.add("resultImg");
         // img.src = canvas.toDataURL("image/png");
@@ -198,13 +217,10 @@ export default {
 };
 </script>
 <style lang="less">
-#main{
-  min-height: 100vh
+#main {
+  min-height: 100vh;
 }
 .poster_wrapper {
-  position: absolute;
-  top:50%;
-  transform: translateY(-50%);
   .bg {
     width: 100%;
   }
@@ -216,7 +232,11 @@ export default {
     border-radius: 3px;
   }
 }
-
+.absolute_style {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .share_btn {
   position: absolute;
   right: 15px;
@@ -243,5 +263,4 @@ export default {
   color: rgba(57, 57, 57, 1);
   -webkit-text-stroke: 1px undefined;
 }
-
 </style>
