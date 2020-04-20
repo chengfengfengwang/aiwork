@@ -1,13 +1,13 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow"/>
-    <div v-show="resultBase64Show" id="posterContainer" class="poster_wrapper">
+    <div v-show="!resultBase64Show" id="posterContainer" class="poster_wrapper">
       <img class="bg" :src="bgSrc" alt>
       <img v-show="!loadingShow" :src="qrSrc" alt class="qr">
     </div>
-    <!-- <div v-show="resultBase64Show" class="poster_wrapper">
+    <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg"  :src="resultBase64" alt="">
-    </div> -->
+    </div>
     <!-- <div v-show="!loadingShow && openInApp" @click="share" class="share_btn">分享给好友</div>
     <div v-show="!loadingShow" class="tips">长按保存图片</div> -->
   </div>
