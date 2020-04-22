@@ -52,6 +52,7 @@ import CountDataActivityAi from './../views/CountData/ActivityAi.vue'
 import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
 import ShareConfig from './../views/ShareConfig.vue';
+import AppHomeConfig from './../views/AppHomeConfig.vue';
 import test from './../views/myTest.vue';
 Vue.use(Router)
 
@@ -241,6 +242,11 @@ const router = new Router({
           path: '/ShareConfig',
           component: ShareConfig
         }, 
+        {
+          name: 'AppHomeConfig',
+          path: '/AppHomeConfig',
+          component: AppHomeConfig
+        },
         {
           name: 'CountDataCourseAi',
           path: '/CountData/CountDataCourseAi',

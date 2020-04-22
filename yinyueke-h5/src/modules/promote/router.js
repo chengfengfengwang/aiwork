@@ -26,6 +26,8 @@ const ou_regSuccess = () => import('./src/ou_regSuccess')
 const ou_poster = () => import('./src/ou_poster')
 const ou_getCash = () => import('./src/ou_getCash')
 const ou_intro = () => import('./src/ou_intro')
+const ou_intro1 = () => import('./src/ou_intro1')
+const ou_reward = () => import('./src/ou_reward.vue')
 
 Vue.use(Router)
 export default new Router({
@@ -36,9 +38,6 @@ export default new Router({
       name: 'poster',
       component: poster
     },
-   
-   
- 
     {
       path: '/reward',
       name: 'reward',
@@ -88,6 +87,16 @@ export default new Router({
       path: '/ou_intro',
       name: 'ou_intro',
       component: ou_intro,
+    },
+    {
+      path: '/ou_intro1',
+      name: 'ou_intro1',
+      component: ou_intro1,
+    },
+    {
+      path: '/ou_reward',
+      name: 'ou_reward',
+      component: ou_reward,
     },
     {
       path: '/test',

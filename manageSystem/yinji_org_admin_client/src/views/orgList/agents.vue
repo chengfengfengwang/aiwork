@@ -416,7 +416,7 @@ export default {
     },
     getGoods() {
       this.axios
-        .get(`${process.env.AGENTSV9}/proxy/goods/?page=0&size=999`)
+        .get(`${process.env.AGENTSV9}/proxy/goods?page=0&size=999`)
         .then(res => {
           this.goodsList = res.data.goods;
         });

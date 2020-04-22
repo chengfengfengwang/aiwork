@@ -463,12 +463,13 @@ export default {
     getQueryVariable: getQueryVariable,
     showHbPeriodFee(total, rate, num) {
       let result = ((total * (1 + rate)) / num);
-      return Math.floor(result * 100) / 100
-
+      //return Math.floor(result * 100) / 100
+      return result.toFixed(2) 
     },
     showHbServiceFee(total, rate, num) {
       let result = ((total * rate) / num);
-      return Math.floor(result * 100) / 100
+      //return Math.floor(result * 100) / 100
+      return result.toFixed(2) 
     },
     showHbRate(num) {
       let result =  (num * 100);

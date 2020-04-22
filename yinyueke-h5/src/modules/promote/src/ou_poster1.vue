@@ -1,7 +1,10 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow" />
-   
+    <div @click="maskShow=true" class="rule_btn">
+      <img src="../../../assets/img/promote/poster/rule_btn.png" alt />
+    </div>
+  
     <div class="poster_container">
       <div id="posterContainer">
         <!-- <div class="nick_name">宝贝 琪琪</div> -->
@@ -15,11 +18,9 @@
           alt
         />
       </div>
+
     </div>
-    <div class="btn_wrapper">
-      <div class="reward_detail_btn" @click="toRewardDetail">查看奖励明细</div>
-      <div class="share_btn" @click="shareToFriends" v-show="openInApp">分享海报给好友</div>
-    </div>
+  
     <div class="mask" v-show="maskShow">
       <div class="ac_rule">
         <div class="rule_title">活动规则</div>
@@ -177,7 +178,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/promote/ou_poster/poster1.png`);
+        let url = require(`../../../assets/img/promote/poster/poster1.png`);
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
@@ -254,7 +255,7 @@ export default {
         //   document.body.appendChild(img);
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
-        //this.resultBase64Show = true;
+        this.resultBase64Show = true;
         // console.log("----------");
         // console.log(this.resultBase64);
         // console.log("----------");
@@ -293,8 +294,82 @@ export default {
     width: 100%;
   }
 }
+.reward {
+  position: absolute;
+  top: 172px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
 
+  background-size: cover;
+  text-align: center;
+  img.top_bg {
+    width: 100%;
+  }
+  .top_main {
+    padding-top: 80px;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    width: 100%;
+    .current {
+      // margin-top: 80px;
+      .label_text {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(252, 225, 57, 1);
+      }
+      .num {
+        // position: relative;
+        // top: -5px;
+        margin-top: -5px;
+        font-size: 44px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+    .detail {
+      margin-top: 0px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-evenly;
+      .detail_item {
+        width: 33.333%;
+        flex-grow: 1;
+        .label_text {
+          font-size: 14px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: rgba(134, 35, 0, 1);
+        }
+        .num {
+          font-size: 24px;
+          font-family: SF UI Text;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+    .detail_link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(252, 225, 57, 1);
+      img {
+        margin-left: 3px;
+        margin-top: 1px;
+        width: 9px;
+      }
+    }
+  }
+}
 .poster_container {
+  margin-top: -20px;
   position: relative;
   text-align: center;
   padding-bottom: 120px;
@@ -340,7 +415,14 @@ export default {
     border-radius: 15px;
     border: 4px solid #fff;
   }
- 
+  .poster_bottom {
+    z-index: 3;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -81px;
+    width: 660px;
+  }
 }
 #remarkSwiper.swiper-container {
   width: 100%;

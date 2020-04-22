@@ -2,7 +2,37 @@
   <div id="main">
     <Loading v-show="loadingShow"/>
     <img src="../../../assets/img/promote/ou_intro/bg.png" alt class="bg">
-    <img src="../../../assets/img/promote/ou_intro/reward1.png" alt class="reward1">
+    <div class="top">
+      <div class="top_title">
+        <div class="text">我的奖励</div>
+        <img src="../../../assets/img/promote/ou_intro1/top_title.png" alt class="top_bg">
+      </div>
+
+      <div class="top_main">
+        <div class="current">
+          <div class="label_text">当前收益(元)</div>
+          <div class="num">{{rewardData.total/100}}</div>
+        </div>
+        <div class="detail">
+          <div class="detail_item">
+            <div class="label_text">已注册</div>
+            <div class="num">{{rewardData.reg_count}}</div>
+          </div>
+          <div class="detail_item">
+            <div class="label_text">付费人数</div>
+            <div class="num">{{rewardData.number}}</div>
+          </div>
+          <div class="detail_item">
+            <div class="label_text">付费金额(元)</div>
+            <div class="num">{{rewardData.amount/100}}</div>
+          </div>
+        </div>
+        <div class="detail_link" @click="toRewardDetail">
+          查看奖励明细
+          <img class="arrow" src="../../../assets/img/promote/poster/arrow.png" alt />
+        </div>
+      </div>
+    </div>
     <img src="../../../assets/img/promote/ou_intro/reward2.png" alt class="reward2">
     <div @click="maskShow=true" class="rule_btn">活动规则</div>
     <div @click="toPoster" class="invite_btn">立即邀请</div>
@@ -67,19 +97,55 @@ export default {
     return {
       loadingShow: false,
       openInApp,
-      maskShow: false
+      maskShow: false,
+      rewardData: {
+        total: 0,
+        amount: 0,
+        reg_count: 0,
+        number: 0
+      }
     };
   },
-  created() {},
+  created() {
+    this.getMyAccountData();
+  },
   components: {
     Loading,
     ImagePreview
   },
   mounted() {},
   methods: {
-    toPoster(){
-      this.$router.push('/ou_poster')
+    toRewardDetail() {
+      this.$router.push("/ou_reward");
     },
+    toGetCash() {
+      this.$router.push("/getCash");
+    },
+    getMyAccountData() {
+      this.loadingShow = true;
+      this.axios
+        .get(
+          `http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable(
+            "uid"
+          )}`
+        )
+        .then(res => {
+          this.loadingShow = false;
+          let rewardData = res.data.stats;
+          if (rewardData.total) {
+            rewardData.total = rewardData.total.toFixed(2);
+          }
+          this.rewardData = rewardData;
+          this.recordItem = res.data.flow;
+          this.recordItem.forEach(e => {
+            e.phone = formatePhone(e.phone);
+          });
+          console.log(this.recordItem);
+        });
+    },
+    toPoster() {
+      this.$router.push("/ou_poster");
+    }
   }
 };
 </script>
@@ -88,11 +154,6 @@ export default {
   position: relative;
   min-height: 100vh;
   background-color: #f52722;
-}
-.top {
-  img {
-    width: 100%;
-  }
 }
 
 .bg {
@@ -183,7 +244,7 @@ export default {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 70%;
+  top: 73%;
 }
 .invite_btn {
   position: fixed;
@@ -196,7 +257,101 @@ export default {
   font-weight: 600;
   color: rgba(255, 255, 255, 1);
   bottom: 0px;
-    background-color: #F32C11;
-    z-index: 999;
+  background-color: #f32c11;
+  z-index: 999;
+}
+.top {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 45%;
+  width: 335px;
+  margin: auto;
+  //background: url("../../../assets/img/reward/top_bg.png") no-repeat center;
+  background-size: cover;
+  text-align: center;
+  border: 5px solid #ffe170;
+  border-radius: 30px;
+  background-color: #fff;
+
+  .top_title {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    img.top_bg {
+      width: 220px;
+    }
+    .text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-family: PingFang SC;
+      font-weight: 600;
+      color: rgba(255, 248, 230, 1);
+    }
+  }
+  .top_main {
+    padding-top: 50px;
+    width: 100%;
+
+    .current {
+      // margin-top: 80px;
+      .label_text {
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(240, 147, 0, 1);
+      }
+      .num {
+        // position: relative;
+        // top: -5px;
+        margin-top: -5px;
+        font-size: 44px;
+        font-family: PingFang SC;
+        font-weight: 600;
+        color: rgba(255, 72, 23, 1);
+      }
+    }
+    .detail {
+      margin-top: 0px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-evenly;
+      .detail_item {
+        width: 33.333%;
+        flex-grow: 1;
+        .label_text {
+          font-size: 14px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: rgba(240, 147, 0, 1);
+        }
+        .num {
+          font-size: 24px;
+          font-family: SF UI Text;
+          font-weight: 400;
+          color: rgba(255, 72, 23, 1);
+        }
+      }
+    }
+    .detail_link {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color:rgba(240,147,0,1);
+      img {
+        margin-left: 3px;
+        margin-top: 1px;
+        width: 9px;
+      }
+    }
+  }
 }
 </style>

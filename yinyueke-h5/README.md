@@ -52,3 +52,4 @@ http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音�
 
 http://cdn.kids-web.immusician.com/yinji/qr1.html
 
+http://cdn.kids-web.immusician.com/yinji/newInvite.html#/download 下载链接
