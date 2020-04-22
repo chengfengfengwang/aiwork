@@ -313,8 +313,11 @@ export default {
         if (process.env === "production") {
           this.callApp();
         }
-        var host =
-          "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+        if(process.env.NODE_ENV === "development"){
+        var host = "http://192.168.2.25:8090"; 
+        }else{
+          var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+        }
         this.toPayUrl = `${host}?${str}#/`;
         //return;
         return this.toPayUrl;
@@ -339,10 +342,14 @@ export default {
       //   var host =
       //     "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
       // }
-      var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      if(process.env.NODE_ENV === "development"){
+        var host = "http://localhost:8090";
+      }else{
+        var host = "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      }
       this.toPayUrl = `${host}?${str}#/`;
-      //console.log(this.toPayUrl);
-      //return;
+      // console.log(this.toPayUrl);
+      // return;
       location.href = this.toPayUrl;
     },
     callApp() {

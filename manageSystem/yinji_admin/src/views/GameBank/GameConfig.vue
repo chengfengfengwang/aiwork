@@ -981,6 +981,12 @@
               <Mnyx2d :obj="formValidate.material_data[0]" ref="mnyx2d"/>
             </FormItem>
           </div>
+          <!-- 节奏按钟配置 -->
+          <div v-if="curGame=='jzaz' && modalShow">
+            <FormItem label="素材">
+              <Jzaz :obj="formValidate.material_data[0]" ref="jzaz"/>
+            </FormItem>
+          </div>
           <!-- 节奏乐器小火车配置 -->
           <div v-if="curGame=='jzyq' && modalShow">
             <FormItem label="素材">
@@ -1156,6 +1162,7 @@ import Buyu from "../../components/Buyu/Buyu";
 import Sgjz from "../../components/Sgjz/Sgjz";
 import Jzyx from "../../components/Jzyx/Jzyx";
 import Mnyx2d from "../../components/Mnyx2d/Mnyx2d";
+import Jzaz from "../../components/Jzaz/Jzaz";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
 import Jzyqsp from "../../components/Jzyqsp/Jzyqsp";
@@ -1545,6 +1552,7 @@ export default {
     Sgjz,
     Jzyx,
     Mnyx2d,
+    Jzaz,
     Ccht,
     Cocohj,
     Cyjzd,
@@ -2016,6 +2024,9 @@ export default {
       }else if (newRow.game_type == 69) {
         //模拟游戏2d
         this.curGame = "mnyx2d";
+      } else if (newRow.game_type == 70) {
+        //节奏按钟
+        this.curGame = "jzaz";
       }  
       else {
         this.curGame = "";
@@ -2592,7 +2603,12 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        } else if (this.curGame == "ccht") {
+        } else if (this.curGame == "jzaz") {
+          var obj = this.$refs.jzaz.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "ccht") {
           var obj = this.$refs.ccht.submit();
           var arr = [];
           arr[0] = obj;

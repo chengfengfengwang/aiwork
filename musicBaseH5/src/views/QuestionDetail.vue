@@ -154,10 +154,12 @@ export default {
       catalog: [],
       isIphonex: false,
       courseInfo: {
+        goodsId: getQueryVariable("goodsId"),
         name: decodeURI(getQueryVariable("name")),
         user_count: getQueryVariable("user_count"),
         price: getQueryVariable("price"),
-        old_price: getQueryVariable("old_price")
+        old_price: getQueryVariable("old_price"),
+        good_img: ""
       },
       musicTheoryShow: false,
       countryThreeShow: false,
@@ -170,14 +172,21 @@ export default {
     this.isIphonex = isIphonex();
     this.showQuestionBank();
     this.showCatalog();
-    this.getBankInfo()
+    this.getBankInfo();
   },
   methods: {
-    getBankInfo(){
-      this.axios.get(`http://58.87.125.111:55555/v1/goods/detail?id=${getQueryVariable('goodsId')}`).then(res=>{
-        const good_img = res.data.good_img;
-        localStorage.setItem('good_img',good_img)
-      })
+    getBankInfo() {
+      this.axios
+        .get(
+          `http://58.87.125.111:55555/v1/goods/detail?id=${getQueryVariable(
+            "goodsId"
+          )}`
+        )
+        .then(res => {
+          const good_img = res.data.good_img;
+          this.courseInfo.good_img = res.data.good_img;
+          localStorage.setItem("good_img", good_img);
+        });
     },
     showQuestionBank() {
       const QuestionBankName = decodeURIComponent(getQueryVariable("name"));
@@ -292,10 +301,11 @@ export default {
       if (process.env === "production") {
         this.callApp();
       }
-
-      this.$router.push({
-        name: "QuestionBankPay"
-      });
+      location.href = this.getPayUrl();
+      //this.$router.push("/");
+      // this.$router.push({
+      //   name: "QuestionBankPay"
+      // });
     },
     callApp() {
       // 由于对象映射，所以调用hello对象等于调用Android映射的对象
@@ -310,6 +320,42 @@ export default {
       } else {
         PayFeedBack.onBuyClick("true");
       }
+    },
+    getPayUrl() {
+      let params = {
+        share_channel: getQueryVariable("share_channel"),
+        address: getQueryVariable("address"),
+        phone: getQueryVariable("phone"),
+        uid: getQueryVariable("uid"),
+        token: getQueryVariable("token"),
+        coupon_id: getQueryVariable("coupon_id"),
+        goodsId: this.courseInfo.goodsId,
+        good_img: this.courseInfo.good_img,
+        name: this.courseInfo.name,
+        user_count: this.courseInfo.user_count,
+        price: this.courseInfo.price,
+        old_price: this.courseInfo.old_price,
+        hasParam: true,
+        t: Date.now()
+      };
+
+      var str = "";
+      for (var key in params) {
+        str += `${key}=${params[key]}&`;
+      }
+      str += `&node=vertical`;
+      if (process.env === "production") {
+        this.callApp();
+      }
+      if (process.env.NODE_ENV === "development") {
+        var host = "http://192.168.2.25:8090";
+      } else {
+        var host =
+          "http://cdn.kids.immusician.com/web/music-base-h5/index.html";
+      }
+      this.toPayUrl = `${host}?${str}#/`;
+      //return;
+      return this.toPayUrl;
     }
   }
 };

@@ -129,7 +129,7 @@
       <div class="modal_btn" @click="paySuccess">支付完成</div>
     </div>
     <div class="tip">温馨提示：优惠券与奖学金卡不能叠加使用，在支付前请您根据需要进行优惠方式的选择，选择后如若想更改请点击返回按钮，奖学金卡如果激活即视为生效，不能再次使用。</div>
-  </div> -->
+  </div>-->
   <div class="page">
     <Loading v-show="loadingShow"/>
     <div class="nav" :style="{marginTop:isIphonex?'20px':'0px'}">
@@ -201,6 +201,32 @@
       </div>
     </div>
     <div class="box box3">
+      <div
+        :class="{'px1-bottom-ddd':!openInxxYYJ}"
+        class="item px1-bottom-f1"
+        @click="payMethod = 'hbfqPay'"
+        v-if="hbfqList && hbfqList.length>0"
+      >
+        <div class="item_left">
+          <div class="item_title">
+            <img src="./../assets/img/icon_pay_hbfq.png" alt class="item_left_icon">花呗分期
+          </div>
+        </div>
+        <div class="item_right">
+          <img
+            v-show="payMethod!='hbfqPay'"
+            src="./../assets/img/new_pay/nochose.png"
+            alt
+            class="item_select_status"
+          >
+          <img
+            v-show="payMethod=='hbfqPay'"
+            src="./../assets/img/new_pay/chose.png"
+            alt
+            class="item_select_status"
+          >
+        </div>
+      </div>
       <div
         :class="{'px1-bottom-ddd':!openInxxYYJ}"
         class="item px1-bottom-f1"
@@ -278,6 +304,37 @@
       </div>
       <div class="modal_btn" @click="paySuccess">支付完成</div>
     </div>
+    <div class="n_mask" @click="hbfqMaskShow=false" v-show="hbfqMaskShow"></div>
+    <div :class="[hbfqMaskShow?'up':'down']" class="hbmask pop_wrapper new">
+      <div class="hbmask_title">请选择分期</div>
+      <div class="item_wrapper">
+        <div @click="hbfqIndex=index" class="item" v-for="(item,index) in hbfqList" :key="index">
+          <div class="item_left">
+            <div
+              class="money"
+            >¥ {{showHbPeriodFee(courseInfo.price/100 - discount,item.rate,item.hb_fq_num)}}<span class="icon_multi"> &#215; </span>{{item.hb_fq_num}}期</div>
+            <div
+              class="money_tip"
+            >手续费{{showHbServiceFee(courseInfo.price/100 - discount,item.rate,item.hb_fq_num)}}/期,费率{{showHbRate(item.rate)}}%</div>
+          </div>
+          <div class="item_right">
+            <img
+              v-show="hbfqIndex!=index"
+              src="./../assets/img/new_pay/nochose.png"
+              alt
+              class="item_select_status"
+            >
+            <img
+              v-show="hbfqIndex==index"
+              src="./../assets/img/new_pay/chose.png"
+              alt
+              class="item_select_status"
+            >
+          </div>
+        </div>
+      </div>
+      <div @click="createOrder" class="next_btn">下一步</div>
+    </div>
   </div>
 </template>
 <script>
@@ -296,7 +353,8 @@ import {
 export default {
   data() {
     return {
-      payMethod: "zfbPay",
+      hbfqMaskShow: false,
+      payMethod: "hbfqPay",
       modalShow: false,
       couponsArr: [],
       selectedCoupons: "",
@@ -312,12 +370,15 @@ export default {
       bonusCode: "",
       bonusDiscount: "",
       openInxxYYJ: openInxxYYJ,
-      qrSrc:'',
-      qrModalShow:false,
+      qrSrc: "",
+      qrModalShow: false,
       isIphonex: false,
-      good_img:'',
-      hideYhq:false,
-      hideJxj:false
+      good_img: "",
+      hideYhq: false,
+      hideJxj: false,
+      hbfqList: [],
+      hbfqIndex: 0,
+      hbfqUseConfig: {}
     };
   },
   components: {
@@ -336,28 +397,26 @@ export default {
     // }else{
     //   document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
     // }
-    this.hideYhq = getQueryVariable('hideYhq')==='1'?true:false;
-    this.hideJxj = getQueryVariable('hideJxj')==='1'?true:false;
-    this.good_img = getQueryVariable('good_img')?getQueryVariable('good_img'):localStorage.getItem('good_img');
+    console.log("-----1-----");
+    this.hideYhq = getQueryVariable("hideYhq") === "1" ? true : false;
+    this.hideJxj = getQueryVariable("hideJxj") === "1" ? true : false;
+    this.good_img = getQueryVariable("good_img")
+      ? getQueryVariable("good_img")
+      : localStorage.getItem("good_img");
     this.isIphonex = isIphonex();
-    if(openApp()==='yinji'){
-        this.host = process.env.JINKANG + '/v1';
-      }else{
-        this.host = process.env.YINJISCHOOL + '/v2';
-      }
-      console.log('----------')
-      var u = navigator.userAgent.toLowerCase();
-      console.log(u)
-      if(u.indexOf("campus") != -1){
-          return 'yinji-school'
-      }else if(u.indexOf("musiclass") != -1){
-          return 'yinji'
-      }
-      console.log(openApp())
-      console.log('----------')
+    console.log("-----2-----");
+    if (openApp() === "yinji-school") {
+      this.host = process.env.YINJISCHOOL + "/v2";
+    } else {
+      this.host = process.env.JINKANG + "/v1";
+    }
+    console.log("-----3-----");
+    //获取花呗分期配置
+    console.log("-----开始请求-----");
+    this.getHbConfig(getQueryVariable('goodsId'))
+    //this.getHbConfig("5e82dfe1521b200e2b476293");
   },
   mounted() {
-    console.log('zzzz')
     //this.qrModalShow = true
     if (window.innerWidth > 600) {
       document.documentElement.style.fontSize = (13 / 375) * 100 + "vw";
@@ -383,17 +442,17 @@ export default {
       });
       this.courseInfo = courseInfo;
       this.urlParams = urlParams;
-      if(!this.courseInfo.user_count){
-        this.courseInfo.user_count = this.urlParams.user_count
+      if (!this.courseInfo.user_count) {
+        this.courseInfo.user_count = this.urlParams.user_count;
       }
-      
+
       this.axios.defaults.headers.common["token"] = this.urlParams.token;
       this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
     } else {
       this.courseInfo = JSON.parse(localStorage.getItem("courseInfo"));
       this.urlParams = JSON.parse(localStorage.getItem("urlParams"));
-      if(!this.courseInfo.user_count){
-        this.courseInfo.user_count = this.urlParams.user_count
+      if (!this.courseInfo.user_count) {
+        this.courseInfo.user_count = this.urlParams.user_count;
       }
     }
     this.getCoupons();
@@ -401,11 +460,38 @@ export default {
     this.downKeyBord();
   },
   methods: {
-    getQueryVariable:getQueryVariable,
-    goBack(){
+    getQueryVariable: getQueryVariable,
+    showHbPeriodFee(total, rate, num) {
+      let result = ((total * (1 + rate)) / num);
+      return Math.floor(result * 100) / 100
+
+    },
+    showHbServiceFee(total, rate, num) {
+      let result = ((total * rate) / num);
+      return Math.floor(result * 100) / 100
+    },
+    showHbRate(num) {
+      let result =  (num * 100);
+      return Math.floor(result * 10) / 10
+    },
+    getHbConfig(id) {
+      //5e82dfe1521b200e2b476293
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/goods/ex_info/?id=${id}`)
+        .then(res => {
+          console.log('--getHbConfig-')
+          console.log(res)
+          if (!res.error) {
+            this.hbfqUseConfig.used_coupon = res.data.used_coupon;
+            this.hbfqUseConfig.used_promo = res.data.used_promo;
+            this.hbfqList = res.data.config;
+          }
+        });
+    },
+    goBack() {
       history.go(-1);
     },
-    paySuccess(){
+    paySuccess() {
       var isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
       if (isIOS) {
         window.webkit.messageHandlers.onBuyClick.postMessage({
@@ -414,7 +500,7 @@ export default {
       } else {
         PayFeedBack.onPaySuccess(this.paySuccessMsg);
       }
-      this.qrModalShow = false
+      this.qrModalShow = false;
     },
     downKeyBord() {
       this.$refs.modal.addEventListener("touchstart", e => {
@@ -438,9 +524,9 @@ export default {
       this.modalShow = false;
       this.axios
         .get(
-          `${this.host}/code_check?code=${
-            this.bonusCode
-          }&goods_id=${this.urlParams.goodsId}&type=1`
+          `${this.host}/code_check?code=${this.bonusCode}&goods_id=${
+            this.urlParams.goodsId
+          }&type=1`
         )
         .then(res => {
           if (!res.error) {
@@ -479,6 +565,7 @@ export default {
     },
     getCoupons() {
       this.loadingShow = true;
+      console.log(this.urlParams)
       this.axios
         .get(
           `${this.host}/web_buy_coupon?id=${
@@ -488,10 +575,6 @@ export default {
         .then(res => {
           this.loadingShow = false;
           this.couponsArr = res.data;
-          console.log("---优惠券信息---");
-          console.log(res.data);
-          console.log("---优惠券信息---");
-          console.log(this.couponsArr.length);
           this.ifCoupons();
           //this.couponsArr.concat(JSON.parse(JSON.stringify(res.data)));
         });
@@ -519,13 +602,13 @@ export default {
         platform: testPlat(),
         instrument_type: this.courseInfo.instrument_type
       };
-      if (this.payMethod === "wxPay") {
-        params.channel = "wx";
-      } else {
-        params.channel = "alipay";
-      }
-      if((getQueryVariable('from')==='youxuepai' || getQueryVariable('qr_mode')==1) && this.payMethod=='wxPay'){
-        params.qr_mode=1
+
+      if (
+        (getQueryVariable("from") === "youxuepai" ||
+          getQueryVariable("qr_mode") == 1) &&
+        this.payMethod == "wxPay"
+      ) {
+        params.qr_mode = 1;
       }
       //是否使用优惠券 是否使用奖学金
       if (this.selectedCoupons !== "") {
@@ -535,45 +618,96 @@ export default {
         params.promo = this.bonusCode.trim();
         params.coupon_id = "";
       }
-
+      if (this.payMethod === "wxPay") {
+        params.channel = "wx";
+      } else if (this.payMethod === "zfbPay") {
+        params.channel = "alipay";
+      } else if (this.payMethod === "hbfqPay") {
+        if (this.hbfqMaskShow) {
+          //花呗分期优惠券和奖学金逻辑
+          if (!this.hbfqUseConfig.used_promo && params.promo) {
+            this.$dialog.alert({
+              message: "该商品暂不支持花呗分期和奖学金同时使用"
+            });
+            return;
+          }
+          if (!this.hbfqUseConfig.used_coupon && params.coupon_id) {
+            this.$dialog.alert({
+              message: "该商品暂不支持花呗分期和优惠券同时使用"
+            });
+            return;
+          }
+          let curHbItem = this.hbfqList[this.hbfqIndex];
+          params.channel = "alipay";
+          params.hb_fq_seller_percent = curHbItem.hb_fq_seller_percent;
+          params.hb_fq_num = curHbItem.hb_fq_num;
+        } else {
+          this.hbfqMaskShow = true;
+          return;
+        }
+      }
       params.goods = `${this.urlParams.goodsId},课程,1`;
       console.log(params);
       //return;
-      var that =this;
-      console.log('--------------')
-      console.log(window.navigator.userAgent)
-      console.log('--------------')
-      this.axios
-        .post(`${this.host}/payment/create/`, params)
-        .then(res => {
-          console.log("----订单信息-----");
-          console.log(res.data);
-          if (res.error) {
-            //alert(res.msg);
-            that.$dialog.alert({ message: res.msg });
-            return;
-          }
-          if((getQueryVariable('from')==='youxuepai' || getQueryVariable('qr_mode')==1) && that.payMethod=='wxPay'){
-            that.paySuccessMsg = `0-${res.data.amount}-${res.data.channel}-${getQueryVariable('goodsId')}-1`
-            QRCode.toDataURL(res.data.credential.wx_pub_qr,{
-              margin:1,
-              width:120
+      var that = this;
+      console.log("--------------");
+      console.log(window.navigator.userAgent);
+      console.log("--------------");
+      this.axios.post(`${this.host}/payment/create/`, params).then(res => {
+        console.log("----订单信息-----");
+        console.log(res.data);
+        if (res.error) {
+          //alert(res.msg);
+          that.$dialog.alert({ message: res.msg });
+          return;
+        }
+        if (
+          (getQueryVariable("from") === "youxuepai" ||
+            getQueryVariable("qr_mode") == 1) &&
+          that.payMethod == "wxPay"
+        ) {
+          that.paySuccessMsg = `0-${res.data.amount}-${
+            res.data.channel
+          }-${getQueryVariable("goodsId")}-1`;
+          QRCode.toDataURL(res.data.credential.wx_pub_qr, {
+            margin: 1,
+            width: 120
+          })
+            .then(url => {
+              that.qrSrc = url;
+              that.qrModalShow = true;
             })
-              .then(url => {
-                that.qrSrc = url;
-                that.qrModalShow = true
-              })
-              .catch(err => {
-                console.error(err)
-              })
-            return
-          }else{
-            console.log("=----to location");
-            window.location.href =
-              "pay://" +
-              toBase64.btoa(encodeURI(encodeURI(JSON.stringify(res.data))));
-          }  
+            .catch(err => {
+              console.error(err);
+            });
+          return;
+        } else {
+          console.log("=----to location");
+          window.location.href =
+            "pay://" +
+            toBase64.btoa(encodeURI(encodeURI(JSON.stringify(res.data))));
+        }
+      });
+    },
+    countHbfqMaskShow(){
+      this.axios
+        .get(`http://58.87.125.111:55555/v1/payment/clicked/?goods_id=${getQueryVariable('goodsId')}&uid=${getQueryVariable('uid')}`)
+        .then(res => {
+          console.log('--getHbConfig-')
+          console.log(res)
+          if (!res.error) {
+            this.hbfqUseConfig.used_coupon = res.data.used_coupon;
+            this.hbfqUseConfig.used_promo = res.data.used_promo;
+            this.hbfqList = res.data.config;
+          }
         });
+    }
+  },
+  watch:{
+    hbfqMaskShow(){
+      if(this.hbfqMaskShow){
+        this.countHbfqMaskShow()
+      }
     }
   }
 };
@@ -709,7 +843,7 @@ export default {
       display: flex;
       align-items: center;
       .item_arrow {
-        transition: transform 0.2s;
+        transition: transform 0.15s;
         width: 10px;
         height: 20px;
       }
@@ -719,11 +853,11 @@ export default {
         font-size: 22px;
         color: #ee525b;
       }
-      .item_right_value.no_value{
-        font-size:28px;
-        font-family:PingFang-SC-Regular,PingFang-SC;
-        font-weight:400;
-        color:rgba(153,153,153,1);
+      .item_right_value.no_value {
+        font-size: 28px;
+        font-family: PingFang-SC-Regular, PingFang-SC;
+        font-weight: 400;
+        color: rgba(153, 153, 153, 1);
       }
       .item_select_status {
         width: 48px;
@@ -781,6 +915,88 @@ export default {
   font-family: PingFang-SC-Medium, PingFang-SC;
   font-weight: 500;
   color: rgba(255, 38, 38, 1);
+}
+//花呗弹窗
+.n_mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.pop_wrapper.new {
+  position: fixed;
+  left: 0;
+  bottom: -100vh;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.5s;
+  border-radius: 15px 15px 0 0;
+  z-index: 100000;
+}
+.pop_wrapper.down {
+  bottom: -100vh;
+}
+.pop_wrapper.up {
+  bottom: 0;
+}
+.hbmask {
+  .hbmask_title {
+    margin: 16px 0;
+    text-align: center;
+    font-size: 40px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(160, 87, 6, 1);
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(238, 238, 238, 1);
+    .icon_multi{
+      //display: inline-block;
+      position: relative;
+      top:-2px;
+      //margin-bottom: 2px;
+    }
+    .money {
+      font-size: 36px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(51, 51, 51, 1);
+    }
+    .money_tip {
+      font-size: 22px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(153, 153, 153, 1);
+    }
+    .item_select_status {
+      width: 48px !important;
+      height: 48px !important;
+    }
+    .item_select_status.no_sel_div {
+      width: 48px !important;
+      height: 48px !important;
+      border: 2px solid rgba(204, 204, 204, 1);
+      border-radius: 50%;
+    }
+  }
+  .next_btn {
+    margin: 40px auto 60px auto;
+    width: 420px;
+    height: 88px;
+    line-height: 88px;
+    border-radius: 44px;
+    background-color: #ffe649;
+    text-align: center;
+    font-size: 36px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: rgba(255, 38, 38, 1);
+  }
 }
 </style>
 
