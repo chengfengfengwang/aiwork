@@ -173,6 +173,7 @@ body{
   position: absolute;
   left: 0;
   top: 5%;
+  z-index: 999;
   //top: 220px;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     top: 6%;
