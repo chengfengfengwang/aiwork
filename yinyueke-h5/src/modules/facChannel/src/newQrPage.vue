@@ -99,7 +99,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: #f6d357;
+  background-color: #f7d961;
   font-size: 0;
 }
 .bg {
