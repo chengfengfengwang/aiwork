@@ -80,7 +80,9 @@ export default {
         code: "",
         share_id: getQueryVariable("share_id"),
         share_phone: getQueryVariable("phone"),
-        share_stall: getQueryVariable("c")
+        share_stall: getQueryVariable("c"),
+        course_id:getQueryVariable("course_id"),
+        lesson_id:getQueryVariable("lesson_id")
       },
       vcodeText: "获取验证码",
       vCode: ""

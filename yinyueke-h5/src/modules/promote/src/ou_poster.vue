@@ -1,30 +1,44 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow" />
-   
+    <Loading v-show="loadingShow"/>
+
     <div class="poster_container">
       <div id="posterContainer">
-        <!-- <div class="nick_name">宝贝 琪琪</div> -->
         <div class="nick_name">宝贝 {{nickName}}</div>
         <img :src="qrSrc" alt class="qr" />
         <img v-show="posterSrc" class="poster" :src="posterSrc" alt />
         <img
           v-show="!posterSrc"
           class="poster"
-          src="../../../assets/img/promote/poster/poster1.png"
+          src="../../../assets/img/promote/ou_poster/poster1.png"
           alt
         />
       </div>
     </div>
+    <!-- <div id="remarkSwiper" class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide" v-for="(remark,index) in remarkArr" :key="index">
+          <div class="user_info">
+            <div class="avatar">
+              <img :src="photoArr[index]" alt>
+            </div>
+            <div class="name">孩子家长</div>
+          </div>
+
+          <div class="remark_content">{{remark.content}}</div>
+        </div>
+      </div>
+    </div> -->
     <div class="btn_wrapper">
-      <div class="reward_detail_btn" @click="toRewardDetail">查看奖励明细</div>
-      <div class="share_btn" @click="shareToFriends" v-show="openInApp">分享海报给好友</div>
+      <!-- <div class="reward_detail_btn" @click="toRewardDetail">查看奖励明细</div> -->
+      <!-- <div class="share_btn" @click="shareToFriends" v-show="openInApp">分享海报给好友</div> -->
+      <div class="share_btn" @click="shareToFriends" v-show="true">分享海报给好友</div>
     </div>
     <div class="mask" v-show="maskShow">
       <div class="ac_rule">
         <div class="rule_title">活动规则</div>
         <div class="close_icon" @click="maskShow=false">
-          <img src="../../../assets/img/promote/poster/close.png" alt />
+          <img src="../../../assets/img/promote/poster/close.png" alt>
         </div>
         <div class="rule_item">
           <div class="item_index">1</div>
@@ -45,13 +59,16 @@
           <div class="item_index">4</div>
           <span class="rule_lab">被邀请人奖励：</span>
           <span>
-            您邀请的好友注册后，即可<span class="color">免费领取3天音乐壳超级会员权益</span>和<span class="color">购买大牌乐器8折卡</span>
+            您邀请的好友注册后，即可
+            <span class="color">免费领取3天音乐壳超级会员权益</span>和
+            <span class="color">购买大牌乐器8折卡</span>
           </span>
         </div>
         <div class="rule_item">
           <div class="item_index">5</div>
           <span>
-            您邀请的好友中，每月月初起，<span class="color">最先购买音乐壳会员的2个用户，可获得音乐壳永久超级会员权益</span> ，其他购买音乐壳会员的用户，可获得10年的音乐壳超级会员权益
+            您邀请的好友中，每月月初起，
+            <span class="color">最先购买音乐壳会员的2个用户，可获得音乐壳永久超级会员权益</span> ，其他购买音乐壳会员的用户，可获得10年的音乐壳超级会员权益
           </span>
         </div>
         <div class="rule_item">
@@ -76,7 +93,7 @@ export default {
   data() {
     return {
       remarkArr: [],
-      loadingShow: true,
+      loadingShow: false,
       openInApp,
       maskShow: false,
       rewardData: {
@@ -87,7 +104,7 @@ export default {
       },
       posterSrc: "",
       qrSrc: "",
-      nickName: getQueryVariable('nick_name')
+      nickName: getQueryVariable("nick_name")
     };
   },
   created() {
@@ -99,8 +116,8 @@ export default {
     //   this.initRemarkSwiper();
     // });
     this.nickName = decodeURIComponent(this.nickName);
-    this.getMyAccountData();
-    this.getQrUrl();
+    // this.getMyAccountData();
+    // this.getQrUrl();
   },
   components: {
     Loading,
@@ -113,7 +130,11 @@ export default {
   methods: {
     getMyAccountData() {
       this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable('uid')}`)
+        .get(
+          `http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable(
+            "uid"
+          )}`
+        )
         .then(res => {
           let rewardData = res.data.stats;
           if (rewardData.total) {
@@ -143,10 +164,10 @@ export default {
     },
     getQrUrl() {
       this.axios
-        .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
-          share_stall: 0,
+        .post(`${process.env.VUE_APP_PROMOTEOU}/v1/share/qrcode_url/`, {
+          share_stall: getQueryVariable("share_stall"),
           phone: getQueryVariable("user_phone"),
-          share_id: 6
+          share_id: getQueryVariable("share_id")
         })
         .then(res => {
           this.qrUrl = res.data.url;
@@ -238,8 +259,11 @@ export default {
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
         onclone: function(document) {
-            document.querySelector('#posterContainer img.poster').style.border='none';
-            document.querySelector('#posterContainer img.poster').style.borderRadius=0;
+          document.querySelector("#posterContainer img.poster").style.border =
+            "none";
+          document.querySelector(
+            "#posterContainer img.poster"
+          ).style.borderRadius = 0;
         },
         scale: 3,
         allowTaint: true
@@ -276,7 +300,6 @@ export default {
 #main {
   position: relative;
   min-height: 100vh;
-  background-color: #faaf78;
 }
 .top {
   img {
@@ -295,13 +318,18 @@ export default {
 }
 
 .poster_container {
-  position: relative;
+  //position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  
   text-align: center;
   padding-bottom: 120px;
   overflow: hidden;
   #posterContainer {
     margin: auto;
-    width: 270px;
+    //width: 270px;
     height: 473px;
   }
   .nick_name {
@@ -314,8 +342,8 @@ export default {
     color: rgba(255, 240, 150, 1);
     //text-decoration: underline;
     z-index: 9;
-    &::after{
-      content: '';
+    &::after {
+      content: "";
       position: absolute;
       width: 100%;
       left: 0;
@@ -336,11 +364,10 @@ export default {
   img.poster {
     position: relative;
     z-index: 8;
-    width: 270px;
+    width: 320px;
     border-radius: 15px;
     border: 4px solid #fff;
   }
- 
 }
 #remarkSwiper.swiper-container {
   width: 100%;

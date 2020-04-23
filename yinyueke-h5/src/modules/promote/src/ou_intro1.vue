@@ -29,7 +29,7 @@
         </div>
         <div class="detail_link" @click="toRewardDetail">
           查看奖励明细
-          <img class="arrow" src="../../../assets/img/promote/poster/arrow.png" alt />
+          <img class="arrow" src="../../../assets/img/promote/ou_intro1/arrow.png" alt />
         </div>
       </div>
     </div>
@@ -125,9 +125,12 @@ export default {
       this.loadingShow = true;
       this.axios
         .get(
-          `http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable(
-            "uid"
-          )}`
+          `http://58.87.125.111:55555/v1/account/get_my_account/`,{
+            headers:{
+              uid:getQueryVariable('uid'),
+              token:getQueryVariable('token')
+            }
+          }
         )
         .then(res => {
           this.loadingShow = false;

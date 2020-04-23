@@ -1023,6 +1023,12 @@
               <Ukpz :obj="formValidate.material_data[0]" ref="ukpz"/>
             </FormItem>
           </div>
+          <!-- 民乐拍照配置 -->
+          <div v-if="curGame=='mypz' && modalShow">
+            <FormItem label="素材">
+              <Mypz :obj="formValidate.material_data[0]" ref="mypz"/>
+            </FormItem>
+          </div>
           <!-- 老虎机（节奏回拍）配置 -->
           <div v-if="curGame=='lhjjzhp' && modalShow">
             <FormItem label="素材">
@@ -1170,6 +1176,7 @@ import Gsgbysf from "../../components/Gsgbysf/Gsgbysf";
 import Cpbf from "../../components/Cpbf/Cpbf";
 import FzgCyk from "../../components/FzgCyk/FzgCyk";
 import Ukpz from "../../components/Ukpz/Ukpz";
+import Mypz from "../../components/Mypz/Mypz";
 import Lhjjzhp from "../../components/Lhjjzhp/Lhjjzhp";
 import Lhjfzg from "../../components/Lhjfzg/Lhjfzg";
 import Cocohj from "../../components/Cocohj/Cocohj";
@@ -1546,6 +1553,7 @@ export default {
     Gqdfj,
     FzgCyk,
     Ukpz,
+    Mypz,
     Lhjjzhp,
     Lhjfzg,
     Buyu,
@@ -1987,7 +1995,10 @@ export default {
       } else if (newRow.game_type == 54) {
         //尤克里里拍照
         this.curGame = "ukulelepz";
-      } else if (newRow.game_type == 55 || newRow.game_type == 66) {
+      } else if (newRow.game_type == 71) {
+        //民乐拍照
+        this.curGame = "mypz";
+      }else if (newRow.game_type == 55 || newRow.game_type == 66) {
         //coco回家（选择题）
         this.curGame = "cocohj";
       } else if (newRow.game_type == 56) {
@@ -2640,6 +2651,11 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "ukulelepz") {
           var obj = this.$refs.ukpz.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "mypz") {
+          var obj = this.$refs.mypz.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);

@@ -79,8 +79,10 @@ export default {
         phone: "",
         code: "",
         share_id: getQueryVariable("share_id"),
-        share_phone: getQueryVariable("phone"),
-        share_stall: getQueryVariable("c")
+        share_phone: getQueryVariable("user_phone"),
+        share_stall: getQueryVariable("share_stall"),
+        course_id:getQueryVariable("course_id"),
+        lesson_id:getQueryVariable("lesson_id")
       },
       vcodeText: "获取验证码",
       vCode: ""
@@ -92,7 +94,6 @@ export default {
     ImagePreview
   },
   mounted() {
-    this.countPageData();
     this.inputevent()
   },
   methods: {
@@ -109,21 +110,10 @@ export default {
         });
       });
     },
-    countPageData() {
-      this.axios
-        .get(
-          `${
-            process.env.VUE_APP_LIEBIAN
-          }/v1/share/save_scan_data/?share_id=6&share_phone=${getQueryVariable(
-            'phone'
-          )}&share_stall=${getQueryVariable('share_stall')}`
-        )
-        .then(res => {});
-    },
     regVip() {
       localStorage.setItem("loginPhone", this.form.phone);
       this.axios
-        .post(`${process.env.VUE_APP_LIEBIAN}/v1/user/share_login/`, this.form)
+        .post(`${process.env.VUE_APP_PROMOTEOU}/v1/user/share_login/`, this.form)
         .then(res => {
           if (!res.error) {
             if(res.data.has_received){
@@ -132,7 +122,7 @@ export default {
               });
             }else{
               sessionStorage.setItem('successUrl',res.data.url);
-              this.$router.push('/regSuccess');
+              this.$router.push('/ou_regSuccess');
             }
           }
         });

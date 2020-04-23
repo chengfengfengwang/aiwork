@@ -33,7 +33,7 @@
       </div>
       <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
     </div> -->
-    <img src="../../../assets/img/facChannel/newqr.jpg" alt class="bg" />
+    <img src="../../../assets/img/facChannel/newqr1.jpg" alt class="bg" />
   </div>
 </template>
 <script>
@@ -74,7 +74,8 @@ export default {
   methods:{
     count() {
       this.axios
-        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_dx41`)
+        //.get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_dx41`)
+        .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_dx0423`)
         .then(res => {});
     },
   },
@@ -98,7 +99,7 @@ export default {
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: #710fd4;
+  background-color: #f6d357;
   font-size: 0;
 }
 .bg {
