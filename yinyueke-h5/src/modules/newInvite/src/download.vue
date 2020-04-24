@@ -1,8 +1,8 @@
 <template>
   <div id="main">
     <div class="main_wrapper">
-      <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
-      <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt="">
+      <img class="bg" src="../../../assets/img/yiqiac/download.png" alt>
+      <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt>
       <div id="download">立即下载</div>
     </div>
     <!-- <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
@@ -18,21 +18,32 @@ export default {
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
+    document.title = "音乐壳";
   },
-  mounted(){
-    this.initShareInstall()
+  mounted() {
+    this.initShareInstall();
   },
   methods: {
+    isIpad() {
+      var ua = navigator.userAgent.toLowerCase() + "";
+      if (/ipad/i.test(ua)) {
+        return true;
+      } else if (/macintosh/i.test(ua)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     toPoster() {
       this.$router.push("/poster");
     },
     initShareInstall() {
       var data = ShareInstall.parseUrlParams(); //shareinstall.js中提供的工具函数，解析url中的所有查询参数
-      data.channel = data.channel ? data.channel : "liebian-defu";
-       console.log('---channel----')
-       console.log(data.channel)
-       console.log('---channel----')
+      data.channel = data.channel ? data.channel : "";
+      var that = this;
+      console.log("---channel----");
+      console.log(data.channel);
+      console.log("---channel----");
       new ShareInstall(
         {
           appKey: "2KBKKFAK2E26FF",
@@ -55,7 +66,12 @@ export default {
 
             //用户点击某个按钮时(假定按钮id为download)，安装app
             button.onclick = function() {
-              m.install();
+              if (that.isIpad()) {
+                location.href =
+                  "https://apps.apple.com/cn/app/id1459732493?l=zh&ls=1";
+              } else {
+                m.install();
+              }
             };
           }
         },
@@ -75,13 +91,13 @@ export default {
   // bottom: 0;
   // left: 0;
   // width: 100%;
-  background-color: #FFF6E1;
+  background-color: #fff6e1;
   min-height: 100vh;
   position: relative;
   .bg {
     width: 100%;
   }
-  .bottom{
+  .bottom {
     position: absolute;
     bottom: 0;
     left: 0;

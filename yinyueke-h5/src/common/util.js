@@ -29,6 +29,16 @@ function getQueryVariable(variable) {
     }
     return '';
 }
+function isIpad() {
+    var ua = navigator.userAgent.toLowerCase() + '';
+    if (/ipad/i.test(ua)) {
+        return true;
+    } else if (/macintosh/i.test(ua)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 function testPlat() {
     if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         //return 'IOS';
@@ -40,7 +50,7 @@ function testPlat() {
         return -1
     }
 }
-const platForm = testPlat()===0 ? 'IOS' : 'Android'
+const platForm = testPlat() === 0 ? 'IOS' : 'Android'
 function formatNumber(n) {
     n = n.toString();
     return n[1] ? n : '0' + n;
@@ -72,7 +82,7 @@ function getDate(date) {
 
     //秒没有返回
     console.log(year, month, day)
-    return year+'年'+month+'月'+day+'日'
+    return year + '年' + month + '月' + day + '日'
 }
 function getCountDown(lefttime) {
     // var nowtime = new Date().valueOf();
@@ -82,27 +92,27 @@ function getCountDown(lefttime) {
     var h = parseInt(lefttime / (60 * 60) % 24);
     var m = parseInt(lefttime / 60 % 60);
     var s = parseInt(lefttime % 60);
-     //h = formatNumber(h);
-     //m = formatNumber(m);
-     s = formatNumber(s);
+    //h = formatNumber(h);
+    //m = formatNumber(m);
+    s = formatNumber(s);
     var str = d + "天" + h + "小时" + m + "分" + s + '秒';
-    if(lefttime<=0){
+    if (lefttime <= 0) {
         str = "已开始";
     };
     return str
 }
-function xStyle(){
-    if(window.innerWidth/window.innerHeight<0.5){
+function xStyle() {
+    if (window.innerWidth / window.innerHeight < 0.5) {
         return true
-    }else{
+    } else {
         return false
     }
-} 
-function conIphoneStyleFn(){
-    let ratio  = 375 / 667;
-    if(window.innerWidth/window.innerHeight<ratio){
+}
+function conIphoneStyleFn() {
+    let ratio = 375 / 667;
+    if (window.innerWidth / window.innerHeight < ratio) {
         return false
-    }else{
+    } else {
         return true
     }
 }
@@ -135,14 +145,14 @@ function testWeixin() { //判断是否是微信
     return ua.match(/MicroMessenger/i) == "micromessenger";
 };
 
-function formatePhone(phone){
-    if((phone+'').length != 11){
+function formatePhone(phone) {
+    if ((phone + '').length != 11) {
         return phone
-    }else{
+    } else {
         return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 
     }
 }
 var u = navigator.userAgent, app = navigator.appVersion;
 var openInApp = u.indexOf('immusician') != -1 || u.indexOf('buluobang') != -1 || u.indexOf('bangtabs') != -1;
-export { conIphoneStyle, xStyle, getCountDown, formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
+export { isIpad, conIphoneStyle, xStyle, getCountDown, formatePhone, getDate, openInApp, platForm, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInYYK, openInXYB, testWeixin }
