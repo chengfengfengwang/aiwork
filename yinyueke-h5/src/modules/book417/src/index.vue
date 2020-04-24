@@ -104,7 +104,7 @@
   </div>
 </template>
 <script>
-import { getQueryVariable } from "../../../common/util.js";
+import { getQueryVariable, testWeixin } from "../../../common/util.js";
 import { Popup } from "vant";
 import bookDir from "../bookDir.js";
 export default {
@@ -126,6 +126,7 @@ export default {
     "van-popup": Popup
   },
   created() {
+   
     this.book = bookDir[this.bookIndex];
     this.initAudio();
     this.bookCover = require(`../../../assets/img/book417/${
@@ -140,6 +141,7 @@ export default {
     if(sessionStorage.getItem('isWatchWechat')){
       this.isWatchWechat = sessionStorage.getItem('isWatchWechat')
     }
+     this.getCode();
   },
 
   methods: {
@@ -150,8 +152,8 @@ export default {
       this.axios
           .get(`http://api.yinji.immusician.com/v1/wechat/is_watch/?code=${this.wxCode}`)
           .then(res => {
-            this.isWatchWechat = res.isWatch;
-            this.openid = res.openid;
+            this.isWatchWechat = Boolean(res.isWatch);
+            this.openid = res.open_id;
             sessionStorage.setItem('isWatchWechat',this.isWatchWechat)
             sessionStorage.setItem('openid',this.openid);
             this.countPage('页面访问')
@@ -173,7 +175,7 @@ export default {
     getCode() {
       var ruri = encodeURIComponent(
         `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${getQueryVariable(
-          index
+          'index'
         )}`
       );
       //正式
@@ -181,16 +183,22 @@ export default {
       //测试
       //var appId = "wx79d1426d8dc6654a";
 
-      if (!this.wxCode && !sessionStorage.getItem("isWatchWechat")) {
+      if (!getQueryVariable("code") && testWeixin()) {
         console.log("执行跳转");
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
       }else{
-        sessionStorage.setItem("isWatchWechat",getQueryVariable("code"))
+        sessionStorage.setItem("wxcode",getQueryVariable("code"))
         this.wxCode = getQueryVariable("code");
+        this.getWechatInfo()
       }
-      this.getWechatInfo()
+      let sessionCode = sessionStorage.getItem("wxcode");
+      //后退到了没有code的链接
+      if (sessionCode && !getQueryVariable("code")) {
+        this.wxCode = sessionCode;
+      }
+      
     },
     goBook(index) {
       location.href = `book417.html?index=${index}`;
