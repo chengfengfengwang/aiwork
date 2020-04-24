@@ -126,7 +126,15 @@ export default {
     "van-popup": Popup
   },
   created() {
-   
+    if(!getQueryVariable('code')){
+      var ruri = encodeURIComponent(
+        `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${getQueryVariable(
+          'index'
+        )}`
+      );
+   location.replace(`http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=${ruri}`)
+    }
+    
     this.book = bookDir[this.bookIndex];
     this.initAudio();
     this.bookCover = require(`../../../assets/img/book417/${

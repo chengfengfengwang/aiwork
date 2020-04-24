@@ -51,4 +51,10 @@ export default {
     '笛子':'dizi',
     '唢呐': 'suona',
     '扬琴':'yangqin',
+    '按钟do':'voice_do',
+    '按钟re':'voice_re',
+    '按钟mi':'voice_mi',
+    '按钟sol':'voice_sol',
+    '按钟laba':'voice_laba',
+    '按钟shanshan':'voice_shanshan'
 }
