@@ -1,35 +1,55 @@
 <template>
-  <div id="main">
+  <div id="main" :class="[isWatchWechat?'watched':'nowatch']">
     <!-- {{book}} -->
     <div class="play_section">
-      <img src="../../../assets/img/book417/0.png" alt class="bg">
+      <img :src="bookCover" alt class="bg">
       <div class="book">
         <div class="book_cover">
-          <img src="../../../assets/img/book417/0.png" alt>
+          <img :src="bookCover" alt>
+          <img
+            @click="togglePlay"
+            v-show="!isPlaying"
+            src="../../../assets/img/book417/play.png"
+            alt
+            class="play_icon"
+          >
+          <img
+            @click="togglePlay"
+            v-show="isPlaying"
+            src="../../../assets/img/book417/pause.jpg"
+            alt
+            class="play_icon"
+          >
         </div>
-        <div class="book_name">儿童古典绘本</div>
+        <div class="book_name">《{{book.title}}》</div>
       </div>
-      <div class="scan_btn">点击扫码，听完整版</div>
+      <div  @click="showModal();countPage('页面内扫码按钮')" v-show="!isWatchWechat" class="scan_btn">点击扫码，听完整版</div>
     </div>
-    <div class="content_section">
-      <img class="cover" src="../../../assets/img/book417/0.png" alt>
+    <div class="content_section" :class="[isShowAll?'':'hideshow']">
+      <img class="cover" :src="bookCover" alt>
       <div class="content">
-        <div class="content_item">国家新闻出版署推荐图书</div>
+        <div class="content_all">{{book.content}}</div>
+      </div>
+    </div>
+    <div v-show="!isShowAll" @click="isShowAll = true" class="showall_section">
+      <div class="gradient"></div>
+      <div class="showall_btn">
+        <img src="../../../assets/img/book417/showall.jpg" alt>
       </div>
     </div>
     <div class="catalog_section">
       <div class="catalog_header">
         <div class="left">
-          <img src="../../../assets/img/book417/0.png" alt>
+          <img :src="bookCover" alt>
         </div>
         <div class="middle">
-          <div class="middle_title">《儿童古典绘本》</div>
+          <div class="middle_title">《{{book.title}}》</div>
           <div class="middle_info">
             <span class="sub">1340订阅</span>
-            <span class="all_num">8集</span>
+            <span class="all_num">{{bookDir.length}}集</span>
           </div>
         </div>
-        <div class="right">
+        <div @click="showModal();countPage('页面内收听按钮')" v-show="!isWatchWechat" class="right">
           <div class="icon">
             <img src="../../../assets/img/book417/headset.png" alt>
           </div>
@@ -37,36 +57,23 @@
         </div>
       </div>
       <div class="catalog_item_wrapper">
-        <div class="catalog_item">
+        <div
+          @click="goBook(index)"
+          v-for="(item,index) in bookDir"
+          :key="index"
+          class="catalog_item"
+        >
           <div class="play_icon">
             <img src="../../../assets/img/book417/itemplay.png" alt>
           </div>
-          <div class="name">01.四季</div>
-          <div class="more_icon">
-            <img src="../../../assets/img/book417/more.png" alt>
-          </div>
-        </div>
-        <div class="catalog_item">
-          <div class="play_icon">
-            <img src="../../../assets/img/book417/itemplay.png" alt>
-          </div>
-          <div class="name">01.四季</div>
-          <div class="more_icon">
-            <img src="../../../assets/img/book417/more.png" alt>
-          </div>
-        </div>
-        <div class="catalog_item">
-          <div class="play_icon">
-            <img src="../../../assets/img/book417/itemplay.png" alt>
-          </div>
-          <div class="name">01.四季</div>
-          <div class="more_icon">
+          <div class="name">0{{index+1}}.{{item.title}}</div>
+          <div @click.stop="showModal" v-show="!isWatchWechat" class="more_icon">
             <img src="../../../assets/img/book417/more.png" alt>
           </div>
         </div>
       </div>
     </div>
-    <div class="watch_section">
+    <div v-show="!isWatchWechat" class="watch_section">
       <div class="left_before">
         <img src="../../../assets/img/book417/logo.png" alt>
       </div>
@@ -76,32 +83,159 @@
         </div>
         <div class="left_bottom">扫码关注，免费收听</div>
       </div>
-      <div class="right">关注</div>
+      <div @click="showModal();countPage('页面内关注按钮')" class="right">关注</div>
     </div>
+    <van-popup v-model="modalShow">
+      <div class="pop_contnet">
+        <img
+          @click="closeModal"
+          src="../../../assets/img/book417/close_icon.png"
+          alt
+          class="close_icon"
+        >
+        <div class="tl1">已更新至{{bookDir.length}}期</div>
+        <div class="qr_wrapper">
+          <img :src="qrSrc" alt class="qr">
+        </div>
+        <div class="tl2">好专辑不要错过哦</div>
+        <div class="tl3">长按扫码关注公众号收听</div>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
 import { getQueryVariable } from "../../../common/util.js";
+import { Popup } from "vant";
 import bookDir from "../bookDir.js";
 export default {
   data() {
     return {
-      book: ""
+      bookDir: bookDir,
+      bookIndex: getQueryVariable("index"),
+      book: "",
+      bookCover: "",
+      qrSrc: "",
+      bookAudio: "",
+      modalShow: false,
+      isWatchWechat: false,
+      isPlaying: false,
+      isShowAll:false
     };
   },
+  components: {
+    "van-popup": Popup
+  },
   created() {
-    console.log(bookDir);
-    this.book = bookDir[getQueryVariable("index")];
-    console.log(this.book);
+    this.book = bookDir[this.bookIndex];
+    this.initAudio();
+    this.bookCover = require(`../../../assets/img/book417/${
+      this.bookIndex
+    }.png`);
+    this.qrSrc = require(`../../../assets/img/book417/qr/${
+      this.bookIndex
+    }.png`);
+    if(sessionStorage.getItem('openid')){
+      this.openid = sessionStorage.getItem('openid')
+    }
+    if(sessionStorage.getItem('isWatchWechat')){
+      this.isWatchWechat = sessionStorage.getItem('isWatchWechat')
+    }
   },
 
-  methods: {}
+  methods: {
+    getWechatInfo(){
+      if(this.openid && this.isWatchWechat){
+        return
+      }
+      this.axios
+          .get(`http://api.yinji.immusician.com/v1/wechat/is_watch/?code=${this.wxCode}`)
+          .then(res => {
+            this.isWatchWechat = res.isWatch;
+            this.openid = res.openid;
+            sessionStorage.setItem('isWatchWechat',this.isWatchWechat)
+            sessionStorage.setItem('openid',this.openid);
+            this.countPage('页面访问')
+          });
+    },
+    countPage(key){
+      //http://api.yinji.immusician.com/v1/wechat/live_list
+      let postUrl = `${location.origin}${location.pathname}?index=${getQueryVariable('index')}`
+      this.axios
+          .post("http://api.yinji.immusician.com/v1/operate/collect_page_visit/", {
+            url:postUrl,
+            key,
+            uid:this.openid
+          })
+          .then(res => {
+           
+          });
+    },
+    getCode() {
+      var ruri = encodeURIComponent(
+        `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${getQueryVariable(
+          index
+        )}`
+      );
+      //正式
+      var appId = "wxebd76dff6ca15a2a";
+      //测试
+      //var appId = "wx79d1426d8dc6654a";
+
+      if (!this.wxCode && !sessionStorage.getItem("isWatchWechat")) {
+        console.log("执行跳转");
+        location.replace(
+          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        );
+      }else{
+        sessionStorage.setItem("isWatchWechat",getQueryVariable("code"))
+        this.wxCode = getQueryVariable("code");
+      }
+      this.getWechatInfo()
+    },
+    goBook(index) {
+      location.href = `book417.html?index=${index}`;
+    },
+    togglePlay() {
+      this.isPlaying = !this.isPlaying;
+      if (this.isPlaying) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+    },
+    initAudio() {
+      let bookName = this.book.title;
+      let audioSrc = "";
+      if (this.isWatchWechat) {
+        audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
+          bookName
+        )}.mp3`;
+      } else {
+        audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
+          bookName + " 试听"
+        )}.mp3`;
+      }
+      this.audio = new Audio();
+      this.audio.src = audioSrc;
+    },
+    showModal() {
+      if(!this.isWatchWechat){
+        this.modalShow = true;
+      }
+    },
+    closeModal() {
+      this.modalShow = false;
+    }
+  }
 };
 </script>
 <style lang="less">
 #main {
   position: relative;
   font-size: 16px;
+}
+#main.nowatch {
+  padding-bottom: 50px;
 }
 .play_section {
   position: relative;
@@ -119,6 +253,7 @@ export default {
     margin-top: 30px;
     margin-bottom: 28px;
     .book_cover {
+      position: relative;
       margin: 0 auto 15px auto;
       width: 115px;
       height: 115px;
@@ -127,6 +262,13 @@ export default {
       overflow: hidden;
       img {
         width: 100%;
+      }
+      .play_icon {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 25%;
+        width: 48px;
       }
     }
     .book_name {
@@ -152,9 +294,51 @@ export default {
   }
 }
 .content_section {
+  position: relative;
   padding: 15px 15px 0 15px;
   img.cover {
     width: 100%;
+  }
+  .content {
+    margin: 30px 0;
+    .content_all {
+      text-indent: 2em;
+      font-size: 13px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+    }
+  }
+}
+.content_section.hideshow{
+  overflow: hidden;
+  height: 509px;
+}
+.showall_section {
+  // position: absolute;
+  // left: 0;
+  // bottom: 0;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  .gradient {
+    position: absolute;
+    top: -79px;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    background-image: -webkit-linear-gradient(
+      top,
+      rgba(255, 255, 255, 0),
+      #fff
+    );
+    background-image: linear-gradient(-180deg, rgba(255, 255, 255, 0), #fff);
+  }
+  .showall_btn {
+    text-align: center;
+    img {
+      width: 20px;
+    }
   }
 }
 .catalog_section {
@@ -191,7 +375,7 @@ export default {
           padding-left: 6px;
         }
         .all_num {
-          padding-right: 6px;
+          padding-right: 16px;
           float: right;
         }
       }
@@ -248,8 +432,8 @@ export default {
   z-index: 9;
   display: flex;
   align-items: center;
-  background:rgba(255,255,255,1);
-  box-shadow:0px -2px 9px 0px rgba(58,58,58,0.2);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px -2px 9px 0px rgba(58, 58, 58, 0.2);
   padding: 12px 15px;
   .left_before {
     margin-right: 8px;
@@ -287,5 +471,71 @@ export default {
     font-weight: 500;
     color: rgba(255, 255, 255, 1);
   }
+}
+.pop_contnet {
+  width: 290px;
+  padding: 40px 0;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 15px;
+  text-align: center;
+  .close_icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 16px;
+    width: 48px;
+  }
+  .tl1 {
+    position: relative;
+    margin-bottom: 13px;
+    font-size: 13px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: rgba(102, 102, 102, 1);
+  }
+  .tl1::before {
+    content: " ";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(102, 102, 102, 1);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 95px;
+  }
+  .tl1::after {
+    content: " ";
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(102, 102, 102, 1);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 95px;
+  }
+  .qr_wrapper {
+    width: 146px;
+    height: 146px;
+    margin: 10px auto;
+    img {
+      width: 100%;
+    }
+  }
+  .tl2 {
+    margin-bottom: 3px;
+    font-size: 13px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    color: #333333;
+  }
+  .tl3 {
+    font-family: PingFangSC-Regular, PingFang SC;
+    color: #ff9500;
+    font-size: 15px;
+  }
+}
+.van-popup {
+  border-radius: 15px;
 }
 </style>
