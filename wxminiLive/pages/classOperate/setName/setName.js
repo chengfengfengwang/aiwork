@@ -30,6 +30,7 @@ Page({
     });
   },
   editLiveClass() {
+    wx.showLoading();
     let selStudents = JSON.parse(wx.getStorageSync("selStudents"));
     let studentIds = selStudents.map(e => e.uid);
     let classId = wx.getStorageSync("classId")
@@ -41,6 +42,7 @@ Page({
         course_id: wx.getStorageSync("selCourseId")
       })
       .then(res => {
+        wx.hideLoading();
         wx.reLaunch({
           url: "/pages/liveClassList/liveClassList" 
         });
@@ -50,6 +52,7 @@ Page({
       });
   },
   createLiveClass() {
+    wx.showLoading();
     let selStudents = JSON.parse(wx.getStorageSync("selStudents"));
     let studentIds = selStudents.map(e => e.uid);
     util
@@ -61,6 +64,7 @@ Page({
         instrument_type: instrumentType
       })
       .then(res => {
+        wx.hideLoading();
         wx.reLaunch({
           url: "/pages/liveClassList/liveClassList" 
         });

@@ -1,6 +1,6 @@
 /**app.wxss**/
 /* 页面高度1206 */
-@import "./components/weui/weui-wxss/dist/style/weui.wxss";
+/* @import "./components/weui/weui-wxss/dist/style/weui.wxss"; */
 .container {
   height: 100%;
   display: flex;

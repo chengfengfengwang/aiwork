@@ -72,9 +72,9 @@ Page({
   selectUser(e) {
     let index = e.currentTarget.dataset.index;
     if(!this.data.students[index].checked && this.data.selected.length>=4){
-      if(this.data.selected.length>=4){
+      if(this.data.selected.length>=8){
         wx.showToast({
-          title: '人数不能超过4个',
+          title: '人数不能超过8个',
           icon: 'none',
           duration: 2000
         });

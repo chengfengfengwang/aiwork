@@ -79,7 +79,8 @@ Page({
           e.list = []
         });
         this.setData({
-          liveClassList: instruments
+          liveClassList: instruments,
+          acInstrument:instruments[0].value
         })
         this.getliveClass(0, instruments[0].value);
       });
