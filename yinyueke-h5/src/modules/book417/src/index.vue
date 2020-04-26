@@ -23,7 +23,11 @@
         </div>
         <div class="book_name">《{{book.title}}》</div>
       </div>
-      <div  @click="showModal();countPage('页面内扫码按钮')" v-show="!isWatchWechat" class="scan_btn">点击扫码，听完整版</div>
+      <div
+        @click="showModal();countPage('页面内扫码按钮')"
+        v-show="!isWatchWechat"
+        class="scan_btn"
+      >点击扫码，听完整版</div>
     </div>
     <div class="content_section" :class="[isShowAll?'':'hideshow']">
       <img class="cover" :src="bookCover" alt>
@@ -119,71 +123,86 @@ export default {
       modalShow: false,
       isWatchWechat: false,
       isPlaying: false,
-      isShowAll:false
+      isShowAll: false
     };
   },
   components: {
     "van-popup": Popup
   },
   created() {
-    if(!getQueryVariable('code')){
-      var ruri = encodeURIComponent(
-        `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${getQueryVariable(
-          'index'
-        )}`
-      );
-   location.replace(`http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=${ruri}`)
-    }
-    
-    this.book = bookDir[this.bookIndex];
+    this.initBookInfo();
     this.initAudio();
-    this.bookCover = require(`../../../assets/img/book417/${
-      this.bookIndex
-    }.png`);
-    this.qrSrc = require(`../../../assets/img/book417/qr/${
-      this.bookIndex
-    }.png`);
-    if(sessionStorage.getItem('openid')){
-      this.openid = sessionStorage.getItem('openid')
+    this.stopGoBack();
+    if (sessionStorage.getItem("openid")) {
+      this.openid = sessionStorage.getItem("openid");
     }
-    if(sessionStorage.getItem('isWatchWechat')){
-      this.isWatchWechat = sessionStorage.getItem('isWatchWechat')
+    if (sessionStorage.getItem("isWatchWechat") === "true") {
+      this.isWatchWechat = true;
     }
-     this.getCode();
+    this.getCode();
+    console.log("111");
   },
-
+  mounted() {
+    console.log("zzz");
+  },
   methods: {
-    getWechatInfo(){
-      if(this.openid && this.isWatchWechat){
-        return
+    stopGoBack() {
+      // history.pushState(null, null, document.URL);
+      //   window.addEventListener("popstate", function() {
+      //     history.pushState(null, null, document.URL);
+      //   });
+      window.history.pushState("", "", location.href);
+      window.addEventListener("popstate", function() {
+        history.go(-2);
+      });
+    },
+    initBookInfo() {
+      this.book = bookDir[this.bookIndex];
+      this.bookCover = require(`../../../assets/img/book417/${
+        this.bookIndex
+      }.png`);
+      this.qrSrc = require(`../../../assets/img/book417/qr/${
+        this.bookIndex
+      }.png`);
+    },
+    getWechatInfo() {
+      if (this.openid && this.isWatchWechat) {
+        return;
       }
       this.axios
-          .get(`http://api.yinji.immusician.com/v1/wechat/is_watch/?code=${this.wxCode}`)
-          .then(res => {
-            this.isWatchWechat = Boolean(res.isWatch);
-            this.openid = res.open_id;
-            sessionStorage.setItem('isWatchWechat',this.isWatchWechat)
-            sessionStorage.setItem('openid',this.openid);
-            this.countPage('页面访问')
-          });
+        .get(
+          `http://api.yinji.immusician.com/v1/wechat/is_watch/?code=${
+            this.wxCode
+          }`
+        )
+        .then(res => {
+          this.isWatchWechat = Boolean(res.isWatch);
+          this.openid = res.open_id;
+          sessionStorage.setItem("isWatchWechat", this.isWatchWechat);
+          sessionStorage.setItem("openid", this.openid);
+          this.countPage("页面访问");
+        });
     },
-    countPage(key){
+    countPage(key) {
       //http://api.yinji.immusician.com/v1/wechat/live_list
-      let postUrl = `${location.origin}${location.pathname}?index=${getQueryVariable('index')}`
+      let postUrl = `${location.origin}${
+        location.pathname
+      }?index=${getQueryVariable("index")}`;
       this.axios
-          .post("http://api.yinji.immusician.com/v1/operate/collect_page_visit/", {
-            url:postUrl,
+        .post(
+          "http://api.yinji.immusician.com/v1/operate/collect_page_visit/",
+          {
+            url: postUrl,
             key,
-            uid:this.openid
-          })
-          .then(res => {
-           
-          });
+            uid: this.openid
+          }
+        )
+        .then(res => {});
     },
     getCode() {
       var ruri = encodeURIComponent(
         `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${getQueryVariable(
-          'index'
+          "index"
         )}`
       );
       //正式
@@ -192,24 +211,28 @@ export default {
       //var appId = "wx79d1426d8dc6654a";
 
       if (!getQueryVariable("code") && testWeixin()) {
-        console.log("执行跳转");
         location.replace(
           `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${ruri}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         );
-      }else{
-        sessionStorage.setItem("wxcode",getQueryVariable("code"))
+      } else {
+        sessionStorage.setItem("wxcode", getQueryVariable("code"));
         this.wxCode = getQueryVariable("code");
-        this.getWechatInfo()
+        this.getWechatInfo();
       }
       let sessionCode = sessionStorage.getItem("wxcode");
       //后退到了没有code的链接
       if (sessionCode && !getQueryVariable("code")) {
         this.wxCode = sessionCode;
       }
-      
     },
     goBook(index) {
-      location.href = `book417.html?index=${index}`;
+      //location.href = `book417.html?index=${index}`;
+      var ruri = encodeURIComponent(
+        `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${index}`
+      );
+      location.replace(
+        `http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=${ruri}`
+      );
     },
     togglePlay() {
       this.isPlaying = !this.isPlaying;
@@ -235,7 +258,7 @@ export default {
       this.audio.src = audioSrc;
     },
     showModal() {
-      if(!this.isWatchWechat){
+      if (!this.isWatchWechat) {
         this.modalShow = true;
       }
     },
@@ -326,7 +349,7 @@ export default {
     }
   }
 }
-.content_section.hideshow{
+.content_section.hideshow {
   overflow: hidden;
   height: 509px;
 }
