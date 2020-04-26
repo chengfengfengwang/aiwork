@@ -31,6 +31,9 @@
     </div>
     <div class="content_section" :class="[isShowAll?'':'hideshow']">
       <img class="cover" :src="bookCover" alt>
+      <div class="cover_item_wrapper" v-show="book.coverItem">
+        <div class="cover_item" v-for="(item,index) in book.coverItem" :key="index">{{item}}</div>
+      </div>
       <div class="content">
         <div class="content_all">{{book.content}}</div>
       </div>
@@ -49,7 +52,7 @@
         <div class="middle">
           <div class="middle_title">《{{book.title}}》</div>
           <div class="middle_info">
-            <span class="sub">1340订阅</span>
+            <span class="sub">{{clickTotal}}订阅</span>
             <span class="all_num">{{bookDir.length-1}}集</span>
           </div>
         </div>
@@ -123,7 +126,8 @@ export default {
       modalShow: false,
       isWatchWechat: false,
       isPlaying: false,
-      isShowAll: false
+      isShowAll: false,
+      clickTotal: ""
     };
   },
   components: {
@@ -140,12 +144,25 @@ export default {
       this.isWatchWechat = true;
     }
     this.getCode();
-    console.log("111");
+    this.getClickData();
   },
-  mounted() {
-    console.log("zzz");
-  },
+  mounted() {},
   methods: {
+    getClickData() {
+      let oUrl = `http://cdn.kids-web.immusician.com/yinji/book417.html?index=${
+        this.bookIndex
+      }`;
+
+      this.axios
+        .get(
+          `http://api.yinji.immusician.com/v1/operate/show_page_visit?url=${encodeURIComponent(
+            oUrl
+          )}`
+        )
+        .then(res => {
+          this.clickTotal = res.data.total;
+        });
+    },
     stopGoBack() {
       // history.pushState(null, null, document.URL);
       //   window.addEventListener("popstate", function() {
@@ -244,12 +261,12 @@ export default {
     },
     initAudio() {
       let bookName;
-      if(this.book.title === '儿童古典音乐绘本'){
-        bookName='四季'
-      }else{
-        bookName=this.book.title
+      if (this.book.title === "儿童古典音乐绘本") {
+        bookName = "四季";
+      } else {
+        bookName = this.book.title;
       }
-      
+
       let audioSrc = "";
       if (this.isWatchWechat) {
         audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
@@ -262,6 +279,19 @@ export default {
       }
       this.audio = new Audio();
       this.audio.src = audioSrc;
+      this.audio.addEventListener(
+        "timeupdate",
+        ()=> {
+          //监听音频播放的实时时间事件
+          let timeDisplay;
+          //用秒数来显示当前播放进度
+          timeDisplay = Math.floor(this.audio.currentTime); //获取实时时间
+          if(timeDisplay==30 && !this.isWatchWechat){
+            this.modalShow = true
+          }
+        },
+        false
+      );
     },
     showModal() {
       if (!this.isWatchWechat) {
@@ -340,9 +370,32 @@ export default {
 }
 .content_section {
   position: relative;
-  padding: 15px 15px 0 15px;
+  padding: 15px 15px 0 18px;
   img.cover {
     width: 100%;
+  }
+  .cover_item_wrapper {
+    margin: 30px 0;
+    .cover_item {
+      padding-left: 6px;
+      position: relative;
+      font-size: 13px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+    }
+    .cover_item:before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 7px;
+      //transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(255, 193, 24, 1);
+    }
   }
   .content {
     margin: 30px 0;
