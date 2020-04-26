@@ -95,8 +95,18 @@
           <FormItem v-show="showArea" label="地域位置">
             <al-selector level="2" gutter="0" v-model="location"/>
           </FormItem>
-          <FormItem label="渠道名称">
+          <!-- <FormItem label="渠道名称">
             <Input v-model="formValue.channel"></Input>
+          </FormItem> -->
+          <FormItem label="渠道">
+            <Select filterable @on-change="channelChange" v-model="formValue.channel_id" style="width:200px">
+              <Option  v-for="(item,index) in channelList" :value="item.id" :key="index">{{ item.name }}</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="sku">
+            <Select filterable v-model="formValue.sku_id" style="width:200px">
+              <Option v-for="(item,index) in skuList" :value="item.id" :key="index">{{ item.name }}</Option>
+            </Select>
           </FormItem>
           <FormItem label="课程类型">
             <Select v-model="formValue.course_type" placeholder="选择课程类型">
@@ -302,7 +312,9 @@ export default {
       searchValue: {
         //channel_source:'',
         //channel_type:''
-      }
+      },
+      channelList:[],
+      skuList:[]
     };
   },
   computed: {
@@ -339,9 +351,27 @@ export default {
   mounted() {
     delete this.axios.defaults.headers.common.uid;
     delete this.axios.defaults.headers.common.token;
+    this.getChannels();
     this.get();
   },
   methods: {
+    channelChange(){
+      this.getSkus()
+    },
+    getSkus(){
+      this.axios
+        .get(`http://58.87.125.111:6363/v1/fgoods/index?page=0&size=10000&status=1&channel_id=${this.formValue.channel_id}&key=`)
+        .then(res => {
+          this.skuList = res.data.list;
+        });
+    },
+    getChannels(){
+      this.axios
+        .get(`http://58.87.125.111:6363/v1/channel/index?page=0&size=999&status=1`)
+        .then(res => {
+          this.channelList = res.data.list;
+        });
+    },
     downLoad(id) {
       window.location.href = `${process.env.XIAOPO}/${process.env.VERSION}/code_csv/${id}`;
       // this.axios
