@@ -3,16 +3,18 @@
     <Loading v-show="loadingShow"/>
     <div v-show="!swiperShow" class="poster_container noswiper">
       <div id="posterContainer">
-        <!-- <div class="nick_name">宝贝 琪琪</div> -->
-        <div class="nick_name">宝贝 {{nickName}}</div>
-        <img :src="qrSrc" alt class="qr">
-        <img v-show="posterSrc" class="poster" :src="posterSrc" alt>
-        <img
-          v-show="!posterSrc"
-          class="poster"
-          src="../../../assets/img/promote/ou_poster/poster1.png"
-          alt
-        >
+        <img v-if="resultBase64Show" class="poster" :src="resultBase64" alt>
+        <div v-else>
+          <div class="nick_name">宝贝 {{nickName}}</div>
+          <img :src="qrSrc" alt class="qr">
+          <img v-show="posterSrc" class="poster" :src="posterSrc" alt>
+          <img
+            v-show="!posterSrc"
+            class="poster"
+            src="../../../assets/img/promote/ou_poster/poster1.png"
+            alt
+          >
+        </div>
       </div>
     </div>
     <div v-show="swiperShow" class="poster_container swiper">
@@ -60,7 +62,9 @@ export default {
       posterSrc: "",
       qrSrc: "",
       nickName: getQueryVariable("nick_name"),
-      swiperShow: false
+      resultBase64:'',
+      resultBase64Show: false,
+      swiperShow: false,
     };
   },
   created() {
@@ -221,7 +225,7 @@ export default {
         //   document.body.appendChild(img);
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
-        //this.resultBase64Show = true;
+        this.resultBase64Show = true;
         // console.log("----------");
         // console.log(this.resultBase64);
         // console.log("----------");
