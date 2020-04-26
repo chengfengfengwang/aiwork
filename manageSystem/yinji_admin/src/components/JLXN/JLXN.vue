@@ -44,7 +44,8 @@ const noteList = [
   { name: "4", value: "f" },
   { name: "5", value: "g" },
   { name: "6", value: "a" },
-  { name: "7", value: "b" }
+  { name: "7", value: "b" },
+  { name: "8", value: "gc" }
 ];
 export default {
   props: {
