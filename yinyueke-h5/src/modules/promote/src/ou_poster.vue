@@ -116,8 +116,7 @@ export default {
     //   this.initRemarkSwiper();
     // });
     this.nickName = decodeURIComponent(this.nickName);
-    // this.getMyAccountData();
-    // this.getQrUrl();
+    //this.getQrUrl();
   },
   components: {
     Loading,
@@ -125,7 +124,6 @@ export default {
   },
 
   mounted() {
-    //this.readyAll();
   },
   methods: {
     getMyAccountData() {

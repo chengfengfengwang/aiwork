@@ -24,6 +24,7 @@ const writeCardInfo = () => import('./src/writeCardInfo.vue')
 const ou_reg = () => import('./src/ou_reg')
 const ou_regSuccess = () => import('./src/ou_regSuccess')
 const ou_poster = () => import('./src/ou_poster')
+const ou_poster1 = () => import('./src/ou_poster1')
 const ou_getCash = () => import('./src/ou_getCash')
 const ou_intro = () => import('./src/ou_intro')
 const ou_intro1 = () => import('./src/ou_intro1')
@@ -77,6 +78,11 @@ export default new Router({
       path: '/ou_poster',
       name: 'ou_poster',
       component: ou_poster,
+    }, 
+    {
+      path: '/ou_poster1',
+      name: 'ou_poster1',
+      component: ou_poster1,
     }, 
     {
       path: '/ou_getCash',

@@ -1,11 +1,7 @@
 <template>
   <div id="main">
     <Loading v-show="loadingShow" />
-    <div @click="maskShow=true" class="rule_btn">
-      <img src="../../../assets/img/promote/poster/rule_btn.png" alt />
-    </div>
-  
-    <div class="poster_container">
+    <div v-show="!swiperShow" class="poster_container">
       <div id="posterContainer">
         <!-- <div class="nick_name">宝贝 琪琪</div> -->
         <div class="nick_name">宝贝 {{nickName}}</div>
@@ -20,46 +16,20 @@
       </div>
 
     </div>
-  
-    <div class="mask" v-show="maskShow">
-      <div class="ac_rule">
-        <div class="rule_title">活动规则</div>
-        <div class="close_icon" @click="maskShow=false">
-          <img src="../../../assets/img/promote/poster/close.png" alt />
+    <div v-show="swiperShow" class="poster_container">
+      <div  class="remark_container wrapper">
+        <div id="remarkSwiper" class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item,index) in remarkArr" :key="index">
+              <img @click="previewRemark(index)" :src="item" alt />
+            </div>
+          </div>
         </div>
-        <div class="rule_item">
-          <div class="item_index">1</div>
-          <span class="rule_lab">邀请对象：</span>
-          <span>您邀请的好友必须是从未注册过音乐壳的新用户，且必须成功购买音乐壳超级会员。</span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">2</div>
-          <span class="rule_lab">邀请方法：</span>
-          <span>您必须生成自己的专属海报邀请好友，我们将依据您的邀请记录发放奖励。</span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">3</div>
-          <span class="rule_lab">邀请人奖励：</span>
-          <span>每成功邀请1个好友注册并购买音乐壳超级会员，您可享受好友实付金额的20%作为现金奖励。您获得的现金奖励，可在每月10日申请提现。申请提现后，系统会在10个工作日内审核并发放。</span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">4</div>
-          <span class="rule_lab">被邀请人奖励：</span>
-          <span>
-            您邀请的好友注册后，即可<span class="color">免费领取3天音乐壳超级会员权益</span>和<span class="color">购买大牌乐器8折卡</span>
-          </span>
-        </div>
-        <div class="rule_item">
-          <div class="item_index">5</div>
-          <span>
-            您邀请的好友中，每月月初起，<span class="color">最先购买音乐壳会员的2个用户，可获得音乐壳永久超级会员权益</span> ，其他购买音乐壳会员的用户，可获得10年的音乐壳超级会员权益
-          </span>
-        </div>
-        <div class="rule_item">
-          <span>其他问题，添加后方微信咨询：YXYMIUSIC</span>
-        </div>
-        <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div>
       </div>
+    </div>
+    
+    <div class="btn_wrapper">
+      <div class="share_btn" @click="shareToFriends" v-show="true">分享海报给好友</div>
     </div>
   </div>
 </template>
@@ -88,19 +58,22 @@ export default {
       },
       posterSrc: "",
       qrSrc: "",
-      nickName: getQueryVariable('nick_name')
+      nickName: getQueryVariable('nick_name'),
+      swiperShow:true
     };
   },
   created() {
-    // for (var i = 4; i < 10; i++) {
-    //   var str = require(`../../../assets/img/promote/poster/poster1.png`);
-    //   this.remarkArr.push(str);
-    // }
-    // this.$nextTick(() => {
-    //   this.initRemarkSwiper();
-    // });
+    if(this.swiperShow){
+      for (var i = 4; i < 10; i++) {
+      var str = require(`../../../assets/img/promote/poster/poster1.png`);
+      this.remarkArr.push(str);
+      }
+      this.$nextTick(() => {
+        this.initRemarkSwiper();
+      });
+    }
+    
     this.nickName = decodeURIComponent(this.nickName);
-    this.getMyAccountData();
     this.getQrUrl();
   },
   components: {
@@ -112,20 +85,6 @@ export default {
     //this.readyAll();
   },
   methods: {
-    getMyAccountData() {
-      this.axios
-        .get(`http://58.87.125.111:55555/v1/account/get_my_account/?god=${getQueryVariable('uid')}`)
-        .then(res => {
-          let rewardData = res.data.stats;
-          if (rewardData.total) {
-            rewardData.total = rewardData.total.toFixed(2);
-          }
-          this.rewardData = rewardData;
-        });
-    },
-    toRewardDetail() {
-      this.$router.push("/reward");
-    },
     previewRemark(index) {
       ImagePreview({
         images: this.remarkArr,
@@ -137,9 +96,12 @@ export default {
         direction: "horizontal",
         initialSlide: 1,
         //loop: true,
-        slidesPerView: 3,
+        slidesPerView: 'auto',
         centeredSlides: true,
-        spaceBetween: 15
+        spaceBetween: 0,
+        // slidesOffsetBefore : -30,
+        // slidesOffsetAfter : -30,
+        //watchOverflow:true
       });
     },
     getQrUrl() {
@@ -255,7 +217,7 @@ export default {
         //   document.body.appendChild(img);
         // };
         this.resultBase64 = canvas.toDataURL("image/png");
-        this.resultBase64Show = true;
+        //this.resultBase64Show = true;
         // console.log("----------");
         // console.log(this.resultBase64);
         // console.log("----------");
@@ -369,8 +331,11 @@ export default {
   }
 }
 .poster_container {
-  margin-top: -20px;
-  position: relative;
+   position: absolute;
+   width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   text-align: center;
   padding-bottom: 120px;
   overflow: hidden;
@@ -415,35 +380,34 @@ export default {
     border-radius: 15px;
     border: 4px solid #fff;
   }
-  .poster_bottom {
-    z-index: 3;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -81px;
-    width: 660px;
-  }
+ 
 }
 #remarkSwiper.swiper-container {
+      z-index: 9;
+    position: relative;
   width: 100%;
   margin: 0 auto;
   .swiper-slide {
+    width: 70%;
     text-align: center;
     font-size: 18px;
-    background: #fff;
-
+    overflow: hidden;
     /* Center slide text vertically */
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 300ms;
     img {
-      width: 200%;
+      //width: 200%;
+      border-radius: 15px;
+      border: 4px solid #fff;
+      width: 100%;
       background-color: #fbf7f1;
     }
   }
+  
   .swiper-slide:not(.swiper-slide-active) {
-    transform: scale(0.8);
+    transform: scale(0.85);
   }
 }
 .btn_wrapper {
