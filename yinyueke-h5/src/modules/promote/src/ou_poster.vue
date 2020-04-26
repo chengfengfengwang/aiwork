@@ -116,7 +116,7 @@ export default {
     //   this.initRemarkSwiper();
     // });
     this.nickName = decodeURIComponent(this.nickName);
-    //this.getQrUrl();
+    this.getQrUrl();
   },
   components: {
     Loading,
@@ -332,29 +332,20 @@ export default {
   }
   .nick_name {
     position: absolute;
-    left: 20%;
-    bottom: 29%;
+    left: 6%;
+    bottom: 17.5%;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 600;
     color: rgba(255, 240, 150, 1);
     //text-decoration: underline;
     z-index: 9;
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      left: 0;
-      bottom: -4px;
-      height: 2px;
-      background-color: rgba(255, 240, 150, 1);
-    }
   }
   .qr {
     position: absolute;
 
-    right: 20%;
-    bottom: 24%;
+    right: 5%;
+    bottom: 9%;
     width: 56px;
     height: 56px;
     z-index: 9;

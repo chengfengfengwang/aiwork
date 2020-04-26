@@ -16,6 +16,15 @@
           :defaultFile="item.img"
           v-on:upload-success="itemUploadSuccess"
         />
+        <MyUpload
+          btnText="上传音频"
+          :acceptType="1"
+          position="1"
+          :index="index"
+          :idx="index"
+          :defaultFile="item.audio"
+          v-on:upload-success="audioUploadSuccess"
+        />
         <div>
           <span>名称：</span>
           <Select v-model="item.name" placeholder="">
@@ -74,6 +83,9 @@ export default {
     },
     itemUploadSuccess(response, idx, position, file, fileList) {
       this.myArr[idx].img = response.data;
+    },
+    audioUploadSuccess(response, idx, position, file, fileList) {
+      this.myArr[idx].audio = response.data;
     },
     add() {
       this.myArr.push({
