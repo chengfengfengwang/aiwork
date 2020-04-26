@@ -1869,7 +1869,7 @@ export default {
         this.curGame = "kapai";
       } else if (newRow.game_type == 8) {
         this.curGame = "xuanze";
-      } else if (newRow.game_type == 1) {
+      } else if (newRow.game_type == 1 || newRow.game_type == 73) {
         this.curGame = "jiluoxiaoniao";
       } else if (newRow.game_type == 9) {
         this.curGame = "yinzhunxiaoniao";
@@ -2035,7 +2035,7 @@ export default {
       }else if (newRow.game_type == 69) {
         //模拟游戏2d
         this.curGame = "mnyx2d";
-      } else if (newRow.game_type == 70 || newRow.game_type == 73) {
+      } else if (newRow.game_type == 70) {
         //节奏按钟
         this.curGame = "jzaz";
       }  
