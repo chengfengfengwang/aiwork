@@ -50,7 +50,7 @@
           <div class="middle_title">《{{book.title}}》</div>
           <div class="middle_info">
             <span class="sub">1340订阅</span>
-            <span class="all_num">{{bookDir.length}}集</span>
+            <span class="all_num">{{bookDir.length-1}}集</span>
           </div>
         </div>
         <div @click="showModal();countPage('页面内收听按钮')" v-show="!isWatchWechat" class="right">
@@ -97,7 +97,7 @@
           alt
           class="close_icon"
         >
-        <div class="tl1">已更新至{{bookDir.length}}期</div>
+        <div class="tl1">已更新至{{bookDir.length-1}}期</div>
         <div class="qr_wrapper">
           <img :src="qrSrc" alt class="qr">
         </div>

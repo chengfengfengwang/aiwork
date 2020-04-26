@@ -147,7 +147,7 @@ export default {
         });
     },
     toPoster() {
-      this.$router.push("/ou_poster");
+      this.$router.push("/ou_poster1");
     }
   }
 };

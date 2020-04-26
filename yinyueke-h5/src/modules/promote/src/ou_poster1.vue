@@ -1,33 +1,34 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow" />
-    <div v-show="!swiperShow" class="poster_container">
+    <Loading v-show="loadingShow"/>
+    <div v-show="!swiperShow" class="poster_container noswiper">
       <div id="posterContainer">
         <!-- <div class="nick_name">宝贝 琪琪</div> -->
         <div class="nick_name">宝贝 {{nickName}}</div>
-        <img :src="qrSrc" alt class="qr" />
-        <img v-show="posterSrc" class="poster" :src="posterSrc" alt />
+        <img :src="qrSrc" alt class="qr">
+        <img v-show="posterSrc" class="poster" :src="posterSrc" alt>
         <img
           v-show="!posterSrc"
           class="poster"
-          src="../../../assets/img/promote/poster/poster1.png"
+          src="../../../assets/img/promote/ou_poster/poster1.png"
           alt
-        />
+        >
       </div>
-
     </div>
-    <div v-show="swiperShow" class="poster_container">
-      <div  class="remark_container wrapper">
+    <div v-show="swiperShow" class="poster_container swiper">
+      <div class="remark_container wrapper">
         <div id="remarkSwiper" class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item,index) in remarkArr" :key="index">
-              <img @click="previewRemark(index)" :src="item" alt />
+              <div class="nick_name">宝贝 {{nickName}}</div>
+              <img :src="qrSrc" alt class="qr">
+              <img @click="previewRemark(index)" :src="item" alt>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="btn_wrapper">
       <div class="share_btn" @click="shareToFriends" v-show="true">分享海报给好友</div>
     </div>
@@ -58,21 +59,21 @@ export default {
       },
       posterSrc: "",
       qrSrc: "",
-      nickName: getQueryVariable('nick_name'),
-      swiperShow:true
+      nickName: getQueryVariable("nick_name"),
+      swiperShow: false
     };
   },
   created() {
-    if(this.swiperShow){
+    if (this.swiperShow) {
       for (var i = 4; i < 10; i++) {
-      var str = require(`../../../assets/img/promote/poster/poster1.png`);
-      this.remarkArr.push(str);
+        var str = require(`../../../assets/img/promote/ou_poster/poster1.png`);
+        this.remarkArr.push(str);
       }
       this.$nextTick(() => {
         this.initRemarkSwiper();
       });
     }
-    
+
     this.nickName = decodeURIComponent(this.nickName);
     this.getQrUrl();
   },
@@ -96,9 +97,9 @@ export default {
         direction: "horizontal",
         initialSlide: 1,
         //loop: true,
-        slidesPerView: 'auto',
+        slidesPerView: "auto",
         centeredSlides: true,
-        spaceBetween: 0,
+        spaceBetween: 0
         // slidesOffsetBefore : -30,
         // slidesOffsetAfter : -30,
         //watchOverflow:true
@@ -140,7 +141,7 @@ export default {
     },
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/promote/poster/poster1.png`);
+        let url = require(`../../../assets/img/promote/ou_poster/poster1.png`);
         // if(this.isFree===0){
         //   url = require("../../../assets/img/yiqiac/poster2.png")
         // }else{
@@ -201,8 +202,11 @@ export default {
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
         onclone: function(document) {
-            document.querySelector('#posterContainer img.poster').style.border='none';
-            document.querySelector('#posterContainer img.poster').style.borderRadius=0;
+          document.querySelector("#posterContainer img.poster").style.border =
+            "none";
+          document.querySelector(
+            "#posterContainer img.poster"
+          ).style.borderRadius = 0;
         },
         scale: 3,
         allowTaint: true
@@ -239,7 +243,6 @@ export default {
 #main {
   position: relative;
   min-height: 100vh;
-  background-color: #faaf78;
 }
 .top {
   img {
@@ -330,61 +333,82 @@ export default {
     }
   }
 }
-.poster_container {
-   position: absolute;
-   width: 100%;
+.poster_container.swiper {
+  position: absolute;
+  width: 100%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   text-align: center;
   padding-bottom: 120px;
   overflow: hidden;
   #posterContainer {
     margin: auto;
     width: 270px;
-    height: 473px;
+    //height: 473px;
   }
   .nick_name {
     position: absolute;
-    left: 20%;
-    bottom: 29%;
+    left: 6%;
+    bottom: 17.5%;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 600;
     color: rgba(255, 240, 150, 1);
     //text-decoration: underline;
     z-index: 9;
-    &::after{
-      content: '';
-      position: absolute;
-      width: 100%;
-      left: 0;
-      bottom: -4px;
-      height: 2px;
-      background-color: rgba(255, 240, 150, 1);
-    }
   }
   .qr {
     position: absolute;
 
-    right: 20%;
-    bottom: 24%;
-    width: 56px;
+    right: 5%;
+    bottom: 3%;
+    width: 56px !important;
     height: 56px;
     z-index: 9;
   }
   img.poster {
     position: relative;
     z-index: 8;
-    width: 270px;
+    width: 320px;
     border-radius: 15px;
-    border: 4px solid #fff;
   }
- 
+}
+.poster_container.noswiper {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  .nick_name {
+    position: absolute;
+    left: 6%;
+    bottom: 17.5%;
+    font-size: 14px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(255, 240, 150, 1);
+    //text-decoration: underline;
+    z-index: 9;
+  }
+  .qr {
+    position: absolute;
+
+    right: 5%;
+    bottom: 3%;
+    width: 56px !important;
+    height: 56px;
+    z-index: 9;
+  }
+  img.poster {
+    position: relative;
+    z-index: 8;
+    width: 320px;
+    border-radius: 15px;
+  }
 }
 #remarkSwiper.swiper-container {
-      z-index: 9;
-    position: relative;
+  z-index: 9;
+  position: relative;
   width: 100%;
   margin: 0 auto;
   .swiper-slide {
@@ -399,13 +423,12 @@ export default {
     transition: 300ms;
     img {
       //width: 200%;
-      border-radius: 15px;
-      border: 4px solid #fff;
+
       width: 100%;
       background-color: #fbf7f1;
     }
   }
-  
+
   .swiper-slide:not(.swiper-slide-active) {
     transform: scale(0.85);
   }
