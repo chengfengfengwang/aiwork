@@ -243,7 +243,13 @@ export default {
       }
     },
     initAudio() {
-      let bookName = this.book.title;
+      let bookName;
+      if(this.book.title === '儿童古典音乐绘本'){
+        bookName='四季'
+      }else{
+        bookName=this.book.title
+      }
+      
       let audioSrc = "";
       if (this.isWatchWechat) {
         audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
