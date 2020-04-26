@@ -1461,6 +1461,10 @@ export default {
         {
           label: "钢琴",
           value: 2
+        },
+        {
+          label: "按钟",
+          value: 3
         }
       ],
       jiluoShowName: 1,
