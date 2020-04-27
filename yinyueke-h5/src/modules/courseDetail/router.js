@@ -26,6 +26,10 @@ const instrumentsKing = () => import('./src/instrumentsKing.vue')
 const doctorXieBody = () => import('./src/doctorXieBody.vue')
 const doctorXieBody1 = () => import('./src/doctorXieBody1.vue')
 const musicCastle = () => import('./src/musicCastle.vue')
+const shanshanPacQimeng = () => import('./src/shanshanPacQimeng.vue')
+const folkMusicKingdom = () => import('./src/folkMusicKingdom.vue')
+const youyouPac = () => import('./src/youyouPac.vue')
+const aefAnzhong = () => import('./src/aefAnzhong.vue')
 
 Vue.use(Router)
 
@@ -120,6 +124,26 @@ export default new Router({
       path: '/musicCastle',
       name: 'musicCastle',
       component: musicCastle
-    }
+    },
+    {
+      path: '/shanshanPacQimeng',
+      name: 'shanshanPacQimeng',
+      component: shanshanPacQimeng
+    },
+    {
+      path: '/folkMusicKingdom',
+      name: 'folkMusicKingdom',
+      component: folkMusicKingdom
+    },
+    {
+      path: '/youyouPac',
+      name: 'youyouPac',
+      component: youyouPac
+    },
+    {
+      path: '/aefAnzhong',
+      name: 'aefAnzhong',
+      component: aefAnzhong
+    },
   ]
 })

@@ -37,3 +37,12 @@ http://kids.immusician.com/web/h5/courseDetail.html#/worldTravel     世界音�
 
 谢呈博士体态律动课
 http://kids.immusician.com/web/h5/courseDetail.html#/doctorXieBody
+
+shanshanPacQimeng 
+姗姗亲子音乐启蒙
+folkMusicKingdom
+民乐王国之旅
+youyouPac
+youyou亲子
+aefAnzhong
+奥尔夫八音按钟

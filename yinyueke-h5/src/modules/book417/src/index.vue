@@ -135,7 +135,6 @@ export default {
   },
   created() {
     this.initBookInfo();
-    this.initAudio();
     this.stopGoBack();
     if (sessionStorage.getItem("openid")) {
       this.openid = sessionStorage.getItem("openid");
@@ -184,6 +183,7 @@ export default {
     },
     getWechatInfo() {
       if (this.openid && this.isWatchWechat) {
+        this.initAudio();
         return;
       }
       this.axios
@@ -195,6 +195,7 @@ export default {
         .then(res => {
           this.isWatchWechat = Boolean(res.isWatch);
           this.openid = res.open_id;
+          this.initAudio();
           sessionStorage.setItem("isWatchWechat", this.isWatchWechat);
           sessionStorage.setItem("openid", this.openid);
           this.countPage("页面访问");
