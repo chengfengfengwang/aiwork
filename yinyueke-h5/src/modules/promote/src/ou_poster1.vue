@@ -24,7 +24,8 @@
             <div class="swiper-slide" v-for="(item,index) in remarkArr" :key="index">
               <div class="nick_name">宝贝 {{nickName}}</div>
               <img :src="qrSrc" alt class="qr">
-              <img @click="previewRemark(index)" :src="item" alt>
+              <!-- <img @click="previewRemark(index)" :src="item" alt> -->
+              <img  :src="item" alt>
             </div>
           </div>
         </div>
@@ -62,15 +63,15 @@ export default {
       posterSrc: "",
       qrSrc: "",
       nickName: getQueryVariable("nick_name"),
-      resultBase64:'',
+      resultBase64: "",
       resultBase64Show: false,
-      swiperShow: false,
+      swiperShow: false
     };
   },
   created() {
     if (this.swiperShow) {
-      for (var i = 4; i < 10; i++) {
-        var str = require(`../../../assets/img/promote/ou_poster/poster1.png`);
+      for (var i = 1; i < 4; i++) {
+        var str = require(`../../../assets/img/promote/ou_poster/poster${i}.png`);
         this.remarkArr.push(str);
       }
       this.$nextTick(() => {
@@ -97,13 +98,19 @@ export default {
       });
     },
     initRemarkSwiper() {
+      var that = this;
       this.mySwiper = new Swiper("#remarkSwiper", {
         direction: "horizontal",
         initialSlide: 1,
         //loop: true,
         slidesPerView: "auto",
         centeredSlides: true,
-        spaceBetween: 0
+        spaceBetween: 0,
+        on: {
+          slideChange: function() {
+            that.swiperGetResult64();
+          }
+        }
         // slidesOffsetBefore : -30,
         // slidesOffsetAfter : -30,
         //watchOverflow:true
@@ -114,7 +121,7 @@ export default {
         .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
           share_stall: 0,
           phone: getQueryVariable("user_phone"),
-          share_id: getQueryVariable("share_id"),
+          share_id: getQueryVariable("share_id")
         })
         .then(res => {
           this.qrUrl = res.data.url;
@@ -126,10 +133,12 @@ export default {
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
       Promise.all(pArr).then(res => {
-        console.log("--");
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.getResult64();
-        }, 350);
+        });
+        // setTimeout(() => {
+        //   this.getResult64();
+        // }, 350);
       });
     },
     createQr() {
@@ -178,32 +187,15 @@ export default {
         };
       });
     },
-    createResultImg() {
-      this.imgToBase64(this.userInfo.avatar).then(res => {
-        this.avatarBase64 = res;
-        document.querySelector(".page.p6").classList.add("visi");
-        html2canvas(document.querySelector(".result_wrapper"), {
-          backgroundColor: "transparent"
-          //allowTaint: true
-        }).then(canvas => {
-          document.querySelector(".page.p6").classList.remove("visi");
-          //return
-          //把画好的canvas转成base64
-          document.querySelector(".result_wrapper").innerHTML = "";
-          var img = new Image();
-          img.classList.add("resultImg");
-          img.src = canvas.toDataURL("image/png");
-          img.onload = function() {
-            document.querySelector(".page.p6 .result_wrapper").appendChild(img);
-          };
-        });
-      });
-    },
     getResult64() {
       this.loadingShow = false;
-      console.log(document.querySelector("#posterContainer"));
-      console.log("----开始截取------");
-      html2canvas(document.querySelector("#posterContainer"), {
+      if (this.swiperShow) {
+        this.swiperGetResult64();
+        return;
+      } else {
+        var cloneEle = document.querySelector("#posterContainer");
+      }
+      html2canvas(cloneEle, {
         //backgroundColor: "transparent"
         onclone: function(document) {
           document.querySelector("#posterContainer img.poster").style.border =
@@ -218,18 +210,40 @@ export default {
         //return
         //把画好的canvas转成base64
         console.log("----截取完成------");
-        // var img = new Image();
-        // img.classList.add("resultImg");
-        // img.src = canvas.toDataURL("image/png");
-        // img.onload = function() {
-        //   document.body.appendChild(img);
-        // };
         this.resultBase64 = canvas.toDataURL("image/png");
         this.resultBase64Show = true;
-        // console.log("----------");
-        // console.log(this.resultBase64);
-        // console.log("----------");
+        console.log("----------");
+        console.log(this.resultBase64);
+        console.log("----------");
       });
+    },
+    swiperGetResult64() {
+      setTimeout(() => {
+        var cloneEle = document.querySelector(
+          ".swiper-slide.swiper-slide-active"
+        );
+        html2canvas(cloneEle, {
+          //backgroundColor: "transparent"
+          onclone: function(document) {
+            document.querySelector("#posterContainer img.poster").style.border =
+              "none";
+            document.querySelector(
+              "#posterContainer img.poster"
+            ).style.borderRadius = 0;
+          },
+          scale: 3,
+          allowTaint: true
+        }).then(canvas => {
+          //return
+          //把画好的canvas转成base64
+          console.log("----截取完成------");
+          this.resultBase64 = canvas.toDataURL("image/png");
+          this.resultBase64Show = true;
+          // console.log("----------");
+          // console.log(this.resultBase64);
+          // console.log("----------");
+        });
+      }, 300);
     },
     shareToFriends() {
       if (platForm == "IOS") {
