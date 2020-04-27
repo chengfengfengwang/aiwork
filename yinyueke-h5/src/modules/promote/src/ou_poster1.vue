@@ -133,12 +133,12 @@ export default {
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
       Promise.all(pArr).then(res => {
-        this.$nextTick(() => {
-          this.getResult64();
-        });
-        // setTimeout(() => {
+        // this.$nextTick(() => {
         //   this.getResult64();
-        // }, 350);
+        // });
+        setTimeout(() => {
+          this.getResult64();
+        }, 350);
       });
     },
     createQr() {
