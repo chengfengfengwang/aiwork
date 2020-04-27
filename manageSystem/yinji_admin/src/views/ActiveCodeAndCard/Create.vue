@@ -51,6 +51,23 @@
         <span>负责人名称</span>
         <Input class="search_item" v-model="searchValue.principal"></Input>
       </div>
+      <div class="search_item_wrapper">
+        <span>渠道</span>
+        <Select
+          filterable
+          @on-change="channelChangeSearch"
+          v-model="searchValue.channel_id"
+          style="width:200px"
+        >
+          <Option v-for="(item,index) in channelList" :value="item.id" :key="index">{{ item.name }}</Option>
+        </Select>
+      </div>
+      <div class="search_item_wrapper">
+        <span>sku</span>
+        <Select filterable v-model="searchValue.sku_id" style="width:200px">
+          <Option v-for="(item,index) in skuList" :value="item.id" :key="index">{{ item.name }}</Option>
+        </Select>
+      </div>
       <Button type="primary" @click="search" style="margin-left:20px">查询</Button>
       <Button type="info" @click="reset">重置</Button>
     </div>
@@ -89,7 +106,11 @@
           </FormItem>
           <FormItem label="渠道类型">
             <Select v-model="formValue.channel_type" placeholder="选择渠道类型">
-              <Option :value="name" v-for="(value,name) in cur_channel_type_name" :key="name">{{value}}</Option>
+              <Option
+                :value="name"
+                v-for="(value,name) in cur_channel_type_name"
+                :key="name"
+              >{{value}}</Option>
             </Select>
           </FormItem>
           <FormItem v-show="showArea" label="地域位置">
@@ -99,8 +120,17 @@
             <Input v-model="formValue.channel"></Input>
           </FormItem>
           <FormItem label="渠道">
-            <Select filterable @on-change="channelChange" v-model="formValue.channel_id" style="width:200px">
-              <Option  v-for="(item,index) in channelList" :value="item.id" :key="index">{{ item.name }}</Option>
+            <Select
+              filterable
+              @on-change="channelChange"  
+              v-model="formValue.channel_id"
+              style="width:200px"
+            >
+              <Option
+                v-for="(item,index) in channelList"
+                :value="item.id"
+                :key="index"
+              >{{ item.name }}</Option>
             </Select>
           </FormItem>
           <FormItem label="sku">
@@ -233,7 +263,7 @@ export default {
         {
           title: "生成数量",
           key: "count"
-        }, 
+        },
         {
           title: "激活数量",
           key: "used_count"
@@ -313,8 +343,8 @@ export default {
         //channel_source:'',
         //channel_type:''
       },
-      channelList:[],
-      skuList:[]
+      channelList: [],
+      skuList: []
     };
   },
   computed: {
@@ -325,22 +355,21 @@ export default {
       return this.formValue.type === "1";
     },
     cur_channel_type_name() {
-      console.log(this.formValue.channel_source)
-      if (this.formValue.channel_source === '0') {
-        console.log('0')
+      console.log(this.formValue.channel_source);
+      if (this.formValue.channel_source === "0") {
+        console.log("0");
         return this.channel_type_name1;
-      } else if (this.formValue.channel_source === '1') {
-        console.log('1')
+      } else if (this.formValue.channel_source === "1") {
+        console.log("1");
         return this.channel_type_name2;
       } else {
-        
         return this.channel_type_name;
       }
     },
     cur_channel_type_name1() {
-      if (this.searchValue.channel_source === '0') {
+      if (this.searchValue.channel_source === "0") {
         return this.channel_type_name1;
-      } else if (this.searchValue.channel_source === '1') {
+      } else if (this.searchValue.channel_source === "1") {
         return this.channel_type_name2;
       } else {
         return this.channel_type_name;
@@ -355,25 +384,36 @@ export default {
     this.get();
   },
   methods: {
-    channelChange(){
-      this.getSkus()
+    channelChange() {
+      this.getSkus(this.formValue.channel_id);
     },
-    getSkus(){
+    channelChangeSearch() {
+      this.getSkus(this.searchValue.channel_id);
+    },
+    getSkus(id) {
       this.axios
-        .get(`http://58.87.125.111:6363/v1/fgoods/index?page=0&size=10000&status=1&channel_id=${this.formValue.channel_id}&key=`)
+        .get(
+          `http://58.87.125.111:6363/v1/fgoods/index?page=0&size=10000&status=1&channel_id=${
+            id
+          }&key=`
+        )
         .then(res => {
           this.skuList = res.data.list;
         });
     },
-    getChannels(){
+    getChannels() {
       this.axios
-        .get(`http://58.87.125.111:6363/v1/channel/index?page=0&size=999&status=1`)
+        .get(
+          `http://58.87.125.111:6363/v1/channel/index?page=0&size=999&status=1`
+        )
         .then(res => {
           this.channelList = res.data.list;
         });
     },
     downLoad(id) {
-      window.location.href = `${process.env.XIAOPO}/${process.env.VERSION}/code_csv/${id}`;
+      window.location.href = `${process.env.XIAOPO}/${
+        process.env.VERSION
+      }/code_csv/${id}`;
       // this.axios
       //   .get(`${process.env.XIAOPO}/${process.env.VERSION}/code_csv/${id}`)
       //   .then(res => {
@@ -391,11 +431,15 @@ export default {
 
       //return false
       this.axios
-        .post(`${process.env.JINKANG}/${process.env.VERSION}/upload_material/`, formdata, {
-          headers: {
-            "Content-Type": "multipart/form-data"
+        .post(
+          `${process.env.JINKANG}/${process.env.VERSION}/upload_material/`,
+          formdata,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
           }
-        })
+        )
         .then(res => {
           this.formValidate.cover = res.data;
         });
@@ -438,13 +482,13 @@ export default {
 
       if (Object.keys(search).length > 0) {
         var url =
-          `${process.env.XIAOPO}/${process.env.VERSION}/code?page=${this.page}&size=${
-            this.pageSize
-          }&` + encodeSearchParams(search);
+          `${process.env.XIAOPO}/${process.env.VERSION}/code?page=${
+            this.page
+          }&size=${this.pageSize}&` + encodeSearchParams(search);
       } else {
-        var url = `${process.env.XIAOPO}/${process.env.VERSION}/code?page=${this.page}&size=${
-          this.pageSize
-        }`;
+        var url = `${process.env.XIAOPO}/${process.env.VERSION}/code?page=${
+          this.page
+        }&size=${this.pageSize}`;
       }
 
       //return;
@@ -458,11 +502,9 @@ export default {
         this.modalShow = false;
         this.goods_ids_name = res.goods_ids_name;
         this.course_type_name = res.course_type_name;
-        console.log( Object.assign(
-          {},
-          res.channel_type_name,
-          res.channel_type_name2
-        ))
+        console.log(
+          Object.assign({}, res.channel_type_name, res.channel_type_name2)
+        );
         this.channel_type_name = Object.assign(
           {},
           res.channel_type_name,
@@ -481,7 +523,11 @@ export default {
     },
     stop(id, status) {
       this.axios
-        .put(`${process.env.XIAOPO}/${process.env.VERSION}/code/${id}?is_deleted=${status}`)
+        .put(
+          `${process.env.XIAOPO}/${
+            process.env.VERSION
+          }/code/${id}?is_deleted=${status}`
+        )
         .then(res => {
           this.get();
         });
@@ -503,7 +549,10 @@ export default {
       console.log(this.formValue);
       //return;
       this.axios
-        .post(process.env.XIAOPO + "/"+process.env.VERSION+"/code", this.formValue)
+        .post(
+          process.env.XIAOPO + "/" + process.env.VERSION + "/code",
+          this.formValue
+        )
         .then(res => {
           this.$Message.success("生成成功啦!");
           //this.modalShow = false;
