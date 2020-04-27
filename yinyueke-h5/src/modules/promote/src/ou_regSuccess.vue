@@ -23,11 +23,11 @@ export default {
   },
   mounted() {
     this.url = sessionStorage.getItem('successUrl')
-    if(this.url){
-      this.showDownload = false
-    }else{
+    if( !this.url || this.url=='undefined' ){
       this.showDownload = true;
       this.initShareInstall()
+    }else{
+      this.showDownload = false
     }
   },
   methods: {
