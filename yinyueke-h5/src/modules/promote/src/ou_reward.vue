@@ -105,7 +105,7 @@ export default {
         });
     },
     toPoster() {
-      this.$router.push("/poster");
+      this.$router.push("/ou_poster1");
     }
   }
 };

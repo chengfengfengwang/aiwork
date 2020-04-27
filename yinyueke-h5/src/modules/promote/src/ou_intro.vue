@@ -12,43 +12,44 @@
           <img src="../../../assets/img/promote/poster/close.png" alt>
         </div>
         <div class="rule_title"></div>
-        <div class="rule_container">
+        <div class="rule_container">                        
           <div class="rule_item">
             <div class="item_index">1</div>
-            <div class="item_title">新人专享注册好礼有什么？</div>
-            <div class="sub_title" style="color:#FF2D0B">1、免费领取3天音乐壳超级会员权益</div>
-            <div class="sub_title" style="color:#FF2D0B">2、每月每个会员老用户邀请的新用户中，前2名下单者可获得音乐壳永久超级会员权益</div>
             <div class="item_content">
-              每个音乐壳超级会员老用户可邀请多个新用户注册；
-              <span
-                class="color"
-              >每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）最先购买音乐壳会员的2个用户获得音乐壳永久超级会员权益；</span>其它购买音乐壳会员的新用户，可获得10年的音乐壳超级会员权益。
-            </div>
-            <div class="sub_title">3、购买大牌乐器8折卡</div>
-            <div class="item_content">
-              <span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span>
-              <span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span>
-              <span class="color">可向对应的辅导老师截图自己的会员头像展示会员身份，即可享受折购买乐器权益。</span>
-            </div>
-            <div>
-              如有其他问题，添加后方微信：
-              <span class="wx_color">YXYMIUSIC</span>
+              你邀请的首个好友注册后，系统自动随机奖励你2-5元现金。
             </div>
           </div>
           <div class="rule_item">
             <div class="item_index">2</div>
-            <span class="item_title">新人专享好礼领取规则？</span>
-            <div class="item_content">仅限扫码音乐壳老用户海报，并在本页注册的新用户领取；每个用户（手机号）限领1次。</div>
+            <div class="item_content">
+              你邀请的好友付费且7天内未退费。好友购课实付金额的20%，是你获得的现金奖励。
+            </div>
           </div>
           <div class="rule_item">
             <div class="item_index">3</div>
-            <span class="item_title">新人专享好礼如何查看和使用？</span>
             <div class="item_content">
-              下载音乐壳app，登录您的账号，点击“我的”—“优惠券”即可查看。如有其它问题，添加后方微信咨询:
-              <span class="wx_color">YXYMIUSIC</span>
+              你获得的现金奖励，可在每月10日申请提现。申请提现后，系统会在10个工作日内审核并发放。
             </div>
           </div>
-          <!-- <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div> -->
+          <div class="rule_item">
+            <div class="item_index">4</div>
+            <div class="item_content">
+              你获得的现金奖励，大于50元时可申请提现。如不够50元，可顺延到下次申请。
+            </div>
+          </div>
+          <div class="rule_item">
+            <div class="item_index">5</div>
+            <div class="item_content">
+              若发现作弊、刷单等行为，取消获赠奖励资格
+            </div>
+          </div>
+          <div class="rule_item">
+            <div class="item_index">5</div>
+            <div class="item_content">
+              审核未通过或其他问题，添加后方微信咨询：yxymiusic
+            </div>
+          </div>
+          <div class="rule_bottom">— 本次活动最终解释权归音乐壳所有 —</div>
         </div>
       </div>
     </div>
