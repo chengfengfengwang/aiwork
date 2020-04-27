@@ -354,7 +354,7 @@ export default {
   .nick_name {
     position: absolute;
     left: 6%;
-    bottom: 17.5%;
+    bottom: 12.5%;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 600;
