@@ -95,9 +95,9 @@
           <FormItem v-show="showArea" label="地域位置">
             <al-selector level="2" gutter="0" v-model="location"/>
           </FormItem>
-          <!-- <FormItem label="渠道名称">
+          <FormItem label="渠道名称">
             <Input v-model="formValue.channel"></Input>
-          </FormItem> -->
+          </FormItem>
           <FormItem label="渠道">
             <Select filterable @on-change="channelChange" v-model="formValue.channel_id" style="width:200px">
               <Option  v-for="(item,index) in channelList" :value="item.id" :key="index">{{ item.name }}</Option>
@@ -349,8 +349,8 @@ export default {
   },
   created() {},
   mounted() {
-    delete this.axios.defaults.headers.common.uid;
-    delete this.axios.defaults.headers.common.token;
+    //delete this.axios.defaults.headers.common.uid;
+    //delete this.axios.defaults.headers.common.token;
     this.getChannels();
     this.get();
   },

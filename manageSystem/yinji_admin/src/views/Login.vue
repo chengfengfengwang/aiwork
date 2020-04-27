@@ -86,6 +86,8 @@ export default {
               }
               if (res.data.username === "珊珊老师") {
                 this.$router.push("/GameBankTest/GameConfigTest");
+              }else if (res.data.nickname === "徐老师") {
+                this.$router.push("/ActiveCodeAndCard/Create");
               } else {
                 this.$router.push("/");
               }

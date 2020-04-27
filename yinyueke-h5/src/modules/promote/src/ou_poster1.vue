@@ -114,7 +114,7 @@ export default {
         .post(`http://api.yinji.immusician.com/v1/share/qrcode_url/`, {
           share_stall: 0,
           phone: getQueryVariable("user_phone"),
-          share_id: 6
+          share_id: getQueryVariable("share_id"),
         })
         .then(res => {
           this.qrUrl = res.data.url;

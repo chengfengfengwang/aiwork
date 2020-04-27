@@ -78,7 +78,7 @@ export default {
   mounted() {},
   methods: {
     toPoster(){
-      this.$router.push('/ou_poster')
+      this.$router.push('/ou_poster1')
     },
   }
 };

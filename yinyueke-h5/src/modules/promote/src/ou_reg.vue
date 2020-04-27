@@ -81,14 +81,16 @@ export default {
         share_id: getQueryVariable("share_id"),
         share_phone: getQueryVariable("user_phone"),
         share_stall: getQueryVariable("share_stall"),
-        course_id:getQueryVariable("course_id"),
-        lesson_id:getQueryVariable("lesson_id")
+        course_id:getQueryVariable("course_id")?getQueryVariable("course_id"):0,
+        lesson_id:getQueryVariable("lesson_id")?getQueryVariable("lesson_id"):0
       },
       vcodeText: "获取验证码",
       vCode: ""
     };
   },
-  created() {},
+  created() {
+    document.title='新学员专属礼包'
+  },
   components: {
     Loading,
     ImagePreview
@@ -111,7 +113,6 @@ export default {
       });
     },
     regVip() {
-      localStorage.setItem("loginPhone", this.form.phone);
       this.axios
         .post(`${process.env.VUE_APP_PROMOTEOU}/v1/user/share_login/`, this.form)
         .then(res => {

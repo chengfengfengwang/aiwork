@@ -3,7 +3,8 @@
     <div class="main_wrapper">
       <img class="bg" src="../../../assets/img/promote/ou_regSuccess/bg.png" alt />
       <!-- <img class="bottom" src="../../../assets/img/yiqiac/download_bottom.png" alt=""> -->
-      <div @click="toYouzan" id="download">立即使用</div>
+      <div v-if="showDownload"  id="download">立即使用</div>
+      <div v-else @click="toYouzan" id="download">立即使用</div>
     </div>
     <!-- <img class="bg" src="../../../assets/img/yiqiac/download.png" alt />
     <div id="download">立即下载</div>-->
@@ -14,20 +15,25 @@ import { getQueryVariable } from "../../../common/util.js";
 export default {
   data() {
     return {
-      topText: "趣味乐理启蒙配套教材音频（上）"
+      showDownload:false
     };
   },
   created() {
-    document.title = "疫期不孤单，爱心赠好课";
+    
   },
   mounted() {
-    //this.initShareInstall()
+    this.url = sessionStorage.getItem('successUrl')
+    if(this.url){
+      this.showDownload = false
+    }else{
+      this.showDownload = true;
+      this.initShareInstall()
+    }
   },
   methods: {
     toYouzan(){
-      let url  = sessionStorage.getItem('successUrl');
-      if(url){
-        location.href = url;
+      if(this.url){
+        location.href = this.url;
       }
     },
     initShareInstall() {
