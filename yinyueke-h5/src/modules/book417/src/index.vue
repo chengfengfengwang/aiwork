@@ -50,7 +50,8 @@
           <img :src="bookCover" alt>
         </div>
         <div class="middle">
-          <div class="middle_title">《{{book.title}}》</div>
+          <!-- <div class="middle_title">《{{book.title}}》</div> -->
+          <div class="middle_title">《儿童古典音乐绘本》</div>
           <div class="middle_info">
             <span class="sub">{{clickTotal}}订阅</span>
             <span class="all_num">{{bookDir.length-1}}集</span>
