@@ -23,23 +23,13 @@
           <div class="rule_item">
             <div class="item_index">1</div>
             <div class="item_title">新人专享注册好礼有什么？</div>
-            <div class="sub_title" style="color:#FF2D0B">1、免费领取3天音乐壳超级会员权益</div>
-            <div class="sub_title" style="color:#FF2D0B">2、每月每个会员老用户邀请的新用户中，前2名下单者可获得音乐壳永久超级会员权益</div>
+            <div class="sub_title">1、音乐星球之旅课程</div>
             <div class="item_content">
-              每个音乐壳超级会员老用户可邀请多个新用户注册；
-              <span
-                class="color"
-              >每个超级会员老用户邀请的新用户中，每月（每月1日0点起开始计时）最先购买音乐壳会员的2个用户获得音乐壳永久超级会员权益；</span>其它购买音乐壳会员的新用户，可获得10年的音乐壳超级会员权益。
+              查看并学习课程，请下载音乐壳app，登录您的账号，选择“音乐素养”品类，在课程页右下角找到课程并学习。
             </div>
-            <div class="sub_title">3、购买大牌乐器8折卡</div>
+            <div class="sub_title">2、音乐壳50元大额优惠券</div>
             <div class="item_content">
-              <span class="scolor">购买音乐壳会员后，即可拥有购买大牌乐器8折卡。</span>
-              <span>限在音乐壳购买乐器使用。如需在音乐壳购买乐器等硬件，</span>
-              <span class="color">可向对应的辅导老师截图自己的会员头像展示会员身份，即可享受折购买乐器权益。</span>
-            </div>
-            <div>
-              如有其他问题，添加后方微信：
-              <span class="wx_color">YXYMIUSIC</span>
+              <span>适用于购买音乐壳所有课程(≥99元可使用)。</span>
             </div>
           </div>
           <div class="rule_item">
@@ -307,7 +297,7 @@ export default {
       font-size: 16px;
       font-family: PingFang SC;
       font-weight: 600;
-      color: rgba(215, 101, 0, 1);
+      color: #000000;
     }
     .sub_title {
       margin-bottom: 7px;
