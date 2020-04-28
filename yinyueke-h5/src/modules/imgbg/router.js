@@ -13,6 +13,8 @@ const poster = () => import('./src/poster.vue')
 const test = () => import('./src/test.vue')
 const qr04051 = () => import('./src/qr04051.vue')
 const qr04052 = () => import('./src/qr04052.vue')
+const shanshanPacQimeng = () => import('./src/shanshanPacQimeng.vue')
+const douyin = () => import('./src/douyin.vue')
 
 Vue.use(Router)
 
@@ -42,6 +44,16 @@ export default new Router({
       path: '/qr04052',
       name: 'qr04052',
       component: qr04052
+    },
+    {
+      path: '/shanshanPacQimeng',
+      name: 'shanshanPacQimeng',
+      component: shanshanPacQimeng
+    },
+    {
+      path: '/douyin',
+      name: 'douyin',
+      component: douyin
     }
   ],
   // scrollBehavior(to, from, savedPosition) {

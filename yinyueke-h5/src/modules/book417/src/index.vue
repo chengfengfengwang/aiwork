@@ -8,14 +8,21 @@
           <img :src="bookCover" alt>
           <img
             @click="togglePlay"
-            v-show="!isPlaying"
+            v-show="isLoading"
+            src="https://samherbert.net/svg-loaders/svg-loaders/tail-spin.svg"
+            alt
+            class="play_icon loading"
+          >
+          <img
+            @click="togglePlay"
+            v-show="!isPlaying && !isLoading"
             src="../../../assets/img/book417/play.png"
             alt
             class="play_icon"
           >
           <img
             @click="togglePlay"
-            v-show="isPlaying"
+            v-show="isPlaying && !isLoading"
             src="../../../assets/img/book417/pause.jpg"
             alt
             class="play_icon"
@@ -127,6 +134,7 @@ export default {
       modalShow: false,
       isWatchWechat: false,
       isPlaying: false,
+      isLoading: false,
       isShowAll: false,
       clickTotal: ""
     };
@@ -144,6 +152,7 @@ export default {
       this.isWatchWechat = true;
     }
     this.getCode();
+    //this.initAudio();
     this.getClickData();
   },
   mounted() {},
@@ -261,7 +270,28 @@ export default {
         this.audio.pause();
       }
     },
+    ajaxGetAudio(audio) {
+      var that = this;
+      return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              //audio.src = window.URL.createObjectURL(xhr.response);
+              console.log("音频都加载");
+              resolve();
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        };
+        xhr.open("GET", audio.src, true);
+        xhr.send();
+      });
+    },
     initAudio() {
+      console.log("--initAudio--");
       let bookName;
       if (this.book.title === "儿童古典音乐绘本") {
         bookName = "四季";
@@ -271,29 +301,61 @@ export default {
 
       let audioSrc = "";
       if (this.isWatchWechat) {
-        audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
+        audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
           bookName
         )}.mp3`;
       } else {
-        audioSrc = `http://7xloms.com5.z0.glb.clouddn.com/${encodeURIComponent(
+        audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
           bookName + " 试听"
         )}.mp3`;
       }
       this.audio = new Audio();
       this.audio.src = audioSrc;
+      this.audio.preload = "auto";
+      //this.ajaxGetAudio(this.audio);
+      //console.log('点击播放')
+      var n;
+      this.audio.addEventListener("loadstart", ()=> {
+        n = new Date().valueOf();
+        console.log("loadstart");
+        this.isLoading = true;
+      });
       this.audio.addEventListener(
-        "timeupdate",
-        ()=> {
+        "canplay",
+        () => {
           //监听音频播放的实时时间事件
-          let timeDisplay;
-          //用秒数来显示当前播放进度
-          timeDisplay = Math.floor(this.audio.currentTime); //获取实时时间
-          if(timeDisplay==30 && !this.isWatchWechat){
-            this.modalShow = true
-          }
+          console.log(new Date().valueOf() - n);
+          console.log("canplay");
         },
         false
       );
+      this.audio.addEventListener(
+        "canplaythrough",
+        () => {
+          setTimeout(() => {
+              this.isLoading = false;
+          }, 1000);
+          //监听音频播放的实时时间事件
+          console.log(new Date().valueOf() - n);
+          console.log("canplaythrough");
+        },
+        false
+      );
+      if (!this.isWatchWechat) {
+        this.audio.addEventListener(
+          "timeupdate",
+          () => {
+            //监听音频播放的实时时间事件
+            let timeDisplay;
+            //用秒数来显示当前播放进度
+            timeDisplay = Math.floor(this.audio.currentTime); //获取实时时间
+            if (timeDisplay == 30 && !this.isWatchWechat) {
+              this.modalShow = true;
+            }
+          },
+          false
+        );
+      }
     },
     showModal() {
       if (!this.isWatchWechat) {
@@ -346,6 +408,11 @@ export default {
         transform: translateX(-50%);
         top: 25%;
         width: 48px;
+        height: 48px;
+      }
+      .play_icon.loading {
+        width: 43px;
+        height: 43px;
       }
     }
     .book_name {

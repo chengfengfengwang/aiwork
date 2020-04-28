@@ -82,7 +82,8 @@ export default {
         share_phone: getQueryVariable("user_phone"),
         share_stall: getQueryVariable("share_stall"),
         course_id:getQueryVariable("course_id")?getQueryVariable("course_id"):0,
-        lesson_id:getQueryVariable("lesson_id")?getQueryVariable("lesson_id"):0
+        lesson_id:getQueryVariable("lesson_id")?getQueryVariable("lesson_id"):0,
+        song_id:getQueryVariable("song_id")?getQueryVariable("song_id"):0
       },
       vcodeText: "获取验证码",
       vCode: ""
