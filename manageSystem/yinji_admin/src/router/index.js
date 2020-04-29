@@ -53,6 +53,10 @@ import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
 import ShareConfig from './../views/ShareConfig.vue';
 import AppHomeConfig from './../views/AppHomeConfig.vue';
+//工具
+import Upload from './../views/Tools/Upload.vue';
+import UploadList from './../views/Tools/UploadList.vue';
+
 import test from './../views/myTest.vue';
 Vue.use(Router)
 
@@ -282,11 +286,26 @@ const router = new Router({
       path: '/test',
       name: 'test',
       component: test,
-    }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test,
+    },
+    {
+      path: '/Upload',
+      name: 'Upload',
+      component: Upload,
+    },
+    {
+      path: '/UploadList',
+      name: 'UploadList',
+      component: UploadList,
+    } 
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login') {
+  if (to.name == 'Login' || to.name == 'Upload') {
     next()
   } else {
     if (store.state.userInfo.token) {
