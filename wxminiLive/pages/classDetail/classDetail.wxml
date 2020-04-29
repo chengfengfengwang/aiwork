@@ -25,8 +25,8 @@
         <view wx:if="{{liveList.length>0}}">
             <view class="live_item {{item.completed==1?'done':''}}" wx:key="index" wx:for="{{liveList}}">
                 <mp-slideview data-planid="{{item.id}}" buttons="{{slideButtons}}" bindbuttontap="slideButtonTap">
-                    <image wx:if="{{item.completed==1}}" class="done_icon" src="../../assets/img/classDetail/done.png" />
-                    <image data-liveid="{{item.id}}" data-lesson_id="{{item.lesson_id}}" data-start_time="{{item.start_time}}" bindtap="editLive" wx:else class="edit" src="../../assets/img/classDetail/edit.png" />
+                    <image wx:if="{{filter.getCountDown(item.start_time)=='已结束'}}" class="done_icon" src="../../assets/img/classDetail/done.png" />
+                    <image wx:if="{{item.countdown>0}}" data-liveid="{{item.id}}" data-lesson_id="{{item.lesson_id}}" data-start_time="{{item.start_time}}" bindtap="editLive"  class="edit" src="../../assets/img/classDetail/edit.png" />
                     <view class="time">{{filter.formatTime(item.start_time)}}</view>
                     <view class="line1">
                         <view>直播倒计时</view>

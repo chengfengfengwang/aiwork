@@ -30,8 +30,10 @@ var getCountDown = function (future) {
     // m = formatNumber(m);
     // s = formatNumber(s);
     var str = d + "天" + h + "小时" + m + "分";
-    if(lefttime<=0){
-        str = "已结束";
+    if(-7200<lefttime && lefttime<=0){
+        str = "进行中";
+    }else if(-7200>lefttime){
+      str = "已结束";
     };
     return str
 }
