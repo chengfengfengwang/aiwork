@@ -14,7 +14,7 @@ export default {
     };
   },
   created() {
-    
+    document.title='AI音乐学院抖音直播间'
   },
   mounted() {
   },
@@ -24,13 +24,16 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.page{
+  text-align: center;
+}
 .tip{
-    padding: 20px 0 0px 0;
-    font-size: 13px;
+    padding: 6px 0 0px 0;
+    font-size: 9px;
     text-align: center
 }
 img.bg{
-  width: 100%;
+  width: 36%;
 }
 </style>
 
