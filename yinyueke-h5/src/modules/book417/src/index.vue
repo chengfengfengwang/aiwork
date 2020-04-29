@@ -34,7 +34,7 @@
         @click="showModal();countPage('页面内扫码按钮')"
         v-show="!isWatchWechat"
         class="scan_btn"
-      >点击扫码，听完整版</div>
+      >点击扫码，更多精彩内容</div>
     </div>
     <div class="content_section" :class="[isShowAll?'':'hideshow']">
       <img class="cover" :src="bookCover" alt>
@@ -300,15 +300,18 @@ export default {
       }
 
       let audioSrc = "";
-      if (this.isWatchWechat) {
-        audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
+      audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
           bookName
         )}.mp3`;
-      } else {
-        audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
-          bookName + " 试听"
-        )}.mp3`;
-      }
+      // if (this.isWatchWechat) {
+      //   audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
+      //     bookName
+      //   )}.mp3`;
+      // } else {
+      //   audioSrc = `http://audio.iguitar.immusician.com/${encodeURIComponent(
+      //     bookName + " 试听"
+      //   )}.mp3`;
+      // }
       this.audio = new Audio();
       this.audio.src = audioSrc;
       this.audio.preload = "auto";
