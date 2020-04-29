@@ -175,7 +175,7 @@ export default {
   position: absolute;
   left: 0;
   //top: 65%;
-  top: 439px;
+  top: 430px;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     top: 66%;
   }

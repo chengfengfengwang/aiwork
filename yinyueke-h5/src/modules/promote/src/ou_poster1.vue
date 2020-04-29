@@ -383,6 +383,7 @@ export default {
     bottom: 3%;
     width: 56px !important;
     height: 56px;
+    border-radius: 3px;
     z-index: 9;
   }
   img.poster {
@@ -415,6 +416,7 @@ export default {
     bottom: 3%;
     width: 56px !important;
     height: 56px;
+    border-radius: 3px;
     z-index: 9;
   }
   img.poster {
