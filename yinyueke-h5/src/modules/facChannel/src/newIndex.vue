@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <img src="../../../assets/img/facChannel/bg331.jpg" alt class="bg" />
+    <img src="../../../assets/img/facChannel/bg429.jpg" alt class="bg" />
   </div>
 </template>
 <script>
