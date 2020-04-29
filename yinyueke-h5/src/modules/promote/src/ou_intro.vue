@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="rule_item">
-            <div class="item_index">5</div>
+            <div class="item_index">6</div>
             <div class="item_content">
               审核未通过或其他问题，添加后方微信咨询：yxymiusic
             </div>
@@ -71,7 +71,9 @@ export default {
       maskShow: false
     };
   },
-  created() {},
+  created() {
+    document.title = '推广有礼 高额返现'
+  },
   components: {
     Loading,
     ImagePreview
@@ -109,7 +111,7 @@ export default {
     .item_index {
       position: absolute;
       left: -0px;
-      top: 4px;
+      top: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -152,7 +154,7 @@ export default {
 }
 .rule_btn {
   position: absolute;
-  top: 20px;
+  top: 100px;
   right: 0;
   width: 32px;
   height: 90px;
