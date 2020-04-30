@@ -383,6 +383,12 @@ const myMenus = [
     text: "app分享配置",
     link: "/ShareConfig"
   },
+  {
+    hasChild: false,
+    name: "Config",
+    text: "配置",
+    link: "/Config"
+  },
 ];
 const shanshanMenus = [
   {

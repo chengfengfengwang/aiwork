@@ -53,6 +53,8 @@ import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
 import ShareConfig from './../views/ShareConfig.vue';
 import AppHomeConfig from './../views/AppHomeConfig.vue';
+import Config from './../views/Config.vue';
+
 //工具
 import Upload from './../views/Tools/Upload.vue';
 import UploadList from './../views/Tools/UploadList.vue';
@@ -252,6 +254,11 @@ const router = new Router({
           component: AppHomeConfig
         },
         {
+          name: 'Config',
+          path: '/Config',
+          component: Config
+        },
+        {
           name: 'CountDataCourseAi',
           path: '/CountData/CountDataCourseAi',
           component: CountDataCourseAi,
@@ -305,7 +312,7 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login' || to.name == 'Upload') {
+  if (to.name == 'Login' || to.name == 'UploadList') {
     next()
   } else {
     if (store.state.userInfo.token) {
