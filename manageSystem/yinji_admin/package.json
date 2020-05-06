@@ -30,6 +30,7 @@
     "lodash.uniqby": "^4.7.0",
     "lodash.uniqwith": "^4.5.0",
     "mz": "^2.7.0",
+    "v-jsoneditor": "^1.4.1",
     "vue": "^2.5.22",
     "vue-json-editor": "^1.4.0",
     "vue-router": "^3.0.1",

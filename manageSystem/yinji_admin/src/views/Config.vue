@@ -1,17 +1,21 @@
 <template>
   <div>
-    <vue-json-editor
+    <!-- <vue-json-editor
+    height="400px"
       v-model="configObj"
       :show-btns="false"
       :exapndedOnStart="true"
       @json-change="onJsonChange"
-    ></vue-json-editor>
+    ></vue-json-editor> -->
+    <v-jsoneditor v-model="configObj" :options="options"  :plus="true" height="700px" @error="onError" />
+
     <Button style="margin-top:10px" type="primary" @click="submit">提交</Button>
   </div>
 </template>
  
 <script>
-import vueJsonEditor from "vue-json-editor";
+// import vueJsonEditor from "vue-json-editor";
+import VJsoneditor from 'v-jsoneditor'
 
 export default {
   data() {
@@ -19,17 +23,25 @@ export default {
       json: {
         msg: "demo of jsoneditor"
       },
-      configObj: {}
+      configObj: {},
+      options:{
+        modes:['tree','form','code'],
+        mode:'code'
+      }
     };
   },
   mounted() {
     this.getconfigObj();
   },
   components: {
-    vueJsonEditor
+    //vueJsonEditor
+    VJsoneditor
   },
 
   methods: {
+    onError() {
+        alert('请检查json')
+    },
     submit() {
       console.log(this.configObj);
       //return
@@ -50,3 +62,6 @@ export default {
   }
 };
 </script>
+<style lang="less">
+
+</style>
