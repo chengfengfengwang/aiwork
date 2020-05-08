@@ -8,24 +8,12 @@ import Router from 'vue-router'
 // import djembePac from './src/djembePac.vue'
 // import qimeng from './src/qimeng_new.vue'
 
-const home = () => import('./src/index.vue')
-const poster = () => import('./src/poster.vue')
 const home1 = () => import('./src/index1.vue')
 const poster1 = () => import('./src/poster1.vue')
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: home
-    },
-    {
-      path: '/poster',
-      name: 'poster',
-      component: poster
-    },
     {
       path: '/home1',
       name: 'home1',

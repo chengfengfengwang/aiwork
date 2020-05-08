@@ -1,8 +1,9 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
+const uploadConfig = require('./uploadConfig');
 module.exports = {
     devServer: {
-        port: 5556,     // 端口
+        port: 5557,     // 端口
     },
     css: {
         loaderOptions: {
@@ -18,7 +19,7 @@ module.exports = {
         }
     },
     publicPath: process.env.NODE_ENV === 'production'
-        ? 'http://kids.immusician.com/org-web/asstes/'
+        ? `${uploadConfig.assectsUrl}/${uploadConfig.assetsPrefix}`
         : '/',
     chainWebpack: config => {
         const imgRule = config.module.rule('images');
@@ -39,7 +40,9 @@ module.exports = {
             );
     },
     pages: {
-       
-        activeCourse: 'src/modules/songList/app.js',
+        test: 'src/modules/test/test.js',
+        normal: 'src/modules/normal/app.js',
+        zs: 'src/modules/zs/app.js'
+
     }
 }

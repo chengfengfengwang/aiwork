@@ -1,15 +1,16 @@
 var fs = require('fs');
 var path = require('path');
 var qiniu = require("qiniu");
+const uploadConfig = require('./uploadConfig');
 //空间名称
-var webBuckName = 'yinji-web';
+var webBuckName = uploadConfig.webBuckName;
 //前缀名
-var webPrefix = 'yiji-org/';
+var webPrefix = uploadConfig.webPrefix;
 
 //空间名称
-var assetsBuckName = 'yinji';
+var assetsBuckName = uploadConfig.assetsBuckName;
 //前缀名
-var assetsPrefix = 'org-web/asstes/';
+var assetsPrefix = uploadConfig.assetsPrefix;
 
 main()
 

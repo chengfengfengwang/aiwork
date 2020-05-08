@@ -26,4 +26,4 @@ npm run lint
 ```
 
 ### Customize configuration
-http://cdn.kids-web.immusician.com/yiji-org/regist.html#/
+http://cdn.kids-web.immusician.com/ac/test.html
