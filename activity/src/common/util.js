@@ -35,6 +35,19 @@ function getDate(date) {
     //秒没有返回
     return [year, month, day].map(formatNumber).join('-');
 }
+function getDate1(date) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    //秒没有返回
+    return [year, month, day].map(formatNumber).join('/');
+}
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -112,4 +125,4 @@ function testWeixin() { //判断是否是微信
 };
 
 const platForm = testPlat();
-export { getDate, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInApp, testWeixin, platForm, formatOnlyTime }
+export { getDate1, getDate, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInApp, testWeixin, platForm, formatOnlyTime }

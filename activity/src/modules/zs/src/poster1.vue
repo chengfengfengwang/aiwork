@@ -7,6 +7,7 @@
          <span class="name_text">{{name}}</span> 
       </div>
       <div v-show="bgSrc" class="course"><span class="course_text">{{course}}</span>课程</div>
+      <div v-show="bgSrc" class="date">{{date}}</div>
     </div>
     <div v-show="resultBase64Show" class="poster_wrapper">
       <img class="bg" :src="resultBase64" alt />
@@ -17,7 +18,7 @@
 <script>
 // var eruda = require("eruda");
 // eruda.init();
-import { openInApp, getQueryVariable, platForm } from "../../../common/util.js";
+import { getDate1, openInApp, getQueryVariable, platForm } from "../../../common/util.js";
 import html2canvas from "html2canvas";
 import Loading from "./../../../components/Loading";
 const QRCode = require("qrcode");
@@ -29,11 +30,13 @@ export default {
       loadingShow: true,
       resultBase64:'',
       resultBase64Show: false,
-      bgSrc: ""
+      bgSrc: "",
+      date:""
     };
   },
   created() {
-    this.course = `《${this.course}》`
+    this.course = `《${this.course}》`;
+    this.date = getDate1()
   },
   components: {
     Loading
@@ -58,7 +61,7 @@ export default {
 
     posterTo64() {
       return new Promise((resolve, reject) => {
-        let url = require(`../../../assets/img/zs/4221588935628_.pic.jpg`);
+        let url = require(`../../../assets/img/wbzs/zs2.jpg`);
         this.imgToBase64(url).then(res => {
           console.log("poster64 ready");
           this.bgSrc = res;
@@ -117,13 +120,13 @@ export default {
         //把画好的canvas转成base64
         console.log(canvas);
         console.log('调用getResult64成功');
-        var img = new Image();
-        img.classList.add("resultImg");
-        img.src = canvas.toDataURL("image/png");
-        img.onload = function() {
-          console.log("onload");
-          document.body.appendChild(img);
-        };
+        // var img = new Image();
+        // img.classList.add("resultImg");
+        // img.src = canvas.toDataURL("image/png");
+        // img.onload = function() {
+        //   console.log("onload");
+        //   document.body.appendChild(img);
+        // };
         this.resultBase64 = canvas.toDataURL("image/png");
         this.resultBase64Show = true;
         // console.log("----------");
@@ -154,11 +157,11 @@ export default {
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 115px;
+    top: 117px;
     left: 50%;
     transform: translateX(-50%);
     font-family: "PingFangSC-Semibold";
-    font-size: 23px;
+    font-size: 17px;
     font-weight: 500;
     .name_text{
       color:rgba(53,32,28,1);
@@ -178,6 +181,13 @@ export default {
       color:rgba(201,145,71,1);
       font-weight: 500;
     }
+  }
+  .date{
+    position: absolute;
+    bottom: 20px;
+    right: 32px;
+    font-size: 10px;
+    color:rgba(53,32,28,1);
   }
 }
 
