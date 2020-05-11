@@ -204,6 +204,12 @@ const myMenus = [
     name: "wanwuOrderList",
     text: "万物订单",
     link: "/wanwuOrderList"
+  },
+  {
+    hasChild: false,
+    name: "ResetAccount",
+    text: "账号还原",
+    link: "/ResetAccount"
   }
 ];
 export default {

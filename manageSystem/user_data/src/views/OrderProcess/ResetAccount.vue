@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="table_top_tool">
-      <Input v-model.number="phone" placeholder="请输入手机号"></Input>
+      <h1>音乐壳账号还原</h1>
+      <Input style="width:300px" v-model.number="phone" placeholder="请输入手机号"></Input>
       <Button type="primary" @click="reset">还原</Button>
     </div>
   </div>
@@ -18,7 +19,7 @@ export default {
       this.axios
         .get(`http://58.87.125.111:55555'/v1/user/clear_data?phone=${phone}`)
         .then(res => {
-          this.allTuid = res.data;
+          this.$Message.success("操作成功!");
         });
     }
   }

@@ -30,6 +30,8 @@ import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
 import tools from './../views/OrderProcess/tools'
 import wanwuOrderList from './../views/OrderProcess/wanwuOrderList.vue'
+//账号还原
+import ResetAccount from './../views/OrderProcess/ResetAccount.vue'
 //夏令营活动
 import SumerCamp from './../views/SumerCamp.vue'
 import downloadChannels from './../views/OrderProcess/downloadChannels.vue'
@@ -189,6 +191,11 @@ const router = new Router({
           name: 'wanwuOrderList',
           path: '/wanwuOrderList',
           component: wanwuOrderList
+        },
+        {
+          name: 'ResetAccount',
+          path: '/ResetAccount',
+          component: ResetAccount
         }
       ]
     },
