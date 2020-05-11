@@ -1,6 +1,10 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 const uploadConfig = require('./uploadConfig');
+const path = require('path');
+function resolve (dir) {
+    return path.join(__dirname, dir)
+}
 module.exports = {
     devServer: {
         port: 5557,     // 端口
@@ -38,6 +42,12 @@ module.exports = {
                     }
                 })
             );
+            config.resolve.alias
+            .set('@$', resolve('src'))
+            .set('assets',resolve('src/assets'))
+            .set('img',resolve('src/assets/img'))
+            .set('components',resolve('src/components'))
+            .set('common',resolve('src/common'))
     },
     pages: {
         test: 'src/modules/test/test.js',

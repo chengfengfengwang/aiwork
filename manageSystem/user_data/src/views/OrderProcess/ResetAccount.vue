@@ -11,15 +11,19 @@
 export default {
   data() {
     return {
-      phone: '',
+      phone: ""
     };
   },
-  methods:{
-    reset(){
+  methods: {
+    reset() {
       this.axios
-        .get(`http://58.87.125.111:55555'/v1/user/clear_data?phone=${phone}`)
+        .get(
+          `http://58.87.125.111:55555/v1/user/clear_data?phone=${this.phone}`
+        )
         .then(res => {
-          this.$Message.success("操作成功!");
+          if (!res.error) {
+            this.$Message.success("操作成功!");
+          }
         });
     }
   }

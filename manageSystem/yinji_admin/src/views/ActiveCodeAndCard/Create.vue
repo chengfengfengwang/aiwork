@@ -34,6 +34,7 @@
         <Select class="search_item" v-model="searchValue.type" placeholder="选择创建类型">
           <Option value="0">课程激活码</Option>
           <Option value="1">奖学金卡</Option>
+          <Option value="2">实物卡</Option>
         </Select>
       </div>
       <div class="search_item_wrapper">
@@ -93,6 +94,7 @@
             <Select v-model="formValue.type" placeholder="选择创建类型">
               <Option value="0">课程激活码</Option>
               <Option value="1">奖学金卡</Option>
+               <Option value="2">实物卡</Option>
             </Select>
           </FormItem>
           <FormItem label="渠道来源">
@@ -135,7 +137,7 @@
           </FormItem>
           <FormItem label="sku">
             <Select filterable v-model="formValue.sku_id" style="width:200px">
-              <Option v-for="(item,index) in skuList" :value="item.id" :key="index">{{ item.name }}</Option>
+              <Option v-for="(item,index) in skuList" :value="item.name" :key="index">{{ item.name }}</Option>
             </Select>
           </FormItem>
           <FormItem label="课程类型">
