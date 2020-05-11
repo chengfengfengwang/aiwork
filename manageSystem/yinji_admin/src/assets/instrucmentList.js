@@ -52,9 +52,13 @@ export default {
     '唢呐': 'suona',
     '扬琴':'yangqin',
     '按钟do':'voice_do',
+    '按钟高音do':'voice_h_do',
     '按钟re':'voice_re',
     '按钟mi':'voice_mi',
+    '按钟fa':'voice_fa',
     '按钟sol':'voice_sol',
+    '按钟la':'voice_la',
+    '按钟ti':'voice_ti',
     '按钟laba':'voice_laba',
     '按钟shanshan':'voice_shanshan'
 }
