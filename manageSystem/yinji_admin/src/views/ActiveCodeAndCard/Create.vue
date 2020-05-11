@@ -137,7 +137,7 @@
           </FormItem>
           <FormItem label="sku">
             <Select filterable v-model="formValue.sku_id" style="width:200px">
-              <Option v-for="(item,index) in skuList" :value="item.name" :key="index">{{ item.name }}</Option>
+              <Option v-for="(item,index) in skuList" :value="item.id" :key="index">{{ item.name }}</Option>
             </Select>
           </FormItem>
           <FormItem label="课程类型">

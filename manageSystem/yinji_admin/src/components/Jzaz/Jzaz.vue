@@ -2,14 +2,10 @@
   <div class="upload-group">
     <div class="instrument_wrapper">
       <span>模式：</span>
-      <Select v-model="obj.mode" style="width:200px"  placeholder>
-          <Option
-            :value="1"
-          >视频模式</Option>
-          <Option
-            :value="2"
-          >游戏模式</Option>
-        </Select>
+      <Select v-model="obj.mode" style="width:200px" placeholder>
+        <Option :value="1">视频模式</Option>
+        <Option :value="2">游戏模式</Option>
+      </Select>
       <MyUpload
         btnText="上传bgt"
         :acceptType="-1"
@@ -18,20 +14,21 @@
       />
       <div>
         <MyUpload
-        btnText="上传mp3"
-        :acceptType="1"
-        :defaultFile="obj.mp3"
-        v-on:upload-success="musicUploadSuccess"
-      />
+          btnText="上传mp3"
+          :acceptType="1"
+          :defaultFile="obj.mp3"
+          v-on:upload-success="musicUploadSuccess"
+        />
       </div>
       <div>
         <MyUpload
-        btnText="上传视频"
-        :acceptType="-1"
-        :defaultFile="obj.video"
-        v-on:upload-success="videoUploadSuccess"
+          btnText="上传视频"
+          :acceptType="-1"
+          :defaultFile="obj.video"
+          v-on:upload-success="videoUploadSuccess"
         />
       </div>
+     
     </div>
   </div>
 </template>
@@ -48,8 +45,7 @@ export default {
   },
   data() {
     return {
-      myObj: this.obj,
-      
+      myObj: this.obj
     };
   },
   components: {

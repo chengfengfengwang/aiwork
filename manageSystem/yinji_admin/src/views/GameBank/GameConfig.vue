@@ -1079,11 +1079,47 @@
           <FormItem label="通关次数">
             <Input v-model.number="formValidate.clear_times"></Input>
           </FormItem>
-           <FormItem label="通关等级">
-              <Select v-model="formValidate.clear_level" placeholder="选择展示位置">
-                <Option v-for="grade in passGrades" :key="grade.value" :value="grade.value">{{grade.name}}</Option>
-              </Select>
-            </FormItem>
+          <FormItem label="通关等级">
+            <Select v-model="formValidate.clear_level" placeholder="选择展示位置">
+              <Option
+                v-for="grade in passGrades"
+                :key="grade.value"
+                :value="grade.value"
+              >{{grade.name}}</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="是否显示五线谱">
+            <Select v-model="obj.wxp" style="width:200px" placeholder>
+              <Option :value="1">是</Option>
+              <Option :value="0">否</Option>
+            </Select>
+          </FormItem>
+
+          <FormItem label="是否显示音符">
+            <Select v-model="obj.yf" style="width:200px" placeholder>
+              <Option :value="1">是</Option>
+              <Option :value="0">否</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="是否显示谱号">
+            <Select v-model="obj.ph" style="width:200px" placeholder>
+              <Option :value="1">是</Option>
+              <Option :value="0">否</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="是否显示小节线">
+            <Select v-model="obj.xjx" style="width:200px" placeholder>
+              <Option :value="1">是</Option>
+              <Option :value="0">否</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="是否显示歌词">
+            <Select v-model="obj.gc" style="width:200px" placeholder>
+              <Option :value="1">是</Option>
+              <Option :value="0">否</Option>
+            </Select>
+          </FormItem>
+
           <!-- <FormItem label="描述" prop="desc">
             <Input
               v-model="formValidate.desc"
@@ -1129,40 +1165,40 @@ const obj = {
     }
   }
 };
-const passGrades=[
+const passGrades = [
   {
-    name:'A+',
-    value:0
+    name: "A+",
+    value: 0
   },
   {
-    name:'A',
-    value:1
+    name: "A",
+    value: 1
   },
   {
-    name:'B+',
-    value:2
+    name: "B+",
+    value: 2
   },
   {
-    name:'B',
-    value:3
+    name: "B",
+    value: 3
   },
   {
-    name:'C+',
-    value:4
+    name: "C+",
+    value: 4
   },
   {
-    name:'D',
-    value:6
+    name: "D",
+    value: 6
   },
   {
-    name:'E',
-    value:7
+    name: "E",
+    value: 7
   },
   {
-    name:'F',
-    value:8
-  },
-]
+    name: "F",
+    value: 8
+  }
+];
 import Gqdfj from "../../components/GqDfj/GqDfj";
 import Buyu from "../../components/Buyu/Buyu";
 import Sgjz from "../../components/Sgjz/Sgjz";
@@ -1172,7 +1208,7 @@ import Jzaz from "../../components/Jzaz/Jzaz";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
 import Jzyqsp from "../../components/Jzyqsp/Jzyqsp";
-import Gsgbysf from "../../components/Gsgbysf/Gsgbysf"; 
+import Gsgbysf from "../../components/Gsgbysf/Gsgbysf";
 import Cpbf from "../../components/Cpbf/Cpbf";
 import FzgCyk from "../../components/FzgCyk/FzgCyk";
 import Ukpz from "../../components/Ukpz/Ukpz";
@@ -1241,8 +1277,8 @@ export default {
       modalShow: false,
       gameNameList: [],
       formValidate: {
-        countdown:60,
-        passRate:70
+        countdown: 60,
+        passRate: 70
       },
       selectedBalanceNoteArr: [],
       xiaoniaoBgt: [],
@@ -1865,10 +1901,17 @@ export default {
     formateRow(row) {
       var newRow = JSON.parse(JSON.stringify(row));
       newRow.online = newRow.online ? "true" : "false";
-      newRow.countdown = newRow.countdown?newRow.countdown:60;
-      newRow.passRate = newRow.passRate?newRow.passRate:70;
-      newRow.clear_times = newRow.clear_times?newRow.clear_times:0;
-      newRow.clear_level = newRow.clear_level?newRow.clear_level:5;
+      newRow.countdown = newRow.countdown ? newRow.countdown : 60;
+      newRow.passRate = newRow.passRate ? newRow.passRate : 70;
+      newRow.clear_times = newRow.clear_times ? newRow.clear_times : 0;
+      newRow.clear_level = newRow.clear_level ? newRow.clear_level : 5;
+
+      newRow.wxp = newRow.wxp ? newRow.wxp : 1;
+      newRow.yf = newRow.yf ? newRow.yf : 1;
+      newRow.ph = newRow.ph ? newRow.ph : 1;
+      newRow.xjx = newRow.xjx ? newRow.xjx : 1;
+      newRow.gc = newRow.gc ? newRow.gc : 1;
+
       if (newRow.game_type == 3) {
         this.curGame = "kapai";
       } else if (newRow.game_type == 8) {
@@ -2002,7 +2045,7 @@ export default {
       } else if (newRow.game_type == 71) {
         //民乐拍照
         this.curGame = "mypz";
-      }else if (newRow.game_type == 55 || newRow.game_type == 66) {
+      } else if (newRow.game_type == 55 || newRow.game_type == 66) {
         //coco回家（选择题）
         this.curGame = "cocohj";
       } else if (newRow.game_type == 56) {
@@ -2036,14 +2079,13 @@ export default {
       } else if (newRow.game_type == 68) {
         //节奏游戏
         this.curGame = "jzyx";
-      }else if (newRow.game_type == 69) {
+      } else if (newRow.game_type == 69) {
         //模拟游戏2d
         this.curGame = "mnyx2d";
       } else if (newRow.game_type == 70) {
         //节奏按钟
         this.curGame = "jzaz";
-      }  
-      else {
+      } else {
         this.curGame = "";
       }
 
@@ -2608,12 +2650,12 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }  else if (this.curGame == "jzyx") {
+        } else if (this.curGame == "jzyx") {
           var obj = this.$refs.jzyx.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }  else if (this.curGame == "mnyx2d") {
+        } else if (this.curGame == "mnyx2d") {
           var obj = this.$refs.mnyx2d.submit();
           var arr = [];
           arr[0] = obj;
@@ -2623,7 +2665,7 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }else if (this.curGame == "ccht") {
+        } else if (this.curGame == "ccht") {
           var obj = this.$refs.ccht.submit();
           var arr = [];
           arr[0] = obj;
@@ -2643,7 +2685,7 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }else if (this.curGame == "cpbf") {
+        } else if (this.curGame == "cpbf") {
           var obj = this.$refs.cpbf.submit();
           var arr = [];
           arr[0] = obj;
@@ -2658,7 +2700,7 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        }else if (this.curGame == "mypz") {
+        } else if (this.curGame == "mypz") {
           var obj = this.$refs.mypz.submit();
           var arr = [];
           arr[0] = obj;
