@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <div class="logo">
-      <img src="../../../assets/img/yiqiac/loginb2.png" alt>
+      <img src="../../../assets/img/zs/loginb2.png" alt>
     </div>
     <div class="bottom_coco">
-      <img src="../../../assets/img/wbzs/coco.png" alt>
+      <img src="../../../assets/img/zs/coco.png" alt>
     </div>
     <div class="form">
       <div class="input_wrapper name">
@@ -97,9 +97,9 @@ body {
   min-height: 100vh;
   position: relative;
   padding: 0 30px;
-  background: url("../../../assets/img/yiqiac/loginb1.png") no-repeat top
+  background: url("../../../assets/img/zs/loginb1.png") no-repeat top
       center/100%,
-    url("../../../assets/img/yiqiac/loginb3.png") no-repeat bottom center/100%;
+    url("../../../assets/img/zs/loginb3.png") no-repeat bottom center/100%;
   background-color: #fff8df;
 }
 .logo {

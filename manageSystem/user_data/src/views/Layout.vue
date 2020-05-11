@@ -208,7 +208,7 @@ const myMenus = [
   {
     hasChild: false,
     name: "ResetAccount",
-    text: "账号还原",
+    text: "工具",
     link: "/ResetAccount"
   }
 ];
