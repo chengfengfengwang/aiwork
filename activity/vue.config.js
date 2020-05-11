@@ -42,7 +42,8 @@ module.exports = {
     pages: {
         test: 'src/modules/test/test.js',
         normal: 'src/modules/normal/app.js',
-        zs: 'src/modules/zs/app.js'
+        zs: 'src/modules/zs/app.js',
+        anvs: 'src/modules/anvs/app.js'
 
     }
 }

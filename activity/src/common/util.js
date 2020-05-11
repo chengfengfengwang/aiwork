@@ -123,6 +123,11 @@ function testWeixin() { //判断是否是微信
     var ua = navigator.userAgent.toLowerCase();
     return ua.match(/MicroMessenger/i) == "micromessenger";
 };
-
+function eConsole(){
+    if (getQueryVariable("eruda")) {
+        const eruda = require('eruda')
+        eruda.init();
+      }
+}
 const platForm = testPlat();
-export { getDate1, getDate, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInApp, testWeixin, platForm, formatOnlyTime }
+export { eConsole, getDate1, getDate, dateCount, formatNumber, getQueryVariable, testPlat, formatTime, setRem, isIphonex, openInApp, testWeixin, platForm, formatOnlyTime }
