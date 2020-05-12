@@ -1089,32 +1089,32 @@
             </Select>
           </FormItem>
           <FormItem label="是否显示五线谱">
-            <Select v-model="obj.wxp" style="width:200px" placeholder>
+            <Select v-model="formValidate.wxp" style="width:200px" placeholder>
               <Option :value="1">是</Option>
               <Option :value="0">否</Option>
             </Select>
           </FormItem>
 
           <FormItem label="是否显示音符">
-            <Select v-model="obj.yf" style="width:200px" placeholder>
+            <Select v-model="formValidate.yf" style="width:200px" placeholder>
               <Option :value="1">是</Option>
               <Option :value="0">否</Option>
             </Select>
           </FormItem>
           <FormItem label="是否显示谱号">
-            <Select v-model="obj.ph" style="width:200px" placeholder>
+            <Select v-model="formValidate.ph" style="width:200px" placeholder>
               <Option :value="1">是</Option>
               <Option :value="0">否</Option>
             </Select>
           </FormItem>
           <FormItem label="是否显示小节线">
-            <Select v-model="obj.xjx" style="width:200px" placeholder>
+            <Select v-model="formValidate.xjx" style="width:200px" placeholder>
               <Option :value="1">是</Option>
               <Option :value="0">否</Option>
             </Select>
           </FormItem>
           <FormItem label="是否显示歌词">
-            <Select v-model="obj.gc" style="width:200px" placeholder>
+            <Select v-model="formValidate.gc" style="width:200px" placeholder>
               <Option :value="1">是</Option>
               <Option :value="0">否</Option>
             </Select>

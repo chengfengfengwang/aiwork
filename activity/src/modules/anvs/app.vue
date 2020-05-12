@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view />
+  <div id="appmain">
+    <router-view/>
   </div>
 </template>
 <script>
@@ -9,13 +9,19 @@ export default {
   data() {
     return {
       isIphonex: false,
-
       loadingShow: false
+    };
+  },
+  provide() {
+    return {
+      status: getQueryVariable("status")
     };
   },
   components: {},
   created() {
     this.isIphonex = isIphonex();
+    this.axios.defaults.headers.common["token"] = localStorage.getItem("token");
+    this.axios.defaults.headers.common["uid"] = localStorage.getItem("uid");
   },
   methods: {
     toggleLoading(status) {
@@ -46,9 +52,9 @@ html {
 * {
   box-sizing: border-box;
 }
-#main {
-  position: relative;
-  font-size: 0;
+#appmain {
+  min-height: 100vh;
+  background:rgba(248,248,248,1);
 }
 </style>
 

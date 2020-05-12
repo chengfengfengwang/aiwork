@@ -1,39 +1,58 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// import ukulelePac from './src/ukulelePac.vue'
-// import ukuleleES from './src/ukuleleES.vue'
-// import djembePac_ad from './src/djembePac_ad.vue' 
-// import ukuleleGsc from './src/ukuleleGsc.vue' 
-// import djembePac from './src/djembePac.vue'
-// import qimeng from './src/qimeng_new.vue'
 
-const home1 = () => import('./src/index1.vue')
-const poster1 = () => import('./src/poster1.vue')
+const login = () => import('./src/login.vue')
+const active = () => import('./src/active.vue')
+const success = () => import('./src/success.vue')
+const download = () => import('./src/download.vue')
+const address = () => import('./src/address.vue')
+const selInstrument = () => import('./src/selInstrument.vue')
+const order = () => import('./src/order.vue')
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'home1',
+    //   component: home1
+    // },
     {
-      path: '/',
-      name: 'home1',
-      component: home1
+      path: '/login',
+      name: 'login',
+      component: login
     },
     {
-      path: '/poster1',
-      name: 'poster1',
-      component: poster1
-    }
-  ],
-  // scrollBehavior(to, from, savedPosition) {
-  //   console.log('--savedPosition--')
-  //   console.log(to, from, savedPosition)
-  //   console.log('--savedPosition--')
-    
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   } else {
-  //     return { x: 0, y: 0 }
-  //   }
-  // }
+      path: '/active',
+      name: 'active',
+      component: active
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: success
+    },
+    {
+      path: '/download',
+      name: 'download',
+      component: download
+    },
+    {
+      path: '/address',
+      name: 'address',
+      component: address
+    },
+    {
+      path: '/selInstrument',
+      name: 'selInstrument',
+      component: selInstrument
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: order
+    } 
+  ]
 })

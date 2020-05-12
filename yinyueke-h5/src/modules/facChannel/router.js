@@ -13,6 +13,9 @@ const success = () => import('./src/success.vue')
 const newIndex = () => import('./src/newIndex.vue')
 const newQrPage = () => import('./src/newQrPage.vue')
 const newInput = () => import('./src/newInput')
+const weiboInput = () => import('./src/weiboInput.vue')
+const weiboQr = () => import('./src/weiboQr.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -42,17 +45,16 @@ export default new Router({
       path: '/newInput',
       name: 'newInput',
       component: newInput,
+    }, 
+    {
+      path: '/weiboInput',
+      name: 'weiboInput',
+      component: weiboInput,
     },
-  ],
-  // scrollBehavior(to, from, savedPosition) {
-  //   console.log('--savedPosition--')
-  //   console.log(to, from, savedPosition)
-  //   console.log('--savedPosition--')
-    
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   } else {
-  //     return { x: 0, y: 0 }
-  //   }
-  // }
+    {
+      path: '/weiboQr',
+      name: 'weiboQr',
+      component: weiboQr,
+    }
+  ]
 })

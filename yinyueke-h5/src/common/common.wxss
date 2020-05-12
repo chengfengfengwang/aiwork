@@ -71,3 +71,6 @@ button {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 999;
 }
+.w100 {
+  width: 100%;
+}
