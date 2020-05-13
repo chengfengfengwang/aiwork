@@ -4,8 +4,8 @@
       <img src="../../../assets/img/success/success_icon.png" alt class="success_icon">
       <div class="title1">恭喜您已兑换成功</div>
       <div class="title2">快来下载APP开启你的音乐之旅吧</div>
-      <div class="btn btn1" v-show="status=='instrument' && need_vip">去激活会员卡</div>
-      <div class="btn btn1" v-show="status=='vip' && need_instrument">去兑换乐器</div>
+      <div class="btn btn1" v-show="status=='instrument' && need_vip" @click="toVip">去激活会员卡</div>
+      <div class="btn btn1" v-show="status=='vip' && need_instrument" @click="toInstrument">去兑换乐器</div>
       <div @click="toLearn" class="btn btn2">去学习</div>
       <a
         class="express"
@@ -38,6 +38,12 @@ export default {
       
   },
   methods: {
+    toVip(){
+      location.href = `${location.origin}${location.pathname}?status=vip#/active`;
+    },
+    toInstrument(){
+      location.href = `${location.origin}${location.pathname}?status=instrument#/active`;
+    },
     toLearn() {
       this.$router.push("/download");
     }

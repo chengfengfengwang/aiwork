@@ -140,11 +140,11 @@ body{
 .wrapper {
   position: absolute;
   left: 0;
-  top: 15%;
+  top: 6%;
   z-index: 999;
   //top: 220px;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
-    top: 17%;
+    top: 6%;
   }
   width: 100%;
   padding: 0 30px;

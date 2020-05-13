@@ -71,6 +71,7 @@ export default {
   align-items: center;
   padding: 20px;
   .select {
+    flex-shrink: 0;
     width: 20px;
     height: 20px;
     margin-right: 10px;
@@ -79,6 +80,7 @@ export default {
     }
   }
   .cover {
+    flex-shrink: 0;
     width: 80px;
     height: 80px;
     margin-right: 16px;
