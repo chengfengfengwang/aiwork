@@ -18,6 +18,7 @@
 </template>
 <script>
 export default {
+  inject: ["status"],
   data() {
     return {
       need_instrument: false,

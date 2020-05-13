@@ -35,6 +35,7 @@
 import Wechat from "../../../components/Wechat";
 
 export default {
+  inject: ["status"],
   data() {
     return {
       acIndex: 0,

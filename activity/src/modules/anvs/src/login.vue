@@ -20,6 +20,7 @@
 import { getQueryVariable } from "../../../common/util.js";
 import Wechat from "../../../components/Wechat";
 export default {
+  inject: ["status"],
   data() {
     return {
       vcodeText: "获取验证码",

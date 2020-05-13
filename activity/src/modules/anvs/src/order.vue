@@ -32,6 +32,7 @@
 </template>
 <script>
 export default {
+  inject: ["status"],
   data() {
     return {
       item: {},
