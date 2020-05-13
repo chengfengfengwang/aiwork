@@ -39,8 +39,8 @@ export default {
     };
   },
   created() {
-    this.item = JSON.parse(localStorage.getItem("selectItem"));
-    this.form = JSON.parse(localStorage.getItem("instrumentForm"));
+    this.item = JSON.parse(sessionStorage.getItem("selectItem"));
+    this.form = JSON.parse(sessionStorage.getItem("instrumentForm"));
     console.log(this.form);
     document.title='确认订单'
   },

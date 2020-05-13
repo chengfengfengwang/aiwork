@@ -71,15 +71,15 @@ export default {
       })
     },
     reg() {
-      //localStorage.setItem('loginPhone',this.form.phone);
+      //sessionStorage.setItem('loginPhone',this.form.phone);
       if(this.btnDisable) return;
       this.axios
         .get(`http://58.87.125.111:55555/v1/user/login/?phone=${this.form.phone}&code=${this.form.code}`)
         .then(res => {
           if(!res.error){
             let data = res.data;
-            localStorage.setItem('token',data.token);
-            localStorage.setItem('uid',data.uid)
+            sessionStorage.setItem('token',data.token);
+            sessionStorage.setItem('uid',data.uid)
             this.axios.defaults.headers.common['token'] = data.token;
             this.axios.defaults.headers.common['uid'] = data.uid;
             //location.href = `${location.origin}${location.pathname}${location.hash}`;

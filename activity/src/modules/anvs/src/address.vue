@@ -97,12 +97,12 @@ export default {
       });
     },
     submit() {
-      let selectItem =  JSON.parse(localStorage.getItem('selectItem'));
+      let selectItem =  JSON.parse(sessionStorage.getItem('selectItem'));
 
       this.form.zone = this.location;
-      this.form.active_code = localStorage.getItem('active_code');
+      this.form.active_code = sessionStorage.getItem('active_code');
       this.form.goods_id = selectItem.goods_id;
-      localStorage.setItem('instrumentForm',JSON.stringify(this.form));
+      sessionStorage.setItem('instrumentForm',JSON.stringify(this.form));
       this.$router.push('/order')
     },
 

@@ -20,8 +20,8 @@ export default {
   components: {},
   created() {
     this.isIphonex = isIphonex();
-    this.axios.defaults.headers.common["token"] = localStorage.getItem("token");
-    this.axios.defaults.headers.common["uid"] = localStorage.getItem("uid");
+    this.axios.defaults.headers.common["token"] = sessionStorage.getItem("token");
+    this.axios.defaults.headers.common["uid"] = sessionStorage.getItem("uid");
   },
   methods: {
     toggleLoading(status) {

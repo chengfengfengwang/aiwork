@@ -51,8 +51,8 @@ export default {
           if (!res.error) {
             let goods_data = res.goods_data;
             if (this.status == "instrument") {
-              localStorage.setItem("active_code", this.cardCode);
-              localStorage.setItem(
+              sessionStorage.setItem("active_code", this.cardCode);
+              sessionStorage.setItem(
                 "goods_data",
                 JSON.stringify(res.goods_data)
               );

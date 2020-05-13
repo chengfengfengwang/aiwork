@@ -72,8 +72,8 @@ export default {
   methods: {
     getLocalAddress(){
       var obj = {};
-      if(localStorage.getItem('addressInfo')){
-        obj = JSON.parse(localStorage.getItem('addressInfo'))
+      if(sessionStorage.getItem('addressInfo')){
+        obj = JSON.parse(sessionStorage.getItem('addressInfo'))
       };
       this.receiver = obj.receiver;
         this.phone = obj.phone;
@@ -87,7 +87,7 @@ export default {
         location:this.location,
         detailAddress:this.detailAddress
       }
-      localStorage.setItem('addressInfo',JSON.stringify(obj));
+      sessionStorage.setItem('addressInfo',JSON.stringify(obj));
       this.$router.go(-1)
     },
     addressConfirm(arr) {
