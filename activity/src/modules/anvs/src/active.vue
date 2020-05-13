@@ -13,10 +13,13 @@
     <input v-model="cardCode" type="text" placeholder="请输入卡片上的激活码进行激活" class="input input_line">
     <div class="ac_btn btn" @click="goActive" :class="{disable:btnDisable}">立即激活</div>
     <img src="../../../assets/img/anvs/rights.png" alt class="rights">
+    <Wechat />
   </div>
 </template>
 <script>
 import { getQueryVariable } from "common/util.js";
+import Wechat from "../../../components/Wechat";
+
 export default {
   inject: ["status"],
   data() {
@@ -29,6 +32,9 @@ export default {
   created() {
     
   },
+   components:{
+    Wechat
+  },
   methods: {
     goActive() {
       if(this.btnDisable) return;
@@ -39,13 +45,16 @@ export default {
         //.get(`http://58.87.125.111:55555/v1/operate/activity_qr/?activity_type=`)
         .then(res => {
           if (!res.error) {
-            if (res.goods_data) {
+            let goods_data = res.goods_data;
+            if (this.status=='instrument') {
               localStorage.setItem("active_code", this.cardCode);
               localStorage.setItem(
                 "goods_data",
                 JSON.stringify(res.goods_data)
               );
               this.$router.push("/selInstrument");
+            }else if (this.status=='vip') {
+              this.$router.push("/success");
             }
           }
         });
