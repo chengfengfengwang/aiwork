@@ -94,7 +94,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
-    height: 80px;
+    min-height: 80px;
     .title {
       font-size: 16px;
       font-family: PingFang-SC-Regular, PingFang-SC;

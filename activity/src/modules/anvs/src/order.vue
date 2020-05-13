@@ -19,7 +19,7 @@
       <div class="content">
         <div class="title">{{item.goods_title}}</div>
         <div class="content_all">
-          <div class="line1">型号：音乐壳定制</div>
+          <div class="line1">{{item.goods_detail.remark}}</div>
           <div class="line2">
             供货价：
             <span class="text-decoration-lt">{{item.goods_detail.old_price}}元</span>
