@@ -57,6 +57,10 @@ export default {
           key: "valid_count"
         },
         {
+          title: "商品名称",
+          key: "goods_name"
+        },
+        {
           title: "姓名",
           key: "name"
         },
