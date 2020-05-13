@@ -13,7 +13,7 @@
     <input v-model="cardCode" type="text" placeholder="请输入卡片上的激活码进行激活" class="input input_line">
     <div class="ac_btn btn" @click="goActive" :class="{disable:btnDisable}">立即激活</div>
     <img src="../../../assets/img/anvs/rights.png" alt class="rights">
-    <Wechat />
+    <Wechat/>
   </div>
 </template>
 <script>
@@ -30,14 +30,18 @@ export default {
     };
   },
   created() {
-    
+    if(this.status=='instrument'){
+      document.title='乐器卡激活'
+    }else if(this.status=='vip'){
+      document.title='会员卡激活'
+    }
   },
-   components:{
+  components: {
     Wechat
   },
   methods: {
     goActive() {
-      if(this.btnDisable) return;
+      if (this.btnDisable) return;
       this.axios
         .post(`http://58.87.125.111:55555/v1/active_code_anniversary`, {
           active_code: this.cardCode
@@ -46,14 +50,16 @@ export default {
         .then(res => {
           if (!res.error) {
             let goods_data = res.goods_data;
-            if (this.status=='instrument') {
+            if (this.status == "instrument") {
               localStorage.setItem("active_code", this.cardCode);
               localStorage.setItem(
                 "goods_data",
                 JSON.stringify(res.goods_data)
               );
               this.$router.push("/selInstrument");
-            }else if (this.status=='vip') {
+            } else if (this.status == "vip") {
+              sessionStorage.setItem("need_instrument", res.need_instrument);
+              sessionStorage.setItem("need_vip", res.need_vip);
               this.$router.push("/success");
             }
           }

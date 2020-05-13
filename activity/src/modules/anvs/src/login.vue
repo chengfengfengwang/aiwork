@@ -35,6 +35,9 @@ export default {
   components:{
     Wechat
   },
+  created(){
+    document.title='登录'
+  },
   mounted() {
     this.inputevent();
     if(process.env.NODE_ENV !== 'production'){

@@ -7,7 +7,10 @@
       <div class="btn btn1" v-show="status=='instrument' && need_vip">去激活会员卡</div>
       <div class="btn btn1" v-show="status=='vip' && need_instrument">去兑换乐器</div>
       <div @click="toLearn" class="btn btn2">去学习</div>
-      <a class="express" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMTA1ODIwMQ==&scene=124#wechat_redirect">查看物流信息</a>
+      <a
+        class="express"
+        href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMTA1ODIwMQ==&scene=124#wechat_redirect"
+      >查看物流信息</a>
       <img src="../../../assets/img/success/cloud.png" alt class="cloud">
       <img src="../../../assets/img/success/bottom.png" alt class="bottom">
     </div>
@@ -15,19 +18,27 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-      need_instrument:false,
-      need_vip:false
-    }
+  data() {
+    return {
+      need_instrument: false,
+      need_vip: false
+    };
   },
-  created(){
-    this.need_instrument = sessionStorage.setItem("need_instrument", res.need_instrument);
-    this.need_vip = sessionStorage.setItem("need_vip", res.need_vip);
+  created() {
+    this.need_instrument =
+      sessionStorage.getItem("need_instrument") === "true" ? true : false;
+    this.need_vip =
+      sessionStorage.getItem("need_vip") === "true" ? true : false;
+      if(this.status=='instrument'){
+        document.title='兑换成功'
+      }else if(this.status=='vip'){
+        document.title='激活成功'
+      }
+      
   },
-  methods:{
-    toLearn(){
-      this.$router.push('/download')
+  methods: {
+    toLearn() {
+      this.$router.push("/download");
     }
   }
 };

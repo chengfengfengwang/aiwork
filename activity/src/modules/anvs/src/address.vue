@@ -66,6 +66,7 @@ export default {
         address:"贫民窟"
       }
     }
+    document.title='添加收货地址'
   },
   mounted() {
     this.inputevent();

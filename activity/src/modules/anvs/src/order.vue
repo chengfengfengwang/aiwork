@@ -42,6 +42,7 @@ export default {
     this.item = JSON.parse(localStorage.getItem("selectItem"));
     this.form = JSON.parse(localStorage.getItem("instrumentForm"));
     console.log(this.form);
+    document.title='确认订单'
   },
   methods: {
     submit() {

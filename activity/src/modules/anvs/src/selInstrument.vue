@@ -47,6 +47,7 @@ export default {
   created() {
     this.goodsList = JSON.parse(localStorage.getItem("goods_data"));
     console.log(this.goodsList);
+    document.title='选择乐器'
   },
   methods:{
     goNext(){

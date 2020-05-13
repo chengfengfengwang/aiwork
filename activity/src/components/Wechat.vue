@@ -52,10 +52,10 @@ export default {
 }
 .we_icon {
   position: fixed;
-  right: 10px;
+  right: 7px;
   top: 418px;
-  width: 60px;
-  height: 60px;
+  width: 63px;
+  height: 63px;
   img {
     width: 100%;
   }
