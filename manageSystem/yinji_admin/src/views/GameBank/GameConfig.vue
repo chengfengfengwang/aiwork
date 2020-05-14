@@ -1906,11 +1906,7 @@ export default {
       newRow.clear_times = newRow.clear_times ? newRow.clear_times : 0;
       newRow.clear_level = newRow.clear_level ? newRow.clear_level : 5;
 
-      newRow.wxp = newRow.wxp ? newRow.wxp : 1;
-      newRow.yf = newRow.yf ? newRow.yf : 1;
-      newRow.ph = newRow.ph ? newRow.ph : 1;
-      newRow.xjx = newRow.xjx ? newRow.xjx : 1;
-      newRow.gc = newRow.gc ? newRow.gc : 1;
+      
 
       if (newRow.game_type == 3) {
         this.curGame = "kapai";
