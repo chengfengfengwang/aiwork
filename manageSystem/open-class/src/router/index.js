@@ -13,6 +13,7 @@ import Group from '../views/Group.vue'
 import OpenVip from '../views/OpenVip'
 import searchVip from '../views/searchVip'
 import book415 from '../views/book415.vue'
+import SongList from '../views/SongList.vue'
 
 Vue.use(Router)
 
@@ -60,6 +61,12 @@ const router = new Router({
           name: 'book415',
           path: '/book415',
           component: book415
+        }, 
+        //歌单
+        {
+          name: 'SongList',
+          path: '/SongList',
+          component: SongList
         },
       ]
     },
@@ -79,16 +86,6 @@ const router = new Router({
       component: searchVip,
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
-    // return 期望滚动到哪个的位置
-    return {}
-    // if (savedPosition) {
-    //   console.log(savedPosition)
-    //   return false
-    // } else {
-    //   return {}
-    // }
-  }
 })
 // router.beforeEach((to, from, next) => {
 //   if (to.name == 'Login') {

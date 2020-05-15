@@ -30,6 +30,7 @@ const shanshanPacQimeng = () => import('./src/shanshanPacQimeng.vue')
 const folkMusicKingdom = () => import('./src/folkMusicKingdom.vue')
 const youyouPac = () => import('./src/youyouPac.vue')
 const aefAnzhong = () => import('./src/aefAnzhong.vue')
+const djmbe61 = () => import('./src/djmbe61.vue')
 
 Vue.use(Router)
 
@@ -144,6 +145,11 @@ export default new Router({
       path: '/aefAnzhong',
       name: 'aefAnzhong',
       component: aefAnzhong
+    }, 
+    {
+      path: '/djmbe61',
+      name: 'djmbe61',
+      component: djmbe61
     },
   ]
 })
