@@ -10,8 +10,8 @@
       >
       <img v-show="status=='vip'" src="../../../assets/img/anvs/card_vip.jpg" alt class="card_img">
     </div>
-    <input v-model="cardCode" type="text" placeholder="请输入卡片上的激活码进行激活" class="input input_line">
-    <div class="ac_btn btn" @click="goActive" :class="{disable:btnDisable}">立即激活</div>
+    <input v-model="cardCode" type="text" :placeholder="placeholder" class="input input_line">
+    <div class="ac_btn btn" @click="goActive" :class="{disable:btnDisable}">{{btnText}}</div>
     <img src="../../../assets/img/anvs/rights.png" alt class="rights">
     <Wechat/>
   </div>
@@ -25,15 +25,21 @@ export default {
   data() {
     return {
       cardCode: "",
-      btnDisable: true
+      btnDisable: true,
+      btnText:'立即激活',
+      placeholder:'请输入卡片上的激活码进行激活'
       //status:'card'
     };
   },
   created() {
     if(this.status=='instrument'){
-      document.title='乐器卡激活'
+      document.title='乐器卡激活';
+      this.btnText = '立即兑换';
+      this.placeholder = '请输入卡片上的兑换码进行兑换'
     }else if(this.status=='vip'){
-      document.title='会员卡激活'
+      document.title='会员卡激活';
+      this.btnText = '立即激活';
+      this.placeholder = '请输入卡片上的激活码进行激活'
     }
   },
   components: {

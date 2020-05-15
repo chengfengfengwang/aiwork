@@ -8,7 +8,7 @@
         placeholder="按日期筛选"
         style="width: 200px"
         @on-change="timeSelectChange"
-      ></DatePicker> -->
+      ></DatePicker>-->
       <Button type="primary" @click="createNew" style="margin-right:30px">新建</Button>
     </div>
 
@@ -21,18 +21,22 @@
     ></Table>
     <Modal v-model="modalShow" width="760">
       <p slot="header" style>
-        <span>修改发货状态</span>
+        <span>专辑</span>
       </p>
       <div>
         <Form ref="formValidate" :label-width="100">
           <FormItem label="分类">
             <Select v-model="formValue.list_type" style="width:200px">
-              <Option
-                v-for="item in typeList"
-                :value="item.key"
-                :key="item.key"
-              >{{ item.title }}</Option>
+              <Option v-for="item in typeList" :value="item.key" :key="item.key">{{ item.title }}</Option>
             </Select>
+          </FormItem>
+          <FormItem label="封面">
+            <MyUpload
+              btnText="上传封面"
+              :acceptType="0"
+              :defaultFile="formValue.cover"
+              v-on:upload-success="coverUploadSuccess"
+            />
           </FormItem>
           <FormItem label="专辑名称">
             <Input v-model="formValue.title"></Input>
@@ -48,7 +52,7 @@
 </template>
 <script>
 import { getDate, tableColumnsFilter } from "./../../common/util.js";
-import Upload from "./../../components/Upload/Upload";
+import MyUpload from "./../../components/Upload/Upload";
 
 export default {
   data() {
@@ -57,8 +61,7 @@ export default {
       classData: [],
       tableLoading: true,
       columns: [
-          
-          {
+        {
           title: "专辑",
           key: "title"
         },
@@ -87,12 +90,56 @@ export default {
                     click: () => {
                       this.$router.push({
                         path: "AudioList",
-                        query: { albumId: params.row.list_type }
+                        query: { albumId: params.row.id }
                       });
                     }
                   }
                 },
                 "查看歌单"
+              ),
+               h(
+                "Button",
+                {
+                  props: {
+                    type: "success",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.modalShow = true;
+                      this.song_list_id = params.row.id;
+                      this.formValue.title = params.row.title;
+                      this.formValue.cover = params.row.cover;
+                      this.formValue.list_type = params.row.list_type;
+                      //song_id  title  url
+
+                      this.modalStatus = "edit";
+                    }
+                  }
+                },
+                "编辑"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "info",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.song_list_id = params.row.id;
+                      this.removeAudio();
+                    }
+                  }
+                },
+                "删除"
               )
               //   h(
               //     "Button",
@@ -116,54 +163,95 @@ export default {
       modalShow: false,
       tableData: [],
       expressState: "",
-      typeList: []
+      typeList: [],
+      formValue: {}
     };
+  },
+  components: {
+    MyUpload
   },
   created() {
     delete this.axios.defaults.headers.common["key"];
-    this.getTableData();
+    delete this.axios.defaults.headers.common["uid"];
+    delete this.axios.defaults.headers.common["token"];
+    this.getAlbumList();
     this.getTypes();
-    this.getSongList()
+    //this.getSongList();
   },
-  mounted() {
-  },
-  beforeDestroy() {
-      this.axios.defaults.headers.common['key'] = this.$store.state.userInfo.key;
-
-  },
+  mounted() {},
+  
   methods: {
+    coverUploadSuccess(response, idx, position, file, fileList) {
+      this.formValue.cover = response.data;
+    },
     createNew() {
       this.formValue = {};
       this.modalShow = true;
+      this.modalStatus='create'
     },
-    handleSubmit() {
+    removeAudio() {
       this.axios
         .get(
-          `http://58.87.125.111:55555/v1/share/update_main_address_state?id=${this.curRow.id}&state=${this.expressState}`
+          `http://api.yinji.immusician.com/v1/song/delete/?song_list_id=${this.song_list_id}`
         )
         .then(res => {
-          this.getTableData()
+          if (!res.error) {
+            this.$Message.success("操作成功");
+          }
+          this.getSongList();
         });
     },
-    getTypes(){
+    createAlbum(){
+      //console.log(this.formValue)
+      //return
+      this.axios
+        .post(`http://api.yinji.immusician.com/v1/song/`,this.formValue)
+        .then(res => {
+          this.modalShow = false;
+          this.getAlbumList()
+        });
+    },
+    updateAlbum() {
+      const param = {
+        //song_list_id:this.albumId,
+        song_id: this.song_list_id,
+        title: this.formValue.title,
+        cover: this.formValue.cover
+      };
+      this.axios
+        .post(
+          `http://api.yinji.immusician.com/v1/song/update/`,
+          param
+        )
+        .then(res => {
+          this.modalShow = false;
+          this.getAlbumList();
+        });
+    },
+    handleSubmit() {
+      if (this.modalStatus == "edit") {
+        this.updateAlbum();
+      } else {
+        this.createAlbum();
+      }
+    },
+    getTypes() {
       this.axios
         .get(`http://api.yinji.immusician.com/v1/song/list_type/`)
         .then(res => {
-           this.typeList = res.data;
+          this.typeList = res.data;
         });
     },
-    getTableData() {
+    getAlbumList() {
       this.tableLoading = true;
-      this.axios
-        .get(`http://api.yinji.immusician.com/v1/song/`)
-        .then(res => {
-          //return
-          this.tableLoading = false;
-          console.log(res.data);
-          this.tableData = res.data;
-        });
+      this.axios.get(`http://api.yinji.immusician.com/v1/song/`).then(res => {
+        //return
+        this.tableLoading = false;
+        console.log(res.data);
+        this.tableData = res.data;
+      });
     },
-    getSongList(){
+    getSongList() {
       this.axios
         .get(`http://api.yinji.immusician.com/v1/song/songs/?song_list_id=16`)
         .then(res => {

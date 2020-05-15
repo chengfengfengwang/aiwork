@@ -2,7 +2,7 @@
   <div id="success">
     <div class="main">
       <img src="../../../assets/img/success/success_icon.png" alt class="success_icon">
-      <div class="title1">恭喜您已兑换成功</div>
+      <div class="title1">{{successText}}</div>
       <div class="title2">快来下载APP开启你的音乐之旅吧</div>
       <div class="btn btn1" v-show="status=='instrument' && need_vip" @click="toVip">去激活会员卡</div>
       <div class="btn btn1" v-show="status=='vip' && need_instrument" @click="toInstrument">去兑换乐器</div>
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       need_instrument: false,
-      need_vip: false
+      need_vip: false,
+      successText:'恭喜您已兑换成功'
     };
   },
   created() {
@@ -31,9 +32,11 @@ export default {
     this.need_vip =
       sessionStorage.getItem("need_vip") === "true" ? true : false;
       if(this.status=='instrument'){
-        document.title='兑换成功'
+        document.title='兑换成功';
+        this.successText = '恭喜您已兑换成功'
       }else if(this.status=='vip'){
-        document.title='激活成功'
+        document.title='激活成功';
+        this.successText = '恭喜您已激活成功'
       }
       
   },

@@ -41,8 +41,8 @@
               <router-link to="/book415">
                 <MenuItem name="book415">赠书发货信息</MenuItem> 
               </router-link>
-              <router-link to="/SongList">
-                <MenuItem name="SongList">歌单</MenuItem> 
+              <router-link to="/AlbumList">
+                <MenuItem name="AlbumList">歌单</MenuItem> 
               </router-link>
               <!-- <router-link to="/OpenClassAi">
                 <MenuItem name="OpenClassAi">AI课程开通</MenuItem> 

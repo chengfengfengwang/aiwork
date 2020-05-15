@@ -180,6 +180,7 @@ import {
   BreadcrumbItem,
   Card
 } from "iview";
+
 const myMenus = [
   {
     hasChild: true,
@@ -388,7 +389,7 @@ const myMenus = [
     name: "Config",
     text: "配置",
     link: "/Config"
-  },
+  }
 ];
 const shanshanMenus = [
   {
@@ -423,10 +424,15 @@ export default {
     this.menus = localStorage.getItem("menus")
       ? JSON.parse(localStorage.getItem("menus"))
       : myMenus;
-
+    // this.menus = [{
+    //   hasChild: false,
+    //   name: "ActiveCodeAndCard",
+    //   text: "激活码",
+    //   link: "/ActiveCodeAndCard/ActivedList"
+    // }];
     this.activeMenuName = this.$route.name;
     this.openMenuArr.push(this.$route.meta.parentMenu);
-    this.getAppName()
+    this.getAppName();
   },
   mounted() {},
   methods: {

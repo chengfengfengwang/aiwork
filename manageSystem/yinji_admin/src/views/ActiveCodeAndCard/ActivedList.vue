@@ -240,10 +240,7 @@ export default {
   },
   created() {},
   mounted() {
-    console.log(this.$route.query.channel)
     this.searchValue.channel = this.$route.query.channel;
-    delete this.axios.defaults.headers.common.uid;
-    delete this.axios.defaults.headers.common.token;
     this.get();
   },
   methods: {
