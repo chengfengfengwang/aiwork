@@ -8,14 +8,14 @@
           <img :src="bookCover" alt>
           <img
             @click="togglePlay"
-            v-show="isLoading"
+            v-show="isLoading && bookIndex!=0"
             src="https://samherbert.net/svg-loaders/svg-loaders/tail-spin.svg"
             alt
             class="play_icon loading"
           >
           <img
             @click="togglePlay"
-            v-show="!isPlaying && !isLoading"
+            v-show="!isPlaying && !isLoading && bookIndex!=0"
             src="../../../assets/img/book417/play.png"
             alt
             class="play_icon"
@@ -76,12 +76,13 @@
           @click="goBook(index)"
           v-for="(item,index) in bookDir"
           :key="index"
+          v-show="index!=0"
           class="catalog_item"
         >
           <div class="play_icon">
             <img src="../../../assets/img/book417/itemplay.png" alt>
           </div>
-          <div class="name">0{{index+1}}.{{item.title}}</div>
+          <div class="name">0{{index}}.{{item.title}}</div>
           <div @click.stop="showModal" v-show="!isWatchWechat" class="more_icon">
             <img src="../../../assets/img/book417/more.png" alt>
           </div>
@@ -190,6 +191,7 @@ export default {
       this.qrSrc = require(`../../../assets/img/book417/qr/${
         this.bookIndex
       }.png`);
+      console.log(this.book)
     },
     getWechatInfo() {
       if (this.openid && this.isWatchWechat) {

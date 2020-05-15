@@ -13,7 +13,8 @@ import Group from '../views/Group.vue'
 import OpenVip from '../views/OpenVip'
 import searchVip from '../views/searchVip'
 import book415 from '../views/book415.vue'
-import SongList from '../views/SongList.vue'
+import AlbumList from '../views/SongList/AlbumList.vue'
+import AudioList from '../views/SongList/AudioList.vue'
 
 Vue.use(Router)
 
@@ -64,9 +65,14 @@ const router = new Router({
         }, 
         //歌单
         {
-          name: 'SongList',
-          path: '/SongList',
-          component: SongList
+          name: 'AlbumList',
+          path: '/AlbumList',
+          component: AlbumList
+        }, 
+        {
+          name: 'AudioList',
+          path: '/AudioList',
+          component: AudioList
         },
       ]
     },

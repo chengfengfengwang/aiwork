@@ -1,15 +1,16 @@
 <template>
   <div>
-    <!-- <div style="margin-bottom:5px">
-      <span>筛选：</span>
+    <div style="margin-bottom:5px">
+      <!-- <span>筛选：</span>
       <DatePicker
         type="daterange"
         placement="bottom-end"
         placeholder="按日期筛选"
         style="width: 200px"
         @on-change="timeSelectChange"
-      ></DatePicker>
-    </div>-->
+      ></DatePicker> -->
+      <Button type="primary" @click="createNew" style="margin-right:30px">新建</Button>
+    </div>
 
     <Table
       :loading="tableLoading"
@@ -24,26 +25,31 @@
       </p>
       <div>
         <Form ref="formValidate" :label-width="100">
-          <FormItem label="状态">
-            <Select v-model="expressState" style="width:200px">
+          <FormItem label="分类">
+            <Select v-model="formValue.list_type" style="width:200px">
               <Option
-                v-for="item in expressStateList"
-                :value="item.value"
-                :key="item.value"
-              >{{ item.name }}</Option>
+                v-for="item in typeList"
+                :value="item.key"
+                :key="item.key"
+              >{{ item.title }}</Option>
             </Select>
+          </FormItem>
+          <FormItem label="专辑名称">
+            <Input v-model="formValue.title"></Input>
           </FormItem>
         </Form>
       </div>
       <div slot="footer">
-        <Button @click="handleSubmit('formValidate')" type="primary">确定</Button>
+        <Button @click="handleSubmit" type="primary">确定</Button>
         <Button @click="modalShow = false;">关闭</Button>
       </div>
     </Modal>
   </div>
 </template>
 <script>
-import { getDate, tableColumnsFilter } from "./../common/util.js";
+import { getDate, tableColumnsFilter } from "./../../common/util.js";
+import Upload from "./../../components/Upload/Upload";
+
 export default {
   data() {
     return {
@@ -79,13 +85,14 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.modalShow = true;
-                      this.curRow = params.row;
-                      this.modalStatus = "edit";
+                      this.$router.push({
+                        path: "AudioList",
+                        query: { albumId: params.row.list_type }
+                      });
                     }
                   }
                 },
-                "修改发货状态"
+                "查看歌单"
               )
               //   h(
               //     "Button",
@@ -109,20 +116,7 @@ export default {
       modalShow: false,
       tableData: [],
       expressState: "",
-      expressStateList: [
-        {
-          name: "未发货",
-          value: 0
-        },
-        {
-          name: "已发货",
-          value: 5
-        },
-        {
-          name: "驳回",
-          value: -1
-        }
-      ]
+      typeList: []
     };
   },
   created() {
@@ -132,15 +126,15 @@ export default {
     this.getSongList()
   },
   mounted() {
-      console.log(this.$store.state)
   },
   beforeDestroy() {
       this.axios.defaults.headers.common['key'] = this.$store.state.userInfo.key;
 
   },
   methods: {
-    timeSelectChange(value) {
-      this.getClassDetail(this.classData.class_id, value[0], value[1]);
+    createNew() {
+      this.formValue = {};
+      this.modalShow = true;
     },
     handleSubmit() {
       this.axios
@@ -155,10 +149,7 @@ export default {
       this.axios
         .get(`http://api.yinji.immusician.com/v1/song/list_type/`)
         .then(res => {
-          //return
-          // this.tableLoading = false;
-          // console.log(res.data);
-          // this.tableData = res.data;
+           this.typeList = res.data;
         });
     },
     getTableData() {
