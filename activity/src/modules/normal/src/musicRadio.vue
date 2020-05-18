@@ -8,16 +8,12 @@
         <div class="section_title">
           <img :src="section.title" alt>
         </div>
-        <div class="item" v-for="(item,idx) in section.itemList" :key="idx">
-          <div class="cover"></div>
+        <div class="item" v-for="(item,idx) in section.song_list" :key="idx">
+          <div class="cover">
+            <img :src="item.cover" alt="">
+          </div>
           <div class="item_title">{{item.title}}</div>
         </div>
-        <!-- <div class="item">
-          <div class="cover">
-            <img src="../../../assets/img/normal/musicRadio/play.png" alt="" class="play">
-          </div>
-          <div class="item_title">谢呈博士原创宝 宝场景音乐</div>
-        </div>-->
       </div>
     </div>
 
@@ -29,68 +25,43 @@ import Download from "components/bottomDownload";
 export default {
   data() {
     return {
-      dataList: [
-        {
-          title: require("../../../assets/img/normal/musicRadio/t_ycgq.png"),
-          itemList: [
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            }
-          ]
-        },
-        {
-          title: require("../../../assets/img/normal/musicRadio/t_yygs.png"),
-          itemList: [
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            }
-          ]
-        },
-        {
-          title: require("../../../assets/img/normal/musicRadio/t_jzk.png"),
-          itemList: [
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            }
-          ]
-        },
-        {
-          title: require("../../../assets/img/normal/musicRadio/t_kcgd.png"),
-          itemList: [
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            },
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            },
-            {
-              title: "谢谢"
-            },
-            {
-              title: "谢谢1"
-            },
-          ]
-        },
-      ]
+      dataList: []
     };
   },
   components: {
     Download
+  },
+  created() {
+    this.getDataList();
+  },
+  methods: {
+    getDataList() {
+      this.axios
+        .get(`http://api.yinji.immusician.com/v1/song/home?activity=h5`)
+        .then(res => {
+          if (!res.error) {
+            let list = res.data;
+            list.forEach(e => {
+              switch (e.title) {
+                case "原创歌曲":
+                  e.title = require("../../../assets/img/normal/musicRadio/t_ycgq.png");
+                  break;
+                case "音乐故事":
+                  e.title = require("../../../assets/img/normal/musicRadio/t_yygs.png");
+                  break;
+                case "家长课":
+                  e.title = require("../../../assets/img/normal/musicRadio/t_jzk.png");
+                  break;
+                case "课程歌单":
+                  e.title = require("../../../assets/img/normal/musicRadio/t_kcgd.png");
+                  break;
+              }
+            });
+            this.dataList = list;
+            console.log(list);
+          }
+        });
+    }
   }
 };
 </script>
@@ -131,7 +102,11 @@ export default {
       position: relative;
       width: 100px;
       height: 100px;
+      margin-bottom: 6px;
       overflow: hidden;
+      img{
+        width: 100%;
+      }
       .play {
         position: absolute;
         right: 10px;

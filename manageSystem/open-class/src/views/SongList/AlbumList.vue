@@ -37,6 +37,14 @@
               :defaultFile="formValue.cover"
               v-on:upload-success="coverUploadSuccess"
             />
+          </FormItem> 
+          <FormItem label="播放页背景">
+            <MyUpload
+              btnText="上传播放页背景"
+              :acceptType="0"
+              :defaultFile="formValue.h5_bg"
+              v-on:upload-success="h5BgUploadSuccess"
+            />
           </FormItem>
           <FormItem label="专辑名称">
             <Input v-model="formValue.title"></Input>
@@ -73,6 +81,21 @@ export default {
             return h("img", {
               attrs: {
                 src: params.row.cover
+              },
+              style: {
+                width:'100px'
+              }
+            });
+          }
+        },
+        {
+          title: "播放背景图",
+          key: "h5_bg",
+          minWidth: 200,
+          render: (h, params) => {
+            return h("img", {
+              attrs: {
+                src: params.row.h5_bg
               },
               style: {
                 width:'100px'
@@ -124,6 +147,7 @@ export default {
                       this.song_list_id = params.row.id;
                       this.formValue.title = params.row.title;
                       this.formValue.cover = params.row.cover;
+                      this.formValue.h5_bg = params.row.h5_bg;
                       this.formValue.list_type = params.row.list_type;
                       //song_id  title  url
 
@@ -195,6 +219,9 @@ export default {
     coverUploadSuccess(response, idx, position, file, fileList) {
       this.formValue.cover = response.data;
     },
+    h5BgUploadSuccess(response, idx, position, file, fileList) {
+      this.formValue.h5_bg = response.data;
+    },
     createNew() {
       this.formValue = {};
       this.modalShow = true;
@@ -227,7 +254,8 @@ export default {
         //song_list_id:this.albumId,
         song_list_id: this.song_list_id,
         title: this.formValue.title,
-        cover: this.formValue.cover
+        cover: this.formValue.cover,
+        h5_bg:this.formValue.h5_bg,
       };
       this.axios
         .post(
