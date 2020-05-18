@@ -30,6 +30,8 @@ import channelBills from './../views/OrderProcess/channelBills.vue'
 import factoryBills from './../views/OrderProcess/factoryBills.vue'
 import tools from './../views/OrderProcess/tools'
 import wanwuOrderList from './../views/OrderProcess/wanwuOrderList.vue'
+import sms from './../views/OrderProcess/sms.vue'
+
 //账号还原
 import ResetAccount from './../views/OrderProcess/ResetAccount.vue'
 //夏令营活动
@@ -196,6 +198,11 @@ const router = new Router({
           name: 'ResetAccount',
           path: '/ResetAccount',
           component: ResetAccount
+        },
+        {
+          name: 'sms',
+          path: '/sms',
+          component: sms
         }
       ]
     },

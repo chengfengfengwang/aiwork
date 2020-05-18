@@ -9,6 +9,7 @@ const download = () => import('./src/download.vue')
 const address = () => import('./src/address.vue')
 const selInstrument = () => import('./src/selInstrument.vue')
 const order = () => import('./src/order.vue')
+const imgDetail = () => import('./src/imgDetail.vue')
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: order
+    },
+    {
+      path: '/imgDetail',
+      name: 'imgDetail',
+      component: imgDetail
     } 
-  ]
+  ] 
 })

@@ -210,6 +210,12 @@ const myMenus = [
     name: "ResetAccount",
     text: "工具",
     link: "/ResetAccount"
+  },
+  {
+    hasChild: false,
+    name: "sms",
+    text: "短信",
+    link: "/sms"
   }
 ];
 export default {

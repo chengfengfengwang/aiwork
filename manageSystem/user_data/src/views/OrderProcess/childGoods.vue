@@ -103,6 +103,14 @@
               <Input v-model.number="formValidate.value" placeholder="请输入开课天数"></Input>
             </FormItem>
           </div>
+          <FormItem label="短信模版">
+            <Select filterable v-model="formValidate.sms_id" placeholder>
+              <Option v-for="sms in smsList" :value="sms.template_id" :key="sms.template_id">{{sms.content}}</Option>
+            </Select>
+          </FormItem>
+          <FormItem label="短信内容">
+            <Input type="textarea" :rows="4"  v-model="formValidate.sms_word" placeholder="请输入短信内容"></Input>
+          </FormItem>
           <FormItem label="备注">
             <Input v-model="formValidate.note" placeholder="请输入备注"></Input>
           </FormItem>
@@ -272,16 +280,25 @@ export default {
       tuids: [],
       allTuid: {},
       trains: [],
-      searchKey:''
+      searchKey: "",
+      smsList: []
     };
   },
   mounted() {
     this.getTableList();
     this.getTuids();
     this.getTrainList();
+    this.getSmsList();
     //this.getFactoryList();
   },
   methods: {
+    getSmsList() {
+      this.axios
+        .get(`${process.env.SMS}/sms/index?page=0&size=999&status=1`)
+        .then(res => {
+          this.smsList = res.data.list;
+        });
+    },
     getTrainList() {
       this.axios.get(`http://58.87.125.111:55555/v1/unlock/`).then(res => {
         this.trains = res.data;
@@ -370,7 +387,9 @@ export default {
         .get(
           `${
             process.env.WULIU
-          }/cgoods/index?page=0&size=999&status=1&vendor_id=${vendor_id}&key=${this.searchKey}`
+          }/cgoods/index?page=0&size=999&status=1&vendor_id=${vendor_id}&key=${
+            this.searchKey
+          }`
         )
         .then(res => {
           this.tableLoading = false;
@@ -406,8 +425,8 @@ export default {
         }
       }
     },
-    searchKey(){
-      this.getTableList()
+    searchKey() {
+      this.getTableList();
     }
   }
 };

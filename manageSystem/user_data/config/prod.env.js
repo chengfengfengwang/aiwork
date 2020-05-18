@@ -8,5 +8,6 @@ module.exports = {
   XIAOPO:'"http://58.87.125.111:55555"',
   PEILUN:'"http://api.yinji.immusician.com:55555"',
   WULIU:'"http://58.87.125.111:6363/v1"',
-  COURSE_LIST:'"http://58.87.125.111:55555"'
+  COURSE_LIST:'"http://58.87.125.111:55555"',
+  SMS:'"http://58.87.125.111:6363/v1"'
 }

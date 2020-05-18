@@ -1,0 +1,34 @@
+.px1-bottom-ffe6e6 {
+  position: relative;
+  border: none;
+}
+.px1-bottom-ffe6e6:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #FFE6E6;
+  width: 100%;
+  height: 2px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+.btn {
+  position: relative;
+  border: none;
+}
+.btn:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #999;
+  width: 100%;
+  height: 2px;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
