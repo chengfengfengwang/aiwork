@@ -17,24 +17,23 @@
   </div>
 </template>
 <script>
+import { getQueryVariable } from "common/util.js";
 export default {
   name:'play',
   data() {
     return {
       audioIndex: "",
       src: "",
-      status: "pause"
+      status: "pause",
+      title:''
     };
   },
   created() {
-    this.audioName = sessionStorage.getItem("audioName");
-    //https://s.immusician.com/web/h5/assets/1-节奏型1.mp3
-    const baseUrl = "//s.immusician.com/web/h5/assets/";
-    document.title = sessionStorage.getItem("title"); 
-    var src = baseUrl + this.audioName + ".mp3";
-    this.src = src;
+    this.title = decodeURIComponent(getQueryVariable("title"));
+    this.src = decodeURIComponent(getQueryVariable("url"));
+    document.title = this.title; 
     this.audio = new Audio();
-    this.audio.src = src;
+    this.audio.src = this.src;
     this.audio.addEventListener(
       "ended",
       () => {

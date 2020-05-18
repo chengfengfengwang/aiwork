@@ -65,10 +65,21 @@ export default {
           title: "专辑",
           key: "title"
         },
-        // {
-        //   title: "顺序",
-        //   key: "sort"
-        // },
+        {
+          title: "封面",
+          key: "cover",
+          minWidth: 200,
+          render: (h, params) => {
+            return h("img", {
+              attrs: {
+                src: params.row.cover
+              },
+              style: {
+                width:'100px'
+              }
+            });
+          }
+        },
         {
           title: " ",
           key: "action",
@@ -198,7 +209,7 @@ export default {
           if (!res.error) {
             this.$Message.success("操作成功");
           }
-          this.getSongList();
+          this.getAlbumList();
         });
     },
     createAlbum(){
@@ -214,7 +225,7 @@ export default {
     updateAlbum() {
       const param = {
         //song_list_id:this.albumId,
-        song_id: this.song_list_id,
+        song_list_id: this.song_list_id,
         title: this.formValue.title,
         cover: this.formValue.cover
       };

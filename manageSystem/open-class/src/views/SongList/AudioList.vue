@@ -51,10 +51,10 @@ export default {
           title: "歌曲",
           key: "title"
         },
-        {
-          title: "顺序",
-          key: "sort"
-        },
+        // {
+        //   title: "顺序",
+        //   key: "sort"
+        // },
         {
           title: "音频",
           key: "url",

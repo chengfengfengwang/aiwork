@@ -3,9 +3,7 @@
     <div class="backBg"></div>
     <header>
       <img src="../../../assets/img/songList/photo.jpg">
-      <h2>
-        民乐王国之旅闪卡歌单
-      </h2>
+      <h2>{{title}}</h2>
       <h2></h2>
     </header>
     <div class="list">
@@ -22,193 +20,171 @@ export default {
   data() {
     return {
       from: "",
+      title:"",
+      dicArr: []
     };
   },
-  created(){
-      document.title = '民乐王国之旅闪卡歌单'
+  created() {
+    this.getAudioList();
   },
-  mounted() {
-    var dicArr = [
-        '笛子',
-        '箫',
-        '埙',
-        '唢呐',
-        '笙',
-        '管子',
-        '琵琶',
-        '阮',
-        '月琴',
-        '三弦',
-        '古筝',
-        '古琴',
-        '扬琴',
-        '二胡',
-        '京胡',
-        '板胡',
-        '板鼓',
-        '大堂鼓',
-        '小堂鼓',
-        '大锣',
-        '小锣',
-        '大钹',
-        '小钹',
-        '排鼓',
-        '编钟',
-        '云锣',
-        '冬不拉',
-        '热瓦甫',
-        '马头琴',
-        '巴乌'
-
-    ];
-    var that = this;
-
-    (function(doc, win) {
-      var docEl = doc.documentElement,
-        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
-        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
-        resizeEvt =
-          "orientationchange" in window ? "orientationchange" : "resize";
-      docEl.dataset.dpr = dpr;
-      var recalc = function() {
-        var width = docEl.clientWidth;
-        if (width / dpr > 750) {
-          width = 750 * dpr;
+  mounted() {},
+  methods: {
+    getAudioList() {
+      this.axios.get(`http://api.yinji.immusician.com/v1/song/3/`).then(res => {
+        if (!res.error) {
+          this.dicArr = res.data.songs;
+          this.title = res.data.title;
+          document.title = res.data.title;
+          this.renderItem()
         }
-        docEl.dataset.width = width;
-        docEl.dataset.percent = 100 * (width / 750);
-        docEl.style.fontSize = 100 * (width / 750) + "px";
-      };
-      recalc();
-      if (!doc.addEventListener) return;
-      win.addEventListener(resizeEvt, recalc, false);
-    })(document, window);
+      });
+    },
+    renderItem() {
+      var that = this;
 
-    ///////////////////
-    $(document).ready(function($) {
-      function getParam(strParamName) {
-        var strReturn = "";
-        var strHref = document.location.href;
-        var bFound = false;
-        var cmpstring = strParamName + "=";
-        var cmplen = cmpstring.length;
+      (function(doc, win) {
+        var docEl = doc.documentElement,
+          isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+          dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+          dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+          resizeEvt =
+            "orientationchange" in window ? "orientationchange" : "resize";
+        docEl.dataset.dpr = dpr;
+        var recalc = function() {
+          var width = docEl.clientWidth;
+          if (width / dpr > 750) {
+            width = 750 * dpr;
+          }
+          docEl.dataset.width = width;
+          docEl.dataset.percent = 100 * (width / 750);
+          docEl.style.fontSize = 100 * (width / 750) + "px";
+        };
+        recalc();
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window);
 
-        if (strHref.indexOf("?") > -1) {
-          var strQueryString = strHref.substr(strHref.indexOf("?") + 1);
-          var aQueryString = strQueryString.split("&");
-          for (var iParam = 0; iParam < aQueryString.length; iParam++) {
-            if (aQueryString[iParam].substr(0, cmplen) == cmpstring) {
-              var aParam = aQueryString[iParam].split("=");
-              strReturn = aParam[1];
-              bFound = true;
-              break;
+      ///////////////////
+      $(document).ready(function($) {
+        function getParam(strParamName) {
+          var strReturn = "";
+          var strHref = document.location.href;
+          var bFound = false;
+          var cmpstring = strParamName + "=";
+          var cmplen = cmpstring.length;
+
+          if (strHref.indexOf("?") > -1) {
+            var strQueryString = strHref.substr(strHref.indexOf("?") + 1);
+            var aQueryString = strQueryString.split("&");
+            for (var iParam = 0; iParam < aQueryString.length; iParam++) {
+              if (aQueryString[iParam].substr(0, cmplen) == cmpstring) {
+                var aParam = aQueryString[iParam].split("=");
+                strReturn = aParam[1];
+                bFound = true;
+                break;
+              }
             }
           }
+          if (bFound == false) return null;
+          return strReturn;
         }
-        if (bFound == false) return null;
-        return strReturn;
-      }
-      var isPlaying = false;
-      var playIcon = "http://s.immusician.com/static/imgs/play_icon.png";
-      var pauseIcon = "http://s.immusician.com/static/imgs/pause_icon.png";
+        var isPlaying = false;
+        var playIcon = "http://s.immusician.com/static/imgs/play_icon.png";
+        var pauseIcon = "http://s.immusician.com/static/imgs/pause_icon.png";
 
-      function buildHtml() {
-        var baseUrl = "http://cdn.kids.immusician.com/static/mp3/";
+        function buildHtml() {
+          var baseUrl = "http://cdn.kids.immusician.com/static/mp3/";
 
-        var html = "";
+          var html = "";
 
-        for (var i = 0; i < dicArr.length; i++) {
-          var item = dicArr[i];
-          //var url = baseUrl + encodeURI(name);
-          html +=
-            "<li><p>" +
-            (i + 1) +
-            ". " +
-            item +
-            "</p></li>";
+          for (var i = 0; i < that.dicArr.length; i++) {
+            var item = that.dicArr[i];
+            //var url = baseUrl + encodeURI(name);
+            html += "<li><p>" + (i + 1) + ". " + item.title + "</p></li>";
+          }
+          $(".list ul").html(html);
         }
-        $(".list ul").html(html);
-      }
-      buildHtml();
+        buildHtml();
 
-      function togglePlay(elm, songName) {
-        var player = document.getElementById("player");
-        resetIcons();
-        //console.log(songName)
-        //return
-        if (!isPlaying) {
-          player.play();
-          elm.css("background-image", "url(" + pauseIcon + ")");
-        } else {
-          player.pause();
-          elm.css("background-image", "url(" + playIcon + ")");
+        function togglePlay(elm, songName) {
+          var player = document.getElementById("player");
+          resetIcons();
+          //console.log(songName)
+          //return
+          if (!isPlaying) {
+            player.play();
+            elm.css("background-image", "url(" + pauseIcon + ")");
+          } else {
+            player.pause();
+            elm.css("background-image", "url(" + playIcon + ")");
+          }
+          isPlaying = !isPlaying;
         }
-        isPlaying = !isPlaying;
-      }
 
-      function resetIcons() {
-        var lis = $(".list ul li a");
-        lis.each(function(index, el) {
-          lis.css("background-image", "url(" + playIcon + ")");
-        });
-      }
-      var domList = $(".list li");
-      $(".list li").click(function(event) {
-        var index = Array.prototype.indexOf.call(domList, this);
-        var title = this.innerText.split('.')[1].trim();
-        location.href = `wordSongList.html?s=${index + 1}&title=${title}#/folkplay`;
-        return;
+        function resetIcons() {
+          var lis = $(".list ul li a");
+          lis.each(function(index, el) {
+            lis.css("background-image", "url(" + playIcon + ")");
+          });
+        }
+        var domList = $(".list li");
+        $(".list li").click(function(event) {
+          var index = Array.prototype.indexOf.call(domList, this);
+          var curItem =  that.dicArr[index];
+          var title = encodeURIComponent(curItem.title) ;
+          var url = encodeURIComponent(curItem.url) ;
+          location.href = `normal.html?title=${title}&url=${url}#/play`;
+          return;
 
-        var p = $(this).find("p");
-        var songName = $(this)
-          .find("p")
-          .text()
-          .split(".")[1]
-          .trim();
-        var _this = $(this).find("a");
-        var _url = _this.attr("data-url");
-        var _currentUrl = $("#player source").attr("src");
-        if (_currentUrl == _url) {
-          togglePlay(_this, songName);
-        } else {
-          $(".playerContainer").html(
-            '<audio id="player" crossorigin><source src="' +
-              _url +
-              '" type="audio/mpeg"></audio>'
-          );
-          isPlaying = false;
-          setTimeout(function() {
+          var p = $(this).find("p");
+          var songName = $(this)
+            .find("p")
+            .text()
+            .split(".")[1]
+            .trim();
+          var _this = $(this).find("a");
+          var _url = _this.attr("data-url");
+          var _currentUrl = $("#player source").attr("src");
+          if (_currentUrl == _url) {
             togglePlay(_this, songName);
-          }, 50);
-        }
-        var _name = $(this)
-          .find("p")
-          .html();
-      });
+          } else {
+            $(".playerContainer").html(
+              '<audio id="player" crossorigin><source src="' +
+                _url +
+                '" type="audio/mpeg"></audio>'
+            );
+            isPlaying = false;
+            setTimeout(function() {
+              togglePlay(_this, songName);
+            }, 50);
+          }
+          var _name = $(this)
+            .find("p")
+            .html();
+        });
 
-      var browser = {
-        versions: (function() {
-          var u = navigator.userAgent;
-          return {
-            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-            android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或者uc浏览器
-            iPhone: u.indexOf("iPhone") > -1, //是否为iPhone或者QQHD浏览器
-            iPad: u.indexOf("iPad") > -1, //是否iPad
-            webApp: u.indexOf("Safari") == -1, //是否web应该程序，没有头部与底部
-            weixin: u.indexOf("MicroMessenger") > -1, //是否微信
-            qq: u.match(/\sQQ/i) == " qq", //是否QQ
-            iguitar: u.match("iGuitar") //IGuitar
-          };
-        })(),
-        language: (
-          navigator.browserLanguage || navigator.language
-        ).toLowerCase()
-      };
-    });
-  },
-  methods: {}
+        var browser = {
+          versions: (function() {
+            var u = navigator.userAgent;
+            return {
+              mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+              ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+              android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或者uc浏览器
+              iPhone: u.indexOf("iPhone") > -1, //是否为iPhone或者QQHD浏览器
+              iPad: u.indexOf("iPad") > -1, //是否iPad
+              webApp: u.indexOf("Safari") == -1, //是否web应该程序，没有头部与底部
+              weixin: u.indexOf("MicroMessenger") > -1, //是否微信
+              qq: u.match(/\sQQ/i) == " qq", //是否QQ
+              iguitar: u.match("iGuitar") //IGuitar
+            };
+          })(),
+          language: (
+            navigator.browserLanguage || navigator.language
+          ).toLowerCase()
+        };
+      });
+    }
+  }
 };
 </script>
 <style>
@@ -359,9 +335,9 @@ header h2 {
     margin-left: 0.24rem;
   }
   header h2 {
-    margin-top: .4rem;
-    font-size: .36rem;
-    margin-left: .1rem;
+    margin-top: 0.4rem;
+    font-size: 0.36rem;
+    margin-left: 0.1rem;
   }
   .list {
     width: 95%;
