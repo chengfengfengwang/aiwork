@@ -44,6 +44,9 @@
               <router-link to="/AlbumList">
                 <MenuItem name="AlbumList">歌单</MenuItem> 
               </router-link>
+              <!-- <router-link to="/OpenVip">
+                <MenuItem name="OpenVip">vip开通</MenuItem> 
+              </router-link> -->
               <!-- <router-link to="/OpenClassAi">
                 <MenuItem name="OpenClassAi">AI课程开通</MenuItem> 
               </router-link> -->

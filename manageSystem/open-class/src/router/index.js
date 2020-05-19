@@ -74,6 +74,11 @@ const router = new Router({
           path: '/AudioList',
           component: AudioList
         },
+        {
+      name: 'OpenVip',
+      path: '/OpenVip',
+      component: OpenVip,
+    },
       ]
     },
     {
@@ -81,11 +86,7 @@ const router = new Router({
       name: 'Login',
       component: Login,
     },
-    {
-      name: 'OpenVip',
-      path: '/OpenVip',
-      component: OpenVip,
-    },
+    
     {
       name: 'searchVip',
       path: '/searchVip',
@@ -93,17 +94,17 @@ const router = new Router({
     }
   ],
 })
-// router.beforeEach((to, from, next) => {
-//   if (to.name == 'Login') {
-//     next()
-//   } else {
-//     if (store.state.userInfo.token) {
-//       next()
-//     } else {
-//       next({
-//         path: '/Login'
-//       })
-//     }
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.name == 'Login' || to.name == 'AlbumList') {
+    next()
+  } else {
+    if (store.state.userInfo.token) {
+      next()
+    } else {
+      next({
+        path: '/Login'
+      })
+    }
+  }
+})
 export default router

@@ -18,7 +18,7 @@
       <div class="cover" @click.stop="goDetail(item.goods_detail.detail_url)">
         <img :src="item.goods_cover_url" alt>
       </div>
-      <div class="content">
+      <div @click.stop="goDetail(item.goods_detail.detail_url)" class="content">
         <div class="content_top">
           <div class="title">{{item.goods_title}}</div>
           <div class="line1">{{item.goods_detail.remark}}</div>

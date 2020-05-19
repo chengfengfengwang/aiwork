@@ -60,5 +60,13 @@ export default {
     '按钟la':'voice_la',
     '按钟ti':'voice_ti',
     '按钟laba':'voice_laba',
-    '按钟shanshan':'voice_shanshan'
+    '按钟shanshan':'voice_shanshan',
+    '小锣':'xiaoluo',
+    '小堂鼓':'xiaotanggu',
+    '大堂鼓':'datanggu',
+    '板鼓':'bangu',
+    '阮':'ruan',
+    '大堂鼓':'datanggu',
+    '大锣':'daluo',
+    '钹':'bo'
 }
