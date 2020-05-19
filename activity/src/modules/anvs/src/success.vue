@@ -7,6 +7,11 @@
       <div class="btn btn1" v-show="status=='instrument' && need_vip" @click="toVip">去激活会员卡</div>
       <div class="btn btn1" v-show="status=='vip' && need_instrument" @click="toInstrument">去兑换乐器</div>
       <div @click="toLearn" class="btn btn2">去学习</div>
+      <div class="qr_group">
+        <div v-show="status=='vip'" class="qr_box"><img src="../../../assets/img/anvs/qr_group.jpg" alt class="qr"></div>
+        <br>
+        <img src="../../../assets/img/anvs/group_tip.png" alt class="qr_tip">
+      </div>
       <a
         class="express"
         href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMTA1ODIwMQ==&scene=124#wechat_redirect"
@@ -102,6 +107,22 @@ export default {
       left: 0;
       bottom: 0px;
       width: 100%;
+    }
+    .qr_group{
+      text-align: center;
+      .qr_box{
+        display: inline-block;
+        background-color: #fff;
+        margin: 30px auto 8px auto;
+        padding: 4px 4px 2px 4px;
+        border-radius: 3px;
+      }
+      .qr{
+        width: 100px;
+      }
+      .qr_tip{
+        width: 100px;
+      }
     }
     .express {
       z-index: 9;

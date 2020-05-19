@@ -8,7 +8,11 @@
         <div class="qr_wrapper">
           <img class="qr" :src="qr" alt>
         </div>
-        <div class="text">扫二维码添加老师微信</div>
+        <div class="text_area">
+        <div class="text">扫码关注“音乐壳”公众号</div>
+        <div class="text">添加老师微信</div>
+        </div>
+        
         <img @click="maskShow=false" src="../assets/img/common/close1.png" alt class="close_icon">
       </div>
     </div>
@@ -78,7 +82,7 @@ export default {
     width: 200px;
   }
 }
-.text {
+.text_area {
   margin: 16px 0 0 0;
   font-size: 14px;
   font-family: PingFang-SC-Regular, PingFang-SC;

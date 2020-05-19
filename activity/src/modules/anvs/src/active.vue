@@ -118,7 +118,7 @@ export default {
 }
 .ac_btn {
   margin: auto;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   width: 315px;
   height: 44px;
   line-height: 44px;
