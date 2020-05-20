@@ -152,7 +152,7 @@
       <div class="price">¥ {{courseInfo.price/100}}</div>
     </div>
     <div class="box box2">
-      <div v-show="!hideJxj" class="item px1-bottom-f1" @click="couponsShow=!couponsShow">
+      <div v-show="!hideYhq" class="item px1-bottom-f1" @click="couponsShow=!couponsShow">
         <div class="item_left">
           <div class="item_title">优惠券</div>
         </div>
@@ -189,8 +189,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div v-show="!hideYhq" class="item" @click="modalShow=true">
+      </div> 
+      <div v-show="!hideJxj" class="item" @click="modalShow=true">
         <div class="item_left">
           <div class="item_title">奖学金</div>
         </div>
@@ -205,7 +205,7 @@
         :class="{'px1-bottom-ddd':!openInxxYYJ}"
         class="item px1-bottom-f1"
         @click="payMethod = 'hbfqPay'"
-        v-if="hbfqList && hbfqList.length>0"
+        v-if="!hideHbfq"
       >
         <div class="item_left">
           <div class="item_title">
@@ -376,6 +376,7 @@ export default {
       good_img: "",
       hideYhq: false,
       hideJxj: false,
+      hideHbfq:false,
       hbfqList: [],
       hbfqIndex: 0,
       hbfqUseConfig: {}
@@ -398,8 +399,7 @@ export default {
     //   document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
     // }
     console.log("-----1-----");
-    this.hideYhq = getQueryVariable("hideYhq") === "1" ? true : false;
-    this.hideJxj = getQueryVariable("hideJxj") === "1" ? true : false;
+    
     this.good_img = getQueryVariable("good_img")
       ? getQueryVariable("good_img")
       : localStorage.getItem("good_img");
@@ -446,8 +446,8 @@ export default {
         this.courseInfo.user_count = this.urlParams.user_count;
       }
 
-      this.axios.defaults.headers.common["token"] = this.urlParams.token;
-      this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
+      // this.axios.defaults.headers.common["token"] = this.urlParams.token;
+      // this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
     } else {
       this.courseInfo = JSON.parse(localStorage.getItem("courseInfo"));
       this.urlParams = JSON.parse(localStorage.getItem("urlParams"));
@@ -478,7 +478,13 @@ export default {
     getHbConfig(id) {
       //5e82dfe1521b200e2b476293
       this.axios
-        .get(`http://58.87.125.111:55555/v1/goods/ex_info/?id=${id}`)
+        .get(`http://58.87.125.111:55555/v1/goods/ex_info/?id=${id}`,{
+          headers:{
+            uid:getQueryVariable('uid'),
+            token:getQueryVariable('token'),
+          }
+        })
+        //.get(`http://192.168.2.75:55555/v1/goods/ex_info/?id=${id}`)
         .then(res => {
           console.log('--getHbConfig-')
           console.log(res)
@@ -486,6 +492,9 @@ export default {
             this.hbfqUseConfig.used_coupon = res.data.used_coupon;
             this.hbfqUseConfig.used_promo = res.data.used_promo;
             this.hbfqList = res.data.config;
+            this.hideYhq = res.data.used_coupon === 1 ? false : true;
+            this.hideJxj = res.data.used_promo === 1 ? false : true;
+            this.hideHbfq = res.data.state === 1 ? false : true;
           }
         });
     },
@@ -572,6 +581,12 @@ export default {
           `${this.host}/web_buy_coupon?id=${
             this.urlParams.goodsId
           }&coupon_type=0`
+          ,{
+          headers:{
+            uid:getQueryVariable('uid'),
+            token:getQueryVariable('token'),
+          }
+        }
         )
         .then(res => {
           this.loadingShow = false;
@@ -694,12 +709,8 @@ export default {
       this.axios
         .get(`http://58.87.125.111:55555/v1/payment/clicked/?goods_id=${getQueryVariable('goodsId')}&uid=${getQueryVariable('uid')}`)
         .then(res => {
-          console.log('--getHbConfig-')
-          console.log(res)
           if (!res.error) {
-            this.hbfqUseConfig.used_coupon = res.data.used_coupon;
-            this.hbfqUseConfig.used_promo = res.data.used_promo;
-            this.hbfqList = res.data.config;
+          
           }
         });
     }

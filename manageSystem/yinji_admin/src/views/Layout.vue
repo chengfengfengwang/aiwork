@@ -410,6 +410,14 @@ const shanshanMenus = [
     ]
   }
 ];
+const openvip = [
+    {
+    hasChild: false,
+    name: "OpenVip",
+    text: "vip",
+    link: "/OpenVip"
+  }
+]
 export default {
   data() {
     return {

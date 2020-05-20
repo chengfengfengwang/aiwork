@@ -7,8 +7,8 @@
       <div class="btn btn1" v-show="status=='instrument' && need_vip" @click="toVip">去激活会员卡</div>
       <div class="btn btn1" v-show="status=='vip' && need_instrument" @click="toInstrument">去兑换乐器</div>
       <div @click="toLearn" class="btn btn2">去学习</div>
-      <div class="qr_group">
-        <div v-show="status=='vip'" class="qr_box"><img src="../../../assets/img/anvs/qr_group.jpg" alt class="qr"></div>
+      <div v-show="status=='vip'" class="qr_group">
+        <div  class="qr_box"><img src="../../../assets/img/anvs/qr_group.jpg" alt class="qr"></div>
         <br>
         <img src="../../../assets/img/anvs/group_tip.png" alt class="qr_tip">
       </div>

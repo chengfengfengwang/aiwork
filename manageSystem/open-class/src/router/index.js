@@ -95,7 +95,7 @@ const router = new Router({
   ],
 })
 router.beforeEach((to, from, next) => {
-  if (to.name == 'Login' || to.name == 'AlbumList') {
+  if (to.name == 'Login' || to.name == 'AlbumList' || to.name == 'searchVip') {
     next()
   } else {
     if (store.state.userInfo.token) {

@@ -58,6 +58,8 @@ import Config from './../views/Config.vue';
 //工具
 import Upload from './../views/Tools/Upload.vue';
 import UploadList from './../views/Tools/UploadList.vue';
+//开通vip
+import OpenVip from './../views/OpenVip.vue';
 
 import test from './../views/myTest.vue';
 Vue.use(Router)
@@ -281,6 +283,11 @@ const router = new Router({
           path: '/CountData/CountDataActivityAi',
           component: CountDataActivityAi,
           meta: { parentMenu: 'CountData' }   
+        }, 
+        {
+          name: 'OpenVip',
+          path: '/OpenVip',
+          component: OpenVip
         },
       ]
     },
