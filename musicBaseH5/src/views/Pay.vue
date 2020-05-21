@@ -1,135 +1,4 @@
 <template>
-  <!-- <div class="page_wrapper">
-    <Loading v-show="loadingShow"/>
-    <Nav title="支付" left-text="返回" left-arrow/>
-    <div class="section1 item_wrapper">
-      <div class="item px1-bottom-ddd">
-        <div class="item_left">
-          <div class="item_title">{{this.courseInfo.name}}</div>
-        </div>
-        <div class="item_right price">¥{{courseInfo.price/100}}</div>
-      </div>
-      <div class="item px1-bottom-ddd" @click="couponsShow=!couponsShow">
-        <div class="item_left">
-          <div class="item_title">优惠券</div>
-        </div>
-        <div class="item_right">
-          <span class="item_right_value" v-show="selectedCoupons!==''">-¥{{couponsDiscount}}</span>
-          <img
-            src="./../assets/img/icon_common_more.png"
-            alt
-            :class="{rotate:couponsShow}"
-            class="item_arrow"
-          >
-        </div>
-      </div>
-      <div class="coupons_container" v-show="couponsShow">
-        <div v-show="couponsArr.length==0" class="no-coupons">暂无优惠券</div>
-        <div
-          class="coupons"
-          v-for="(item,index) in couponsArr"
-          v-show="courseInfo.price/100>=item.limit_money"
-          :key="index"
-          @click="selectCoupon(index)"
-        >
-          <div class="coupons_left">¥{{item.coupon_value}}</div>
-          <div class="coupons_right">
-            <div class="coupons_right_info">
-              <div class="coupons_name">{{item.name}}</div>
-              <div class="coupons_use_area">{{item.describe}}</div>
-              <div class="coupons_left_time">{{dateCount(item.end_time)}}</div>
-            </div>
-            <div class="coupons_select">
-              <img v-show="selectedCoupons===index" src="./../assets/img/coupons_select.png" alt>
-              <img v-show="selectedCoupons!==index" src="./../assets/img/coupons_no_select.png" alt>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="item" @click="modalShow=true">
-        <div class="item_left">
-          <div class="item_title">奖学金</div>
-        </div>
-        <div class="item_right">
-          <span class="item_right_value" v-show="bonusDiscount">-¥{{bonusDiscount}}</span>
-          <img src="./../assets/img/icon_common_more.png" alt class="item_arrow">
-        </div>
-      </div>
-    </div>
-    <div class="section2 item_wrapper">
-      <div :class="{'px1-bottom-ddd':!openInxxYYJ}" class="item" @click="payMethod = 'zfbPay'">
-        <div class="item_left">
-          <div class="item_title">
-            <img src="./../assets/img/icon_pay_alypay.png" alt class="item_left_icon">支付宝
-          </div>
-        </div>
-        <div class="item_right">
-          <img
-            v-show="payMethod!='zfbPay'"
-            src="./../assets/img/icon_common_select_nm.png"
-            alt
-            class="item_select_status"
-          >
-          <img
-            v-show="payMethod=='zfbPay'"
-            src="./../assets/img/icon_common_select_act.png"
-            alt
-            class="item_select_status"
-          >
-        </div>
-      </div>
-      <div class="item" @click="payMethod = 'wxPay'" v-show="!openInxxYYJ">
-        <div class="item_left">
-          <div class="item_title">
-            <img src="./../assets/img/icon_pay_wechat.png" alt class="item_left_icon">微信支付
-          </div>
-        </div>
-        <div class="item_right">
-          <img
-            v-show="payMethod!='wxPay'"
-            src="./../assets/img/icon_common_select_nm.png"
-            alt
-            class="item_select_status"
-          >
-          <img
-            v-show="payMethod=='wxPay'"
-            src="./../assets/img/icon_common_select_act.png"
-            alt
-            class="item_select_status"
-          >
-        </div>
-      </div>
-    </div>
-    <div class="bottom_pay_bar">
-      <div class="bar_main">
-        <span>¥ {{courseInfo.price/100 - this.discount}}</span>
-        <span class="discount" v-show="discount!==0">已优惠 ¥{{this.discount}}</span>
-      </div>
-      <div class="bar_btn" @click="createOrder">立即支付</div>
-    </div>
-    <div ref="mask" class="mask" v-show="modalShow"></div>
-    <div ref="modal" class="modal" v-show="modalShow">
-      <div class="close_icon" @click="modalShow=false">
-        <img src="./../assets/img/icon_toaster_close.png" alt>
-      </div>
-      <div class="modal_title">奖学金</div>
-      <div class="modal_tip">可在官方渠道合作处获取奖学金</div>
-      <input ref="myInput" v-model="bonusCode" @blur="onBlur" type="text" placeholder="请输入奖学金码">
-      <div class="modal_btn" @click="closeModal">完成</div>
-    </div>
-    <div class="mask" v-show="qrModalShow"></div>
-    <div class="modal" v-show="qrModalShow">
-      <div class="close_icon" @click="qrModalShow=false">
-        <img src="./../assets/img/icon_toaster_close.png" alt>
-      </div>
-      <div class="modal_title">扫码支付</div>
-      <div>
-        <img :src="qrSrc" alt="" class="qr">
-      </div>
-      <div class="modal_btn" @click="paySuccess">支付完成</div>
-    </div>
-    <div class="tip">温馨提示：优惠券与奖学金卡不能叠加使用，在支付前请您根据需要进行优惠方式的选择，选择后如若想更改请点击返回按钮，奖学金卡如果激活即视为生效，不能再次使用。</div>
-  </div>-->
   <div class="page">
     <Loading v-show="loadingShow"/>
     <div class="nav" :style="{marginTop:isIphonex?'20px':'0px'}">
@@ -143,13 +12,13 @@
     </div>
     <div class="box box1">
       <div class="left">
-        <img :src="good_img" alt>
+        <img :src="goods_img" alt>
       </div>
       <div class="right">
-        <div class="goods_name">{{courseInfo.name}}</div>
-        <div class="people">{{courseInfo.user_count}}人参加</div>
+        <div class="goods_name">{{goods_name}}</div>
+        <div class="people">{{goods_user_count}}人参加</div>
       </div>
-      <div class="price">¥ {{courseInfo.price/100}}</div>
+      <div class="price">¥ {{goods_price/100}}</div>
     </div>
     <div class="box box2">
       <div v-show="!hideYhq" class="item px1-bottom-f1" @click="couponsShow=!couponsShow">
@@ -172,7 +41,7 @@
         <div
           class="coupons"
           v-for="(item,index) in couponsArr"
-          v-show="(courseInfo.price/100)>=item.limit_money"
+          v-show="(goods_price/100)>=item.limit_money"
           :key="index"
           @click="selectCoupon(index)"
         >
@@ -189,7 +58,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
       <div v-show="!hideJxj" class="item" @click="modalShow=true">
         <div class="item_left">
           <div class="item_title">奖学金</div>
@@ -282,7 +151,7 @@
         class="tip_content"
       >温馨提示：优惠券与奖学金卡不能叠加使用，在支付前请您根据需要进行优惠方式的选择，选择后如若想更改请点击返回按钮，奖学金卡如果激活即视为生效，不能再次使用。</div>
     </div>
-    <div class="pay_btn" @click="createOrder">立即支付 ¥ {{courseInfo.price/100 - this.discount}}</div>
+    <div class="pay_btn" @click="createOrder">立即支付 ¥ {{goods_price/100 - this.discount}}</div>
     <div ref="mask" class="mask" v-show="modalShow"></div>
     <div ref="modal" class="modal" v-show="modalShow">
       <div class="close_icon" @click="modalShow=false">
@@ -310,12 +179,16 @@
       <div class="item_wrapper">
         <div @click="hbfqIndex=index" class="item" v-for="(item,index) in hbfqList" :key="index">
           <div class="item_left">
-            <div
-              class="money"
-            >¥ {{showHbPeriodFee(courseInfo.price/100 - discount,item.rate,item.hb_fq_num)}}<span class="icon_multi"> &#215; </span>{{item.hb_fq_num}}期</div>
+            <div class="money">
+              ¥ {{showHbPeriodFee(goods_price/100 - discount,item.rate,item.hb_fq_num)}}
+              <span
+                class="icon_multi"
+              >&#215;</span>
+              {{item.hb_fq_num}}期
+            </div>
             <div
               class="money_tip"
-            >手续费{{showHbServiceFee(courseInfo.price/100 - discount,item.rate,item.hb_fq_num)}}/期,费率{{showHbRate(item.rate)}}%</div>
+            >手续费{{showHbServiceFee(goods_price/100 - discount,item.rate,item.hb_fq_num)}}/期,费率{{showHbRate(item.rate)}}%</div>
           </div>
           <div class="item_right">
             <img
@@ -359,9 +232,7 @@ export default {
       couponsArr: [],
       selectedCoupons: "",
       couponsShow: false,
-      courseInfo: {},
       loadingShow: false,
-      urlParams: {},
       ipInfo: {
         ip: "暂未获取到"
       },
@@ -373,13 +244,21 @@ export default {
       qrSrc: "",
       qrModalShow: false,
       isIphonex: false,
-      good_img: "",
+
       hideYhq: false,
       hideJxj: false,
-      hideHbfq:false,
+      hideHbfq: false,
       hbfqList: [],
       hbfqIndex: 0,
-      hbfqUseConfig: {}
+      hbfqUseConfig: {},
+      /////
+      goods_img: "",
+      goods_name: "",
+      goods_user_count: "",
+      goods_price: "",
+      share_channel: "",
+      address: "",
+      instrument_type: ""
     };
   },
   components: {
@@ -392,102 +271,101 @@ export default {
     }
   },
   created() {
-    //document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
-    // if(window.innerWidth>600){
-    //   document.documentElement.style.fontSize = (24 / 375) * 100 + "vw";
-    // }else{
-    //   document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
-    // }
-    console.log("-----1-----");
-    
-    this.good_img = getQueryVariable("good_img")
-      ? getQueryVariable("good_img")
-      : localStorage.getItem("good_img");
     this.isIphonex = isIphonex();
-    console.log("-----2-----");
+
+    // this.goods_img = getQueryVariable("goods_img");
+    // this.goods_name = decodeURI(getQueryVariable("name"));
+    // this.goods_user_count = getQueryVariable("user_count");
+    // this.goods_price = getQueryVariable("price");
+    // this.share_channel = getQueryVariable("share_channel");
+    // this.address = decodeURI(getQueryVariable("address"));
+
+    // this.phone = getQueryVariable("phone");
+    // this.uid = getQueryVariable("uid");
+    // this.token = getQueryVariable("token");
+    // this.coupon_id = getQueryVariable("coupon_id");
+    // this.goods_id = getQueryVariable("goodsId");
+    // this.instrument_type = getQueryVariable("instrument_type");
+    // this.from = getQueryVariable("from"); //youxuepai
+    this.share_channel = getQueryVariable("share_channel");
+    this.address = decodeURI(getQueryVariable("address"));
+    this.phone = getQueryVariable("phone");
+    this.uid = getQueryVariable("uid");
+    this.token = getQueryVariable("token");
+    this.coupon_id = getQueryVariable("coupon_id");
+    this.goods_id = getQueryVariable("goodsId");
+    this.instrument_type = getQueryVariable("instrument_type");
+    this.from = getQueryVariable("from"); //youxuepai
+    //校园版支付
     if (openApp() === "yinji-school") {
       this.host = process.env.YINJISCHOOL + "/v2";
     } else {
       this.host = process.env.JINKANG + "/v1";
     }
-    console.log("-----3-----");
-    //获取花呗分期配置
-    console.log("-----开始请求-----");
-    this.getHbConfig(getQueryVariable('goodsId'))
-    //this.getHbConfig("5e82dfe1521b200e2b476293");
-  },
-  mounted() {
-    //this.qrModalShow = true
-    if (window.innerWidth > 600) {
-      document.documentElement.style.fontSize = (13 / 375) * 100 + "vw";
-    } else {
-      document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
-    }
-    if (getQueryVariable("hasParam")) {
-      var courseInfo = {};
-      courseInfo.name = decodeURI(getQueryVariable("name"));
-      courseInfo.price = getQueryVariable("price");
-      var urlParams = {};
-      [
-        "goodsId",
-        "share_channel",
-        "address",
-        "phone",
-        "uid",
-        "token",
-        "coupon_id",
-        "user_count"
-      ].forEach(e => {
-        urlParams[e] = getQueryVariable(e);
-      });
-      this.courseInfo = courseInfo;
-      this.urlParams = urlParams;
-      if (!this.courseInfo.user_count) {
-        this.courseInfo.user_count = this.urlParams.user_count;
-      }
+    this.axios.defaults.headers.common["token"] = this.token;
+    this.axios.defaults.headers.common["uid"] = this.uid;
 
-      // this.axios.defaults.headers.common["token"] = this.urlParams.token;
-      // this.axios.defaults.headers.common["uid"] = this.urlParams.uid;
-    } else {
-      this.courseInfo = JSON.parse(localStorage.getItem("courseInfo"));
-      this.urlParams = JSON.parse(localStorage.getItem("urlParams"));
-      if (!this.courseInfo.user_count) {
-        this.courseInfo.user_count = this.urlParams.user_count;
-      }
-    }
+    this.getGoodsInfo();
+    this.getHbConfig(this.goods_id);
     this.getCoupons();
     this.getIp();
+  },
+  mounted() {
+    this.initCss();
+
     this.downKeyBord();
   },
   methods: {
+    getGoodsInfo() {
+      this.loadingShow = true;
+      this.axios
+        .get(
+          `http://58.87.125.111:55555/v1/goods/detail?id=${getQueryVariable(
+            "goodsId"
+          )}`
+        )
+        .then(res => {
+          this.loadingShow = false;
+          this.courseInfo = res.data;
+
+          this.goods_img = this.courseInfo.good_img;
+          this.goods_name = decodeURI(this.courseInfo.name);
+          this.goods_user_count = this.courseInfo.user_count;
+          this.goods_price = this.courseInfo.price;
+        });
+    },
+    initCss() {
+      if (window.innerWidth > 600) {
+        document.documentElement.style.fontSize = (13 / 375) * 100 + "vw";
+      } else {
+        document.documentElement.style.fontSize = (16 / 375) * 100 + "vw";
+      }
+    },
     getQueryVariable: getQueryVariable,
     showHbPeriodFee(total, rate, num) {
-      let result = ((total * (1 + rate)) / num);
+      let result = (total * (1 + rate)) / num;
       //return Math.floor(result * 100) / 100
-      return result.toFixed(2) 
+      return result.toFixed(2);
     },
     showHbServiceFee(total, rate, num) {
-      let result = ((total * rate) / num);
+      let result = (total * rate) / num;
       //return Math.floor(result * 100) / 100
-      return result.toFixed(2) 
+      return result.toFixed(2);
     },
     showHbRate(num) {
-      let result =  (num * 100);
-      return Math.floor(result * 10) / 10
+      let result = num * 100;
+      return Math.floor(result * 10) / 10;
     },
     getHbConfig(id) {
-      //5e82dfe1521b200e2b476293
       this.axios
-        .get(`http://58.87.125.111:55555/v1/goods/ex_info/?id=${id}`,{
-          headers:{
-            uid:getQueryVariable('uid'),
-            token:getQueryVariable('token'),
+        .get(`http://58.87.125.111:55555/v1/goods/ex_info/?id=${id}`, {
+          headers: {
+            uid: this.uid,
+            token: this.token
           }
         })
         //.get(`http://192.168.2.75:55555/v1/goods/ex_info/?id=${id}`)
         .then(res => {
-          console.log('--getHbConfig-')
-          console.log(res)
           if (!res.error) {
             this.hbfqUseConfig.used_coupon = res.data.used_coupon;
             this.hbfqUseConfig.used_promo = res.data.used_promo;
@@ -495,6 +373,9 @@ export default {
             this.hideYhq = res.data.used_coupon === 1 ? false : true;
             this.hideJxj = res.data.used_promo === 1 ? false : true;
             this.hideHbfq = res.data.state === 1 ? false : true;
+            if(this.hideHbfq){
+              this.payMethod = 'zfbPay'
+            }
           }
         });
     },
@@ -535,7 +416,7 @@ export default {
       this.axios
         .get(
           `${this.host}/code_check?code=${this.bonusCode}&goods_id=${
-            this.urlParams.goodsId
+            this.goods_id
           }&type=1`
         )
         .then(res => {
@@ -547,7 +428,7 @@ export default {
         });
     },
     ifCoupons() {
-      var coupon_id = this.urlParams.coupon_id;
+      var coupon_id = this.coupon_id;
       if (coupon_id) {
         this.couponsArr.forEach((e, i) => {
           if (coupon_id === e._id) {
@@ -575,48 +456,38 @@ export default {
     },
     getCoupons() {
       this.loadingShow = true;
-      console.log(this.urlParams)
       this.axios
-        .get(
-          `${this.host}/web_buy_coupon?id=${
-            this.urlParams.goodsId
-          }&coupon_type=0`
-          ,{
-          headers:{
-            uid:getQueryVariable('uid'),
-            token:getQueryVariable('token'),
+        .get(`${this.host}/web_buy_coupon?id=${this.goods_id}&coupon_type=0`, {
+          headers: {
+            uid: this.uid,
+            token: this.token
           }
-        }
-        )
+        })
         .then(res => {
           this.loadingShow = false;
           this.couponsArr = res.data;
           this.ifCoupons();
-          //this.couponsArr.concat(JSON.parse(JSON.stringify(res.data)));
         });
     },
     getIp() {
       this.axios.get("http://ipinfo.io").then(res => {
-        console.log("---ip---");
         this.ipInfo = res;
-        console.log(res);
-        console.log("---ip---");
       });
     },
     createOrder() {
       var params = {
         bundle_id: "com.immusician.musiclass",
-        phone: this.urlParams.phone,
+        phone: this.phone,
         goods: "",
-        address: decodeURI(this.urlParams.address),
+        address: this.address,
         promo: "", //奖学金
         coupon_id: "", //优惠券ID
         channel: "", //支付方式
         message: "", //备注信息
         client_ip: this.ipInfo ? this.ipInfo.ip : "暂未获取到", //ip
-        share_channel: this.urlParams.share_channel, //合作厂商
+        share_channel: this.share_channel, //合作厂商
         platform: testPlat(),
-        instrument_type: this.courseInfo.instrument_type
+        instrument_type: this.instrument_type
       };
 
       if (
@@ -662,7 +533,7 @@ export default {
           return;
         }
       }
-      params.goods = `${this.urlParams.goodsId},课程,1`;
+      params.goods = `${this.goods_id},课程,1`;
       console.log(params);
       //return;
       var that = this;
@@ -682,9 +553,9 @@ export default {
             getQueryVariable("qr_mode") == 1) &&
           that.payMethod == "wxPay"
         ) {
-          that.paySuccessMsg = `0-${res.data.amount}-${
-            res.data.channel
-          }-${getQueryVariable("goodsId")}-1`;
+          that.paySuccessMsg = `0-${res.data.amount}-${res.data.channel}-${
+            this.goods_id
+          }-1`;
           QRCode.toDataURL(res.data.credential.wx_pub_qr, {
             margin: 1,
             width: 120
@@ -705,20 +576,23 @@ export default {
         }
       });
     },
-    countHbfqMaskShow(){
+    countHbfqMaskShow() {
       this.axios
-        .get(`http://58.87.125.111:55555/v1/payment/clicked/?goods_id=${getQueryVariable('goodsId')}&uid=${getQueryVariable('uid')}`)
+        .get(
+          `http://58.87.125.111:55555/v1/payment/clicked/?goods_id=${
+            this.goods_id
+          }&uid=${this.uid}`
+        )
         .then(res => {
           if (!res.error) {
-          
           }
         });
     }
   },
-  watch:{
-    hbfqMaskShow(){
-      if(this.hbfqMaskShow){
-        this.countHbfqMaskShow()
+  watch: {
+    hbfqMaskShow() {
+      if (this.hbfqMaskShow) {
+        this.countHbfqMaskShow();
       }
     }
   }
@@ -804,9 +678,11 @@ export default {
   .left {
     flex-grow: 0;
     margin-right: 32px;
+    width: 160px;
+    height: 160px;
     img {
-      width: 160px;
-      height: 160px;
+      width: 100%;
+      height: 100%;
       border-radius: 12px;
     }
   }
@@ -967,10 +843,10 @@ export default {
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(238, 238, 238, 1);
-    .icon_multi{
+    .icon_multi {
       //display: inline-block;
       position: relative;
-      top:-2px;
+      top: -2px;
       //margin-bottom: 2px;
     }
     .money {

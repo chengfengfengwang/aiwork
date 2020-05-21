@@ -103,14 +103,14 @@
               <Input v-model.number="formValidate.value" placeholder="请输入开课天数"></Input>
             </FormItem>
           </div>
-          <FormItem label="短信模版">
+          <!-- <FormItem label="短信模版">
             <Select filterable v-model="formValidate.sms_id" placeholder>
               <Option v-for="sms in smsList" :value="sms.template_id" :key="sms.template_id">{{sms.content}}</Option>
             </Select>
           </FormItem>
           <FormItem label="短信内容">
             <Input type="textarea" :rows="4"  v-model="formValidate.sms_word" placeholder="请输入短信内容"></Input>
-          </FormItem>
+          </FormItem> -->
           <FormItem label="备注">
             <Input v-model="formValidate.note" placeholder="请输入备注"></Input>
           </FormItem>

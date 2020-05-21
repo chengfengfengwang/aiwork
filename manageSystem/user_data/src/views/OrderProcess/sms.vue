@@ -10,7 +10,7 @@
         >{{status.name}}</Option>
       </Select>
       <Button type="primary" @click="getTableList">搜索</Button>
-      <Button type="success" @click="createNew">新建</Button>
+      <!-- <Button type="success" @click="createNew">新建</Button> -->
     </div>
 
     <Table :loading="tableLoading" border :columns="columns" :data="dataList"></Table>

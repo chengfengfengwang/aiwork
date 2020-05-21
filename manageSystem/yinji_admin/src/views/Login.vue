@@ -152,18 +152,29 @@ export default {
           this.axios.defaults.headers.common["token"] = res.data.token;
           this.axios.defaults.headers.common["uid"] = res.data.uid;
           this.$Message.success("Success!");
-          if (process.env.APP_NAME === "org") {
-            this.$router.push("/AnotherQuestionBank/QuestionBanks");
-            console.log("org app");
-            return;
+          let menus0 = res.data.menus[0];
+          if(menus0.link){
+            this.$router.push(menus0.link); 
+          }else{
+            this.$router.push(menus0.children[0].link); 
           }
-          if (res.data.username === "珊珊老师") {
-            this.$router.push("/GameBankTest/GameConfigTest");
-          } else if (res.data.nickname === "徐老师") {
-            this.$router.push("/ActiveCodeAndCard/Create");
-          } else {
-            this.$router.push("/");
-          }
+
+
+
+          // if (process.env.APP_NAME === "org") {
+          //   this.$router.push("/AnotherQuestionBank/QuestionBanks");
+          //   return;
+          // }
+          // if (res.data.username === "珊珊老师") {
+          //   this.$router.push("/GameBankTest/GameConfigTest");
+          // } else if (res.data.nickname === "徐老师") {
+          //   this.$router.push("/ActiveCodeAndCard/Create");
+          // } else if (res.data.username === "admin"){
+          //   this.$router.push("/"); 
+          // }else{
+          //   let url = res.data.menus[0].link
+          //   this.$router.push("/"); 
+          // }
         })
         .catch(err => {
           this.$Message.error("登录失败!");

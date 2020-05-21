@@ -108,6 +108,48 @@
         <Button @click="downloadModalShow=false">关闭</Button>
       </div>
     </Modal>
+    <Modal v-model="smsModalShow" width="760" :mask-closable="false">
+      <p slot="header" style>
+        <span>短信编辑</span>
+      </p>
+      <div>
+        <Form :label-width="100">
+          <FormItem label="短信内容">
+            <Input type="textarea" :rows="4" v-model="smsContent"></Input>
+            <div>提示：点击提交进入短信审核</div>
+          </FormItem>
+          
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button @click="smsModalSubmit" type="primary">提交审核</Button>
+        <Button @click="smsModalShow=false">关闭</Button>
+      </div>
+    </Modal>
+    <Modal v-model="smsFileModalShow" width="760" :mask-closable="false">
+      <p slot="header" style>
+        <span>批量发送短信</span>
+      </p>
+      <div>
+        <Form :label-width="100">
+          <FormItem label="上传文件">
+            <Upload
+              accept="*"
+              :before-upload="beforeUpload"
+              :max-size="1024"
+              action="//jsonplaceholder.typicode.com/posts/"
+            >
+              <Button icon="ios-cloud-upload-outline">上传文件</Button>
+            </Upload>
+            <div>{{fileName}}</div>
+          </FormItem>
+        </Form>
+      </div>
+      <div slot="footer">
+        <Button @click="smsFileModalSubmit" type="primary">确定</Button>
+        <Button @click="smsFileModalShow=false">关闭</Button>
+      </div>
+    </Modal>
     <Modal v-model="childGoodsModalShow" width="760" :mask-closable="false">
       <p slot="header" style>
         <span>音乐壳课程</span>
@@ -132,6 +174,10 @@ export default {
         {
           title: "名称",
           key: "show_name"
+        },
+        {
+          title: "短信状态",
+          key: "state"
         },
         // {
         //   title: "联系人",
@@ -209,6 +255,45 @@ export default {
                 "Button",
                 {
                   props: {
+                    type: "success",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.smsModalShow = true;
+                      this.skuId = params.row.id;
+                      this.smsContent = params.row.content;
+                    }
+                  }
+                },
+                "短信"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "success",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.smsFileModalShow = true;
+                      this.smsId = params.row.sms_id;
+                    }
+                  }
+                },
+                "发送短信"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
                     type: "error",
                     size: "small"
                   },
@@ -246,9 +331,13 @@ export default {
       pageSize: 100,
       total: 0,
       downloadModalShow: false,
+      smsModalShow: false,
+      smsFileModalShow: false,
       startTime1: "",
       endTime1: "",
-      searchKey:""
+      searchKey: "",
+      smsContent: "",
+      fileName:''
     };
   },
   components: {
@@ -259,6 +348,38 @@ export default {
     //this.getChannelList();
   },
   methods: {
+    beforeUpload(file) {
+      this.fileName = file.name;
+      this.file = file;
+      return false;
+    },
+    smsModalSubmit() {
+      const formObj = {
+        content: this.smsContent,
+        goods_id: this.skuId
+      };
+      this.axios.post(`${process.env.WULIU}/sms/create`, formObj).then(res => {
+        if (!res.error) {
+          this.smsModalShow = false;
+        }
+      });
+    },
+    smsFileModalSubmit() {
+      var formdata = new FormData();
+      formdata.append("file", this.file);
+      formdata.append("template_id", this.smsId);
+      this.axios
+        .post(`${process.env.WULIU}/sms/upload_form`, formdata, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res => {
+          if (!res.error) {
+            this.smsFileModalShow = false;
+          }
+        });
+    },
     downloadModalSubmit() {
       const formObj = {
         start_time: this.startTime1.valueOf() / 1000,
@@ -391,8 +512,8 @@ export default {
         }
       }
     },
-    searchKey(){
-      this.getTableList()
+    searchKey() {
+      this.getTableList();
     }
   }
 };
