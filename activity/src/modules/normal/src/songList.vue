@@ -358,6 +358,7 @@ header h2 {
     right: 0.18rem;
   }
   .right {
+    display: none;
     height: 2rem;
     width: 28%;
     background-size: 54%;
