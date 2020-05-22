@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import { getQueryVariable } from "common/util.js";
 import $ from "jquery";
 import { close } from "fs";
 export default {
@@ -25,12 +26,12 @@ export default {
     };
   },
   created() {
-    this.getAudioList();
+    this.getAudioList(getQueryVariable('listId'));
   },
   mounted() {},
   methods: {
-    getAudioList() {
-      this.axios.get(`http://api.yinji.immusician.com/v1/song/3/`).then(res => {
+    getAudioList(id) {
+      this.axios.get(`http://api.yinji.immusician.com/v1/song/${id}/`).then(res => {
         if (!res.error) {
           this.dicArr = res.data.songs;
           this.title = res.data.title;

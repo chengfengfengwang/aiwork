@@ -14,10 +14,13 @@
       alt
       class="pause"
     >
+    <radioDialog />
   </div>
 </template>
 <script>
 import { getQueryVariable } from "common/util.js";
+import radioDialog from "components/radioDialog";
+
 export default {
   name:'play',
   data() {
@@ -27,6 +30,9 @@ export default {
       status: "pause",
       title:''
     };
+  },
+  components:{
+    radioDialog
   },
   created() {
     this.title = decodeURIComponent(getQueryVariable("title"));

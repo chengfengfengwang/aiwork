@@ -8,7 +8,7 @@
         <div class="section_title">
           <img :src="section.title" alt>
         </div>
-        <div class="item" v-for="(item,idx) in section.song_list" :key="idx">
+        <div @click="goSongList(item.id)" class="item" v-for="(item,idx) in section.song_list" :key="idx">
           <div class="cover">
             <img :src="item.cover" alt="">
           </div>
@@ -35,6 +35,9 @@ export default {
     this.getDataList();
   },
   methods: {
+    goSongList(id){
+      location.href = `normal.html?listId=${id}#/songList`
+    },
     getDataList() {
       this.axios
         .get(`http://api.yinji.immusician.com/v1/song/home?activity=h5`)
