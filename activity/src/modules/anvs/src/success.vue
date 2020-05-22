@@ -8,16 +8,18 @@
       <div class="btn btn1" v-show="status=='vip' && need_instrument" @click="toInstrument">去兑换乐器</div>
       <div @click="toLearn" class="btn btn2">去学习</div>
       <div v-show="status=='vip'" class="qr_group">
-        <div  class="qr_box"><img src="../../../assets/img/anvs/qr_group.jpg" alt class="qr"></div>
+        <div class="qr_box">
+          <img src="../../../assets/img/anvs/qr_group.jpg" alt class="qr">
+        </div>
         <br>
         <img src="../../../assets/img/anvs/group_tip.png" alt class="qr_tip">
       </div>
-      <a
+      <!-- <a
         class="express"
         href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxMTA1ODIwMQ==&scene=124#wechat_redirect"
-      >查看物流信息</a>
+      >查看物流信息</a>-->
       <img src="../../../assets/img/success/cloud.png" alt class="cloud">
-      <img src="../../../assets/img/success/bottom.png" alt class="bottom">
+      <!-- <img src="../../../assets/img/success/bottom.png" alt class="bottom"> -->
     </div>
   </div>
 </template>
@@ -28,7 +30,7 @@ export default {
     return {
       need_instrument: false,
       need_vip: false,
-      successText:'恭喜您已兑换成功'
+      successText: "恭喜您已兑换成功"
     };
   },
   created() {
@@ -36,21 +38,24 @@ export default {
       sessionStorage.getItem("need_instrument") === "true" ? true : false;
     this.need_vip =
       sessionStorage.getItem("need_vip") === "true" ? true : false;
-      if(this.status=='instrument'){
-        document.title='兑换成功';
-        this.successText = '恭喜您已兑换成功'
-      }else if(this.status=='vip'){
-        document.title='激活成功';
-        this.successText = '恭喜您已激活成功'
-      }
-      
+    if (this.status == "instrument") {
+      document.title = "兑换成功";
+      this.successText = "恭喜您已兑换成功";
+    } else if (this.status == "vip") {
+      document.title = "激活成功";
+      this.successText = "恭喜您已激活成功";
+    }
   },
   methods: {
-    toVip(){
-      location.href = `${location.origin}${location.pathname}?status=vip#/active`;
+    toVip() {
+      location.href = `${location.origin}${
+        location.pathname
+      }?status=vip#/active`;
     },
-    toInstrument(){
-      location.href = `${location.origin}${location.pathname}?status=instrument#/active`;
+    toInstrument() {
+      location.href = `${location.origin}${
+        location.pathname
+      }?status=instrument#/active`;
     },
     toLearn() {
       this.$router.push("/download");
@@ -62,10 +67,15 @@ export default {
 #success {
   overflow: hidden;
   min-height: 100vh;
+
+  background: url("../../../assets/img/success/bottom.png") no-repeat left
+      bottom/100%,
+    100%;
   background-color: #ffcb3e;
   .main {
     margin-top: 100px;
     text-align: center;
+
     .success_icon {
       width: 88px;
       margin-bottom: 26px;
@@ -108,19 +118,19 @@ export default {
       bottom: 0px;
       width: 100%;
     }
-    .qr_group{
+    .qr_group {
       text-align: center;
-      .qr_box{
+      .qr_box {
         display: inline-block;
         background-color: #fff;
         margin: 30px auto 8px auto;
         padding: 4px 4px 2px 4px;
         border-radius: 3px;
       }
-      .qr{
+      .qr {
         width: 100px;
       }
-      .qr_tip{
+      .qr_tip {
         width: 100px;
       }
     }
