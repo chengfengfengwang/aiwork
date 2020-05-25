@@ -19,7 +19,7 @@
       <Button type="info" @click="reset">重置</Button>
     </div>
     <Table :loading="tableLoading" border :columns="columns" :data="dataList"></Table>
-    <!-- <div style="margin-top:10px">
+    <div style="margin-top:10px">
       <Page
         @on-page-size-change="pageSizeChange"
         @on-change="pageChange"
@@ -29,7 +29,7 @@
         :page-size-opts="[5,10,15,20,30,40]"
         show-elevator
       />
-    </div> -->
+    </div>
     <Modal v-model="modalShow" width="760">
       <p slot="header" style>
         <span>题库</span>
@@ -212,7 +212,7 @@ export default {
       ],
       dataList: [],
       page: 0,
-      pageSize: 10000,
+      pageSize: 10,
       total: 0,
       modalStatus: "",
       bankList: [],
