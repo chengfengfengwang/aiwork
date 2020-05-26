@@ -32,6 +32,7 @@ export default {
     Download
   },
   created() {
+    document.title = 'coco音乐电台';
     this.getDataList();
   },
   methods: {

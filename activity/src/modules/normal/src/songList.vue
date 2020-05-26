@@ -35,6 +35,7 @@ export default {
         if (!res.error) {
           this.dicArr = res.data.songs;
           this.title = res.data.title;
+          this.playBg = res.data.h5_bg?res.data.h5_bg:'';
           document.title = res.data.title;
           this.renderItem()
         }
@@ -101,7 +102,8 @@ export default {
           for (var i = 0; i < that.dicArr.length; i++) {
             var item = that.dicArr[i];
             //var url = baseUrl + encodeURI(name);
-            html += "<li><p>" + (i + 1) + ". " + item.title + "</p></li>";
+            //html += "<li><p>" + (i + 1) + ". " + item.title + "</p></li>";
+            html += "<li><p>"  + item.title + "</p></li>";
           }
           $(".list ul").html(html);
         }
@@ -134,7 +136,7 @@ export default {
           var curItem =  that.dicArr[index];
           var title = encodeURIComponent(curItem.title) ;
           var url = encodeURIComponent(curItem.url) ;
-          location.href = `normal.html?title=${title}&url=${url}#/play`;
+          location.href = `normal.html?title=${title}&url=${url}&playBg=${encodeURIComponent(that.playBg)}#/play`;
           return;
 
           var p = $(this).find("p");

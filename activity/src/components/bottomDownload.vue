@@ -52,6 +52,7 @@ export default {
   position: fixed;
   z-index: 999;
   width: 93%;
+  width: 100%;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);

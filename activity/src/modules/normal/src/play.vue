@@ -1,5 +1,8 @@
 <template>
-  <div id="instrumentWrapper">
+  <div
+    id="instrumentWrapper"
+    :style="{background: 'url(' + playBg + ') no-repeat center top/cover'}"
+  >
     <img
       v-show="status=='pause'"
       @click="play"
@@ -14,7 +17,7 @@
       alt
       class="pause"
     >
-    <radioDialog />
+    <radioDialog v-show="popShow"/>
   </div>
 </template>
 <script>
@@ -22,22 +25,41 @@ import { getQueryVariable } from "common/util.js";
 import radioDialog from "components/radioDialog";
 
 export default {
-  name:'play',
+  name: "play",
   data() {
     return {
       audioIndex: "",
       src: "",
+      playBg: "",
       status: "pause",
-      title:''
+      title: "",
+      popShow: false
     };
   },
-  components:{
+  computed: {
+    // bgStyle(){
+    //   let bg = 'url("'+ require(this.playBg) +'") no-repeat center top/cover'
+    //   return{
+    //     //../../../assets/img/songList/bg.jpeg
+    //     background: bg
+    //   }
+    // }
+  },
+  components: {
     radioDialog
   },
   created() {
     this.title = decodeURIComponent(getQueryVariable("title"));
     this.src = decodeURIComponent(getQueryVariable("url"));
-    document.title = this.title; 
+
+    let playBg = decodeURIComponent(getQueryVariable("playBg"));
+    if (playBg) {
+      this.playBg = playBg;
+    } else {
+      this.playBg = require("../../../assets/img/songList/bg.jpeg");
+    }
+    console.log(this.playBg);
+    document.title = this.title;
     this.audio = new Audio();
     this.audio.src = this.src;
     this.audio.addEventListener(
@@ -47,6 +69,7 @@ export default {
       },
       false
     );
+    this.audio.addEventListener("timeupdate", this.audioTimer, false);
   },
   methods: {
     play() {
@@ -56,11 +79,21 @@ export default {
     pause() {
       this.status = "pause";
       this.audio.pause();
+    },
+    audioTimer() {
+      //监听音频播放的实时时间事件
+      let timeDisplay;
+      //用秒数来显示当前播放进度
+      timeDisplay = Math.floor(this.audio.currentTime); //获取实时时间
+      if (timeDisplay == 60) {
+        this.popShow = true;
+      }
     }
   },
-  beforeRouteLeave(to, from, next)  {
+  beforeRouteLeave(to, from, next) {
     this.audio.pause();
-    next()
+    this.audio.removeEventListener("timeupdate", this.audioTimer, false);
+    next();
   }
 };
 </script>
