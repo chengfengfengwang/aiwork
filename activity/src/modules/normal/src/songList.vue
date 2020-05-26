@@ -11,35 +11,59 @@
     </div>
     <div class="right"></div>
     <div class="playerContainer"></div>
+    <div class="download songlist" v-show="downloadShow" :style="{paddingBottom:isIphonex?'20px':'10px'}">
+      <div class="icon_area">
+        <img src="../../../assets/img/common/logo.png" alt>
+      </div>
+      <div class="download_main">
+        <div class="main_title">下载app,收听全部课程配套音乐</div>
+        <div class="sub_title">让孩子爱上音乐</div>
+      </div>
+      <div class="down_load_btn" id="downloadButton">立即下载</div>
+      <div class="close_icon" @click="closeDownload">
+        <img src="../../../assets/img/common/close.png" alt>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import { getQueryVariable } from "common/util.js";
+import { initShareInstall, getQueryVariable, isIphonex } from "common/util.js";
 import $ from "jquery";
 import { close } from "fs";
 export default {
   data() {
     return {
       from: "",
-      title:"",
-      dicArr: []
+      title: "",
+      dicArr: [],
+      downloadShow: true,
+      isIphonex: false
     };
   },
   created() {
-    this.getAudioList(getQueryVariable('listId'));
+    this.isIphonex = isIphonex();
+    this.getAudioList(getQueryVariable("listId"));
+    initShareInstall();
   },
+  components: {},
   mounted() {},
   methods: {
+    closeDownload() {
+      this.downloadShow = false;
+      sessionStorage.setItem("closedDownloadShow", "true");
+    },
     getAudioList(id) {
-      this.axios.get(`http://api.yinji.immusician.com/v1/song/${id}/`).then(res => {
-        if (!res.error) {
-          this.dicArr = res.data.songs;
-          this.title = res.data.title;
-          this.playBg = res.data.h5_bg?res.data.h5_bg:'';
-          document.title = res.data.title;
-          this.renderItem()
-        }
-      });
+      this.axios
+        .get(`http://api.yinji.immusician.com/v1/song/${id}/`)
+        .then(res => {
+          if (!res.error) {
+            this.dicArr = res.data.songs;
+            this.title = res.data.title;
+            this.playBg = res.data.h5_bg ? res.data.h5_bg : "";
+            document.title = res.data.title;
+            this.renderItem();
+          }
+        });
     },
     renderItem() {
       var that = this;
@@ -103,7 +127,7 @@ export default {
             var item = that.dicArr[i];
             //var url = baseUrl + encodeURI(name);
             //html += "<li><p>" + (i + 1) + ". " + item.title + "</p></li>";
-            html += "<li><p>"  + item.title + "</p></li>";
+            html += "<li><p>" + item.title + "</p></li>";
           }
           $(".list ul").html(html);
         }
@@ -133,10 +157,12 @@ export default {
         var domList = $(".list li");
         $(".list li").click(function(event) {
           var index = Array.prototype.indexOf.call(domList, this);
-          var curItem =  that.dicArr[index];
-          var title = encodeURIComponent(curItem.title) ;
-          var url = encodeURIComponent(curItem.url) ;
-          location.href = `normal.html?title=${title}&url=${url}&playBg=${encodeURIComponent(that.playBg)}#/play`;
+          var curItem = that.dicArr[index];
+          var title = encodeURIComponent(curItem.title);
+          var url = encodeURIComponent(curItem.url);
+          location.href = `normal.html?title=${title}&url=${url}&playBg=${encodeURIComponent(
+            that.playBg
+          )}#/play`;
           return;
 
           var p = $(this).find("p");
@@ -190,7 +216,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="less">
 * {
   margin: 0;
   padding: 0;
@@ -442,6 +468,72 @@ header h2 {
   }
   .right {
     position: fixed;
+  }
+}
+.download.songlist {
+  line-height: normal;
+  box-sizing: border-box;
+  font-size: 0.24rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(222, 222, 222, 0.75);
+  border-radius: .1rem;
+  padding: 0.2rem 0.3rem;
+  position: fixed;
+  z-index: 999;
+  width: 93%;
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  .icon_area {
+    //box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.07);
+    margin-right: .16rem;
+    border-radius: .12rem;
+    line-height: 0.8rem;
+    height: 0.8rem;
+    img {
+      width: 0.8rem;
+    }
+  }
+  .download_main {
+    flex: 1;
+    .main_title {
+      font-family: PingFangSC-Regular;
+      font-size: 0.24rem;
+      color: #333333;
+    }
+    .sub_title {
+      font-family: PingFangSC-Light;
+      font-size: 0.2rem;
+      color: #666666;
+      letter-spacing: 1.1px;
+    }
+  }
+  .down_load_btn {
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+    margin-top: -.3rem;
+    background: #ffaa06;
+    border-radius: .3rem;
+    width: 1.52rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 0.24rem;
+    color: #ffffff;
+  }
+  .close_icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: .06rem .1rem;
+    img {
+      width: .2rem;
+    }
   }
 }
 </style>

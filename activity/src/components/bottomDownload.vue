@@ -4,7 +4,7 @@
       <img src="../assets/img/common/logo.png" alt>
     </div>
     <div class="download_main">
-      <div class="main_title">下载音乐壳APP</div>
+      <div class="main_title">下载app,收听全部课程配套音乐</div>
       <div class="sub_title">让孩子爱上音乐</div>
     </div>
     <div class="down_load_btn" id="downloadButton">立即下载</div>
