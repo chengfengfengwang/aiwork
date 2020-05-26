@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>奖学金</title>
+  <meta name="apple-mobile-web-app-capable" />
+  <meta name="referrer" content="no-referrer" />
+  <link href="http://s.immusician.com/static/iTunesArtwork.png" rel="shortcut icon" type="image/x-icon">
+  <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+  <script type="text/javascript">
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+        dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+      docEl.dataset.dpr = dpr;
+      var recalc = function () {
+        var width = docEl.clientWidth;
+        if (width / dpr > 750) {
+          width = 750 * dpr;
+        }
+        docEl.dataset.width = width
+        docEl.dataset.percent = 100 * (width / 750);
+        docEl.style.fontSize = 100 * (width / 750) + 'px';
+      };
+      recalc()
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);
+  </script>
+  <meta name="format-detection" content="telephone=no" />
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      -webkit-user-select: text
+    }
+
+    a,
+    img {
+      -webkit-touch-callout: none
+    }
+
+    ol,
+    ul {
+      list-style: none
+    }
+
+    *,
+    :after,
+    :before {
+      -webkit-box-sizing: border-box;
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: transparent
+    }
+
+    body,
+    html {
+      font-family: 'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+      font-size: .35rem;
+      font-weight: 300;
+      line-height: .5rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-box-align: center;
+      height: 100%;
+    }
+
+    body {
+      width: 7.5rem;
+      background: #180d22;
+    }
+
+    img {
+      vertical-align: top;
+    }
+
+    header {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: .24rem;
+      font-weight: 400;
+      color: #333;
+      text-align: center;
+      height: .3rem;
+      line-height: .3rem;
+      margin-top: .12rem;
+    }
+
+    h2 {
+      font-weight: 400;
+      font-size: .24rem;
+      margin-top: .2rem;
+      color: white;
+      text-align: left;
+      width: 92%;
+    }
+
+    h2.center {
+      text-align: center;
+    }
+
+    .desc {
+      padding: .1rem .3rem;
+      color: rgba(255, 255, 255, .6);
+      font-size: .2rem;
+      line-height: .26rem;
+    }
+
+    .parters {
+      width: 96%;
+      padding: 0 2%;
+      height: auto;
+      overflow: hidden;
+    }
+
+    .parters a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      font-size: .18rem;
+      text-align: center;
+      width: 1.5rem;
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .parters a img {
+      width: 99%;
+    }
+
+    .introduction li p {
+      color: white;
+      font-size: .2rem;
+      padding: .24rem .3rem .1rem .3rem;
+      line-height: .34rem;
+    }
+
+    .introduction li img {
+      width: 65%;
+      margin-left: .3rem;
+    }
+
+    footer {
+      margin-top: .1rem;
+      font-size: .25rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .diduo {
+      border-radius: 6px
+    }
+  </style>
+  <style>
+    .parters>a {
+      display: none
+    }
+  </style>
+</head>
+
+<body ontouchstart="">
+  <h2>合作商家</h2>
+  <div class="parters">
+    <a class="ukulele" href="https://weiboyq.tmall.com"><img src="http://s.immusician.com/static/web/imgs/weibo@2x.png">
+      <p>威伯</p>
+    </a>
+    <a class="ukulele" href="https://andelu.tmall.com"><img src="http://s.immusician.com/static/web/imgs/andelu@2x.png">
+      <p>安德鲁</p>
+    </a>
+    <a class="ukulele" href="https://dodomiyueqi.tmall.com"><img src="http://s.immusician.com/static/web/imgs/DODOMIR.png">
+      <p>哆哆咪</p>
+    </a>
+    <a class="ukulele" href="https://enyayq.tmall.com"><img src="http://s.immusician.com/static/web/imgs/enya@2x.png">
+      <p>Enya</p>
+    </a>
+    <a class="ukulele" href="https://kakayq.tmall.com"><img src="http://s.immusician.com/static/web/imgs/kaka@2x.png">
+      <p>Kaka</p>
+    </a>
+    <a class="ukulele" href="https://mall.jd.com/index-1000085021.html"><img src="http://s.immusician.com/static/web/imgs/mosen.png">
+      <p>莫森</p>
+    </a>
+    <a class="ukulele" href="https://donner.tmall.com"><img style="border-radius:14px" src="https://s.immusician.com/static/web/imgs/tn.png">
+      <p>唐农</p>
+    </a>
+    <a class="ukulele" href="https://bwsest1988.tmall.com/?spm=a220o.1000855.1997427721.d4918089.2996369czHvjDx"><img
+        style="border-radius:14px" src="https://s.immusician.com/static/web/imgs/bws.png">
+      <p>毕维斯</p>
+    </a>
+    <a class="ukulele" href="https://xiaoshilife.m.taobao.com/"><img style="border-radius:14px" src="https://s.immusician.com/static/web/imgs/xsyc.png">
+      <p>小石原创</p>
+    </a>
+    <a class="ukulele" href="http://umaukulele.jd.com"><img style="border-radius:14px" src="https://s.immusician.com/static/web/imgs/uma.png">
+      <p>uma</p>
+    </a>
+    <a class="ukulele" href="https://caihongren.tmall.com/"><img style="border-radius:14px" src="https://s.immusician.com/static/web/imgs/chr.png">
+      <p>彩虹人</p>
+    </a>
+
+    <a class="guitar" href="https://heyayq.tmall.com/"><img src="http://s.immusician.com/static/web/imgs/heya.png">
+      <p>和雅</p>
+    </a>
+    <a class="guitar" href="https://shop.m.jd.com/?shopId=180305"><img src="http://s.immusician.com/static/web/imgs/0335.png?sdfasdfa">
+      <p>吉他虫</p>
+    </a>
+    <a class="guitar" href="https://detail.tmall.com/item.htm?spm=a1z10.3-b.w4011-2633017738.62.182367e3bB8oT0&amp;id=17257706689&amp;rn=c15752bc40055426d499e62e2cbb76d6&amp;abbucket=1"><img
+        src="http://s.immusician.com/static/web/imgs/buluke.png">
+      <p>布鲁克</p>
+    </a>
+    <a class="guitar" href="https://m.tb.cn/h.eRyCwSt?sm=f95fd2"><img src="http://s.immusician.com/static/web/imgs/dove.png">
+      <p>鸽子</p>
+    </a>
+    <a class="guitar" href="https://m.tb.cn/h.eRyy7n5?sm=c248c8"><img src="http://s.immusician.com/static/web/imgs/rex.png">
+      <p>雷克斯</p>
+    </a>
+    <a class="guitar" href="kepma.tmall.com"><img src="http://s.immusician.com/static/web/imgs/kama.png">
+      <p>卡玛</p>
+    </a>
+    <!-- <a class="guitar" href="https://dodomiyueqi.tmall.com"><img src="http://s.immusician.com/static/web/imgs/DODOMIR.png"><p>美音</p></a> -->
+
+    <a class="kalimba" href="https://andelu.tmall.com"><img src="http://s.immusician.com/static/web/imgs/andelu@2x.png">
+      <p>安德鲁</p>
+    </a>
+    <a class="kalimba" href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.3fe1687dbP7YfB&id=573104953419"><img
+        class="diduo" src="https://s.immusician.com/static/diduo.png">
+      <p>蒂朵</p>
+    </a>
+    <a class="kalimba" href="https://enyayq.tmall.com"><img src="http://s.immusician.com/static/web/imgs/enya@2x.png">
+      <p>Enya</p>
+    </a>
+    <a class="kalimba" href="https://detail.tmall.com/item.htm?id=566236763865"><img src="http://s.immusician.com/static/web/imgs/kxd.png">
+      <p>卡西达</p>
+    </a>
+    <a class="kalimba" href="https://gecko.tmall.com"><img style="border-radius:7px;" src="http://s.immusician.com/static/web/imgs/bihu_logo.png">
+      <p>壁虎</p>
+    </a>
+    <a class="kalimba" href="https://ruiqinyq.tmall.com/shop/view_shop.htm?spm=a220o.1000855.w5001-21532737789.3.75d5168fowQSFl&scene=taobao_shop"><img
+      src="https://s.immusician.com/static/web/imgs/rq.png">
+      <p>蕊琴</p> 
+    </a>
+    <a class="djembe" href="https://detail.tmall.com/item.htm?id=539440223545&scm=1007.13982.82927.0&last_time=1564484782"><img
+        src="http://s.immusician.com/static/web/imgs/jmyq.png">
+      <p>佳慕乐器</p>
+    </a>
+    <a class="djembe" href="https://longshengyq.tmall.com/?spm=a220o.1000855.w5001-16640625408.4.14794beell9y3z&scene=taobao_shop"><img
+        src="http://s.immusician.com/static/web/imgs/lsyq.png">
+      <p>龙圣乐器</p> 
+    </a>
+    <a class="piano" href="https://mall.jd.com/index-1000004782.html"><img src="http://s.immusician.com/static/web/imgs/kxo.png">
+      <p>卡西欧</p>
+    </a>
+    <a class="piano" href="https://kawayi.tmall.com"><img src="http://s.immusician.com/static/web/imgs/kwy.png">
+      <p>卡哇伊</p>
+    </a>
+    <a class="piano" href="https://enyayq.tmall.com"><img src="http://s.immusician.com/static/web/imgs/enya@2x.png">
+      <p>Enya</p>
+    </a>
+    <a class="piano" href="https://andelu.tmall.com"><img src="http://s.immusician.com/static/web/imgs/andelu@2x.png">
+      <p>安德鲁</p>
+    </a>
+    <a class="piano" href="https://wenxiyq.tmall.com/shop/view_shop.htm?spm=687.8433302/new.20001.1.296f226a0STb8G&mytmenu=mdianpu&utkn=g%2C47sm55oa23dppv5i2ovll2q1565339950771&user_number_id=2284484912&scm=1028.1.2.20001"><img
+        src="http://s.immusician.com/static/web/imgs/mfyq.png">
+      <p>玟熙乐器</p>
+    </a>
+    <a class="guzheng" href="https://runyang.tmall.com/shop/view_shop.htm"><img style="background:#fff"
+      src="https://s.immusician.com/runyang.png">
+    <p>润扬</p>
+  </a>
+  </div>
+  <ul class="introduction">
+    <li>
+      <p>商务合作：阿财老师:15210446944 微信同号</p>
+    </li>
+  </ul>
+  <footer>&copy;2018 immusician.com</footer>
+</body>
+<script>
+  function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] == variable) { return pair[1]; }
+    }
+    return '';
+  }
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d7900abe595736cd5e3c5d2a6db7ef3f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+
+  var instrument = getQueryVariable('instrument');
+  if (instrument) {
+    var selector = '.' + instrument;
+    console.log(selector)
+    document.querySelectorAll(selector).forEach(e => {
+      e.style.display = "inline-block";
+    })
+  }else{
+    document.querySelectorAll('.guitar').forEach(e => {
+      e.style.display = "inline-block";
+    })
+  }
+
+    // document.querySelectorAll('.piano').forEach(e => {
+    //   e.style.display = "inline-block";
+    // })
+    // document.querySelectorAll('.djembe').forEach(e=>{
+    //   e.style.display = "inline-block";
+    // }) 
+    // document.querySelectorAll('.kalimba').forEach(e=>{
+    //   e.style.display = "inline-block";
+    // }) 
+    // document.querySelectorAll('.guitar').forEach(e=>{
+    //   e.style.display = "inline-block";
+    // }) 
+    // document.querySelectorAll('.ukulele').forEach(e=>{
+    //   e.style.display = "inline-block";
+    // })
+</script>
+
+</html>
