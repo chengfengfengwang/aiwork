@@ -9,7 +9,11 @@
         style="width: 200px"
         @on-change="timeSelectChange"
       ></DatePicker>-->
-      <Button type="primary" @click="createNew" style="margin-right:30px">新建</Button>
+      <Select v-model="searchType" style="width:200px">
+        <Option v-for="item in typeList" :value="item.key" :key="item.key">{{ item.title }}</Option>
+      </Select>
+      <Button type="primary" @click="getAlbumList" style="margin-right:10px">查询</Button>
+      <Button type="success" @click="createNew" style="margin-right:30px">新建</Button>
     </div>
 
     <Table
@@ -48,6 +52,9 @@
           </FormItem>
           <FormItem label="专辑名称">
             <Input v-model="formValue.title"></Input>
+          </FormItem>
+          <FormItem label="排序">
+            <Input v-model="formValue.sort"></Input>
           </FormItem>
         </Form>
       </div>
@@ -104,6 +111,10 @@ export default {
           }
         },
         {
+          title: "排序",
+          key: "sort"
+        },
+        {
           title: " ",
           key: "action",
           minWidth: 50,
@@ -149,6 +160,7 @@ export default {
                       this.formValue.cover = params.row.cover;
                       this.formValue.h5_bg = params.row.h5_bg;
                       this.formValue.list_type = params.row.list_type;
+                      this.formValue.sort = params.row.sort;
                       //song_id  title  url
 
                       this.modalStatus = "edit";
@@ -199,7 +211,8 @@ export default {
       tableData: [],
       expressState: "",
       typeList: [],
-      formValue: {}
+      formValue: {},
+      searchType:-1
     };
   },
   components: {
@@ -256,6 +269,7 @@ export default {
         title: this.formValue.title,
         cover: this.formValue.cover,
         h5_bg:this.formValue.h5_bg,
+        sort:this.formValue.sort,
       };
       this.axios
         .post(
@@ -283,7 +297,7 @@ export default {
     },
     getAlbumList() {
       this.tableLoading = true;
-      this.axios.get(`http://api.yinji.immusician.com/v1/song/`).then(res => {
+      this.axios.get(`http://api.yinji.immusician.com/v1/song/?list_type=${this.searchType}`).then(res => {
         //return
         this.tableLoading = false;
         console.log(res.data);
