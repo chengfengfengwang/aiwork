@@ -7,7 +7,7 @@ function resolve (dir) {
 }
 module.exports = {
     devServer: {
-        port: 5557,     // 端口
+        port: 6660,     // 端口
     },
     css: {
         loaderOptions: {
