@@ -27,7 +27,7 @@ export default {
       vCode: "",
       form: {
         phone: "",
-        code: ""
+        code: "",
       },
       btnDisable:true,
       qr:''
@@ -75,7 +75,7 @@ export default {
       //sessionStorage.setItem('loginPhone',this.form.phone);
       if(this.btnDisable) return;
       this.axios
-        .get(`http://58.87.125.111:55555/v1/user/login/?phone=${this.form.phone}&code=${this.form.code}`)
+        .get(`http://58.87.125.111:55555/v1/user/login/?phone=${this.form.phone}&code=${this.form.code}&not_need_chk=1`)
         .then(res => {
           if(!res.error){
             let data = res.data;
