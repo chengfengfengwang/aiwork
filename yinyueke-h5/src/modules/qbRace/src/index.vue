@@ -6,7 +6,7 @@
     <img src="../../../assets/img/qbRace/1.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/2.jpg" alt class="bg" />
     <img src="../../../assets/img/qbRace/3.jpg" alt class="bg" />
-    <img src="../../../assets/img/qbRace/4.jpg" alt class="bg" />
+    <!-- <img src="../../../assets/img/qbRace/4.jpg" alt class="bg" /> -->
   </div>
 </template>
 <script>
@@ -88,7 +88,7 @@ export default {
   position: absolute;
   width: 100%;
   text-align: center;
-  top: 18.97%;
+  top: 20.3%;
   left: 0;
   //left: 30%;
   font-size: 13px;
@@ -99,7 +99,7 @@ export default {
 .enbtn {
   position: absolute;
   width: 222px;
-  top: 16.1%;
+  top: 17.6%;
   left: 50%;
   transform: translateX(-50%);
 }
