@@ -418,6 +418,21 @@ const openvip = [
     link: "/OpenVip"
   }
 ]
+const jiaoyan = 
+[
+    {
+    hasChild: false,
+    name: "AlbumList",
+    text: "歌单",
+    link: "/AlbumList"
+  },
+  {
+    hasChild: false,
+    name: "Book415",
+    text: "快递信息",
+    link: "/Book415"
+  }
+]
 export default {
   data() {
     return {

@@ -55,6 +55,12 @@ import ShareConfig from './../views/ShareConfig.vue';
 import AppHomeConfig from './../views/AppHomeConfig.vue';
 import Config from './../views/Config.vue';
 
+//书籍发货
+import Book415 from './../views/book415.vue';
+//歌单配置
+import AlbumList from './../views/SongList/AlbumList.vue';
+import AudioList from './../views/SongList/AudioList.vue';
+
 //工具
 import Upload from './../views/Tools/Upload.vue';
 import UploadList from './../views/Tools/UploadList.vue';
@@ -288,6 +294,21 @@ const router = new Router({
           name: 'OpenVip',
           path: '/OpenVip',
           component: OpenVip
+        }, 
+         {
+          name: 'Book415',
+          path: '/Book415',
+          component: Book415
+        }, 
+        {
+          name: 'AlbumList',
+          path: '/AlbumList',
+          component: AlbumList
+        }, 
+        {
+          name: 'AudioList',
+          path: '/AudioList',
+          component: AudioList
         },
       ]
     },
