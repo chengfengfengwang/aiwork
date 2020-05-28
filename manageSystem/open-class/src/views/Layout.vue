@@ -38,12 +38,12 @@
               <router-link to="/">
                 <MenuItem name="OpenClassYinji">音基课程开通</MenuItem> 
               </router-link>
-              <router-link to="/book415">
+              <!-- <router-link to="/book415">
                 <MenuItem name="book415">赠书发货信息</MenuItem> 
               </router-link>
               <router-link to="/AlbumList">
                 <MenuItem name="AlbumList">歌单</MenuItem> 
-              </router-link>
+              </router-link> -->
               <!-- <router-link to="/OpenVip">
                 <MenuItem name="OpenVip">vip开通</MenuItem> 
               </router-link> -->
