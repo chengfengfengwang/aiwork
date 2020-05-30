@@ -12,7 +12,8 @@ export default {
   },
   components: {},
   created() {
-  
+    document.title = '求谱';
+    console.log('zz')
   },
   methods: {
     toggleLoading(status) {

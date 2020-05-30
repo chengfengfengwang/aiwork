@@ -17,7 +17,6 @@ export default {
     return {}
   },
   created(){
-    document.title='入群领取礼包'
   },
   components: {
     
