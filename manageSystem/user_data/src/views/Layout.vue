@@ -216,6 +216,12 @@ const myMenus = [
     name: "sms",
     text: "短信",
     link: "/sms"
+  },
+  {
+    hasChild: false,
+    name: "book415",
+    text: "活动快递",
+    link: "/book415"
   }
 ];
 export default {

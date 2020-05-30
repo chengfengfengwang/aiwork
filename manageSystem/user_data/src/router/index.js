@@ -37,6 +37,8 @@ import ResetAccount from './../views/OrderProcess/ResetAccount.vue'
 //夏令营活动
 import SumerCamp from './../views/SumerCamp.vue'
 import downloadChannels from './../views/OrderProcess/downloadChannels.vue'
+//快递
+import Book415 from './../views/Book415.vue'
 
 import Test from './../views/Test.vue';
 
@@ -203,6 +205,11 @@ const router = new Router({
           name: 'sms',
           path: '/sms',
           component: sms
+        },
+        {
+          name: 'Book415',
+          path: '/Book415',
+          component: Book415
         }
       ]
     },
