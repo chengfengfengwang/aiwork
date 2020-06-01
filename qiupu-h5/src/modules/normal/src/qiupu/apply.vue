@@ -4,42 +4,77 @@
     <div class="form_wrapper">
       <div class="input_wrapper">
         <div class="label">曲谱名</div>
-        <input type="text">
+        <input placeholder="请输入曲名" v-model="formValue.name" type="text">
       </div>
       <div class="input_wrapper">
         <div class="label">作者</div>
-        <input type="text">
+        <input placeholder="请输入作者名称" v-model="formValue.author" type="text">
       </div>
 
       <div class="input_wrapper course_option">
         <div class="label">曲谱类型</div>
-        <select required v-model="selInstrument">
-          <option value disabled selected>选择课程品类</option>
-          <option v-for="course in instrumentList" :key="course" :value="course">{{course}}</option>
+        <select required v-model.number="formValue.instrument_type">
+          <option value disabled selected>选择曲谱类型</option>
+          <option v-for="(value, name) in instrumentList" :key="name" :value="name">{{value}}</option>
         </select>
       </div>
       <div class="input_wrapper">
         <div class="label">试听链接</div>
-        <input type="text">
+        <input placeholder="请输入链接" v-model="formValue.audition_url" type="text">
       </div>
-      <div class="btn">发布</div>
+      <div class="btn" @click="submit">发布</div>
     </div>
   </div>
 </template>
 <script>
-import Nav from './../../../../components/Nav'
+import Nav from "./../../../../components/Nav";
 export default {
   data() {
     return {
       menuIndex: 0,
       selInstrument: "吉他",
-      instrumentList: ["1", "2"]
+      instrumentList: {},
+      formValue: {
+        name: "",
+        author: "",
+        instrument_type: "",
+        audition_url: ""
+        //id:''
+      }
     };
   },
   created() {
+    if (process.env.NODE_ENV !== "production") {
+      this.formValue = {
+        name: "夜曲",
+        author: "周杰伦",
+        instrument_type: 0,
+        audition_url: "https://www.baidu.com"
+      };
+    }
+    this.getInstruments();
   },
   components: {
     Nav
+  },
+  methods: {
+    getInstruments() {
+      this.axios
+        .get(`http://192.168.2.129:8002/v1/instrument_type`)
+        .then(res => {
+          this.instrumentList = res.data;
+        });
+    },
+    submit() {
+      // console.log(this.formValue)
+      // return
+      //this.formValue.instrument_type = 0;
+      this.axios
+        .post(`http://192.168.2.129:8002/v1/request_score`, this.formValue)
+        .then(res => {
+          console.log(res);
+        });
+    }
   }
 };
 </script>
@@ -69,7 +104,7 @@ export default {
       line-height: 44px;
       color: rgba(51, 51, 51, 1);
     }
-    select{
+    select {
       flex-grow: 1;
     }
   }

@@ -30,7 +30,7 @@ axios.interceptors.response.use(function (response) {
   }, function (error) {
     if(error && error.response){
         if(error.response.status == 400){
-            Dialog.alert({message: error.response.data.message})
+            Dialog.alert({message: error.response.data.msg})
             //alert(error.response.data.message)
         } else{
             Dialog.alert({message: '请求出错，状态码' + error.response.status})

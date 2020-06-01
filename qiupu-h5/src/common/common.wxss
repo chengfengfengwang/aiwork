@@ -126,3 +126,10 @@ button {
 .text-decoration-lt {
   text-decoration: line-through;
 }
+input::placeholder,
+select:invalid {
+  font-size: 15px;
+  font-family: "PingFang-SC-Regular", "PingFang-SC";
+  font-weight: 400;
+  color: #999999;
+}

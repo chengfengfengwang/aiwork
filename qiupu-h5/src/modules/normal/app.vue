@@ -13,7 +13,8 @@ export default {
   components: {},
   created() {
     document.title = '求谱';
-    console.log('zz')
+    this.axios.defaults.headers.common['token'] = 'god';
+    this.axios.defaults.headers.common['uid'] = 2;
   },
   methods: {
     toggleLoading(status) {

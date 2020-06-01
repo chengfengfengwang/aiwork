@@ -3,18 +3,18 @@
     <Nav>求谱墙</Nav>
     <div class="content">
       <div class="list_wrapper">
-        <div class="list_item" v-for="n in 5" :key="n">
-          <div class="index">{{n}}</div>
+        <div class="list_item" v-for="(item,index) in list" :key="index">
+          <div class="index">{{index+1}}</div>
           <div class="qupu">
-            <div class="title">好想爱这个世界</div>
+            <div class="title">{{item.name}}</div>
             <div>
-              <span class="author">华晨宇</span>
-              <span class="type">吉他谱</span>
+              <span class="author">{{item.author}}</span>
+              <span class="type">{{item.instrument_type_msg}}</span>
             </div>
           </div>
-          <div class="num">230</div>
-          <div class="status">
-            已求
+          <div class="num">{{item.vote_score}}</div>
+          <div class="status" :class="{yiqiu:item.status_msg=='已求',tongqiu:item.status_msg=='同求',zhizuozhong:item.status_msg=='制作中'}">
+            {{item.status_msg}}
           </div>
         </div>
       </div>
@@ -27,12 +27,22 @@ import Nav from './../../../../components/Nav'
 export default {
   data() {
     return {
-      menuIndex: 0
+      menuIndex: 0,
+      list:[]
     };
   },
-  created() {},
+  created() {
+    this.getList()
+  },
   components: {
     Nav
+  },
+  methods:{
+    getList(){
+      this.axios.get(`http://192.168.2.129:8002/v1/request_scores?page=0&size=999`).then(res=>{
+        this.list = res.data.api_request_sheet_music_wall;
+      })
+    }
   }
 };
 </script>

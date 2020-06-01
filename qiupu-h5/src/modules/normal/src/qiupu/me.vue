@@ -1,10 +1,10 @@
 <template>
   <div id="main">
     <div class="menus">
-      <div class="menu_item" :class="{active:menuIndex==0}">待审核</div>
-      <div class="menu_item" :class="{active:menuIndex==1}">制谱中</div>
+      <div v-for="(value,name,index) in statusList" :key="index" class="menu_item" :class="{active:menuIndex==index}">{{value}}</div>
+      <!-- <div class="menu_item" :class="{active:menuIndex==1}">制谱中</div>
       <div class="menu_item" :class="{active:menuIndex==2}">已完成</div>
-      <div class="menu_item" :class="{active:menuIndex==3}">未通过</div>
+      <div class="menu_item" :class="{active:menuIndex==3}">未通过</div> -->
     </div>
     <div class="content">
       <div class="list_wrapper">
@@ -31,12 +31,28 @@
 export default {
   data() {
     return {
-      menuIndex:0
+      menuIndex:0,
+      dataList:{},
+      statusList:[],
     };
   },
   created() {
+    this.getStatusList()
+    this.getMyData();
   },
-  components: {}
+  components: {},
+  methods:{
+    getMyData(){
+      this.axios.get(`http://192.168.2.129:8002/v1/my_request_scores?page=0&size=999`).then(res=>{
+        this.list = res.data.api_request_sheet_music_wall;
+      })
+    },
+    getStatusList(){
+      this.axios.get(`http://192.168.2.129:8002/v1/score_wall_status`).then(res=>{
+        this.statusList = res.data;
+      })
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
