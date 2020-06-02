@@ -4,6 +4,9 @@ import router from './router'
 import axios from './../../common/axios_config'
 import  './../../common/common.less'
 
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
+
 Vue.prototype.axios = axios;
 
 

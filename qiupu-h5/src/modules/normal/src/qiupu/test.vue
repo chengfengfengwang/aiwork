@@ -22,14 +22,13 @@
         <div class="label">试听链接</div>
         <input placeholder="请输入链接" v-model="formValue.audition_url" type="text">
       </div>
-      <!-- <div class="btn" :class="{active:!$v.formValue.$invalid}" @click="submit">发布</div> -->
-      <div class="btn"  @click="submit">发布</div>
+      <div class="btn" :class="{active:!$v.formValue.$invalid}" @click="submit">发布</div>
     </div>
   </div>
 </template>
 <script>
 import Nav from "./../../../../components/Nav";
-//import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -44,14 +43,14 @@ export default {
       }
     };
   },
-  // validations: {
-  //   formValue: {
-  //     name: { required },
-  //     author: { required },
-  //     instrument_type: { required },
-  //     audition_url: { required }
-  //   }
-  // },
+  validations: {
+    formValue: {
+      name: { required },
+      author: { required },
+      instrument_type: { required },
+      audition_url: { required }
+    }
+  },
   created() {
     if (process.env.NODE_ENV !== "production") {
       this.formValue = {
@@ -126,8 +125,7 @@ export default {
       rgba(255, 69, 32, 1) 100%
     );
     color: rgba(255, 255, 255, 1);
-    //opacity: 0.3;
-    opacity: 1;
+    opacity: 0.3;
     &.active {
       opacity: 1;
     }
