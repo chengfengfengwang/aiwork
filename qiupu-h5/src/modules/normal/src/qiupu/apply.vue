@@ -22,14 +22,15 @@
         <div class="label">试听链接</div>
         <input placeholder="请输入链接" v-model="formValue.audition_url" type="text">
       </div>
-      <!-- <div class="btn" :class="{active:!$v.formValue.$invalid}" @click="submit">发布</div> -->
-      <div class="btn"  @click="submit">发布</div>
+      <div class="btn" :class="{active:!$v.formValue.$invalid}" @click="submit">发布</div>
+      <!-- <div class="btn" @click="submit">发布</div> -->
     </div>
   </div>
 </template>
 <script>
+import { Toast } from "vant";
 import Nav from "./../../../../components/Nav";
-//import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -44,14 +45,14 @@ export default {
       }
     };
   },
-  // validations: {
-  //   formValue: {
-  //     name: { required },
-  //     author: { required },
-  //     instrument_type: { required },
-  //     audition_url: { required }
-  //   }
-  // },
+  validations: {
+    formValue: {
+      name: { required },
+      author: { required },
+      instrument_type: { required }
+      //      audition_url: { required }
+    }
+  },
   created() {
     if (process.env.NODE_ENV !== "production") {
       this.formValue = {
@@ -63,10 +64,33 @@ export default {
     }
     this.getInstruments();
   },
+  mounted() {},
   components: {
     Nav
   },
   methods: {
+    invalidMessage() {
+      if (this.$v.formValue.name.$invalid) {
+        Toast({
+          message: "请输入曲名",
+          duration: 2000
+        });
+        return false;
+      } else if (this.$v.formValue.author.$invalid) {
+        Toast({
+          message: "请输入作者",
+          duration: 2000
+        });
+        return false;
+      } else if (this.$v.formValue.instrument_type.$invalid) {
+        Toast({
+          message: "请输入乐器类型",
+          duration: 2000
+        });
+        return false;
+      }
+      return true;
+    },
     getInstruments() {
       this.axios
         .get(`http://192.168.2.129:8002/v1/instrument_type`)
@@ -78,11 +102,22 @@ export default {
       // console.log(this.formValue)
       // return
       //this.formValue.instrument_type = 0;
-      this.axios
-        .post(`http://192.168.2.129:8002/v1/request_score`, this.formValue)
-        .then(res => {
-          console.log(res);
-        });
+      if (this.invalidMessage()) {
+        this.axios
+          .post(`http://192.168.2.129:8002/v1/request_score`, this.formValue)
+          .then(res => {
+            if (!res.error) {
+              const time = 1500;
+              Toast.success({
+                message: "发布成功",
+                duration: time
+              });
+              setTimeout(() => {
+                this.$router.push("/qiupu_me");
+              }, time);
+            }
+          });
+      }
     }
   }
 };
@@ -126,8 +161,8 @@ export default {
       rgba(255, 69, 32, 1) 100%
     );
     color: rgba(255, 255, 255, 1);
-    //opacity: 0.3;
-    opacity: 1;
+    opacity: 0.3;
+    //opacity: 1;
     &.active {
       opacity: 1;
     }
