@@ -30,6 +30,12 @@
           <FormItem label="权重">
             <Input v-model.number="formValidate.weight" placeholder="请输入展示权重"></Input>
           </FormItem>
+           <FormItem label="是否需要开课">
+            <Select  v-model="formValidate.need_course" placeholder>
+              <Option :value="0">不需要</Option>
+              <Option :value="1">需要</Option>
+            </Select>
+          </FormItem>
         </Form>
       </div>
       <div slot="footer">
