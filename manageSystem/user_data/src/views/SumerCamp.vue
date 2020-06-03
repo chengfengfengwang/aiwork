@@ -69,6 +69,16 @@ export default {
           title: "课程",
           key: "course_name"
         },
+        //http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=http://cdn.kids-web.immusician.com/yinji/wxbind.html?course_id=32
+        {
+          title: "链接",
+          key: "url",
+          
+          render: (h, params) => {
+            return h("span", {},
+            `http://api.yinji.immusician.com/v1/operate/redirect_code_url?url=http://cdn.kids-web.immusician.com/yinji/wxbind.html?course_id=${params.row.course_id}`);
+          }
+        },
         {
           title: "二维码",
           key: "qr",

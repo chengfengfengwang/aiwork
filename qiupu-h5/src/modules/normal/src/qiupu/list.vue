@@ -1,36 +1,76 @@
 <template>
   <div id="main">
     <Nav>求谱墙</Nav>
+    <!--mescroll滚动区域的基本结构-->
     <div class="content">
-      <div class="list_wrapper">
-        <van-list v-model="loading" :finished="finished" finished-text @load="getList">
-          <div class="list_item" v-for="(item,index) in list" :key="item.id">
-            <div class="index">{{index+1}}</div>
-            <div class="qupu">
-              <div class="title">{{item.name}}</div>
-              <div>
-                <span class="author">{{item.author}}</span>
-                <span class="type">{{item.instrument_type_msg}}</span>
-              </div>
+      <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
+        <div class="list_item" v-for="(item,index) in dataList" :key="item.id">
+          <div class="index">{{index+1}}</div>
+          <div class="qupu">
+            <div class="title">{{item.name}}</div>
+            <div>
+              <span class="author">{{item.author}}</span>
+              <span class="type">{{item.instrument_type_msg}}</span>
             </div>
-            <div class="num">{{item.vote_score}}</div>
-            <div
-              class="status"
-              :class="{yiqiu:item.status_msg=='已求',tongqiu:item.status_msg=='同求',zhizuozhong:item.status_msg=='制作中'}"
-            >{{item.status_msg}}</div>
           </div>
-        </van-list>
-      </div>
+          <div class="num">{{item.vote_score}}</div>
+          <div
+            class="status"
+            :class="{yiqiu:item.status_msg=='已求',tongqiu:item.status_msg=='同求',zhizuozhong:item.status_msg=='制作中'}"
+          >{{item.status_msg}}</div>
+        </div>
+      </mescroll-vue>
     </div>
   </div>
 </template>
+			
 <script>
+// 引入mescroll的vue组件
+import MescrollVue from "mescroll.js/mescroll.vue";
 import Nav from "./../../../../components/Nav";
-import { List } from "vant";
 
 export default {
+  components: {
+    Nav,
+    MescrollVue // 注册mescroll组件
+  },
   data() {
     return {
+      mescroll: null, // mescroll实例对象
+      mescrollDown: {
+        use: true,
+        auto: false,
+        callback: this.downCallback
+      }, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
+      mescrollUp: {
+        // 上拉加载的配置.
+        callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
+        //以下是一些常用的配置,当然不写也可以的.
+        page: {
+          num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+          size: 10 //每页数据条数,默认10
+        },
+        loadFull: {
+          use: true, //use : 列表数据过少,不足以滑动触发上拉加载,是否自动加载下一页,直到满屏或无数据; 默认false,因为可调大page.size使数据满屏.
+          delay: 500 //delay : 延时执行的毫秒数; 延时是为了保证列表数据或占位的图片都已初始化完成,且下拉刷新上拉加载中区域动画已执行完毕;
+        },
+        htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
+        noMoreSize: 0, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
+        //避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
+        //这就是为什么无更多数据有时候不显示的原因
+        toTop: {
+          //回到顶部按钮
+          src: "./static/mescroll/mescroll-totop.png", //图片路径,默认null,支持网络图
+          offset: 1000 //列表滚动1000px才显示回到顶部按钮
+        },
+        empty: {
+          //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
+          warpId: "xxid", //父布局的id (1.3.5版本支持传入dom元素)
+          icon: "./static/mescroll/mescroll-empty.png", //图标,默认null,支持网络图
+          tip: "暂无相关数据~" //提示
+        }
+      },
+      dataList: [], // 列表数据
       page: 0,
       size: 10,
       menuIndex: 0,
@@ -39,36 +79,90 @@ export default {
       finished: false
     };
   },
-  created() {
-    //this.getList();
+  beforeRouteEnter(to, from, next) {
+    // 如果没有配置顶部按钮或isBounce,则beforeRouteEnter不用写
+    next(vm => {
+      // 滚动到原来的列表位置,恢复顶部按钮和isBounce的配置
+      vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter();
+    });
   },
-  components: {
-    Nav,
-    "van-list": List
+  beforeRouteLeave(to, from, next) {
+    // 如果没有配置顶部按钮或isBounce,则beforeRouteLeave不用写
+    // 记录列表滚动的位置,隐藏顶部按钮和isBounce的配置
+    this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave();
+    next();
   },
   methods: {
-    getList() {
+    getList(pageNum, pageSize, successCallback, errCallback) {
+      //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
       this.axios
-        .get(
-          `http://192.168.2.129:8002/v1/request_scores?page=${this.page}&size=${
-            this.size
-          }`
-        )
-        .then(res => {
-          this.loading = false;
-          this.page++;
-          var resList = res.data.api_request_sheet_music_wall;
-          if (resList && resList.length > 0) {
-            this.list = this.list.concat(resList);
-          } else {
-            this.finished = true;
+        .get(`http://192.168.2.129:8002/v1/request_scores`, {
+          params: {
+            page: pageNum, // 页码
+            size: pageSize // 每页长度
           }
+        })
+        .then((res)=>{
+          let data = res.data.api_request_sheet_music_wall;
+          let resList = [];
+          if(data){
+            resList = data
+          }else{
+            resList=[]
+          }
+          successCallback(resList)
+        })
+        .catch(errCallback);
+    },
+    // mescroll组件初始化的回调,可获取到mescroll对象
+    mescrollInit(mescroll) {
+      this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
+    },
+    //下拉回调
+    downCallback(mescroll) {
+      //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
+      var pageNum = 0;
+      var pageSize = 10; // 页长, 默认每页10条
+      this.getList(pageNum, pageSize, data => {
+        this.dataList = [];
+        this.dataList = this.dataList.concat(data);
+        this.$nextTick(() => {
+          mescroll.endSuccess();
         });
+      }, () => {
+        // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+        this.mescroll.endErr()
+      });
+    },
+    // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
+    upCallback(page, mescroll) {
+      //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
+      var pageNum = page.num - 1;
+      var pageSize = page.size; // 页长, 默认每页10条
+      this.getList(pageNum, pageSize, data => {
+        
+        if (pageNum === 0) this.dataList = [];
+        this.dataList = this.dataList.concat(data);
+        this.$nextTick(() => {
+          mescroll.endSuccess(data.length);
+        });
+      }, () => {
+        // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+        this.mescroll.endErr()
+      });
     }
   }
 };
 </script>
-<style lang="less" scoped>
+			
+			<style lang="less" scoped>
+/*通过fixed固定mescroll的高度*/
+.mescroll {
+  position: fixed;
+  top: 44px;
+  bottom: 0;
+  height: auto;
+}
 .menus {
   display: flex;
   padding: 8px 34px;
@@ -102,9 +196,9 @@ export default {
   }
 }
 .content {
-  padding: 0 16px;
   .list_item {
     margin: 24px 0;
+    padding: 0 16px;
     display: flex;
     //justify-content: space-between;
     align-items: center;
@@ -172,5 +266,4 @@ export default {
     }
   }
 }
-
 </style>
