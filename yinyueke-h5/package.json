@@ -15,7 +15,7 @@
     "core-js": "^2.6.5",
     "eruda": "^2.1.0",
     "html2canvas": "^1.0.0-rc.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "qrcode": "^1.4.4",
     "spinkit": "^2.0.1",
     "swiper": "^4.5.0",
