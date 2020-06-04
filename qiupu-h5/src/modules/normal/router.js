@@ -6,6 +6,7 @@ const home = () => import('./src/index.vue')
 const qiupu_me = () => import('./src/qiupu/me.vue')
 const qiupu_apply = () => import('./src/qiupu/apply.vue')
 const qiupu_list = () => import('./src/qiupu/list.vue')
+
 //const qiupu_test = () => import('./src/qiupu/test.vue')
 
 
@@ -32,11 +33,7 @@ export default new Router({
       path: '/qiupu_list',
       name: 'qiupu_list',
       component: qiupu_list
-    },
-    // {
-    //   path: '/qiupu_test',
-    //   name: 'qiupu_test',
-    //   component: qiupu_test
-    // }
+    }
+    
   ]
 })

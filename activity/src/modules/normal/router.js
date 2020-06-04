@@ -7,6 +7,7 @@ const musicRadio = () => import('./src/musicRadio.vue')
 const songList = () => import('./src/songList.vue')
 const play = () => import('./src/play.vue')
 const bg100 = () => import('./src/bg100.vue')
+const tools_org = () => import('./src/tools/index.vue')
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/bg100',
       name: 'bg100',
       component: bg100
+    },
+    {
+      path: '/tools_org',
+      name: 'tools_org',
+      component: tools_org
     }
   ]
 })
