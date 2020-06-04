@@ -14,7 +14,7 @@
       <div class="menu_item" :class="{active:menuIndex==2}">已完成</div>
       <div class="menu_item" :class="{active:menuIndex==3}">未通过</div>-->
     </div>
-    <div class="content">
+    <div class="content" id="content">
       <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
         <div class="list_item" v-for="(dataItem,index) in dataList" :key="index">
           <div class="index">{{index+1}}</div>
@@ -46,7 +46,7 @@ export default {
     return {
       mescroll: null, // mescroll实例对象
       mescrollDown: {
-        use: true,
+        use: false,
         auto: false,
         callback: this.downCallback
       }, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
@@ -73,8 +73,8 @@ export default {
         },
         empty: {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
-          warpId: "xxid", //父布局的id (1.3.5版本支持传入dom元素)
-          icon: "./static/mescroll/mescroll-empty.png", //图标,默认null,支持网络图
+          warpId: "content", //父布局的id (1.3.5版本支持传入dom元素)
+          icon: "./mescroll/mescroll-empty.png", //图标,默认null,支持网络图
           tip: "暂无相关数据~" //提示
         }
       },
