@@ -127,7 +127,7 @@ export default {
             var item = that.dicArr[i];
             //var url = baseUrl + encodeURI(name);
             //html += "<li><p>" + (i + 1) + ". " + item.title + "</p></li>";
-            html += "<li><p>" + item.title + "</p></li>";
+            html += "<li><p>" + item.title + "</p><a href='javascript:;'></a></li>";
           }
           $(".list ul").html(html);
         }

@@ -39,8 +39,8 @@ export default {
         Toast.fail("请输入手机号");
         return
       }
-      this.axios
-        .put(`http://api.agency.immusician.com/v9/delete_user`, {
+      this.axios 
+        .put(`http://api.agency.immusician.com/v9/clear_device`, {
           phone: this.phone
         })
         .then(res => {

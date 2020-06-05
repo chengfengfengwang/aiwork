@@ -27,3 +27,4 @@ npm run lint
 
 ### Customize configuration
 http://cdn.kids-web.immusician.com/ac/test.html
+http://cdn.kids-web.immusician.com/ac/normal.html#/musicRadio

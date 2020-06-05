@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 
 const home = () => import('./src/index.vue')
+const privacy = () => import('./src/privacy.vue')
+
 const qiupu_me = () => import('./src/qiupu/me.vue')
 const qiupu_apply = () => import('./src/qiupu/apply.vue')
 const qiupu_list = () => import('./src/qiupu/list.vue')
@@ -18,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: home
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: privacy
     },
     {
       path: '/qiupu_me',
