@@ -74,7 +74,7 @@ export default {
         empty: {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
           warpId: "content", //父布局的id (1.3.5版本支持传入dom元素)
-          icon: "./mescroll/mescroll-empty.png", //图标,默认null,支持网络图
+          icon: "http://cdn.kids.immusician.com/mescroll-empty.png", //图标,默认null,支持网络图
           tip: "暂无相关数据~" //提示
         }
       },

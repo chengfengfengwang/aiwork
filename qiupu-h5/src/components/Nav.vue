@@ -30,6 +30,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .nav {
+  position: relative;
   padding: 16px 15px;
   display: flex;
   align-items: center;
@@ -43,9 +44,17 @@ export default {
   color: rgba(51, 51, 51, 1);
 }
 .back{
+  position: absolute;
+  left: 15px;
+  top:50%;
+  transform: translateY(-50%);
   width: 24px;
 }
 .me{
+  position: absolute;
+  right: 15px;
+  top:50%;
+  transform: translateY(-50%);
   width: 21px;
 }
 </style>

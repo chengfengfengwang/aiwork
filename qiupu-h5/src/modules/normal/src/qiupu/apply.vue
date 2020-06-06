@@ -4,11 +4,11 @@
     <div class="form_wrapper">
       <div class="input_wrapper">
         <div class="label">曲谱名</div>
-        <input placeholder="请输入曲名" v-model="formValue.name" type="text">
+        <input placeholder="请输入曲谱名称" v-model="formValue.name" type="text">
       </div>
       <div class="input_wrapper">
         <div class="label">作者</div>
-        <input placeholder="请输入作者名称" v-model="formValue.author" type="text">
+        <input placeholder="请输入曲谱作者名称" v-model="formValue.author" type="text">
       </div>
 
       <div class="input_wrapper course_option">
@@ -72,19 +72,19 @@ export default {
     invalidMessage() {
       if (this.$v.formValue.name.$invalid) {
         Toast({
-          message: "请输入曲名",
+          message: "请输入曲谱名称",
           duration: 2000
         });
         return false;
       } else if (this.$v.formValue.author.$invalid) {
         Toast({
-          message: "请输入作者",
+          message: "请输入曲谱作者",
           duration: 2000
         });
         return false;
       } else if (this.$v.formValue.instrument_type.$invalid) {
         Toast({
-          message: "请输入乐器类型",
+          message: "请选择曲谱类型",
           duration: 2000
         });
         return false;

@@ -28,7 +28,10 @@ axios.interceptors.response.use(function (response) {
     }
     
   }, function (error) {
+    console.log('---请求error---')
+          
     if(error && error.response){
+        
         if(error.response.status == 400){
             Dialog.alert({message: error.response.data.msg})
             //alert(error.response.data.message)
@@ -36,6 +39,8 @@ axios.interceptors.response.use(function (response) {
             Dialog.alert({message: '请求出错，状态码' + error.response.status})
             //alert('请求出错，状态码' + error.response.status)
         }
+    }else if(error.toString().indexOf('timeout')!=-1){
+        Dialog.alert({message: '请求超时'})
     }
     // 对响应错误做点什么
     return Promise.reject(error);

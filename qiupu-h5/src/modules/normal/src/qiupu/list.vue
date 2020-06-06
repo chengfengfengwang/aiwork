@@ -21,7 +21,7 @@
           <div
             @click="vote(item,index)"
             class="status"
-            :class="{yiqiu:item.is_vote_msg=='已求',tongqiu:item.is_vote_msg=='同求',zhizuozhong:item.is_vote_msg=='制作中'}"
+            :class="{benren:item.is_vote_msg=='本人',yiqiu:item.is_vote_msg=='已求',tongqiu:item.is_vote_msg=='同求',zhizuozhong:item.is_vote_msg=='制作中'}"
           >{{item.is_vote_msg}}</div>
         </div>
       </mescroll-vue>
@@ -75,7 +75,7 @@ export default {
         empty: {
           //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
           warpId: "content", //父布局的id (1.3.5版本支持传入dom元素)
-          icon: "./mescroll/mescroll-empty.png", //图标,默认null,支持网络图
+          icon: "http://cdn.kids.immusician.com/mescroll-empty.png", //图标,默认null,支持网络图
           tip: "暂无相关数据~" //提示
         }
       },
@@ -297,6 +297,10 @@ export default {
       font-size: 14px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
+      &.benren {
+        border: 1px solid rgba(153, 153, 153, 1);
+        color: rgba(153, 153, 153, 1);
+      }
       &.yiqiu {
         border: 1px solid rgba(153, 153, 153, 1);
         color: rgba(153, 153, 153, 1);
