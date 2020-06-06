@@ -93,7 +93,7 @@ export default {
     },
     getInstruments() {
       this.axios
-        .get(`http://192.168.2.129:8002/v1/instrument_type`)
+        .get(`${process.env.VUE_APP_QIUPU}/instrument_type`)
         .then(res => {
           this.instrumentList = res.data;
         });
@@ -104,7 +104,7 @@ export default {
       //this.formValue.instrument_type = 0;
       if (this.invalidMessage()) {
         this.axios
-          .post(`http://192.168.2.129:8002/v1/request_score`, this.formValue)
+          .post(`${process.env.VUE_APP_QIUPU}/request_score`, this.formValue)
           .then(res => {
             if (!res.error) {
               const time = 1500;
@@ -140,7 +140,7 @@ export default {
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
     }
-    input {
+    input,select {
       flex-grow: 1;
       font-size: 15px;
       font-family: PingFangSC-Regular, PingFang SC;

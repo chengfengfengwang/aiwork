@@ -1,10 +1,14 @@
 <template>
   <div id="main">
-    <Nav>求谱墙</Nav>
+    <Nav :backShow="false">求谱墙</Nav>
     <!--mescroll滚动区域的基本结构-->
     <div class="content" id="content">
       <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
-        <div class="list_item" v-for="(item,index) in dataList" :key="item.id">
+        <div
+          class="list_item"
+          v-for="(item,index) in dataList"
+          :key="item.id"
+        >
           <div class="index">{{index+1}}</div>
           <div class="qupu">
             <div class="title">{{item.name}}</div>
@@ -15,11 +19,15 @@
           </div>
           <div class="num">{{item.vote_score}}</div>
           <div
+            @click="vote(item,index)"
             class="status"
-            :class="{yiqiu:item.status_msg=='已求',tongqiu:item.status_msg=='同求',zhizuozhong:item.status_msg=='制作中'}"
-          >{{item.status_msg}}</div>
+            :class="{yiqiu:item.is_vote_msg=='已求',tongqiu:item.is_vote_msg=='同求',zhizuozhong:item.is_vote_msg=='制作中'}"
+          >{{item.is_vote_msg}}</div>
         </div>
       </mescroll-vue>
+    </div>
+    <div @click="goApply" class="apply">
+      <img src="../../../../assets/img/normal/qiupu/add.jpg" alt>
     </div>
   </div>
 </template>
@@ -28,6 +36,7 @@
 // 引入mescroll的vue组件
 import MescrollVue from "mescroll.js/mescroll.vue";
 import Nav from "./../../../../components/Nav";
+import { Toast } from "vant";
 
 export default {
   components: {
@@ -92,25 +101,57 @@ export default {
     this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave();
     next();
   },
+  mounted(){
+  },
   methods: {
+    vote(item,index){
+      //localhost:8002
+      if(item.is_vote_msg!=='同求'){
+        return
+      }
+      
+      this.axios
+        .put(`${process.env.VUE_APP_QIUPU}/vote_request_score`, {
+          id:item.id
+        })
+        .then(res => {
+          if(!res.error){
+            Toast({
+              message: "投票成功",
+              duration: 2000
+            });
+            //本地修改为已求状态
+            item.is_vote_msg = '已求';
+            this.list.splice(index,1,item)
+          }
+          
+        })
+    },
+    goQupuDetail() {
+      console.log('goQupuDetail')
+      location.href = "uniwebview://qupu_detail?id=5ec79ab3dff4144ee386c0ad";
+    },
+    goApply() {
+      this.$router.push("/qiupu_apply");
+    },
     getList(pageNum, pageSize, successCallback, errCallback) {
       //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
       this.axios
-        .get(`http://192.168.2.129:8002/v1/request_scores`, {
+        .get(`${process.env.VUE_APP_QIUPU}/request_scores`, {
           params: {
             page: pageNum, // 页码
             size: pageSize // 每页长度
           }
         })
-        .then((res)=>{
+        .then(res => {
           let data = res.data.api_request_sheet_music_wall;
           let resList = [];
-          if(data){
-            resList = data
-          }else{
-            resList=[]
+          if (data) {
+            resList = data;
+          } else {
+            resList = [];
           }
-          successCallback(resList)
+          successCallback(resList);
         })
         .catch(errCallback);
     },
@@ -123,33 +164,42 @@ export default {
       //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
       var pageNum = 0;
       var pageSize = 10; // 页长, 默认每页10条
-      this.getList(pageNum, pageSize, data => {
-        this.dataList = [];
-        this.dataList = this.dataList.concat(data);
-        this.$nextTick(() => {
-          mescroll.endSuccess();
-        });
-      }, () => {
-        // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-        this.mescroll.endErr()
-      });
+      this.getList(
+        pageNum,
+        pageSize,
+        data => {
+          this.dataList = [];
+          this.dataList = this.dataList.concat(data);
+          this.$nextTick(() => {
+            mescroll.endSuccess();
+          });
+        },
+        () => {
+          // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+          this.mescroll.endErr();
+        }
+      );
     },
     // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
     upCallback(page, mescroll) {
       //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
       var pageNum = page.num - 1;
       var pageSize = page.size; // 页长, 默认每页10条
-      this.getList(pageNum, pageSize, data => {
-        
-        if (pageNum === 0) this.dataList = [];
-        this.dataList = this.dataList.concat(data);
-        this.$nextTick(() => {
-          mescroll.endSuccess(data.length);
-        });
-      }, () => {
-        // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-        this.mescroll.endErr()
-      });
+      this.getList(
+        pageNum,
+        pageSize,
+        data => {
+          if (pageNum === 0) this.dataList = [];
+          this.dataList = this.dataList.concat(data);
+          this.$nextTick(() => {
+            mescroll.endSuccess(data.length);
+          });
+        },
+        () => {
+          // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+          this.mescroll.endErr();
+        }
+      );
     }
   }
 };
@@ -252,7 +302,7 @@ export default {
         color: rgba(153, 153, 153, 1);
       }
       &.tongqiu {
-        border: 1px solid rgba(153, 153, 153, 1);
+        border: 1px solid #FF641E;
         color: rgba(255, 135, 27, 1);
       }
       &.zhizuozhong {
@@ -264,6 +314,16 @@ export default {
         color: rgba(255, 255, 255, 1);
       }
     }
+  }
+}
+.apply {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 80px;
+  img {
+    width: 100%;
   }
 }
 </style>

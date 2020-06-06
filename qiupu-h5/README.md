@@ -1,2 +1,2 @@
-http://cdn.kids-web.immusician.com/ac/test.html
-http://cdn.kids-web.immusician.com/ac/normal.html#/pricacy
+http://cdn.kids-web.immusician.com/kaopu/normal.html#/pricacy
+http://cdn.kids-web.immusician.com/kaopu/normal.html#/vip

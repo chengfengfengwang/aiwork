@@ -50,7 +50,7 @@ export default {
     getList() {
       this.axios
         .get(
-          `http://192.168.2.129:8002/v1/request_scores?page=${this.page}&size=${
+          `${process.env.VUE_APP_QIUPU}/request_scores?page=${this.page}&size=${
             this.size
           }`
         )

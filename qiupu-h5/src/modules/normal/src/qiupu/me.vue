@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <Nav>我的求谱</Nav>
+    <Nav :meShow="false">我的求谱</Nav>
     <div class="menus">
       <div
         v-for="(value,name,index) in statusList"
@@ -25,11 +25,11 @@
               <span class="type">{{dataItem.instrument_type_msg}}</span>
             </div>
           </div>
-          <div class="operate">
+          <!-- <div class="operate">
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
-          </div>
+          </div> -->
         </div>
       </mescroll-vue>
     </div>
@@ -106,7 +106,7 @@ export default {
 
     getStatusList() {
       this.axios
-        .get(`http://192.168.2.129:8002/v1/score_wall_status`)
+        .get(`${process.env.VUE_APP_QIUPU}/score_wall_status`)
         .then(res => {
           this.statusList = res.data;
         });
@@ -114,7 +114,7 @@ export default {
     getList(pageNum, pageSize, successCallback, errCallback) {
       //var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
       this.axios
-        .get(`http://192.168.2.129:8002/v1/my_request_scores`, {
+        .get(`${process.env.VUE_APP_QIUPU}/my_request_scores`, {
           params: {
             page: pageNum, // 页码
             size: pageSize, // 每页长度

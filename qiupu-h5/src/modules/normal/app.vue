@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import { getQueryVariable } from "common/util.js";
 export default {
   data() {
     return{
@@ -13,8 +14,9 @@ export default {
   components: {},
   created() {
     document.title = '求谱';
-    this.axios.defaults.headers.common['token'] = 'god';
-    this.axios.defaults.headers.common['uid'] = 2;
+    this.axios.defaults.headers.common['token'] = getQueryVariable('token');
+    this.axios.defaults.headers.common['uid'] = getQueryVariable('uid');
+    this.instrument_type = getQueryVariable('instrument_type');
   },
   methods: {
     toggleLoading(status) {

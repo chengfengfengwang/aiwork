@@ -1,16 +1,36 @@
 <template>
   <div class="nav">
+    <img v-show="backShow" @click="goBack" src="../assets/img/nav/back.jpg" alt="" class="back">
     <span class="title">
       <slot></slot>
     </span>
+    <img v-show="meShow" @click="toMe" src="../assets/img/nav/me.jpg" alt="" class="me">
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props:{
+    backShow: {
+      default: true
+    },
+    meShow: {
+      default: true
+    },
+  },
+  methods:{
+    goBack(){
+      console.log('zzz')
+      history.go(-1)
+    },
+    toMe(){
+      this.$router.push('/qiupu_me')
+    },
+  }
+};
 </script>
 <style lang="less" scoped>
 .nav {
-  padding: 10px 15px;
+  padding: 16px 15px;
   display: flex;
   align-items: center;
 }
@@ -21,6 +41,12 @@ export default {};
   font-family: PingFangSC-Semibold, PingFang SC;
   font-weight: 600;
   color: rgba(51, 51, 51, 1);
+}
+.back{
+  width: 24px;
+}
+.me{
+  width: 21px;
 }
 </style>
 

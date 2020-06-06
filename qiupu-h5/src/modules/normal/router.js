@@ -4,6 +4,7 @@ import Router from 'vue-router'
 
 const home = () => import('./src/index.vue')
 const privacy = () => import('./src/privacy.vue')
+const vip = () => import('./src/vip.vue')
 
 const qiupu_me = () => import('./src/qiupu/me.vue')
 const qiupu_apply = () => import('./src/qiupu/apply.vue')
@@ -25,6 +26,11 @@ export default new Router({
       path: '/privacy',
       name: 'privacy',
       component: privacy
+    },
+    {
+      path: '/vip',
+      name: 'vip',
+      component: vip
     },
     {
       path: '/qiupu_me',

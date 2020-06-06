@@ -251,28 +251,28 @@ export default {
               //   },
               //   checkText
               // ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "error",
-                    size: "small"
-                  },
-                  on: {
-                    click: () => {
-                      var that = this;
-                      this.$Modal.confirm({
-                        title: "警告",
-                        content: "确定要删除吗？",
-                        onOk() {
-                          that.delete(params.row.institutions_id);
-                        }
-                      });
-                    }
-                  }
-                },
-                "删除"
-              )
+              // h(
+              //   "Button",
+              //   {
+              //     props: {
+              //       type: "error",
+              //       size: "small"
+              //     },
+              //     on: {
+              //       click: () => {
+              //         var that = this;
+              //         this.$Modal.confirm({
+              //           title: "警告",
+              //           content: "确定要删除吗？",
+              //           onOk() {
+              //             that.delete(params.row.institutions_id);
+              //           }
+              //         });
+              //       }
+              //     }
+              //   },
+              //   "删除"
+              // )
             ]);
           }
         }

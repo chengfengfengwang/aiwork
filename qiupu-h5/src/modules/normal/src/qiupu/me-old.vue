@@ -74,7 +74,7 @@ export default {
     getMyData() {
       this.axios
         .get(
-          `http://192.168.2.129:8002/v1/my_request_scores?page=${this.page}&size=${this.size}&status=${this.curStatus}`
+          `${process.env.VUE_APP_QIUPU}/my_request_scores?page=${this.page}&size=${this.size}&status=${this.curStatus}`
         )
         .then(res => {
           //this.dataList = res.data.api_request_sheet_music_wall;
@@ -91,7 +91,7 @@ export default {
     },
     getStatusList() {
       this.axios
-        .get(`http://192.168.2.129:8002/v1/score_wall_status`)
+        .get(`${process.env.VUE_APP_QIUPU}/score_wall_status`)
         .then(res => {
           this.statusList = res.data;
         });
