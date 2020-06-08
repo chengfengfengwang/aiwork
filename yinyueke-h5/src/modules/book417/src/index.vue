@@ -9,7 +9,7 @@
           <img
             @click="togglePlay"
             v-show="isLoading && bookIndex!=0"
-            src="https://samherbert.net/svg-loaders/svg-loaders/tail-spin.svg"
+            src="../../../assets/img/svgloaders/tail-spin.svg"
             alt
             class="play_icon loading"
           >
