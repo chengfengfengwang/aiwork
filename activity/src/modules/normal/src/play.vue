@@ -4,14 +4,20 @@
     :style="{background: 'url(' + playBg + ') no-repeat center top/cover'}"
   >
     <img
-      v-show="status=='pause'"
+      v-show="status=='pause' && !isLoading"
       @click="play"
       src="../../../assets/img/songList/play.jpeg"
       alt
       class="play"
     >
     <img
-      v-show="status=='playing'"
+    v-show="isLoading"
+            src="../../../assets/img/svgloaders/puff.svg"
+            alt
+            class="play_icon loading"
+          >
+    <img
+      v-show="status=='playing' && !isLoading"
       @click="pause"
       src="../../../assets/img/songList/pause.jpeg"
       alt
@@ -33,7 +39,8 @@ export default {
       playBg: "",
       status: "pause",
       title: "",
-      popShow: false
+      popShow: false,
+      isLoading: false
     };
   },
   computed: {
@@ -69,6 +76,18 @@ export default {
       },
       false
     );
+    this.audio.addEventListener("loadstart", ()=> {
+        this.isLoading = true;
+      });
+     this.audio.addEventListener(
+        "canplaythrough",
+        () => {
+          setTimeout(() => {
+              this.isLoading = false;
+          }, 1000);
+        },
+        false
+      );
     this.audio.addEventListener("timeupdate", this.audioTimer, false);
   },
   methods: {
@@ -134,17 +153,16 @@ export default {
     top/cover;
   overflow: hidden;
   .play,
-  .pause {
+  .pause ,.loading{
     border-radius: 50%;
     width: 85px;
     position: absolute;
-    // top:10px;
-    // right: 10px;
-    // width: 70px;
-    // padding: 10px
     left: 50%;
     transform: translateX(-50%);
     top: 33%;
+  }
+  .loading{
+
   }
 }
 </style>
