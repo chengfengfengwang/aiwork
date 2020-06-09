@@ -41,6 +41,8 @@ axios.interceptors.response.use(function (response) {
         }
     }else if(error.toString().indexOf('timeout')!=-1){
         Dialog.alert({message: '请求超时'})
+    }else{
+        Dialog.alert({message: '请求出错'})
     }
     // 对响应错误做点什么
     return Promise.reject(error);

@@ -9,10 +9,10 @@
         <input v-model="form.nickname" placeholder="请输入您的姓名" type="text">
       </div>
       <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入您的手机号" type="text">
+        <input v-model.trim="form.phone" placeholder="请输入您的手机号" type="text">
       </div>
       <div class="input_wrapper v_code">
-        <input v-model="form.code" placeholder="请输入验证码" type="text">
+        <input v-model.trim="form.code" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
       <div class="input_wrapper course_option">

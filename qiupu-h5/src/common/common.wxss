@@ -76,6 +76,11 @@
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
 }
+.shenglue {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 button {
   border: none;
   outline: none;
@@ -138,4 +143,14 @@ select {
   border: none;
   background-color: transparent;
   outline: none;
+}
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 4.266666666666667vw;
+  }
+}
+@media screen and (min-width: 480px) {
+  html {
+    font-size: 3.466666666666667vw;
+  }
 }

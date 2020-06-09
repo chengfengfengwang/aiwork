@@ -13,7 +13,7 @@
           <div class="qupu">
             <div class="title">{{item.name}}</div>
             <div>
-              <span class="author">{{item.author}}</span>
+              <span class="author shenglue">{{item.author}}</span>
               <span class="type">{{item.instrument_type_msg}}</span>
             </div>
           </div>
@@ -268,6 +268,9 @@ export default {
         color: rgba(51, 51, 51, 1);
       }
       .author {
+        display: inline-block;
+        vertical-align: middle;
+        width: 7em;
         margin-right: 30px;
         font-size: 14px;
         font-family: PingFangSC-Regular, PingFang SC;
@@ -275,6 +278,8 @@ export default {
         color: rgba(153, 153, 153, 1);
       }
       .type {
+        display: inline-block;
+        vertical-align: middle;
         font-size: 12px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
