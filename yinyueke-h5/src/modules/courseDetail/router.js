@@ -31,6 +31,7 @@ const folkMusicKingdom = () => import('./src/folkMusicKingdom.vue')
 const youyouPac = () => import('./src/youyouPac.vue')
 const aefAnzhong = () => import('./src/aefAnzhong.vue')
 const djmbe61 = () => import('./src/djmbe61.vue')
+const piano_jzk = () => import('./src/piano_jzk.vue')
 
 Vue.use(Router)
 
@@ -150,6 +151,11 @@ export default new Router({
       path: '/djmbe61',
       name: 'djmbe61',
       component: djmbe61
+    }, 
+    {
+      path: '/piano_jzk',
+      name: 'piano_jzk',
+      component: piano_jzk
     },
   ]
 })
