@@ -102,13 +102,20 @@ export default {
       // console.log(this.formValue)
       // return
       //this.formValue.instrument_type = 0;
+      if (!this.$parent.isLogin) {
+        Toast({
+          message: "需要登录才能发布求谱",
+          duration: 2000
+        });
+        return;
+      }
       if (this.invalidMessage()) {
         this.axios
           .post(`${process.env.VUE_APP_QIUPU}/request_score`, this.formValue)
           .then(res => {
             if (!res.error) {
               const time = 1500;
-              Toast.success({
+              Toast({
                 message: "发布成功",
                 duration: time
               });
@@ -140,7 +147,8 @@ export default {
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
     }
-    input,select {
+    input,
+    select {
       flex-grow: 1;
       font-size: 15px;
       font-family: PingFangSC-Regular, PingFang SC;

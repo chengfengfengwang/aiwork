@@ -29,7 +29,7 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
-          </div> -->
+          </div>-->
         </div>
       </mescroll-vue>
     </div>
@@ -40,7 +40,7 @@ import MescrollVue from "mescroll.js/mescroll.vue";
 
 import Nav from "./../../../../components/Nav";
 import { List } from "vant";
-import { getQueryVariable } from '../../../../../../yinyueke-h5/src/common/util';
+import { getQueryVariable } from "../../../../../../yinyueke-h5/src/common/util";
 
 export default {
   data() {

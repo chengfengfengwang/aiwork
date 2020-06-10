@@ -4,10 +4,12 @@
     <span class="title">
       <slot></slot>
     </span>
-    <img v-show="meShow" @click="toMe" src="../assets/img/nav/me.jpg" alt="" class="me">
+    <img v-show="meShow && isLogin" @click="toMe" src="../assets/img/nav/me.jpg" alt="" class="me">
   </div>
 </template>
 <script>
+import { getQueryVariable } from "common/util.js";
+
 export default {
   props:{
     backShow: {
@@ -16,6 +18,11 @@ export default {
     meShow: {
       default: true
     },
+  },
+  data(){
+    return {
+      isLogin: Boolean(getQueryVariable('uid') && getQueryVariable('token'))
+    }
   },
   methods:{
     goBack(){
