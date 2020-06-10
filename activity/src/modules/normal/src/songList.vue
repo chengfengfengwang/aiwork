@@ -19,7 +19,7 @@
         <div class="main_title">下载app,收听全部课程配套音乐</div>
         <div class="sub_title">让孩子爱上音乐</div>
       </div>
-      <div class="down_load_btn" id="downloadButton">立即下载</div>
+      <div class="down_load_btn" @click="downloadClickCount();download()">立即下载</div>
       <div class="close_icon" @click="closeDownload">
         <img src="../../../assets/img/common/close.png" alt>
       </div>
@@ -27,9 +27,11 @@
   </div>
 </template>
 <script>
-import { initShareInstall, getQueryVariable, isIphonex } from "common/util.js";
+import { getQueryVariable, isIphonex } from "common/util.js";
 import $ from "jquery";
 import { close } from "fs";
+import  { uvRequest } from "common/countFn.js";
+
 export default {
   data() {
     return {
@@ -43,11 +45,17 @@ export default {
   created() {
     this.isIphonex = isIphonex();
     this.getAudioList(getQueryVariable("listId"));
-    initShareInstall();
+    uvRequest(101,110,getQueryVariable("listId"))
   },
   components: {},
   mounted() {},
   methods: {
+    download(){
+      location.href = "http://api.yinji.immusician.com/download/?channel=cocodt"
+    },
+    downloadClickCount(){
+      uvRequest(101,111,getQueryVariable("listId"))
+    },
     closeDownload() {
       this.downloadShow = false;
       sessionStorage.setItem("closedDownloadShow", "true");
@@ -160,9 +168,11 @@ export default {
           var curItem = that.dicArr[index];
           var title = encodeURIComponent(curItem.title);
           var url = encodeURIComponent(curItem.url);
+          var audioId = encodeURIComponent(curItem.id);
+          var listId = encodeURIComponent(getQueryVariable("listId"));
           location.href = `normal.html?title=${title}&url=${url}&playBg=${encodeURIComponent(
             that.playBg
-          )}#/play`;
+          )}&audioId=${audioId}&listId=${listId}#/play`;
           return;
 
           var p = $(this).find("p");

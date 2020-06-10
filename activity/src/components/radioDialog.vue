@@ -7,7 +7,7 @@
           <div>下载app，畅享全部课程配套音乐，</div>
           <div>还可享受部分免费课程~</div>
         </div>
-        <div id="downloadButton" class="btn">点击下载</div>
+        <div  @click="download();toCount()" class="btn">点击下载</div>
       </div>
     </div>
   </div>
@@ -16,6 +16,11 @@
 import {initShareInstall, isIphonex} from 'common/util.js'
 
 export default {
+   props:{
+    countCallBack:{
+      type:Function
+    }
+  },
   data() {
     return {
       maskShow: true,
@@ -29,6 +34,14 @@ export default {
       initShareInstall()
   },
   methods: {
+    download(){
+      location.href = "http://api.yinji.immusician.com/download/?channel=cocodt"
+    },
+    toCount(){
+      if(typeof this.countCallBack === 'function'){
+        this.countCallBack()
+      }
+    },
     getQr() {
       this.axios
         .get(

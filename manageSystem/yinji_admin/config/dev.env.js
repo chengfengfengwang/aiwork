@@ -12,6 +12,6 @@ module.exports = merge(prodEnv, {
   LIDONG_AI:'"http://192.168.1.91:22222/v3"',
   LIDONG_YINJI:'"http://192.168.1.91:55555/v1"',
   JINKANG:'"http://58.87.125.111:55555"',
-  //JINKANG:'"http://192.168.1.84:55555"',
+  PEILUN:'"http://192.168.2.73:33333/v2"',
   VERSION:'"v1"' 
 })

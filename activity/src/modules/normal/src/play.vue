@@ -23,12 +23,13 @@
       alt
       class="pause"
     >
-    <radioDialog v-show="popShow"/>
+    <radioDialog :countCallBack="downloadClickCount" v-show="popShow"/>
   </div>
 </template>
 <script>
 import { getQueryVariable } from "common/util.js";
 import radioDialog from "components/radioDialog";
+import  { uvRequest } from "common/countFn.js";
 
 export default {
   name: "play",
@@ -89,8 +90,12 @@ export default {
         false
       );
     this.audio.addEventListener("timeupdate", this.audioTimer, false);
+    uvRequest(102,110,getQueryVariable("listId"),getQueryVariable("audioId"))
   },
   methods: {
+    downloadClickCount(){
+      uvRequest(102,111,getQueryVariable("listId"),getQueryVariable("audioId"))
+    },
     play() {
       this.status = "playing";
       this.audio.play();

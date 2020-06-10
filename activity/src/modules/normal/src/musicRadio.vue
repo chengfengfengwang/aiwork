@@ -8,36 +8,65 @@
         <div class="section_title">
           <img :src="section.title" alt>
         </div>
-        <div @click="goSongList(item.id)" class="item" v-for="(item,idx) in section.song_list" :key="idx">
+        <div
+          @click="goSongList(item.id)"
+          class="item"
+          v-for="(item,idx) in section.song_list"
+          :key="idx"
+        >
           <div class="cover">
-            <img :src="item.cover" alt="">
+            <img :src="item.cover" alt>
           </div>
           <div class="item_title">{{item.title}}</div>
         </div>
       </div>
     </div>
 
-    <Download/>
+    <Download :countCallBack="downloadClickCount" />
   </div>
 </template>
 <script>
 import Download from "components/bottomDownload";
+import { getQueryVariable } from "common/util.js";
+import { uvRequest } from "common/countFn.js";
+
+let countData = {
+  位置: [
+    {
+      h5歌单合辑列表页: 100,
+      h5具体合辑页: 101,
+      h5具体音频页: 102
+    }
+  ],
+  类型: [
+    {
+      页面访问: 110,
+      点击:111
+    }
+  ]
+};
 export default {
   data() {
     return {
-      dataList: []
+      dataList: [],
+      openid: "",
+      isWatchWechat: ""
     };
   },
   components: {
     Download
   },
   created() {
-    document.title = 'coco音乐电台';
+    document.title = "coco音乐电台";
     this.getDataList();
+    this.getWechatInfo();
   },
   methods: {
-    goSongList(id){
-      location.href = `normal.html?listId=${id}#/songList`
+    downloadClickCount(){
+      uvRequest(100,111)
+    },
+    goSongList(id) {
+      location.href = `normal.html?listId=${id}#/songList`;
     },
     getDataList() {
       this.axios
@@ -63,6 +92,24 @@ export default {
             });
             this.dataList = list;
             console.log(list);
+          }
+        });
+    },
+    getWechatInfo() {
+      if (this.openid) {
+        return;
+      }
+      this.axios
+        .get(
+          `http://api.yinji.immusician.com/v1/wechat/is_watch/?code=${getQueryVariable(
+            "code"
+          )}`
+        )
+        .then(res => {
+          this.openid = res.open_id;
+          if (this.openid) {
+            sessionStorage.setItem("open_id", this.openid);
+            uvRequest(100, 110);
           }
         });
     }
@@ -108,7 +155,7 @@ export default {
       height: 100px;
       margin-bottom: 6px;
       overflow: hidden;
-      img{
+      img {
         width: 100%;
       }
       .play {

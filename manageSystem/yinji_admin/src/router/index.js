@@ -66,6 +66,9 @@ import Upload from './../views/Tools/Upload.vue';
 import UploadList from './../views/Tools/UploadList.vue';
 //开通vip
 import OpenVip from './../views/OpenVip.vue';
+//快递查询
+import Express from './../views/Express/index.vue';
+import ExpressActivity from './../views/Express/expressActivity.vue';
 
 import test from './../views/myTest.vue';
 Vue.use(Router)
@@ -295,6 +298,16 @@ const router = new Router({
           path: '/OpenVip',
           component: OpenVip
         }, 
+        {
+          name: 'Express',
+          path: '/Express',
+          component: Express
+        },  
+        {
+          name: 'ExpressActivity',
+          path: '/ExpressActivity',
+          component: ExpressActivity
+        },
          {
           name: 'Book415',
           path: '/Book415',

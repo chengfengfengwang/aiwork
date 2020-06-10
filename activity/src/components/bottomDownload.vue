@@ -7,8 +7,8 @@
       <div class="main_title">下载app,收听全部课程配套音乐</div>
       <div class="sub_title">让孩子爱上音乐</div>
     </div>
-    <div class="down_load_btn" id="downloadButton">立即下载</div>
-    <div class="close_icon" @click="closeDownload">
+    <div class="down_load_btn"  @click="download();toCount()">立即下载</div>
+    <div class="close_icon" @click="closeDownload()">
       <img src="../assets/img/common/close.png" alt>
     </div>
   </div>
@@ -18,6 +18,11 @@
 import {initShareInstall, isIphonex} from 'common/util.js'
 
 export default {
+  props:{
+    countCallBack:{
+      type:Function
+    }
+  },
   data() {
     return {
       downloadShow: true,
@@ -32,6 +37,14 @@ export default {
   },
   mounted() {},
   methods: {
+    download(){
+      location.href = "http://api.yinji.immusician.com/download/?channel=cocodt"
+    },
+    toCount(){
+      if(typeof this.countCallBack === 'function'){
+        this.countCallBack()
+      }
+    },
     closeDownload() {
       this.downloadShow = false;
       sessionStorage.setItem("closedDownloadShow", "true");
