@@ -46,6 +46,9 @@ import AddWx from './../views/AddWx.vue'
 //数据统计
 import CountSongList from './../views/NewCountData/songList.vue';
 
+//课程学习计划
+import CoursePlan from './../views/CoursePlan/index.vue';
+import CoursePlanLevelList from './../views/CoursePlan/levelList.vue';
 
 
 import OrderList from './../views/OrderList.vue';
@@ -309,7 +312,17 @@ const router = new Router({
           name: 'AudioList',
           path: '/AudioList',
           component: AudioList
-        },
+        }, 
+        {
+          name: 'CoursePlan',
+          path: '/CoursePlan',
+          component: CoursePlan
+        }, 
+        {
+          name: 'CoursePlanLevelList',
+          path: '/CoursePlanLevelList',
+          component: CoursePlanLevelList
+        }, 
       ]
     },
     {
