@@ -47,7 +47,7 @@ export default {
     return {
       mescroll: null, // mescroll实例对象
       mescrollDown: {
-        use: false,
+        use: true,
         auto: false,
         callback: this.downCallback
       }, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)

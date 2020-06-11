@@ -70,7 +70,7 @@
         ></video>
       </div>
       <div class="text">
-        <div class="intro_title" v-show="courseInfo.name">{{courseInfo.name}}</div>
+        <div class="intro_title" v-show="courseInfo.name">《{{courseInfo.name}}》</div>
         <div class="intro_item" v-for="(item,index) in brief" :key="index">
           <div class="intro_label">{{item.label}}</div>
           <div class="intro_item_content">{{item.content}}</div>
@@ -457,6 +457,8 @@ export default {
           if (this.courseInfo.goods_id == "5db262b5f156d84930287b81") {
             this.$set(this.courseInfo, "name", "音乐星球之旅");
             console.log(this.courseInfo);
+          }else if(this.courseInfo.goods_id == "5d312e70f156d8527588a746"){
+            this.$set(this.courseInfo, "name", "器乐王国之旅");
           }
           console.log(this.courseInfo)
           this.getCoursetype(this.courseInfo.goods_id);
