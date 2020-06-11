@@ -44,10 +44,9 @@ import CodeAndCard_ActivedList from './../views/ActiveCodeAndCard/ActivedList.vu
 import AddWx from './../views/AddWx.vue'
 
 //数据统计
-import CountDataCourseAi from './../views/CountData/CourseAi.vue'
-import CountDataCourseYinji from './../views/CountData/CourseYinji.vue'
-import CountDataActivityYinji from './../views/CountData/ActivityYinji.vue'
-import CountDataActivityAi from './../views/CountData/ActivityAi.vue'
+import CountSongList from './../views/NewCountData/songList.vue';
+
+
 
 import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
@@ -269,29 +268,17 @@ const router = new Router({
           path: '/Config',
           component: Config
         },
+        // {
+        //   name: 'CountDataCourseAi',
+        //   path: '/CountData/CountDataCourseAi',
+        //   component: CountDataCourseAi,
+        //   meta: { parentMenu: 'CountData' }
+        // },  
         {
-          name: 'CountDataCourseAi',
-          path: '/CountData/CountDataCourseAi',
-          component: CountDataCourseAi,
+          name: 'CountSongList',
+          path: '/CountData/CountSongList',
+          component: CountSongList,
           meta: { parentMenu: 'CountData' }
-        },  
-        {
-          name: 'CountDataCourseYinji',
-          path: '/CountData/CountDataCourseYinji',
-          component: CountDataCourseYinji,
-          meta: { parentMenu: 'CountData' }  
-        },
-        {
-          name: 'CountDataActivityYinji',
-          path: '/CountData/CountDataActivityYinji',
-          component: CountDataActivityYinji,
-          meta: { parentMenu: 'CountData' }   
-        },  
-        {
-          name: 'CountDataActivityAi',
-          path: '/CountData/CountDataActivityAi',
-          component: CountDataActivityAi,
-          meta: { parentMenu: 'CountData' }   
         }, 
         {
           name: 'OpenVip',
