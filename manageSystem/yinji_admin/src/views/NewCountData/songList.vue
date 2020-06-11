@@ -92,6 +92,10 @@ export default {
           title: "事件",
           key: "stats_type_msg"
         },
+        {
+          title: "数量",
+          key: "total"
+        },
 
         // {
         //   title: " ",
@@ -220,9 +224,9 @@ export default {
       app_type: {},
       site_type: {},
       stats_type: {},
-      s_app_type: '',
-      s_site_type: '',
-      s_stats_type: ''
+      s_app_type: '1',
+      s_site_type: '100',
+      s_stats_type: '110'
     };
   },
   mounted() {
@@ -256,17 +260,24 @@ export default {
     },
 
     getTableList() {
-      const formObj = {
+      
+      let formObj = {
         // app_type: this.s_app_type,
         // site_type: this.s_site_type,
         // stats_type: this.s_stats_type
       };
+      const start_time = new Date(this.startTime).valueOf()/1000;
+      const end_time = new Date(this.endTime).valueOf()/1000;
       if(this.s_app_type){
           formObj.app_type = this.s_app_type;
-      }else if(this.s_site_type){
+      } if(this.s_site_type){
           formObj.site_type = this.s_site_type;
-      }else if(this.s_stats_type){
+      } if(this.s_stats_type){
           formObj.stats_type = this.s_stats_type;
+      } if(start_time){
+          formObj.start_time = start_time;
+      } if(end_time){
+          formObj.end_time = end_time;
       }
       this.axios
         .get(`${process.env.XIAOPO}/v1/coco_stats`, {

@@ -6,7 +6,7 @@ function uvRequest(
     song_id = -1, //单个歌曲id
   ) {
     axios
-      .post(`http://192.168.2.129:55555/v1/coco_stats`, {
+      .post(`http://api.yinji.immusician.com/v1/coco_stats`, {
         site_type,
         stats_type,
         song_list_id,

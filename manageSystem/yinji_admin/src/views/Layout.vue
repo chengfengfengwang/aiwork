@@ -357,24 +357,9 @@ const myMenus = [
     menuText: "数据统计",
     children: [
       {
-        name: "CountDataCourseAi",
-        text: "AI课程",
-        link: "/CountData/CountDataCourseAi"
-      },
-      {
-        name: "CountDataActivityAi",
-        text: "Ai活动",
-        link: "/CountData/CountDataActivityAi"
-      },
-      {
-        name: "CountDataCourseYinji",
-        text: "音基课程",
-        link: "/CountData/CountDataCourseYinji"
-      },
-      {
-        name: "CountDataActivityYinji",
-        text: "音基活动",
-        link: "/CountData/CountDataActivityYinji"
+        name: "CountSongList",
+        text: "歌单",
+        link: "/CountData/CountSongList"
       }
     ]
   },
