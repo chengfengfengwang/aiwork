@@ -66,6 +66,9 @@ export default {
         }
       ]
     };
+  },
+  created(){
+    document.title = 'VIP详情'
   }
 };
 </script>

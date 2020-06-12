@@ -168,9 +168,14 @@ export default {
         pageNum,
         pageSize,
         data => {
+         
           this.dataList = [];
           this.dataList = this.dataList.concat(data);
           this.$nextTick(() => {
+             Toast({
+              message: "更新成功",
+              duration: 1000
+            });
             mescroll.endSuccess();
           });
         },
@@ -207,12 +212,7 @@ export default {
 			
 			<style lang="less" scoped>
 /*通过fixed固定mescroll的高度*/
-.mescroll {
-  position: fixed;
-  top: 44px;
-  bottom: 0;
-  height: auto;
-}
+
 .menus {
   display: flex;
   padding: 8px 34px;
@@ -244,6 +244,10 @@ export default {
       border-radius: 12px;
     }
   }
+}
+.content {
+  min-height: 70vh;
+  height: calc(100vh - 60px);
 }
 .content {
   .list_item {

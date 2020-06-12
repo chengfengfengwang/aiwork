@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <img src="../../../assets/img/normal/normal/qr522.jpg" alt="" class="qr">
+    <img src="../../../assets/img/normal/normal/qr612.png" alt="" class="qr">
     <div class="text">
       <div>
         <div class="text_title">扫码入群领取:</div>

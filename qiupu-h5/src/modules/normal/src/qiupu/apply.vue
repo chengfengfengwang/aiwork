@@ -114,7 +114,7 @@ export default {
           .post(`${process.env.VUE_APP_QIUPU}/request_score`, this.formValue)
           .then(res => {
             if (!res.error) {
-              const time = 1500;
+              const time = 800;
               Toast({
                 message: "发布成功",
                 duration: time

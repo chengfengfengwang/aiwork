@@ -216,8 +216,7 @@ export default {
     };
   },
   mounted() {
-    //this.getTableList();
-    this.getChannels();
+    this.getTableList();
   },
   methods: {
        createNewBank() {
@@ -234,13 +233,7 @@ export default {
       this.page = 0;
       this.getTableList();
     },
-    getChannels() {
-      this.axios
-        .get(`${process.env.WULIU}/channel/index?page=0&size=999&status=1`)
-        .then(res => {
-          this.channelList = res.data.list;
-        });
-    },
+   
     getTableList() {
       const formObj = {
         start_time: this.startTime.valueOf() / 1000,
@@ -248,7 +241,7 @@ export default {
         status: this.status,
         channel_id: this.searchChannel
       };
-      this.axios.post(`${process.env.WULIU}/order/system/index`,formObj).then(res => {
+      this.axios.get(`${process.env.JINKANG}/v1/courses_lv/show/?course_id=27`).then(res => {
         this.tableLoading = false;
         this.dataList = res.data.list;
       });
