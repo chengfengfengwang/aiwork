@@ -63,9 +63,10 @@ export default {
                   },
                   on: {
                     click: () => {
-                      localStorage.setItem("channelId", params.row.id);
-                      localStorage.setItem("channelName", params.row.name);
-                      this.$router.push("/CoursePlanLevelList");
+                      //this.$router.push("/CoursePlanLevelList");
+                      let courseName = encodeURIComponent(params.row.name);
+                      location.href = `${location.origin}${location.pathname}?course_id=27&course_name=${courseName}#/CoursePlanLevelList`;
+                      //this.$router.push({ path: '/CoursePlanLevelList', query: { course_id: '27' }})
                     }
                   }
                 },
@@ -90,31 +91,6 @@ export default {
                   }
                 },
                 "sku"
-              ),
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "info",
-                    size: "small"
-                  },
-                  style: {
-                    marginRight: "5px",
-                    display: this.editShow ? "inline-block" : "none"
-                  },
-                  on: {
-                    click: () => {
-                      this.modalShow = true;
-                      this.modalStatus = "edit";
-                      this.formValidate = JSON.parse(
-                        JSON.stringify(params.row)
-                      );
-                      delete this.formValidate._index;
-                      delete this.formValidate._rowKey;
-                    }
-                  }
-                },
-                "编辑"
               ),
               h(
                 "Button",

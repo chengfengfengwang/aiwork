@@ -3,12 +3,12 @@
     <Select v-model="s_app_type" placeholder="选择app" style="width:200px">
       <Option v-for="(value,name) in app_type" :key="name" :value="name">{{value}}</Option>
     </Select>
-    <Select v-model="s_site_type" placeholder="选择位置" style="width:200px">
+    <!-- <Select v-model="s_site_type" placeholder="选择位置" style="width:200px">
       <Option v-for="(value,name) in site_type" :key="name" :value="name">{{value}}</Option>
-    </Select>
-    <Select v-model="s_stats_type" placeholder="触发事件" style="width:200px">
+    </Select> -->
+    <!-- <Select v-model="s_stats_type" placeholder="触发事件" style="width:200px">
       <Option v-for="(value,name) in stats_type" :key="name" :value="name">{{value}}</Option>
-    </Select>
+    </Select> -->
     <span>开始时间</span>
     <DatePicker v-model="startTime" type="date" placeholder="Select date" style="width: 200px"></DatePicker>
     <span>结束时间</span>
@@ -87,6 +87,10 @@ export default {
         {
           title: "位置",
           key: "site_type_msg"
+        }, 
+        {
+          title: "歌单",
+          key: "song_list_name"
         },
         {
           title: "事件",
@@ -225,8 +229,8 @@ export default {
       site_type: {},
       stats_type: {},
       s_app_type: '1',
-      s_site_type: '100',
-      s_stats_type: '110'
+      s_site_type: '',
+      s_stats_type: ''
     };
   },
   mounted() {
@@ -260,7 +264,7 @@ export default {
     },
 
     getTableList() {
-      
+      this.tableLoading = true;
       let formObj = {
         // app_type: this.s_app_type,
         // site_type: this.s_site_type,
