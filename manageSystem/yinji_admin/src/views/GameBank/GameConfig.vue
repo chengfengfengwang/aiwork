@@ -987,6 +987,12 @@
               <Jzaz :obj="formValidate.material_data[0]" ref="jzaz"/>
             </FormItem>
           </div>
+          <!-- 拖动认识键盘 -->
+          <div v-if="curGame=='tdrsjp' && modalShow">
+            <FormItem label="素材">
+              <Tdrsjp :obj="formValidate.material_data[0]" ref="tdrsjp"/>
+            </FormItem>
+          </div>
           <!-- 节奏乐器小火车配置 -->
           <div v-if="curGame=='jzyq' && modalShow">
             <FormItem label="素材">
@@ -1239,6 +1245,7 @@ import ZC from "../../components/ZC/index";
 import TuSe from "../../components/TS/tuse";
 import ZHPT from "../../components/ZHPT/zhpt";
 import JLXN from "../../components/JLXN/JLXN";
+import Tdrsjp from "../../components/Tdrsjp/index";
 import HechengInstruments from "../../assets/instrucmentList.js";
 import PassData from "../../assets/passData.js";
 import { mapState, mapActions } from "vuex";
@@ -1607,7 +1614,8 @@ export default {
     Jzyq,
     Jzyqsp,
     Gsgbysf,
-    Cpbf
+    Cpbf,
+    Tdrsjp
   },
   mounted() {
     //this.getProductList();
@@ -2081,7 +2089,9 @@ export default {
       } else if (newRow.game_type == 70) {
         //节奏按钟
         this.curGame = "jzaz";
-      } else {
+      } else if (newRow.game_type == 74) {
+        this.curGame = "tdrsjp";
+      }else {
         this.curGame = "";
       }
 
@@ -2658,6 +2668,11 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "jzaz") {
           var obj = this.$refs.jzaz.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        } else if (this.curGame == "tdrsjp") {
+          var obj = this.$refs.tdrsjp.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);

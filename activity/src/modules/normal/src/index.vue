@@ -17,7 +17,26 @@ export default {
     return {}
   },
   created(){
-    document.title='入群领取礼包'
+    document.title='入群领取礼包';
+    this.countPage('页面访问')
+  },
+  methods:{
+     countPage(key) {
+      // //http://api.yinji.immusician.com/v1/wechat/live_list
+      // let postUrl = `${location.origin}${
+      //   location.pathname
+      // }?index=${getQueryVariable("index")}`;
+      this.axios
+        .post(
+          "http://api.yinji.immusician.com/v1/operate/collect_page_visit/",
+          {
+            url: '音乐壳奖学金卡页面PV',
+            key,
+            uid: ''
+          }
+        )
+        .then(res => {});
+    },
   },
   components: {
     
