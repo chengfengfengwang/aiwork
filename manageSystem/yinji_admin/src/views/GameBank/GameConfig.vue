@@ -990,7 +990,7 @@
           <!-- 拖动认识键盘 -->
           <div v-if="curGame=='tdrsjp' && modalShow">
             <FormItem label="素材">
-              <Tdrsjp :obj="formValidate.material_data[0]" ref="tdrsjp"/>
+              <Tdrsjp :groupArr="formValidate.material_data[0]" ref="tdrsjp"/>
             </FormItem>
           </div>
           <!-- 节奏乐器小火车配置 -->
@@ -1042,9 +1042,15 @@
             </FormItem>
           </div>
           <!-- 老虎机（非洲鼓）配置 -->
-          <div v-if="curGame=='lhjfzg' && modalShow">
+          <div v-if="curGame=='lhjfzg' && modalShow"> 
             <FormItem label="素材">
               <Lhjfzg :obj="formValidate.material_data[0]" ref="lhjfzg"/>
+            </FormItem>
+          </div> 
+          <!-- 拖动动物到键盘 -->
+          <div v-if="curGame=='tddwdjp' && modalShow"> 
+            <FormItem label="素材">
+              <Tddwdjp :groupArr="formValidate.material_data[0]" ref="tddwdjp"/>
             </FormItem>
           </div>
           <!-- coco回家配置 -->
@@ -1221,6 +1227,8 @@ import Ukpz from "../../components/Ukpz/Ukpz";
 import Mypz from "../../components/Mypz/Mypz";
 import Lhjjzhp from "../../components/Lhjjzhp/Lhjjzhp";
 import Lhjfzg from "../../components/Lhjfzg/Lhjfzg";
+import Tddwdjp from "../../components/Tddwdjp/index";
+
 import Cocohj from "../../components/Cocohj/Cocohj";
 import Cyjzd from "../../components/Cyjzd/Cyjzd";
 import XjlWxp from "../../components/XjlWxp/XjlWxp";
@@ -1245,7 +1253,7 @@ import ZC from "../../components/ZC/index";
 import TuSe from "../../components/TS/tuse";
 import ZHPT from "../../components/ZHPT/zhpt";
 import JLXN from "../../components/JLXN/JLXN";
-import Tdrsjp from "../../components/Tdrsjp/index";
+import Tdrsjp from "../../components/Tdrsjp/TuodongGroup";
 import HechengInstruments from "../../assets/instrucmentList.js";
 import PassData from "../../assets/passData.js";
 import { mapState, mapActions } from "vuex";
@@ -1465,7 +1473,7 @@ export default {
         }
       ],
       gameList: [],
-      page: 198,
+      page: 424,
       pageSize: 10,
       total: 0,
       modalCoverShow: "",
@@ -1603,6 +1611,7 @@ export default {
     Mypz,
     Lhjjzhp,
     Lhjfzg,
+    Tddwdjp,
     Buyu,
     Sgjz,
     Jzyx,
@@ -2067,6 +2076,9 @@ export default {
       } else if (newRow.game_type == 61) {
         //老虎机（非洲鼓）
         this.curGame = "lhjfzg";
+      } else if (newRow.game_type == 75) {
+        //拖动动物到键盘
+        this.curGame = "tddwdjp";
       } else if (newRow.game_type == 62) {
         //节奏乐器（小火车）
         this.curGame = "jzyq";
@@ -2555,8 +2567,14 @@ export default {
     },
     createNewGame() {
       //this.modalCoverShow = false;
-      this.formValidate = {};
-      this.$refs.formValidate.resetFields();
+      this.formValidate = {
+        wxp:0,
+        yf:0,
+        ph:0,
+        xjx:0,
+        gc:0
+      };
+      //this.$refs.formValidate.resetFields();
       this.modalShow = true;
       this.modalStatus = "create";
       this.curGame = "";
@@ -2725,7 +2743,12 @@ export default {
           var obj = this.$refs.lhjfzg.submit();
           var arr = [];
           arr[0] = obj;
-          newForm.material_data = JSON.stringify(arr);
+          newForm.material_data = JSON.stringify(arr); 
+        } else if (this.curGame == "tddwdjp") {
+          var obj = this.$refs.tddwdjp.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr); 
         } else if (this.curGame == "cocohj") {
           var obj = this.$refs.cocohj.submit();
           var arr = [];
