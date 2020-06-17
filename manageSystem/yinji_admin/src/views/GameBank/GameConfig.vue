@@ -981,6 +981,12 @@
               <Mnyx2d :obj="formValidate.material_data[0]" ref="mnyx2d"/>
             </FormItem>
           </div>
+          <!-- ai舞台秀 -->
+          <div v-if="curGame=='aiwtx' && modalShow">
+            <FormItem label="素材">
+              <Aiwtx :obj="formValidate.material_data[0]" ref="aiwtx"/>
+            </FormItem>
+          </div>
           <!-- 节奏按钟配置 -->
           <div v-if="curGame=='jzaz' && modalShow">
             <FormItem label="素材">
@@ -1216,6 +1222,7 @@ import Buyu from "../../components/Buyu/Buyu";
 import Sgjz from "../../components/Sgjz/Sgjz";
 import Jzyx from "../../components/Jzyx/Jzyx";
 import Mnyx2d from "../../components/Mnyx2d/Mnyx2d";
+import Aiwtx from "../../components/Aiwtx/index";
 import Jzaz from "../../components/Jzaz/Jzaz";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
@@ -1616,6 +1623,7 @@ export default {
     Sgjz,
     Jzyx,
     Mnyx2d,
+    Aiwtx,
     Jzaz,
     Ccht,
     Cocohj,
@@ -2098,6 +2106,9 @@ export default {
       } else if (newRow.game_type == 69) {
         //模拟游戏2d
         this.curGame = "mnyx2d";
+      } else if (newRow.game_type == 80) {
+        //ai舞台秀
+        this.curGame = "aiwtx";
       } else if (newRow.game_type == 70) {
         //节奏按钟
         this.curGame = "jzaz";
@@ -2684,7 +2695,12 @@ export default {
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
-        } else if (this.curGame == "jzaz") {
+        } else if (this.curGame == "aiwtx") {
+          var obj = this.$refs.aiwtx.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "jzaz") {
           var obj = this.$refs.jzaz.submit();
           var arr = [];
           arr[0] = obj;
