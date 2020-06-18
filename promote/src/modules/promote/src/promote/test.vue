@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    
+    <div @click="share" class="btn">分享</div>
   </div>
 </template>
 <script>
@@ -8,33 +8,22 @@ import { getQueryVariable } from "../../../../common/util.js";
 export default {
   data() {
     return {
-      vcodeText: "获取验证码",
-      vCode: "",
-      selectedCourse: "",
-      form: {
-        real_name: "",
-        phone: "",
-        code: "",
-        share_id: getQueryVariable("share_id"),
-        share_phone: "",
-        is_proxy: 1,
-        share_stall: getQueryVariable("c")
-      },
-      courseList: [],
-      hasPhone: false
+      
     };
   },
   created() {
-    if (getQueryVariable("p")) {
-      this.hasPhone = true;
-      this.form.share_phone = getQueryVariable("p");
-    }
+   
   },
   mounted() {
-    this.inputevent();
   },
   methods: {
-   
+   share(){
+     let base64 = 'data:image/png;base64,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'
+     console.log(webkit.messageHandlers.shareWebImage.postMessage)
+     webkit.messageHandlers.shareWebImage.postMessage({
+          data: base64
+        });
+   }
   }
 };
 </script>
@@ -65,6 +54,9 @@ body {
   width: 100%;
   min-height: 100vh;
 }
-
+.btn{
+  margin-top: 200px;
+  border:1px solid #333;
+}
 </style>
 

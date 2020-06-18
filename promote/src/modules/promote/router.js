@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const test = () => import('./src/promote/test.vue')
+const test1 = () => import('./src/promote/test1.vue')
 const poster = () => import('./src/promote/poster.vue')
 const reward = () => import('./src/promote/reward.vue')
 const reg = () => import('./src/promote/reg.vue')
@@ -96,6 +97,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: test
+    },
+    {
+      path: '/test1',
+      name: 'test1',
+      component: test1
     },
   ],
 

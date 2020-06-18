@@ -138,7 +138,7 @@ export default {
         // });
         setTimeout(() => {
           this.getResult64();
-        }, 350);
+        }, 550);
       });
     },
     createQr() {
@@ -243,7 +243,7 @@ export default {
           // console.log(this.resultBase64);
           // console.log("----------");
         });
-      }, 300);
+      }, 500);
     },
     shareToFriends() {
       if (platForm == "IOS") {

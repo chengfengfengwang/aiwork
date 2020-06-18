@@ -180,7 +180,7 @@ export default {
         console.log("--");
         setTimeout(() => {
           this.getResult64();
-        }, 350);
+        }, 550);
       });
     },
     createQr() {

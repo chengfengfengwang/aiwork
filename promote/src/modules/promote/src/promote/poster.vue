@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <Loading v-show="loadingShow" />
+    <Loading v-show="loadingShow"  />
     <div @click="maskShow=true" class="rule_btn">
       <img src="../../../../assets/img/promote/poster/rule_btn.png" alt />
     </div>
@@ -201,10 +201,9 @@ export default {
       pArr.push(this.createQr());
       pArr.push(this.posterTo64());
       Promise.all(pArr).then(res => {
-        console.log("--");
         setTimeout(() => {
           this.getResult64();
-        }, 350);
+        }, 550);
       });
     },
     createQr() {
@@ -253,30 +252,8 @@ export default {
         };
       });
     },
-    createResultImg() {
-      this.imgToBase64(this.userInfo.avatar).then(res => {
-        this.avatarBase64 = res;
-        document.querySelector(".page.p6").classList.add("visi");
-        html2canvas(document.querySelector(".result_wrapper"), {
-          backgroundColor: "transparent"
-          //allowTaint: true
-        }).then(canvas => {
-          document.querySelector(".page.p6").classList.remove("visi");
-          //return
-          //把画好的canvas转成base64
-          document.querySelector(".result_wrapper").innerHTML = "";
-          var img = new Image();
-          img.classList.add("resultImg");
-          img.src = canvas.toDataURL("image/png");
-          img.onload = function() {
-            document.querySelector(".page.p6 .result_wrapper").appendChild(img);
-          };
-        });
-      });
-    },
     getResult64() {
       this.loadingShow = false;
-      console.log(document.querySelector("#posterContainer"));
       console.log("----开始截取------");
       html2canvas(document.querySelector("#posterContainer"), {
         //backgroundColor: "transparent"
@@ -296,7 +273,7 @@ export default {
         // img.onload = function() {
         //   document.body.appendChild(img);
         // };
-        this.resultBase64 = canvas.toDataURL("image/png");
+        this.resultBase64 = canvas.toDataURL();
         //this.resultBase64Show = true;
         // console.log("----------");
         // console.log(this.resultBase64);
@@ -532,4 +509,89 @@ export default {
     color: rgba(230, 24, 11, 1);
   }
 }
+.ac_rule {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 325px;
+  padding: 36px 20px 20px 20px;
+  background-color: #fff;
+  border: 6px solid #facb9f;
+  border-radius: 20px;
+  font-size: 13px;
+  font-family: PingFangSC-Regular;
+  color: #666666;
+ 
+  .rule_title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 213px;
+    height: 36px;
+    top: -11px;
+     background: url('../../../../assets/img/promote/poster/rule_title.png') no-repeat
+       center/cover;
+    font-size: 16px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: rgba(142, 49, 18, 1);
+    text-align: center;
+    padding-top: 6px;
+    // img{
+    //   width: 100%;
+    // }
+  }
+  .close_icon {
+    position: absolute;
+    bottom: -76px;
+    left: 50%;
+    padding: 20px;
+    transform: translateX(-50%);
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .rule_item {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 28px;
+    .item_index {
+      position: absolute;
+      left: -4px;
+      top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: rgba(240, 144, 87, 1);
+      border-radius: 50%;
+      font-size: 12px;
+      font-family: PingFang SC;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+    }
+    .rule_lab {
+      font-family: PingFangSC-Semibold;
+      font-weight: 600;
+    }
+    .color {
+      color: #f54815;
+    }
+  }
+  .rule_bottom {
+    font-size: 13px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
+    text-align: center;
+  }
+}
+ @media screen and (max-width: 420px) and (min-height: 750px) {
+    .ac_rule{
+      top: 70px;
+    } 
+  }
 </style>
