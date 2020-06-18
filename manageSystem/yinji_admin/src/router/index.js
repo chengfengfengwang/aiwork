@@ -40,6 +40,8 @@ import QuestionBanks from './../views/AnotherQuestionBank/QuestionBanks.vue'
 //激活码和奖学金卡
 import CodeAndCard_Create from './../views/ActiveCodeAndCard/Create.vue'
 import CodeAndCard_ActivedList from './../views/ActiveCodeAndCard/ActivedList.vue'
+import CodeAndCard_Create_Ai from './../views/ActiveCodeAndCard/Create_Ai.vue'
+
 //购买完成后添加微信
 import AddWx from './../views/AddWx.vue'
 
@@ -236,11 +238,17 @@ const router = new Router({
           meta: { parentMenu: 'ActiveCodeAndCard' }  
         },
         {
+          name: 'CodeAndCard_Create_Ai',
+          path: '/ActiveCodeAndCard/Create_Ai',
+          component: CodeAndCard_Create_Ai,
+          meta: { parentMenu: 'ActiveCodeAndCard' }  
+        },
+        {
           name: 'CodeAndCard_ActivedList', 
           path: '/ActiveCodeAndCard/ActivedList',
           component: CodeAndCard_ActivedList,
           meta: { parentMenu: 'ActiveCodeAndCard' }  
-        },
+        }, 
         {
           name: 'OrderList',
           path: '/OrderList',
