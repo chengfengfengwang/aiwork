@@ -163,7 +163,6 @@ export default {
         this.imgToBase64(url).then(res => {
           console.log("poster64 ready");
           this.posterSrc = res;
-          this.loadingShow = false;
           resolve();
         });
       });
@@ -188,7 +187,6 @@ export default {
       });
     },
     getResult64() {
-      this.loadingShow = false;
       if (this.swiperShow) {
         this.swiperGetResult64();
         return;
@@ -210,6 +208,7 @@ export default {
         //return
         //把画好的canvas转成base64
         console.log("----截取完成------");
+        this.loadingShow = false;
         this.resultBase64 = canvas.toDataURL("image/png");
         this.resultBase64Show = true;
         console.log("----------");

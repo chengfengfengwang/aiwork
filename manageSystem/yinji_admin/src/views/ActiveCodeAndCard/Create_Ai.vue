@@ -92,72 +92,29 @@
         <Form :model="formValue" label-position="right" :label-width="100">
           <FormItem label="创建类型">
             <Select v-model="formValue.type" placeholder="选择创建类型">
-              <Option value="0">课程激活码</Option>
-              <Option value="1">奖学金卡</Option>
-               <Option value="2">实物卡</Option>
+              <Option value="0">激活码</Option>
             </Select>
           </FormItem>
-          <!-- <FormItem label="渠道来源">
-            <Select v-model="formValue.channel_source" placeholder="选择渠道来源">
+          <FormItem label="礼包">
+            <Select  multiple v-model="giftIds" placeholder="选择渠道来源">
               <Option
-                :value="name"
-                v-for="(value,name) in channel_source_name"
-                :key="name"
-              >{{value}}</Option>
+                :value="item.id"
+                v-for="(item,index) in giftBagList"
+                :key="index"
+              >{{item.name}}</Option>
             </Select>
           </FormItem>
-          <FormItem label="渠道类型">
-            <Select v-model="formValue.channel_type" placeholder="选择渠道类型">
-              <Option
-                :value="name"
-                v-for="(value,name) in cur_channel_type_name"
-                :key="name"
-              >{{value}}</Option>
-            </Select>
-          </FormItem> -->
           <FormItem label="渠道名称">
             <Input v-model="formValue.channel"></Input>
-          </FormItem>
-          <!-- <FormItem label="渠道">
-            <Select
-              filterable
-              @on-change="channelChange"  
-              v-model="formValue.channel_id"
-              style="width:200px"
-            >
-              <Option
-                v-for="(item,index) in channelList"
-                :value="item.id"
-                :key="index"
-              >{{ item.name }}</Option>
-            </Select>
-          </FormItem>
-          <FormItem label="sku">
-            <Select filterable v-model="formValue.sku_id" style="width:200px">
-              <Option v-for="(item,index) in skuList" :value="item.id" :key="index">{{ item.name }}</Option>
-            </Select>
-          </FormItem>
-          <FormItem label="课程类型">
-            <Select v-model="formValue.course_type" placeholder="选择课程类型">
-              <Option :value="name" v-for="(value,name) in course_type_name" :key="name">{{value}}</Option>
-            </Select>
-          </FormItem> -->
-          <FormItem label="课程套餐">
-            <Select v-model="formValue.goods_ids" placeholder="选择渠道类型">
-              <Option :value="name" v-for="(value,name) in goods_ids_name" :key="name">{{value}}</Option>
-            </Select>
           </FormItem>
           <FormItem label="时长">
             <Input placeholder="单位：天" v-model.number="formValue.goods_deadline"></Input>
           </FormItem>
-          <FormItem label="奖学金卡金额" v-show="showAmount">
-            <Input placeholder="请填写奖学金卡金额（非小数）单位：元" v-model.number="formValue.amount"></Input>
+          <FormItem label="班级类型">
+            <Input placeholder="班级类型" v-model.number="formValue.class_type"></Input>
           </FormItem>
-          <FormItem label="负责人">
-            <Input placeholder="请填写相关负责人名称" v-model="formValue.principal"></Input>
-          </FormItem>
-          <FormItem label="厂商手机号">
-            <Input placeholder="请填写厂商手机号" v-model="formValue.phone"></Input>
+          <FormItem label="负责人手机号">
+            <Input placeholder="请填写负责人手机号" v-model="formValue.phone"></Input>
           </FormItem>
           <FormItem label="生成数量">
             <Input placeholder="请填写生成数量" v-model.number="formValue.count"></Input>
@@ -182,7 +139,7 @@ export default {
   data() {
     return {
       tableLoading: true,
-      modalShow: false,
+      modalShow: true,
       formValidate: {},
       formValue: {},
       location: [],
@@ -211,23 +168,23 @@ export default {
             );
           }
         },
-        {
-          title: "渠道来源",
-          key: "channel_source",
-          render: (h, params) => {
-            return h(
-              "div",
-              this.channel_source_name[params.row.channel_source]
-            );
-          }
-        },
-        {
-          title: "渠道类型",
-          key: "channel_type",
-          render: (h, params) => {
-            return h("div", this.channel_type_name[params.row.channel_type]);
-          }
-        },
+        // {
+        //   title: "渠道来源",
+        //   key: "channel_source",
+        //   render: (h, params) => {
+        //     return h(
+        //       "div",
+        //       this.channel_source_name[params.row.channel_source]
+        //     );
+        //   }
+        // },
+        // {
+        //   title: "渠道类型",
+        //   key: "channel_type",
+        //   render: (h, params) => {
+        //     return h("div", this.channel_type_name[params.row.channel_type]);
+        //   }
+        // },
         {
           title: "编号",
           key: "start",
@@ -237,13 +194,13 @@ export default {
           }
         },
 
-        {
-          title: "课程套餐",
-          key: "goods_ids",
-          render: (h, params) => {
-            return h("div", this.goods_ids_name[params.row.goods_ids]);
-          }
-        },
+        // {
+        //   title: "课程套餐",
+        //   key: "goods_ids",
+        //   render: (h, params) => {
+        //     return h("div", this.goods_ids_name[params.row.goods_ids]);
+        //   }
+        // },
         {
           title: "时长(天)",
           key: "goods_deadline"
@@ -332,7 +289,9 @@ export default {
         //channel_type:''
       },
       channelList: [],
-      skuList: []
+      skuList: [],
+      giftBagList:[],
+      giftIds:[]
     };
   },
   computed: {
@@ -370,8 +329,18 @@ export default {
     //delete this.axios.defaults.headers.common.token;
     //this.getChannels();
     this.get();
+    this.giftBag()
   },
   methods: {
+    giftBag(){
+       this.axios
+        .get(
+          `${process.env.XIAOPO}/v3/code_gift_bag/`
+        )
+        .then(res => {
+          this.giftBagList = res.data;
+        });
+    },
     channelChange() {
       this.getSkus(this.formValue.channel_id);
     },
@@ -487,7 +456,6 @@ export default {
         } else {
           this.dataList = [];
         }
-        this.modalShow = false;
         this.goods_ids_name = res.goods_ids_name;
         this.course_type_name = res.course_type_name;
         console.log(
@@ -527,15 +495,16 @@ export default {
     },
     handleSubmit() {
       //console.log(this.location);
-      if (this.formValue.channel_source === "1") {
-        var myLocation = "";
-        this.location.forEach(e => {
-          myLocation += e.name + " ";
-        });
-        this.formValue.location = myLocation.trim();
-      }
+      // if (this.formValue.channel_source === "1") {
+      //   var myLocation = "";
+      //   this.location.forEach(e => {
+      //     myLocation += e.name + " ";
+      //   });
+      //   this.formValue.location = myLocation.trim();
+      // }
       console.log(this.formValue);
-      //return;
+      console.log(this.formatGiftIds(this.giftIds));
+      return;
       this.axios
         .post(
           process.env.XIAOPO + "/" + process.env.VERSION + "/code",
@@ -558,6 +527,17 @@ export default {
     reset() {
       this.searchValue = {};
       this.get();
+    },
+    formatGiftIds(ids){
+      let obj = {};
+      for(let i=0;i<ids.length;i++){
+        for(let k=0;k<this.giftBagList.length;k++){
+          if(ids[i]===this.giftBagList[k].id){
+            obj[this.giftBagList[k].instrument_type] = ids[i]
+          }
+        }
+      };
+      return obj
     }
   },
   //   watch: {

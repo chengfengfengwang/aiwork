@@ -987,6 +987,18 @@
               <Aiwtx :obj="formValidate.material_data[0]" ref="aiwtx"/>
             </FormItem>
           </div>
+          <!-- 键盘区分左右手 -->
+          <div v-if="curGame=='jpqfzys' && modalShow">
+            <FormItem label="素材">
+              <Jpqfzys :obj="formValidate.material_data[0]" ref="jpqfzys"/>
+            </FormItem>
+          </div>
+          <!-- 双手节奏练习键盘 -->
+          <div v-if="curGame=='ssjzlxjp' && modalShow">
+            <FormItem label="素材">
+              <Ssjzlxjp :obj="formValidate.material_data[0]" ref="ssjzlxjp"/>
+            </FormItem>
+          </div>
           <!-- 节奏按钟配置 -->
           <div v-if="curGame=='jzaz' && modalShow">
             <FormItem label="素材">
@@ -1223,6 +1235,8 @@ import Sgjz from "../../components/Sgjz/Sgjz";
 import Jzyx from "../../components/Jzyx/Jzyx";
 import Mnyx2d from "../../components/Mnyx2d/Mnyx2d";
 import Aiwtx from "../../components/Aiwtx/index";
+import Jpqfzys from "../../components/Jpqfzys/index";
+import Ssjzlxjp from "../../components/Ssjzlxjp/index";
 import Jzaz from "../../components/Jzaz/Jzaz";
 import Ccht from "../../components/Ccht/Ccht";
 import Jzyq from "../../components/Jzyq/Jzyq";
@@ -1624,6 +1638,8 @@ export default {
     Jzyx,
     Mnyx2d,
     Aiwtx,
+    Jpqfzys,
+    Ssjzlxjp,
     Jzaz,
     Ccht,
     Cocohj,
@@ -2106,6 +2122,12 @@ export default {
       } else if (newRow.game_type == 69) {
         //模拟游戏2d
         this.curGame = "mnyx2d";
+      } else if (newRow.game_type == 79) {
+        //键盘区分左右手
+        this.curGame = "jpqfzys";
+      } else if (newRow.game_type == 81) {
+        //双手节奏练习键盘
+        this.curGame = "ssjzlxjp";
       } else if (newRow.game_type == 80) {
         //ai舞台秀
         this.curGame = "aiwtx";
@@ -2697,6 +2719,16 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "aiwtx") {
           var obj = this.$refs.aiwtx.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "jpqfzys") {
+          var obj = this.$refs.jpqfzys.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        }else if (this.curGame == "ssjzlxjp") {
+          var obj = this.$refs.ssjzlxjp.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);
