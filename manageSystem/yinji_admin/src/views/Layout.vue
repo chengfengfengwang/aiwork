@@ -24,6 +24,7 @@
 }
 .ivu-menu-item {
   color: #515a6e;
+  padding-bottom: 150px;
 }
 </style>
 <template>
@@ -364,6 +365,18 @@ const myMenus = [
     ]
   },
   {
+    hasChild: true,
+    name: "CoursePlan",
+    menuText: "课程计划",
+    children: [
+      {
+        name: "CoursePlan",
+        text: "Level/周",
+        link: "/CoursePlan"
+      }
+    ]
+  },
+  {
     hasChild: false,
     name: "ShareConfig",
     text: "app分享配置",
@@ -432,12 +445,7 @@ export default {
     this.menus = localStorage.getItem("menus")
       ? JSON.parse(localStorage.getItem("menus"))
       : myMenus;
-    // this.menus = [{
-    //   hasChild: false,
-    //   name: "ActiveCodeAndCard",
-    //   text: "激活码",
-    //   link: "/ActiveCodeAndCard/ActivedList"
-    // }];
+    //this.menus = myMenus;
     this.activeMenuName = this.$route.name;
     this.openMenuArr.push(this.$route.meta.parentMenu);
     this.getAppName();

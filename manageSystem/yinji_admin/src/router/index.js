@@ -324,12 +324,14 @@ const router = new Router({
         {
           name: 'CoursePlan',
           path: '/CoursePlan',
-          component: CoursePlan
+          component: CoursePlan,
+          meta: { parentMenu: 'CoursePlan' }
         }, 
         {
           name: 'CoursePlanLevelList',
           path: '/CoursePlanLevelList',
-          component: CoursePlanLevelList
+          component: CoursePlanLevelList,
+          meta: { parentMenu: 'CoursePlan' }
         }, 
       ]
     },

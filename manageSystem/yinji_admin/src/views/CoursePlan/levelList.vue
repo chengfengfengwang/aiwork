@@ -85,6 +85,16 @@
               placeholder="输入描述"
             ></Input>
           </FormItem>
+          <FormItem label="是否有周列表">
+            <Select v-model="lvFormValue.has_week" placeholder="是否有周列表">
+              <Option
+                :value="0"
+              >否</Option>
+              <Option
+                :value="1"
+              >是</Option>
+            </Select>
+          </FormItem>
           <FormItem>
             <Button type="success" @click="lvFormSubmit" style="width:100px">提交</Button>
           </FormItem>
@@ -146,6 +156,11 @@
               </Col>
             </Row>
           </FormItem>
+          <FormItem label="课外曲谱">
+            <Select filterable v-model="weekFormValue.score_list" multiple placeholder="选择课外曲谱">
+              <Option v-for="item in qupuList" :key="item._id" :value="item._id">{{item.name}}</Option>
+            </Select>
+          </FormItem>
           <FormItem>
             <Button type="success" @click="weekFormSubmit" style="width:100px">提交</Button>
           </FormItem>
@@ -172,7 +187,8 @@ export default {
       lvFormShow: true,
       weekFormShow: false,
       index: 0,
-      courseName:''
+      courseName:'',
+      qupuList:[]
     };
   },
   mounted() {
@@ -180,12 +196,20 @@ export default {
      this.courseName = decodeURIComponent(getQueryVariable("course_name"));
     this.getLevelList();
     this.getLessonList();
+    this.getQupuList();
   },
   components: {
     MyUpload: Upload,
     BgList
   },
   methods: {
+    getQupuList(){
+       this.axios 
+        .get(`${process.env.JINKANG}/v1/score/?page=0&szie=999&instrument_type=${getQueryVariable('instrument_type')}`)
+        .then(res => {
+          this.qupuList = res.data;
+        });
+    },
     handleRemoveKnowledge(index) {
       this.weekFormValue.knowledge_list.splice(index, 1);
     },
