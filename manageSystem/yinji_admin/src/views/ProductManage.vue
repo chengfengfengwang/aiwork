@@ -24,12 +24,12 @@
           <FormItem label="商品名称" prop="name">
             <Input v-model="formValidate.name" placeholder="请输入商品名称"></Input>
           </FormItem>
-          <!-- <FormItem label="原价" prop="old_price">
+          <FormItem label="原价" prop="old_price">
             <Input v-model.number="formValidate.old_price" placeholder="输入商品展示价格"></Input>
           </FormItem>
           <FormItem label="现价" prop="price">
             <Input v-model.number="formValidate.price" placeholder="输入商品展示价格"></Input>
-          </FormItem> -->
+          </FormItem>
           <FormItem label="course_list" prop="course_list">
             <Input v-model="formValidate.course_list" placeholder="输入course_list用英文逗号隔开,如 1,2,3"></Input>
           </FormItem>
@@ -146,12 +146,12 @@
             <FormItem label="外链商品链接">
               <Input v-model="formValidate.outside_goods_url" placeholder="外链商品链接"></Input>
             </FormItem>
-            <!-- <FormItem label="外链商品原价">
+            <FormItem label="外链商品原价">
               <Input v-model="formValidate.outside_goods_old_price" placeholder="外链商品原价"></Input>
             </FormItem>
             <FormItem label="外链商品现价">
               <Input v-model="formValidate.outside_goods_price" placeholder="外链商品现价"></Input>
-            </FormItem> -->
+            </FormItem>
             <FormItem label="是否上线">
               <RadioGroup v-model="formValidate.outside_online">
                 <Radio label="true">上线</Radio>
@@ -197,20 +197,20 @@ export default {
           //     return h("div", formatTime(params.row.start_time));
           //   }
         },
-        // {
-        //   title: "原价（元）",
-        //   key: "old_price",
-        //   render: (h, params) => {
-        //     return h("div", params.row.old_price / 100);
-        //   }
-        // },
-        // {
-        //   title: "现价（元）",
-        //   key: "price",
-        //   render: (h, params) => {
-        //     return h("div", params.row.price / 100);
-        //   }
-        // },
+        {
+          title: "原价（元）",
+          key: "old_price",
+          render: (h, params) => {
+            return h("div", params.row.old_price / 100);
+          }
+        },
+        {
+          title: "现价（元）",
+          key: "price",
+          render: (h, params) => {
+            return h("div", params.row.price / 100);
+          }
+        },
         {
           title: "是否上线",
           key: "online",

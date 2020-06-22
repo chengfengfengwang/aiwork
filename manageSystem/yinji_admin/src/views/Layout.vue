@@ -24,7 +24,10 @@
 }
 .ivu-menu-item {
   color: #515a6e;
-  padding-bottom: 150px;
+  /* padding-bottom: 150px; */
+}
+.ivu-menu-light{
+  padding-bottom: 150px; 
 }
 </style>
 <template>

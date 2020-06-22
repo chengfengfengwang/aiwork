@@ -616,6 +616,16 @@
             <FormItem label="分组名称">
               <Input v-model="huocheName" placeholder="分组名称"/>
             </FormItem>
+            <FormItem label="版本">
+            <Select v-model="huocheVersion" placeholder="旧版ui为0新版ui为1">
+              <Option
+                :value="0"
+              >旧版</Option>
+              <Option
+                :value="1"
+              >新版</Option>
+            </Select>
+          </FormItem>
           </div>
           <!-- 送小精灵回家游戏配置 -->
           <div v-if="curGame=='sxjlhj'">
@@ -1593,7 +1603,8 @@ export default {
       PassData: PassData,
       xuniDuration: 0,
       yqpzInstrucment: "",
-      tytName: ""
+      tytName: "",
+      huocheVersion:0
     };
   },
   computed: {
@@ -2426,6 +2437,7 @@ export default {
         if (newRow.material_data && newRow.material_data.length > 0) {
           this.huocheGroups = newRow.material_data[0].groupArr;
           this.huocheName = newRow.material_data[0].name;
+          this.huocheVersion = newRow.material_data[0].version;
           this.huocheGuideAudio.splice(
             0,
             1,
@@ -2435,6 +2447,7 @@ export default {
         } else {
           this.huocheGroups = [];
           this.huocheName = "";
+          this.huocheVersion = 1;
           this.huocheGuideAudio = [];
           this.huocheBg = [];
         }
@@ -3071,6 +3084,7 @@ export default {
           arr[0] = {
             groupArr: this.$refs.huocheUploads.myGroupArr,
             name: this.huocheName,
+            version: this.huocheVersion,
             guideAudio: this.huocheGuideAudio[0],
             bg: this.huocheBg[0]
           };

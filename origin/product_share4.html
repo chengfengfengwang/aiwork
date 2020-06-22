@@ -1,0 +1,111 @@
+
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="http://s.immusician.com/static/images/bitbug_favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <script type="text/javascript">
+      (function (doc, win) {
+          var docEl = doc.documentElement,
+          isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+          dpr = isIOS? Math.min(win.devicePixelRatio, 3) : 1,
+          dpr = window.top === window.self? dpr : 1, //被iframe引用时，禁止缩放
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+          docEl.dataset.dpr = dpr;
+          var recalc = function () {
+              var width = docEl.clientWidth;
+              if (width / dpr > 750) {
+                  width = 750 * dpr;
+              }
+              docEl.dataset.width = width
+              docEl.dataset.percent = 100 * (width / 750);
+              docEl.style.fontSize = 100 * (width / 750) + 'px';
+          };
+          recalc()
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+      })(document, window);
+    </script>
+    <title id="head">学员作品分享</title>
+    <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style type="text/css">
+      * {margin:0;padding:0;border:0;-webkit-user-select:text}
+      a,img {-webkit-touch-callout:none}
+      ol,ul {list-style:none}
+      *,:after,:before {-webkit-box-sizing:border-box;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:transparent}
+      body,html {font-family:'HanHei SC', 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;font-size:.35rem;font-weight:300;line-height:.5rem;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:center;height: 100%;}
+      body {width:7.5rem; background: white;}
+      h2{padding: .1rem; font-size: .3rem; text-align: center; font-weight: 300; color: #333;}
+      .video_div{margin: .1rem 0;width: 100%; height: auto; overflow:hidden;}
+      .video_div video{width: 100%; height: 100%;padding: 0!important;object-fit: fill;}
+      video::-webkit-media-controls-volume-slider,video::-webkit-media-controls-mute-button{display:none;}
+      .imgscls{margin: .1rem 0; padding: 0;}
+      .imgscls img{width: 60%; margin-left:20%; height: auto;}
+      p{padding: .15rem; overflow:hidden; text-align: justify;font-size: .25rem; width: auto; height: auto; margin-bottom: 20px; margin-top: 20px}
+    </style>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+            var xx = $.getUrlParam('key');
+            console.log(xx);
+
+            $.ajax({
+                type: 'get',
+//                url: "http://api.iguitar.immusician.com:2525/v3/product/" + xx + "/shore_info",
+                url: "http://api.iguitar.immusician.com:2525/v3/product/" + xx + "/shore_info",
+                dataType: 'json',
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    console.log(data.data)
+                    if (data.data.share_title) {
+                        $('body').append("<p>"+data.data.share_title+"</p>");
+                    }
+                    if (data.data.top_picture) {
+                        $('body').append("<div><img src='"+data.data.top_picture+"'/></div>");
+                    }
+                    if (data.data.text1) {
+                        $('body').append("<p>"+data.data.text1+"</p>");
+                    }
+                    if (data.data.video_url) {
+                        $('body').append("<div class='video_div'><video controls=\"controls\" poster=\""+data.data.picture_url+"\" webkit-playsinline=\"true\" controlsList=\"nodownload\"><source src=\""+data.data.video_url+"\" type=\"video/mp4\"></video></div>");
+                    }
+                    if (data.data.bottom_picture) {
+                        $('body').append("<div class='imgscls'><img src='"+data.data.bottom_picture+"'/></div>");
+                    }
+                    if (data.data.text2)  {
+                        $('body').append("<p>"+data.data.text2+"</p>");
+                    }
+                    if (data.data.thumbnail) {
+                        $('body').append("<div class='imgscls'><img src='"+data.data.thumbnail+"'/></div>");
+                    }
+
+                    if (data.data.title) {
+                        // $('#head').text('学员作品分享');
+                    }
+                },
+                error: function () {
+                    alert('内部错误，请联系开发人员');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+  var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1263336784'%3E%3C/span%3E%3Cscript src='" + 
+    cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263336784' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  document.getElementById("cnzz_stat_icon_1263336784").style.display = "none";
+</script>
+</html>
