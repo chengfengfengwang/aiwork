@@ -22,6 +22,13 @@
         :defaultFile="obj.bg"
         v-on:upload-success="uploadSuccess"
       />
+      <MyUpload
+        btnText="相框图片"
+        position="3"
+        :acceptType="0"
+        :defaultFile="obj.photo_frame_url"
+        v-on:upload-success="uploadSuccess"
+      />
       <div>
         <span>分享文案</span>
         <Input class="edit_width" v-model="obj.content" placeholder="分享文案"></Input>
@@ -69,6 +76,8 @@ export default {
         this.myObj.bgMusic = response.data;
       } else if (position == 2) {
         this.myObj.bg = response.data;
+      }else if (position == 3) {
+        this.myObj.photo_frame_url = response.data;
       }
     },
     bgMusicUploadSuccess(response, idx, position, file, fileList) {
