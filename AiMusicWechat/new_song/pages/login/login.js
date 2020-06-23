@@ -11,6 +11,7 @@ Page(Object.assign({}, auth.authUserInfo,{
   onLoad: function (options) {
     wx.getSetting({
       success: res => {
+        console.log(res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权用户信息，不再弹出自定义授权弹框
           this.setData({

@@ -1,24 +1,24 @@
 var fs = require('fs');
 var path = require('path');
 var qiniu = require("qiniu");
+const uploadConfig = require('./uploadConfig');
 //空间名称
-//var buckName = 'base-html';
-var buckName = 'immusician';
+var webBuckName = uploadConfig.webBuckName;
 //前缀名
-var prefix = 'web/h5/ai/';
+var webPrefix = uploadConfig.webPrefix;
+
+//空间名称
+var assetsBuckName = uploadConfig.assetsBuckName;
+//前缀名
+var assetsPrefix = uploadConfig.assetsPrefix;
 
 main()
 
 function main(){
     displayFile('./dist')
 }
-// upload('static/css/app.4648e402426a319c1582ceb43ae85344.css',"./dist/static/css/app.4648e402426a319c1582ceb43ae85344.css")
-// setTimeout(() => {
-//     upload('static/js/app.aec09cb4c8c96792a361.js',"./dist/static/js/app.aec09cb4c8c96792a361.js")
 
-// }, 0);
-
-function upload(key,localFile) {
+function upload(key,localFile,fileType) {
 
     var accessKey = '493-3wqSvs35AYgjhYQaoY4qRHOb4i3bsxdFwwxQ';
     var secretKey = 'DKXVZp563b434wmycV36njsqWrYr_ejYuZxSWE1S';
@@ -27,7 +27,13 @@ function upload(key,localFile) {
     
     var config = new qiniu.conf.Config();
     // 空间对应的机房
-    config.zone = qiniu.zone.Zone_z1;
+    if(fileType==='html'){
+        config.zone = qiniu.zone.Zone_z1; //华北
+        var Bucket = `${webBuckName}:${key}`;
+    }else{
+        config.zone = qiniu.zone.Zone_z1//华东
+        var Bucket = `${assetsBuckName}:${key}`;
+    }
     // 是否使用https域名
     //config.useHttpsDomain = true;
     // 上传是否使用cdn加速
@@ -37,7 +43,7 @@ function upload(key,localFile) {
     var putExtra = new qiniu.form_up.PutExtra();
 
 
-    var Bucket = `${buckName}:${key}`;
+    
     var options = {
         scope: Bucket
         //MimeType:0,
@@ -61,7 +67,6 @@ function upload(key,localFile) {
         }
     });
 }
-
 //遍历文件夹
 function displayFile(param) {
     //转换为绝对路径
@@ -82,10 +87,18 @@ function displayFile(param) {
             //如果不是目录，打印文件信息
             //console.log(param)
             //console.log(param);
-            var key = prefix + param.split('dist/')[1];
+            
             var localFile = './' + param;
-            //console.log(key);
-            upload(key,localFile)
+            
+            if(param.indexOf('.html')>-1){
+                var key = webPrefix + param.split('dist/')[1];
+                upload(key,localFile,'html')
+            }else{
+                var key = assetsPrefix + param.split('dist/')[1];
+                upload(key,localFile,'assets')
+            }
+            console.log(key);
+            
         }
     })
 }

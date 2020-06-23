@@ -1,5 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
+const uploadConfig = require('./uploadConfig');
+
 module.exports = {
     css: {
         loaderOptions: {
@@ -15,7 +17,7 @@ module.exports = {
         }
     },
     publicPath: process.env.NODE_ENV === 'production'
-        ? 'http://s.immusician.com/web/h5/ai/'
+        ? `${uploadConfig.assectsUrl}/${uploadConfig.assetsPrefix}`
         : '/',
     chainWebpack: config => {
         const imgRule = config.module.rule('images');
@@ -36,7 +38,7 @@ module.exports = {
             );
     },
     pages: {
-        //vip
+        normal: 'src/modules/normal/app.js',
         vip: 'src/modules/vip/vip.js',
         //vipPay
     }

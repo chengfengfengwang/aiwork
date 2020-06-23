@@ -27,7 +27,7 @@
               <div class="common_text">在音乐壳坚持学习</div>
               <div>
                 <span class="day_num">{{reportInfo.week_study}}</span>
-                <span class="day">分</span>
+                <span class="day">天</span>
               </div>
             </div>
             <div class="right">

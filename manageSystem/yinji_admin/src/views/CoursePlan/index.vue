@@ -64,9 +64,10 @@ export default {
                   on: {
                     click: () => {
                       //this.$router.push("/CoursePlanLevelList");
+                      let courseId = encodeURIComponent(params.row.id);
                       let courseName = encodeURIComponent(params.row.name);
                       let instrumentType = encodeURIComponent(params.row.instrument_type);
-                      location.href = `${location.origin}${location.pathname}?course_id=27&course_name=${courseName}&instrument_type=${instrumentType}#/CoursePlanLevelList`;
+                      location.href = `${location.origin}${location.pathname}?course_id=${courseId}&course_name=${courseName}&instrument_type=${instrumentType}#/CoursePlanLevelList`;
                       //this.$router.push({ path: '/CoursePlanLevelList', query: { course_id: '27' }})
                     }
                   }

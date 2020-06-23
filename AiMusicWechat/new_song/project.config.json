@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
-	"appid": "wx773f06cbc6f4a1b0",
+	"appid": "wx26681ad58ff9c0bb",
 	"projectname": "wechat_ai_music",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
@@ -29,6 +29,10 @@
 		},
 		"game": {
 			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -155,6 +159,21 @@
 					"id": -1,
 					"name": "course",
 					"pathName": "pages/course/course",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/wechatQr/wechatQr",
+					"pathName": "pages/user/wechatQr/wechatQr",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
+					"query": "class_id=1218",
 					"scene": null
 				}
 			]
