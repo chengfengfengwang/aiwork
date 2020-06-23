@@ -17,7 +17,7 @@
     "mv": "cp -R /tmp/dist /data2/admin_live/"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "cross-env": "^7.0.2",
     "iview": "^3.2.2",
     "iview-area": "^1.6.0",
