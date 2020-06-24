@@ -9,14 +9,17 @@
         <img src="../../../../assets/img/jxj_ac/round.png" alt class="round">
       </div>
       <div class="input_wrapper phone">
-        <input v-model="form.phone" placeholder="请输入手机号" type="text">
+        <input v-model="formValue.phone" placeholder="请输入手机号" type="text">
       </div>
       <div class="input_wrapper v_code">
-        <input v-model="form.code" placeholder="请输入验证码" type="text">
+        <input v-model="formValue.verify" placeholder="请输入验证码" type="text">
         <div class="v_code_btn" @click="getVCode">{{vcodeText}}</div>
       </div>
+      <div class="input_wrapper code">
+        <input v-model="formValue.code" placeholder="请输入邀请码" type="text">
+      </div>
       <div class="input_wrapper course_option">
-        <select required v-model="selInstrument">
+        <select required v-model="formValue.instrument_type">
           <option value disabled selected>选择课程品类</option>
           <option
             v-for="course in instrumentList"
@@ -26,38 +29,42 @@
         </select>
       </div>
 
-      <div @click="reg" :class="{active:btnActive}" class="reg_btn">免费领取</div>
+      <div @click="reg" :class="{active:!$v.formValue.$invalid}" class="reg_btn">免费领取</div>
     </div>
-    <div v-show="popShow" class="pop_wrapper mask">
-      <div class="pop_content">
-        <div class="gift_title">尊享课程大礼包-尤克里里</div>
-        <div class="gift_content">
-          <div class="item">
-            <div class="index">
-              <img src="../../../../assets/img/jxj_ac/index1.png" alt>
-            </div>解锁47节初级课程，零基础轻松学
-            <span class="remark">(课程时效：7天)</span>
+    <div class="mask" v-show="popShow" @click="popShow=false"></div>
+    <div v-show="popShow" class="pop_content">
+      <div class="gift_title">{{popInfo.title}}</div>
+      <div class="gift_content">
+        <div class="item" v-for="(item,index) in popInfo.context" :key="index">
+          <div class="index">
+            {{index+1}}
+            <!-- <img :src="'../../../../assets/img/jxj_ac/index'+(index+1)+'.png'" alt> -->
           </div>
-          <div class="item">
-            <div class="index">
-              <img src="../../../../assets/img/jxj_ac/index2.png" alt>
-            </div>赠送一年名师互动课
-            <span class="remark">（课程时效：1年）</span>
-          </div>
+          {{item[1]}}
+          <span class="remark">({{item[2]}})</span>
         </div>
-        <div class="yhq">
+        <!-- <div class="item">
+          <div class="index">
+            <img src="../../../../assets/img/jxj_ac/index2.png" alt>
+          </div>赠送一年名师互动课
+          <span class="remark">（课程时效：1年）</span>
+        </div>-->
+      </div>
+      <div class="yhq_wrapper">
+        <div class="yhq" v-for="(item,index) in popInfo.coupons" :key="index">
           <div class="left">
-            <div class="yhq_num">50</div>
+            <div class="yhq_num">{{item.coupon_value}}</div>
             <div>奖学金(元)</div>
           </div>
           <div class="right">
-            <div class="yhq_content">全部乐器必修课程通用 满100即可使用</div>
-            <div class="yhq_time">有效期:自激活之日起,10天内有效</div>
+            <div class="yhq_content">{{item.describe}}</div>
+            <div class="yhq_time">{{item.time_txt}}</div>
           </div>
         </div>
-        <div class="download_btn">
-          <img src="../../../../assets/img/jxj_ac/download_btn.png" alt>
-        </div>
+      </div>
+
+      <div class="download_btn">
+        <img src="../../../../assets/img/jxj_ac/download_btn.png" alt>
       </div>
     </div>
   </div>
@@ -65,41 +72,92 @@
 <script>
 import { getQueryVariable } from "../../../../common/util.js";
 import { Toast, Dialog } from "vant";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
       vcodeText: "获取验证码",
-      vCode: "",
-      selectedCourse: "",
-      form: {
+      formValue: {
         phone: "",
+        verify: "",
         code: "",
-        vendor: "andelu"
+        zone: 86,
+        instrument_type: ""
       },
       selInstrument: "",
       instrumentList: [
+        {
+          name: "吉他",
+          value: "0"
+        },
         {
           name: "尤克里里",
           value: "1"
         },
         {
-          name: "尤克里里",
+          name: "卡林巴",
           value: "2"
+        },
+        {
+          name: "非洲鼓",
+          value: "3"
+        },
+        {
+          name: "钢琴",
+          value: "4"
         }
       ],
-      instrumentMenu: ["guitar", "ukulele", "kalimba"],
-      btnActive: false,
-      popShow:false
+      popShow: false,
+      popInfo: {}
     };
+  },
+  validations: {
+    formValue: {
+      phone: { required },
+      verify: { required },
+      code: { required },
+      instrument_type: { required }
+    }
   },
   created() {
     //this.countPage(key);
+    if (process.env.NODE_ENV !== "production") {
+      this.formValue = {
+        phone: "18810240072",
+        verify: "951029",
+        code: "zmjai",
+        zone: 86,
+        instrument_type: "1"
+      };
+    }
+    document.title = "领取尊享课程大礼包";
   },
   mounted() {
     this.inputevent();
   },
   methods: {
+    invalidMessage() {
+      let message = "";
+      if (this.$v.formValue.phone.$invalid) {
+        message = "请输入手机号";
+      } else if (this.$v.formValue.verify.$invalid) {
+        message = "请输入验证码";
+      } else if (this.$v.formValue.code.$invalid) {
+        message = "请输入邀请码";
+      } else if (this.$v.formValue.instrument_type.$invalid) {
+        message = "请选择课程品类";
+      }
+      if (message) {
+        Toast({
+          message,
+          duration: 2000
+        });
+        return false;
+      } else {
+        return true;
+      }
+    },
     countPage(key) {
       this.axios
         .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=${key}`)
@@ -109,17 +167,6 @@ export default {
       this.axios
         .get(`http://58.87.125.111:6363/v1/txsms/tongji?key=vendor_andelu_wx`)
         .then(res => {});
-    },
-    btnChange() {
-      if (
-        this.form.code &&
-        this.form.phone &&
-        this.selInstrument !== undefined
-      ) {
-        this.btnActive = true;
-      } else {
-        this.btnActive = false;
-      }
     },
     inputevent() {
       var inputArr = document.querySelectorAll("input");
@@ -134,49 +181,23 @@ export default {
         });
       });
     },
-    getInstruments() {
-      this.axios
-        .get(`http://58.87.125.111:6363/v1/third/vendor_activity?vendor=andelu`)
-        .then(res => {
-          var data = res.data;
-          this.instrumentList = [];
-          for (let key in data) {
-            this.instrumentList.push({
-              name: data[key],
-              value: key
-            });
-          }
-          //this.instrumentList.unshift({ id: "-1", name: "全部" });
-        });
-    },
     reg() {
-      this.form.instrument = Number(this.selInstrument);
-      //console.log(this.form)
-
-      if (!this.btnActive) {
-        var msg = "";
-        if (!this.form.phone) {
-          msg = "请填写手机号";
-        } else if (!this.form.code) {
-          msg = "请填写验证码";
-        } else if (this.form.instrument === undefined) {
-          msg = "请选择课程品类";
-        }
-        Toast({
-          message: msg,
-          duration: 1000
-        });
+      console.log(this.formValue);
+      //return
+      if (!this.invalidMessage()) {
         return;
       }
-      this.successCount();
+
       this.axios
-        .post(`http://58.87.125.111:6363/v1/third/vendor_activity`, this.form)
+        .post(`${process.env.VUE_APP_XIAOPO}/v3/users/login/`, this.formValue)
         .then(res => {
           if (!res.error) {
-            Dialog.alert({ message: "课程领取成功，下载APP学习" }).then(res => {
-              location.href =
-                "http://s.immusician.com/static/html/channel_page_auto.html?channel=&channel=andelu7tianrumen";
-            });
+            this.popShow = true;
+            this.popInfo = res.data.code_data;
+            // Dialog.alert({ message: "课程领取成功，下载APP学习" }).then(res => {
+            //   location.href =
+            //     "http://s.immusician.com/static/html/channel_page_auto.html?channel=&channel=andelu7tianrumen";
+            // });
             // sessionStorage.setItem("acInstrument", this.form.instrument);
             // sessionStorage.setItem("acCourse", JSON.stringify(res.data.words));
             //this.$router.push("/success");
@@ -186,11 +207,11 @@ export default {
     getVCode() {
       if (this.vcodeText === "重新获取" || this.vcodeText === "获取验证码") {
         if (this.vcodeText === "获取验证码") {
-          this.vCode = "";
+          this.vcodeText = "";
         }
         this.axios
           .post(`http://58.87.125.111:6363/v1/txsms/send`, {
-            phone: this.form.phone,
+            phone: this.formValue.phone,
             zone: 86
           })
           .then(res => {
@@ -208,18 +229,6 @@ export default {
           this.vcodeText = "重新获取";
         }
       }, 1000);
-    }
-  },
-  watch: {
-    form: {
-      //监听的对象
-      deep: true, //深度监听设置为 true
-      handler: function(newV, oldV) {
-        this.btnChange();
-      }
-    },
-    selInstrument() {
-      this.btnChange();
     }
   }
 };
@@ -388,6 +397,7 @@ html {
   width: 312px;
   height: 300px;
   position: fixed;
+  z-index: 2001;
   left: 50%;
   top: 80px;
   transform: translateX(-50%);
@@ -423,6 +433,12 @@ html {
         top: 2px;
         width: 16px;
         height: 16px;
+        text-align: center;
+        line-height: 16px;
+        font-size: 11px;
+        color: #ff712d;
+        background-color: #ffc345;
+        border-radius: 50%;
         img {
           width: 100%;
         }
@@ -439,13 +455,16 @@ html {
       }
     }
   }
-  .yhq {
-    width: 276px;
-    height: 75px;
+  .yhq_wrapper {
     position: absolute;
     left: 50%;
     transform: translateX(-48%);
     top: 209px;
+  }
+  .yhq {
+    width: 276px;
+    height: 75px;
+    margin-bottom: 5px;
     background: url(../../../../assets/img/jxj_ac/yhq.png) no-repeat center/100%
       100%;
     display: flex;

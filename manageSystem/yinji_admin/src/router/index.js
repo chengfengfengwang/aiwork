@@ -52,6 +52,8 @@ import CountSongList from './../views/NewCountData/songList.vue';
 import CoursePlan from './../views/CoursePlan/index.vue';
 import CoursePlanLevelList from './../views/CoursePlan/levelList.vue';
 
+//优惠券
+import Yhq from './../views/Yhq.vue/index.vue';
 
 import OrderList from './../views/OrderList.vue';
 import UserInfo from './../views/UserInfo.vue';
@@ -332,6 +334,12 @@ const router = new Router({
           path: '/CoursePlanLevelList',
           component: CoursePlanLevelList,
           meta: { parentMenu: 'CoursePlan' }
+        }, 
+        {
+          name: 'Yhq',
+          path: '/Yhq',
+          component: Yhq,
+          meta: { parentMenu: 'Yhq' }
         }, 
       ]
     },

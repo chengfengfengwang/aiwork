@@ -44,6 +44,18 @@ function getDate(date) {
     //秒没有返回
     return [year, month, day].map(formatNumber).join('-');
 }
+function getDateDMY(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+
+    //秒没有返回
+    return [day,month, year].map(formatNumber).join('/');
+}
 function formatTime(date) {
     var date = date * 1000; //项目返回的是秒级的时间戳
     var date = new Date(date);
@@ -134,4 +146,4 @@ function getQueryVariable(variable) {
     }
     return '';
 }
-export { getQueryVariable, formatNumber, formatTime, getTime, timeToTimeStamp, getDate, compare, getIndex, getTagName, selectQuestionFilter, selectQuestionOption, find, findkey, encodeSearchParams }
+export { getDateDMY,getQueryVariable, formatNumber, formatTime, getTime, timeToTimeStamp, getDate, compare, getIndex, getTagName, selectQuestionFilter, selectQuestionOption, find, findkey, encodeSearchParams }

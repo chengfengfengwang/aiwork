@@ -9,8 +9,8 @@
         <div class="list_box">
           <div class="label_info">
             level列表
-            <Icon @click="addLv" class="add" type="ios-add-circle-outline"/>
-            <Icon @click="removeLv" class="close" type="ios-close-circle-outline"/>
+            <!-- <Icon @click="addLv" class="add" type="ios-add-circle-outline"/>
+            <Icon @click="removeLv" class="close" type="ios-close-circle-outline"/> -->
           </div>
           <div class="list_wrapper">
             <div
@@ -94,6 +94,9 @@
                 :value="1"
               >是</Option>
             </Select>
+          </FormItem> 
+          <FormItem label="合集类型">
+            <Input v-model.number="lvFormValue.collection_type"></Input>
           </FormItem>
           <FormItem>
             <Button type="success" @click="lvFormSubmit" style="width:100px">提交</Button>
@@ -280,8 +283,7 @@ export default {
       });
     },
     lvFormSubmit() {
-      console.log(this.lvFormValue);
-      //return;
+      this.lvFormValue.course_id = this.courseId;
       this.axios
         .post(
           `${process.env.JINKANG}/v1/courses_lv/create_and_update`,
@@ -347,16 +349,20 @@ export default {
     getWeekDetail(id) {
       if (!id) {
         if (process.env.NODE_ENV !== "production") {
-          this.weekFormValue = {
+          // this.weekFormValue = {
+          //   lv_id: this.levelList[this.curLevelIndex].id,
+          //   background_url:
+          //     "http://image.yinji.immusician.com/material/fc56c56e2f03990b27d8d57fbc53e4ad.png",
+          //   has_report: 1,
+          //   knowledge_list: [{value:'知识点111'},{value:'知识点222'}],
+          //   lesson_list: [254, 261, 260, 259],
+          //   name: "第三周",
+          //   order: 2,
+          //   sub_name: "制作中"
+          // };
+           this.weekFormValue = {
             lv_id: this.levelList[this.curLevelIndex].id,
-            background_url:
-              "http://image.yinji.immusician.com/material/fc56c56e2f03990b27d8d57fbc53e4ad.png",
-            has_report: 1,
-            knowledge_list: [{value:'知识点111'},{value:'知识点222'}],
-            lesson_list: [254, 261, 260, 259],
-            name: "第三周",
-            order: 2,
-            sub_name: "制作中"
+            knowledge_list: [{value:''}]
           };
         } else {
           this.weekFormValue = {
@@ -400,8 +406,11 @@ export default {
         )
         .then(res => {
           this.levelList = res.data;
-          this.getLvDetail(this.levelList[0].id);
-          this.getWeekList(this.levelList[0].id);
+          if(this.levelList.length>0){
+            this.getLvDetail(this.levelList[0].id);
+            this.getWeekList(this.levelList[0].id);
+          }
+          
         });
     },
     addLv() {

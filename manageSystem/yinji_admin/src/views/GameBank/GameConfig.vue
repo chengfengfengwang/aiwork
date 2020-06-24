@@ -1033,6 +1033,12 @@
               <Tdrsjp :groupArr="formValidate.material_data[0]" ref="tdrsjp"/>
             </FormItem>
           </div>
+          <!-- 认识双手键盘指法 -->
+          <div v-if="curGame=='rsssjpzf' && modalShow">
+            <FormItem label="素材">
+              <Rsssjpzf :groupArr="formValidate.material_data[0]" ref="rsssjpzf"/>
+            </FormItem>
+          </div>
           <!-- 节奏乐器小火车配置 -->
           <div v-if="curGame=='jzyq' && modalShow">
             <FormItem label="素材">
@@ -1299,6 +1305,7 @@ import TuSe from "../../components/TS/tuse";
 import ZHPT from "../../components/ZHPT/zhpt";
 import JLXN from "../../components/JLXN/JLXN";
 import Tdrsjp from "../../components/Tdrsjp/TuodongGroup";
+import Rsssjpzf from "../../components/Rsssjpzf/index";
 import HechengInstruments from "../../assets/instrucmentList.js";
 import PassData from "../../assets/passData.js";
 import { mapState, mapActions } from "vuex";
@@ -1675,7 +1682,8 @@ export default {
     Jzyqsp,
     Gsgbysf,
     Cpbf,
-    Tdrsjp
+    Tdrsjp,
+    Rsssjpzf
   },
   mounted() {
     //this.getProductList();
@@ -2169,6 +2177,8 @@ export default {
         this.curGame = "jzaz";
       } else if (newRow.game_type == 74) {
         this.curGame = "tdrsjp";
+      } else if (newRow.game_type == 78) {
+        this.curGame = "rsssjpzf";
       }else {
         this.curGame = "";
       }
@@ -2784,6 +2794,11 @@ export default {
           newForm.material_data = JSON.stringify(arr);
         } else if (this.curGame == "tdrsjp") {
           var obj = this.$refs.tdrsjp.submit();
+          var arr = [];
+          arr[0] = obj;
+          newForm.material_data = JSON.stringify(arr);
+        } else if (this.curGame == "rsssjpzf") {
+          var obj = this.$refs.rsssjpzf.submit();
           var arr = [];
           arr[0] = obj;
           newForm.material_data = JSON.stringify(arr);

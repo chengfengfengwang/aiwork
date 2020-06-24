@@ -1,5 +1,16 @@
 <template>
   <div>
+    <!-- <RadioGroup v-model="searchForm.online">
+        <Radio label="true">
+                <span>是</span>
+              </Radio>
+              <Radio label="false">
+                <span>否</span>
+              </Radio>
+    </RadioGroup> -->
+    <span>是否上线：</span>
+    <i-Switch v-model="searchForm.online" />
+    <Button type="success" @click="getTableList" style="width:100px">搜索</Button>
     <Table :loading="tableLoading" border :columns="columns" :data="dataList"></Table>
     <div style="margin-top:10px">
       <Page
@@ -12,7 +23,6 @@
         show-elevator
       />
     </div>
-   
   </div>
 </template>
 <script>
@@ -23,6 +33,9 @@ export default {
       total: 0,
       page: 0,
       pageSize: 10,
+      searchForm: {
+        online: true
+      },
       columns: [
         {
           title: "课程名称",
@@ -35,7 +48,7 @@ export default {
           render: (h, params) => {
             return h("img", {
               attrs: {
-                src: params.row.cover_url 
+                src: params.row.cover_url
               },
               style: {
                 //width: "100%"
@@ -63,11 +76,15 @@ export default {
                   },
                   on: {
                     click: () => {
-                      //this.$router.push("/CoursePlanLevelList");
                       let courseId = encodeURIComponent(params.row.id);
+                      //let courseId = 27;
                       let courseName = encodeURIComponent(params.row.name);
-                      let instrumentType = encodeURIComponent(params.row.instrument_type);
-                      location.href = `${location.origin}${location.pathname}?course_id=${courseId}&course_name=${courseName}&instrument_type=${instrumentType}#/CoursePlanLevelList`;
+                      let instrumentType = encodeURIComponent(
+                        params.row.instrument_type
+                      );
+                      location.href = `${location.origin}${
+                        location.pathname
+                      }?course_id=${courseId}&course_name=${courseName}&instrument_type=${instrumentType}#/CoursePlanLevelList`;
                       //this.$router.push({ path: '/CoursePlanLevelList', query: { course_id: '27' }})
                     }
                   }
@@ -147,7 +164,9 @@ export default {
     getTableList() {
       this.axios
         .get(
-          `http://hot.test.immusician.com:55555/v1/courses?page=0&size=100&keyword=&instrument_type=piano&level=all&sort=_id,1&online=true`
+          `http://hot.test.immusician.com:55555/v1/courses?page=0&size=100&keyword=&instrument_type=piano&level=all&sort=_id,1&online=${
+            this.searchForm.online
+          }`
         )
         .then(res => {
           this.tableLoading = false;

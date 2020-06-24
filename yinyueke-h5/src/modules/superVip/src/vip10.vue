@@ -14,8 +14,8 @@ export default {
     };
   },
   created() {
-    for (var i = 1; i < 16; i++) {
-      this.imgArr.push(require("../../../assets/img/superVip/vip10/" + i + ".jpg"));
+    for (var i = 1; i < 17; i++) {
+      this.imgArr.push(require("../../../assets/img/superVip/vip10/" + i + ".png"));
     }
     
   },
@@ -54,7 +54,7 @@ body {
   min-height: 100vh;
   position: relative;
   padding: 0 0px;
-  padding-bottom: 80px;
+  padding-bottom: 60px;
   img {
     width: 100%;
   }

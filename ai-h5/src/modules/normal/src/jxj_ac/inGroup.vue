@@ -1,38 +1,39 @@
 <template>
   <div class="page">
     <img src="../../../../assets/img/jxj_ac/login_bg.png" alt class="bg">
-    <div class="gift_content">
-      <div class="item">
-        <div class="index">
-          <img src="../../../../assets/img/jxj_ac/index1.png" alt>
-        </div>解锁47节初级课程，零基础轻松学
-        (18节初级+17节进阶课程+12节琶音课程）
+    <div class="main_wrapper">
+      <div class="gift_content">
+        <div class="item">
+          <div class="index">
+            <img src="../../../../assets/img/jxj_ac/index1.png" alt>
+          </div>解锁47节初级课程，零基础轻松学
+          (18节初级+17节进阶课程+12节琶音课程）
+        </div>
+        <div class="item">
+          <div class="index">
+            <img src="../../../../assets/img/jxj_ac/index2.png" alt>
+          </div>赠送一年名师互动课
+        </div>
+        <div class="item">
+          <div class="index">
+            <img src="../../../../assets/img/jxj_ac/index3.png" alt>
+          </div>入群领取300首电子曲谱，专业老师辅导
+        </div>
       </div>
-      <div class="item">
-        <div class="index">
-          <img src="../../../../assets/img/jxj_ac/index2.png" alt>
-        </div>赠送一年名师互动课
-      </div>
-      <div class="item">
-        <div class="index">
-          <img src="../../../../assets/img/jxj_ac/index3.png" alt>
-        </div>入群领取300首电子曲谱，专业老师辅导
-      </div>
-    </div>
-    <div class="qr_content">
-      <div class="tips1">
-        扫描下方二维码，入群领取300首电子曲谱
-        <br>群内更有专业老师辅导
-      </div>
-      <div class="arrow">
-        <img src="../../../../assets/img/jxj_ac/arrow.png" alt>
-      </div>
-      <div class="qr">
-          <img src="../../../../assets/img/jxj_ac/login_bg.png" alt="">
-      </div>
-      <div class="tips2">
-        将二维码截图保存至手机 打开微信扫一扫
-        <br>扫码即可进入班级群
+      <div class="qr_content">
+        <div class="tips1">
+          扫描下方二维码，入群领取300首电子曲谱
+          <br>群内更有专业老师辅导
+        </div>
+        <img class="arrow" src="../../../../assets/img/jxj_ac/arrow.png" alt>
+
+        <div class="qr">
+          <img src="../../../../assets/img/jxj_ac/login_bg.png" alt>
+        </div>
+        <div class="tips2">
+          将二维码截图保存至手机 打开微信扫一扫
+          <br>扫码即可进入班级群
+        </div>
       </div>
     </div>
   </div>
@@ -86,14 +87,16 @@ html {
 .bg {
   width: 100%;
 }
-
-.gift_content {
-  border: 5px solid #cd7ee5;
-  width: 343px;
+.main_wrapper {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: 188px;
+}
+.gift_content {
+  border: 5px solid #cd7ee5;
+  width: 343px;
+
   background-color: #fff;
   padding: 10px;
   border-radius: 12px;
@@ -118,12 +121,12 @@ html {
   }
 }
 .qr_content {
+  margin-top: 20px;
   width: 343px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 188px;
-  background-color: #fff;
+  // position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // top: 188px;
   padding: 10px;
   border-radius: 12px;
   text-align: center;
@@ -135,17 +138,16 @@ html {
   }
   .arrow {
     width: 22px;
+    margin: 10px auto;
+  }
+  .qr {
     img {
-      width: 22px;
+      width: 110px;
+      height: 110px;
     }
   }
-  .qr{
-      img{
-          width: 110px;
-          height: 110px;
-      }
-  }
   .tips2 {
+    margin-top: 15px;
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;

@@ -9,5 +9,6 @@ module.exports = {
   LIDONG_AI:'"http://58.87.125.111:2525/v3"',
   LIDONG_YINJI:'"http://58.87.125.111:55555/v1"',
   JINKANG:'"http://58.87.125.111:55555"',
+  YHQ:'"http://58.87.125.111:55555"',
   VERSION:'"v1"' 
 }

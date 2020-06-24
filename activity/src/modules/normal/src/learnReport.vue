@@ -287,17 +287,16 @@ export default {
       myChart.setOption(option);
     },
     getReport() {
-      const courseId = getQueryVariable("course_id");
-      const lessonId = getQueryVariable("lesson_id");
+      const week_id = getQueryVariable("week_id");
       this.axios
         .get(
-          `${process.env.VUE_APP_JINKANG}/v1/students/week_report/?god=197`
-          // {
-          //   headers: {
-          //     uid: getQueryVariable("uid"),
-          //     token: getQueryVariable("token")
-          //   }
-          // }
+          `${process.env.VUE_APP_JINKANG}/v1/students/week_report/?week_id=${week_id}`,
+          {
+            headers: {
+              uid: getQueryVariable("uid"),
+              token: getQueryVariable("token")
+            }
+          }
         )
         .then(res => {
           this.reportInfo = res.data;
