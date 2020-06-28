@@ -7,9 +7,20 @@
         <span @click="remove(groupItem)">移除</span>
       </div>
     </GroupItem>
+    
     <div style="margin-top:10px;">
       <Button type="success" @click="add">新增分组</Button>
-      <!-- <Button type="success" @click="submit">提交</Button> -->
+      <Button type="success" @click="submit">提交</Button>
+    </div>
+    <div>
+      <MyUpload
+          btnText="上传完成音频"
+          :acceptType="1"
+          position="0"
+        
+          :defaultFile="myGroupArr.successAudio"
+          v-on:upload-success="itemUploadSuccess"
+        />
     </div>
   </div>
 </template>
@@ -36,6 +47,9 @@ export default {
     MyUpload
   },
   methods: {
+    itemUploadSuccess(response, idx, position, file, fileList) {
+      this.myGroupArr.successAudio = response.data;
+    },
     submit() {
       let resultArr = JSON.parse(JSON.stringify(this.myGroupArr));
       resultArr.forEach(e => {

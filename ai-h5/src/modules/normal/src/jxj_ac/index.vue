@@ -122,15 +122,15 @@ export default {
   },
   created() {
     //this.countPage(key);
-    if (process.env.NODE_ENV !== "production") {
-      this.formValue = {
-        phone: "18810240072",
-        verify: "951029",
-        code: "zmjai",
-        zone: 86,
-        instrument_type: "1"
-      };
-    }
+    // if (process.env.NODE_ENV !== "production") {
+    //   this.formValue = {
+    //     phone: "18810240072",
+    //     verify: "951029",
+    //     code: "zmjai",
+    //     zone: 86,
+    //     instrument_type: "1"
+    //   };
+    // }
     document.title = "领取尊享课程大礼包";
   },
   mounted() {

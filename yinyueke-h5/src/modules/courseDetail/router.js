@@ -32,6 +32,7 @@ const youyouPac = () => import('./src/youyouPac.vue')
 const aefAnzhong = () => import('./src/aefAnzhong.vue')
 const djmbe61 = () => import('./src/djmbe61.vue')
 const piano_jzk = () => import('./src/piano_jzk.vue')
+const piano_quweiqimeng = () => import('./src/piano_quweiqimeng.vue')
 
 Vue.use(Router)
 
@@ -156,6 +157,11 @@ export default new Router({
       path: '/piano_jzk',
       name: 'piano_jzk',
       component: piano_jzk
+    }, 
+    {
+      path: '/piano_quweiqimeng',
+      name: 'piano_quweiqimeng',
+      component: piano_quweiqimeng
     },
   ]
 })
