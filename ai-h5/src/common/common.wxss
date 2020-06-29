@@ -49,3 +49,29 @@ button {
   outline: none;
   background-color: transparent;
 }
+.btn {
+  margin: auto;
+  width: 315px;
+  height: 44px;
+  line-height: 44px;
+  background: #ffffff;
+  border-radius: 22px;
+  text-align: center;
+  font-size: 18px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  color: #ff5726;
+}
+.btn.next_step {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  background: #ffcb3e;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #ff5726;
+}
+.btn.disable {
+  background-color: #EEEEEE !important;
+  color: #999999 !important;
+}

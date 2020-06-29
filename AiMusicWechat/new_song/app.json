@@ -25,7 +25,8 @@
     "pages/login/login",
     "pages/user/bright/bright",
     "pages/user/wechatQr/wechatQr",
-    "pages/playVideo/playVideo"
+    "pages/playVideo/playVideo",
+    "pages/addWx/addWx"
   ],
   "tabBar": {
     "backgroundColor": "#ffffff",

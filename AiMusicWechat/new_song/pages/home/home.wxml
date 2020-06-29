@@ -1,5 +1,4 @@
 <view class='homeContainer' style='padding-top:{{navHeight}}rpx'>
-
   <view class='maskLayer' wx:if="{{showModal}}">
     <view class='dialogs'>
 

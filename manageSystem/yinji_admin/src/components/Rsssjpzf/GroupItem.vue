@@ -6,7 +6,7 @@
     </h2>
     <div>
       <span>练习手指：</span>
-      <Input style="width:200px" v-model="myGroup.options" placeholder="输入手指，01234"/>
+      <Input style="width:200px" v-model="myGroup.options" placeholder="输入手指，12345"/>
     </div>
   </div>
 </template>
