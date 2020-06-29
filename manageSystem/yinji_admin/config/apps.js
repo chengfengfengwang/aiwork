@@ -5,7 +5,7 @@ var apps = [
         htmlHost: 'http://s.immusician.com',
         htmlPath: 'web/admin/music_base_admin/',
         assetsBuckName: 'immusician',
-        assetsHost: 'http://s.immusician.com',
+        assetsHost: '//s.immusician.com',
         assetsPath: 'web/admin/music_base_admin/'
     },
     {

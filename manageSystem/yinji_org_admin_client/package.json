@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "odeploy": "node build/build.js && node upload.js && node refresh.js",
-    "deploy": "node build/build.js && node newUpload.js && node refresh.js",
+    "deploy": "node build/build.js && node newUpload.js",
     "scp": "scp -r ./dist ubuntu@123.206.19.158:/tmp",
     "mv": "cp -R /tmp/dist /data2/admin_live/"
   },
