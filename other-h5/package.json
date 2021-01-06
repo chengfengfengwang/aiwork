@@ -10,7 +10,7 @@
     "pushg": "git push origin master && git push home master"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "echarts": "^4.2.1",
     "fakervue": "^0.5.3",
     "html2canvas": "^1.0.0-rc.5",
