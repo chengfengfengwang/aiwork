@@ -9,7 +9,7 @@
     "odeploy": "vue-cli-service build && node upload.js && node refresh.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "clipboard": "^2.0.4",
     "core-js": "^2.6.5",
     "qrcode": "^1.3.3",
