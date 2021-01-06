@@ -11,7 +11,7 @@
     "deploy": "node build/build.js && node upload.js && node refresh.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "fakervue": "^0.1.9",
     "jquery": "^3.4.1",
     "qrcode": "^1.4.1",
