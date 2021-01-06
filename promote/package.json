@@ -8,7 +8,7 @@
     "deploy": "vue-cli-service build && node upload.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "eruda": "^2.3.3",
     "html2canvas": "^1.0.0-rc.5",
