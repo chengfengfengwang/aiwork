@@ -16,7 +16,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "iview": "^3.4.2",
     "qiniu-js": "^2.5.4",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "vant": "^1.6.13",
     "vue": "^2.6.6",
     "vue-router": "^3.0.2",
